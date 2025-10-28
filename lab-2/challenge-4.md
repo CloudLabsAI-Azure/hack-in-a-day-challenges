@@ -1,31 +1,35 @@
-# Challenge 04: Build a Summary Report and Dashboard
+# Challenge 04: Analyze Data Using GenAI Prompts
 
 ## Introduction
-After deriving textual insights, Contoso wants to visualize key metrics to support operations and management reviews.  
-You will build a basic dashboard showing machine performance and downtime statistics.
+With data available and LLM deployed, Contoso wants to generate natural-language insights from machine logs.  
+In this challenge, you’ll use Azure OpenAI to summarize and interpret manufacturing data.
 
 ## Challenge Objectives
-- Import AI-generated summaries and raw metrics into Power BI or Excel.  
-- Create charts for uptime, temperature patterns, and downtime reasons.  
-- Present findings in a concise visual report.
+- Load the CSV data from Azure Blob Storage.  
+- Send structured chunks of data to Azure OpenAI via prompt.  
+- Generate natural-language summaries and recommendations.
 
 ## Steps to Complete
-1. Download your machine sensor CSV and AI summary results.  
-2. Open **Power BI Desktop** or **Excel**.  
-3. In Power BI: **Get Data → CSV**, load the dataset.  
-4. Transform the data to summarize per machine and time window.  
-5. Create visuals such as:  
-   - Machine utilization (%)  
-   - Average temperature per shift  
-   - Count of downtime events  
-6. Add text boxes displaying AI insights from Challenge 03.
+1. Open **Azure AI Studio** or **Azure OpenAI Playground**.  
+
+2. Choose the deployed model `gpt-35-turbo`.  
+
+3. Prepare a prompt such as:  
+   - You are an AI data analyst. Summarize key insights from the following manufacturing sensor data:
+   - Provide an overview of machine performance, downtime patterns, and recommendations for improvement.
+
+4. Run the prompt and observe the output summary.  
+
+5. Modify the prompt to ask specific questions, for example:  
+   - “Which machines showed highest temperature variance?”  
+   - “Summarize possible reasons for downtime.”  
 
 ## Success Criteria
-- Dashboard created successfully with multiple visuals.  
-- Key metrics and AI insights visible in the report.
+- Model produces coherent, context-aware summaries of data.  
+- Insights include metrics and recommendations based on patterns.
 
 ## Additional Resources
-- [Power BI Quickstart](https://learn.microsoft.com/power-bi/fundamentals/desktop-getting-started)
-- [Excel Charts and PivotTables](https://support.microsoft.com/excel)
+- [Prompt Engineering Guidance](https://learn.microsoft.com/azure/ai-services/openai/concepts/prompt-engineering)
+- [Azure AI Studio Playground](https://oai.azure.com/portal)
 
-Now, click **Next** to continue to **Challenge 05: Add a Chat-Style Interface for Insights**.
+Now, click **Next** to continue to **Challenge 04: Build a Summary Report and Dashboard**.

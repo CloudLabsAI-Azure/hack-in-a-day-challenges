@@ -1,35 +1,54 @@
-# Challenge 03: Analyze Data Using GenAI Prompts
+# Challenge 03: Create Azure AI Search Resource and Import Manufacturing Data
 
 ## Introduction
-With data available and LLM deployed, Contoso wants to generate natural-language insights from machine logs.  
-In this challenge, you’ll use Azure OpenAI to summarize and interpret manufacturing data.
+To enable context-driven insights, Contoso Manufacturing needs a **searchable data layer** that the Large Language Model (LLM) can reference.  
+Azure AI Search provides this capability — it allows you to index and query structured or unstructured data, forming the foundation for **Retrieval-Augmented Generation (RAG)** scenarios.
+
+In this challenge, you’ll create an **Azure AI Search** service and import your manufacturing dataset into an index.  
+This index will serve as the contextual knowledge base that the model will later use to generate accurate, data-grounded responses.
 
 ## Challenge Objectives
-- Load the CSV data from Azure Blob Storage.  
-- Send structured chunks of data to Azure OpenAI via prompt.  
-- Generate natural-language summaries and recommendations.
+- Create an **Azure AI Search** resource.  
+- Upload and import your manufacturing dataset into an **index**.  
+- Validate that the indexed data can be queried successfully.  
 
 ## Steps to Complete
-1. Open **Azure AI Studio** or **Azure OpenAI Playground**.  
 
-2. Choose the deployed model `gpt-35-turbo`.  
+1. In the **Azure Portal**, select **Create a resource** → search for **Azure AI Search** → click **Create**.  
+2. Under **Basics**, fill in the following details:
+   - **Subscription:** Select your active subscription.  
+   - **Resource Group:** Use `MFG-GENAI-RG`.  
+   - **Service Name:** `mfg-search-<uniqueID>` (replace `<uniqueID>` with your initials or deployment ID).  
+   - **Region:** Select *East US* or the same region as your OpenAI resource.  
+   - **Pricing Tier:** Choose *Basic (B)* or *Free (F)*.  
+3. Click **Review + Create** → **Create**.  
+4. Once deployment completes, open your **Azure AI Search** resource and note:
+   - **Endpoint URL**  
+   - **Admin Key**
 
-3. Prepare a prompt such as:  
-   - You are an AI data analyst. Summarize key insights from the following manufacturing sensor data:
-   - Provide an overview of machine performance, downtime patterns, and recommendations for improvement.
-
-4. Run the prompt and observe the output summary.  
-
-5. Modify the prompt to ask specific questions, for example:  
-   - “Which machines showed highest temperature variance?”  
-   - “Summarize possible reasons for downtime.”  
+5. In the left pane, select **Import data**.  
+6. For **Data Source**, choose **Azure Blob Storage**.  
+7. Select the same Storage Account where you uploaded your manufacturing dataset (`machine_sensor_data.csv`).  
+8. Name your data source: `mfg-datasource`.  
+9. On the **Add cognitive skills (optional)** page, skip and click **Next**.  
+10. On **Create an index**, name it `mfg-index`.  
+    - Confirm that fields such as `MachineID`, `Temperature`, `Downtime`, and `Timestamp` are detected.  
+11. Complete the wizard and click **Submit**.  
+12. Once the index builds successfully, test it:  
+    - In the **Search Explorer**, enter a query such as:  
+      ```
+      search=MachineID:102 OR Temperature gt 90
+      ```  
+    - Observe returned documents.
 
 ## Success Criteria
-- Model produces coherent, context-aware summaries of data.  
-- Insights include metrics and recommendations based on patterns.
+- Azure AI Search resource created successfully.  
+- Manufacturing dataset indexed and searchable.  
+- Queries return relevant data from your uploaded dataset.
 
 ## Additional Resources
-- [Prompt Engineering Guidance](https://learn.microsoft.com/azure/ai-services/openai/concepts/prompt-engineering)
-- [Azure AI Studio Playground](https://oai.azure.com/portal)
+- [Azure AI Search Overview](https://learn.microsoft.com/azure/search/search-what-is-azure-search)  
+- [Import Data into Azure AI Search](https://learn.microsoft.com/azure/search/search-import-data-portal)  
+- [Use Search Explorer](https://learn.microsoft.com/azure/search/search-explorer)
 
-Now, click **Next** to continue to **Challenge 04: Build a Summary Report and Dashboard**.
+Now, click **Next** (bottom right corner) to continue to **Challenge 04: Analyze Data Using GenAI Prompts**.

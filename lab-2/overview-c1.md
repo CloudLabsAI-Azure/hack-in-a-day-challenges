@@ -19,6 +19,10 @@ Manufacturers generate massive volumes of data from production lines, sensors, m
 
 Provide a streamlined 6-hour prototype environment where participants use generative AI tools (large language models + analytics) to ingest, analyse, and summarise manufacturing operational data. The accelerator will show how to: connect to production/sensor logs, feed into a generative-AI workflow (e.g., prompt + retrieval + summarisation + insight generation), surface root-cause suggestions, produce dashboards and natural-language commentary for operations teams, and deliver a “co-pilot” interface for manufacturing data. By combining data analytics + GenAI, the lab enables teams to move from raw machine/sensor data to meaningful insights and recommendations in a short time.
 
+## Architecture
+
+![](./c2-arch.png)
+
 ## Learning Objectives
 
 - Understand how to combine computer vision (image/frame ingestion) with generative AI to produce commentary and recommended actions.
@@ -36,11 +40,11 @@ Prepare the provided synthetic dataset, upload it to Azure Storage, and explore 
 - **Challenge 02: Deploy Azure OpenAI Service**  
 Provision an Azure OpenAI resource and ensure access to the gpt-35-turbo model for generative data summarization.
 
-- **Challenge 03: Analyze Data Using GenAI Prompts**  
-Use the Azure OpenAI playground or a notebook to prompt the model for key insights and pattern detection from the dataset.
+- **Challenge 03: Create Azure AI Search Resource and Import Manufacturing Data:**
+In this challenge, you’ll create an **Azure AI Search** service and import your manufacturing dataset into an index.  
 
-- **Challenge 04: Build a Summary Report and Dashboard**  
-Transform GenAI outputs into visual summaries using Excel or Power BI to display trends and root-cause findings.
+- **Challenge 04: Analyze Data Using GenAI Prompts**  
+Use the Azure OpenAI playground or a notebook to prompt the model for key insights and pattern detection from the dataset.
 
 - **Challenge 05: Add a Chat-Style Interface for Insights**  
 Create a simple chat UI (Streamlit / web form) to interact with your data and ask questions such as “Which machine had the most downtime this week?”

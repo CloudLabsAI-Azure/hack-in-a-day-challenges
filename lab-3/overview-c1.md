@@ -18,6 +18,10 @@ Production lines in manufacturing frequently rely on visual inspections for defe
 
 Provide a beginner-friendly prototype where teams build a “visual assistant” that uses generative AI + computer-vision to assist shop-floor operators. The assistant ingests images or video frames from a manufacturing line (or sample dataset), analyses them for anomalies (defects, misalignment, missing parts), generates natural-language commentary (e.g., “Component X appears misaligned by approx 3mm; recommend repositioning”), and presents a simple UI dashboard for review and action. By combining vision models + generative AI commentary, the lab allows teams to show how manufacturing visual inspection and assistance can be automated and augmented.
 
+## Architecture
+
+![](./c3-arch.png)
+
 ## Learning Objectives
 **Description:**  
 By the end of this lab, you will learn to:
