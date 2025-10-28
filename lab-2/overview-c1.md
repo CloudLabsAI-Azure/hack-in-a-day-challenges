@@ -5,42 +5,28 @@
 **Difficulty:** Beginner  
 **Tags:** `Manufacturing`, `Generative AI`, `Data Analytics`, `Azure OpenAI`, `Industry 4.0`
 
----
-
 ## Overview
 In this lab, participants will learn how to use **Generative AI** to analyze manufacturing operational data and automatically generate insights and recommendations.  
 You’ll ingest a synthetic manufacturing dataset, summarize trends, detect anomalies, and build a simple insights dashboard using Azure OpenAI Service and data-analysis tools.
 
 The goal is to demonstrate how GenAI can turn raw machine and sensor logs into meaningful, human-readable narratives that accelerate decision-making on the factory floor.
 
----
-
 ## Problem Statement
-Modern manufacturing plants generate terabytes of data daily—from machine sensors, quality checks, and maintenance logs.  
-However, operators often struggle to interpret this data quickly. Manual report creation slows down root-cause analysis, causes missed optimization opportunities, and increases downtime.
 
----
+Manufacturers generate massive volumes of data from production lines, sensors, machines, quality-inspections, supply-chain logs, and maintenance records. Yet many operations teams struggle to gain meaningful insights quickly: patterns remain hidden, downtime causes are reactive rather than predictive, data sits in silos, and generating actionable reports takes too long. This slows responsiveness, drives up waste, and limits the ability to proactively optimize manufacturing throughput and quality.
 
 ## Solution Overview
-You will build a **GenAI-powered data analysis assistant** that connects to operational data, performs automated summarization, and produces natural-language insights.  
-Using **Azure OpenAI Service** (for LLMs such as gpt-35-turbo) and **Azure Storage** or **Synapse Notebook**, you will:
-- Clean and transform manufacturing sensor data.  
-- Use GenAI prompts to detect patterns and root causes.  
-- Present results through a lightweight dashboard (Excel, Power BI, or Streamlit).  
-This beginner-friendly lab focuses on concept demonstration rather than full-scale deployment.
 
----
+Provide a streamlined 6-hour prototype environment where participants use generative AI tools (large language models + analytics) to ingest, analyse, and summarise manufacturing operational data. The accelerator will show how to: connect to production/sensor logs, feed into a generative-AI workflow (e.g., prompt + retrieval + summarisation + insight generation), surface root-cause suggestions, produce dashboards and natural-language commentary for operations teams, and deliver a “co-pilot” interface for manufacturing data. By combining data analytics + GenAI, the lab enables teams to move from raw machine/sensor data to meaningful insights and recommendations in a short time.
 
 ## Learning Objectives
-**Description:** By the end of this lab, you will learn to:
 
-- Understand how Generative AI assists data analytics in manufacturing.  
-- Prepare and analyze sensor / machine data using notebooks or low-code tools.  
-- Prompt LLMs to summarize insights and generate recommendations.  
-- Build a simple visualization layer for summarized results.  
-- Apply responsible AI and data-governance practices to industrial datasets.
+- Understand how to combine computer vision (image/frame ingestion) with generative AI to produce commentary and recommended actions.
+- Pre-process visual data (images/frames), detect anomalies/defects, and use retrieval/prompting pipelines to generate natural-language insights.
+- Build a simple UI or dashboard that shows visual input, detected issues, commentary and next-steps.
+- Recognise challenges: camera calibration, lighting, anomaly-detection false positives, generative AI hallucination, human-in-loop review.
+- Learn how to deploy a lightweight prototype using accessible Azure (or cloud) services and clean up resources.
 
----
 
 ## Challenges Overview
 
@@ -61,7 +47,5 @@ Create a simple chat UI (Streamlit / web form) to interact with your data and as
 
 - **Challenge 06: Clean Up Resources**  
 Delete all Azure resources to prevent extra charges and complete your GenAI data-analysis journey.
-
----
 
 ## Happy Hacking!
