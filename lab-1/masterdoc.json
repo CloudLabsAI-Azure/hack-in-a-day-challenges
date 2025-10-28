@@ -1,0 +1,37 @@
+[
+    {
+        "Name": "Finance – Intelligent Document Processing (IDP)",
+        "Language": "English",
+        "BaseURL": "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges.git",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/lab-1/overview-c1.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/lab-1/challenge-1.md",
+                "Order": 2
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/lab-1/challenge-2.md",
+                "Order": 3
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/lab-1/challenge-3.md",
+                "Order": 4
+            },
+                        {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/lab-1/challenge-4.md",
+                "Order": 5
+            },
+                        {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/lab-1/challenge-5.md",
+                "Order": 6
+            },
+                                    {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/lab-1/challenge-6.md",
+                "Order": 7
+            }
+        ]
+    }
+]
