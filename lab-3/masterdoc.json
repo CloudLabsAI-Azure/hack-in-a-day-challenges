@@ -25,7 +25,7 @@
                 "Order": 5
             },
                         {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/lab-3/challenge-5.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/lab-3/chalenge-5.md",
                 "Order": 6
             },
                                     {
@@ -34,4 +34,5 @@
             }
         ]
     }
+
 ]
