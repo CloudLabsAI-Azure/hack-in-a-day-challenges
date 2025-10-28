@@ -44,15 +44,25 @@ By the end of this lab, you will learn:
 
 ---
 
-## Challenge Objectives
+## Challenges Overview
 
-**Description:**  
-By the end of this lab, you will be able to:
-- Create Azure AI Document Intelligence Resource
-- Test Prebuilt Invoice Model
-- Validate Extracted Invoice Data
-- Store Extracted Results in Azure Storage
-- Visualize and Review Extracted Data
+- **Challenge 01: Create Azure AI Document Intelligence Resource**  
+Set up the Azure AI Document Intelligence service within your subscription. This challenge focuses on deploying the foundational resource required to enable intelligent document processing across your finance workflows.
+
+- **Challenge 02: Extract Data Using the Prebuilt Invoice Model**  
+Leverage the Prebuilt Invoice Model in Document Intelligence Studio to automatically extract structured data such as vendor details, invoice numbers, and totals from uploaded PDF invoices.
+
+- **Challenge 03: Validate Extracted Invoice Data**  
+Review and verify the accuracy of the extracted invoice data against key business rules. Ensure totals match calculations and mandatory fields are correctly captured before data storage.
+
+- **Challenge 04: Store Extracted Results in Azure Storage**  
+Securely store validated invoice data in Azure Blob Storage for audit, reporting, and downstream integration. Learn to manage containers and handle JSON output securely through the Azure Portal.
+
+- **Challenge 05: Visualize Extracted Invoice Summary**  
+Transform the extracted invoice data into actionable insights. Use Power BI or Excel to visualize total spending, vendor distribution, and invoice trends for better financial decision-making.
+
+- **Challenge 06: Clean Up Resources**  
+Delete all deployed Azure resources to prevent unnecessary costs and ensure a clean environment post-lab completion. This step finalizes your Intelligent Document Processing deployment workflow.
 
 ---
 
