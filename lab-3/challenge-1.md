@@ -7,6 +7,22 @@ Azure AI Vision provides pretrained image analysis capabilities to detect object
 
 In this challenge, you’ll create the Azure AI Vision resource in your subscription to enable image analysis for the Visual Assistant.
 
+## Accessing the Azure portal
+
+1. To access the Azure portal, click on the **Azure Portal** Microsoft edge shortcut that is created in the desktop.
+
+1. On the Sign in to Microsoft Azure tab, you will see a login screen. Enter the following email/username, and then click on Next.
+
+   - Email/Username: <inject key="AzureAdUserEmail"></inject>
+
+   - Password: <inject key="AzureAdUserPassword"></inject>
+
+1. If you see the pop-up Stay Signed in?, click No.
+
+1. If you see the pop-up You have free Azure Advisor recommendations!, close the window to continue with the challenge.
+
+1. If a Welcome to Microsoft Azure pop-up window appears, click Cancel to skip the tour.
+
 ## Challenge Objectives
 - Create an **Azure AI Vision** (Cognitive Services) resource.  
 - Note the **Endpoint** and **API Key** for later use.  
