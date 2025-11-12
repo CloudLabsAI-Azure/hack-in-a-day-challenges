@@ -1,0 +1,20 @@
+[
+    {
+        "Name": "Build-A-Fabric-Real-Time-Intelligence-Solution-in-a-Day",
+        "Language": "English",
+        "Files": [
+             {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/FabConRTITutorial/refs/heads/main/Lab_Files/Challenge_overview.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/FabConRTITutorial/refs/heads/main/Lab_Files/challenge-getting-started.md",
+                "Order": 2
+            },    
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/FabConRTITutorial/refs/heads/main/Lab_Files/Challenge-Based-Hack.md",
+                "Order": 3
+            }    
+        ]
+    }
+]
