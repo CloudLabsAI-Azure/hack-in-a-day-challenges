@@ -5,15 +5,15 @@
         "BaseURL": "https://github.com/CloudLabsAI-Azure/OpenAI-CallCenter",
         "Files": [
             {
-                "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/OpenAI-CallCenter/refs/heads/main/Challenge%20%20lab%20-%20page%201.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/call-center-data-analysis-using-azure-ai-services-and-azure-openai/overview.md",
                 "Order": 1
             },
             {
-                "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/OpenAI-CallCenter/refs/heads/main/Challenge%20lab%20-%20getting%20started.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/call-center-data-analysis-using-azure-ai-services-and-azure-openai/getting-started.md",
                 "Order": 2
             },
             {
-                "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/OpenAI-CallCenter/refs/heads/main/Challenge-Based%20Hackathon.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/call-center-data-analysis-using-azure-ai-services-and-azure-openai/challenge-based.md",
                 "Order": 3
             }
 
