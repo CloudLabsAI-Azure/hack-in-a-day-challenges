@@ -6,15 +6,15 @@
         "BaseURL": "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges",
         "Files": [
             {
-                "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/Customer-Support-Conversation-Summarization-with-Azure-OpenAI/main/Instructions/Challenge_overview.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/customer-support-conversation-summarization-with-azure-openai-analyze-sentences-and-call-summary/overview.md",
                 "Order": 1
             },
             {
-                "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/Customer-Support-Conversation-Summarization-with-Azure-OpenAI/main/Instructions/challenge-getting-started.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/customer-support-conversation-summarization-with-azure-openai-analyze-sentences-and-call-summary/getting-started.md",
                 "Order": 2
             },
             {
-                "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/Customer-Support-Conversation-Summarization-with-Azure-OpenAI/main/Instructions/Challenge-Based%20Hackathon.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/customer-support-conversation-summarization-with-azure-openai-analyze-sentences-and-call-summary/challenge-based.md",
                 "Order": 3
             }
         ]
