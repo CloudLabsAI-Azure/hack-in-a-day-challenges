@@ -1,26 +1,51 @@
-# Call Center Data Analysis using Azure AI services and Azure OpenAI
+# Call Center Data Analysis using Azure AI Services and Azure OpenAI
 
-Welcome to the Copilot Hackathon! Today, you’ll extract actionable insights from customer conversations using Azure AI services and Azure OpenAI. You’ll apply both real-time and post-call analytics—covering transcription, sentiment analysis, and visual reporting—to boost call center efficiency and customer satisfaction.
+Welcome to the Call Center Data Analysis Hack in a Day! Today, you'll explore the power of AI-driven analytics by building an intelligent call center analysis solution using Azure AI Services and Azure OpenAI. Through this hands-on experience, you'll learn how to design a system that can automatically transcribe audio calls, perform sentiment analysis, and generate actionable insights for improved customer service operations.
 
 ## Introduction
-Your quest is to build an analytics workflow for call center data that turns raw audio and transcripts into insights. You’ll use Azure AI Speech for transcription, Azure OpenAI for summarization and intent/action-item extraction, and Azure AI Language for sentiment, key phrases, and PII redaction—then surface findings via dashboards for supervisors and QA teams.
 
-![Architecture](images/archdiag.png)
+Your mission is to create an AI-powered call center analytics pipeline that transforms how organizations handle customer interaction data. Leveraging Azure AI Services, Azure OpenAI, and Power BI, you'll design a solution that can automatically transcribe customer calls, analyze conversations for sentiment and key insights, and visualize trends through interactive dashboards.
+
+This solution will act as a comprehensive call center intelligence platform integrating audio processing, AI-driven analysis, and business intelligence to deliver faster, smarter, and more efficient customer service insights for managers and analysts alike.
 
 ## Learning Objectives
-By participating in this hackathon, you will learn how to:
-- Configure ingestion for live and recorded calls; generate high-accuracy transcripts with Azure AI Speech.
-- Enrich conversations using Azure OpenAI (summaries, topics, intents, action items) and Azure AI Language (sentiment, key phrases, PII redaction).
-- Orchestrate real-time vs. post-call pipelines and persist insights for analytics.
-- Visualize KPIs (CSAT proxies, sentiment trends, agent coaching cues) in a lightweight dashboard.
 
-## Hackathon Format: Challenge-Based
-This hackathon adopts a challenge-based format to learn by solving a practical problem:
-- Analyzing the problem statement.  
-- Strategizing your approach to find the most effective solution.  
-- Leveraging the provided lab environment and Azure AI services.
+By participating in this hackathon, you will learn how to:
+
+- Deploy Azure resources for audio transcription, conversation analysis, and data storage using ARM templates.
+- Configure Azure AI Services for speech-to-text transcription and conversation processing.
+- Implement Azure OpenAI for intelligent conversation summarization and sentiment analysis.
+- Build interactive Power BI dashboards for visualizing call center metrics and trends.
+- Create end-to-end automated workflows using Azure Functions for seamless data processing.
+
+## Hack in a Day Format: Challenge-Based
+
+This hack in a day adopts a challenge-based learning format, providing a hands-on experience through three progressive stages that mirror a real-world call center analytics implementation. Each challenge focuses on a key capability of the Call Center Analysis Solution:
+
+- **Challenge 1: Foundation** - Deploy Azure resources and set up the infrastructure for audio processing and data storage.
+- **Challenge 2: Data Processing** - Upload audio files and implement automated transcription and analysis workflows.
+- **Challenge 3: Visualization** - Create interactive Power BI dashboards and configure real-time data refresh capabilities.
+
+Throughout each challenge, you'll:
+- Analyze the call center data requirements and business scenarios.
+- Strategize and design a scalable AI-driven analytics solution.
+- Leverage your Azure environment to deploy, integrate, and test AI processing components.
 
 ## Challenge Overview
-Begin by setting up Azure AI Speech for transcription and storage for call artifacts. Build an enrichment pipeline that uses Azure OpenAI for conversation summaries and intent/action-item extraction, plus Azure AI Language for sentiment and key-phrase analysis with PII redaction. For real-time scenarios, emit interim insights (e.g., live sentiment) to a store/stream; for post-call, batch-process recordings to compute call-level metrics. Finally, wire a simple dashboard to visualize trends (sentiment over time, agent-level insights, topic hotspots) and iterate on prompts and thresholds to improve accuracy and usefulness.
 
-**Happy Hacking!!**
+Your journey begins with deploying Azure resources using ARM templates to create the foundational infrastructure for call center analytics. You'll then upload customer call recordings and trigger automated processing workflows. Finally, you'll create comprehensive Power BI visualizations that provide actionable insights into customer sentiment, conversation summaries, and operational trends.
+
+By the end of this hack in a day, you'll have a fully functional Call Center Analysis solution capable of automated audio transcription, intelligent sentiment analysis, conversation summarization, and interactive business intelligence reporting.
+
+## Support Contact
+
+The CloudLabs support team is available 24/7, 365 days a year, via email and live chat to ensure seamless assistance at any time. We offer dedicated support channels tailored specifically for both learners and instructors, ensuring that all your needs are promptly and efficiently addressed.
+
+Learner Support Contacts:
+
+- Email Support: cloudlabs-support@spektrasystems.com
+- Live Chat Support: https://cloudlabs.ai/labs-support
+
+Now, click on the **Next** from lower right corner to move on next page.
+
+## Happy Hacking!!

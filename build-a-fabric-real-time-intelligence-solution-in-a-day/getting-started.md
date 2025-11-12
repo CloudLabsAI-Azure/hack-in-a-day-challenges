@@ -1,81 +1,59 @@
-# Getting started with Challenge Environment
+## Getting Started with Challenge
 
-### Overall Estimated Duration : 4 Hours
+Welcome to Hack in a Day: Build A Fabric Real-Time Intelligence Solution challenge! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
 
-Welcome to Copilot Hackathon, We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.sharing, collaboration, and online access.
-  
 ### Accessing Your Challenge Environment
 
-Once you're ready to dive in, your virtual machine and Challenge guide will be right at your fingertips within your web browser.
+Once you're ready to dive in, your virtual machine and challenge guide will be right at your fingertips within your web browser.
 
-![](media/guide-01up2.png)
+![](./media/gs1.png)
 
 ### Exploring Your Challenge Resources
 
-To get a better understanding of your Challenge resources and credentials, navigate to the **Environment** tab.
+To get a better understanding of your challenge resources and credentials, navigate to the Environment tab.
 
-![](media/getting-started-2upd2.png)
+![](./media/gs-leave-2.png)
 
 ### Utilizing the Split Window Feature
 
-For convenience, you can open the Challenge guide in a separate window by selecting the Split Window button from the Top right corner
+For convenience, you can open the challenge guide in a separate window by selecting the Split Window button from the Top right corner
 
-![](media/getting-started-3upd2.png)
+![](./media/gs-leave-3.png)
 
-## Managing Your Virtual Machine
+### Managing Your Virtual Machine
 
-On the **Resources (1)** tab, use the **Action buttons (2)** next to your VM. Feel free to **start**, **stop**, or **restart** your Virtual Machine as needed. Your experience is in your hands!
+Feel free to start, stop, or restart your virtual machine as needed from the Resources tab. Your experience is in your hands!
 
-![](media/getting-started-5upd2.png)
+![](./media/gs-leave-4.png)
 
-## Lab Guide Zoom In/Zoom Out
+## Let's Get Started with Microsoft Fabric Real-Time Intelligence
 
-To adjust the zoom level for the environment page, click the **A↕ : 100%** icon located next to the timer in the lab environment.
+1. In the JumpVM, click on **Microsoft Edge** browser which is created on desktop.
 
-![](media/zoomnew1.png)
+   ![](./media/gs-up1.png)
 
-## Let's Get Started with Microsoft Fabric portal
- 
-1. Open the **Microsoft Edge browser** on your desktop of the **LabVM** and visit `https://app.fabric.microsoft.com/`. You will be navigated to the login page.
+1. Navigate to **Microsoft Fabric** portal by typing `https://fabric.microsoft.com` in the address bar.
 
-  ![](media/guide-58up.png)
+1. On the **Sign into Microsoft** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
 
-1. Enter the following **Username/Email** **(1)**, and then click on **Submit** **(2)**.  
+   - Email/Username: <inject key="AzureAdUserEmail"></inject>
 
-    - **Username/Email**:<inject key="AzureAdUserEmail"></inject>
+     ![](./media/gs-lab3-g2.png)
 
-      ![](media/guide-59up.png)
+1. Now, enter the following password and click on **Sign in**.
 
-    - **Temporary Access Pass**:<inject key="AzureAdUserPassword"></inject> 
+   - Password: <inject key="AzureAdUserPassword"></inject>
 
-      ![](media/1.2Pass.png)
+     ![](./media/gs-lab3-g3.png)
 
-1. Click **Sign in** and follow the prompts to sign into Fabric.
+     >**Note:** If you see the Action Required dialog box, then select Ask Later option.
+     
+1. If you see the pop-up **Stay Signed in?**, click No.
 
-1. You will be navigated to the **Fabric Home Page**.
+   ![](./media/gs-4.png)
 
-    ![](media/guide-60up.png)
+1. Welcome to **Microsoft Fabric**! You're now ready to start building your real-time intelligence solution using Eventhouse, Eventstream, Lakehouse, and Data Activator.
 
-    > **Note:** Click on **Cancel** in the Welcome to Fabric view pop-up.
+Now, click on the **Next** from lower right corner to move on next page.
 
-    To work with Fabric items, you will need a trial license and a workspace that has Fabric license. Let’s set this up.
-
-1. On the top right corner of the screen, Select the **User** **icon (1)**. Select **Free trial (2)**.
-
-    ![](media/image11upd2.png)
-
-1. **Activate your 60-day free Fabric trial capacity** dialog opens. Select **Activate**.
-
-    ![](media/image12upd2.png)
-
-1. The "Successfully upgraded to Microsoft Fabric" dialog will appear. Click on **Fabric Home Page**.      
-
-1. You will be navigated back to the **Microsoft** **Fabric Home page**.
-
-    ![](media/1.4.png)
-
-1. Keep this browser tab open, you will be using this further.
-
-1. Now, click on the **Next** from lower right corner to move on next page.
-
-## Happy Learning!!
+## Happy Hacking!!

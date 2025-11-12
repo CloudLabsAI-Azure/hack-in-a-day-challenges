@@ -1,33 +1,50 @@
 # Customer Support Conversation Summarization with Azure OpenAI
 
-Welcome to the Copilot Hackathon! Today, you’ll streamline customer service operations by building an AI-powered **conversation summarization** workflow. You’ll generate concise summaries from chat transcripts and call recordings using **Azure OpenAI**, **Azure AI Language Studio**, and **Azure AI Speech Studio**—so agents and leaders can grasp the “what, why, and outcome” in seconds.
+Welcome to the Customer Support Conversation Summarization Hack in a Day! Today, you'll explore the power of AI-driven conversation analysis by building an intelligent summarization solution using Azure OpenAI and Azure AI Services. Through this hands-on experience, you'll learn how to design systems that can automatically analyze customer-agent conversations and extract meaningful insights for improved customer service operations.
 
 ## Introduction
 
-Your quest is to create an end-to-end summarization pipeline for customer–agent interactions. You’ll work with text transcripts and audio calls, apply **LLM-based summarization**, and—where helpful—layer in **sentiment**, **key phrases**, and **topics**. By the end, you’ll have a repeatable approach that turns long conversations into crisp insights suitable for handoffs, QA, and reporting.
+Your mission is to create an AI-powered conversation analysis pipeline that transforms how organizations handle customer support interactions. Leveraging Azure AI Language Studio, Azure AI Speech Studio, and Azure OpenAI, you'll design a solution that can automatically summarize both text-based and audio-based customer conversations, extract key insights, and provide actionable intelligence for customer service teams.
+
+This solution will act as a comprehensive conversation intelligence platform integrating text analysis, speech processing, and AI-driven summarization to deliver faster, smarter, and more efficient customer support insights for managers and agents alike.
 
 ## Learning Objectives
 
 By participating in this hackathon, you will learn how to:
 
-- **Provision Azure AI services** needed for summarization (Azure OpenAI, AI Language, and AI Speech).
-- Use **Azure AI Language Studio** to summarize text-based conversations and extract key insights.
-- Use **Azure AI Speech Studio** to **transcribe** audio calls and generate **call summaries**.
-- (Optional) Apply **sentiment analysis** and **key phrase extraction** to enrich summaries.
-- Validate outputs against business-friendly criteria (issue, action, resolution) and capture results for downstream workflows.
+- Deploy Azure AI Language Service for intelligent text-based conversation summarization.
+- Configure Azure AI Speech Service for audio transcription and conversation analysis.
+- Implement conversation summarization models to extract key issues, resolutions, and sentiments.
+- Analyze customer-agent interactions from both text and audio sources for comprehensive insights.
+- Create automated workflows for processing and summarizing customer support conversations.
 
-## Hackathon Format: Challenge-Based
+## Hack in a Day Format: Challenge-Based
 
-This hackathon follows a challenge-based format so you learn by solving a practical problem:
+This hack in a day adopts a challenge-based learning format, providing a hands-on experience through two progressive stages that mirror a real-world customer support analytics implementation. Each challenge focuses on a key capability of the Conversation Summarization Solution:
 
-- Analyze the customer-support scenario and define the desired summary format.
-- Strategize the flow for text and audio inputs across Azure AI services.
-- Leverage the provided lab environment, datasets, and Azure tools to implement and validate the pipeline.
+- **Challenge 1: Text Analysis** - Implement Azure AI Language Studio for summarizing text-based customer-agent conversations.
+- **Challenge 2: Audio Intelligence** - Deploy Azure AI Speech Studio for analyzing and summarizing customer support call recordings.
+
+Throughout each challenge, you'll:
+- Analyze customer support conversation requirements and business scenarios.
+- Strategize and design scalable AI-driven conversation analysis solutions.
+- Leverage Azure AI services to implement intelligent summarization and insight extraction capabilities.
 
 ## Challenge Overview
 
-Begin by deploying the required Azure resources. In **Azure AI Language Studio**, upload sample **text transcripts** and run summarization to produce concise notes that capture customer **issue**, agent **actions**, and **resolution**. Next, use **Azure AI Speech Studio** to **transcribe audio** recordings and apply **conversation summarization** on the resulting text. Optionally, enhance results with **sentiment** and **key phrases** for quicker triage and reporting.
+Your journey begins with setting up Azure AI Language Service to analyze and summarize text-based customer conversations. You'll then implement Azure AI Speech Service to transcribe and analyze audio recordings of customer calls. Throughout both challenges, you'll focus on extracting key insights including customer issues, agent responses, resolutions, and sentiment analysis.
 
-By the end of the challenge, you’ll have a working summarization workflow for both text and audio conversations that can be adapted for real support operations.
+By the end of this hack in a day, you'll have a fully functional Customer Support Conversation Summarization solution capable of processing both text and audio interactions, generating intelligent summaries, and providing actionable insights for improving customer service quality and efficiency.
+
+## Support Contact
+
+The CloudLabs support team is available 24/7, 365 days a year, via email and live chat to ensure seamless assistance at any time. We offer dedicated support channels tailored specifically for both learners and instructors, ensuring that all your needs are promptly and efficiently addressed.
+
+Learner Support Contacts:
+
+- Email Support: cloudlabs-support@spektrasystems.com
+- Live Chat Support: https://cloudlabs.ai/labs-support
+
+Now, click on the **Next** from lower right corner to move on next page.
 
 ## Happy Hacking!!
