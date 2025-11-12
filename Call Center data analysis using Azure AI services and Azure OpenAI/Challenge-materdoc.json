@@ -1,0 +1,22 @@
+[
+    {
+        "Name": "Lab : Call Center data analysis using Azure AI services and Azure OpenAI",
+        "Language": "English",
+        "BaseURL": "https://github.com/CloudLabsAI-Azure/OpenAI-CallCenter",
+        "Files": [
+            {
+                "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/OpenAI-CallCenter/refs/heads/main/Challenge%20%20lab%20-%20page%201.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/OpenAI-CallCenter/refs/heads/main/Challenge%20lab%20-%20getting%20started.md",
+                "Order": 2
+            },
+            {
+                "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/OpenAI-CallCenter/refs/heads/main/Challenge-Based%20Hackathon.md",
+                "Order": 3
+            }
+
+        ]
+    }
+]
