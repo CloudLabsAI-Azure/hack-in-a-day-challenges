@@ -205,4 +205,3 @@ You learned how to:
 - Configure Power BI Service workspaces for enterprise collaboration and content management
 
 This solution demonstrates how Power BI enables **data-driven decision making** through intuitive, self-service analytics accessible to business stakeholders at all levels.
- 

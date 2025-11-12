@@ -211,4 +211,3 @@ You learned how to:
 - Orchestrate multi-agent systems using Semantic Kernel and Autogen for complex task automation
 
 This solution demonstrates how Azure AI Foundry enables **enterprise-grade AI agent development** through integrated tooling, comprehensive observability, and scalable multi-agent orchestration frameworks.
- 

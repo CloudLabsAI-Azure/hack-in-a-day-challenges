@@ -169,4 +169,3 @@ You learned how to:
 - Create an interactive real-time dashboard with automated alerts.  
 
 This lab demonstrates how Microsoft Fabric enables **timely, data-driven decision making** through real-time analytics and automation.
- 
