@@ -5,15 +5,15 @@
         "BaseURL": "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges",
         "Files": [
             {
-                "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/Build-Custom-Knowledge-RAG-App-With-Azure-AI-Foundry/refs/heads/main/Instructions/Labs/Challenge%20lab%20-%20page1%20.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/hands-on-with-azure-ai-foundry-and-agent-frameworks/overview.md",
                 "Order": 1
             },
             {
-                "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/Build-Custom-Knowledge-RAG-App-With-Azure-AI-Foundry/refs/heads/main/Instructions/Labs/Challenge%20lab%20-%20Getting%20started.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/hands-on-with-azure-ai-foundry-and-agent-frameworks/getting-started.md",
                 "Order": 2
             },
             {
-                "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/Build-Custom-Knowledge-RAG-App-With-Azure-AI-Foundry/refs/heads/main/Instructions/Labs/Challenge-Based%20Hackathon.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/hands-on-with-azure-ai-foundry-and-agent-frameworks/challenge-based.md",
                 "Order": 3
             }
 
