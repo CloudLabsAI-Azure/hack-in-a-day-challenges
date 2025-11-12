@@ -53,4 +53,15 @@ Create a simple Streamlit-based dashboard to upload images, view AI results, and
 - **Challenge 06: Clean Up Resources**  
 Remove all Azure resources to prevent extra costs and complete your Visual Assistant workflow.
 
-## Happy Hacking!
+## Support Contact
+
+The CloudLabs support team is available 24/7, 365 days a year, via email and live chat to ensure seamless assistance at any time. We offer dedicated support channels tailored specifically for both learners and instructors, ensuring that all your needs are promptly and efficiently addressed.
+
+Learner Support Contacts:
+
+- Email Support: cloudlabs-support@spektrasystems.com
+- Live Chat Support: https://cloudlabs.ai/labs-support
+
+Now, click on the **Next** from lower right corner to move on next page.
+
+## Happy Hacking!!
