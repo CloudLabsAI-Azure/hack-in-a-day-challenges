@@ -4,15 +4,15 @@
     "Language": "English",
     "Files": [
       {
-      "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/Dashboard-in-a-day/refs/heads/prod/MSSPL/Challenge_overview.md",
+      "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/create-and-publish-powerbi-dashboards-and-reports/overview.md",
         "Order": 1
       },
       {
-      "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/Dashboard-in-a-day/refs/heads/prod/MSSPL/challenge-getting-started.md",
+      "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/create-and-publish-powerbi-dashboards-and-reports/getting-started.md",
         "Order": 2
       },
       {
-       "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/Dashboard-in-a-day/prod/MSSPL/Challenge-pag3.md",
+       "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/create-and-publish-powerbi-dashboards-and-reports/challenge-based.md",
         "Order": 3
       }
     ]
