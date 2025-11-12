@@ -1,24 +1,51 @@
 # Developing a Custom RAG App Using Azure AI Foundry
 
-Welcome to the Copilot Hackathon! Today, you’ll build a custom Retrieval-Augmented Generation (RAG) application using the Azure AI Foundry SDK. You’ll provision the right Azure resources, wire up Azure AI Search, and implement a retrieval-enhanced generation flow—then evaluate and optimize it for accuracy, quality, and efficiency.
+Welcome to the Custom RAG Application Hack in a Day! Today, you'll explore the power of Retrieval-Augmented Generation by building a comprehensive AI application using Azure AI Foundry. Through this hands-on experience, you'll learn how to design intelligent systems that can retrieve relevant information from knowledge sources and generate accurate, contextual responses using advanced AI models.
 
 ## Introduction
-Your quest is to create a RAG-powered application that retrieves relevant knowledge and augments model responses. You’ll set up Azure AI Foundry (projects, model deployments), configure Azure AI Search with vector indexing, and develop the end-to-end pipeline in VS Code. By the end, you’ll have a working solution with telemetry and evaluation to guide improvements.
+
+Your mission is to create a custom Retrieval-Augmented Generation (RAG) application that transforms how organizations handle knowledge management and information retrieval. Leveraging Azure AI Foundry SDK, Azure AI Search, and advanced AI models, you'll design a solution that can intelligently index knowledge sources, retrieve relevant information, and generate accurate responses with observability and performance optimization.
+
+This solution will act as a comprehensive intelligent knowledge platform integrating document processing, semantic search, AI-driven response generation, and performance monitoring to deliver faster, smarter, and more efficient information retrieval experiences for users and developers alike.
 
 ## Learning Objectives
+
 By participating in this hackathon, you will learn how to:
-- Set up the Azure AI Foundry SDK and provision core resources (project, model deployments, Azure AI Search), initialize a repo, and configure environment variables.
-- Build a RAG pipeline: ingest/index data, implement retrieval + generation, and add telemetry to monitor performance.
-- Evaluate and optimize: use Azure AI evaluators to measure retrieval accuracy and response quality, interpret results, and fine-tune for efficiency.
 
-## Hackathon Format: Challenge-Based
-This hackathon adopts a challenge-based format, offering you a unique opportunity to learn while dealing with a practical problem. The challenge includes one or more objectives designed to test and enhance your skills in specific aspects.
+- Set up Azure AI Foundry projects and deploy advanced AI models for RAG applications.
+- Implement Azure AI Search for intelligent document indexing and semantic retrieval.
+- Build comprehensive RAG pipelines integrating knowledge retrieval and response generation.
+- Configure observability and telemetry using OpenTelemetry and Azure Monitor for performance tracking.
+- Evaluate and optimize RAG application performance using Azure AI evaluation frameworks.
 
-- Analyzing the problem statement.  
-- Strategizing your approach to find the most effective solution.  
-- Leveraging the provided lab environment and Azure AI services.
+## Hack in a Day Format: Challenge-Based
+
+This hack in a day adopts a challenge-based learning format, providing a hands-on experience through three progressive stages that mirror a real-world RAG application implementation. Each challenge focuses on a key capability of the Custom RAG Solution:
+
+- **Challenge 1: Foundation & Intelligence** - Integrate observability mechanisms and build AI-driven fitness assistants using advanced frameworks.
+- **Challenge 2: Multi-Agent Systems** - Implement Semantic Kernel agents and multi-agent RAG systems using Autogen for complex reasoning.
+- **Challenge 3: Complete RAG Implementation** - Develop end-to-end custom RAG applications with full Azure AI Foundry integration and optimization.
+
+Throughout each challenge, you'll:
+- Analyze knowledge management requirements and RAG architecture patterns.
+- Strategize and design scalable AI-driven information retrieval solutions.
+- Leverage Azure AI Foundry to implement, monitor, and optimize intelligent RAG applications.
 
 ## Challenge Overview
-Begin by creating an Azure AI Foundry project and deploying both a GPT-class model and a text-embedding model. Configure Azure AI Search with a vector index, then ingest your knowledge sources. Implement the RAG pipeline that (1) embeds and indexes documents, (2) retrieves top-K context for a user query, and (3) generates grounded answers. Add telemetry to capture retrieval and response metrics. Finally, run evaluations in Azure AI Foundry to assess retrieval accuracy and response quality, analyze findings, and iterate on your indexing, prompts, or parameters to improve the system.
 
-**Happy Hacking!!**
+Your journey begins with implementing observability and tracing mechanisms for AI agent monitoring. You'll then build multi-agent RAG systems using advanced frameworks like Semantic Kernel and Autogen. Finally, you'll create a complete custom RAG application with full Azure AI Foundry integration, including model deployment, knowledge indexing, and performance evaluation.
+
+By the end of this hack in a day, you'll have a fully functional Custom RAG Application capable of intelligent knowledge retrieval, contextual response generation, multi-agent reasoning, and comprehensive performance monitoring and optimization.
+
+## Support Contact
+
+The CloudLabs support team is available 24/7, 365 days a year, via email and live chat to ensure seamless assistance at any time. We offer dedicated support channels tailored specifically for both learners and instructors, ensuring that all your needs are promptly and efficiently addressed.
+
+Learner Support Contacts:
+
+- Email Support: cloudlabs-support@spektrasystems.com
+- Live Chat Support: https://cloudlabs.ai/labs-support
+
+Now, click on the **Next** from lower right corner to move on next page.
+
+## Happy Hacking!!

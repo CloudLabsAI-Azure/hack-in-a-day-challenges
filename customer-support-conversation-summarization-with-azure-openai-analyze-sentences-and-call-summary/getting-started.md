@@ -1,73 +1,57 @@
-# Getting started with Challenge Environment
+## Getting Started with Challenge
 
-### Overall Estimated Duration : 4 Hours
+Welcome to Hack in a Day: Customer Support Conversation Summarization with Azure OpenAI challenge! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
 
-Welcome to Copilot Hackathon, We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.sharing, collaboration, and online access.
-  
 ### Accessing Your Challenge Environment
 
-Once you're ready to dive in, your virtual machine and Challenge guide will be right at your fingertips within your web browser.
+Once you're ready to dive in, your virtual machine and challenge guide will be right at your fingertips within your web browser.
 
-  ![](../media/gt-7-1.png)
+![](./media/gs1.png)
 
 ### Exploring Your Challenge Resources
 
-To get a better understanding of your Challenge resources and credentials, navigate to the **Environment** tab.
- 
-  ![](../media/gt-2.png)
- 
+To get a better understanding of your challenge resources and credentials, navigate to the Environment tab.
+
+![](./media/gs-leave-2.png)
+
 ### Utilizing the Split Window Feature
 
-For convenience, you can open the Challenge guide in a separate window by selecting the Split Window button from the Top right corner
- 
-  ![](../media/power-03new.png)
- 
-## Managing Your Virtual Machine
+For convenience, you can open the challenge guide in a separate window by selecting the Split Window button from the Top right corner
 
-On the **Resources (1)** tab, use the **Action buttons (2)** next to your VM. Feel free to **start**, **stop**, or **restart** your Virtual Machine as needed. Your experience is in your hands!
+![](./media/gs-leave-3.png)
 
-  ![](../media/gt-10.png)
+### Managing Your Virtual Machine
 
-## Lab Guide Zoom In/Zoom Out
+Feel free to start, stop, or restart your virtual machine as needed from the Resources tab. Your experience is in your hands!
 
-To adjust the zoom level for the environment page, click the **A↕ : 100%** icon located next to the timer in the lab environment.
+![](./media/gs-leave-4.png)
 
-   ![Inline Validation](../media/zoominout.png)
+## Let's Get Started with Azure AI Language Studio and Azure AI Speech Studio
 
-## Let's Get Started with Azure Portal
- 
-1. On your virtual machine, click on the **Azure Portal** icon as shown below:
- 
-    ![](../media/azure-portal-edge.png)
+1. In the JumpVM, click on **Azure Portal** shortcut of Microsoft Edge browser which is created on desktop.
 
-1. On the **Sign in to Microsoft Azure** tab you will see the login screen, in that enter the following email/username, and click on **Next**. 
+   ![](./media/gs-up1.png)
 
-   * **Email/Username**: <inject key="AzureAdUserEmail"></inject>
-   
-      ![](../media/user-email.png "Enter Email")
+1. On the **Sign into Microsoft** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
+
+   - Email/Username: <inject key="AzureAdUserEmail"></inject>
+
+     ![](./media/gs-lab3-g2.png)
+
+1. Now, enter the following password and click on **Sign in**.
+
+   - Password: <inject key="AzureAdUserPassword"></inject>
+
+     ![](./media/gs-lab3-g3.png)
+
+     >**Note:** If you see the Action Required dialog box, then select Ask Later option.
      
-1. Now enter the following password and click on **Sign in**.
-   
-   * **Password**: <inject key="AzureAdUserPassword"></inject>
-   
-      ![](../media/user-pass.png "Enter Password")
+1. If you see the pop-up **Stay Signed in?**, click No.
 
-1. If you see the pop-up Action Required, click Ask Later.
+   ![](./media/gs-4.png)
 
-   ![](../media/asklater.png)
-     
-1. If you see the pop-up **Stay Signed in?**, select **No**.
+1. Welcome to **Azure Portal**! You're now ready to start building your AI-powered conversation summarization solution using Azure AI Language Studio and Azure AI Speech Studio for intelligent text and audio analysis.
 
-1. If you see the pop-up **You have free Azure Advisor recommendations!**, close the window to continue the lab.
+Now, click on the **Next** from lower right corner to move on next page.
 
-1. If a **Welcome to Microsoft Azure** popup window appears, select **Maybe Later** to skip the tour.
-   
-1. Now, click on **Next** from the lower right corner to move on to the next page.
-
-   ![](../media/lab-next.png)
- 
-1. Keep this browser tab open, you will be using this further.
-
-1. Now, click on the **Next** from lower right corner to move on next page.
-
-## Happy Learning!!
+## Happy Hacking!!

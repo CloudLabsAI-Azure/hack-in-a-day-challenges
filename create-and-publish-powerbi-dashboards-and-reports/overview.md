@@ -1,34 +1,51 @@
-# Create and Publish Power BI Dashboards & Reports (Dashboard-in-a-Day)
+# Create and Publish Power BI Dashboards & Reports
 
-Welcome to the Copilot Hackathon! Today, you'll explore the power of data storytelling by building and publishing a Power BI report and dashboard end-to-end. You’ll enhance a pre-created report, apply design best practices, and publish it to the Power BI Service—then construct an executive-ready dashboard.
+Welcome to the Power BI Dashboards & Reports Hack in a Day! Today, you'll explore the power of business intelligence by building comprehensive dashboards and reports using Power BI Desktop and Power BI Service. Through this hands-on experience, you'll learn how to design interactive visualizations that transform raw data into compelling business insights and actionable analytics.
 
 ## Introduction
 
-Your quest is to create a compelling analytics experience using Power BI Desktop and Power BI Service. Starting from a pre-built report, you’ll apply conditional formatting, add branding (logos/themes), import custom visuals, and create bookmarks for narrative flow. You’ll then publish the report to the Service, pin key visuals to a dashboard, and use Q&A/Insights to surface quick findings for stakeholders.
+Your mission is to create a professional business intelligence solution that demonstrates advanced Power BI capabilities. Leveraging Power BI Desktop and Power BI Service, you'll design interactive reports with conditional formatting, custom visuals, and sophisticated storytelling features that deliver meaningful insights to business stakeholders.
+
+This solution will act as a comprehensive business intelligence platform integrating data visualization, interactive dashboards, and collaborative analytics to deliver faster, smarter, and more efficient reporting experiences for business users and decision makers alike.
 
 ## Learning Objectives
 
 By participating in this hackathon, you will learn how to:
 
-- Set up and sign in to Power BI Desktop and Power BI Service in the lab environment.
-- Enhance a pre-built report with **conditional formatting**, **custom visuals**, and **custom themes**.
-- Apply **branding** (logos) and configure **mobile layout** and **selection** panes for clean composition.
-- Use **bookmarks** to craft an interactive story across report pages.
-- Publish reports to **Power BI Service**, manage **workspaces**, and configure basic **tenant settings** when required.
-- Build an executive **dashboard** by **pinning visuals**, organizing tiles, and leveraging **Q&A** and **Quick Insights**.
+- Enhance pre-built Power BI reports with conditional formatting and custom visual elements.
+- Apply professional themes, logos, and branding to create polished business presentations.
+- Implement advanced Power BI features including bookmarks, drill-through, and interactive storytelling.
+- Publish reports to Power BI Service and create organized workspace environments.
+- Build interactive dashboards by pinning key visuals and configuring real-time refresh capabilities.
 
-## Hackathon Format: Challenge-Based
+## Hack in a Day Format: Challenge-Based
 
-This hackathon adopts a challenge-based format, offering you a hands-on way to learn by solving a practical problem. The challenge includes one or more objectives designed to test and deepen your Power BI skills.
+This hack in a day adopts a challenge-based learning format, providing a hands-on experience through three progressive stages that mirror a real-world business intelligence implementation. Each challenge focuses on a key capability of the Power BI Solution:
 
-- Analyzing the problem statement.
-- Strategizing an approach to produce an executive-ready dashboard.
-- Leveraging the provided lab environment, Power BI Desktop, and Power BI Service.
+- **Challenge 1: Foundation** - Publish enhanced reports to Power BI Service and configure workspace environments.
+- **Challenge 2: Dashboard Creation** - Build interactive dashboards by pinning key visuals and implementing drill-down capabilities.
+- **Challenge 3: Organization & Intelligence** - Organize dashboard layouts, implement Q&A features, and configure insights and alerts.
+
+Throughout each challenge, you'll:
+- Analyze business intelligence requirements and visualization best practices.
+- Strategize and design compelling data storytelling experiences.
+- Leverage Power BI features to create professional, interactive business intelligence solutions.
 
 ## Challenge Overview
 
-Begin your journey in **Power BI Desktop** with a pre-created report. Apply **conditional formatting** to highlight outliers, add **logos** for branding, and import **custom visuals** to improve data expression. Unify the look and feel with a **custom theme**, and create **bookmarks** to guide stakeholders through key insights.
+Your journey begins with enhancing a pre-built Power BI report using advanced formatting and visualization techniques. You'll then publish the report to Power BI Service and create comprehensive dashboards. Finally, you'll implement advanced features like Q&A, quick insights, and interactive elements to deliver a fully featured business intelligence solution.
 
-Next, **publish** the report to **Power BI Service** and organize it in a workspace. From there, **pin** critical visuals to a new **dashboard**, arrange tiles for readability, and use **Q&A** and **Quick Insights** to accelerate discovery. Optionally, configure **alerts** for threshold-based monitoring of key metrics. By the end, you’ll have a polished dashboard and shared report ready for collaboration.
+By the end of this hack in a day, you'll have a fully functional Power BI solution capable of professional data visualization, interactive dashboards, collaborative reporting, and intelligent analytics features.
+
+## Support Contact
+
+The CloudLabs support team is available 24/7, 365 days a year, via email and live chat to ensure seamless assistance at any time. We offer dedicated support channels tailored specifically for both learners and instructors, ensuring that all your needs are promptly and efficiently addressed.
+
+Learner Support Contacts:
+
+- Email Support: cloudlabs-support@spektrasystems.com
+- Live Chat Support: https://cloudlabs.ai/labs-support
+
+Now, click on the **Next** from lower right corner to move on next page.
 
 ## Happy Hacking!!
