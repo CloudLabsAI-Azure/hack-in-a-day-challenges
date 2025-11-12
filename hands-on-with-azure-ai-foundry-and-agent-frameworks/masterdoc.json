@@ -1,23 +1,22 @@
 [
-  {
-    "Name": "Azure AI Foundry Workshop",
-    "Language": "English",
-    "BaseURL": "https://github.com/CloudLabsAI-Azure/Azure-AI-Foundry-Workshop",
-    "Files": [
-      {
-        "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/Azure-AI-Foundry-Workshop/refs/heads/main/Labs/Challenge_overview.md
-",
-        "Order": 1
-      },
-      {
-        "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/Azure-AI-Foundry-Workshop/refs/heads/main/Labs/challenge-getting-started.md",
-        "Order": 2
-      },
-      {
-        "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/Azure-AI-Foundry-Workshop/refs/heads/main/Labs/Challenge-Based Hackathon.md
-",
-        "Order": 3
-      }
-    ]
-  }
+    {
+        "Name": "Lab : Build a custom knowledge retrieval (RAG) app with the Azure AI Foundry SDK",
+        "Language": "English",
+        "BaseURL": "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges",
+        "Files": [
+            {
+                "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/Build-Custom-Knowledge-RAG-App-With-Azure-AI-Foundry/refs/heads/main/Instructions/Labs/Challenge%20lab%20-%20page1%20.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/Build-Custom-Knowledge-RAG-App-With-Azure-AI-Foundry/refs/heads/main/Instructions/Labs/Challenge%20lab%20-%20Getting%20started.md",
+                "Order": 2
+            },
+            {
+                "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/Build-Custom-Knowledge-RAG-App-With-Azure-AI-Foundry/refs/heads/main/Instructions/Labs/Challenge-Based%20Hackathon.md",
+                "Order": 3
+            }
+
+        ]
+    }
 ]
