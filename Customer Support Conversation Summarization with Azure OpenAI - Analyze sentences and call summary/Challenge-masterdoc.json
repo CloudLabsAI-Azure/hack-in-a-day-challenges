@@ -1,0 +1,22 @@
+
+[
+    {
+        "Name": "Customer Support Conversation Summarization with Azure OpenAI",
+        "Language": "English",
+        "BaseURL": "https://github.com/CloudLabsAI-Azure/Customer-Support-Conversation-Summarization-with-Azure-OpenAI/tree/main",
+        "Files": [
+            {
+                "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/Customer-Support-Conversation-Summarization-with-Azure-OpenAI/main/Instructions/Challenge_overview.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/Customer-Support-Conversation-Summarization-with-Azure-OpenAI/main/Instructions/challenge-getting-started.md",
+                "Order": 2
+            },
+            {
+                "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/Customer-Support-Conversation-Summarization-with-Azure-OpenAI/main/Instructions/Challenge-Based%20Hackathon.md",
+                "Order": 3
+            }
+        ]
+    }
+]
