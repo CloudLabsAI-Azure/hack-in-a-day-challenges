@@ -2,7 +2,7 @@
     {
         "Name": "Lab : Call Center data analysis using Azure AI services and Azure OpenAI",
         "Language": "English",
-        "BaseURL": "https://github.com/CloudLabsAI-Azure/OpenAI-CallCenter",
+        "BaseURL": "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges",
         "Files": [
             {
                 "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/call-center-data-analysis-using-azure-ai-services-and-azure-openai/overview.md",
