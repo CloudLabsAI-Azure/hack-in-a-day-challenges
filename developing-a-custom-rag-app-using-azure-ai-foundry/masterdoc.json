@@ -2,7 +2,7 @@
     {
         "Name": "Lab : Build a custom knowledge retrieval (RAG) app with the Azure AI Foundry SDK",
         "Language": "English",
-        "BaseURL": "https://github.com/CloudLabsAI-Azure/Build-Custom-Knowledge-RAG-App-With-Azure-AI-Foundry",
+        "BaseURL": "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges",
         "Files": [
             {
                 "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/Build-Custom-Knowledge-RAG-App-With-Azure-AI-Foundry/refs/heads/main/Instructions/Labs/Challenge%20lab%20-%20page1%20.md",
