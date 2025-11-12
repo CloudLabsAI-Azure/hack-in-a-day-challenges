@@ -3,7 +3,7 @@
     {
         "Name": "Customer Support Conversation Summarization with Azure OpenAI",
         "Language": "English",
-        "BaseURL": "https://github.com/CloudLabsAI-Azure/Customer-Support-Conversation-Summarization-with-Azure-OpenAI/tree/main",
+        "BaseURL": "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges",
         "Files": [
             {
                 "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/Customer-Support-Conversation-Summarization-with-Azure-OpenAI/main/Instructions/Challenge_overview.md",
