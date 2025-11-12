@@ -2,6 +2,7 @@
   {
     "Name": "Create and publish Power BI Dashboards & Reports",
     "Language": "English",
+    "BaseURL": "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges",
     "Files": [
       {
       "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/create-and-publish-powerbi-dashboards-and-reports/overview.md",
