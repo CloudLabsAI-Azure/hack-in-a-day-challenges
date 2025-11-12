@@ -2,6 +2,7 @@
     {
         "Name": "Build-A-Fabric-Real-Time-Intelligence-Solution-in-a-Day",
         "Language": "English",
+        "BaseURL": "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges",
         "Files": [
              {
                 "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/build-a-fabric-real-time-intelligence-solution-in-a-day/overview.md",
