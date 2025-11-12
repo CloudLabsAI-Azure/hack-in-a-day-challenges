@@ -10,7 +10,7 @@ This solution will act as a comprehensive AI agent development platform integrat
 
 ## Learning Objectives
 
-By participating in this hackathon, you will learn how to:
+By participating in this Hack in a Day, you will learn how to:
 
 - Navigate and utilize Azure AI Foundry workspace for comprehensive AI agent development.
 - Implement chat completions, embeddings, and RAG workflows for intelligent conversation systems.

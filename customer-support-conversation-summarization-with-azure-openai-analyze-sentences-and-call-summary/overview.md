@@ -10,7 +10,7 @@ This solution will act as a comprehensive conversation intelligence platform int
 
 ## Learning Objectives
 
-By participating in this hackathon, you will learn how to:
+By participating in this Hack in a Day, you will learn how to:
 
 - Deploy Azure AI Language Service for intelligent text-based conversation summarization.
 - Configure Azure AI Speech Service for audio transcription and conversation analysis.

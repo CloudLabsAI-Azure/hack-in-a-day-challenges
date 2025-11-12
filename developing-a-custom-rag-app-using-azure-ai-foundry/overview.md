@@ -10,7 +10,7 @@ This solution will act as a comprehensive intelligent knowledge platform integra
 
 ## Learning Objectives
 
-By participating in this hackathon, you will learn how to:
+By participating in this Hack in a Day, you will learn how to:
 
 - Set up Azure AI Foundry projects and deploy advanced AI models for RAG applications.
 - Implement Azure AI Search for intelligent document indexing and semantic retrieval.

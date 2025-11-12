@@ -10,7 +10,7 @@ This solution will act as a comprehensive real-time intelligence platform integr
 
 ## Learning Objectives
 
-By participating in this hackathon, you will learn how to:
+By participating in this Hack in a Day, you will learn how to:
 
 - Set up a Fabric Workspace and Eventhouse for real-time data ingestion and storage.
 - Stream synthetic events using Eventstream and Python Notebook for data simulation.
