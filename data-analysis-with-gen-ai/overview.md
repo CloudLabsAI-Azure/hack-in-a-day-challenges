@@ -2,7 +2,7 @@
 *Apply generative AI to analyze, summarize, and interpret manufacturing data for actionable insights.*
 
 **Duration:** 6 hours  
-**Difficulty:** Beginner  
+  
 **Tags:** `Manufacturing`, `Generative AI`, `Data Analytics`, `Azure OpenAI`, `Industry 4.0`
 
 ## Overview
@@ -31,7 +31,6 @@ Provide a streamlined 6-hour prototype environment where participants use genera
 - Recognise challenges: camera calibration, lighting, anomaly-detection false positives, generative AI hallucination, human-in-loop review.
 - Learn how to deploy a lightweight prototype using accessible Azure (or cloud) services and clean up resources.
 
-
 ## Challenges Overview
 
 - **Challenge 01: Create and Review the Sample Manufacturing Dataset**  
@@ -52,4 +51,15 @@ Create a simple chat UI (Streamlit / web form) to interact with your data and as
 - **Challenge 06: Clean Up Resources**  
 Delete all Azure resources to prevent extra charges and complete your GenAI data-analysis journey.
 
-## Happy Hacking!
+## Support Contact
+
+The CloudLabs support team is available 24/7, 365 days a year, via email and live chat to ensure seamless assistance at any time. We offer dedicated support channels tailored specifically for both learners and instructors, ensuring that all your needs are promptly and efficiently addressed.
+
+Learner Support Contacts:
+
+- Email Support: cloudlabs-support@spektrasystems.com
+- Live Chat Support: https://cloudlabs.ai/labs-support
+
+Now, click on the **Next** from lower right corner to move on next page.
+
+## Happy Hacking!!

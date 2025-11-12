@@ -3,8 +3,6 @@
 
 **Duration:** 6 hours
 
-**Difficulty:** Intermediate
-
 **Tags:** `Intelligent Document Processing`, `Azure AI, Document` `Intelligence`, `Automation`
 
 ## Overview
@@ -58,4 +56,15 @@ Transform the extracted invoice data into actionable insights. Use Power BI or E
 - **Challenge 06: Clean Up Resources**  
 Delete all deployed Azure resources to prevent unnecessary costs and ensure a clean environment post-lab completion. This step finalizes your Intelligent Document Processing deployment workflow.
 
-## Happy hacking!
+## Support Contact
+
+The CloudLabs support team is available 24/7, 365 days a year, via email and live chat to ensure seamless assistance at any time. We offer dedicated support channels tailored specifically for both learners and instructors, ensuring that all your needs are promptly and efficiently addressed.
+
+Learner Support Contacts:
+
+- Email Support: cloudlabs-support@spektrasystems.com
+- Live Chat Support: https://cloudlabs.ai/labs-support
+
+Now, click on the **Next** from lower right corner to move on next page.
+
+## Happy Hacking!!
