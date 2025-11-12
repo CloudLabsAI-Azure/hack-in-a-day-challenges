@@ -1,0 +1,20 @@
+[
+  {
+    "Name": "Create and publish Power BI Dashboards & Reports",
+    "Language": "English",
+    "Files": [
+      {
+      "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/Dashboard-in-a-day/refs/heads/prod/MSSPL/Challenge_overview.md",
+        "Order": 1
+      },
+      {
+      "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/Dashboard-in-a-day/refs/heads/prod/MSSPL/challenge-getting-started.md",
+        "Order": 2
+      },
+      {
+       "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/Dashboard-in-a-day/prod/MSSPL/Challenge-pag3.md",
+        "Order": 3
+      }
+    ]
+  }
+]
