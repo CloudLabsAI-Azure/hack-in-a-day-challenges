@@ -10,7 +10,7 @@ This solution will act as a comprehensive call center intelligence platform inte
 
 ## Learning Objectives
 
-By participating in this hackathon, you will learn how to:
+By participating in this Hack in a Day, you will learn how to:
 
 - Deploy Azure resources for audio transcription, conversation analysis, and data storage using ARM templates.
 - Configure Azure AI Services for speech-to-text transcription and conversation processing.

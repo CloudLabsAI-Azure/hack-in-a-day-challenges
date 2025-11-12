@@ -1,238 +1,211 @@
 # Challenge: Call Center Data Analysis using Azure AI Services and Azure OpenAI
 
-* Lab 01: Provision Azure Resources – 60 mins
-* Lab 02: Upload Audio Files – 45 mins
-* Lab 03: Visualization with Power BI – 120 mins
+**Estimated Time:** 4 Hours  
 
----
+**Industry Focus:** Customer Service / BPO Operations
 
 ## Problem Statement
+Thousands of calls contain sentiment, intents, and action items but stay locked in raw audio/transcripts. Manual review is slow, inconsistent, and not privacy-safe; there's no unified pipeline for transcription, enrichment (summaries/PII), and near-real-time reporting.
 
-A leading call center handles thousands of customer calls daily. Each conversation may contain critical insights such as customer sentiment, recurring issues, and service feedback. Currently, this data remains underutilized.
-
-In this challenge, you will build an **AI-driven analytics pipeline** using **Azure AI Services, Azure OpenAI, and Power BI** to:
-
-* Transcribe audio calls.
-* Perform conversation summarization and sentiment analysis.
-* Visualize insights for operational efficiency and improved customer satisfaction.
-
----
+In this challenge, you will build an **end-to-end analytics workflow** using Azure AI Speech for transcription; enrich with Azure OpenAI (summaries, intents, action items) and Azure AI Language (sentiment, key phrases, PII redaction); orchestrate via Azure Functions + Storage; persist to Azure SQL Database; visualize KPIs and trends in Power BI dashboards (with refresh when new calls arrive).
 
 ## Goals
+By the end of this challenge, you will deliver a **working pipeline that transcribes sample calls, writes enriched outputs to SQL, and surfaces sentiment trends, topics, and summaries in a published Power BI report/dashboard; new uploads auto-flow through to refreshed visuals** including:
 
-* Provision Azure resources to handle audio transcription, conversation analysis, and SQL data storage.
-* Upload customer call audio files for processing.
-* Generate actionable insights using Azure OpenAI.
-* Visualize sentiment trends and conversation summaries in Power BI dashboards.
+- Configure ingestion for live/recorded calls and generate accurate transcripts
+- Enrich conversations with summaries/intents/action items and sentiment/key phrases/PII
+- Design real-time vs post-call pipelines
+- Persist insights to SQL
+- Build a Power BI dashboard with CSAT proxies, sentiment trends, agent coaching cues
+- Iterate prompts/thresholds
 
----
+## Prerequisites
+- **Skill Level:** Basic familiarity with Azure Functions/Storage/SQL
+- **Audience:** Contact center ops & QA leads, BI/analytics teams, data engineers
+- **Technology Stack:** Azure AI Speech, Azure OpenAI Service, Azure AI Language, Azure Functions, Azure Storage, Azure SQL Database, Power BI Desktop/Service, Azure Monitor & Event Grid
 
-##  Datasets
+## Datasets
+Use the following sample datasets provided in lab files:
 
-Use the sample audio recordings provided in the lab VM:
+- **Sample Call Recordings:** Real-world customer service scenarios including complaints, inquiries, and positive feedback
+- **Power BI Template:** Pre-configured dashboard with models and visualizations for call center analytics
+- **ARM Templates:** Infrastructure-as-code for rapid Azure resource deployment
 
-| File Path                                          | Description                |
-| -------------------------------------------------- | -------------------------- |
-| `C:\LabFiles\Recordings\bad_review.wav`            | Sample customer complaint  |
-| `C:\LabFiles\Recordings\Call_pharmacy_call.wav`    | Customer inquiry           |
-| `C:\LabFiles\Recordings\Call_apply_loan.wav`       | Loan application call      |
-| `C:\LabFiles\Recordings\Call_health_insurance.wav` | Health insurance inquiry   |
-| `C:\LabFiles\Recordings\good_review.wav`           | Positive customer feedback |
+Ensure all datasets are stored in your local directory: `C:\LabFiles\CallCenter`
 
-Additionally, the **Power BI report file**:
+| File Path | Description |
+|-----------|-------------|
+| `C:\LabFiles\Recordings\bad_review.wav` | Customer complaint scenario |
+| `C:\LabFiles\Recordings\Call_pharmacy_call.wav` | Pharmacy inquiry call |
+| `C:\LabFiles\Recordings\Call_apply_loan.wav` | Loan application process |
+| `C:\LabFiles\Recordings\Call_health_insurance.wav` | Health insurance consultation |
+| `C:\LabFiles\Recordings\good_review.wav` | Positive customer feedback |
+| `C:\LabFiles\callcenter-dataanalysis.pbix` | Pre-built Power BI report template |
 
-* `C:\LabFiles\callcenter-dataanalysis.pbix` (prebuilt report with models and visuals)
+## Challenge Objectives
 
----
-
-##  Challenge Objectives
-
-###  Challenge 1: Provision Azure Resources
-
-**Estimated Time:** 60 minutes
-
-#### Objective
-
-Deploy Azure resources for audio transcription, conversation analysis, and SQL data storage.
-
-#### Tasks
-
-**Task 1.1 – Deploy Resources with ARM Template**
-
-1. In Azure Portal, search **Deploy a custom template**.
-2. Select **Build your own template in the editor**.
-3. Click **Load file** → Navigate to `C:\LabFiles` → Select `azuredeploy-01.json`.
-4. Click **Save**.
-5. On **Custom deployment** blade:
-
-   * Resource group: `callcenter-`
-   * Deployment ID: enter a unique value
-   * Leave other parameters as default
-6. Click **Review + Create → Create**
-7. Wait ~6–7 minutes for deployment completion.
-
-**Task 1.2 – Create Output Table in Azure SQL Database**
-
-1. Open Azure SQL Database `Database-`.
-2. Open **Query Editor (Preview)**.
-3. Login:
-
-   ```
-   Username: sqluser
-   Password: password.1!!
-   ```
-4. Paste and execute:
-
-   ```sql
-   CREATE TABLE dbo.Output (
-       ID NVARCHAR(255) NOT NULL PRIMARY KEY,
-       FileName NVARCHAR(MAX) NULL,
-       Sentiment NVARCHAR(MAX) NULL,
-       Summary NVARCHAR(MAX) NULL
-   );
-   ```
-5. Verify table creation:
-
-   ```sql
-   SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Output';
-   ```
-
-####  Validation Check
-
-* ARM deployment succeeded.
-* `dbo.Output` table exists in SQL Database.
-
----
-
-### Challenge 2: Upload Audio Files
-
-**Estimated Time:** 45 minutes
+### **Challenge 1: Foundation - Deploy Azure AI Infrastructure**
+**Estimated Duration:** 60 Minutes
 
 #### Objective
-
-Upload audio recordings and trigger transcription and analysis via Azure Functions.
+Establish the foundational Azure AI services and data infrastructure for call center analytics pipeline.
 
 #### Tasks
+1. **Deploy Azure AI Services Infrastructure:**
+   - Use ARM template (`azuredeploy-01.json`) to provision integrated AI services
+   - Configure Azure AI Speech for real-time transcription capabilities
+   - Set up Azure OpenAI Service with GPT models for conversation analysis
+   - Deploy Azure AI Language for sentiment analysis and PII detection
 
-**Task 2.1 – Restart Function Apps**
+2. **Configure Data Pipeline Architecture:**
+   - Deploy Azure Functions for serverless orchestration and event processing
+   - Set up Azure Storage for audio file ingestion and JSON transcript output
+   - Provision Azure SQL Database for structured insights storage
+   - Configure Azure Monitor and Event Grid for pipeline monitoring
 
-1. Go to Azure **Function Apps**.
-2. Restart each function: `StartTranscriptionFunction`, `FetchTranscriptionFunction`, `AnalyzeTranscriptionFunction`.
-3. Ensure all functions are running.
+3. **Initialize Database Schema:**
+   - Create `dbo.Output` table with proper schema for call analytics
+   - Set up indexes for optimal query performance
+   - Configure connection strings and security settings
+   - Verify database connectivity and permissions
 
-**Task 2.2 – Upload Audio Files**
+4. **Validate Infrastructure Readiness:**
+   - Test ARM deployment completion and resource provisioning
+   - Verify Azure Functions are operational and properly configured
+   - Confirm database schema creation and connectivity
+   - Check Azure AI service endpoints and API key configuration
 
-1. Go to **Storage Account → callcenterstore → Containers → audio-input**.
-2. Upload the following files:
+#### Validation Check
+- ARM deployment completed successfully with all Azure AI services operational
+- Azure SQL Database contains properly structured `dbo.Output` table with required schema
+- Azure Functions are running and ready for event-driven processing
+- Storage containers are configured for audio input and JSON transcript output
+- All service connections and permissions are properly established
 
-   * `bad_review.wav`
-   * `Call_pharmacy_call.wav`
-   * `Call_apply_loan.wav`
-3. Wait 5–6 minutes.
-4. Verify that JSON transcripts appear in `json-result-output` container.
-
-####  Validation Check
-
-* JSON transcripts exist in `json-result-output`.
-* Functions processed the audio files correctly.
-
----
-
-### Challenge 3: Visualization using Power BI
-
-**Estimated Time:** 120 minutes
+### **Challenge 2: Data Ingestion - Process Call Recordings with AI Pipeline**
+**Estimated Duration:** 75 Minutes
 
 #### Objective
-
-Connect Power BI to SQL Database, refresh prebuilt report, and create interactive dashboard.
+Implement end-to-end call processing pipeline with Azure AI Speech transcription, Azure OpenAI enrichment, and Azure AI Language analysis.
 
 #### Tasks
+1. **Configure Serverless Processing Pipeline:**
+   - Restart and validate Azure Functions: `StartTranscriptionFunction`, `FetchTranscriptionFunction`, `AnalyzeTranscriptionFunction`
+   - Test event-driven architecture with storage blob triggers
+   - Configure function app settings and environment variables
+   - Verify Azure AI service integrations and API connections
 
-**Task 3.1 – Open Power BI Report**
+2. **Process Sample Call Recordings:**
+   - Upload audio files to `audio-input` container to trigger processing pipeline
+   - Process customer complaint scenario (`bad_review.wav`)
+   - Handle pharmacy inquiry consultation (`Call_pharmacy_call.wav`) 
+   - Analyze loan application conversation (`Call_apply_loan.wav`)
+   - Monitor real-time processing through Azure Functions logs
 
-1. Open **Power BI Desktop** from the lab VM.
-2. Click **Open → Browse this device → `C:\LabFiles\callcenter-dataanalysis.pbix` → Open**.
-3. Cancel any SQL Server pop-ups and close **Evaluating Queries** windows.
+3. **Implement AI-Powered Call Analysis:**
+   - **Transcription:** Convert audio to accurate text using Azure AI Speech
+   - **Summarization:** Generate concise call summaries using Azure OpenAI GPT models
+   - **Intent Recognition:** Extract customer intents and action items with GPT analysis
+   - **Sentiment Analysis:** Analyze emotional tone using Azure AI Language
+   - **PII Detection:** Identify and redact sensitive information for privacy compliance
+   - **Key Phrase Extraction:** Surface important topics and themes from conversations
 
-**Task 3.2 – Update Data Source Settings**
+4. **Validate Processing Pipeline:**
+   - Monitor JSON transcript generation in `json-result-output` container
+   - Verify enriched data contains summaries, sentiment scores, and extracted insights
+   - Check Azure SQL Database for populated analysis results
+   - Test error handling and retry mechanisms for failed processing
 
-1. Click **Transform Data → Data source settings → Change Source**.
+#### Validation Check
+- All Azure Functions are operational and processing audio files successfully
+- JSON transcripts with enriched AI analysis appear in output storage container
+- Azure SQL Database contains structured call insights with sentiment, summaries, and metadata
+- Processing pipeline handles various call types and scenarios accurately
+- PII redaction and privacy controls are functioning correctly
 
-   * Server: `sqlserver.database.windows.net`
-   * Database: `Database-`
-2. Click **Edit Permissions → Edit → Database**, and provide credentials:
+### **Challenge 3: Analytics & Visualization - Build Call Center Intelligence Dashboard**
+**Estimated Duration:** 105 Minutes
 
-   ```
-   Username: sqluser
-   Password: password.1!!
-   ```
-3. Click **Save → OK → Close → Apply Changes**.
+#### Objective
+Create comprehensive Power BI dashboards with real-time call center KPIs, sentiment trends, and agent coaching insights that automatically refresh with new call data.
 
-**Task 3.3 – Refresh Report**
+#### Tasks
+1. **Configure Power BI Data Integration:**
+   - Connect Power BI Desktop to Azure SQL Database with call analytics data
+   - Configure secure authentication using SQL credentials and gateway settings
+   - Set up automatic data refresh schedules for near-real-time dashboard updates
+   - Optimize data model relationships and performance for large call volumes
 
-* Click **Refresh**.
-* Verify that visuals display sentiment distribution, conversation summaries, and trends.
+2. **Build Call Center KPI Dashboard:**
+   - **Customer Satisfaction Metrics:** CSAT proxy scores derived from sentiment analysis
+   - **Sentiment Distribution:** Visual breakdown of positive, negative, and neutral calls
+   - **Topic Analysis:** Word clouds and trend charts of key phrases and call themes  
+   - **Agent Performance:** Individual agent coaching cues based on call outcomes
+   - **Volume Metrics:** Call volume trends by hour, day, and call type
+   - **Response Time Analysis:** Average handling time and resolution metrics
 
-**Task 3.4 – Publish Report Online**
+3. **Implement Advanced Analytics Features:**
+   - **Sentiment Trend Analysis:** Time-series visualization of sentiment patterns
+   - **Intent Classification Dashboard:** Visual breakdown of customer intent categories
+   - **Action Item Tracking:** Summary of follow-up actions identified by AI analysis
+   - **PII Compliance Monitoring:** Dashboard showing redaction effectiveness and privacy metrics
+   - **Call Quality Scoring:** Automated quality assessments based on AI analysis
 
-1. Click **Publish → Save**.
-2. Sign in with **Azure Work/School account**.
-3. Assign report to **My Workspace → Select**.
-4. Configure **Gateway authentication**:
+4. **Deploy and Test Real-Time Updates:**
+   - Publish dashboard to Power BI Service with appropriate sharing permissions
+   - Configure automatic refresh triggers when new calls are processed
+   - Test end-to-end pipeline: upload new audio → process with AI → refresh dashboard
+   - Validate dashboard responsiveness and data accuracy with new call samples
+   - Set up alerts for significant sentiment changes or quality issues
 
-   * Method: Basic
-   * Username: sqluser
-   * Password: password.1!!
-   * Privacy Level: None
+5. **Optimize for Operational Use:**
+   - Configure role-based access control for different user types (managers, agents, QA)
+   - Set up scheduled email reports for key stakeholders
+   - Implement drill-down capabilities for detailed call analysis
+   - Create mobile-optimized views for on-the-go monitoring
 
-**Task 3.5 – Pin Report to Dashboard**
+#### Validation Check
+- Power BI report successfully connects to Azure SQL Database with proper authentication
+- Dashboard displays accurate call center KPIs including sentiment trends and agent metrics
+- Real-time refresh functionality works when new audio files are uploaded and processed
+- All visualizations respond correctly to filters and show meaningful business insights
+- Published dashboard is accessible to stakeholders with appropriate permissions and security
 
-1. Open report → ellipsis beside Edit → **Pin to dashboard**.
-2. Choose **New dashboard**, name: `callcenter-dataanalysis`, click **Pin live**.
-3. Click **Go to dashboard**.
-4. Apply filters for specific sentiment or conversation files.
+## Success Criteria
+**You will have successfully completed this challenge when you deliver:**
 
-**Task 3.6 – Upload New Audio and Refresh Dashboard**
+A **working pipeline that transcribes sample calls, writes enriched outputs to SQL, and surfaces sentiment trends, topics, and summaries in a published Power BI report/dashboard; new uploads auto-flow through to refreshed visuals**.
 
-1. Upload `Call_health_insurance.wav` and `good_review.wav` to `audio-input`.
-2. Wait 5–6 minutes.
-3. Refresh Power BI dashboard to see updated results.
+### **Technical Deliverables:**
+- **Infrastructure:** Azure AI services properly deployed and configured for call center analytics
+- **Data Processing:** Audio transcription pipeline operational with consistent quality and accuracy
+- **AI Enrichment:** Conversation analysis producing summaries, sentiment scores, intents, and PII redaction
+- **Data Persistence:** Structured insights stored in Azure SQL Database with proper schema and indexing
+- **Visualization:** Interactive Power BI dashboard with real-time call center KPIs and trends
+- **Automation:** End-to-end pipeline with automatic processing and dashboard refresh capabilities
+- **Compliance:** PII detection and redaction working correctly for privacy protection
 
-####  Validation Check
+### **Business Outcomes:**
+- **Instant Insights:** Real-time visibility into customer sentiment and call quality metrics
+- **Agent Coaching:** Data-driven coaching cues and performance metrics for continuous improvement
+- **Quality Assurance:** Automated call quality scoring and compliance monitoring
+- **Operational Efficiency:** Reduced manual review time with AI-powered call analysis and summarization
 
-* Report connects to SQL Database.
-* Dashboard visuals display correct sentiment and conversation summaries.
-* Newly uploaded audio files update dashboard metrics.
+## Additional Resources
+- [Azure AI Speech Service Documentation](https://learn.microsoft.com/azure/ai-services/speech-service/)
+- [Azure OpenAI Service Documentation](https://learn.microsoft.com/azure/ai-services/openai/)
+- [Azure AI Language Documentation](https://learn.microsoft.com/azure/ai-services/language-service/)
+- [Azure Functions Documentation](https://learn.microsoft.com/azure/azure-functions/)
+- [Azure SQL Database Documentation](https://learn.microsoft.com/azure/azure-sql/)
+- [Power BI Documentation](https://learn.microsoft.com/power-bi/)
 
----
+## Conclusion
+By completing this challenge, you will have built an **end-to-end AI-powered call center analytics pipeline** using Azure AI services.
 
-##  Success Criteria
+You learned how to:
+- Deploy and configure Azure AI Speech, OpenAI, and Language services for call analysis
+- Build serverless processing pipelines using Azure Functions and Storage
+- Implement privacy-safe AI analysis with PII detection and redaction
+- Create real-time Power BI dashboards with automated refresh capabilities
 
-* Azure resources deployed and operational.
-* Audio files transcribed and analyzed using Azure OpenAI.
-* Power BI report visualizes correct sentiment and summaries.
-* Dashboard reflects updates from newly uploaded audio files.
-
----
-
-##  Additional Resources
-
-* [Azure Speech Service Documentation](https://learn.microsoft.com/azure/ai-services/speech-service/)
-* [Azure OpenAI Documentation](https://learn.microsoft.com/azure/ai-services/openai/)
-* [Azure Functions Overview](https://learn.microsoft.com/azure/azure-functions/)
-* [Power BI Getting Started](https://learn.microsoft.com/power-bi/fundamentals/)
-
----
-
-##  Conclusion
-
-In this challenge, you successfully built an **end-to-end AI-powered analytics pipeline** for a call center.
-You automated:
-
-* Audio transcription via Azure Speech Services.
-* Conversation summarization and sentiment analysis using Azure OpenAI.
-* Visualization of insights in Power BI dashboards.
-
-This workflow empowers call center management to make **data-driven decisions** and improve customer satisfaction efficiently.
-
- 
+This solution demonstrates how Azure AI services enable **intelligent call center operations** through automated transcription, sentiment analysis, and actionable business insights.

@@ -10,7 +10,7 @@ This solution will act as a comprehensive business intelligence platform integra
 
 ## Learning Objectives
 
-By participating in this hackathon, you will learn how to:
+By participating in this Hack in a Day, you will learn how to:
 
 - Enhance pre-built Power BI reports with conditional formatting and custom visual elements.
 - Apply professional themes, logos, and branding to create polished business presentations.
