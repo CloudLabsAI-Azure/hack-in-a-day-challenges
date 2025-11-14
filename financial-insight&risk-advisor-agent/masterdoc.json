@@ -1,0 +1,21 @@
+[
+    {
+        "Name": "Financial Insight & Risk Advisor Agent",
+        "Language": "English",
+        "BaseURL": "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges",
+        "Files": [
+             {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/financial-insight%26risk-advisor-agent/overview.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/financial-insight%26risk-advisor-agent/getting-started.md",
+                "Order": 2
+            },    
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/financial-insight%26risk-advisor-agent/challenge.md",
+                "Order": 3
+            }    
+        ]
+    }
+]
