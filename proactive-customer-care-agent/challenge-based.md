@@ -1,171 +1,232 @@
-# Challenge: Build a Fabric Real-Time Intelligence Solution
+# Challenge: Build a Proactive Customer Care Agent
 
 **Estimated Time:** 4 Hours  
 
-**Industry Focus:** Cross-Industry (Operations, Digital, Commerce)
+**Industry Focus:** Customer Service, Customer Experience, Customer Success
 
 ## Problem Statement
-Organizations need instant insights from streaming events but lack an end-to-end pipeline for ingesting, modeling, visualizing, and automating actions in real time. Disconnected tools slow response times, limit visibility into key metrics (CTR/latency), and make alerting and reactive workflows difficult to implement.
+Customer support teams are reactive, responding only after users face problems or delays. Businesses need proactive agents that can identify service delays or negative sentiment before escalation. Traditional support models lack real-time monitoring capabilities, resulting in missed opportunities to prevent customer churn, late detection of service issues, and overwhelmed support teams dealing with preventable escalations.
 
-In this challenge, you will build a **complete Fabric Real-Time Intelligence (RTI) solution** using Microsoft Fabric to stream synthetic events, land and process them with Eventstream and Eventhouse, model and query data using KQL, expose data via OneLake and Lakehouse, visualize with Real-Time Dashboards, and trigger actions via Data Activator (Reflex).
+In this challenge, you will build a **Proactive Customer Care Agent** using Azure AI Foundry and Azure AI Services to continuously monitor incoming feedback and CRM data. The agent will autonomously analyze customer sentiment, identify emerging issues, and trigger proactive interventions before problems escalate into critical support tickets.
 
 ## Goals
-By the end of this challenge, you will deliver a **live, auto-refreshing dashboard with threshold-based alerts** including:
+By the end of this challenge, you will deliver a **fully autonomous proactive care agent with real-time monitoring and automated responses** including:
 
-- Stand up Fabric Workspace, Eventhouse, and Eventstream for real-time data ingestion
-- Enable OneLake and Lakehouse integration for unified data access  
-- Create KQL tables and functions (Bronze → Silver → Gold data layers)
-- Build a Real-Time Dashboard with auto-refresh and KPI tiles
-- Configure Data Activator alerts for threshold monitoring
-- Operate effectively in the Fabric Service (items, permissions, refresh capabilities)
+- Deploy Azure AI Foundry orchestration models for intelligent decision-making
+- Implement Azure AI Language for real-time sentiment analysis and classification
+- Build multi-step reasoning workflows for proactive issue detection
+- Create automated alert systems integrated with Microsoft Teams
+- Configure autonomous compensation and escalation workflows
+- Generate daily summaries and preventive action recommendations
 
 ## Prerequisites
-- **Skill Level:** Basic familiarity with KQL and streaming concepts
-- **Audience:** Data engineers, BI developers, analytics engineers, operations teams
-- **Technology Stack:** Microsoft Fabric (Workspace, Eventhouse, Eventstream, OneLake/Lakehouse, KQL Database, Real-Time Dashboards, Data Activator/Reflex)
+- **Skill Level:** Beginner–Intermediate
+- **Audience:** Customer Success Managers, CX Analysts, Support Operations Teams
+- **Technology Stack:** Azure AI Foundry, Azure AI Language, Azure OpenAI, Logic Apps, Power Automate, Microsoft Teams
+- **Knowledge Requirements:** Basic understanding of Power Automate, Azure Cognitive Services
 
 ## Datasets
 Use the following sample datasets provided in lab files:  
 
-- **Synthetic Event Data:** Generated via Python Notebook (`Generate_synthetic_web_events.ipynb`) for Click and Impression events
-- **Reference Data:** `products.csv` and `productcategory.csv` for Lakehouse tables  
+- **Customer Feedback Data:** Synthetic customer reviews and feedback messages
+- **CRM Data:** Sample customer interaction records with support tickets
+- **Sentiment Labels:** Training data for sentiment classification models  
 
-Ensure all datasets are stored in your local directory: `C:\LabFiles\FabricRTI`
+Ensure all datasets are stored in your local directory: `C:\LabFiles\ProactiveCare`
 
 ## Challenge Objectives
 
-### **Challenge 1: Foundation - Set Up Fabric Workspace and Eventhouse**
-**Estimated Duration:** 30 Minutes  
+### **Challenge 1: Foundation - Set Up Azure AI Foundry and Language Services**
+**Estimated Duration:** 45 Minutes  
 
 #### Objective
-Establish the foundational components for real-time data ingestion and storage.
+Establish the foundational AI services for sentiment analysis and intelligent orchestration.
 
 #### Tasks
-1. Create a Fabric Workspace named `RTI_<uniqueID>` for collaborative development
-2. Create an Eventhouse `WebEvents_EH` within the workspace for event storage  
-3. Enable OneLake Availability to expose Eventhouse data across the Fabric ecosystem
-4. Verify workspace permissions and access controls
+1. Create an Azure AI Foundry resource named `ProactiveCare_AIFoundry` for orchestration workflows
+2. Deploy Azure AI Language service `CustomerSentiment_AI` for text analytics and sentiment detection
+3. Configure Azure OpenAI Service with GPT-4 model deployment for natural language understanding
+4. Set up service connections and authentication between Azure AI services
+5. Create a resource group `ProactiveCare_RG` to organize all solution components
+6. Verify API endpoints and access keys for all deployed services
 
 #### Validation Check
-- Workspace and Eventhouse are successfully created
-- OneLake Availability is enabled and accessible
-- Workspace is ready for collaborative development
+- Azure AI Foundry workspace is operational and accessible
+- Azure AI Language service successfully processes sample text
+- Azure OpenAI deployment responds to test prompts
+- All service connections are authenticated and functional
 
-### **Challenge 2: Data Ingestion - Stream Events with Eventstream**
+### **Challenge 2: Data Integration - Connect Feedback Sources and CRM Data**
 **Estimated Duration:** 60 Minutes  
 
 #### Objective
-Implement real-time event streaming to simulate customer web interactions and establish data flow patterns.
+Integrate multiple customer feedback channels and CRM systems to create a unified data pipeline for monitoring.
 
 #### Tasks
-1. Create an Eventstream `WebEventsStream_ES` to handle real-time Click and Impression events
-2. Import and execute the `Generate_synthetic_web_events.ipynb` notebook to generate synthetic web events
-3. Configure Eventstream topology with proper routing:
-   - **Click Events** → `BronzeClicks` table in Eventhouse
-   - **Impression Events** → `BronzeImpressions` table in Eventhouse  
-4. Monitor event flow and verify data ingestion rates
-5. Test event stream resilience and error handling
+1. Create Logic App `FeedbackIngestion_LA` to collect data from multiple sources:
+   - Email feedback from customer support inbox
+   - Web form submissions from feedback portal
+   - Social media mentions and reviews
+   - CRM ticket updates and customer interactions
+
+2. Configure Azure Storage Account `proactivecaredata` for centralized data storage:
+   - Create container `raw-feedback` for incoming feedback
+   - Create container `processed-feedback` for analyzed data
+   - Set up blob triggers for automated processing
+
+3. Build Power Automate flow `FeedbackMonitor_Flow` to:
+   - Poll feedback sources on scheduled intervals
+   - Normalize data formats from different channels
+   - Store raw feedback in Azure Storage
+   - Trigger sentiment analysis pipeline
+
+4. Implement data validation and error handling mechanisms
+5. Set up logging and monitoring for data ingestion processes
 
 #### Validation Check
-- Eventstream topology is active and processing events
-- Eventhouse tables (`BronzeClicks`, `BronzeImpressions`) receive streaming data
-- Event flow rates are consistent and measurable
+- Logic App successfully ingests feedback from all configured sources
+- Azure Storage contains properly formatted feedback data
+- Power Automate flow runs on schedule without errors
+- Data pipeline handles various feedback formats correctly
 
-### **Challenge 3: Data Integration - Build KQL Database Schema and Lakehouse Integration**
+### **Challenge 3: Intelligence Layer - Build Sentiment Analysis and Issue Detection**
+**Estimated Duration:** 75 Minutes  
+
+#### Objective
+Implement AI-powered sentiment analysis with multi-step reasoning to detect emerging issues and negative sentiment patterns.
+
+#### Tasks
+1. **Configure Azure AI Language Sentiment Analysis:**
+   - Create sentiment analysis pipeline using Azure AI Language
+   - Configure custom classification models for domain-specific terminology
+   - Set up entity recognition for product names, service issues, and customer identifiers
+   - Implement confidence scoring thresholds for classification accuracy
+
+2. **Build AI Foundry Orchestration Workflow:**
+   - Create multi-step reasoning loop for issue classification
+   - Implement decision trees for escalation routing:
+     - **Critical Issues:** Negative sentiment + urgent keywords → Immediate escalation
+     - **Moderate Issues:** Mixed sentiment + product problems → Team notification
+     - **Positive Feedback:** High satisfaction scores → Success team digest
+   - Configure contextual analysis to understand issue severity
+   - Build temporal analysis to detect trending problems
+
+3. **Create Intelligent Classification Functions:**
+   - Develop Azure Function `ClassifyFeedback_Func` to process sentiment results
+   - Implement scoring algorithm combining:
+     - Sentiment polarity (negative, neutral, positive)
+     - Customer history and lifetime value
+     - Issue urgency indicators (delay, error, failure keywords)
+     - Recency and frequency patterns
+   - Build issue categorization (billing, technical, delivery, service quality)
+
+4. **Implement Proactive Detection Logic:**
+   - Set up anomaly detection for sentiment trend changes
+   - Configure threshold-based alerts for issue clustering
+   - Build predictive models for escalation probability
+   - Create feedback aggregation for pattern recognition
+
+#### Validation Check
+- Sentiment analysis correctly classifies feedback with high accuracy
+- AI Foundry orchestration workflow processes decisions intelligently
+- Critical issues are identified and flagged automatically
+- Classification functions produce consistent, actionable insights
+
+### **Challenge 4: Automation & Response - Proactive Interventions and Team Collaboration**
 **Estimated Duration:** 60 Minutes  
 
 #### Objective
-Create a unified data architecture with KQL-based data transformations and Lakehouse integration for analytics.
+Create automated response workflows with intelligent alerting, compensation logic, and team collaboration tools for proactive customer care.
 
 #### Tasks
-1. Create a Lakehouse named `WebSalesData_LH` for unified data access
-2. Upload reference CSV files (`products.csv`, `productcategory.csv`) and create Delta tables
-3. Create shortcuts in Lakehouse to connect Eventhouse tables (`BronzeClicks` and `BronzeImpressions`)
-4. Execute `createAll.kql` script to build data transformation layers:
-   - **Bronze Layer:** Raw event data from Eventstream
-   - **Silver Layer:** Cleaned and enriched data with business rules
-   - **Gold Layer:** Aggregated metrics and KPIs for analytics
-5. Create KQL functions for key metrics (CTR calculations, latency analysis)
-6. Verify data lineage and transformation logic
+1. **Build Microsoft Teams Integration:**
+   - Create Teams channel `Proactive-Care-Alerts` for real-time notifications
+   - Configure adaptive cards for rich alert formatting with:
+     - Customer information and sentiment scores
+     - Issue summary and classification
+     - Recommended actions and escalation options
+     - Quick response buttons for agent actions
+   - Set up daily digest posts for team awareness
+   - Implement @mentions for specific team member assignments
+
+2. **Implement Automated Response Workflows:**
+   - **Critical Issue Escalation:** 
+     - Trigger immediate Teams alert for urgent cases
+     - Create high-priority support ticket automatically
+     - Send empathetic acknowledgment email to customer
+     - Assign to senior support agent based on expertise
+   
+   - **Proactive Compensation Logic:**
+     - Detect service delay patterns from feedback
+     - Calculate appropriate compensation (discount codes, credits, upgrades)
+     - Generate personalized apology messages using Azure OpenAI
+     - Automate compensation delivery via email or CRM update
+     - Log compensation actions for audit trail
+   
+   - **Preventive Action Recommendations:**
+     - Aggregate similar issues from multiple customers
+     - Generate root cause analysis summaries
+     - Recommend process improvements to operations teams
+     - Create knowledge base articles for common problems
+
+3. **Configure Autonomous Agent Operations:**
+   - Set up continuous monitoring with configurable polling intervals
+   - Implement intelligent batching for efficiency
+   - Build retry logic and error handling for resilient operations
+   - Create feedback loops for agent learning and improvement
+
+4. **Build Daily Summary Reports:**
+   - Aggregate sentiment trends across all feedback channels
+   - Generate actionable insights with Azure OpenAI summarization
+   - Create visualizations for sentiment distribution
+   - Compile preventive action recommendations
+   - Schedule automated delivery to customer success leadership
 
 #### Validation Check
-- Lakehouse contains Delta tables and active Eventhouse shortcuts
-- KQL Silver and Gold tables/functions are successfully created and populated
-- Data transformations produce accurate business metrics
-- OneLake integration enables cross-service data access
-
-### **Challenge 4: Visualization & Automation - Real-Time Dashboard and Alerting**
-**Estimated Duration:** 90 Minutes  
-
-#### Objective
-Create an interactive, auto-refreshing dashboard with intelligent alerting to enable real-time monitoring and automated responses.
-
-#### Tasks
-1. **Build Real-Time Dashboard** `Web Events Dashboard` with comprehensive KPI tiles:
-   - **Traffic Metrics:** Clicks by hour, Impressions by hour
-   - **Geographic Analysis:** Impressions by location/region  
-   - **Performance KPIs:** CTR (Click-Through Rate) metrics
-   - **Technical Metrics:** Average Page Load Time trends
-   - **Business Insights:** Conversion funnel and user engagement patterns
-
-2. **Configure Dashboard Features:**
-   - Enable Auto-refresh (Continuous) for real-time updates
-   - Set appropriate refresh intervals for optimal performance
-   - Implement interactive filters and drill-down capabilities
-   - Add time-series visualizations for trend analysis
-
-3. **Implement Data Activator (Reflex) Alerts:**
-   - Configure threshold-based alerts for critical metrics
-   - Set up automated notifications for anomaly detection
-   - Create escalation workflows for different alert severity levels
-   - Test alert triggering and response mechanisms
-
-4. **Optimize for Collaboration:**
-   - Configure dashboard sharing and permissions
-   - Set up workspace collaboration features
-   - Implement dashboard embedding capabilities
-
-#### Validation Check
-- Dashboard visuals update automatically with live data
-- All KPI tiles display accurate, real-time metrics
-- Data Activator triggers alerts correctly when thresholds are exceeded
-- Dashboard is responsive, interactive, and ready for production use
-- Collaboration features are properly configured
+- Teams channel receives real-time alerts for critical issues
+- Automated compensation workflows execute correctly without manual intervention
+- Daily summaries are generated and delivered on schedule
+- All proactive interventions are logged and trackable
+- Agent operates autonomously with minimal human oversight
 
 ## Success Criteria
 **You will have successfully completed this challenge when you deliver:**
 
-A **functioning real-time pipeline** where events stream into Eventhouse, are curated via KQL into Silver/Gold layers, surfaced in an interactive Real-Time Dashboard with continuous refresh, and monitored by automated alerts via Data Activator - all ready for collaboration in a Fabric workspace.
+A **fully autonomous proactive customer care agent** that continuously monitors feedback, analyzes sentiment in real-time, identifies emerging issues before escalation, triggers intelligent interventions, and provides actionable insights to customer success teams - all operating with minimal human intervention.
 
 ### **Technical Deliverables:**
-- **Foundation:** Fabric Workspace and Eventhouse properly configured with OneLake integration
-- **Data Flow:** Real-time event streaming pipeline operational with consistent data ingestion  
-- **Data Architecture:** Lakehouse integration with reference data and Eventhouse shortcuts established
-- **Data Transformation:** KQL Silver/Gold tables and functions producing accurate business metrics
-- **Visualization:** Interactive Real-Time Dashboard with auto-refresh and comprehensive KPIs
-- **Automation:** Data Activator alerts configured and tested for threshold monitoring
-- **Collaboration:** Workspace permissions and sharing capabilities ready for team collaboration
+- **Foundation:** Azure AI Foundry and Azure AI Language services configured and integrated
+- **Data Pipeline:** Multi-channel feedback ingestion with centralized storage and processing
+- **Intelligence Layer:** Sentiment analysis with multi-step reasoning and issue classification
+- **Automation:** Proactive alerts, compensation workflows, and Teams integration operational
+- **Monitoring:** Daily summaries and preventive action recommendations generated automatically
+- **Orchestration:** End-to-end autonomous workflows from detection to resolution
 
 ### **Business Outcomes:**
-- **Instant Visibility:** Real-time insights into key performance indicators (CTR, latency, engagement)
-- **Automated Response:** Threshold-based alerting enables immediate reaction to anomalies  
-- **Unified Platform:** End-to-end pipeline eliminates disconnected tools and improves response times
-- **Scalable Solution:** Architecture ready for production deployment and team collaboration
+- **Proactive Care:** Issues identified and addressed before customer escalation
+- **Reduced Churn:** Negative sentiment detected early with automated retention actions
+- **Team Efficiency:** Support teams receive actionable alerts instead of monitoring manually
+- **Customer Satisfaction:** Faster response times and proactive compensation improve CSAT scores
+- **Operational Insights:** Daily summaries reveal patterns for continuous improvement
+- **Scalable Solution:** Agent handles increasing feedback volume without linear cost growth
 
 ## Additional Resources
-- [Microsoft Fabric Overview](https://learn.microsoft.com/fabric/overview)  
-- [Eventhouse Documentation](https://learn.microsoft.com/fabric/eventhouse)  
-- [Eventstream Documentation](https://learn.microsoft.com/fabric/eventstream)  
-- [KQL Reference](https://learn.microsoft.com/azure/data-explorer/kusto/query/)  
-- [Data Activator Documentation](https://learn.microsoft.com/fabric/data-activator)
+- [Azure AI Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/what-is-ai-studio)
+- [Azure AI Language - Sentiment Analysis](https://learn.microsoft.com/azure/ai-services/language-service/sentiment-opinion-mining/overview)
+- [Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/overview)
+- [Power Automate for Cloud Flows](https://learn.microsoft.com/power-automate/getting-started)
+- [Azure Logic Apps](https://learn.microsoft.com/azure/logic-apps/logic-apps-overview)
+- [Microsoft Teams Adaptive Cards](https://learn.microsoft.com/microsoftteams/platform/task-modules-and-cards/cards/design-effective-cards)
 
 ## Conclusion
-By completing this challenge, you will have built an **end-to-end real-time analytics pipeline** in Microsoft Fabric.  
+By completing this challenge, you will have built an **end-to-end proactive customer care solution** powered by Azure AI services.  
 
 You learned how to:  
-- Set up a collaborative Fabric Workspace and Eventhouse.  
-- Stream and process synthetic events in real time.  
-- Integrate Eventhouse with Lakehouse and build structured KQL databases.  
-- Create an interactive real-time dashboard with automated alerts.  
+- Deploy and orchestrate multiple Azure AI services for intelligent decision-making
+- Implement real-time sentiment analysis with custom classification models
+- Build multi-step reasoning workflows for autonomous issue detection
+- Create automated intervention systems with compensation and escalation logic
+- Integrate AI agents with collaboration tools for seamless team operations
+- Generate actionable insights and preventive recommendations
 
-This lab demonstrates how Microsoft Fabric enables **timely, data-driven decision making** through real-time analytics and automation.
+This lab demonstrates how Azure AI Foundry enables **proactive, intelligent customer care** that transforms reactive support teams into predictive customer success organizations, improving satisfaction while reducing operational costs.

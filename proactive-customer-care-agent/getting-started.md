@@ -1,6 +1,6 @@
 ## Getting Started with Challenge
 
-Welcome to Hack in a Day: Build A Fabric Real-Time Intelligence Solution challenge! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
+Welcome to Hack in a Day: Build a Proactive Customer Care Agent challenge! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
 
 ### Accessing Your Challenge Environment
 
@@ -26,15 +26,15 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 ![](./media/gs-leave-4.png)
 
-## Let's Get Started with Microsoft Fabric Real-Time Intelligence
+## Let's Get Started with Azure AI Foundry and Proactive Customer Care
 
 1. In the JumpVM, click on **Microsoft Edge** browser which is created on desktop.
 
    ![](./media/gs-up1.png)
 
-1. Navigate to **Microsoft Fabric** portal by typing `https://fabric.microsoft.com` in the address bar.
+1. Navigate to **Azure Portal** by typing `https://portal.azure.com` in the address bar.
 
-1. On the **Sign into Microsoft** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
+1. On the **Sign into Microsoft Azure** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
 
    - Email/Username: <inject key="AzureAdUserEmail"></inject>
 
@@ -52,7 +52,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/gs-4.png)
 
-1. Welcome to **Microsoft Fabric**! You're now ready to start building your real-time intelligence solution using Eventhouse, Eventstream, Lakehouse, and Data Activator.
+1. Welcome to **Azure Portal**! You're now ready to start building your proactive customer care agent using Azure AI Foundry, Azure AI Language, Azure OpenAI, Logic Apps, and Power Automate.
 
 Now, click on the **Next** from lower right corner to move on next page.
 
