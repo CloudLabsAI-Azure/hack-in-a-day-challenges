@@ -1,0 +1,21 @@
+[
+    {
+        "Name": "Build-A-Fabric-Real-Time-Intelligence-Solution-in-a-Day",
+        "Language": "English",
+        "BaseURL": "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges",
+        "Files": [
+             {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/build-a-fabric-real-time-intelligence-solution-in-a-day/overview.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/build-a-fabric-real-time-intelligence-solution-in-a-day/getting-started.md",
+                "Order": 2
+            },    
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/build-a-fabric-real-time-intelligence-solution-in-a-day/challenge-based.md",
+                "Order": 3
+            }    
+        ]
+    }
+]
