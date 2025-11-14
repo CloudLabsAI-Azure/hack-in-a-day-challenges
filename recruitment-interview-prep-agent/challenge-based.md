@@ -1,4 +1,4 @@
-# Challenge: Recruitment Interview Prep Agent
+# Challenge: Recruitment Interview Prep Agent - Hack in a Day
 
 **Estimated Time:** 4 Hours  
 
