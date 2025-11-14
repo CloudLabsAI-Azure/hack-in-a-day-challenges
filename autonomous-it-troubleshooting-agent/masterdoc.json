@@ -1,21 +1,22 @@
 [
     {
-        "Name": "Build-A-Fabric-Real-Time-Intelligence-Solution-in-a-Day",
+        "Name": "Autonomous IT Troubleshooting Agent",
         "Language": "English",
         "BaseURL": "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges",
         "Files": [
              {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/build-a-fabric-real-time-intelligence-solution-in-a-day/overview.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/autonomous-it-troubleshooting-agent/overview.md",
                 "Order": 1
             },
             {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/build-a-fabric-real-time-intelligence-solution-in-a-day/getting-started.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/autonomous-it-troubleshooting-agent/getting-started.md",
                 "Order": 2
             },    
             {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/build-a-fabric-real-time-intelligence-solution-in-a-day/challenge-based.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/autonomous-it-troubleshooting-agent/challenge.md",
                 "Order": 3
             }    
         ]
     }
 ]
+
