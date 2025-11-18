@@ -5,7 +5,7 @@
         "BaseURL": "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges.git",
         "Files": [
             {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/data-analysis-with-gen-ai/overview-c1.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/data-analysis-with-gen-ai/getting-started.md",
                 "Order": 1
             },
             {
