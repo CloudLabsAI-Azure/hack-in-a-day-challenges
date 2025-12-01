@@ -23,6 +23,10 @@ In this challenge, you’ll create the **Azure AI Document Intelligence** resour
 
 1. If a Welcome to Microsoft Azure pop-up window appears, click Cancel to skip the tour.
 
+## Accessing the Datasets
+
+Please download and extract the datasets required for this challenge here - [Datasets](https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/c1-datasets.zip)
+
 ## Challenge Objectives
 - Create a **Document Intelligence** resource in the Azure Portal.  
 - Configure correct region, resource group, and pricing tier.  
