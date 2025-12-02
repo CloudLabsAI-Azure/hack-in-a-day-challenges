@@ -17,9 +17,9 @@ This index will serve as the contextual knowledge base that the model will later
 1. In the **Azure Portal**, select **Create a resource** → search for **Azure AI Search** → click **Create**.  
 2. Under **Basics**, fill in the following details:
    - **Subscription:** Select your active subscription.  
-   - **Resource Group:** Use `MFG-GENAI-RG`.  
-   - **Service Name:** `mfg-search-<uniqueID>` (replace `<uniqueID>` with your initials or deployment ID).  
-   - **Region:** Select *East US* or the same region as your OpenAI resource.  
+   - **Resource Group:** Use ODL-demolab-<inject key="DeploymentID"></inject>.  
+   - **Service Name:** mfg-search-<inject key="DeploymentID"></inject>.
+   - **Region:** <inject key="Region"></inject>. 
    - **Pricing Tier:** Choose *Basic (B)* or *Free (F)*.  
 3. Click **Review + Create** → **Create**.  
 4. Once deployment completes, open your **Azure AI Search** resource and note:
@@ -29,15 +29,16 @@ This index will serve as the contextual knowledge base that the model will later
 5. In the left pane, select **Import data**.  
 6. For **Data Source**, choose **Azure Blob Storage**.  
 7. Select the same Storage Account where you uploaded your manufacturing dataset (`machine_sensor_data.csv`).  
-8. Name your data source: `mfg-datasource`.  
+8. Name your data source: mfg-datasource-<inject key="DeploymentID"></inject>.  
 9. On the **Add cognitive skills (optional)** page, skip and click **Next**.  
-10. On **Create an index**, name it `mfg-index`.  
+10. On **Create an index**, name it mfg-index-<inject key="DeploymentID"></inject>.  
     - Confirm that fields such as `MachineID`, `Temperature`, `Downtime`, and `Timestamp` are detected.  
 11. Complete the wizard and click **Submit**.  
 12. Once the index builds successfully, test it:  
-    - In the **Search Explorer**, enter a query such as:  
+    - In the **Search Explorer**, enter a query to Get all RUNNING records for MACHINE_001:  
+    
       ```
-      search=MachineID:102 OR Temperature gt 90
+      search=machine_id:"MACHINE_001"&$filter=status eq 'RUNNING'
       ```  
     - Observe returned documents.
 
