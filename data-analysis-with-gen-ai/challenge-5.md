@@ -21,7 +21,7 @@ In this challenge, you’ll build a simple chat-style interface using Streamlit 
    if user_query:
        prompt = f"You are a manufacturing analyst. Answer briefly based on logs. Question: {user_query}"
        response = openai.ChatCompletion.create(
-           engine="gpt-35-turbo",
+           engine="gpt-4.1-mini",
            messages=[{"role":"user","content":prompt}],
            temperature=0.5
        )

@@ -12,7 +12,7 @@ In this challenge, you’ll use Azure OpenAI to summarize and interpret manufact
 ## Steps to Complete
 1. Open **Azure AI Studio** or **Azure OpenAI Playground**.  
 
-2. Choose the deployed model `gpt-35-turbo`.  
+2. Choose the deployed model `gpt-4.1-mini`.  
 
 3. Prepare a prompt such as:  
    - You are an AI data analyst. Summarize key insights from the following manufacturing sensor data:
