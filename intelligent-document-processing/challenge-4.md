@@ -12,7 +12,7 @@ In this challenge, you will create a container in Azure Storage and upload the e
 - Confirm successful upload and private access configuration.
 
 ## Steps to Complete
-1. Createe a Storage Account for this lab:
+1. Create a Storage Account for this lab:
 
    - In the Azure Portal click **Create a resource** → **Storage** → **Storage account**.  
    - Select **Subscription**
