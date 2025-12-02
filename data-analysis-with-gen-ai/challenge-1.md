@@ -18,10 +18,10 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 - Explore the data schema (columns such as timestamp, machine ID, temperature, status).
 
 ## Steps to Complete
-1. In the Azure Portal, create a **Storage Account** (named `mfgdata<uniqueID>`).  
-2. Open **Containers** → click **+ Container** → name it `manufacturing-logs`.  
+1. In the Azure Portal, create a **Storage Account** with name: mfgdatagenai<inject key="DeploymentID"></inject>.  
+2. Open **Containers** → click **+ Container** → name it manufacturing-logs-<inject key="DeploymentID"></inject>.  
 3. Set **Access Level** to *Private*.  
-4. Upload the provided CSV file (`machine_sensor_data.csv`) from the lab VM or downloads folder.  
+4. Upload the provided CSV file (`machine_sensor_data.csv`) from the downloads folder.  
 5. After upload, click the file and note the Blob URL (location for later use).  
 6. (Optional) Open the CSV in Excel or VS Code to inspect columns and data range.
 
