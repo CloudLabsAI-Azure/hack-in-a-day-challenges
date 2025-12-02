@@ -19,10 +19,6 @@ Manufacturers generate massive volumes of data from production lines, sensors, m
 
 Provide a streamlined 6-hour prototype environment where participants use generative AI tools (large language models + analytics) to ingest, analyse, and summarise manufacturing operational data. The accelerator will show how to: connect to production/sensor logs, feed into a generative-AI workflow (e.g., prompt + retrieval + summarisation + insight generation), surface root-cause suggestions, produce dashboards and natural-language commentary for operations teams, and deliver a “co-pilot” interface for manufacturing data. By combining data analytics + GenAI, the lab enables teams to move from raw machine/sensor data to meaningful insights and recommendations in a short time.
 
-## Architecture
-
-![](./c2-arch.png)
-
 ## Learning Objectives
 
 - Understand how to combine computer vision (image/frame ingestion) with generative AI to produce commentary and recommended actions.
@@ -47,9 +43,6 @@ Use the Azure OpenAI playground or a notebook to prompt the model for key insigh
 
 - **Challenge 05: Add a Chat-Style Interface for Insights**  
 Create a simple chat UI (Streamlit / web form) to interact with your data and ask questions such as “Which machine had the most downtime this week?”
-
-- **Challenge 06: Clean Up Resources**  
-Delete all Azure resources to prevent extra charges and complete your GenAI data-analysis journey.
 
 ## Support Contact
 

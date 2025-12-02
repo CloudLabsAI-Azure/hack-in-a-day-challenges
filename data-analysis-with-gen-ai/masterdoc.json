@@ -31,10 +31,6 @@
                         {
                 "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/data-analysis-with-gen-ai/challenge-5.md",
                 "Order": 7
-            },
-                                    {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/data-analysis-with-gen-ai/challenge-6.md",
-                "Order": 8
             }
         ]
     }

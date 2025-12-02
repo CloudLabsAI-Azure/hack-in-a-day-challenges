@@ -49,9 +49,6 @@ Securely store validated invoice data in Azure Blob Storage for audit, reporting
 - **Challenge 05: Visualize Extracted Invoice Summary**  
 Transform the extracted invoice data into actionable insights. Use Power BI or Excel to visualize total spending, vendor distribution, and invoice trends for better financial decision-making.
 
-- **Challenge 06: Clean Up Resources**  
-Delete all deployed Azure resources to prevent unnecessary costs and ensure a clean environment post-lab completion. This step finalizes your Intelligent Document Processing deployment workflow.
-
 ## Support Contact
 
 The CloudLabs support team is available 24/7, 365 days a year, via email and live chat to ensure seamless assistance at any time. We offer dedicated support channels tailored specifically for both learners and instructors, ensuring that all your needs are promptly and efficiently addressed.
