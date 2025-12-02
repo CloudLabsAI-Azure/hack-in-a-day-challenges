@@ -36,7 +36,7 @@ You will build a simple web interface that allows users to upload an image, anal
 
        prompt = f"Generate an inspection summary and corrective advice for: {vision_results}"
        response = openai.ChatCompletion.create(
-           engine="gpt-35-turbo",
+           engine="gpt-4.1-mini",
            messages=[{"role":"user","content":prompt}],
            temperature=0.4
        )

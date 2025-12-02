@@ -16,8 +16,8 @@ In this challenge, you’ll create the **Custom Vision resources** required for 
 2. Search for **Custom Vision**, then click **Create**.  
 3. Under **Basics**, configure:  
    - **Subscription:** Use your sandbox subscription.  
-   - **Resource Group:** `MFG-VIS-ASSIST-RG`.  
-   - **Region:** *East US* or nearest supported region that supports Custom Vision.  
+   - **Resource Group:** ODL-demolab-<inject key="DeploymentID"></inject>.  
+   - **Region:** <inject key="Region"></inject>.  
 4. Scroll down to **Custom Vision Types** and ensure:  
    - **Create both Training and Prediction resources** is selected.  
 5. Specify resource names:  
