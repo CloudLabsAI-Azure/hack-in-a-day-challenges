@@ -16,9 +16,9 @@ In this challenge, you will create a container in Azure Storage and upload the e
 
    - In the Azure Portal click **Create a resource** → **Storage** → **Storage account**.  
    - Select **Subscription**
-   - Select **Resource Group**: ODL-demolab-<inject key="GET-DEPLOYMENT-ID"></inject>.
+   - Select **Resource Group**: ODL-demolab-<inject key="DeploymentID"></inject>.
    - Choose **Region:** <inject key="Region"></inject>.
-   - And enter a **Name**: storagefinanceidp<inject key="GET-DEPLOYMENT-ID"></inject>.  
+   - And enter a **Name**: storagefinanceidp<inject key="DeploymentID"></inject>.  
    - And click **Review + Create** → **Create**.  
 
 2. To allow anonymous/public access for the container, configure it now:
@@ -30,7 +30,7 @@ In this challenge, you will create a container in Azure Storage and upload the e
 3. Open the **Storage Account** created in your environment.  
 3. Select **Containers** from the left-hand menu.  
 4. Click **+ Container** and configure:
-   - **Name:** invoices-output-<inject key="GET-DEPLOYMENT-ID"></inject>
+   - **Name:** invoices-output-<inject key="DeploymentID"></inject>
    - **Public Access Level:** *(allow anonymous access)*  
 5. Return to **Document Intelligence Studio** and click **Download Results** to save the invoice JSON output.  
 6. In your container, click **Upload** → select the downloaded JSON file → click **Upload**.  
