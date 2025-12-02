@@ -13,8 +13,8 @@ Azure OpenAI Service provides API access to models like gpt-35-turbo, which can 
 1. In the Azure Portal, select **Create a resource** → search for **Azure OpenAI**.  
 2. Click **Create**, then fill in the following:  
    - **Subscription:** Your active subscription.  
-   - **Resource Group:** `MFG-GENAI-RG`.  
-   - **Region:** Select a region with OpenAI availability (e.g., East US or West Europe).  
+   - **Resource Group:** ODL-demolab-<inject key="DeploymentID"></inject>.  
+   - **Region:** <inject key="Region"></inject>. 
    - **Name:** `openai-mfg-<uniqueID>`.  
    - **Pricing Tier:** *Standard S0*.  
 3. After deployment, navigate to the resource → select **Model Deployments**.  
