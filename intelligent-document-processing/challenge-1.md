@@ -7,25 +7,13 @@ This service extracts structured data such as invoice numbers, totals, vendor na
 
 In this challenge, you’ll create the **Azure AI Document Intelligence** resource — the foundation for the rest of your Intelligent Document Processing solution.
 
-## Accessing the Azure portal
-
-1. To access the Azure portal, click on the **Azure Portal** Microsoft edge shortcut that is created in the desktop.
-
-1. On the Sign in to Microsoft Azure tab, you will see a login screen. Enter the following email/username, and then click on Next.
-
-   - Email/Username: <inject key="AzureAdUserEmail"></inject>
-
-   - Password: <inject key="AzureAdUserPassword"></inject>
-
-1. If you see the pop-up Stay Signed in?, click No.
-
-1. If you see the pop-up You have free Azure Advisor recommendations!, close the window to continue with the challenge.
-
-1. If a Welcome to Microsoft Azure pop-up window appears, click Cancel to skip the tour.
-
 ## Accessing the Datasets
 
 Please download and extract the datasets required for this challenge here - [Datasets](https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/c1-datasets.zip)
+
+   ```
+   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/c1-datasets.zip/
+   ```
 
 ## Challenge Objectives
 - Create a **Document Intelligence** resource in the Azure Portal.  
@@ -36,16 +24,13 @@ Please download and extract the datasets required for this challenge here - [Dat
 1. In the Azure Portal, select **Create a resource**.  
 2. Search for **Document Intelligence** and click **Create**.  
 3. Under **Basics**, provide:
-   - **Subscription:** Use your available subscription.  
-   - **Resource Group:** Select or create `Finance-IDP-RG`.  
-   - **Region:** *East US* (or nearest).  
-   - **Name:** `finance-docint-<uniqueID>` (replace `<uniqueID>`).  
+   - **Subscription:** Use the available subscription.  
+   - **Resource Group:** Select `Finance-IDP-RG`.  
+   - **Region:** <inject key="Region"></inject>.  
+   - **Name:** `finance-doc-intl-<inject key="GET-DEPLOYMENT-ID"></inject>.  
    - **Pricing Tier:** Choose *Free (F0)* or *Standard (S0)*.  
 4. Click **Review + Create** → **Create**.  
 5. After deployment succeeds, open the resource.  
-6. From the **Keys and Endpoint** section, copy:
-   - **Endpoint URL**  
-   - **Key 1**
 
 ## Success Criteria
 - Azure AI Document Intelligence resource deployed successfully.  
