@@ -6,7 +6,7 @@ Azure OpenAI Service provides API access to models like gpt-4.1-mini, which can 
 
 ## Challenge Objectives
 - Create an **Azure OpenAI** resource in your subscription.  
-- Deploy the **gpt-35-turbo** model with 20 K TPM capacity.  
+- Deploy the **gpt-4.1-mini** model with 20 K TPM capacity.  
 - Record the endpoint and API key for later use.
 
 ## Steps to Complete

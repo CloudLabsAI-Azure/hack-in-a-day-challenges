@@ -33,7 +33,7 @@ Provide a streamlined 6-hour prototype environment where participants use genera
 Prepare the provided synthetic dataset, upload it to Azure Storage, and explore its structure. This challenge introduces the data you’ll analyze with GenAI.
 
 - **Challenge 02: Deploy Azure OpenAI Service**  
-Provision an Azure OpenAI resource and ensure access to the gpt-35-turbo model for generative data summarization.
+Provision an Azure OpenAI resource and ensure access to the gpt-4.1-mini model for generative data summarization.
 
 - **Challenge 03: Create Azure AI Search Resource and Import Manufacturing Data:**
 In this challenge, you’ll create an **Azure AI Search** service and import your manufacturing dataset into an index.  
