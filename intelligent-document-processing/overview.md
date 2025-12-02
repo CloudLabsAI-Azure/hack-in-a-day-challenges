@@ -19,10 +19,6 @@ Finance teams spend large amounts of time on manual capture, validation and reco
 
 Provide a lightweight, production-style prototype that automates end-to-end invoice ingestion, extraction, validation and routing using modern IDP and serverless services. The accelerator demonstrates how to: ingest mixed-format invoices (PDFs, scanned images, emails), extract structured data (supplier, invoice number, dates, line items, totals), validate against simple business rules (PO match, tax rounding), and route results to downstream systems (save to storage / produce a CSV / queue for human review). The lab uses Azure AI Document Intelligence (Form Recognizer lineage), serverless glue (Functions/Logic Apps)  to show how finance teams cut processing time and errors. Azure’s Document Intelligence provides prebuilt and custom model options to speed extraction and maintain accuracy. 
 
-## Architecture
-
-![](./c1-arch.png)
-
 ## Learning Objectives
 
 **Description:**  
