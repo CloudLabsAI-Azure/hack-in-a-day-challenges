@@ -12,11 +12,14 @@ In this challenge, you will create a container in Azure Storage and upload the e
 - Confirm successful upload and private access configuration.
 
 ## Steps to Complete
-1. Createe a Storage Account for this lab:
+1. Create a Storage Account for this lab:
 
    - In the Azure Portal click **Create a resource** → **Storage** → **Storage account**.  
-   - Provide **Subscription**, create/select **Resource Group**, choose **Region:** <inject key="Region"></inject>, and enter a **Name**: storagefinanceidp1979712<inject key="GET-DEPLOYMENT-ID"></inject>.  
-   - Leave default performance/replication options for the lab and click **Review + Create** → **Create**.  
+   - Select **Subscription**
+   - Select **Resource Group**: ODL-demolab-<inject key="GET-DEPLOYMENT-ID"></inject>.
+   - Choose **Region:** <inject key="Region"></inject>.
+   - And enter a **Name**: storagefinanceidp<inject key="GET-DEPLOYMENT-ID"></inject>.  
+   - And click **Review + Create** → **Create**.  
 
 2. To allow anonymous/public access for the container, configure it now:
 

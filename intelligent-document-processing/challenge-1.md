@@ -25,7 +25,7 @@ Please download and extract the datasets required for this challenge here - [Dat
 2. Search for **Document Intelligence** and click **Create**.  
 3. Under **Basics**, provide:
    - **Subscription:** Use the available subscription.  
-   - **Resource Group:** Select `Finance-IDP-RG`.  
+   - **Resource Group:** Select ODL-demolab-<inject key="GET-DEPLOYMENT-ID"></inject>.  
    - **Region:** <inject key="Region"></inject>.  
    - **Name:** `finance-doc-intl-<inject key="GET-DEPLOYMENT-ID"></inject>.  
    - **Pricing Tier:** Choose *Free (F0)* or *Standard (S0)*.  
