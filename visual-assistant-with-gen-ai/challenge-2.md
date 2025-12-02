@@ -1,31 +1,37 @@
-# Challenge 02: Upload and Analyze Sample Manufacturing Images
-**Estimated Time:** 45 Minutes
+# Challenge 02: Create Custom Vision Project for Surface Defect Detection  
 
 ## Introduction
-Contoso’s production line generates product images for every component batch.  
-You will now upload synthetic manufacturing images to Azure Blob Storage and analyze them with your Vision resource to detect objects and anomalies.
+Contoso’s production line generates images for every manufactured component.  
+To enable automated defect detection, you will now create a **Custom Vision project** that will be used later to train a model for identifying surface defects in manufactured parts.
 
 ## Challenge Objectives
-- Upload sample manufacturing images to Azure Blob Storage.  
-- Analyze images using Azure AI Vision service.  
-- Review detected objects and anomaly details.
+- Sign in to the **Custom Vision Portal**.  
+- Create a new **Custom Vision Project** for defect detection.  
+- Configure correct project type, classification type, and domain.
 
 ## Steps to Complete
-1. In the Azure Portal, create or open your **Storage Account**.  
-2. Select **Containers** → click **+ Container** → name it `mfg-vision-input`.  
-3. Set **Access Level:** Private.  
-4. Upload the sample images provided in the lab (`gear_part_1.jpg`, `gear_part_2_defect.jpg`, etc.).  
-5. Navigate to your **AI Vision** resource → select **Try in Vision Studio**.  
-6. Under **Image Analysis**, choose **Object Detection**.  
-7. Upload one of your images from the `mfg-vision-input` container.  
-8. Review the detected tags, objects, and confidence scores displayed on the right.
+1. Open the Custom Vision Portal:
+   ```
+   https://www.customvision.ai/projects  
+   ```
+2. Sign in using the same credentials you used to deploy Azure resources.  
+3. On the **Projects** page, click **+ New Project**.  
+4. Fill in the project details:  
+   - **Name:** `surface-detection-project`  
+   - **Description:** `Surface defect detection for manufacturing components`  
+   - **Project Type:** `Classification`  
+   - **Classification Type:** `Multiclass (Single tag per image)`  
+   - **Domain:** `General [A2]`  
+5. Click **Create Project**.  
+6. Wait for the workspace to load, you should now see the **Training Images** page where images can later be uploaded and tagged.
 
 ## Success Criteria
-- Images successfully analyzed using Vision Studio.  
-- Object tags and anomaly labels visible with confidence percentages.
+- Custom Vision project named **surface-detection-project** created successfully.  
+- Project type correctly set to **Classification (Multiclass)** using **General [A2]** domain.
 
 ## Additional Resources
-- [Vision Studio](https://portal.vision.cognitive.azure.com)
-- [Object Detection with Azure AI Vision](https://learn.microsoft.com/azure/ai-services/computer-vision/concept-object-detection)
+- [Custom Vision Portal](https://www.customvision.ai)  
+- [Classification Models with Custom Vision](https://learn.microsoft.com/azure/ai-services/custom-vision-service/getting-started-build-a-classifier)
 
-Now, click **Next** to continue to **Challenge 03: Deploy Azure OpenAI Service for Commentary Generation**.
+
+Now, click **Next** to continue to **Challenge 03: Upload and Tag Manufacturing Images for Model Training**.

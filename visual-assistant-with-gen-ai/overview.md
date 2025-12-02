@@ -18,11 +18,8 @@ Production lines in manufacturing frequently rely on visual inspections for defe
 
 Provide a beginner-friendly prototype where teams build a “visual assistant” that uses generative AI + computer-vision to assist shop-floor operators. The assistant ingests images or video frames from a manufacturing line (or sample dataset), analyses them for anomalies (defects, misalignment, missing parts), generates natural-language commentary (e.g., “Component X appears misaligned by approx 3mm; recommend repositioning”), and presents a simple UI dashboard for review and action. By combining vision models + generative AI commentary, the lab allows teams to show how manufacturing visual inspection and assistance can be automated and augmented.
 
-## Architecture
-
-![](./c3-arch.png)
-
 ## Learning Objectives
+
 **Description:**  
 By the end of this lab, you will learn to:
 
@@ -31,7 +28,6 @@ By the end of this lab, you will learn to:
 - Build a simple UI or dashboard that shows visual input, detected issues, commentary and next-steps.
 - Recognise challenges: camera calibration, lighting, anomaly-detection false positives, generative AI hallucination, human-in-loop review.
 - Learn how to deploy a lightweight prototype using accessible Azure (or cloud) services and clean up resources.
-
 
 ## Challenges Overview
 
@@ -49,9 +45,6 @@ Combine AI Vision and Generative AI outputs to produce comprehensive visual insp
 
 - **Challenge 05: Build a Visual Assistant Web Interface**  
 Create a simple Streamlit-based dashboard to upload images, view AI results, and interact with Generative AI commentary in real-time.
-
-- **Challenge 06: Clean Up Resources**  
-Remove all Azure resources to prevent extra costs and complete your Visual Assistant workflow.
 
 ## Support Contact
 
