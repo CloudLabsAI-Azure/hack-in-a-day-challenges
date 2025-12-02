@@ -17,7 +17,7 @@ In this challenge, you’ll use the **Prebuilt Invoice Model** through the Azure
 2. Click **Go to Document Intelligence Studio** (opens in a new tab).  
 3. In the Studio, scroll to **Prebuilt Models** and select **Invoice**.  
 4. Choose **Try the model**.  
-5. Upload a sample invoice (PDF or image) from the dataset provided in your lab environment.  
+5. Upload a sample invoice from the dataset provided.  
 6. Wait for the analysis to complete.  
 7. Observe the structured output:
    - **Vendor Name**

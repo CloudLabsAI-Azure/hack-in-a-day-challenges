@@ -12,14 +12,31 @@ In this challenge, you will create a container in Azure Storage and upload the e
 - Confirm successful upload and private access configuration.
 
 ## Steps to Complete
-1. Open the **Storage Account** created in your environment.  
-2. Select **Containers** from the left-hand menu.  
-3. Click **+ Container** and configure:
-   - **Name:** `invoices-output`
-   - **Public Access Level:** *Private (no anonymous access)*  
-4. Return to **Document Intelligence Studio** and click **Download Results** to save the invoice JSON output.  
-5. In your container, click **Upload** → select the downloaded JSON file → click **Upload**.  
-6. Refresh the container list to verify the uploaded file appears.
+1. Createe a Storage Account for this lab:
+
+   - In the Azure Portal click **Create a resource** → **Storage** → **Storage account**.  
+   - Provide **Subscription**, create/select **Resource Group**, choose **Region:** <inject key="Region"></inject>, and enter a **Name**: storagefinanceidp1979712<inject key="GET-DEPLOYMENT-ID"></inject>.  
+   - Leave default performance/replication options for the lab and click **Review + Create** → **Create**.  
+
+2. To allow anonymous/public access for the container, configure it now:
+
+   - Open the newly created Storage Account in the Azure Portal, select **Settings → Configuration** (or **Containers** → the container's Access level after you create it).  
+   - Under **Blob public access**, set the option to enable public/anonymous access if your scenario requires it.  
+   - Save the configuration changes. Note: Enabling anonymous access allows anyone with the blob URL to read blobs — only use this when necessary for demos and ensure you remove public access after the lab.
+
+3. Open the **Storage Account** created in your environment.  
+3. Select **Containers** from the left-hand menu.  
+4. Click **+ Container** and configure:
+   - **Name:** invoices-output-<inject key="GET-DEPLOYMENT-ID"></inject>
+   - **Public Access Level:** *(allow anonymous access)*  
+5. Return to **Document Intelligence Studio** and click **Download Results** to save the invoice JSON output.  
+6. In your container, click **Upload** → select the downloaded JSON file → click **Upload**.  
+7. Refresh the container list to verify the uploaded file appears.
+8. Copy the Storage Account name and access key for later use:
+
+   - In the Storage Account blade, select **Access keys** under **Security + networking**.
+   - Copy the **Storage account name** and **Key1** (connection string or key) and store them securely — you will need these to connect Power BI or programmatic clients.
+   - Keep keys private; rotate or revoke them when the lab is complete.
 
 ## Success Criteria
 - Extracted data securely stored in Azure Blob Storage.  

@@ -31,10 +31,6 @@
                         {
                 "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/intelligent-document-processing/challenge-5.md",
                 "Order": 7
-            },
-                                    {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/intelligent-document-processing/challenge-6.md",
-                "Order": 8
             }
         ]
     }
