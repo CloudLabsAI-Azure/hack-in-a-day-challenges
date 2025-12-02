@@ -2,7 +2,7 @@
 
 ## Introduction
 Contoso wants to use a Large Language Model (LLM) to summarize machine logs and generate human-readable insights.  
-Azure OpenAI Service provides API access to models like gpt-35-turbo, which can analyze data and produce natural language reports.
+Azure OpenAI Service provides API access to models like gpt-4.1-mini, which can analyze data and produce natural language reports.
 
 ## Challenge Objectives
 - Create an **Azure OpenAI** resource in your subscription.  
