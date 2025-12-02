@@ -15,17 +15,17 @@ Azure OpenAI Service provides API access to models like gpt-35-turbo, which can 
    - **Subscription:** Your active subscription.  
    - **Resource Group:** ODL-demolab-<inject key="DeploymentID"></inject>.  
    - **Region:** <inject key="Region"></inject>. 
-   - **Name:** `openai-mfg-<uniqueID>`.  
+   - **Name:** openai-mfg-<inject key="DeploymentID"></inject>.  
    - **Pricing Tier:** *Standard S0*.  
 3. After deployment, navigate to the resource → select **Model Deployments**.  
 4. Deploy the following models:  
-   - **gpt-35-turbo** (version 0125) with 20 K TPM.  
+   - **gpt-4.1-mini** (version Global Standard) with 20 K TPM.  
    - *(Optional)* `text-embedding-ada-002` for semantic search use later.  
 5. Note the **Endpoint URL** and **API Key 1**.
 
 ## Success Criteria
 - Azure OpenAI resource deployed successfully.  
-- `gpt-35-turbo` model available for prompt testing.  
+- `gpt-4.1-mini` model available for prompt testing.  
 - Endpoint and API key ready for subsequent use.
 
 ## Additional Resources
