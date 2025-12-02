@@ -32,6 +32,11 @@ In this challenge, you will create a container in Azure Storage and upload the e
 5. Return to **Document Intelligence Studio** and click **Download Results** to save the invoice JSON output.  
 6. In your container, click **Upload** → select the downloaded JSON file → click **Upload**.  
 7. Refresh the container list to verify the uploaded file appears.
+8. Copy the Storage Account name and access key for later use:
+
+   - In the Storage Account blade, select **Access keys** under **Security + networking**.
+   - Copy the **Storage account name** and **Key1** (connection string or key) and store them securely — you will need these to connect Power BI or programmatic clients.
+   - Keep keys private; rotate or revoke them when the lab is complete.
 
 ## Success Criteria
 - Extracted data securely stored in Azure Blob Storage.  
