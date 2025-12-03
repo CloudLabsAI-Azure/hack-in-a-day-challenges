@@ -26,13 +26,13 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 ![](./media/gs-leave-4.png)
 
-## Let's Get Started with Azure and AI Tools
+## Let's Get Started with Copilot Studio and Microsoft 365
 
 1. In the JumpVM, click on **Microsoft Edge** browser which is created on desktop.
 
    ![](./media/gs-up1.png)
 
-1. Navigate to the **Azure Portal** by typing `https://portal.azure.com` in the address bar.
+1. Navigate to **Microsoft Copilot Studio** by typing `https://copilotstudio.microsoft.com` in the address bar.
 
 1. On the **Sign into Microsoft** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
 
@@ -52,13 +52,24 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/gs-4.png)
 
-1. After signing in, ensure you can access:
-   - **Azure AI Foundry / Azure OpenAI** (for the reasoning agent)
-   - **Power Automate** (for remediation flows)
-   - **Microsoft Teams** (for alerts and escalation)
-   - **Dataverse** (for storing incident and action records, if used in this lab)
+1. After signing in, ensure you can access the following services:
+   - **Microsoft Copilot Studio** (https://copilotstudio.microsoft.com) - for building your IT Support Copilot
+   - **Power Automate** (https://make.powerautomate.com) - for creating notification flows
+   - **Microsoft Teams** - for sending resolution summaries and escalations
+   - **Office 365 Portal** (https://portal.office.com) - for accessing all Microsoft 365 services
 
-1. You are now ready to start building your Autonomous IT Troubleshooting Agent that leverages LLM reasoning, tool invocation, and Teams-based escalation.
+1. **Download the Lab Files:**
+   - Open **File Explorer**
+   - Navigate to `C:\LabFiles\AutonomousITAgent\datasets`
+   - Verify you can see the following files:
+     - IT_Support_FAQ_Password_Reset.pdf
+     - IT_Support_SOP_VPN_Issues.pdf
+     - IT_Support_SOP_Slow_Laptop.pdf
+     - IT_Support_SOP_Printer_Issues.pdf
+     - IT_Support_Test_Scenarios.csv
+   - These files will be used to build your copilot's knowledge base
+
+1. You are now ready to start building your **IT Support Copilot** using Microsoft Copilot Studio! This copilot will help employees with common IT issues like password resets, VPN problems, slow laptops, and printer troubleshooting.
 
 Now, click on the **Next** from lower right corner to move on next page.
 

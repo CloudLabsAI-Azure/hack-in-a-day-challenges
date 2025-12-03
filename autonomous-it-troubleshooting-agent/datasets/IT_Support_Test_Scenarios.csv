@@ -1,0 +1,101 @@
+Scenario_ID,Category,User_Question,Expected_Response_Type,Complexity,Notes
+1,Password Reset,I forgot my password,Self-service password reset instructions,Easy,Should provide link to password reset portal
+2,Password Reset,How do I reset my password?,Self-service password reset instructions,Easy,Should provide step-by-step instructions
+3,Password Reset,My password expired and I can't log in,Self-service password reset instructions,Medium,Should explain expired password process
+4,Password Reset,I'm getting an error that my account is locked,Account lockout procedures,Medium,Should explain 30-minute auto-unlock or contact IT
+5,Password Reset,What are the password requirements?,Password policy information,Easy,Should list requirements: length complexity expiration
+6,Password Reset,I just changed my password but it's not working,Password sync delay explanation,Medium,Should explain 15-minute sync time
+7,Password Reset,Can I use my old password again?,Password history policy,Easy,Should explain cannot reuse last 10 passwords
+8,Password Reset,I'm not receiving the verification code for password reset,Verification troubleshooting,Medium,Should suggest checking spam alternate methods
+9,VPN Issues,VPN not connecting,VPN troubleshooting steps,Medium,Should provide systematic troubleshooting
+10,VPN Issues,I can't connect to VPN,VPN troubleshooting steps,Medium,Should ask about error messages and provide steps
+11,VPN Issues,VPN keeps disconnecting,VPN connection stability troubleshooting,Medium,Should check internet network adapters
+12,VPN Issues,What's the VPN server address?,VPN configuration information,Easy,Should provide vpn.company.com
+13,VPN Issues,VPN says authentication failed,VPN credential verification,Medium,Should verify username/password format and MFA
+14,VPN Issues,I'm getting error 'Unable to contact VPN server',VPN firewall/network troubleshooting,Hard,Should check firewall internet connection backup gateway
+15,VPN Issues,VPN connected but can't access internal resources,VPN DNS/routing troubleshooting,Hard,Should check DNS settings and routing
+16,VPN Issues,My VPN client won't install,VPN software installation help,Medium,Should provide download link and admin rights info
+17,VPN Issues,Which VPN client should I use?,VPN software recommendation,Easy,Should recommend Cisco AnyConnect version
+18,VPN Issues,VPN is very slow,VPN performance optimization,Medium,Should suggest checking internet speed using wired connection closing apps
+19,Slow Laptop,My laptop is running slow,General performance troubleshooting,Medium,Should ask clarifying questions and provide steps
+20,Slow Laptop,Computer is lagging and freezing,System resource check,Medium,Should guide to check Task Manager RAM/CPU
+21,Slow Laptop,Laptop takes forever to boot up,Startup optimization,Medium,Should suggest disabling startup programs
+22,Slow Laptop,My laptop fan is loud and it's hot,Overheating troubleshooting,Medium,Should check for overheating and suggest cooling solutions
+23,Slow Laptop,How much RAM do I have?,System information check,Easy,Should guide to check in Task Manager or Settings
+24,Slow Laptop,Can I upgrade my laptop's RAM?,Hardware upgrade inquiry,Easy,Should suggest submitting upgrade request with IT
+25,Slow Laptop,Windows is taking up all my disk space,Disk cleanup instructions,Medium,Should provide disk cleanup steps
+26,Slow Laptop,How do I free up space on my laptop?,Storage management,Medium,Should suggest disk cleanup deleting temp files
+27,Slow Laptop,My laptop is slow when I open Outlook,Application-specific slowness,Medium,Should suggest archiving emails checking mailbox size
+28,Slow Laptop,Too many programs running at once,Resource management,Medium,Should guide to close unnecessary programs check Task Manager
+29,Slow Laptop,Is my laptop infected with a virus?,Malware scan instructions,Medium,Should guide to run antivirus scan
+30,Slow Laptop,Should I restart my laptop?,Restart recommendation,Easy,Should confirm restarting helps and recommend weekly restarts
+31,Printer Issues,Printer not working,General printer troubleshooting,Medium,Should ask about specific issue and provide checklist
+32,Printer Issues,Can't print my document,Print troubleshooting,Medium,Should check printer status queue and connection
+33,Printer Issues,Printer is offline,Printer offline fix,Medium,Should provide steps to set printer online restart spooler
+34,Printer Issues,My print job is stuck,Print queue management,Medium,Should guide to clear print queue restart spooler
+35,Printer Issues,Printer says paper jam,Paper jam removal instructions,Medium,Should provide safe paper jam removal steps
+36,Printer Issues,Printing blank pages,Toner/ink troubleshooting,Medium,Should check toner levels protective tape
+37,Printer Issues,Printouts are faded or light,Print quality toner issues,Medium,Should check toner levels disable toner save mode
+38,Printer Issues,How do I add a printer to my computer?,Printer installation,Medium,Should provide steps to add network or USB printer
+39,Printer Issues,Printer not found or detected,Printer discovery troubleshooting,Hard,Should check network connection add by IP address
+40,Printer Issues,How do I print from my phone?,Mobile printing instructions,Medium,Should explain AirPrint or manufacturer app
+41,Printer Issues,Printer is printing very slow,Print performance optimization,Medium,Should check document size quality settings
+42,Printer Issues,Where can I order printer toner?,Supplies ordering,Easy,Should provide supplies request email/portal
+43,Printer Issues,Black streaks on my printouts,Print quality cleaning,Medium,Should suggest running cleaning page checking drum
+44,Printer Issues,What's the IP address of the printer on 3rd floor?,Printer information request,Easy,Should explain how to find printer IP or check with IT
+45,General,What can you help me with?,Capabilities overview,Easy,Should list main categories: password VPN laptop printer
+46,General,I need IT support,General support inquiry,Easy,Should ask what issue they're experiencing
+47,General,How do I contact IT support?,Contact information,Easy,Should provide phone email chat portal
+48,General,What are your hours?,Support hours inquiry,Easy,Should provide helpdesk hours
+49,General,Can you help me with software installation?,Software installation support,Medium,Should determine what software and provide guidance or escalation
+50,General,I need admin rights on my laptop,Admin rights request,Medium,Should explain process to request elevated privileges
+51,General,How do I access the company intranet?,Intranet access help,Easy,Should provide URL and mention VPN requirement if remote
+52,General,My keyboard is not working,Hardware issue,Medium,Should troubleshoot basic issues or escalate
+53,General,Can you reset my MFA/two-factor authentication?,MFA reset request,Medium,Should provide self-service steps or escalation to IT
+54,General,I accidentally deleted an important file,File recovery request,Medium,Should check recycle bin or suggest IT file recovery service
+55,General,How do I set up my new laptop?,New device setup,Hard,Should refer to onboarding documentation or schedule with IT
+56,Mixed,I can't log in and VPN won't connect,Multiple issues,Hard,Should prioritize login issue first then VPN
+57,Mixed,My laptop is slow and printer isn't working,Multiple issues,Hard,Should address separately starting with laptop performance
+58,Mixed,Forgot password and need to print urgently,Multiple issues urgent,Hard,Should prioritize password reset then printer
+59,Edge Case,Can you give me someone else's password?,Security violation request,N/A,Should refuse and explain security policy
+60,Edge Case,My laptop is on fire,Emergency safety issue,Critical,Should advise to evacuate and call emergency services
+61,Edge Case,I spilled coffee on my laptop,Physical damage,Medium,Should advise to power off unplug and contact IT immediately
+62,Edge Case,Someone hacked my account,Security incident,High,Should escalate to IT Security immediately
+63,Edge Case,I received a phishing email,Security awareness,Medium,Should instruct to report to security@company.com without clicking links
+64,Edge Case,Can I install games on my work laptop?,Policy question,Easy,Should explain acceptable use policy
+65,Password Reset,New password doesn't meet requirements,Password complexity help,Medium,Should explain specific requirements and give examples
+66,Password Reset,Can IT see my password?,Password security question,Easy,Should explain IT cannot see passwords only reset them
+67,Password Reset,How often do I need to change my password?,Password policy question,Easy,Should explain 90-day expiration policy
+68,Password Reset,I'm traveling and don't have access to my phone for MFA,MFA alternative access,Hard,Should explain backup verification methods
+69,VPN Issues,Can I use VPN on my personal device?,BYOD VPN question,Medium,Should explain company policy on personal device VPN
+70,VPN Issues,VPN worked yesterday but not today,Recent VPN failure,Medium,Should check for account issues password changes
+71,VPN Issues,Do I need VPN to access email?,VPN necessity question,Easy,Should explain Office 365 accessible without VPN but internal resources need it
+72,VPN Issues,VPN is asking for a certificate,Certificate troubleshooting,Hard,Should guide to update VPN client or contact IT
+73,Slow Laptop,Laptop was fast last week now suddenly slow,Recent performance degradation,Medium,Should ask about recent changes updates or installations
+74,Slow Laptop,Is it normal for laptop to be slow in the morning?,Morning slowness pattern,Medium,Should explain possible overnight updates or backups
+75,Slow Laptop,I heard I should defragment my drive will that help?,Defragmentation question,Medium,Should explain difference between HDD and SSD
+76,Slow Laptop,My laptop is 5 years old can it be upgraded?,Hardware upgrade feasibility,Medium,Should suggest assessment or replacement consideration
+77,Printer Issues,Can I print color or only black and white?,Printer capability question,Easy,Should ask which printer and explain capabilities
+78,Printer Issues,How do I print double-sided?,Duplex printing help,Easy,Should explain printer properties duplex settings
+79,Printer Issues,The printer is making strange noises,Hardware noise issue,Medium,Should advise to check for obstructions or contact IT
+80,Printer Issues,How do I scan a document?,Scanning instructions,Medium,Should provide basic scanning steps or refer to printer manual
+81,General,Is there a faster way to get help?,Efficiency question,Easy,Should promote self-service options and copilot capabilities
+82,General,Can this copilot solve all my IT problems?,Capability question,Easy,Should explain scope and when to escalate to human support
+83,General,I need this fixed right now it's urgent,Urgency expression,N/A,Should acknowledge urgency and provide fastest solution path
+84,General,Thank you for your help,Gratitude,N/A,Should respond politely and offer further assistance
+85,General,This didn't work what else can I try?,Troubleshooting continuation,N/A,Should provide next level troubleshooting or escalation
+86,Password Reset,I changed my password now my phone can't sync email,Post-password change issue,Medium,Should explain need to update password on all devices
+87,Password Reset,Can I have the same password as my colleague?,Inappropriate password question,Easy,Should explain each user must have unique password
+88,VPN Issues,VPN worked on WiFi but not on mobile hotspot,Network-specific VPN issue,Medium,Should check firewall settings on mobile carrier
+89,VPN Issues,After connecting to VPN my internet is slow,VPN impact on performance,Medium,Should explain split tunneling and network impact
+90,Slow Laptop,How do I check what's making my laptop slow?,Resource monitoring guidance,Medium,Should guide to Task Manager and Performance tab
+91,Slow Laptop,Can I delete Windows Update files?,Update file management,Medium,Should explain disk cleanup system files option
+92,Slow Laptop,My C drive is red is that bad?,Critical disk space,High,Should confirm critical and provide immediate cleanup steps
+93,Printer Issues,I sent a print job an hour ago and it still hasn't printed,Delayed printing,Medium,Should check print queue printer status
+94,Printer Issues,Printer printed only half of the page,Partial print issue,Medium,Should check paper size scaling settings
+95,Printer Issues,Can I print confidential documents securely?,Secure printing inquiry,Medium,Should explain secure print release features if available
+96,General,Who do I contact for software licensing?,Licensing question,Easy,Should direct to appropriate team or email
+97,General,Can you remote into my computer to fix this?,Remote support request,Medium,Should explain remote support availability and process
+98,General,I'll be working from home do I need to prepare anything?,Remote work preparation,Medium,Should verify VPN access laptop updates
+99,General,My manager asked me to get this fixed by EOD,Deadline pressure,N/A,Should acknowledge timeline and provide efficient solution
+100,General,None of the solutions worked I'm frustrated,Escalation needed,High,Should empathize and provide escalation with all context
