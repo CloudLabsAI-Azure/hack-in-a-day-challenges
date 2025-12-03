@@ -1,0 +1,14 @@
+# Azure OpenAI SDK
+openai==1.58.1
+
+# Streamlit for web UI
+streamlit==1.40.2
+
+# Python dotenv for environment variables
+python-dotenv==1.0.1
+
+# Image processing
+Pillow==11.0.0
+
+# Requests for HTTP calls (used for Custom Vision REST API)
+requests==2.32.3
