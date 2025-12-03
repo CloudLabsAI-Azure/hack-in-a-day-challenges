@@ -6,13 +6,14 @@ Azure **Custom Vision** enables you to **train your own image classification and
 
 In this challenge, you’ll create the **Custom Vision resources** required for the Visual Assistant — including **Training** and **Prediction** endpoints — which will later be used to train and deploy defect detection models.
 
-## Accessing the Datasets
+## Accessing the Datasets and Codefiles
 
-Please copy the below link and paste in a new browser tab inside your LabVM to download the required datasets for the usecase and extract it.
+Please copy the below link and paste in a new browser tab inside your LabVM to download the required datasets and codefiles for the usecase and extract it.
 
 ```
 https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/c3-datasets.zip
 ```
+> Once the file is downloaded, please extract it in any desired path in the LabVM. You will be able to see `Codefiles` and `Datasets` folders.
 
 ## Challenge Objectives  
 - Create **Azure Custom Vision Training** and **Prediction** resources.  
@@ -20,27 +21,25 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 - Understand where custom image models are trained and hosted.
 
 ## Steps to Complete  
-1. In the Azure Portal, click **Create a resource**.  
-2. Search for **Custom Vision**, then click **Create**.  
-3. Under **Basics**, configure:  
+1. In the Azure Portal, search for **Custom vision** in the search bar.  
+1. On the **Custom Vision** page, then click **Create**.  
+1. Under **Basics**, configure:
+   - **Create Options:** Select **both**  
    - **Subscription:** Use your sandbox subscription.  
-   - **Resource Group:** ODL-demolab-<inject key="DeploymentID"></inject>.  
+   - **Resource Group:** challenge-rg-<inject key="DeploymentID"></inject>.  
    - **Region:** <inject key="Region"></inject>.  
-4. Scroll down to **Custom Vision Types** and ensure:  
+1. Scroll down to **Custom Vision Types** and ensure:  
    - **Create both Training and Prediction resources** is selected.  
-5. Specify resource names:  
-   - **Training Resource Name:** `cv-train-mfg-<uniqueID>`  
-   - **Prediction Resource Name:** `cv-pred-mfg-<uniqueID>`  
-6. Select **Pricing Tier**:  
-   - *Free (F0)* if available — or *Standard (S0)*.  
-7. Click **Review + Create**, then **Create**.  
-8. Once deployment completes, open each resource:  
+1. Specify resource name:  
+   - **Training Resource Name:** **cv-train-mfg-<inject key="DeploymentID"></inject>** 
+1. Select **Pricing Tier**:  
+   - *Free (F0)* for both training and prediction resources.
+1. Click **Review + Create**, then **Create**.  
+1. Once deployment completes, open cvtrainmfg<inject key="DeploymentID"></inject>-Prediction:  
    - Go to **Keys and Endpoint**.  
-   - Copy the following for later challenges:  
-     - **Training Endpoint**  
-     - **Training Key**  
-     - **Prediction Endpoint**  
-     - **Prediction Key**
+   - Copy the following and paste it in a notepad for later challenges:  
+     - **Endpoint**  
+     - **Key 1**
 
 ## Success Criteria  
 - Custom Vision Training and Prediction resources created successfully.  

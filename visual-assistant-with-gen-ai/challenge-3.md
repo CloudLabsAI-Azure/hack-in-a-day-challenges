@@ -12,22 +12,19 @@ In this challenge, you will upload images to the existing project, assign the co
 - Train the initial defect-detection model.
 
 ## Steps to Complete
-1. Open the Custom Vision Portal:  
-   👉 https://www.customvision.ai/projects  
-2. Select the **surface-detection-project** created in the previous challenge.
-3. On the **Training Images** page, click **Add images**.
-4. From the downloaded dataset folder, extract the ZIP file if not already extracted.
-5. Navigate to the `/train` directory — inside it you will find three folders representing defect categories:  
+1. On the **Training Images** page, click **Add images**.
+1. From the downloaded dataset folder, extract the ZIP file if not already extracted.
+1. Navigate to the `Datasets/train` directory which you have extracted earlier, inside it you will find three folders representing defect categories:  
    - `crazing`  
    - `patches`  
    - `scratches`
-6. Upload images category-wise:  
+1. Upload images category-wise:  
    - Open the `crazing` folder → select all images → click **Open** → apply the tag `crazing`.  
    - Open the `patches` folder → select all images → click **Open** → apply the tag `patches`.  
    - Open the `scratches` folder → select all images → click **Open** → apply the tag `scratches`.
-7. After all images are uploaded and tagged, click **Train** (top right).
-8. Keep default training configuration and confirm.  
-9. Wait for the training run to complete.  
+1. After all images are uploaded and tagged, click **Train** (top right).
+1. Select **Quick training** and confirm.  
+1. Wait for the training run to complete.
    > 🚨 **Note:** Training may take up to **30 minutes**, depending on compute availability.
 
 ## Success Criteria

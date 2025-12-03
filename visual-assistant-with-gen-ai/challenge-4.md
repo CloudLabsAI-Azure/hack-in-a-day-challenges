@@ -1,33 +1,42 @@
-# Challenge 04: Generate Visual Inspection Reports
-**Estimated Time:** 45 Minutes
+# Challenge 04: Publish and Test the Surface Defect Detection Model  
+**Estimated Time:** 30 Minutes
 
 ## Introduction
-After detecting visual anomalies, Contoso wants to automatically generate descriptive inspection reports summarizing what was found.  
-You will combine AI Vision output with Azure OpenAI commentary to produce readable reports.
+After the model has completed training, Contoso now needs to make the model available for real-time predictions.  
+Publishing the trained model connects it to the **Prediction resource**, enabling applications and operators to send new images for defect detection.
+
+In this challenge, you will publish the trained model and test it using sample images to verify prediction accuracy.
 
 ## Challenge Objectives
-- Combine vision detection data and LLM commentary.  
-- Generate inspection summaries for each analyzed image.  
-- Save the results as text or JSON files.
+- Publish the trained Custom Vision model to the Prediction resource.  
+- Run a **Quick Test** using sample manufacturing images.  
+- Validate the model’s ability to identify defect categories with confidence scores.
 
 ## Steps to Complete
-1. Open **Vision Studio** → select your analyzed image.  
-2. Copy detected tags and confidence data (e.g., “Bolt missing,” “Surface scratch detected”).  
-3. Go to **Azure AI Studio / OpenAI Playground** → select your deployed model `gpt-4.1-mini`.  
-4. Use a prompt like:  
 
-   - You are a manufacturing quality assistant.Based on these findings, generate a short inspection report with recommendations:[Paste object detection output]
-
-5. Observe the generated summary.  
-6. Save the generated text to a `.txt` or `.json` file for later display.
+1. From the **surface-detection-project** workspace, navigate to the **Performance** tab.  
+1. Locate the trained iteration (model) created in the previous challenge.
+1. Click **Publish**.
+1. In the Publish dialog:
+   - **Model Name:** keep the default or enter a version name such as `surface-detection-v1`.  
+   - **Prediction Resource:** select the available **Prediction** resource created earlier.
+1. Click **Publish** to enable the Prediction API.
+1. click on **Prediction URL** from top beside publish option to get the URL, from the list copy the second URL which will be under `If you have an image file:` section which is known as image_file_url.Paste it safely for later use.
+1. After publishing, click **Quick Test** (top right).
+1. From the downloaded dataset, navigate to the `Datasets/test` folder.
+1. Upload any sample test image (for example, an image from *crazing*, *patches*, or *scratches* category).
+1. Review prediction results displayed in the Quick Test panel:
+   - Predicted defect category  
+   - Confidence score for each category (probablity)
 
 ## Success Criteria
-- AI-generated inspection summary successfully created.  
-- File saved for visualization in the next challenge.
+- The model is published successfully to the Prediction resource.  
+- Quick Test displays a predicted defect label with probability scores, confirming correct model behavior.
 
 ## Additional Resources
-- [Azure AI Studio](https://oai.azure.com/portal)
-- [Prompt Engineering Examples](https://learn.microsoft.com/azure/ai-services/openai/concepts/prompt-engineering)
+- [Publish and Test Custom Vision Models](https://learn.microsoft.com/azure/ai-services/custom-vision-service/use-predictions-from-custom-vision)  
+- [Quick Test in Custom Vision Portal](https://learn.microsoft.com/azure/ai-services/custom-vision-service/getting-started-build-a-classifier#test-your-model)
 
-Now, click **Next** to continue to **Challenge 05: Build a Visual Assistant Web Interface**.
+---
 
+Now, click **Next** to continue to **Challenge 05: Generate AI-Based Inspection Commentary**.
