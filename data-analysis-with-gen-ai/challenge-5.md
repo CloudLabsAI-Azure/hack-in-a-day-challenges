@@ -1,15 +1,18 @@
 # Challenge 05: Add a Chat-Style Interface for Insights
 
 ## Introduction
+
 Contoso wants operators to ask questions about data in natural language.  
 In this challenge, you’ll build a simple chat-style interface using Streamlit or Flask to query the LLM for insights.
 
 ## Challenge Objectives
+
 - Create a lightweight UI to accept user queries.  
     - Send queries to the Foundry LLM and display responses.  
 - Demonstrate interactive data exploration with GenAI.
 
 ## Steps to Complete
+
 1. Open **VS Code** or Azure Cloud Shell.  
 2. Create a Python file `app.py` and paste a lightweight example (pseudocode) that calls the Foundry/LLM endpoint via your preferred client library. Replace the `YOUR_API_KEY` and `YOUR_ENDPOINT` placeholders with values from your Foundry project:
 

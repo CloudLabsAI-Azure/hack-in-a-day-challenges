@@ -6,6 +6,7 @@
 **Tags:** `Manufacturing`, `Generative AI`, `Data Analytics`, `Microsoft Foundry`, `Industry 4.0`
 
 ## Overview
+
 In this lab, participants will learn how to use **Generative AI** to analyze manufacturing operational data and automatically generate insights and recommendations.  
 You’ll ingest a synthetic manufacturing dataset, summarize trends, detect anomalies, and build a simple insights dashboard using Microsoft Foundry (LLM capabilities) and data-analysis tools.
 
