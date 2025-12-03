@@ -1,5 +1,4 @@
 # Challenge 06: Configure the Application and Run the Visual Inspection Assistant  
-**Estimated Time:** 45 Minutes
 
 ## Introduction
 Now that all AI services are deployed and configured, Contoso will integrate them into the sample application.  

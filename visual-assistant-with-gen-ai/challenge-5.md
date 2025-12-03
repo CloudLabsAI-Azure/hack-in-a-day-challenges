@@ -1,5 +1,4 @@
 # Challenge 05: Deploy Foundry Resource and GPT-4.1-Mini Model  
-**Estimated Time:** 30 Minutes
 
 ## Introduction
 With the surface defect model successfully predicting image anomalies, Contoso now wants to generate natural-language inspection commentary using Generative AI.  

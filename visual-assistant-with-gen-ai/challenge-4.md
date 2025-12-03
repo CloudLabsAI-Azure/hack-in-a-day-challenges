@@ -1,5 +1,4 @@
 # Challenge 04: Publish and Test the Surface Defect Detection Model  
-**Estimated Time:** 30 Minutes
 
 ## Introduction
 After the model has completed training, Contoso now needs to make the model available for real-time predictions.  
