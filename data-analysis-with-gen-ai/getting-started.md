@@ -26,7 +26,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 ![](./media/gs-leave-4.png)
 
-## Let's Get Started with Azure OpenAI and GenAI Manufacturing Analytics
+## Let's Get Started with Microsoft Foundry and GenAI Manufacturing Analytics
 
 1. In the JumpVM, click on **Azure Portal** shortcut of Microsoft Edge browser which is created on desktop.
 
@@ -50,7 +50,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/gs-4.png)
 
-1. Welcome to **Azure Portal**! You're now ready to start building your manufacturing GenAI solution using Azure OpenAI, Azure AI Search, and Azure Storage for intelligent data analysis and insights generation.
+1. Welcome to **Azure Portal**! You're now ready to start building your manufacturing GenAI solution using Microsoft Foundry, Azure AI Search, and Azure Storage for intelligent data analysis and insights generation.
 
 1. You can also open **VS Code** from the desktop to work with Python scripts and Streamlit applications for hands-on development.
 

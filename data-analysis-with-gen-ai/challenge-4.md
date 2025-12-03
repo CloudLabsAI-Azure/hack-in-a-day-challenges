@@ -2,17 +2,17 @@
 
 ## Introduction
 With data available and LLM deployed, Contoso wants to generate natural-language insights from machine logs.  
-In this challenge, you’ll use Azure OpenAI to summarize and interpret manufacturing data.
+In this challenge, you’ll use Microsoft Foundry (LLM capabilities) to summarize and interpret manufacturing data.
 
 ## Challenge Objectives
 - Load the CSV data from Azure Blob Storage.  
-- Send structured chunks of data to Azure OpenAI via prompt.  
+-- Send structured chunks of data to the Foundry LLM via prompt.  
 - Generate natural-language summaries and recommendations.
 
 ## Steps to Complete
-1. Open **Azure AI Studio** or **Azure OpenAI Playground**.  
+1. Open **Microsoft Foundry Studio** (or the Foundry project UI) and open your project `mfg-proj-<inject key="DeploymentID"></inject>`.
 
-2. Choose the deployed model `gpt-4.1-mini`.  
+2. Choose the deployed LLM model (for example `gpt-4.1-mini`) within the Foundry project.
 
 3. Prepare a prompt such as:  
    - You are an AI data analyst. Summarize key insights from the following manufacturing sensor data:
@@ -30,6 +30,6 @@ In this challenge, you’ll use Azure OpenAI to summarize and interpret manufact
 
 ## Additional Resources
 - [Prompt Engineering Guidance](https://learn.microsoft.com/azure/ai-services/openai/concepts/prompt-engineering)
-- [Azure AI Studio Playground](https://oai.azure.com/portal)
+- Microsoft Foundry documentation: https://learn.microsoft.com/azure/ai-foundry/
 
 Now, click **Next** to continue to **Challenge 04: Build a Summary Report and Dashboard**.
