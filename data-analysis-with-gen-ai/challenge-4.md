@@ -18,14 +18,10 @@ In this challenge, you’ll use Microsoft Foundry (LLM capabilities) to summariz
 2. Choose the deployed LLM model (for example `gpt-4.1-mini`) within the Foundry project.
 
 3. Prepare a prompt such as:  
-   - You are an AI data analyst. Summarize key insights from the following manufacturing sensor data:
-   - Provide an overview of machine performance, downtime patterns, and recommendations for improvement.
+   - Temprature of MACHINE_001
+   - All Running MACHINE.
 
-4. Run the prompt and observe the output summary.  
-
-5. Modify the prompt to ask specific questions, for example:  
-   - “Which machines showed highest temperature variance?”  
-   - “Summarize possible reasons for downtime.”  
+4. Run the prompt and observe the output summary.   
 
 ## Success Criteria
 

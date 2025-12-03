@@ -17,19 +17,21 @@ Azure OpenAI Service provides API access to models like gpt-4.1-mini, which can 
 2. Fill in the basics for the Foundry resource:
    - **Subscription:** Your active subscription.
    - **Resource Group:** ODL-demolab-<inject key="DeploymentID"></inject>.
-   - **Region:** <inject key="Region"></inject>.
    - **Name:** openai-mfg-<inject key="DeploymentID"></inject>.
+   - **Region:** <inject key="Region"></inject>.
    - **Default Project Name:** `mfg-proj-<inject key="DeploymentID"></inject>`.
 
 3. Click **Review + Create** → **Create** and wait for deployment to complete.
 
 4. After deployment, open the Microsoft Foundry resource and navigate to the project `mfg-proj-<inject key="DeploymentID"></inject>`.
 
-5. Deploy or enable the following model capabilities in the Foundry project (or equivalent model deployment area):
-   - **gpt-4.1-mini** — *Global Standard* tier with **20,000 TPM** capacity.
-   - **text-embedding-ada-002** — embedding model with **30,000 TPM** capacity (Requried for semantic search).
+5. From the Foundry resource **Overview** page click **Go to Foundry portal** 
 
-6. Note any endpoints, project identifiers, and keys provided by Foundry for later use.
+6. Deploy or enable the following model capabilities in the **models + endpoints** section in Foundry project (or equivalent model deployment area):
+   - **gpt-4.1-mini** — *Global Standard* tier with **20,000 TPM** capacity.
+   - **text-embedding-ada-002** — *Global Standard* with **30,000 TPM** capacity (Requried for semantic search).
+
+7. Note any endpoints, project identifiers, and keys provided by Foundry for later use.
 
 ## Success Criteria
 

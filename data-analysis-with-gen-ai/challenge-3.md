@@ -31,20 +31,28 @@ This index will serve as the contextual knowledge base that the model will later
    - **Endpoint URL**  
    - **Admin Key**
 
-5. In the left pane, select **Import data**.  
+5. In the left pane, select **Import data (new)**.  
 
-6. For **Data Source**, choose **Azure Blob Storage**.  
+6. Choose **Azure Blob Storage** as the Data Source.  
 
-7. Select the same Storage Account where you uploaded your manufacturing dataset (`machine_sensor_data.csv`).  
+7. When asked **What scenario are you targeting?**, choose **RAG** (Retrieval-Augmented Generation).  
 
-8. Name your data source: mfg-datasource-<inject key="DeploymentID"></inject>. 
+8. Configure your Azure Blob Storage connection:
+  - Select **Subscription** and the **Storage account** where you uploaded `datasets`.
+  - Choose the **Blob container** that contains the file.
+  - Set **Parsing mode** to **Delimited Text** and enable **First line contains header**.
 
-9. On the **Add cognitive skills (optional)** page, skip and click **Next**.  
+9. When prompted to **Vectorize your text**, configure vectorization for the dataset:
+  - **Column to vectorize:** `machine_id` (or `MachineID` depending on the detected field name).
+  - **Kind:** **Azure AI Foundry (preview)**.
+  - Select **Subscription** and choose your **Azure AI Foundry/Hub project** (for example `mfg-proj-<inject key="DeploymentID"></inject>`).
+  - **Model deployment:** `text-embedding-ada-002`.
+  - **Authentication type:** `API key` and provide the Foundry API key when prompted.
+  - Check the acknowledgement box to accept preview terms, then click **Next**.
 
-10. On **Create an index**, name it mfg-index-<inject key="DeploymentID"></inject>.  
-    - Confirm that fields such as `MachineID`, `Temperature`, `Downtime`, and `Timestamp` are detected.  
+10. Proceed through the remaining steps, review settings, and click **Create** to build the index and vector store.
 
-11. Complete the wizard and click **Submit**.  
+  - On the **Review and create** page, Azure will show a summary of the resources and object names that will be created. By default there will be an **Objects name prefix** or similar generated name. Review this prefix (it is used to name the index/vector objects) and click **Create**.
 
 12. Once the index builds successfully, test it:  
     - In the **Search Explorer**, enter a query to Get all RUNNING records for MACHINE_001:  
@@ -52,7 +60,7 @@ This index will serve as the contextual knowledge base that the model will later
       ```
       search=machine_id:"MACHINE_001"&$filter=status eq 'RUNNING'
       ```  
-    - Observe returned documents.
+    - Observe returned data (Json).
 
 ## Success Criteria
 
