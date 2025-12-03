@@ -3,11 +3,11 @@
 
 **Duration:** 6 hours  
   
-**Tags:** `Manufacturing`, `Generative AI`, `Data Analytics`, `Azure OpenAI`, `Industry 4.0`
+**Tags:** `Manufacturing`, `Generative AI`, `Data Analytics`, `Microsoft Foundry`, `Industry 4.0`
 
 ## Overview
 In this lab, participants will learn how to use **Generative AI** to analyze manufacturing operational data and automatically generate insights and recommendations.  
-You’ll ingest a synthetic manufacturing dataset, summarize trends, detect anomalies, and build a simple insights dashboard using Azure OpenAI Service and data-analysis tools.
+You’ll ingest a synthetic manufacturing dataset, summarize trends, detect anomalies, and build a simple insights dashboard using Microsoft Foundry (LLM capabilities) and data-analysis tools.
 
 The goal is to demonstrate how GenAI can turn raw machine and sensor logs into meaningful, human-readable narratives that accelerate decision-making on the factory floor.
 
@@ -32,14 +32,14 @@ Provide a streamlined 6-hour prototype environment where participants use genera
 - **Challenge 01: Create and Review the Sample Manufacturing Dataset**  
 Prepare the provided synthetic dataset, upload it to Azure Storage, and explore its structure. This challenge introduces the data you’ll analyze with GenAI.
 
-- **Challenge 02: Deploy Azure OpenAI Service**  
-Provision an Azure OpenAI resource and ensure access to the gpt-4.1-mini model for generative data summarization.
+- **Challenge 02: Deploy Microsoft Foundry**  
+Provision a Microsoft Foundry resource and configure a project with access to LLM capabilities (for example `gpt-4.1-mini`) for generative data summarization.
 
 - **Challenge 03: Create Azure AI Search Resource and Import Manufacturing Data:**
 In this challenge, you’ll create an **Azure AI Search** service and import your manufacturing dataset into an index.  
 
 - **Challenge 04: Analyze Data Using GenAI Prompts**  
-Use the Azure OpenAI playground or a notebook to prompt the model for key insights and pattern detection from the dataset.
+Use Microsoft Foundry Studio or a notebook to prompt the deployed LLM for key insights and pattern detection from the dataset.
 
 - **Challenge 05: Add a Chat-Style Interface for Insights**  
 Create a simple chat UI (Streamlit / web form) to interact with your data and ask questions such as “Which machine had the most downtime this week?”

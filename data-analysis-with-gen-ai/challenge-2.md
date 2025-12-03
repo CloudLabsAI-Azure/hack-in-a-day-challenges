@@ -10,22 +10,28 @@ Azure OpenAI Service provides API access to models like gpt-4.1-mini, which can 
 - Record the endpoint and API key for later use.
 
 ## Steps to Complete
-1. In the Azure Portal, select **Create a resource** → search for **Azure OpenAI**.  
-2. Click **Create**, then fill in the following:  
-   - **Subscription:** Your active subscription.  
-   - **Resource Group:** ODL-demolab-<inject key="DeploymentID"></inject>.  
-   - **Region:** <inject key="Region"></inject>. 
-   - **Name:** openai-mfg-<inject key="DeploymentID"></inject>.  
-   - **Pricing Tier:** *Standard S0*.  
-3. After deployment, navigate to the resource → select **Model Deployments**.  
-4. Deploy the following models:  
-   - **gpt-4.1-mini** (version Global Standard) with 20 K TPM.  
-   - *(Optional)* `text-embedding-ada-002` for semantic search use later.  
-5. Note the **Endpoint URL** and **API Key 1**.
+1. In the Azure Portal search for **Microsoft Foundry** and choose **Create a Foundry resource**.
+
+2. Fill in the basics for the Foundry resource:
+   - **Subscription:** Your active subscription.
+   - **Resource Group:** ODL-demolab-<inject key="DeploymentID"></inject>.
+   - **Region:** <inject key="Region"></inject>.
+   - **Name:** openai-mfg-<inject key="DeploymentID"></inject>.
+   - **Default Project Name:** `mfg-proj-<inject key="DeploymentID"></inject>`.
+
+3. Click **Review + Create** → **Create** and wait for deployment to complete.
+
+4. After deployment, open the Microsoft Foundry resource and navigate to the project `mfg-proj-<inject key="DeploymentID"></inject>`.
+
+5. Deploy or enable the following model capabilities in the Foundry project (or equivalent model deployment area):
+   - **gpt-4.1-mini** — *Global Standard* tier with **20,000 TPM** capacity.
+   - **text-embedding-ada-002** — embedding model with **30,000 TPM** capacity (Requried for semantic search).
+
+6. Note any endpoints, project identifiers, and keys provided by Foundry for later use.
 
 ## Success Criteria
-- Azure OpenAI resource deployed successfully.  
-- `gpt-4.1-mini` model available for prompt testing.  
+- Microsoft Foundry resource deployed successfully.  
+- `gpt-4.1-mini` and `text-embedding-ada-002` model available for prompt testing.  
 - Endpoint and API key ready for subsequent use.
 
 ## Additional Resources

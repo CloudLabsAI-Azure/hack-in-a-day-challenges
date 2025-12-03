@@ -6,26 +6,28 @@ In this challenge, you’ll build a simple chat-style interface using Streamlit 
 
 ## Challenge Objectives
 - Create a lightweight UI to accept user queries.  
-- Send queries to Azure OpenAI model and display responses.  
+    - Send queries to the Foundry LLM and display responses.  
 - Demonstrate interactive data exploration with GenAI.
 
 ## Steps to Complete
 1. Open **VS Code** or Azure Cloud Shell.  
-2. Create a Python file `app.py` and paste:  
+2. Create a Python file `app.py` and paste a lightweight example (pseudocode) that calls the Foundry/LLM endpoint via your preferred client library. Replace the `YOUR_API_KEY` and `YOUR_ENDPOINT` placeholders with values from your Foundry project:
+
    ```python
-   import openai, streamlit as st
-   openai.api_key = "YOUR_API_KEY"
-   endpoint = "YOUR_ENDPOINT"
+   # PSEUDOCODE: replace with Foundry SDK or REST call
+   import requests
+   import streamlit as st
+
+   API_KEY = "YOUR_API_KEY"
+   ENDPOINT = "YOUR_ENDPOINT"
+
    st.title("Manufacturing Data Chat Assistant")
    user_query = st.text_input("Ask about machine performance:")
    if user_query:
-       prompt = f"You are a manufacturing analyst. Answer briefly based on logs. Question: {user_query}"
-       response = openai.ChatCompletion.create(
-           engine="gpt-4.1-mini",
-           messages=[{"role":"user","content":prompt}],
-           temperature=0.5
-       )
-       st.write(response.choices[0].message["content"])
+       payload = {"model": "gpt-4.1-mini", "prompt": user_query, "temperature": 0.5}
+       headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
+       r = requests.post(ENDPOINT, json=payload, headers=headers)
+       st.write(r.json().get("output", "No response"))
    ```
 3. Run the app: streamlit run app.py and open the shown URL.
 
@@ -41,6 +43,6 @@ In this challenge, you’ll build a simple chat-style interface using Streamlit 
 
 - [Streamlit Documentation](https://docs.streamlit.io/)
 
-- [Azure OpenAI Python SDK](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/chatgpt)
+- Foundry/LLM docs and SDKs: https://learn.microsoft.com/azure/ai-foundry/
 
 Now, click **Next** to continue to **Clean Up**.
