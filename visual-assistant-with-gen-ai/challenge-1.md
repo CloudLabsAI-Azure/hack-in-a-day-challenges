@@ -6,6 +6,14 @@ Azure **Custom Vision** enables you to **train your own image classification and
 
 In this challenge, you’ll create the **Custom Vision resources** required for the Visual Assistant — including **Training** and **Prediction** endpoints — which will later be used to train and deploy defect detection models.
 
+## Accessing the Datasets
+
+Please copy the below link and paste in a new browser tab inside your LabVM to download the required datasets for the usecase and extract it.
+
+```
+https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/c3-datasets.zip
+```
+
 ## Challenge Objectives  
 - Create **Azure Custom Vision Training** and **Prediction** resources.  
 - Note the **Endpoint** and **API Keys** for later use.  
