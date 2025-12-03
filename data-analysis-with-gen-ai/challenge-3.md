@@ -20,7 +20,7 @@ This index will serve as the contextual knowledge base that the model will later
 
 2. Under **Basics**, fill in the following details:
    - **Subscription:** Select your active subscription.  
-   - **Resource Group:** Use ODL-demolab-<inject key="DeploymentID"></inject>.  
+  - **Resource Group:** Use challenge-rg-<inject key="DeploymentID"></inject>.  
    - **Service Name:** mfg-search-<inject key="DeploymentID"></inject>.
    - **Region:** <inject key="Region"></inject>. 
    - **Pricing Tier:** Choose *Basic (B)* or *Free (F)*. 

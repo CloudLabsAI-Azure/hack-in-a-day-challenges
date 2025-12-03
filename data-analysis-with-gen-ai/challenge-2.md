@@ -16,7 +16,7 @@ Azure OpenAI Service provides API access to models like gpt-4.1-mini, which can 
 
 2. Fill in the basics for the Foundry resource:
    - **Subscription:** Your active subscription.
-   - **Resource Group:** ODL-demolab-<inject key="DeploymentID"></inject>.
+   - **Resource Group:** challenge-rg-<inject key="DeploymentID"></inject>.
    - **Name:** openai-mfg-<inject key="DeploymentID"></inject>.
    - **Region:** <inject key="Region"></inject>.
    - **Default Project Name:** `mfg-proj-<inject key="DeploymentID"></inject>`.
