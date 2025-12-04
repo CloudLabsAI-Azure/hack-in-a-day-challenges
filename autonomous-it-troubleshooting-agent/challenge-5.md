@@ -1,301 +1,273 @@
-# Challenge 05: Add Teams Notifications with Adaptive Cards
+# Challenge 05: Test Your IT Helpdesk Copilot End-to-End
 
 ## Introduction
-For high-priority tickets or when IT manager approval is needed, you want to send rich, interactive notifications directly to Microsoft Teams. Copilot Studio supports sending adaptive cards to Teams channels, allowing IT managers to view ticket details and take action without leaving Teams.
+Now that you've built your IT Helpdesk Copilot with 3 topics, a reusable Freshdesk flow, and knowledge base integration, it's time to thoroughly test the complete solution. End-to-end testing ensures all components work together seamlessly—from user input to ticket creation in Freshdesk.
 
-In this challenge, you'll add Teams notifications with adaptive cards for high-priority tickets, all within Copilot Studio without external Power Automate flows.
+In this challenge, you will test all 3 topics comprehensively, verify Freshdesk flow integration, confirm tickets are created in Freshdesk, and validate the entire user experience.
 
 ## Challenge Objectives
-- Add conditional logic to detect high-priority tickets
-- Send adaptive cards to Teams channel for manager review
-- Include ticket details in interactive cards
-- Test notifications in Microsoft Teams
+- Test all 3 topics in Copilot Studio test pane
+- Verify Freshdesk flow integration for each topic
+- Confirm tickets are created in Freshdesk portal
+- Validate ticket details (subject, description, priority, requester email)
+- Test knowledge base responses for common queries
+- Identify and fix any conversation flow issues
 
 ## Steps to Complete
 
-### Step 1: Create Teams Channel for IT Notifications
+### Step 1: Prepare Your Test Environment
 
-1. Open **Microsoft Teams** (desktop or web):
+1. Open your **IT Support Copilot** in Copilot Studio.
 
+2. Ensure all 3 topics are **enabled**:
+   - Password Reset Support
+   - VPN Troubleshooting
+   - Slow Laptop Performance
+
+3. Verify your **Freshdesk** flow is **published** (check in Actions list).
+
+4. Open a second browser tab or window with **Freshdesk** portal:
    ```
-   https://teams.microsoft.com
-   ```
-
-2. Sign in with your credentials:
-   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
-   - **Password:** <inject key="AzureAdUserPassword"></inject>
-
-3. Create a new team or use an existing one:
-   - Click **Teams** in the left sidebar
-   - Click **Join or create a team**
-   - Click **Create team**
-   - Select **From scratch**
-   - Select **Private**
-   - Name: `IT Support Team - <inject key="DeploymentID"></inject>`
-   - Click **Create**
-
-4. Add a channel for tickets:
-   - In your team, click **...** next to the team name
-   - Select **Add channel**
-   - Name: `High Priority Tickets`
-   - Privacy: **Standard**
-   - Click **Add**
-
-5. Note the team and channel names for later use.
-
-### Step 2: Get Teams Channel ID
-
-1. In the **High Priority Tickets** channel, click **...** (More options) at the top.
-
-2. Select **Get link to channel**.
-
-3. Copy the link - it contains the team and channel IDs you'll need.
-
-4. The URL format is:
-   ```
-   https://teams.microsoft.com/l/channel/CHANNEL_ID/channel-name?groupId=TEAM_ID
+   https://your-account.freshdesk.com
    ```
 
-5. Save both IDs for later (or you can use the channel name in Copilot Studio).
+5. Sign in to Freshdesk to monitor ticket creation in real-time.
 
-### Step 3: Modify VPN Topic for High-Priority Detection
+6. Keep both windows visible for testing.
 
-1. Go back to **Copilot Studio** → **Topics** → **VPN Troubleshooting**.
+### Step 2: Test Password Reset Support Topic
 
-2. Find the "Create a record" action you added in Challenge 04.
+1. In Copilot Studio, open the **Test your copilot** pane.
 
-3. After the ticket creation action, click **+** to add a new node.
+2. Start a fresh conversation by clicking **Reset** (trash icon).
 
-4. Select **Add a condition**.
-
-5. Configure the condition to check priority:
-   - **Variable:** (Create or select a variable that holds priority, e.g., `TicketPriority`)
-   - **Operator:** `is equal to`
-   - **Value:** `High`
-
-### Step 4: Add Teams Message Action
-
-1. In the **Condition is met** branch (High priority), click **+**.
-
-2. Select **Call an action** → **Send a message to Teams**.
-
-3. If this action isn't available, you may need to:
-   - Click **Call an action** → **Create a flow**
-   - Select **Post a message to Teams** template
-   - Or use a simpler message node and manually configure later
-
-4. Configure the Teams message:
-   - **Team:** Select or enter `IT Support Team - <inject key="DeploymentID"></inject>`
-   - **Channel:** Select or enter `High Priority Tickets`
-   - **Message:** Use an adaptive card JSON (see Step 5)
-
-### Step 5: Create Adaptive Card JSON
-
-1. For the message content, use this adaptive card template:
-
-```json
-{
-  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-  "type": "AdaptiveCard",
-  "version": "1.4",
-  "body": [
-    {
-      "type": "TextBlock",
-      "text": "🚨 High Priority IT Ticket",
-      "weight": "Bolder",
-      "size": "Large",
-      "color": "Attention"
-    },
-    {
-      "type": "FactSet",
-      "facts": [
-        {
-          "title": "Ticket ID:",
-          "value": "${TicketID}"
-        },
-        {
-          "title": "Category:",
-          "value": "${IssueCategory}"
-        },
-        {
-          "title": "User:",
-          "value": "${UserEmail}"
-        },
-        {
-          "title": "Priority:",
-          "value": "High"
-        },
-        {
-          "title": "Status:",
-          "value": "New"
-        }
-      ]
-    },
-    {
-      "type": "TextBlock",
-      "text": "Description:",
-      "weight": "Bolder"
-    },
-    {
-      "type": "TextBlock",
-      "text": "${IssueDescription}",
-      "wrap": true
-    }
-  ],
-  "actions": [
-    {
-      "type": "Action.OpenUrl",
-      "title": "View in Power Apps",
-      "url": "https://make.powerapps.com"
-    }
-  ]
-}
-```
-
-2. Replace `${TicketID}`, `${IssueCategory}`, etc. with actual variables from your topic using the `{x:VariableName}` syntax in Copilot Studio.
-
-### Step 6: Alternative - Use Simple Teams Message
-
-If adaptive cards are complex, use a simpler approach:
-
-1. Instead of "Send adaptive card", use **Send a message** or **Post to Teams channel**.
-
-2. Compose a formatted message:
+3. Type a trigger phrase:
    ```
-   🚨 **High Priority IT Ticket Created**
-   
-   **Ticket ID:** {x:System.CreatedRecordId}
-   **Category:** VPN Issues
-   **User:** {x:UserEmail}
-   **Priority:** High
-   **Status:** New
-   
-   **Description:**
-   {x:IssueDescription}
-   
-   Please review and assign this ticket to an IT technician.
+   I forgot my password
    ```
 
-3. Select the Teams channel where this message should be posted.
+4. Follow the conversation flow:
+   - Answer questions about username
+   - Respond to reset instructions
+   - When asked if you need to escalate, say: **Yes, create a ticket**
 
-4. Click **Save**.
+5. Verify the copilot:
+   - Calls the Freshdesk flow
+   - Displays confirmation message
+   - Shows appropriate response
 
-### Step 7: Test High-Priority Ticket with Teams Notification
+6. **Switch to Freshdesk portal** → Go to **Tickets** section.
 
-1. Open the **Test your copilot** pane in Copilot Studio.
+7. Verify the new ticket:
+   - **Subject:** Should contain "Password Reset Request"
+   - **Description:** Should mention username
+   - **Priority:** Medium
+   - **Requester Email:** Should match your email
+   - **Status:** Open
 
-2. Start a new conversation.
+### Step 3: Test VPN Troubleshooting Topic
 
-3. Type: `VPN authentication keeps failing and I can't access any company resources`
+1. Reset the conversation in the test pane.
 
-4. Go through the troubleshooting steps.
+2. Type:
+   ```
+   VPN won't connect
+   ```
 
-5. When asked to create a ticket, say **Yes**.
+3. Follow the conversation:
+   - Provide error details
+   - Answer troubleshooting questions
+   - Request ticket creation
 
-6. Ensure the priority is set to **High** (you may need to adjust topic logic to automatically set VPN issues as High priority).
+4. Ensure the topic triggers correctly and provides relevant troubleshooting steps.
 
-7. Complete the ticket creation.
+5. When ticket is created, verify:
+   - Confirmation message is displayed
+   - Ticket appears in Freshdesk
 
-### Step 8: Verify Teams Notification
+6. In **Freshdesk**, check the new ticket:
+   - **Subject:** Should contain "VPN Connection Issue"
+   - **Description:** Should include error details
+   - **Priority:** Medium
+   - **Status:** Open
 
-1. Go to **Microsoft Teams** → **IT Support Team** → **High Priority Tickets** channel.
+### Step 4: Test Slow Laptop Performance Topic
 
-2. You should see a new message with the ticket details.
+1. Reset the test conversation.
 
-3. If using an adaptive card, verify all fields are populated correctly.
+2. Type:
+   ```
+   My computer is running really slow
+   ```
 
-4. If not, check the topic flow and variable mappings.
+3. Complete the conversation flow:
+   - Describe symptoms (freezing, slow boot, etc.)
+   - Follow diagnostic suggestions
+   - Escalate to ticket creation
 
-### Step 9: Add Teams Notification to Other High-Priority Scenarios
+4. Verify topic provides helpful diagnostic steps before escalation.
 
-1. Go to **Topics** → **Slow Laptop Performance**.
+5. Check ticket confirmation message in copilot.
 
-2. Find the section where you determine if disk space is critical (C drive is red).
+6. In **Freshdesk**, verify the ticket:
+   - **Subject:** Contains "Slow Laptop Performance"
+   - **Description:** Includes symptoms
+   - **Priority:** Medium
+   - **Status:** Open
 
-3. If this indicates high priority, add the same Teams notification logic:
-   - Condition: Priority is High
-   - Action: Send Teams message with ticket details
+### Step 5: Test Knowledge Base Integration
 
-4. Repeat for any other scenarios that warrant manager notification.
+Test if your copilot can answer questions directly from the **it-support.pdf** knowledge base without creating tickets.
 
-5. Click **Save** on each topic.
+1. Reset the conversation.
 
-### Step 10: Optional - Add Approval Buttons to Adaptive Card
+2. Ask a general IT question:
+   ```
+   How do I clear my browser cache?
+   ```
 
-If you want managers to approve/reject directly from Teams:
+3. Verify the copilot:
+   - Provides a direct answer from knowledge base
+   - Does NOT trigger a topic unnecessarily
+   - Offers helpful instructions
 
-1. Modify the adaptive card JSON to include action buttons:
+4. Try another knowledge base query:
+   ```
+   What are the system requirements for our VPN client?
+   ```
 
-```json
-"actions": [
-  {
-    "type": "Action.Submit",
-    "title": "Approve",
-    "style": "positive",
-    "data": {
-      "action": "approve",
-      "ticketId": "${TicketID}"
-    }
-  },
-  {
-    "type": "Action.Submit",
-    "title": "Reject",
-    "style": "destructive",
-    "data": {
-      "action": "reject",
-      "ticketId": "${TicketID}"
-    }
-  },
-  {
-    "type": "Action.OpenUrl",
-    "title": "View Ticket",
-    "url": "https://make.powerapps.com"
-  }
-]
-```
+5. Check if the response comes from the uploaded knowledge base.
 
-2. Note: Handling button clicks requires additional Power Automate logic or a webhook, which goes beyond pure Copilot Studio.
+6. If responses are generic, verify:
+   - Knowledge source is enabled in **Settings** → **Generative AI**
+   - **it-support.pdf** is uploaded and indexed
 
-3. For this challenge, displaying information is sufficient.
+### Step 6: Test Multiple Tickets in Sequence
 
-### Step 11: Test Multiple Scenarios
+1. Create 3 tickets in quick succession to test flow reliability:
+   - Password reset ticket
+   - VPN issue ticket
+   - Slow laptop ticket
 
-1. Create several high-priority tickets:
-   - VPN issue (High)
-   - Critical disk space (High)
-   - General password reset (Medium - should NOT notify Teams)
+2. Verify all 3 tickets appear in Freshdesk.
 
-2. Verify:
-   - High-priority tickets appear in Teams channel
-   - Medium/Low priority tickets do NOT spam the channel
-   - All ticket details are accurate
+3. Ensure no duplicate tickets are created.
 
-### Step 12: Configure Channel Notifications
+### Step 7: Test Edge Cases and Error Handling
 
-1. In Teams, in the **High Priority Tickets** channel, click **...** → **Channel notifications settings**.
+1. Test what happens if user provides incomplete information:
+   - Start password reset topic
+   - Skip username when asked
+   - See how copilot handles it
 
-2. Set notifications to:
-   - **All new posts**
-   - **Banner and feed**
+2. Test fallback behavior:
+   - Type something unrelated: `What's the weather today?`
+   - Verify copilot uses fallback topic appropriately
 
-3. This ensures IT managers get immediate alerts for high-priority tickets.
+3. Test error handling (if API fails):
+   - If possible, temporarily disconnect Freshdesk connection
+   - Try creating a ticket
+   - Verify copilot provides graceful error message
 
-4. Click **Save**.
+4. Reconnect Freshdesk connection after testing.
+
+### Step 8: Verify Ticket Details in Freshdesk
+
+1. In **Freshdesk**, go to **Tickets** → View all open tickets.
+
+2. For each test ticket, verify:
+   - All required fields are populated correctly
+   - No missing or null values
+   - Priority levels match topic configuration
+   - Description provides enough context for IT team
+
+3. Check if tickets are assigned to any agent or group (optional based on your Freshdesk setup).
+
+### Step 9: Test Conversation Flow Quality
+
+1. Evaluate each topic for conversation quality:
+   - Are questions clear and relevant?
+   - Are responses helpful and accurate?
+   - Is the tone appropriate for IT helpdesk?
+   - Are transitions smooth?
+
+2. If any topic feels generic or unhelpful:
+   - Go to **Topics** → Open the specific topic
+   - Edit message nodes to improve clarity
+   - Add more context or instructions
+   - Save and retest
+
+### Step 10: Document Test Results
+
+1. Create a simple test results log:
+
+   | Topic | Trigger Phrase | Ticket Created | Priority | Status |
+   |-------|----------------|----------------|----------|--------|
+   | Password Reset | I forgot my password | Yes | Medium | Pass |
+   | VPN Troubleshooting | VPN won't connect | Yes | Medium | Pass |
+   | Slow Laptop | Computer is slow | Yes | Medium | Pass |
+   | Knowledge Base | Clear browser cache | N/A | N/A | Pass |
+
+2. Note any issues encountered during testing.
+
+3. Document any required fixes or improvements.
+
+### Step 11: Fix Issues (If Any)
+
+If you encounter issues during testing:
+
+1. **Topic not triggering:**
+   - Go to **Topics** → Open the topic
+   - Add more trigger phrases
+   - Save and retest
+
+2. **Flow not being called:**
+   - Verify "Call an action" node is correctly configured
+   - Check flow is published
+   - Verify flow input mappings
+
+3. **Ticket not appearing in Freshdesk:**
+   - Check Freshdesk connection in Copilot Studio
+   - Verify API Key and Account URL are correct
+   - Test flow independently in Actions
+
+4. **Incorrect ticket details:**
+   - Review variable mappings in "Call an action" node
+   - Ensure variables are captured in topic conversation
+   - Update mappings and retest
+
+### Step 12: Final Verification
+
+1. Complete one final end-to-end test for each topic.
+
+2. Verify in Freshdesk:
+   - All tickets are created successfully
+   - Ticket details are accurate
+   - No errors in ticket creation
+
+3. Check copilot behavior:
+   - All topics trigger correctly
+   - Conversation flows are smooth
+   - Ticket confirmations are displayed
+
+4. Your copilot is now ready for deployment!
 
 ## Success Criteria
-✅ Teams channel created for IT notifications  
-✅ High-priority ticket detection logic added to topics  
-✅ Teams messages or adaptive cards sent for high-priority tickets  
-✅ Ticket details correctly displayed in Teams channel  
-✅ Medium/Low priority tickets do not trigger Teams notifications  
-✅ Test high-priority ticket successfully posted to Teams  
-✅ All notifications contain accurate ticket information  
+- All 3 topics tested successfully in Copilot Studio
+- Each topic correctly triggers from appropriate phrases
+- Freshdesk flow is called from each topic without errors
+- Tickets appear in Freshdesk portal with correct details
+- Confirmation messages are displayed to users
+- Knowledge base queries return accurate responses
+- Edge cases and error scenarios handled gracefully
+- Conversation flows are clear and helpful
+- Test results documented  
 
 ## Additional Resources
-- [Adaptive Cards overview](https://adaptivecards.io/)  
-- [Post messages to Teams from Copilot](https://learn.microsoft.com/microsoft-copilot-studio/publication-add-bot-to-microsoft-teams)  
-- [Conditional branching in topics](https://learn.microsoft.com/microsoft-copilot-studio/authoring-create-edit-topics)
+- [Test your copilot](https://learn.microsoft.com/microsoft-copilot-studio/authoring-test-bot)  
+- [Debug topic flows](https://learn.microsoft.com/microsoft-copilot-studio/authoring-create-edit-topics)  
+- [Freshdesk API troubleshooting](https://developers.freshdesk.com/api/)
 
 ---
 
-Now, click **Next** to continue to **Challenge 06: Deploy to Teams & Test End-to-End**.
+Now, click **Next** to continue to **Challenge 06: Publish Your Copilot to Microsoft Teams**.

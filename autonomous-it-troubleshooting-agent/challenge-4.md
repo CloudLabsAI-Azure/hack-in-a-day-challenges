@@ -1,244 +1,247 @@
-# Challenge 04: Connect Copilot Studio to Freshdesk
+# Challenge 04: Create Topics Using Generative AI
 
 ## Introduction
-Now that your Freshdesk account is ready, you'll connect Copilot Studio to Freshdesk using the Freshdesk connector. This integration allows your copilot to automatically create support tickets when users need assistance beyond self-service troubleshooting.
+Instead of manually building conversation flows from scratch, Microsoft Copilot Studio allows you to create topics using generative AI. Simply describe what you want the topic to do, and AI will generate the conversation flow, trigger phrases, and responses automatically. You'll then connect these topics to your Freshdesk flow for ticket escalation.
 
-In this challenge, you will add the Freshdesk connector to one topic, configure ticket creation with user inputs, and test the end-to-end flow within Copilot Studio.
+In this challenge, you will create 3 essential IT helpdesk topics using generative AI: Credential Reset Support, VPN Connectivity Support, and Hardware Support Assistant. Each topic will call your published Freshdesk flow when escalation is needed.
 
 ## Challenge Objectives
-- Add Freshdesk connector to Password Reset Support topic
-- Configure connection with API credentials
-- Collect Subject and Description from users
-- Create tickets in Freshdesk with appropriate priority
-- Display ticket confirmation to users
+- Use Copilot Studio's generative AI to create 3 topics
+- Connect each topic to your published Freshdesk flow
+- Map topic variables to flow inputs
+- Test topics with flow integration
 
 ## Steps to Complete
 
-### Step 1: Open Password Reset Support Topic
+### Step 1: Navigate to Topics Section
 
-1. In **Copilot Studio**, navigate to **Topics** in the left navigation.
+1. In your **IT Support Copilot**, click **Topics** in the left navigation pane.
 
-2. Click on **Password Reset Support** topic to open it.
+2. You'll see existing system topics (Conversation Start, Fallback, Error).
 
-3. Review the existing conversation flow created by generative AI.
+3. Click **+ Add** or **+ New topic** at the top.
 
-### Step 2: Add Escalation Question
+4. Select **Create from description with Copilot** (or similar option for AI-generated topics).
 
-1. Scroll to the end of the conversation flow.
+### Step 2: Create Topic 1 - Credential Reset Support
 
-2. Click **+** to add a node.
+1. In the topic creation dialog, enter the following:
 
-3. Select **Ask a question**.
+    - **Name:** `CredentialResetSupport`
+    - **Description:**
 
-4. Configure:
-   - **Message:** `Would you like me to create a support ticket for you?`
-   - **Identify:** Select **Boolean** (Yes/No)
-   - **Save response as:** `CreateTicket`
+    ```
+    Help users who need password reset assistance when they forget their password or their account becomes locked. Ask the user for their username and save it as a variable. Use generative answers to provide self-service reset instructions by referring to the uploaded knowledge sources whenever possible. After sharing the steps, ask the user whether they were able to reset their password successfully. If not, offer to create a support ticket. When creating the ticket, generate a subject line such as "Password Reset Assistance – <username>" and create a detailed description that includes the username and the reason they were unable to reset the password. Map these values to the Freshdesk Power Automate flow inputs for Subject and Description so the flow receives the correct variables. This topic should act as a guided password-reset helper that uses the knowledge base first, and escalates to ticket creation only when needed.
+    ```
 
-5. Click **Save**.
+2. Click **Create** or **Generate**.
 
-### Step 3: Add Condition for Ticket Creation
+3. Wait for the AI to generate the topic (15-30 seconds).
 
-1. Below the question, click **+** to add a node.
+4. Review the generated topic:
 
-2. Select **Add a condition**.
+   - **Trigger phrases:** Verify it includes phrases like:
+     - "I forgot my password"
+     - "Reset my password"
+     - "Account locked"
+     - "Can't log in"
+     - "Password reset"
 
-3. Configure the condition:
-   - **Variable:** Select `CreateTicket`
-   - **Operator:** `is equal to`
-   - **Value:** `true` (Yes)
+5. Review the conversation flow:
+   - Should ask for username and save as variable
+   - Should provide self-service reset instructions using knowledge base
+   - Should ask if issue is resolved
+   - Should offer escalation to ticket creation
 
-### Step 4: Collect Ticket Subject
+6. Click **Save** to keep this topic.
 
-1. In the **Condition is met** branch (when user says Yes), click **+**.
+### Step 3: Create Topic 2 - VPN Connectivity Support
 
-2. Select **Ask a question**.
+1. Click **+ Add** → **Create from description with Copilot**.
 
-3. Configure:
-   - **Message:** `Please provide a brief subject for your ticket`
-   - **Identify:** Select **User's entire response**
-   - **Save response as:** Create variable `Subject`
+2. Enter the following:
 
-4. Click **Save**.
+    - **Name:** `VPNConnectivitySupport`
+    - **Description:**
 
-### Step 5: Collect Ticket Description
+        ```
+        Assist users experiencing VPN or general internet connectivity issues. Ask the user what exact problem or error message they are seeing and save that response as a variable. Ask where the user is working from, such as home, office, or another location, and save that as another variable. Provide basic troubleshooting steps including checking internet connection, verifying Wi-Fi status, restarting the VPN client, checking login credentials, reconnecting to the network, and any other basic connectivity checks. After giving these steps, ask the user whether the issue is resolved. If the user says no, offer to create a support ticket. When creating the ticket, generate a subject line using the location variable, for example "Connectivity Issue – <location>," and generate a detailed description that includes the user's reported error message and the location information. Map these values to the Freshdesk Power Automate flow inputs for Subject and Description so the flow receives the correct variables. This topic should handle all VPN and internet issues but exclude hardware problems, as those are handled in another topic.
+        ```
 
-1. Below the Subject question, click **+**.
+3. Click **Create** or **Generate**.
 
-2. Select **Ask a question**.
+4. Review and customize:
 
-3. Configure:
-   - **Message:** `Please describe the issue in detail`
-   - **Identify:** Select **User's entire response**
-   - **Save response as:** Create variable `Description`
+   - **Trigger phrases:** Verify phrases like:
+     - "VPN not connecting"
+     - "VPN authentication failed"
+     - "Can't connect to VPN"
+     - "Internet not working"
+     - "Connectivity issues"
+     - "Network problems"
 
-4. Click **Save**.
+5. Review the conversation flow:
+   - Should ask about error message and save as variable
+   - Should ask about location (home/office) and save as variable
+   - Should provide troubleshooting steps
+   - Should ask if issue is resolved
+   - Should offer ticket creation with location in subject
 
-### Step 6: Add Freshdesk Connector Action
+6. Click **Save**.
 
-1. Below the Description question, click **+**.
+### Step 4: Create Topic 3 - Hardware Support Assistant
 
-2. Select **Call an action** → **Create a flow**.
+1. Click **+ Add** → **Create from description with Copilot**.
 
-   > **Note:** This opens the connector library where you can add Freshdesk.
+2. Enter the following:
 
-3. In the search box, type **Freshdesk**.
+    - **Name:** `HardwareSupportAssistant`
+    - **Description:**
 
-4. From the list, select **Freshdesk** connector.
+        ```
+        Create a hardware support topic that handles all common device issues, including laptops, mice, keyboards, monitors, printers, headphones, docking stations, network adapters, and any other device. Begin by asking the user which device they are having trouble with and save this selection as a variable, then ask them to describe the issue in their own words and save that as another variable. Provide troubleshooting steps based on the selected device: for laptops, include steps for slow performance, freezing, overheating, slow boot, high CPU or memory usage, updates, restart, disk cleanup, and malware checks; for printers, include steps for offline issues, paper jams, blank pages, print queue problems, restarting the spooler, reconnecting cables, reloading paper, and power cycling; for mice and keyboards, include USB or Bluetooth checks, battery checks, driver checks, cleaning stuck keys, and re-pairing; for monitors, include steps for no display, flickering, resolution problems, cable or port checks, brightness and power checks; for headphones and microphones, include audio settings, mic testing, Bluetooth reconnecting, resetting, and driver updates; and for docking stations or network adapters, include cable checks, restarting the dock, firmware checks, and adapter resets. For any "other device," provide general troubleshooting such as checking cables, restarting the device, and verifying drivers. After the troubleshooting steps, ask the user whether the issue is resolved. If not, offer to create a support ticket. When creating the ticket, generate a subject like "Hardware Issue – <device>" and a description that includes the user's reported issue details and device type, and map these values to the Freshdesk Power Automate flow as the Subject and Description inputs.
+        ```
 
-5. Select the action **Create a ticket**.
+3. Click **Create** or **Generate**.
 
-### Step 7: Configure Freshdesk Connection
+4. Review and customize:
+   - **Trigger phrases:** Verify phrases like:
+     - "My laptop is slow"
+     - "Printer not working"
+     - "Mouse not responding"
+     - "Keyboard issue"
+     - "Monitor problems"
+     - "Hardware issue"
+     - "Device not working"
 
-1. In the **Create a ticket** configuration pane, you'll be prompted to create a new connection.
+5. Review the conversation flow:
+   - Should ask which device and save as variable
+   - Should ask to describe the issue and save as variable
+   - Should provide device-specific troubleshooting steps
+   - Should ask if issue is resolved
+   - Should offer ticket creation with device type in subject
 
-2. Click **Create new** (or **+ New connection**).
+6. Click **Save**.
 
-3. Provide the following connection details:
-   - **Connection name:** `helpdesk`
-   - **Account URL:** Paste the Account URL you copied in Challenge 03 (e.g., `https://your-account.freshdesk.com`)
-   - **Email or API key:** Paste the **API Key** you copied in Challenge 03
-   - **Password:** Since you're using an API Key, the password field is not important, but it's required. Enter any random value (e.g., `X`)
+### Step 5: Review All Topics
 
-4. Click **Create** to establish the connection.
+1. In the **Topics** list, verify you now have 3 custom topics:
+   - CredentialResetSupport
+   - VPNConnectivitySupport
+   - HardwareSupportAssistant
 
-5. Wait for the connection to be validated and established.
+2. Ensure all topics are **enabled** (toggle should be on).
 
-### Step 8: Map Variables to Freshdesk Fields
+### Step 6: Connect Topics to Freshdesk Flow
 
-1. Once the connection is created, you'll see the **Create a ticket** action with input fields.
+Now connect each topic to your published **Freshdesk** flow. The AI-generated topics should already have the conversation flow with variables captured. You'll add the action to call the Freshdesk flow when escalation is needed.
 
-2. Configure the **Subject** parameter:
-   - Click in the **Subject** field
-   - Click **Insert dynamic content** (lightning bolt icon or **{x}** button)
-   - Select **Subject** variable from the list
+#### For CredentialResetSupport Topic:
 
-3. Configure the **Description** parameter:
-   - Click in the **Description** field
-   - Click **Insert dynamic content**
-   - Select **Description** variable
+1. Open **CredentialResetSupport** topic in the editor.
 
-4. Configure the **Email** parameter:
-   - Click **Enter custom value**
-   - Type: `<inject key="AzureAdUserEmail"></inject>` (or use `System.User.Email` if available)
+2. Locate the point in the conversation where the user indicates the issue is NOT resolved (after troubleshooting).
 
-5. Configure the **Priority** parameter:
-   - From the dropdown, select **Medium** (or use a variable if you're determining priority dynamically)
+3. At that escalation point, add a new node:
+   - Click **+** → **Call an action** → Select **Freshdesk** flow.
 
-6. Configure the **Status** parameter:
-   - From the dropdown, select **Open**
+4. Map the flow inputs using the variables captured in the topic:
+   - **Subject:** `"Password Reset Assistance - " & Topic.Username`
+   - **Description:** `"User unable to reset password. Username: " & Topic.Username & ". Additional details: " & Topic.IssueReason`
 
-7. Leave other optional fields blank for now.
+   > **Note:** Variable names may differ based on AI generation. Use the actual variable names from your generated topic (e.g., `Topic.username`, `Topic.UserName`, etc.).
 
-8. Click **Save** on the action.
+5. After the flow action, add a **Message** node:
+   - Type: `"I've created a support ticket for your password reset request. Our IT team will contact you shortly."`
 
-### Step 9: Display Success Message
+6. Save the topic.
 
-1. Below the Freshdesk action, click **+**.
+#### For VPNConnectivitySupport Topic:
 
-2. Select **Send a message**.
+1. Open **VPNConnectivitySupport** topic.
 
-3. Configure the message:
-   ```
-   ✅ Great! I've created a support ticket for you in Freshdesk.
-   
-   Your ticket has been submitted successfully and our IT team will contact you shortly.
-   ```
+2. Locate the point where the user indicates the issue is NOT resolved (after troubleshooting).
 
-4. Click **Save**.
+3. Add **Call an action** node at the escalation point → Select **Freshdesk** flow.
 
-### Step 10: Add Message for "No" Response
+4. Map inputs using the variables captured in the topic:
+   - **Subject:** `"Connectivity Issue - " & Topic.Location`
+   - **Description:** `"User experiencing connectivity problems. Location: " & Topic.Location & ". Error/Issue: " & Topic.ErrorMessage`
 
-1. Go back to the **Else** branch of the condition (when user says No to creating a ticket).
+   > **Note:** Use the actual variable names from your generated topic for location and error message.
 
-2. Click **+** → **Send a message**.
+5. Add a **Message** node:
+   - Type: `"I've created a support ticket for your connectivity issue. Our IT team will contact you shortly."`
 
-3. Type:
-   ```
-   No problem! Feel free to reach out if you need help later. You can also contact IT support directly at support@company.com
-   ```
+6. Save the topic.
 
-4. Click **Save** on the topic.
+#### For HardwareSupportAssistant Topic:
 
-### Step 11: Test the Password Reset Topic with Freshdesk
+1. Open **HardwareSupportAssistant** topic.
 
-1. Click **Save** to save all changes to the topic.
+2. Locate the point where the user indicates the issue is NOT resolved (after troubleshooting).
 
-2. Open the **Test your copilot** pane on the right side.
+3. Add **Call an action** node → Select **Freshdesk** flow.
 
-3. Type: `I want to create a ticket` and press Enter.
+4. Map inputs using the variables captured in the topic:
+   - **Subject:** `"Hardware Issue - " & Topic.Device`
+   - **Description:** `"User experiencing hardware problems. Device: " & Topic.Device & ". Issue description: " & Topic.IssueDescription`
 
-4. The copilot should respond and trigger the Password Reset Support topic.
+   > **Note:** Use the actual variable names from your generated topic for device type and issue description.
 
-5. When asked if you want to create a support ticket, respond: **Yes**
+5. Add a **Message** node:
+   - Type: `"I've created a support ticket for your hardware issue. Our IT team will contact you shortly."`
 
-6. When asked for the subject, type:
-   ```
-   Password Reset Request
-   ```
+6. Save the topic.
 
-7. When asked for the description, type:
-   ```
-   I forgot my password and need assistance resetting it. I've tried the self-service portal but encountered errors.
-   ```
+### Step 7: Test Topics with Flow Integration
 
-8. Wait for the confirmation message indicating the ticket was created successfully.
+1. Open the **Test your copilot** pane.
 
-### Step 12: Verify Ticket in Freshdesk
+2. Test **CredentialResetSupport** topic:
+   - Type: "I forgot my password"
+   - Provide username when asked
+   - Review the self-service instructions
+   - Indicate issue is not resolved
+   - Verify ticket creation confirmation message
 
-1. Open a new tab and navigate to your **Freshdesk portal**:
-   ```
-   https://your-account.freshdesk.com
-   ```
+3. Test **VPNConnectivitySupport** topic:
+   - Type: "VPN won't connect"
+   - Describe the error message
+   - Provide location (home/office)
+   - Follow troubleshooting steps
+   - Indicate issue is not resolved
+   - Verify ticket is created with location in subject
 
-2. Sign in if prompted.
+4. Test **HardwareSupportAssistant** topic:
+   - Type: "My laptop is slow" or "Printer not working"
+   - Select device type when asked
+   - Describe the issue
+   - Follow troubleshooting steps
+   - Indicate issue is not resolved
+   - Verify ticket is created with device type in subject
 
-3. Click on **Tickets** in the left navigation.
-
-4. You should see a new ticket with:
-   - **Subject:** Password Reset Request
-   - **Description:** The description you provided
-   - **Priority:** Medium
-   - **Status:** Open
-   - **Requester:** Your email address
-
-5. Click on the ticket to view full details.
-
-6. Verify all information is correctly populated.
-
-### Step 13: Test Again with Different Inputs
-
-1. Go back to Copilot Studio's test pane.
-
-2. Click **Restart** to start a fresh conversation.
-
-3. Type: `I forgot my password`
-
-4. Go through the topic flow.
-
-5. When creating a ticket, provide different details:
-   - **Subject:** `Account Locked Out`
-   - **Description:** `My account is locked after multiple failed login attempts`
-
-6. Verify the ticket is created.
-
-7. Check Freshdesk again to see the second ticket appears.
+5. For each test, ensure:
+   - Topic triggers correctly
+   - Variables are captured properly
+   - Troubleshooting steps are provided
+   - Flow is called with proper inputs when escalated
+   - Confirmation message is displayed
 
 ## Success Criteria
-✅ Freshdesk connector successfully added to Password Reset Support topic  
-✅ Connection established using API Key and Account URL  
-✅ Subject and Description variables collected from users  
-✅ Freshdesk "Create a ticket" action configured with dynamic variables  
-✅ Ticket priority and status set appropriately  
-✅ Test tickets created successfully in Copilot Studio  
-✅ Tickets visible in Freshdesk portal with correct information  
-✅ All ticket fields populated accurately  
+- Created 3 topics using generative AI (CredentialResetSupport, VPNConnectivitySupport, HardwareSupportAssistant)
+- All topics have relevant trigger phrases configured
+- Topics capture user input in variables (username, location, device, error messages, etc.)
+- Connected each topic to your Freshdesk flow via "Call an action"
+- Mapped flow inputs (Subject and Description) correctly using topic variables
+- Test pane successfully creates tickets through topics with dynamic subject lines
+- Confirmation messages are displayed to users  
 
 ## Additional Resources
-- [Freshdesk connector in Power Platform](https://learn.microsoft.com/connectors/freshdesk/)  
-- [Use connectors in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/advanced-flow)  
-- [Freshdesk API documentation](https://developers.freshdesk.com/api/)
+- [Create topics with Copilot](https://learn.microsoft.com/microsoft-copilot-studio/authoring-create-edit-topics)  
+- [Use generative AI for topic creation](https://learn.microsoft.com/microsoft-copilot-studio/nlu-authoring)  
+- [Call flows from topics](https://learn.microsoft.com/microsoft-copilot-studio/authoring-call-action)
 
 ---
 
-Now, click **Next** to continue to **Challenge 05: Add Freshdesk Connector to Remaining Topics**.
+Now, click **Next** to continue to **Challenge 05: Test Your IT Helpdesk Copilot End-to-End**.
