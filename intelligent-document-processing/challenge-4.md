@@ -7,11 +7,13 @@ Azure Blob Storage provides a cost-effective, scalable, and durable location to 
 In this challenge, you will create a container in Azure Storage and upload the extracted invoice data.
 
 ## Challenge Objectives
+
 - Create a Blob container for storing extracted data.  
 - Upload JSON output files from Document Intelligence Studio.  
 - Confirm successful upload and private access configuration.
 
 ## Steps to Complete
+
 1. Create a Storage Account for this lab:
 
    - In the Azure Portal click **Create a resource** → **Storage** → **Storage account**.  
@@ -28,13 +30,19 @@ In this challenge, you will create a container in Azure Storage and upload the e
    - Save the configuration changes. Note: Enabling anonymous access allows anyone with the blob URL to read blobs — only use this when necessary for demos and ensure you remove public access after the lab.
 
 3. Open the **Storage Account** created in your environment.  
+
 3. Select **Containers** from the left-hand menu.  
+
 4. Click **+ Container** and configure:
    - **Name:** invoices-output-<inject key="DeploymentID"></inject>
    - **Public Access Level:** *(allow anonymous access)*  
+
 5. Return to **Document Intelligence Studio** and click **Download Results** to save the invoice JSON output.  
+
 6. In your container, click **Upload** → select the downloaded JSON file → click **Upload**.  
+
 7. Refresh the container list to verify the uploaded file appears.
+
 8. Copy the Storage Account name and access key for later use:
 
    - In the Storage Account blade, select **Access keys** under **Security + networking**.

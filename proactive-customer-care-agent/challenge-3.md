@@ -1,9 +1,9 @@
-# Challenge 03: Create Freshdesk Ticket Flow
+# Challenge 03: Create Customer Service Flow
 
 ## Introduction
-Now that your Freshdesk account is ready, you'll create a reusable flow in Copilot Studio that connects to Freshdesk. This flow will be called by your topics to create support tickets automatically when users need assistance beyond self-service troubleshooting.
+Now that your Freshdesk account is ready, you'll create a reusable flow in Copilot Studio that connects to Freshdesk. This flow will be called by your topics to create support tickets automatically when customers need assistance beyond self-service troubleshooting.
 
-In this challenge, you will create an agent flow with the Freshdesk connector that automates ticket creation based on user input, streamlining the process for handling support requests.
+In this challenge, you will create an agent flow with the Freshdesk connector that automates ticket creation based on customer input, streamlining the process for handling service requests.
 
 ## Challenge Objectives
 - Create an agent flow in Copilot Studio
@@ -17,7 +17,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 ### Step 1: Navigate to Actions in Copilot Studio
 
-1. In **Copilot Studio**, with your **IT Support Copilot** open, click **Actions** (or **Flows**) in the left navigation.
+1. In **Copilot Studio**, with your **Customer Care Copilot** open, click **Actions** (or **Flows**) in the left navigation.
 
 2. Click **+ Add an action** at the top.
 
@@ -68,7 +68,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 2. Click **Create new** (or **+ New connection**).
 
 3. Provide the following connection details:
-   - **Connection name:** `helpdesk`
+   - **Connection name:** `customerservice`
    - **Account URL:** Paste the Account URL you copied in Challenge 02 (e.g., `https://your-account.freshdesk.com`)
    - **Email or API key:** Paste the **API Key** you copied in Challenge 02
    - **Password:** Since you're using an API Key, enter any random value (e.g., `X`) as it's a required field
@@ -125,7 +125,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 2. When prompted for a name, enter:
    ```
-   Freshdesk
+   Customer Service Request
    ```
 
 3. Wait for the flow to save successfully.
@@ -138,7 +138,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 3. Provide test values for the input parameters:
    - **Subject:** `Test Ticket - Flow Validation`
-   - **Description:** `Testing the Freshdesk flow before connecting to topics`
+   - **Description:** `Testing the customer service flow before connecting to topics`
 
 4. Click **Run flow**.
 
@@ -161,7 +161,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 4. You should see a new ticket with:
    - **Subject:** Test Ticket - Flow Validation
-   - **Description:** Testing the Freshdesk flow before connecting to topics
+   - **Description:** Testing the customer service flow before connecting to topics
    - **Priority:** Medium
    - **Status:** Open
    - **Requester:** Your email address
@@ -170,7 +170,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 6. Verify all information is correctly populated.
 
-7. If the ticket appears correctly, your flow is working!
+7. If the ticket appears correctly, your flow is working.
 
 ### Step 11: Publish the Flow
 
@@ -189,7 +189,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 1. In Copilot Studio, click **Actions** in the left navigation.
 
 2. You should see your flow listed:
-   - **Name:** Freshdesk
+   - **Name:** Customer Service Request
    - **Status:** Published
 
 3. This flow is now ready to be called from any topic.
@@ -200,14 +200,14 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 - Freshdesk connector added and connection established
 - Freshdesk "Create a ticket" action configured with dynamic inputs and preset values
 - Return value added to send status back to agent
-- Flow saved with the name "Freshdesk"
+- Flow saved with the name "Customer Service Request"
 - Flow tested independently with manual test inputs
 - Test ticket created successfully in Freshdesk portal
-- Flow published and available in Actions list  
+- Flow published and available in Actions list
 
 ## Additional Resources
-- [Create flows in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/advanced-flow)  
-- [Freshdesk connector documentation](https://learn.microsoft.com/connectors/freshdesk/)  
+- [Create flows in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/advanced-flow)
+- [Freshdesk connector documentation](https://learn.microsoft.com/connectors/freshdesk/)
 - [Flow inputs and outputs](https://learn.microsoft.com/microsoft-copilot-studio/authoring-variables)
 
 ---

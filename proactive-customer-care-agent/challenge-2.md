@@ -151,13 +151,13 @@ In this challenge, you will activate your Freshdesk free trial, configure your a
 - API Key retrieved and saved securely
 - Account URL copied and documented
 - Freshdesk dashboard explored and understood
-- Test ticket created manually (optional) to understand ticket structure  
+- Test ticket created manually (optional) to understand ticket structure
 
 ## Additional Resources
-- [Freshdesk Documentation](https://support.freshdesk.com/)  
-- [Freshdesk API Overview](https://developers.freshdesk.com/api/)  
+- [Freshdesk Documentation](https://support.freshdesk.com/)
+- [Freshdesk API Overview](https://developers.freshdesk.com/api/)
 - [Freshdesk Getting Started Guide](https://freshdesk.com/resources/getting-started)
 
 ---
 
-Now, click **Next** to continue to **Challenge 03: Create Freshdesk Ticket Flow**.
+Now, click **Next** to continue to **Challenge 03: Create Customer Service Flow**.

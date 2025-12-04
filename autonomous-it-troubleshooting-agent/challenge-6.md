@@ -1,22 +1,22 @@
-# Challenge 06: Deploy to Teams & Test End-to-End
+# Challenge 06: Publish Your Copilot to Microsoft Teams
 
 ## Introduction
-The final step is to deploy your IT Helpdesk Copilot to Microsoft Teams, making it accessible to all employees in your organization. Teams provides the perfect channel for IT support, with chat and notifications all integrated within Copilot Studio.
+The final step is to deploy your IT Helpdesk Copilot to Microsoft Teams, making it accessible to employees in your organization. Teams is the perfect channel for IT support—employees can get help directly where they already collaborate and communicate.
 
-In this challenge, you will publish your copilot, add it to Teams, and perform comprehensive end-to-end testing of the entire automation workflow—all built entirely within Copilot Studio.
+In this challenge, you will publish your copilot, add it to Teams, test the complete user experience, and share it with your organization.
 
 ## Challenge Objectives
-- Publish the copilot from Copilot Studio
-- Deploy the copilot to Microsoft Teams
-- Test complete user journey from Teams
-- Verify Teams notifications for high-priority tickets
-- Validate ticket management in Dataverse/Power Apps
+- Publish your copilot from Copilot Studio
+- Add the copilot to Microsoft Teams
+- Test the complete user journey in Teams
+- Configure availability and permissions
+- Share the copilot with your organization
 
 ## Steps to Complete
 
 ### Step 1: Publish Your Copilot
 
-1. In **Copilot Studio**, ensure you're in your **IT Helpdesk Copilot - <inject key="DeploymentID"></inject>**.
+1. In **Copilot Studio**, ensure you're in your **IT Support Copilot**.
 
 2. Click **Publish** in the top-right corner (or in the left navigation).
 
@@ -63,7 +63,7 @@ In this challenge, you will publish your copilot, add it to Teams, and perform c
 
 3. In Teams, click **Apps** in the left sidebar.
 
-4. Search for **IT Helpdesk Copilot** (or the name you gave it).
+4. Search for **IT Support Copilot**.
 
 5. Click on your copilot in the search results.
 
@@ -71,7 +71,7 @@ In this challenge, you will publish your copilot, add it to Teams, and perform c
 
 7. The copilot chat will open automatically.
 
-### Step 4: Test Password Reset Flow in Teams
+### Step 4: Test Your Copilot in Teams
 
 1. In the copilot chat in Teams, type:
    ```
@@ -80,151 +80,164 @@ In this challenge, you will publish your copilot, add it to Teams, and perform c
 
 2. Follow the conversation:
    - Answer any questions the copilot asks
-   - Review the self-service reset instructions
-   - When asked if you want to create a ticket, respond: **Yes**
+   - Review the instructions provided
+   - When prompted to create a ticket, respond: **Yes**
 
-3. Provide additional information if prompted:
-   - Email address
-   - Problem description
+3. Verify you receive a helpful confirmation message that the support ticket was created.
 
-4. Verify you receive a ticket ID and confirmation message.
-
-5. Open **Microsoft Lists** in a browser:
-   - Navigate to **IT Helpdesk Tickets - <inject key="DeploymentID"></inject>**
-   - Find the newly created ticket
-   - Verify all details are correct
-
-### Step 5: Test VPN Issues with High Priority
-
-1. Start a new conversation in Teams with the copilot.
-
-2. Type:
+4. Try another test:
    ```
-   VPN authentication keeps failing and I can't work
+   VPN won't connect
    ```
 
-3. Go through the troubleshooting steps.
+5. Verify the VPN topic triggers correctly and creates a ticket.
 
-4. When asked about creating a ticket, say **Yes**.
-
-5. The ticket should be created with **High** priority.
-
-6. Check the **IT Support Team** → **High Priority Tickets** channel in Teams:
-   - You should see a new notification with the VPN ticket details
-   - Verify all information is displayed correctly
-
-7. Go to **Power Apps** → **Tables** → **IT Helpdesk Tickets**:
-   - Find the VPN ticket
-   - Verify the status is **New**
-   - Note the Ticket ID matches the Teams notification
-
-### Step 6: Test Slow Laptop Scenario
-
-1. Start another conversation in the copilot.
-
-2. Type:
+6. Test knowledge base query:
    ```
-   My laptop is running really slow and programs keep freezing
+   How do I clear browser cache?
    ```
 
-3. Answer the diagnostic questions:
-   - Symptoms, boot time, disk space, etc.
+7. Verify response comes from your knowledge base.
 
-4. Follow the suggested troubleshooting steps.
+### Step 5: Configure Copilot Availability
 
-5. Create a ticket if the issue persists.
+1. Go back to **Copilot Studio** → **Channels** → **Microsoft Teams**.
 
-6. Verify ticket creation with **Medium** priority.
+2. Review availability settings:
+   - **Show to everyone in my org** - Recommended for company-wide access
+   - **Show to users or groups** - For limited rollout
+   - **Hide from others** - For testing only
 
-7. Check Lists - the ticket should be auto-assigned (no approval needed for medium priority).
+3. Select **Show to everyone in my org** (or appropriate option).
 
-### Step 7: Test Printer Support
+4. Click **Save**.
 
-1. Start a new conversation.
+### Step 6: Share Copilot with Your Team
 
-2. Type:
+1. In **Teams**, with your copilot open, click **Share** (if available).
+
+2. Alternatively, copy the copilot link from Copilot Studio:
+   - Go to **Channels** → **Microsoft Teams**
+   - Click **Availability options**
+   - Copy the **Share link**
+
+3. Share this link via:
+   - Email to your team
+   - Teams channel announcement
+   - Company intranet
+
+4. Example message to share:
    ```
-   The office printer keeps showing as offline
+   New IT Helpdesk Copilot Available!
+
+   Get instant IT support directly in Teams. Our new copilot can help with:
+   - Password resets
+   - VPN troubleshooting
+   - Slow laptop performance
+   - And more!
+
+   Click here to start chatting: [Copilot Link]
    ```
 
-3. Go through printer troubleshooting:
-   - Check printer status
-   - Restart print spooler
-   - Clear print queue
+### Step 7: Pin Copilot in Teams (Optional)
 
-4. If unresolved, create a ticket.
+1. In **Teams**, right-click on your copilot in the left sidebar.
 
-5. Verify ticket creation in Power Apps with appropriate category.
+2. Select **Pin** to keep it easily accessible.
 
-### Step 8: Test Knowledge Base Responses
+3. You can also add it to a specific team or channel:
+   - Go to a team → Click **+** to add a tab
+   - Search for your copilot
+   - Add it as a tab for easy access
 
-1. Test questions that should be answered from the knowledge base without ticket creation:
+### Step 8: Test from Another User's Perspective (Optional)
 
-   - "What are the password requirements?"
-   - "What's the VPN server address?"
-   - "How do I check Task Manager?"
-   - "How do I add a printer?"
+If you have access to a test account:
 
-2. Verify the copilot provides helpful responses from the it-support.pdf knowledge base.
+1. Sign in to Teams with a different user account.
 
-3. Ensure responses are accurate and contextual.
+2. Search for your IT Helpdesk Copilot in Teams Apps.
 
-### Step 9: Review Analytics and Insights
+3. Add it and test:
+   - Trigger a topic
+   - Create a test ticket
+   - Verify it appears in Freshdesk
 
-1. Go back to **Copilot Studio**.
+4. This validates the end-user experience.
 
-2. Click **Analytics** in the left navigation.
+### Step 9: Configure Bot Settings (Optional)
 
-3. Review the dashboard:
-   - **Total sessions** - Number of conversations
-   - **Engagement rate** - User interaction level
-   - **Resolution rate** - How often issues were resolved
-   - **Escalation rate** - How often tickets were created
+1. In **Copilot Studio**, go to **Settings** → **General**.
 
-4. Click **Topics** to see which topics are used most frequently.
+2. Review and configure:
+   - **Icon:** Upload a custom icon for your copilot
+   - **Color:** Set brand colors
+   - **Description:** Add helpful description for users
 
-5. Identify any topics with high abandonment rates that may need improvement.
+3. Update **Conversation Start** topic:
+   - Go to **Topics** → **Conversation Start**
+   - Customize welcome message:
+     ```
+     Welcome to IT Helpdesk Support!
 
-### Step 10: Share Copilot with Team Members
+     I can help you with:
+     - Password resets
+     - VPN connection issues
+     - Slow laptop performance
 
-1. In Teams, go to your copilot chat.
+     Or ask me any IT question!
 
-2. Click the **...** (More options) at the top.
+     What can I help you with today?
+     ```
 
-3. Select **Share**.
+4. Save and republish.
 
-4. Choose how to share:
-   - **Copy link** - Share the link with colleagues
-   - **Add to a team** - Make it available in a specific Teams channel
-   - **Add to a chat** - Add to group conversations
+### Step 10: Monitor Usage and Performance
 
-5. Share with at least one colleague for testing (if available).
+1. In **Copilot Studio**, go to **Analytics** in the left navigation.
 
-### Step 11: Review Dataverse Tickets
+2. Review metrics:
+   - **Total sessions:** How many conversations
+   - **Engagement rate:** User interaction level
+   - **Resolution rate:** Topics successfully completed
+   - **Escalation rate:** How often tickets are created
 
-1. Go to **Power Apps** → **Tables** → **IT Helpdesk Tickets**.
+3. Identify improvement opportunities:
+   - Topics with low resolution
+   - Common fallback triggers
+   - Frequently asked questions
 
-2. Review all tickets created during testing.
+4. Iterate and improve based on analytics.
 
-3. Verify ticket data quality:
-   - All required fields populated
-   - Correct categories assigned
-   - Appropriate priorities set
-   - User emails captured
+### Step 11: Review All Tickets in Freshdesk
 
-4. This data can now be used for reporting and analytics.
+1. Open **Freshdesk portal** in a browser.
+
+2. Go to **Tickets** → View all open tickets.
+
+3. Review tickets created from Teams:
+   - Verify all tickets from your testing appear
+   - Check ticket details are accurate
+   - Confirm all tickets have Medium priority and Open status
+
+4. Test ticket management in Freshdesk:
+   - Assign a ticket to yourself
+   - Add a note or comment
+   - Update ticket status to "In Progress"
+
+5. This validates the complete integration flow.
 
 ## Success Criteria
-✅ Copilot successfully published from Copilot Studio  
-✅ Copilot deployed and accessible in Microsoft Teams  
-✅ All 4 topic scenarios tested end-to-end in Teams  
-✅ Tickets created successfully with correct information in Dataverse  
-✅ High-priority tickets trigger Teams channel notifications  
-✅ Teams notifications display accurate ticket details  
-✅ Knowledge base provides accurate responses without escalation  
-✅ Analytics show conversation metrics and topic usage  
-✅ Copilot shared with team members for broader access  
-✅ All functionality built entirely within Copilot Studio (no external Power Automate flows)  
+- Copilot successfully published from Copilot Studio
+- Copilot deployed and accessible in Microsoft Teams
+- All 3 topics tested successfully in Teams
+- Tickets created through Teams appear in Freshdesk
+- Confirmation messages are displayed to users in Teams
+- Knowledge base queries work correctly in Teams
+- Copilot availability configured appropriately
+- Share link created and distributed
+- Analytics reviewed for usage insights
+- Complete solution working end-to-end  
 
 ## Additional Resources
 - [Publish your copilot](https://learn.microsoft.com/microsoft-copilot-studio/publication-fundamentals-publish-channels)  
@@ -234,33 +247,34 @@ In this challenge, you will publish your copilot, add it to Teams, and perform c
 
 ---
 
-## 🎉 Congratulations!
+## Congratulations!
 
 You have successfully built an **AI-powered IT Helpdesk Automation Copilot** using Microsoft Copilot Studio and Power Automate!
 
 ### What You Accomplished:
-✅ Created an intelligent conversational assistant with knowledge base  
-✅ Built 4 automated support topics using generative AI  
-✅ Integrated Dataverse for ticket management—all within Copilot Studio  
-✅ Implemented Teams notifications for high-priority issues  
-✅ Deployed to Microsoft Teams for organization-wide access  
-✅ Reduced manual helpdesk workload through automation  
-✅ Built the entire solution without external Power Automate flows  
+- Created an intelligent IT Helpdesk Copilot with knowledge base
+- Built 3 automated support topics using generative AI
+- Created reusable Freshdesk integration flow in Copilot Studio
+- Integrated Freshdesk API for ticket management
+- Deployed to Microsoft Teams for organization-wide access
+- Reduced manual helpdesk workload through automation
+- Built the entire solution with Copilot Studio agent flows (no external Power Automate)  
 
 ### Next Steps:
 - Monitor analytics to identify improvement opportunities
-- Add more topics for additional support scenarios
-- Enhance Teams notifications with more interactive elements
-- Add Power BI dashboard for ticket trend analysis
-- Customize responses based on user feedback
-- Expand knowledge base with more documentation
-- Consider adding approval workflows using Power Automate if needed
+- Add more topics for additional support scenarios (printer issues, software requests, etc.)
+- Customize Freshdesk ticket fields (add custom fields for department, location, etc.)
+- Add priority-based routing in Freshdesk
+- Create automation rules in Freshdesk for ticket assignment
+- Expand knowledge base with more IT documentation
+- Configure SLA policies in Freshdesk for response times
 
 ### Business Impact:
-- ⚡ **Faster Response Times** - 24/7 instant support
-- 📉 **Reduced Ticket Volume** - Self-service resolution
-- 😊 **Improved User Satisfaction** - Quick issue resolution
-- 💰 **Cost Savings** - Automated repetitive tasks
-- 📊 **Better Insights** - Data-driven support improvements
+- **Faster Response Times** - 24/7 instant IT support
+- **Reduced Ticket Volume** - Self-service resolution via knowledge base
+- **Improved User Satisfaction** - Quick issue resolution in Teams
+- **Better Ticket Management** - Centralized helpdesk in Freshdesk
+- **Cost Savings** - Reduced manual support workload and automated repetitive tasks
+- **Better Insights** - Data-driven support improvements
 
 Great work on completing this challenge! 🚀
