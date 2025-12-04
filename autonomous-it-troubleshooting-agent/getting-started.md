@@ -30,7 +30,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 1. In the JumpVM, click on **Microsoft Edge** browser which is created on desktop.
 
-   ![](./media/gs-up1.png)
+   ![](./media/zgr-gt.png)
 
 1. Open a new browser tab and navigate to the Power Apps portal using the link below:
 

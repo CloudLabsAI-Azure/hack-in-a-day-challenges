@@ -1,6 +1,7 @@
 # Challenge 01: Create Azure AI Document Intelligence Resource
 
 ## Introduction
+
 Contoso Finance, a leading enterprise, processes hundreds of invoices daily. Manual data entry from PDFs and scans causes frequent errors and delays.  
 To solve this, Contoso plans to implement an **AI-based invoice automation solution** using **Azure AI Document Intelligence**.  
 This service extracts structured data such as invoice numbers, totals, vendor names, and dates, saving hours of repetitive manual effort.
@@ -16,23 +17,30 @@ Please download and extract the datasets required for this challenge here - [Dat
    ```
 
 ## Challenge Objectives
+
 - Create a **Document Intelligence** resource in the Azure Portal.  
 - Configure correct region, resource group, and pricing tier.  
 - Retrieve the **Endpoint** and **API Key** for later use.  
 
 ## Steps to Complete
+
 1. In the Azure Portal, select **Create a resource**.  
-2. Search for **Document Intelligence** and click **Create**.  
+
+2. Search for **Document Intelligence** and click **Create**. 
+
 3. Under **Basics**, provide:
    - **Subscription:** Use the available subscription.  
    - **Resource Group:** Select ODL-demolab-<inject key="DeploymentID"></inject>.  
    - **Region:** <inject key="Region"></inject>.  
    - **Name:** `finance-doc-intl-<inject key="DeploymentID"></inject>.  
    - **Pricing Tier:** Choose *Free (F0)* or *Standard (S0)*.  
+
 4. Click **Review + Create** → **Create**.  
+
 5. After deployment succeeds, open the resource.  
 
 ## Success Criteria
+
 - Azure AI Document Intelligence resource deployed successfully.  
 - Endpoint and API Key recorded for future use.  
 
