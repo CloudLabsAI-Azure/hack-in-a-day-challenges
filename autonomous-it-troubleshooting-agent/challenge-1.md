@@ -11,6 +11,14 @@ In this challenge, you will create an AI-powered IT Helpdesk Copilot using Micro
 - Configure basic copilot settings and identity
 - Upload knowledge base (it-support.pdf) for intelligent responses
 
+## Accessing the Datasets
+
+Please download and extract the datasets required for this challenge here - [Datasets](https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/c1-datasets.zip)
+
+   ```
+   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/c1-datasets.zip/
+   ```
+
 ## Steps to Complete
 
 ### Step 1: Sign in to Microsoft Copilot Studio
