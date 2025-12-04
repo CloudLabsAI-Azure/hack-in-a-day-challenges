@@ -1,13 +1,13 @@
 # Challenge 04: Create Topics Using Generative AI
 
 ## Introduction
-Instead of manually building conversation flows from scratch, Microsoft Copilot Studio allows you to create topics using generative AI. Simply describe what you want the topic to do, and AI will generate the conversation flow, trigger phrases, and responses automatically. You'll then connect these topics to your Customer Service Request flow for ticket escalation.
+Instead of manually building conversation flows from scratch, Microsoft Copilot Studio allows you to create topics using generative AI. Simply describe what you want the topic to do, and AI will generate the conversation flow, trigger phrases, and responses automatically. You'll then connect these topics to your CustomerServiceFlow for ticket escalation.
 
-In this challenge, you will create 4 essential customer care topics using generative AI: Order Tracking Assistance, Product Return Processing, Delivery Delay Management, and Service Quality Complaint Handling. Each topic will call your published Customer Service Request flow when escalation is needed.
+In this challenge, you will create 4 essential customer care topics using generative AI: Order Tracking Assistance, Product Return Processing, Delivery Delay Management, and Service Quality Complaint Handling. Each topic will call your published CustomerServiceFlow when escalation is needed.
 
 ## Challenge Objectives
 - Use Copilot Studio's generative AI to create 4 topics
-- Connect each topic to your published Customer Service Request flow
+- Connect each topic to your published CustomerServiceFlow
 - Map topic variables to flow inputs
 - Test topics with flow integration
 
@@ -31,7 +31,7 @@ In this challenge, you will create 4 essential customer care topics using genera
     - **Description:**
 
     ```
-    Help customers track their orders and provide delivery status updates. Ask the customer for their order number and save it as a variable. Use generative answers to retrieve order status information from the uploaded knowledge sources whenever possible. Provide estimated delivery dates, current shipping status, and tracking links. After sharing the tracking information, ask the customer whether they need additional assistance. If the customer reports an issue with tracking or needs human support, offer to create a support ticket. When creating the ticket, generate a subject line such as "Order Tracking Request - <order number>" and create a detailed description that includes the order number and any specific concerns raised by the customer. Map these values to the Customer Service Request flow inputs for Subject and Description so the flow receives the correct variables. This topic should act as a self-service order tracking helper that uses the knowledge base first and escalates to ticket creation only when needed.
+    Help customers track their orders and provide delivery status updates. Ask the customer for their order number and save it as a variable. Use generative answers to retrieve order status information from the uploaded knowledge sources whenever possible. Provide estimated delivery dates, current shipping status, and tracking links. After sharing the tracking information, ask the customer whether they need additional assistance. If the customer reports an issue with tracking or needs human support, offer to create a support ticket. When creating the ticket, generate a subject line such as "Order Tracking Request - <order number>" and create a detailed description that includes the order number and any specific concerns raised by the customer. Map these values to the CustomerServiceFlow inputs for Subject and Description so the flow receives the correct variables. This topic should act as a self-service order tracking helper that uses the knowledge base first and escalates to ticket creation only when needed.
     ```
 
 2. Click **Create** or **Generate**.
@@ -65,7 +65,7 @@ In this challenge, you will create 4 essential customer care topics using genera
     - **Description:**
 
         ```
-        Assist customers who want to return or exchange products. Ask the customer for their order number and save it as a variable, then ask them to describe the reason for the return and save that as another variable. Use generative answers to provide return policy information, return windows, refund timelines, and return shipping instructions by referring to the uploaded knowledge sources. Provide step-by-step guidance for initiating returns through the customer portal or by mail. After sharing the return process, ask the customer whether they understand the steps or need help proceeding. If the customer requests assistance with processing the return or has questions about eligibility, offer to create a support ticket. When creating the ticket, generate a subject line using the order number, for example "Product Return Request - <order number>," and generate a detailed description that includes the order number and the reason for return provided by the customer. Map these values to the Customer Service Request flow inputs for Subject and Description so the flow receives the correct variables. This topic should handle all return and exchange requests but escalate to human agents when customer needs assistance with processing.
+        Assist customers who want to return or exchange products. Ask the customer for their order number and save it as a variable, then ask them to describe the reason for the return and save that as another variable. Use generative answers to provide return policy information, return windows, refund timelines, and return shipping instructions by referring to the uploaded knowledge sources. Provide step-by-step guidance for initiating returns through the customer portal or by mail. After sharing the return process, ask the customer whether they understand the steps or need help proceeding. If the customer requests assistance with processing the return or has questions about eligibility, offer to create a support ticket. When creating the ticket, generate a subject line using the order number, for example "Product Return Request - <order number>," and generate a detailed description that includes the order number and the reason for return provided by the customer. Map these values to the CustomerServiceFlow inputs for Subject and Description so the flow receives the correct variables. This topic should handle all return and exchange requests but escalate to human agents when customer needs assistance with processing.
         ```
 
 3. Click **Create** or **Generate**.
@@ -98,7 +98,7 @@ In this challenge, you will create 4 essential customer care topics using genera
     - **Description:**
 
         ```
-        Help customers who are experiencing delayed deliveries or missed delivery windows. Ask the customer for their order number and save it as a variable, then ask them to describe the delivery issue in their own words and save that as another variable. Use generative answers to provide information about common delivery delays, carrier issues, weather impacts, and estimated resolution times by referring to the uploaded knowledge sources. Provide troubleshooting steps such as checking tracking status, verifying delivery address, contacting the carrier, or scheduling redelivery. After providing assistance, ask the customer whether the issue is resolved or if they need further help. If the customer indicates the delay is unacceptable or requests compensation, offer to create a support ticket for priority handling. When creating the ticket, generate a subject line such as "Delivery Delay - <order number>" and create a detailed description that includes the order number, delivery issue details, and customer concerns. Map these values to the Customer Service Request flow inputs for Subject and Description so the flow receives the correct variables. This topic should provide self-service solutions for delivery issues but escalate to human agents when customers need priority assistance or compensation.
+        Help customers who are experiencing delayed deliveries or missed delivery windows. Ask the customer for their order number and save it as a variable, then ask them to describe the delivery issue in their own words and save that as another variable. Use generative answers to provide information about common delivery delays, carrier issues, weather impacts, and estimated resolution times by referring to the uploaded knowledge sources. Provide troubleshooting steps such as checking tracking status, verifying delivery address, contacting the carrier, or scheduling redelivery. After providing assistance, ask the customer whether the issue is resolved or if they need further help. If the customer indicates the delay is unacceptable or requests compensation, offer to create a support ticket for priority handling. When creating the ticket, generate a subject line such as "Delivery Delay - <order number>" and create a detailed description that includes the order number, delivery issue details, and customer concerns. Map these values to the CustomerServiceFlow inputs for Subject and Description so the flow receives the correct variables. This topic should provide self-service solutions for delivery issues but escalate to human agents when customers need priority assistance or compensation.
         ```
 
 3. Click **Create** or **Generate**.
@@ -130,7 +130,7 @@ In this challenge, you will create 4 essential customer care topics using genera
     - **Description:**
 
         ```
-        Handle customer complaints about service quality, product defects, poor customer service experiences, or other issues. Begin by asking the customer to describe their complaint or concern in detail and save this as a variable. Ask if the complaint is related to a specific order, and if yes, ask for the order number and save it as another variable. Use generative answers to acknowledge the complaint empathetically and provide relevant company policies, quality standards, or resolution processes from the uploaded knowledge sources. Offer immediate solutions such as replacement, refund, discount codes, or service credits when appropriate based on knowledge base guidance. After presenting potential solutions, ask the customer whether they are satisfied with the proposed resolution. If the customer is not satisfied or requests to escalate the complaint to management, offer to create a priority support ticket. When creating the ticket, generate a subject line such as "Service Quality Complaint - <order number if provided, otherwise Customer Concern>" and create a detailed description that includes all complaint details, order information if applicable, and resolution attempts already made. Map these values to the Customer Service Request flow inputs for Subject and Description so the flow receives the correct variables. This topic should handle complaints professionally with empathy while offering immediate solutions, and escalate to human agents only when the customer is not satisfied with automated resolution options.
+        Handle customer complaints about service quality, product defects, poor customer service experiences, or other issues. Begin by asking the customer to describe their complaint or concern in detail and save this as a variable. Ask if the complaint is related to a specific order, and if yes, ask for the order number and save it as another variable. Use generative answers to acknowledge the complaint empathetically and provide relevant company policies, quality standards, or resolution processes from the uploaded knowledge sources. Offer immediate solutions such as replacement, refund, discount codes, or service credits when appropriate based on knowledge base guidance. After presenting potential solutions, ask the customer whether they are satisfied with the proposed resolution. If the customer is not satisfied or requests to escalate the complaint to management, offer to create a priority support ticket. When creating the ticket, generate a subject line such as "Service Quality Complaint - <order number if provided, otherwise Customer Concern>" and create a detailed description that includes all complaint details, order information if applicable, and resolution attempts already made. Map these values to the CustomerServiceFlow inputs for Subject and Description so the flow receives the correct variables. This topic should handle complaints professionally with empathy while offering immediate solutions, and escalate to human agents only when the customer is not satisfied with automated resolution options.
         ```
 
 3. Click **Create** or **Generate**.
@@ -163,9 +163,9 @@ In this challenge, you will create 4 essential customer care topics using genera
 
 2. Ensure all topics are **enabled** (toggle should be on).
 
-### Step 7: Connect Topics to Customer Service Request Flow
+### Step 7: Connect Topics to CustomerServiceFlow
 
-Now connect each topic to your published **Customer Service Request** flow. The AI-generated topics should already have the conversation flow with variables captured. You'll add the action to call the Customer Service Request flow when escalation is needed.
+Now connect each topic to your published **CustomerServiceFlow**. The AI-generated topics should already have the conversation flow with variables captured. You'll add the action to call the CustomerServiceFlow when escalation is needed.
 
 #### For OrderTrackingAssistance Topic:
 
@@ -174,7 +174,7 @@ Now connect each topic to your published **Customer Service Request** flow. The 
 2. Locate the point in the conversation where the customer indicates they need assistance (after providing tracking information).
 
 3. At that escalation point, add a new node:
-   - Click **+** → **Call an action** → Select **Customer Service Request** flow.
+   - Click **+** → **Call an action** → Select **CustomerServiceFlow** flow.
 
 4. Map the flow inputs using the variables captured in the topic:
    - **Subject:** `"Order Tracking Request - " & Topic.OrderNumber`
@@ -193,30 +193,11 @@ Now connect each topic to your published **Customer Service Request** flow. The 
 
 2. Locate the point where the customer requests assistance with processing the return.
 
-3. Add **Call an action** node at the escalation point → Select **Customer Service Request** flow.
+3. Add **Call an action** node at the escalation point → Select **CustomerServiceFlow**.
 
 4. Map inputs using the variables captured in the topic:
    - **Subject:** `"Product Return Request - " & Topic.OrderNumber`
    - **Description:** `"Customer requesting return assistance. Order Number: " & Topic.OrderNumber & ". Return Reason: " & Topic.ReturnReason`
-
-   > **Note:** Use the actual variable names from your generated topic.
-
-5. Add a **Message** node:
-   - Type: `"I've created a support ticket for your return request. Our returns team will contact you shortly to assist with processing."`
-
-6. Save the topic.
-
-#### For DeliveryDelayManagement Topic:
-
-1. Open **DeliveryDelayManagement** topic.
-
-2. Locate the point where the customer indicates the issue is not resolved or requests priority handling.
-
-3. Add **Call an action** node → Select **Customer Service Request** flow.
-
-4. Map inputs using the variables captured in the topic:
-   - **Subject:** `"Delivery Delay - " & Topic.OrderNumber`
-   - **Description:** `"Customer experiencing delivery delay. Order Number: " & Topic.OrderNumber & ". Issue Details: " & Topic.DeliveryIssue`
 
    > **Note:** Use the actual variable names from your generated topic.
 
