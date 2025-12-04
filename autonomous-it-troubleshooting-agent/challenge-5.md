@@ -1,234 +1,301 @@
-# Challenge 05: Connect Topics to Flows
+# Challenge 05: Add Teams Notifications with Adaptive Cards
 
 ## Introduction
-Now that you have created the topics and Power Automate flows, it's time to connect them together. Each topic will call the **Create IT Helpdesk Ticket** flow when escalation is needed, making the flow reusable across all support scenarios.
+For high-priority tickets or when IT manager approval is needed, you want to send rich, interactive notifications directly to Microsoft Teams. Copilot Studio supports sending adaptive cards to Teams channels, allowing IT managers to view ticket details and take action without leaving Teams.
 
-In this challenge, you will integrate the ticket creation flow into all 4 topics, configure the flow inputs, and test the end-to-end automation.
+In this challenge, you'll add Teams notifications with adaptive cards for high-priority tickets, all within Copilot Studio without external Power Automate flows.
 
 ## Challenge Objectives
-- Add the ticket creation flow as an action in each topic
-- Configure flow inputs dynamically from conversation variables
-- Test escalation workflow from copilot to helpdesk
-- Verify tickets are created with correct information
+- Add conditional logic to detect high-priority tickets
+- Send adaptive cards to Teams channel for manager review
+- Include ticket details in interactive cards
+- Test notifications in Microsoft Teams
 
 ## Steps to Complete
 
-### Step 1: Open Password Reset Support Topic
+### Step 1: Create Teams Channel for IT Notifications
 
-1. In **Copilot Studio**, navigate to **Topics** in the left navigation.
+1. Open **Microsoft Teams** (desktop or web):
 
-2. Click on **Password Reset Support** topic to open it.
-
-3. Review the conversation flow diagram.
-
-### Step 2: Add Escalation Option
-
-1. Scroll to the end of the topic's conversation flow.
-
-2. Click **+** to add a new node.
-
-3. Select **Ask a question**.
-
-4. Configure the question:
-   - **Message:** Type `Would you like me to create a support ticket for you?`
-   - **Identify:** Select **Boolean** (Yes/No)
-   - **Save response as:** Create a variable named `CreateTicket`
-
-### Step 3: Add Condition for Ticket Creation
-
-1. Below the question node, click **+** to add a node.
-
-2. Select **Add a condition**.
-
-3. Configure the condition:
-   - **Select a variable:** Choose `CreateTicket`
-   - **Condition:** `is equal to`
-   - **Value:** `True`
-
-### Step 4: Call the Power Automate Flow
-
-1. In the **All other conditions** branch (when user says Yes), click **+** to add an action.
-
-2. Select **Call an action** → **Create a flow**.
-
-3. Wait for Power Automate to open.
-
-4. In the list, find **Create IT Helpdesk Ticket** flow.
-
-5. Click on the flow name to select it.
-
-6. You'll see the flow inputs that need to be configured.
-
-### Step 5: Configure Flow Inputs
-
-1. Map the flow inputs to conversation variables:
-
-   **IssueCategory:**
-   - Click in the field
-   - Type: `Password Reset` (or select from a variable if you collected it earlier)
-
-   **UserEmail:**
-   - Click in the field
-   - Select **System.User.Email** from the variable picker (if available)
-   - Or add a question earlier in the topic to collect user email and use that variable
-
-   **IssueDescription:**
-   - Click in the field
-   - You can create a variable earlier in the topic that captures the user's problem description
-   - For now, type a default like: `User requested password reset assistance`
-   - Or concatenate multiple variables if you collected detailed information
-
-   **Priority:**
-   - Click in the field
-   - Type: `Medium` (or use a variable if you're determining priority dynamically)
-
-2. The flow action should now have all 4 inputs configured.
-
-### Step 6: Display Ticket Confirmation
-
-1. Below the flow action, click **+** to add a node.
-
-2. Select **Send a message**.
-
-3. Configure the message:
    ```
-   Great! I've created a support ticket for you.
-   
-   Ticket ID: {x:TicketID}
-   Status: {x:TicketStatus}
-   
-   An IT technician will contact you shortly via email.
+   https://teams.microsoft.com
    ```
 
-4. Note: `{x:TicketID}` and `{x:TicketStatus}` are the outputs from your Power Automate flow.
+2. Sign in with your credentials:
+   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
+   - **Password:** <inject key="AzureAdUserPassword"></inject>
 
-5. Click **Save** to save the topic.
+3. Create a new team or use an existing one:
+   - Click **Teams** in the left sidebar
+   - Click **Join or create a team**
+   - Click **Create team**
+   - Select **From scratch**
+   - Select **Private**
+   - Name: `IT Support Team - <inject key="DeploymentID"></inject>`
+   - Click **Create**
 
-### Step 7: Add Flow to VPN Troubleshooting Topic
+4. Add a channel for tickets:
+   - In your team, click **...** next to the team name
+   - Select **Add channel**
+   - Name: `High Priority Tickets`
+   - Privacy: **Standard**
+   - Click **Add**
 
-1. Go back to **Topics** and open **VPN Troubleshooting**.
+5. Note the team and channel names for later use.
 
-2. Repeat steps 2-6 above:
-   - Add "Would you like me to create a support ticket?" question
-   - Add condition
-   - Call **Create IT Helpdesk Ticket** flow
-   - Configure inputs:
-     - IssueCategory: `VPN Issues`
-     - UserEmail: User's email variable
-     - IssueDescription: VPN problem description
-     - Priority: `Medium` or `High` depending on severity
-   - Display confirmation message
+### Step 2: Get Teams Channel ID
 
-3. Click **Save**.
+1. In the **High Priority Tickets** channel, click **...** (More options) at the top.
 
-### Step 8: Add Flow to Slow Laptop Performance Topic
+2. Select **Get link to channel**.
 
-1. Open **Slow Laptop Performance** topic.
+3. Copy the link - it contains the team and channel IDs you'll need.
 
-2. Add the same escalation workflow:
-   - "Create support ticket?" question
-   - Condition check
-   - Call **Create IT Helpdesk Ticket** flow with:
-     - IssueCategory: `Slow Laptop`
-     - UserEmail: User's email
-     - IssueDescription: Performance issue details
-     - Priority: Determined based on symptoms (e.g., disk space critical = High)
-   - Confirmation message
+4. The URL format is:
+   ```
+   https://teams.microsoft.com/l/channel/CHANNEL_ID/channel-name?groupId=TEAM_ID
+   ```
 
-3. Click **Save**.
+5. Save both IDs for later (or you can use the channel name in Copilot Studio).
 
-### Step 9: Add Flow to Printer Support Topic
+### Step 3: Modify VPN Topic for High-Priority Detection
 
-1. Open **Printer Support** topic.
+1. Go back to **Copilot Studio** → **Topics** → **VPN Troubleshooting**.
 
-2. Add the escalation workflow:
-   - "Create support ticket?" question
-   - Condition check
-   - Call **Create IT Helpdesk Ticket** flow with:
-     - IssueCategory: `Printer Issues`
-     - UserEmail: User's email
-     - IssueDescription: Printer problem details
-     - Priority: `Low` or `Medium`
-   - Confirmation message
+2. Find the "Create a record" action you added in Challenge 04.
 
-3. Click **Save**.
+3. After the ticket creation action, click **+** to add a new node.
 
-### Step 10: Test End-to-End Flow
+4. Select **Add a condition**.
 
-1. Open the **Test your copilot** pane.
+5. Configure the condition to check priority:
+   - **Variable:** (Create or select a variable that holds priority, e.g., `TicketPriority`)
+   - **Operator:** `is equal to`
+   - **Value:** `High`
 
-2. Test each topic's escalation:
+### Step 4: Add Teams Message Action
 
-   **Test 1 - Password Reset:**
-   - Type: "I forgot my password"
-   - Follow the conversation
-   - When asked about creating a ticket, respond: "Yes"
-   - Verify you receive a ticket ID in the response
+1. In the **Condition is met** branch (High priority), click **+**.
 
-   **Test 2 - VPN Issues:**
-   - Type: "VPN won't connect"
-   - Go through troubleshooting
-   - Say: "Yes, create a ticket"
-   - Verify ticket creation confirmation
+2. Select **Call an action** → **Send a message to Teams**.
 
-   **Test 3 - Slow Laptop:**
-   - Type: "My computer is really slow"
-   - Answer diagnostic questions
-   - Escalate to ticket
-   - Confirm ticket created
+3. If this action isn't available, you may need to:
+   - Click **Call an action** → **Create a flow**
+   - Select **Post a message to Teams** template
+   - Or use a simpler message node and manually configure later
 
-   **Test 4 - Printer:**
-   - Type: "Printer is offline"
-   - Try troubleshooting steps
-   - Create ticket
-   - Verify success message
+4. Configure the Teams message:
+   - **Team:** Select or enter `IT Support Team - <inject key="DeploymentID"></inject>`
+   - **Channel:** Select or enter `High Priority Tickets`
+   - **Message:** Use an adaptive card JSON (see Step 5)
 
-### Step 11: Verify Tickets in Microsoft Lists
+### Step 5: Create Adaptive Card JSON
 
-1. Open **Microsoft Lists** and go to **IT Helpdesk Tickets - <inject key="DeploymentID"></inject>**.
+1. For the message content, use this adaptive card template:
 
-2. You should see 4 new tickets corresponding to your tests.
+```json
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.4",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "🚨 High Priority IT Ticket",
+      "weight": "Bolder",
+      "size": "Large",
+      "color": "Attention"
+    },
+    {
+      "type": "FactSet",
+      "facts": [
+        {
+          "title": "Ticket ID:",
+          "value": "${TicketID}"
+        },
+        {
+          "title": "Category:",
+          "value": "${IssueCategory}"
+        },
+        {
+          "title": "User:",
+          "value": "${UserEmail}"
+        },
+        {
+          "title": "Priority:",
+          "value": "High"
+        },
+        {
+          "title": "Status:",
+          "value": "New"
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "Description:",
+      "weight": "Bolder"
+    },
+    {
+      "type": "TextBlock",
+      "text": "${IssueDescription}",
+      "wrap": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "View in Power Apps",
+      "url": "https://make.powerapps.com"
+    }
+  ]
+}
+```
 
-3. Verify each ticket has:
-   - Correct Issue Category
-   - Your email address
-   - Appropriate Issue Description
-   - Correct Priority
-   - Status: New
+2. Replace `${TicketID}`, `${IssueCategory}`, etc. with actual variables from your topic using the `{x:VariableName}` syntax in Copilot Studio.
 
-4. If tickets appear correctly, your integration is working!
+### Step 6: Alternative - Use Simple Teams Message
 
-### Step 12: Test High-Priority Approval Flow
+If adaptive cards are complex, use a simpler approach:
 
-1. In the test pane, start a new conversation.
+1. Instead of "Send adaptive card", use **Send a message** or **Post to Teams channel**.
 
-2. Type: "My C drive is completely full and I can't work"
+2. Compose a formatted message:
+   ```
+   🚨 **High Priority IT Ticket Created**
+   
+   **Ticket ID:** {x:System.CreatedRecordId}
+   **Category:** VPN Issues
+   **User:** {x:UserEmail}
+   **Priority:** High
+   **Status:** New
+   
+   **Description:**
+   {x:IssueDescription}
+   
+   Please review and assign this ticket to an IT technician.
+   ```
 
-3. When creating the ticket, ensure you set **Priority** to **High** (you may need to modify the topic to ask about urgency).
+3. Select the Teams channel where this message should be posted.
 
-4. Check **Microsoft Teams** → **Approvals**:
-   - You should see an approval request for the high-priority ticket
+4. Click **Save**.
 
-5. Approve or reject the ticket.
+### Step 7: Test High-Priority Ticket with Teams Notification
 
-6. Verify the ticket status updates in Lists.
+1. Open the **Test your copilot** pane in Copilot Studio.
 
-7. Check your email for the approval notification.
+2. Start a new conversation.
+
+3. Type: `VPN authentication keeps failing and I can't access any company resources`
+
+4. Go through the troubleshooting steps.
+
+5. When asked to create a ticket, say **Yes**.
+
+6. Ensure the priority is set to **High** (you may need to adjust topic logic to automatically set VPN issues as High priority).
+
+7. Complete the ticket creation.
+
+### Step 8: Verify Teams Notification
+
+1. Go to **Microsoft Teams** → **IT Support Team** → **High Priority Tickets** channel.
+
+2. You should see a new message with the ticket details.
+
+3. If using an adaptive card, verify all fields are populated correctly.
+
+4. If not, check the topic flow and variable mappings.
+
+### Step 9: Add Teams Notification to Other High-Priority Scenarios
+
+1. Go to **Topics** → **Slow Laptop Performance**.
+
+2. Find the section where you determine if disk space is critical (C drive is red).
+
+3. If this indicates high priority, add the same Teams notification logic:
+   - Condition: Priority is High
+   - Action: Send Teams message with ticket details
+
+4. Repeat for any other scenarios that warrant manager notification.
+
+5. Click **Save** on each topic.
+
+### Step 10: Optional - Add Approval Buttons to Adaptive Card
+
+If you want managers to approve/reject directly from Teams:
+
+1. Modify the adaptive card JSON to include action buttons:
+
+```json
+"actions": [
+  {
+    "type": "Action.Submit",
+    "title": "Approve",
+    "style": "positive",
+    "data": {
+      "action": "approve",
+      "ticketId": "${TicketID}"
+    }
+  },
+  {
+    "type": "Action.Submit",
+    "title": "Reject",
+    "style": "destructive",
+    "data": {
+      "action": "reject",
+      "ticketId": "${TicketID}"
+    }
+  },
+  {
+    "type": "Action.OpenUrl",
+    "title": "View Ticket",
+    "url": "https://make.powerapps.com"
+  }
+]
+```
+
+2. Note: Handling button clicks requires additional Power Automate logic or a webhook, which goes beyond pure Copilot Studio.
+
+3. For this challenge, displaying information is sufficient.
+
+### Step 11: Test Multiple Scenarios
+
+1. Create several high-priority tickets:
+   - VPN issue (High)
+   - Critical disk space (High)
+   - General password reset (Medium - should NOT notify Teams)
+
+2. Verify:
+   - High-priority tickets appear in Teams channel
+   - Medium/Low priority tickets do NOT spam the channel
+   - All ticket details are accurate
+
+### Step 12: Configure Channel Notifications
+
+1. In Teams, in the **High Priority Tickets** channel, click **...** → **Channel notifications settings**.
+
+2. Set notifications to:
+   - **All new posts**
+   - **Banner and feed**
+
+3. This ensures IT managers get immediate alerts for high-priority tickets.
+
+4. Click **Save**.
 
 ## Success Criteria
-✅ All 4 topics integrated with the Create IT Helpdesk Ticket flow  
-✅ Flow inputs correctly configured with topic variables  
-✅ Escalation option available in each topic  
-✅ Ticket creation confirmed with Ticket ID in copilot response  
-✅ Tickets visible in Microsoft Lists with correct details  
-✅ High-priority tickets trigger Teams approval workflow  
-✅ Approval/rejection updates ticket status and sends notifications  
+✅ Teams channel created for IT notifications  
+✅ High-priority ticket detection logic added to topics  
+✅ Teams messages or adaptive cards sent for high-priority tickets  
+✅ Ticket details correctly displayed in Teams channel  
+✅ Medium/Low priority tickets do not trigger Teams notifications  
+✅ Test high-priority ticket successfully posted to Teams  
+✅ All notifications contain accurate ticket information  
 
 ## Additional Resources
-- [Call Power Automate flows from topics](https://learn.microsoft.com/microsoft-copilot-studio/advanced-flow)  
-- [Pass variables to flows](https://learn.microsoft.com/microsoft-copilot-studio/authoring-variables)  
-- [Topic authoring best practices](https://learn.microsoft.com/microsoft-copilot-studio/guidance/authoring-best-practices)
+- [Adaptive Cards overview](https://adaptivecards.io/)  
+- [Post messages to Teams from Copilot](https://learn.microsoft.com/microsoft-copilot-studio/publication-add-bot-to-microsoft-teams)  
+- [Conditional branching in topics](https://learn.microsoft.com/microsoft-copilot-studio/authoring-create-edit-topics)
 
 ---
 
-Now, click **Next** to continue to **Challenge 06: Deploy to Teams & Test**.
+Now, click **Next** to continue to **Challenge 06: Deploy to Teams & Test End-to-End**.

@@ -1,16 +1,16 @@
 # Challenge 06: Deploy to Teams & Test End-to-End
 
 ## Introduction
-The final step is to deploy your IT Helpdesk Copilot to Microsoft Teams, making it accessible to all employees in your organization. Teams provides the perfect channel for IT support, with chat, notifications, and approval workflows all in one place.
+The final step is to deploy your IT Helpdesk Copilot to Microsoft Teams, making it accessible to all employees in your organization. Teams provides the perfect channel for IT support, with chat and notifications all integrated within Copilot Studio.
 
-In this challenge, you will publish your copilot, add it to Teams, and perform comprehensive end-to-end testing of the entire automation workflow.
+In this challenge, you will publish your copilot, add it to Teams, and perform comprehensive end-to-end testing of the entire automation workflow—all built entirely within Copilot Studio.
 
 ## Challenge Objectives
 - Publish the copilot from Copilot Studio
 - Deploy the copilot to Microsoft Teams
 - Test complete user journey from Teams
-- Verify approval workflow in Teams
-- Validate ticket management in Microsoft Lists
+- Verify Teams notifications for high-priority tickets
+- Validate ticket management in Dataverse/Power Apps
 
 ## Steps to Complete
 
@@ -105,26 +105,18 @@ In this challenge, you will publish your copilot, add it to Teams, and perform c
 
 3. Go through the troubleshooting steps.
 
-4. When asked about creating a ticket:
-   - Say **Yes**
-   - Indicate this is **urgent** or **high priority** (if prompted)
+4. When asked about creating a ticket, say **Yes**.
 
 5. The ticket should be created with **High** priority.
 
-6. Check **Teams** → **Approvals** app:
-   - Click on **Approvals** in the left Teams sidebar
-   - You should see a new approval request for the VPN ticket
-   - Review the ticket details
+6. Check the **IT Support Team** → **High Priority Tickets** channel in Teams:
+   - You should see a new notification with the VPN ticket details
+   - Verify all information is displayed correctly
 
-7. Click **Approve** to approve the ticket.
-
-8. Go back to **Microsoft Lists**:
-   - Refresh the helpdesk tickets list
+7. Go to **Power Apps** → **Tables** → **IT Helpdesk Tickets**:
    - Find the VPN ticket
-   - Verify the status changed to **In Progress**
-
-9. Check your email:
-   - You should have received an approval confirmation email
+   - Verify the status is **New**
+   - Note the Ticket ID matches the Teams notification
 
 ### Step 6: Test Slow Laptop Scenario
 
@@ -162,7 +154,7 @@ In this challenge, you will publish your copilot, add it to Teams, and perform c
 
 4. If unresolved, create a ticket.
 
-5. Verify ticket creation in Lists with appropriate category.
+5. Verify ticket creation in Power Apps with appropriate category.
 
 ### Step 8: Test Knowledge Base Responses
 
@@ -177,23 +169,7 @@ In this challenge, you will publish your copilot, add it to Teams, and perform c
 
 3. Ensure responses are accurate and contextual.
 
-### Step 9: Test Approval Rejection Flow
-
-1. Create another high-priority ticket in Teams.
-
-2. Go to **Teams** → **Approvals**.
-
-3. This time, click **Reject** on the approval request.
-
-4. Add a rejection comment: "Please try standard troubleshooting first"
-
-5. Go to **Microsoft Lists**:
-   - Find the rejected ticket
-   - Verify status is **Closed**
-
-6. Check your email for the rejection notification.
-
-### Step 10: Review Analytics and Insights
+### Step 9: Review Analytics and Insights
 
 1. Go back to **Copilot Studio**.
 
@@ -209,7 +185,7 @@ In this challenge, you will publish your copilot, add it to Teams, and perform c
 
 5. Identify any topics with high abandonment rates that may need improvement.
 
-### Step 11: Share Copilot with Team Members
+### Step 10: Share Copilot with Team Members
 
 1. In Teams, go to your copilot chat.
 
@@ -224,27 +200,31 @@ In this challenge, you will publish your copilot, add it to Teams, and perform c
 
 5. Share with at least one colleague for testing (if available).
 
-### Step 12: Document Your Solution
+### Step 11: Review Dataverse Tickets
 
-1. Create a quick reference guide that includes:
-   - How to access the IT Helpdesk Copilot in Teams
-   - What types of issues it can help with
-   - How to escalate issues
-   - Expected response times
+1. Go to **Power Apps** → **Tables** → **IT Helpdesk Tickets**.
 
-2. Share this guide with your team.
+2. Review all tickets created during testing.
+
+3. Verify ticket data quality:
+   - All required fields populated
+   - Correct categories assigned
+   - Appropriate priorities set
+   - User emails captured
+
+4. This data can now be used for reporting and analytics.
 
 ## Success Criteria
 ✅ Copilot successfully published from Copilot Studio  
 ✅ Copilot deployed and accessible in Microsoft Teams  
 ✅ All 4 topic scenarios tested end-to-end in Teams  
-✅ Tickets created successfully with correct information in Lists  
-✅ High-priority tickets trigger approval workflow in Teams  
-✅ Approval and rejection flows work correctly  
-✅ Email notifications sent at appropriate stages  
+✅ Tickets created successfully with correct information in Dataverse  
+✅ High-priority tickets trigger Teams channel notifications  
+✅ Teams notifications display accurate ticket details  
 ✅ Knowledge base provides accurate responses without escalation  
 ✅ Analytics show conversation metrics and topic usage  
 ✅ Copilot shared with team members for broader access  
+✅ All functionality built entirely within Copilot Studio (no external Power Automate flows)  
 
 ## Additional Resources
 - [Publish your copilot](https://learn.microsoft.com/microsoft-copilot-studio/publication-fundamentals-publish-channels)  
@@ -261,17 +241,20 @@ You have successfully built an **AI-powered IT Helpdesk Automation Copilot** usi
 ### What You Accomplished:
 ✅ Created an intelligent conversational assistant with knowledge base  
 ✅ Built 4 automated support topics using generative AI  
-✅ Integrated Power Automate flows for ticket creation  
-✅ Implemented Teams approval workflow for critical issues  
+✅ Integrated Dataverse for ticket management—all within Copilot Studio  
+✅ Implemented Teams notifications for high-priority issues  
 ✅ Deployed to Microsoft Teams for organization-wide access  
 ✅ Reduced manual helpdesk workload through automation  
+✅ Built the entire solution without external Power Automate flows  
 
 ### Next Steps:
 - Monitor analytics to identify improvement opportunities
 - Add more topics for additional support scenarios
-- Integrate with other systems (ServiceNow, Jira, etc.)
+- Enhance Teams notifications with more interactive elements
+- Add Power BI dashboard for ticket trend analysis
 - Customize responses based on user feedback
 - Expand knowledge base with more documentation
+- Consider adding approval workflows using Power Automate if needed
 
 ### Business Impact:
 - ⚡ **Faster Response Times** - 24/7 instant support

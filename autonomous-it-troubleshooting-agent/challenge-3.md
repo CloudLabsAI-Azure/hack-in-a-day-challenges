@@ -1,227 +1,163 @@
-# Challenge 03: Setup Helpdesk & Create Ticket Creation Flow
+# Challenge 03: Setup Freshdesk & Get API Credentials
 
 ## Introduction
-When the copilot cannot resolve an issue automatically, it needs to create a support ticket in your helpdesk system. Power Automate flows enable seamless integration between Copilot Studio and backend systems.
+When the copilot cannot resolve an issue automatically, it needs to create a support ticket in your helpdesk system. Freshdesk is a popular cloud-based helpdesk solution that integrates seamlessly with Copilot Studio through its API connector.
 
-In this challenge, you will set up a Microsoft Lists-based helpdesk system and create a reusable Power Automate flow that all topics can use to create support tickets.
+In this challenge, you will activate your Freshdesk free trial, configure your account, and obtain the API credentials needed to connect Copilot Studio to Freshdesk for automated ticket creation.
 
 ## Challenge Objectives
-- Create a Microsoft Lists helpdesk table for ticket management
-- Build a Power Automate flow to create tickets
-- Configure flow inputs to capture issue details
-- Test the flow independently before integration
+- Activate Freshdesk free trial account
+- Configure Freshdesk profile and settings
+- Obtain API Key and Account URL
+- Prepare credentials for Copilot Studio integration
 
 ## Steps to Complete
 
-### Step 1: Create Helpdesk List in Microsoft Lists
+### Step 1: Start Freshdesk Free Trial
 
-1. Open **Microsoft Edge** and navigate to:
+1. Open **Microsoft Edge** browser in your lab VM.
 
-   ```
-   https://www.microsoft.com/en-us/microsoft-365/microsoft-lists
-   ```
-
-2. Click **Sign in** and use your credentials:
-   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
-   - **Password:** <inject key="AzureAdUserPassword"></inject>
-
-3. Click **+ New list** at the top.
-
-4. Select **Blank list**.
-
-5. Configure the list:
-   - **Name:** `IT Helpdesk Tickets - <inject key="DeploymentID"></inject>`
-   - **Description:** `Support tickets created by IT Helpdesk Copilot`
-   - **Save to:** My lists (or select a specific site)
-
-6. Click **Create**.
-
-### Step 2: Add Custom Columns to Helpdesk List
-
-1. Once the list is created, click **+ Add column** to add the following columns:
-
-2. Add **Issue Category** column:
-   - Type: **Choice**
-   - Choices: `Password Reset`, `VPN Issues`, `Slow Laptop`, `Printer Issues`
-   - Click **Save**
-
-3. Add **User Email** column:
-   - Type: **Single line of text**
-   - Click **Save**
-
-4. Add **Issue Description** column:
-   - Type: **Multiple lines of text**
-   - Click **Save**
-
-5. Add **Priority** column:
-   - Type: **Choice**
-   - Choices: `Low`, `Medium`, `High`
-   - Default: `Medium`
-   - Click **Save**
-
-6. Add **Status** column:
-   - Type: **Choice**
-   - Choices: `New`, `In Progress`, `Waiting for Approval`, `Resolved`, `Closed`
-   - Default: `New`
-   - Click **Save**
-
-7. Add **Assigned To** column:
-   - Type: **Person**
-   - Allow multiple selections: No
-   - Click **Save**
-
-8. Your list should now have these columns:
-   - Title (default)
-   - Issue Category
-   - User Email
-   - Issue Description
-   - Priority
-   - Status
-   - Assigned To
-
-### Step 3: Navigate to Power Automate
-
-1. Open a new tab and navigate to:
+2. Navigate to **Freshworks Portal**:
 
    ```
-   https://make.powerautomate.com
+   https://www.freshworks.com/freshdesk/
    ```
 
-2. Sign in with the same credentials if prompted.
+3. Click **Start free trial** to begin the free trial registration.
 
-3. Ensure you're in the correct environment (**Dev-<inject key="DeploymentID"></inject>** or default).
+### Step 2: Provide Registration Details
 
-### Step 4: Create Ticket Creation Flow
+1. In the registration pane, provide these details:
+   - **First name:** `ODL`
+   - **Last name:** `User`
+   - **Work email:** <inject key="AzureAdUserEmail"></inject>
+   - **Company name:** `Contoso`
 
-1. In Power Automate, click **+ Create** in the left navigation.
+2. Click **Try it free**.
 
-2. Select **Instant cloud flow**.
+### Step 3: Complete Setup Questions
 
-3. Configure the flow:
-   - **Flow name:** `Create IT Helpdesk Ticket`
-   - **Choose how to trigger this flow:** Select **Power Virtual Agents** (or **Microsoft Copilot Studio**)
-   - Click **Create**
+1. In the next pane, provide these details:
+   - **What industry are you from?:** From the list, select **Software and internet**
+   - **How many employees are there in your company?:** Select **1-10**
+   - Check the box: **I'm trying customer service software for the first time**
 
-### Step 5: Configure Flow Input Parameters
+2. Click **Next**.
 
-1. In the trigger **Power Virtual Agents**, click **+ Add an input**.
+### Step 4: Activate Your Account via Email
 
-2. Add the following inputs:
+1. Open a new tab and navigate to **Outlook**:
 
-   **Input 1:**
-   - Type: **Text**
-   - Name: `IssueCategory`
-   - Description: `Category of the issue`
+   ```
+   https://outlook.office.com
+   ```
 
-   **Input 2:**
-   - Type: **Text**
-   - Name: `UserEmail`
-   - Description: `User's email address`
+2. Sign in with your lab credentials if prompted.
 
-   **Input 3:**
-   - Type: **Text**
-   - Name: `IssueDescription`
-   - Description: `Detailed description of the issue`
+3. In your inbox, look for the **Freshworks verification email**.
 
-   **Input 4:**
-   - Type: **Text**
-   - Name: `Priority`
-   - Description: `Priority level: Low, Medium, or High`
+   > **Note:** If you're unable to locate the activation email from Freshworks, please wait a few minutes, as there might be a delay in email delivery. Check your spam or junk folder as well.
 
-3. Your trigger should now have 4 input parameters.
+4. Open the email and click **Activate Account**.
 
-### Step 6: Add Create Item Action
+### Step 5: Set Your Password
 
-1. Click **+ New step**.
+1. In the activation pane, provide:
+   - **Enter password:** Create a strong password (e.g., `Freshdesk@2025`)
+   - **Confirm password:** Re-enter the same password
 
-2. Search for **Microsoft Lists** and select **Create item**.
+2. Click **Activate your account**.
 
-3. Configure the action:
-   - **Site Address:** Select the SharePoint site where your list is located (or My lists)
-   - **List Name:** Select `IT Helpdesk Tickets - <inject key="DeploymentID"></inject>`
+3. Wait for the Freshdesk portal to load.
 
-4. Fill in the fields using dynamic content:
-   - **Title:** Click in the field → select `IssueCategory` from dynamic content
-   - **Issue Category:** Select `IssueCategory`
-   - **User Email:** Select `UserEmail`
-   - **Issue Description:** Select `IssueDescription`
-   - **Priority:** Select `Priority`
-   - **Status:** Type `New` (or leave as default)
+### Step 6: Access Profile Settings
 
-5. Leave **Assigned To** empty for now (will be handled in the approval flow).
+1. Once logged into the Freshdesk portal, click on the **Profile** icon in the top-right corner.
 
-### Step 7: Add Response to Copilot
+2. Select **Profile settings** from the dropdown menu.
 
-1. Click **+ New step**.
+### Step 7: Retrieve API Key
 
-2. Search for **Respond to Power Virtual Agents** (or **Return value(s) to Microsoft Copilot**).
+1. In the profile page, scroll down and click **View API Key**.
 
-3. Select the action.
+   > **Note:** If you're unable to find this option, minimize the screen size using **Ctrl + -** to zoom out.
 
-4. Click **+ Add an output**.
+2. In the next pane, complete the **CAPTCHA** verification.
 
-5. Add output:
-   - Type: **Text**
-   - Name: `TicketID`
-   - Value: Click in the field → select **ID** from the **Create item** action's dynamic content
+3. Once verified, you'll see your API Key displayed.
 
-6. Click **+ Add an output** again.
+4. **Copy the API Key** and paste it into a Notepad file for safekeeping.
 
-7. Add second output:
-   - Type: **Text**
-   - Name: `TicketStatus`
-   - Value: Type `Ticket created successfully`
+   > **Important:** You will need this API Key to connect Copilot Studio to Freshdesk in the next challenge.
 
-### Step 8: Save and Test the Flow
+### Step 8: Copy Account URL
 
-1. Click **Save** in the top-right corner.
+1. From the browser address bar, copy the **Account URL**.
 
-2. Wait for the flow to save successfully.
+2. The URL format is typically:
+   ```
+   https://your-company-name.freshdesk.com
+   ```
 
-3. Click **Test** in the top-right corner.
+3. **Copy this full URL** and paste it into the same Notepad file alongside your API Key.
 
-4. Select **Manually** → **Test**.
+4. Your Notepad should now contain:
+   ```
+   Account URL: https://your-account.freshdesk.com
+   API Key: [Your API Key Here]
+   ```
 
-5. Provide test values:
-   - **IssueCategory:** `Password Reset`
-   - **UserEmail:** `test@contoso.com`
-   - **IssueDescription:** `User forgot password and cannot log in`
-   - **Priority:** `Medium`
+### Step 9: Explore Freshdesk Dashboard
 
-6. Click **Run flow**.
+1. Take a moment to explore the Freshdesk interface:
+   - **Tickets** - View and manage support tickets
+   - **Contacts** - Manage customer contacts
+   - **Reports** - View ticket analytics
+   - **Admin** - Configure settings and integrations
 
-7. Wait for the flow to complete.
+2. Click on **Tickets** in the left navigation to see the tickets dashboard (it will be empty for now).
 
-8. Click **Done** and verify the flow run succeeded.
+3. Note the ticket structure:
+   - Subject
+   - Description
+   - Priority (Low, Medium, High, Urgent)
+   - Status (Open, Pending, Resolved, Closed)
+   - Type
+   - Source
 
-### Step 9: Verify Ticket Creation
+4. This structure will be used when creating tickets from Copilot Studio.
 
-1. Go back to your **IT Helpdesk Tickets** list in Microsoft Lists.
+### Step 10: Test Manual Ticket Creation (Optional)
 
-2. Refresh the page.
+1. To familiarize yourself with Freshdesk, create a test ticket manually:
+   - Click **+ New Ticket** in the top-right corner
+   - Fill in:
+     - **Requester:** Your email
+     - **Subject:** `Test Ticket - Setup Complete`
+     - **Description:** `Testing Freshdesk setup before Copilot integration`
+     - **Priority:** Medium
+     - **Status:** Open
 
-3. You should see a new item with:
-   - Title: Password Reset
-   - Issue Category: Password Reset
-   - User Email: test@contoso.com
-   - Issue Description: User forgot password and cannot log in
-   - Priority: Medium
-   - Status: New
+2. Click **Submit** to create the ticket.
 
-4. If the ticket appears correctly, your flow is working!
+3. Verify the ticket appears in the **Tickets** list with a unique Ticket ID.
+
+4. You can now close this test ticket by changing its status to **Closed**.
 
 ## Success Criteria
-✅ Microsoft Lists helpdesk created with custom columns  
-✅ Power Automate flow created with 4 input parameters  
-✅ Flow successfully creates items in the helpdesk list  
-✅ Flow returns ticket ID back to the copilot  
-✅ Test run completed successfully with ticket visible in Lists  
+✅ Freshdesk free trial successfully activated  
+✅ Account verified via email activation  
+✅ Profile settings accessed successfully  
+✅ API Key retrieved and saved securely  
+✅ Account URL copied and documented  
+✅ Freshdesk dashboard explored and understood  
+✅ Test ticket created manually (optional) to understand ticket structure  
 
 ## Additional Resources
-- [Microsoft Lists overview](https://support.microsoft.com/lists)  
-- [Power Automate cloud flows](https://learn.microsoft.com/power-automate/overview-cloud)  
-- [Copilot Studio and Power Automate integration](https://learn.microsoft.com/microsoft-copilot-studio/advanced-flow)
+- [Freshdesk Documentation](https://support.freshdesk.com/)  
+- [Freshdesk API Overview](https://developers.freshdesk.com/api/)  
+- [Freshdesk Getting Started Guide](https://freshdesk.com/resources/getting-started)
 
 ---
 
-Now, click **Next** to continue to **Challenge 04: Create Teams Approval Flow**.
+Now, click **Next** to continue to **Challenge 04: Connect Copilot Studio to Freshdesk**.

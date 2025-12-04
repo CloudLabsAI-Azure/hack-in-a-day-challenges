@@ -1,231 +1,244 @@
-# Challenge 04: Create Teams Approval Flow
+# Challenge 04: Connect Copilot Studio to Freshdesk
 
 ## Introduction
-For critical or complex IT issues, tickets need approval from IT managers before they're assigned to technicians. Microsoft Teams provides a built-in approval system that integrates seamlessly with Power Automate, enabling real-time notifications and approvals.
+Now that your Freshdesk account is ready, you'll connect Copilot Studio to Freshdesk using the Freshdesk connector. This integration allows your copilot to automatically create support tickets when users need assistance beyond self-service troubleshooting.
 
-In this challenge, you will create a reusable approval flow that sends ticket details to an IT manager in Teams, waits for their approval or rejection, and updates the ticket status accordingly.
+In this challenge, you will add the Freshdesk connector to one topic, configure ticket creation with user inputs, and test the end-to-end flow within Copilot Studio.
 
 ## Challenge Objectives
-- Create a Power Automate flow triggered by ticket creation
-- Send approval request to IT manager via Teams
-- Update ticket status based on approval decision
-- Notify the user of the outcome
+- Add Freshdesk connector to Password Reset Support topic
+- Configure connection with API credentials
+- Collect Subject and Description from users
+- Create tickets in Freshdesk with appropriate priority
+- Display ticket confirmation to users
 
 ## Steps to Complete
 
-### Step 1: Navigate to Power Automate
+### Step 1: Open Password Reset Support Topic
 
-1. If not already there, navigate to:
+1. In **Copilot Studio**, navigate to **Topics** in the left navigation.
 
-   ```
-   https://make.powerautomate.com
-   ```
+2. Click on **Password Reset Support** topic to open it.
 
-2. Ensure you're in the correct environment.
+3. Review the existing conversation flow created by generative AI.
 
-### Step 2: Create Approval Flow
+### Step 2: Add Escalation Question
 
-1. Click **+ Create** in the left navigation.
+1. Scroll to the end of the conversation flow.
 
-2. Select **Automated cloud flow**.
+2. Click **+** to add a node.
 
-3. Configure the flow:
-   - **Flow name:** `IT Helpdesk Approval and Assignment`
-   - **Choose your flow's trigger:** Search for **Microsoft Lists** and select **When an item is created**
-   - Click **Create**
-
-### Step 3: Configure the Trigger
-
-1. In the **When an item is created** trigger:
-   - **Site Address:** Select the SharePoint site where your helpdesk list is located
-   - **List Name:** Select `IT Helpdesk Tickets - <inject key="DeploymentID"></inject>`
-
-2. This flow will now trigger automatically whenever a new ticket is created.
-
-### Step 4: Add Condition to Check Priority
-
-1. Click **+ New step**.
-
-2. Search for **Condition** and select it.
-
-3. Configure the condition to check if the ticket needs approval:
-   - Click in the first field → select **Priority** from dynamic content
-   - Choose **is equal to**
-   - Type: `High`
-
-4. This ensures only high-priority tickets require manager approval.
-
-### Step 5: Configure "Yes" Branch - Send Approval Request
-
-1. In the **If yes** branch, click **Add an action**.
-
-2. Search for **Approvals** and select **Start and wait for an approval**.
-
-3. Configure the approval action:
-   - **Approval type:** Select **Approve/Reject - First to respond**
-   - **Title:** Type `IT Ticket Approval Required - ` then add **Title** from dynamic content
-   - **Assigned to:** Enter your IT manager's email: <inject key="AzureAdUserEmail"></inject> (or another email for testing)
-   - **Details:** Build a formatted message:
-     ```
-     A new high-priority IT ticket has been created and requires approval:
-     
-     Ticket ID: [Select ID from dynamic content]
-     Category: [Select Issue Category]
-     User: [Select User Email]
-     Description: [Select Issue Description]
-     Priority: [Select Priority]
-     
-     Please review and approve or reject this ticket.
-     ```
-   - **Item link:** (Optional) Enter the URL to the Lists item
-   - **Item link description:** Type `View Ticket`
-
-### Step 6: Add Condition to Check Approval Response
-
-1. After the approval action, click **+ New step** (still in the "Yes" branch).
-
-2. Search for **Condition** and add it.
-
-3. Configure the nested condition:
-   - Click in the first field → select **Outcome** from the approval action's dynamic content
-   - Choose **is equal to**
-   - Type: `Approve`
-
-### Step 7: Handle Approved Tickets
-
-1. In the nested **If yes** branch (approval approved), click **Add an action**.
-
-2. Search for **Microsoft Lists** and select **Update item**.
-
-3. Configure the update:
-   - **Site Address:** Same as before
-   - **List Name:** `IT Helpdesk Tickets - <inject key="DeploymentID"></inject>`
-   - **Id:** Select **ID** from the trigger's dynamic content
-   - **Status:** Type or select `In Progress`
-   - **Assigned To Claims:** Enter an IT technician's email or leave blank
-
-4. Click **Add an action** after the update.
-
-5. Search for **Office 365 Outlook** and select **Send an email (V2)**.
-
-6. Configure the email:
-   - **To:** Select **User Email** from trigger dynamic content
-   - **Subject:** Type `Your IT Ticket Has Been Approved`
-   - **Body:** 
-     ```
-     Your support ticket (ID: [Select ID]) has been approved and assigned to our IT team.
-     
-     Category: [Select Issue Category]
-     Priority: [Select Priority]
-     Status: In Progress
-     
-     An IT technician will contact you shortly.
-     ```
-
-### Step 8: Handle Rejected Tickets
-
-1. In the nested **If no** branch (approval rejected), click **Add an action**.
-
-2. Search for **Microsoft Lists** and select **Update item**.
-
-3. Configure the update:
-   - **Site Address:** Same as before
-   - **List Name:** `IT Helpdesk Tickets - <inject key="DeploymentID"></inject>`
-   - **Id:** Select **ID** from trigger
-   - **Status:** Type or select `Closed`
-
-4. Click **Add an action**.
-
-5. Add **Send an email (V2)** action.
-
-6. Configure:
-   - **To:** Select **User Email**
-   - **Subject:** Type `Your IT Ticket Has Been Closed`
-   - **Body:**
-     ```
-     Your support ticket (ID: [Select ID]) has been reviewed and closed.
-     
-     Reason: The request was not approved by IT management.
-     
-     If you believe this is an error, please contact IT support directly.
-     ```
-
-### Step 9: Configure "No" Branch - Auto-assign Low/Medium Priority
-
-1. Go back to the main condition (priority check).
-
-2. In the **If no** branch, click **Add an action**.
-
-3. Add **Microsoft Lists** → **Update item**.
+3. Select **Ask a question**.
 
 4. Configure:
-   - **Site Address:** Same as before
-   - **List Name:** `IT Helpdesk Tickets - <inject key="DeploymentID"></inject>`
-   - **Id:** Select **ID** from trigger
-   - **Status:** Type or select `In Progress`
-   - **Assigned To Claims:** Enter a default IT technician email
+   - **Message:** `Would you like me to create a support ticket for you?`
+   - **Identify:** Select **Boolean** (Yes/No)
+   - **Save response as:** `CreateTicket`
 
-5. Click **Add an action**.
+5. Click **Save**.
 
-6. Add **Send an email (V2)**.
+### Step 3: Add Condition for Ticket Creation
 
-7. Configure:
-   - **To:** Select **User Email**
-   - **Subject:** Type `Your IT Ticket Has Been Created`
-   - **Body:**
-     ```
-     Your support ticket has been created and assigned to our IT team.
-     
-     Ticket ID: [Select ID]
-     Category: [Select Issue Category]
-     Priority: [Select Priority]
-     Status: In Progress
-     
-     An IT technician will contact you shortly.
-     ```
+1. Below the question, click **+** to add a node.
 
-### Step 10: Save and Test the Flow
+2. Select **Add a condition**.
 
-1. Click **Save** in the top-right corner.
+3. Configure the condition:
+   - **Variable:** Select `CreateTicket`
+   - **Operator:** `is equal to`
+   - **Value:** `true` (Yes)
 
-2. Wait for the flow to save.
+### Step 4: Collect Ticket Subject
 
-3. To test, go to **Power Automate** → **+ Create** → **Instant cloud flow**.
+1. In the **Condition is met** branch (when user says Yes), click **+**.
 
-4. Or simply create a new high-priority ticket manually in your Lists:
-   - Go to **IT Helpdesk Tickets** list
-   - Click **+ New**
-   - Fill in:
-     - Title: `Test High Priority`
-     - Issue Category: `VPN Issues`
-     - User Email: Your email
-     - Issue Description: `Test approval flow`
-     - Priority: `High`
-     - Status: `New`
-   - Click **Save**
+2. Select **Ask a question**.
 
-5. Check Microsoft Teams:
-   - Open **Teams** → **Approvals** app
-   - You should see a new approval request
-   - Click **Approve** or **Reject** to test
+3. Configure:
+   - **Message:** `Please provide a brief subject for your ticket`
+   - **Identify:** Select **User's entire response**
+   - **Save response as:** Create variable `Subject`
 
-6. Verify the ticket status updated in Lists.
+4. Click **Save**.
 
-7. Check your email for the notification.
+### Step 5: Collect Ticket Description
+
+1. Below the Subject question, click **+**.
+
+2. Select **Ask a question**.
+
+3. Configure:
+   - **Message:** `Please describe the issue in detail`
+   - **Identify:** Select **User's entire response**
+   - **Save response as:** Create variable `Description`
+
+4. Click **Save**.
+
+### Step 6: Add Freshdesk Connector Action
+
+1. Below the Description question, click **+**.
+
+2. Select **Call an action** → **Create a flow**.
+
+   > **Note:** This opens the connector library where you can add Freshdesk.
+
+3. In the search box, type **Freshdesk**.
+
+4. From the list, select **Freshdesk** connector.
+
+5. Select the action **Create a ticket**.
+
+### Step 7: Configure Freshdesk Connection
+
+1. In the **Create a ticket** configuration pane, you'll be prompted to create a new connection.
+
+2. Click **Create new** (or **+ New connection**).
+
+3. Provide the following connection details:
+   - **Connection name:** `helpdesk`
+   - **Account URL:** Paste the Account URL you copied in Challenge 03 (e.g., `https://your-account.freshdesk.com`)
+   - **Email or API key:** Paste the **API Key** you copied in Challenge 03
+   - **Password:** Since you're using an API Key, the password field is not important, but it's required. Enter any random value (e.g., `X`)
+
+4. Click **Create** to establish the connection.
+
+5. Wait for the connection to be validated and established.
+
+### Step 8: Map Variables to Freshdesk Fields
+
+1. Once the connection is created, you'll see the **Create a ticket** action with input fields.
+
+2. Configure the **Subject** parameter:
+   - Click in the **Subject** field
+   - Click **Insert dynamic content** (lightning bolt icon or **{x}** button)
+   - Select **Subject** variable from the list
+
+3. Configure the **Description** parameter:
+   - Click in the **Description** field
+   - Click **Insert dynamic content**
+   - Select **Description** variable
+
+4. Configure the **Email** parameter:
+   - Click **Enter custom value**
+   - Type: `<inject key="AzureAdUserEmail"></inject>` (or use `System.User.Email` if available)
+
+5. Configure the **Priority** parameter:
+   - From the dropdown, select **Medium** (or use a variable if you're determining priority dynamically)
+
+6. Configure the **Status** parameter:
+   - From the dropdown, select **Open**
+
+7. Leave other optional fields blank for now.
+
+8. Click **Save** on the action.
+
+### Step 9: Display Success Message
+
+1. Below the Freshdesk action, click **+**.
+
+2. Select **Send a message**.
+
+3. Configure the message:
+   ```
+   ✅ Great! I've created a support ticket for you in Freshdesk.
+   
+   Your ticket has been submitted successfully and our IT team will contact you shortly.
+   ```
+
+4. Click **Save**.
+
+### Step 10: Add Message for "No" Response
+
+1. Go back to the **Else** branch of the condition (when user says No to creating a ticket).
+
+2. Click **+** → **Send a message**.
+
+3. Type:
+   ```
+   No problem! Feel free to reach out if you need help later. You can also contact IT support directly at support@company.com
+   ```
+
+4. Click **Save** on the topic.
+
+### Step 11: Test the Password Reset Topic with Freshdesk
+
+1. Click **Save** to save all changes to the topic.
+
+2. Open the **Test your copilot** pane on the right side.
+
+3. Type: `I want to create a ticket` and press Enter.
+
+4. The copilot should respond and trigger the Password Reset Support topic.
+
+5. When asked if you want to create a support ticket, respond: **Yes**
+
+6. When asked for the subject, type:
+   ```
+   Password Reset Request
+   ```
+
+7. When asked for the description, type:
+   ```
+   I forgot my password and need assistance resetting it. I've tried the self-service portal but encountered errors.
+   ```
+
+8. Wait for the confirmation message indicating the ticket was created successfully.
+
+### Step 12: Verify Ticket in Freshdesk
+
+1. Open a new tab and navigate to your **Freshdesk portal**:
+   ```
+   https://your-account.freshdesk.com
+   ```
+
+2. Sign in if prompted.
+
+3. Click on **Tickets** in the left navigation.
+
+4. You should see a new ticket with:
+   - **Subject:** Password Reset Request
+   - **Description:** The description you provided
+   - **Priority:** Medium
+   - **Status:** Open
+   - **Requester:** Your email address
+
+5. Click on the ticket to view full details.
+
+6. Verify all information is correctly populated.
+
+### Step 13: Test Again with Different Inputs
+
+1. Go back to Copilot Studio's test pane.
+
+2. Click **Restart** to start a fresh conversation.
+
+3. Type: `I forgot my password`
+
+4. Go through the topic flow.
+
+5. When creating a ticket, provide different details:
+   - **Subject:** `Account Locked Out`
+   - **Description:** `My account is locked after multiple failed login attempts`
+
+6. Verify the ticket is created.
+
+7. Check Freshdesk again to see the second ticket appears.
 
 ## Success Criteria
-✅ Automated flow created and triggered by new ticket creation  
-✅ High-priority tickets send approval requests to Teams  
-✅ Approval/rejection updates ticket status automatically  
-✅ Email notifications sent to users based on approval outcome  
-✅ Low/Medium priority tickets auto-assigned without approval  
-✅ Flow tested successfully with both approval and rejection scenarios  
+✅ Freshdesk connector successfully added to Password Reset Support topic  
+✅ Connection established using API Key and Account URL  
+✅ Subject and Description variables collected from users  
+✅ Freshdesk "Create a ticket" action configured with dynamic variables  
+✅ Ticket priority and status set appropriately  
+✅ Test tickets created successfully in Copilot Studio  
+✅ Tickets visible in Freshdesk portal with correct information  
+✅ All ticket fields populated accurately  
 
 ## Additional Resources
-- [Approvals in Microsoft Teams](https://support.microsoft.com/office/what-is-approvals-a9a01c95-e0bf-4d20-9ada-f7be3fc283d3)  
-- [Power Automate approvals](https://learn.microsoft.com/power-automate/get-started-approvals)  
-- [Conditional logic in flows](https://learn.microsoft.com/power-automate/use-expressions-in-conditions)
+- [Freshdesk connector in Power Platform](https://learn.microsoft.com/connectors/freshdesk/)  
+- [Use connectors in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/advanced-flow)  
+- [Freshdesk API documentation](https://developers.freshdesk.com/api/)
 
 ---
 
-Now, click **Next** to continue to **Challenge 05: Connect Topics to Flows**.
+Now, click **Next** to continue to **Challenge 05: Add Freshdesk Connector to Remaining Topics**.

@@ -25,18 +25,21 @@ In this challenge, you will create 4 essential IT helpdesk topics using generati
 
 ### Step 2: Create Topic 1 - Password Reset
 
-1. In the topic creation dialog, enter the following description:
+1. In the topic creation dialog, enter the following 
 
-   ```
-   Help users reset their password when they forget it or their account is locked. Ask for their username, provide self-service reset instructions, and offer to create a ticket if they need additional help.
-   ```
+    - **Name:** Rename to `Password Reset Support`
+    - **description:**
+
+    ```
+    Help users reset their password when they forget it or their account is locked. Ask for their username, provide self-service reset instructions, and offer to create a ticket if they need additional help.
+    ```
 
 2. Click **Create** or **Generate**.
 
 3. Wait for the AI to generate the topic (15-30 seconds).
 
 4. Review the generated topic:
-   - **Name:** Rename to `Password Reset Support`
+
    - **Trigger phrases:** Verify it includes phrases like:
      - "I forgot my password"
      - "Reset my password"
@@ -54,16 +57,18 @@ In this challenge, you will create 4 essential IT helpdesk topics using generati
 
 1. Click **+ Add** → **Create from description with Copilot**.
 
-2. Enter the description:
 
-   ```
-   Assist users experiencing VPN connection problems. Ask what error they're seeing, provide troubleshooting steps like checking internet connection and credentials, and offer to escalate if the issue persists.
-   ```
+2. **Name:** Rename to `VPN Troubleshooting`
+    - Enter the description:
+
+        ```
+        Assist users experiencing VPN connection problems. Ask what error they're seeing, provide troubleshooting steps like checking internet connection and credentials, and offer to escalate if the issue persists.
+        ```
 
 3. Click **Create** or **Generate**.
 
 4. Review and customize:
-   - **Name:** Rename to `VPN Troubleshooting`
+
    - **Trigger phrases:** Verify phrases like:
      - "VPN not connecting"
      - "VPN authentication failed"
