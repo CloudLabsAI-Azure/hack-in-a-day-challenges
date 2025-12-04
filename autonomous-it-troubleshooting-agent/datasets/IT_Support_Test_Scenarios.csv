@@ -1,0 +1,36 @@
+Scenario_ID,Category,User_Question,Expected_Response_Type,Complexity,Notes
+1,Password Reset,I forgot my password,Self-service password reset instructions,Easy,Should provide link to password reset portal
+2,Password Reset,My password expired and I can't log in,Self-service password reset instructions,Medium,Should explain expired password process
+3,Password Reset,I'm getting an error that my account is locked,Account lockout procedures,Medium,Should explain 30-minute auto-unlock or contact IT
+4,Password Reset,What are the password requirements?,Password policy information,Easy,Should list requirements: length complexity expiration
+5,Password Reset,I'm not receiving the verification code for password reset,Verification troubleshooting,Medium,Should suggest checking spam alternate methods
+6,Password Reset,I changed my password now my phone can't sync email,Post-password change issue,Medium,Should explain need to update password on all devices
+7,VPN Issues,VPN not connecting,VPN troubleshooting steps,Medium,Should provide systematic troubleshooting
+8,VPN Issues,VPN keeps disconnecting,VPN connection stability troubleshooting,Medium,Should check internet network adapters
+9,VPN Issues,What's the VPN server address?,VPN configuration information,Easy,Should provide vpn.company.com
+10,VPN Issues,VPN says authentication failed,VPN credential verification,Medium,Should verify username/password format and MFA
+11,VPN Issues,I'm getting error 'Unable to contact VPN server',VPN firewall/network troubleshooting,Hard,Should check firewall internet connection backup gateway
+12,VPN Issues,VPN connected but can't access internal resources,VPN DNS/routing troubleshooting,Hard,Should check DNS settings and routing
+13,VPN Issues,Do I need VPN to access email?,VPN necessity question,Easy,Should explain Office 365 accessible without VPN but internal resources need it
+14,Slow Laptop,My laptop is running slow,General performance troubleshooting,Medium,Should ask clarifying questions and provide steps
+15,Slow Laptop,Computer is lagging and freezing,System resource check,Medium,Should guide to check Task Manager RAM/CPU
+16,Slow Laptop,Laptop takes forever to boot up,Startup optimization,Medium,Should suggest disabling startup programs
+17,Slow Laptop,My laptop fan is loud and it's hot,Overheating troubleshooting,Medium,Should check for overheating and suggest cooling solutions
+18,Slow Laptop,Windows is taking up all my disk space,Disk cleanup instructions,Medium,Should provide disk cleanup steps
+19,Slow Laptop,Is my laptop infected with a virus?,Malware scan instructions,Medium,Should guide to run antivirus scan
+20,Slow Laptop,Should I restart my laptop?,Restart recommendation,Easy,Should confirm restarting helps and recommend weekly restarts
+21,Slow Laptop,My C drive is red is that bad?,Critical disk space,High,Should confirm critical and provide immediate cleanup steps
+22,Printer Issues,Printer not working,General printer troubleshooting,Medium,Should ask about specific issue and provide checklist
+23,Printer Issues,Printer is offline,Printer offline fix,Medium,Should provide steps to set printer online restart spooler
+24,Printer Issues,My print job is stuck,Print queue management,Medium,Should guide to clear print queue restart spooler
+25,Printer Issues,Printer says paper jam,Paper jam removal instructions,Medium,Should provide safe paper jam removal steps
+26,Printer Issues,Printing blank pages,Toner/ink troubleshooting,Medium,Should check toner levels protective tape
+27,Printer Issues,How do I add a printer to my computer?,Printer installation,Medium,Should provide steps to add network or USB printer
+28,Printer Issues,How do I print from my phone?,Mobile printing instructions,Medium,Should explain AirPrint or manufacturer app
+29,General,What can you help me with?,Capabilities overview,Easy,Should list main categories: password VPN laptop printer
+30,General,How do I contact IT support?,Contact information,Easy,Should provide phone email chat portal
+31,General,Can you help me with software installation?,Software installation support,Medium,Should determine what software and provide guidance or escalation
+32,General,I accidentally deleted an important file,File recovery request,Medium,Should check recycle bin or suggest IT file recovery service
+33,Mixed,I can't log in and VPN won't connect,Multiple issues,Hard,Should prioritize login issue first then VPN
+34,Edge Case,I spilled coffee on my laptop,Physical damage,Medium,Should advise to power off unplug and contact IT immediately
+35,Edge Case,I received a phishing email,Security awareness,Medium,Should instruct to report to security@company.com without clicking links
