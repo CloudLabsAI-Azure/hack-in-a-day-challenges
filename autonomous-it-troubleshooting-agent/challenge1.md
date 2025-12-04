@@ -8,38 +8,80 @@ This intelligent assistant will provide instant, 24/7 support by answering quest
 
 In this challenge, you'll create the **IT Support Copilot** in Microsoft Copilot Studio — the foundation for your intelligent IT support solution.
 
-## Accessing the Lab Environment
-
-Please ensure you have access to the following resources:
-- **Microsoft 365 Credentials:** `<inject key="AzureAdUserEmail"></inject>`
-- **Password:** `<inject key="AzureAdUserPassword"></inject>`
-- **Copilot Studio Portal:** [https://copilotstudio.microsoft.com](https://copilotstudio.microsoft.com)
-
 ## Challenge Objectives
 - Create a new **Copilot** in Microsoft Copilot Studio.
 - Configure copilot identity, description, and conversation starters.
 - Test basic conversation flow and verify system topics are active.
 - Understand the copilot authoring interface and navigation.
 
-## Steps to Complete
+## Tasks to Complete
 
-### Step 1: Sign in to Microsoft Copilot Studio
+## Task 1 : Provisioning power platform environment
+
 1. Open **Microsoft Edge** browser in your lab VM.
-2. Navigate to **Microsoft Copilot Studio**: `https://copilotstudio.microsoft.com`
-3. Click **Sign in**.
-4. Enter the provided credentials:
-   - **Email/Username:** `<inject key="AzureAdUserEmail"></inject>`
-   - **Password:** `<inject key="AzureAdUserPassword"></inject>`
-5. If prompted with **"Stay signed in?"**, click **No**.
-6. Wait for the Copilot Studio home page to load.
 
-### Step 2: Create a New Copilot
-1. On the Copilot Studio home page, click **+ Create** in the left navigation pane.
-2. Select **New copilot** from the options.
-3. In the creation dialog, you may see options to describe your copilot or start from blank:
-   - Choose **Skip to configure** or **Create from blank** to manually configure.
+1. Navigate to **Microsoft Power Apps**:
 
-### Step 3: Configure Basic Copilot Settings
+   ```
+   https://make.powerapps.com/
+   ```
+
+1. Click **Sign in**.
+
+1. Enter the provided credentials:
+   - Email/Username: <inject key="AzureAdUserEmail"></inject>
+   - Password: <inject key="AzureAdUserPassword"></inject>
+
+1. If prompted with **Welcome to Power Apps**, leave the default country as-is and click **Get started**.
+
+1. Once done, click on **Tables (1)** from the left menu and click on **Create with Excel or .CSV file (2)**.
+
+1. In the pop up window to create a environment, Click on **Create**. This will create a new power platform developer environment.
+
+1. In the next pane, click on **Select from device** and in the pop-up window to select files.
+
+1. On the **Open** dialog box, navigate to the extracted datasets folder select the file **IT_Support_Test_Scenarios.csv (2)**, and then click **Open (3)**.
+
+1. On the **Import an Excel or .CSV file** pane, verify that the file **IT_Support_Test_Scenarios.csv** is listed. Click **Import** to proceed.
+
+1. Once selected, click on **Save and exit** and in the pop up window, click on **Save and exit**.
+
+### Task 2: Sign into Microsoft Copilot Studio
+
+1. As you have now created a new environment and set up Dataverse, navigate to **Copilot Studio**  in a new tab using this link:
+
+   ```
+   https://copilotstudio.microsoft.com/
+   ```
+   
+1. In the pop-up window that appears click on **Get Started**
+
+1. In the home page, select the environment option.
+
+1. Change the environment to the new environment that you have created earlier on **Select environment** pane, expand **Supported environments (1)** and select **ODL_User<inject key="DeploymentID"></inject> Environment (2)**.
+
+### Task 3: Create a New Agent
+
+In this task, you will create a new agent in Microsoft Copilot Studio by defining its name, description, and basic configuration settings. This agent will serve as the base for enabling intelligent leave management operations.
+
+1. Navigate to Copilot Studio page from the browser.
+
+1. From the home page, select **Create (1)** from left menu and click on **+ New agent (2)** to create an agent.
+
+1. In the next pane, select **configure (1)** and provide the following details.
+
+    | Key                     | Value                               |
+    |-------------------------------|--------------------------------------------|
+    | Name | `IT Support Copilot` |
+    | Description | Your intelligent assistant for common IT support issues including password resets, VPN problems, slow laptop troubleshooting, and printer issues. |
+    | Instruction | You are an assistant that helps employees with information technology (IT) support within their organization. You can query a list of service requests that were previously opened by the employee, lookup details for a specific service request, create a new service request or get answers to common questions regarding traditional IT support services such as hardware, software, networking and password help. Service requests are also referred to as tickets, cases or incidents. You should respond politely. |
+   
+1. In the next pane, provide the same details given above and click on **Create**.
+
+1. You have successfully created the IT Support Copilot Agent. In the next steps of this lab, you will enhance it further by adding knowledge sources and advanced features.
+
+### Task 3: Create a New Agent
+
 1. In the copilot configuration screen, provide the following details:
    - **Name:** `IT Support Copilot - <inject key="DeploymentID"></inject>`
    - **Description:** `Your intelligent assistant for common IT support issues including password resets, VPN problems, slow laptop troubleshooting, and printer issues`
@@ -48,14 +90,14 @@ Please ensure you have access to the following resources:
 2. Click **Create** to initialize your copilot.
 3. Wait for the copilot to be created (this may take 30-60 seconds).
 
-### Step 4: Customize Copilot Icon and Identity
+### Step 5: Customize Copilot Icon and Identity
 1. Once the copilot is created, you'll see the authoring canvas.
 2. Click on **Settings** (gear icon) in the top-right corner.
 3. Navigate to **Generative AI** section (if available) or **Details**.
 4. Under **Icon** or **Avatar**, select an appropriate icon for IT support (e.g., headset, computer, or help icon).
 5. Click **Save** to apply changes.
 
-### Step 5: Add Conversation Starters
+### Step 6: Add Conversation Starters
 1. In the copilot authoring canvas, look for **Topics** in the left navigation.
 2. Find the **Conversation Start** system topic or the main overview page.
 3. Add **Conversation starters** (suggested prompts for users):
@@ -66,7 +108,7 @@ Please ensure you have access to the following resources:
 4. These will appear as buttons when users first interact with your copilot.
 5. **Save** your changes.
 
-### Step 6: Review Default System Topics
+### Step 7: Review Default System Topics
 1. In the left navigation, click **Topics**.
 2. You'll see several **System** topics that come pre-configured:
    - **Conversation Start** - Greets users when they first interact
@@ -76,7 +118,7 @@ Please ensure you have access to the following resources:
 4. Notice the message nodes and flow logic—this is how copilot conversations are designed.
 5. Keep these system topics **enabled** for now (toggle should be on).
 
-### Step 7: Test Your Copilot
+### Step 8: Test Your Copilot
 1. Look for the **Test your copilot** button or pane (usually on the right side or bottom-right corner).
 2. Click to open the **Test** pane.
 3. Type **"Hello"** in the test chat and press Enter.
@@ -85,7 +127,7 @@ Please ensure you have access to the following resources:
 6. The copilot should display the conversation starters you configured.
 7. If the test pane works and responds, your copilot is functioning correctly.
 
-### Step 8: Explore the Copilot Studio Interface
+### Step 9: Explore the Copilot Studio Interface
 Take a moment to familiarize yourself with the interface:
 - **Topics:** Where you create conversation flows
 - **Entities:** Define data types (dates, numbers, custom values)
