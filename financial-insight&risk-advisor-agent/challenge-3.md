@@ -1,70 +1,91 @@
 # Challenge 03: Build Financial Analysis Topics  
-**Estimated Time:** 50 Minutes
 
 ## Introduction
-With the financial datasets and knowledge documents uploaded, the Financial Risk Advisor Copilot can now reference business data to extract meaningful insights.  
-In this challenge, you will design two key financial analysis topics that not only summarize trends but also classify the level of business risk using an AI-reasoning prompt:
-• Revenue Trend & Growth Drivers  
-• Cash Flow Stability & Liquidity Outlook  
+The Copilot now has access to financial datasets and documents.  
+In this challenge, you will create two interactive financial analysis topics.  
+When each topic is triggered, the Copilot will:
+1) Ask a clarifying question  
+2) Use the user's answer to locate and interpret the correct values in the uploaded documents  
+3) Provide insights + assign a risk level: **No Risk / Moderate Risk / High Risk**
 
-These topics form the analytical core of the Copilot.
+This makes the agent conversational and context-aware.
 
 ## Challenge Objectives
-- Create two professional finance analysis topics.
-- Provide topic descriptions instead of trigger phrases (new Copilot Studio interface).
-- Configure instructions to summarize insights **and assign a risk score**.
-
----
+- Create two interactive financial analysis topics.
+- Ask for user input before performing analysis.
+- Generate insights using the knowledge base + user input.
+- Include a clear risk classification in responses.
 
 ## Steps to Complete
 
 ### Topic 1 — Revenue Trend & Growth Drivers
-1. Open the Financial Risk Advisor Copilot in Copilot Studio.
-2. From the top navigation, select **Topics**, then click **New topic**.
-3. Set the **Topic name:** Revenue Trend & Growth Drivers
-4. Set the **Topic description:**  
-   Identifies whether revenue is increasing or decreasing across reporting periods. Highlights spikes or declines and explains business drivers impacting revenue performance.
-5. Add a **Prompt** action and paste these instructions:  
-   Extract revenue values from the uploaded financial statements. Analyze whether revenue is trending up or down across the available reporting periods. Identify major spikes or declines and explain root causes mentioned in the reports. Based on this trend, classify the financial risk as: No Risk, Moderate Risk, or High Risk. Provide the output in bullet points with clear numbers and the final risk level.
-6. Add a **Message** action and enable **Respond using generative answers (with knowledge)**.
-7. Click **Save**.
 
----
+1. Open the Financial Risk Advisor Copilot in Copilot Studio.
+1. Navigate to **Topics** → **New topic**.
+1. Configure: 
+   - **Describe what topic does:** Analyze revenue patterns across reporting periods using financial documents. Ask the user which period or report to analyze, then evaluate the revenue trend, identify drivers behind changes, and assign a risk level (No Risk / Moderate Risk / High Risk) with clear reasoning.
+1. In the topic flow editor, Add a new **ask a question** node and add the below question:
+     ```
+     Which reporting period or document would you like me to analyze for revenue performance? 
+     ```
+1. Under **identify** select type as **User's Entire Response**.
+
+1. Once added, add one more node, select **Advanced** from list and click on **Generative answers**.
+
+1. In **Generative answers** node, select the **Variable** `Var1` by clicking on **...** option.
+
+1. Under data sources, click on **edit** and in the configuration pane, under **Knowledge Sources**, enable **search only selected resources** and select all the documents uploaded.
+
+1. once done, in the same pane, scroll down and disable **allow ai to use its own general knowledge**.
+
+1. Now, to Save the topic, click on save from top right corner and provide the name for the topic as `Revenue Trend & Growth Driver`.
 
 ### Topic 2 — Cash Flow Stability & Liquidity Outlook
-1. Still inside **Topics**, click **New topic** again.
-2. Set the **Topic name:** Cash Flow Stability & Liquidity Outlook
-3. Set the **Topic description:**  
-   Evaluates whether the business is generating or burning cash. Detects liquidity pressure, instability, and signals of financial stress from cash flow reports.
-4. Add a **Prompt** action and paste these instructions:  
-   Review the cash flow and liquidity data from the uploaded financial documents. Determine whether the business is generating or burning cash, and identify any periods of significant cash pressure or volatility. Describe causes where available (operational, staffing, supply chain, seasonal, etc.). Based on the analysis, classify the financial risk as: No Risk, Moderate Risk, or High Risk. Provide the summary in bullet points with specific values and the final risk level.
-5. Add a **Message** action and enable **Respond using generative answers (with knowledge)**.
-6. Click **Save**.
 
----
+1. On the **Topics** page, click **New topic** again.
+
+1. Configure:
+   - **Describe what topic does:** Evaluate cash flow and liquidity using financial documents. Ask the user which period or report to examine, then assess whether the business is generating or burning cash, identify liquidity stress factors, and assign a risk level (No Risk / Moderate Risk / High Risk) with justification.
+
+1. In the topic flow editor, Add a new **ask a question** node and add the below question:
+   ```
+   Which period or document should I examine to evaluate cash flow and liquidity?
+   ```
+1. Under **identify** select type as **User's Entire Response**.
+
+1. Once added, add one more node, select **Advanced** from list and click on **Generative answers**.
+
+1. In **Generative answers** node, select the **Variable** `Var2` by clicking on **...** option.
+
+1. Under data sources, click on **edit** and in the configuration pane, under **Knowledge Sources**, enable **search only selected resources** and select all the documents uploaded.
+
+1. once done, in the same pane, scroll down and disable **allow ai to use its own general knowledge**.
+
+1. Now, to Save the topic, click on save from top right corner and provide the name for the topic as `Cash Flow Stability & Liquidity Driver`.
 
 ### Test Both Topics
-1. Ensure all uploaded files under **Knowledge** show status **Ready**.
-2. Click **Test** (top right).
-3. Ask sample questions such as:  
-   • How is our revenue trending?  
-   • What is the current cash flow situation?  
-4. Confirm that the Copilot:
-   • References real values from the documents  
-   • Provides bullet-point summaries  
-   • Assigns the correct risk level (No / Moderate / High)
 
----
+1. Confirm uploaded files under **Knowledge** show status **Ready**.
+
+1. Click **Test** from top right corner.
+
+1. Ask the Copilot:  
+   • “Analyse revenue performance"  
+   • “How is our cash flow looking?”
+4. Copilot should:
+   • Ask follow-up question (period/document)  
+   • Use user’s reply to reference the correct dataset  
+   • Produce bullet-point insights.
 
 ## Success Criteria
-- Two topics are created successfully:
-  1) Revenue Trend & Growth Drivers  
-  2) Cash Flow Stability & Liquidity Outlook
-- Responses reference uploaded financial content, not generic or templated answers.
-- The Copilot outputs a risk classification clearly in each topic.
+- Both topics are created successfully and request clarification from the user.
+- Copilot references uploaded financial data based on user input (not generic advice).
+- Responses include:
+  • Numeric insights in bullet points  
+  • A final, clearly stated risk level  
 
 ## Additional Resources
-- https://learn.microsoft.com/microsoft-copilot-studio/topics
-- https://learn.microsoft.com/microsoft-copilot-studio/knowledge#use-knowledge-in-topics
+- https://learn.microsoft.com/microsoft-copilot-studio/topics  
+- https://learn.microsoft.com/microsoft-copilot-studio/knowledge
 
 ---

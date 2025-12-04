@@ -1,91 +1,40 @@
-# Challenge 03: Build Financial Analysis Topics  
+# Challenge 03: Upload and Tag Images for Surface Defect Training  
 
 ## Introduction
-The Copilot now has access to financial datasets and documents.  
-In this challenge, you will create two interactive financial analysis topics.  
-When each topic is triggered, the Copilot will:
-1) Ask a clarifying question  
-2) Use the user's answer to locate and interpret the correct values in the uploaded documents  
-3) Provide insights + assign a risk level: **No Risk / Moderate Risk / High Risk**
+With the Custom Vision project created, Contoso will now prepare the defect detection model by uploading labeled training images.  
+The model will learn to identify surface anomalies based on three defect categories: **crazing**, **patches**, and **scratches**.
 
-This makes the agent conversational and context-aware.
+In this challenge, you will upload images to the existing project, assign the correct tags to each image, and trigger model training.
 
 ## Challenge Objectives
-- Create two interactive financial analysis topics.
-- Ask for user input before performing analysis.
-- Generate insights using the knowledge base + user input.
-- Include a clear risk classification in responses.
+- Upload sample manufacturing images to the Custom Vision project.  
+- Tag images according to the correct defect category.  
+- Train the initial defect-detection model.
 
 ## Steps to Complete
-
-### Topic 1 — Revenue Trend & Growth Drivers
-
-1. Open the Financial Risk Advisor Copilot in Copilot Studio.
-1. Navigate to **Topics** → **New topic**.
-1. Configure: 
-   - **Describe what topic does:** Analyze revenue patterns across reporting periods using financial documents. Ask the user which period or report to analyze, then evaluate the revenue trend, identify drivers behind changes, and assign a risk level (No Risk / Moderate Risk / High Risk) with clear reasoning.
-1. In the topic flow editor, Add a new **ask a question** node and add the below question:
-     ```
-     Which reporting period or document would you like me to analyze for revenue performance? 
-     ```
-1. Under **identify** select type as **User's Entire Response**.
-
-1. Once added, add one more node, select **Advanced** from list and click on **Generative answers**.
-
-1. In **Generative answers** node, select the **Variable** `Var1` by clicking on **...** option.
-
-1. Under data sources, click on **edit** and in the configuration pane, under **Knowledge Sources**, enable **search only selected resources** and select all the documents uploaded.
-
-1. once done, in the same pane, scroll down and disable **allow ai to use its own general knowledge**.
-
-1. Now, to Save the topic, click on save from top right corner and provide the name for the topic as `Revenue Trend & Growth Driver`.
-
-### Topic 2 — Cash Flow Stability & Liquidity Outlook
-
-1. On the **Topics** page, click **New topic** again.
-
-1. Configure:
-   - **Describe what topic does:** Evaluate cash flow and liquidity using financial documents. Ask the user which period or report to examine, then assess whether the business is generating or burning cash, identify liquidity stress factors, and assign a risk level (No Risk / Moderate Risk / High Risk) with justification.
-
-1. In the topic flow editor, Add a new **ask a question** node and add the below question:
-   ```
-   Which period or document should I examine to evaluate cash flow and liquidity?
-   ```
-1. Under **identify** select type as **User's Entire Response**.
-
-1. Once added, add one more node, select **Advanced** from list and click on **Generative answers**.
-
-1. In **Generative answers** node, select the **Variable** `Var2` by clicking on **...** option.
-
-1. Under data sources, click on **edit** and in the configuration pane, under **Knowledge Sources**, enable **search only selected resources** and select all the documents uploaded.
-
-1. once done, in the same pane, scroll down and disable **allow ai to use its own general knowledge**.
-
-1. Now, to Save the topic, click on save from top right corner and provide the name for the topic as `Cash Flow Stability & Liquidity Driver`.
-
-### Test Both Topics
-
-1. Confirm uploaded files under **Knowledge** show status **Ready**.
-
-1. Click **Test** from top right corner.
-
-1. Ask the Copilot:  
-   • “Analyse revenue performance"  
-   • “How is our cash flow looking?”
-4. Copilot should:
-   • Ask follow-up question (period/document)  
-   • Use user’s reply to reference the correct dataset  
-   • Produce bullet-point insights.
+1. On the **Training Images** page, click **Add images**.
+1. From the downloaded dataset folder, extract the ZIP file if not already extracted.
+1. Navigate to the `Datasets/train` directory which you have extracted earlier, inside it you will find three folders representing defect categories:  
+   - `crazing`  
+   - `patches`  
+   - `scratches`
+1. Upload images category-wise:  
+   - Open the `crazing` folder → select all images → click **Open** → apply the tag `crazing`.  
+   - Open the `patches` folder → select all images → click **Open** → apply the tag `patches`.  
+   - Open the `scratches` folder → select all images → click **Open** → apply the tag `scratches`.
+1. After all images are uploaded and tagged, click **Train** (top right).
+1. Select **Quick training** and confirm.  
+1. Wait for the training run to complete.
+   > **Note:** Training may take up to **30 minutes**, depending on compute availability.
 
 ## Success Criteria
-- Both topics are created successfully and request clarification from the user.
-- Copilot references uploaded financial data based on user input (not generic advice).
-- Responses include:
-  • Numeric insights in bullet points  
-  • A final, clearly stated risk level  
+- All training images uploaded and correctly tagged across **three defect categories**.  
+- Initial training completed and a performance summary (Precision / Recall / mAP) is displayed.
 
 ## Additional Resources
-- https://learn.microsoft.com/microsoft-copilot-studio/topics  
-- https://learn.microsoft.com/microsoft-copilot-studio/knowledge
+- [Upload and Tag Images in Custom Vision](https://learn.microsoft.com/azure/ai-services/custom-vision-service/getting-started-build-a-classifier#upload-and-tag-images)  
+- [Train and Evaluate Custom Vision Models](https://learn.microsoft.com/azure/ai-services/custom-vision-service/getting-started-build-a-classifier#train-the-classifier)
 
 ---
+
+Now, click **Next** to continue to **Challenge 04: Evaluate Model Performance and Improve Accuracy**.
