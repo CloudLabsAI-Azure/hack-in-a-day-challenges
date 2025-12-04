@@ -4,14 +4,14 @@
 Now that you've built your Customer Care Copilot with 4 topics, a reusable Customer Service Request flow, and knowledge base integration, it's time to thoroughly test the complete solution. End-to-end testing ensures all components work together seamlessly from customer input to ticket creation in Freshdesk.
 
 In this challenge, you will test all 4 topics comprehensively, verify Customer Service Request flow integration, confirm tickets are created in Freshdesk, and validate the entire customer experience.
-
+ 
 ## Challenge Objectives
-- Test all 4 topics in Copilot Studio test pane
-- Verify Customer Service Request flow integration for each topic
-- Confirm tickets are created in Freshdesk portal
-- Validate ticket details (subject, description, priority, requester email)
-- Test knowledge base responses for common queries
-- Identify and fix any conversation flow issues
+ - Test all 4 topics in Copilot Studio test pane
+ - Verify CustomerServiceFlow integration for each topic
+ - Confirm tickets are created in Freshdesk portal
+ - Validate ticket details (subject, description, priority, requester email)
+ - Test knowledge base responses for common queries
+ - Identify and fix any conversation flow issues
 
 ## Steps to Complete
 

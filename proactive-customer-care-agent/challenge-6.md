@@ -255,7 +255,7 @@ You have successfully built an **AI-powered Customer Care Copilot** using Micros
 ### What You Accomplished:
 - Created an intelligent Customer Care Copilot with knowledge base
 - Built 4 automated customer service topics using generative AI
-- Created reusable Customer Service Request flow in Copilot Studio
+- Created reusable CustomerServiceFlow in Copilot Studio
 - Integrated Freshdesk API for ticket management
 - Deployed to Microsoft Teams for organization-wide access
 - Reduced manual customer service workload through automation

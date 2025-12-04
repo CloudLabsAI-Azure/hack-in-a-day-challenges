@@ -121,11 +121,11 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 ### Step 8: Save and Name the Flow
 
-1. Click **Save** in the top-right corner of the flow designer.
+2. Click **Save** in the top-right corner of the flow designer.
 
-2. When prompted for a name, enter:
+3. When prompted for a name, enter:
    ```
-   Customer Service Request
+   CustomerServiceFlow
    ```
 
 3. Wait for the flow to save successfully.
@@ -189,7 +189,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 1. In Copilot Studio, click **Actions** in the left navigation.
 
 2. You should see your flow listed:
-   - **Name:** Customer Service Request
+   - **Name:** CustomerServiceFLow
    - **Status:** Published
 
 3. This flow is now ready to be called from any topic.
@@ -200,7 +200,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 - Freshdesk connector added and connection established
 - Freshdesk "Create a ticket" action configured with dynamic inputs and preset values
 - Return value added to send status back to agent
-- Flow saved with the name "Customer Service Request"
+- Flow saved with the name "CustomerServiceFlow"
 - Flow tested independently with manual test inputs
 - Test ticket created successfully in Freshdesk portal
 - Flow published and available in Actions list
