@@ -25,7 +25,7 @@ In this challenge, you will upload images to the existing project, assign the co
 1. After all images are uploaded and tagged, click **Train** (top right).
 1. Select **Quick training** and confirm.  
 1. Wait for the training run to complete.
-   > 🚨 **Note:** Training may take up to **30 minutes**, depending on compute availability.
+   > **Note:** Training may take up to **30 minutes**, depending on compute availability.
 
 ## Success Criteria
 - All training images uploaded and correctly tagged across **three defect categories**.  
