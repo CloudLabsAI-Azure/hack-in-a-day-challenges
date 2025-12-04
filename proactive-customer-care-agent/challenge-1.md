@@ -55,7 +55,7 @@ Please download and extract the datasets required for this challenge here - [Dat
    - **Name:** `Customer Care Copilot`
    - **Description:** `AI-powered assistant for customer service automation including order tracking, complaint management, service inquiries, and product support`
    - **Language:** English
-   - **Environment:** Select the default environment or **Dev-<inject key="DeploymentID"></inject>** if available
+   - **Environment:** Select the **odl_user_<inject key="DeploymentID"></inject>**.
 
 2. Click **Create** to initialize your copilot.
 
