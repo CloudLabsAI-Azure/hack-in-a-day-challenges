@@ -4,7 +4,7 @@
 Contoso Manufacturing aims to automate defect detection by analyzing images captured from production lines.  
 Azure **Custom Vision** enables you to **train your own image classification and object detection models**, allowing the system to recognize factory defects, missing components, and anomalies with high accuracy.
 
-In this challenge, you’ll create the **Custom Vision resources** required for the Visual Assistant — including **Training** and **Prediction** endpoints — which will later be used to train and deploy defect detection models.
+In this challenge, you’ll create the **Custom Vision resources** required for the Visual Assistant, including **Training** and **Prediction** endpoints, which will later be used to train and deploy defect detection models.
 
 ## Accessing the Datasets and Codefiles
 
