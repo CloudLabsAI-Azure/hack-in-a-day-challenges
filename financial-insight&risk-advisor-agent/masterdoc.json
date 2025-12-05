@@ -13,9 +13,25 @@
                 "Order": 2
             },    
             {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/financial-insight%26risk-advisor-agent/challenge.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/financial-insight%26risk-advisor-agent/challenge-1.md",
                 "Order": 3
-            }    
+            },
+                        {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/financial-insight%26risk-advisor-agent/challenge-2.md",
+                "Order": 4
+            },
+                        {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/financial-insight%26risk-advisor-agent/challenge-3.md",
+                "Order": 5
+            },
+                        {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/financial-insight%26risk-advisor-agent/challenge-4.md",
+                "Order": 6
+            },
+                        {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/financial-insight%26risk-advisor-agent/challenge-5.md",
+                "Order": 7
+            }
         ]
     }
 ]
