@@ -62,23 +62,13 @@ Alternatively, you can download them here - [Datasets](https://github.com/CloudL
 
 2. Scroll down on the **Start building your agent** page and select **+ Add (1)** to add knowledge sources.
 
-   ![image](./media/m-l1-23.png)
-
 3. Select **SharePoint** from the **Add Knowledge** window.
-
-   ![image](./media/m-l1-24.png)
 
 4. Enter the **SharePoint site KnowledgeHub link (1)** that you copied in Challenge 1, then select **Add (2)**.
 
-   ![image](./media/12-9-m51.png)
-
    > **Note:** If the site link shows **"This item was not found in your SharePoint or OneDrive files"**, this may occur due to temporary indexing delays. Select **Add anyway** to continue.
 
-   ![image](./media/lab5-12-1.png)
-
 5. Select **Add to agent** to add the SharePoint knowledge source.
-
-   ![image](./media/m-l1-25.png)
 
 6. The SharePoint site will now be indexed for knowledge retrieval.
 

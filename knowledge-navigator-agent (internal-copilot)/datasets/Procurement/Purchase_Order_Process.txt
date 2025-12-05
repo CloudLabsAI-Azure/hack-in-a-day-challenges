@@ -1,0 +1,476 @@
+# Purchase Order Request Process
+
+**Procurement Department Guide | Version 3.5**
+
+## What is a Purchase Order (PO)?
+
+A Purchase Order is a formal document issued to vendors authorizing a purchase transaction. It includes item details, quantities, prices, payment terms, and delivery requirements. POs create legally binding contracts when accepted by vendors.
+
+## When PO is Required
+
+### Always Require PO:
+- Purchases over $1,000
+- Recurring vendor relationships
+- Multi-item orders
+- Custom manufacturing or services
+- Software licenses or subscriptions
+- Professional services contracts
+- Equipment and hardware
+- Marketing and promotional materials
+- Office furniture and supplies (bulk)
+
+### PO Not Required:
+- Purchases under $1,000 (use corporate card)
+- Utilities and facility costs (auto-paid)
+- Employee expenses (use expense reports)
+- Emergency purchases (followed by PO within 24 hours)
+- Pre-approved contracts with blanket POs
+
+## Purchase Order Types
+
+### Standard PO
+- **Use For:** One-time purchases with specific quantities and delivery dates
+- **Details:** Itemized list, unit prices, total amount, delivery date
+- **Example:** Office furniture order, computer equipment, marketing materials
+
+### Blanket PO
+- **Use For:** Recurring purchases from same vendor over period (usually 1 year)
+- **Details:** Maximum spend amount, validity period, approved items/services
+- **Example:** Office supplies, IT support services, cleaning services
+- **Benefits:** Reduces paperwork for frequent purchases
+
+### Contract PO
+- **Use For:** Long-term agreements with negotiated terms and pricing
+- **Details:** Multi-year commitments, volume discounts, service level agreements
+- **Example:** Software licenses, managed services, equipment leasing
+
+### Planned PO
+- **Use For:** Known future need with flexible delivery schedule
+- **Details:** Quantities estimated, delivery dates TBD, pricing locked
+- **Example:** Quarterly marketing campaigns, seasonal inventory
+
+## PO Request Process
+
+### Step 1: Prepare Your Request
+
+**Gather Information:**
+- Detailed description of goods/services needed
+- Vendor information (name, contact, address)
+- Itemized list with part numbers/SKUs
+- Quantity needed
+- Unit price and total cost
+- Requested delivery date
+- Business justification
+- Budget code/cost center
+- Manager pre-approval (if required)
+
+**Vendor Selection:**
+- Get quotes from 3 vendors for purchases >$10,000
+- Use preferred vendor list when possible
+- New vendors require procurement approval
+- Include vendor W-9 form for first-time vendors
+
+### Step 2: Check Budget Availability
+
+1. Log in to financial system: finance.company.com
+2. Review budget vs. actuals for your cost center
+3. Confirm sufficient budget for purchase
+4. If over budget, request budget amendment first
+5. Note budget code for PO request
+
+### Step 3: Submit PO Request
+
+**Via Procurement Portal (Preferred):**
+1. Go to procurement.company.com
+2. Click "Create Purchase Request"
+3. Select PO type (Standard, Blanket, Contract)
+4. Fill in all required fields:
+   - Vendor details
+   - Item descriptions
+   - Quantities and unit prices
+   - Delivery date and location
+   - Budget code
+   - Business justification
+5. Attach supporting documents:
+   - Vendor quotes (required for >$10,000)
+   - Technical specifications
+   - Statement of Work (for services)
+   - Comparisons (if multiple vendors)
+6. Submit request
+
+**Via Email (If Portal Unavailable):**
+- Email: procurement@company.com
+- Subject: "PO Request - [Your Name] - [Brief Description]"
+- Include all details listed above
+- Attach vendor quotes and specifications
+
+### Step 4: Approval Workflow
+
+**Automatic Routing Based on Amount:**
+
+**< $5,000:**
+1. Manager approval (1 day)
+2. Procurement review (1 day)
+3. PO issued (1 day)
+**Total: 2-3 days**
+
+**$5,000 - $25,000:**
+1. Manager approval
+2. Director approval
+3. Procurement review
+4. Finance approval (budget confirmation)
+5. PO issued
+**Total: 3-5 days**
+
+**$25,000 - $100,000:**
+1. Manager approval
+2. Director approval
+3. VP approval
+4. Procurement competitive bid review
+5. Legal review (if new vendor or contract)
+6. CFO approval
+7. PO issued
+**Total: 1-2 weeks**
+
+**> $100,000:**
+1. Full approval chain above
+2. Executive committee review
+3. Board notification (if >$500K)
+4. Formal vendor selection process
+5. Contract negotiation
+6. PO issued
+**Total: 2-4 weeks**
+
+### Step 5: PO Issuance
+
+**Procurement Actions:**
+- Verify all approvals received
+- Validate vendor information
+- Check for duplicate orders
+- Assign PO number (format: PO-2024-XXXXX)
+- Generate PO document
+- Send PO to vendor via email
+- Copy requestor and approvers
+- Update procurement system
+
+**PO Document Includes:**
+- Unique PO number
+- Issue date
+- Vendor name and address
+- Ship-to address
+- Billing address
+- Item descriptions and quantities
+- Unit prices and total amount
+- Payment terms
+- Delivery date
+- Special instructions
+- Terms and conditions
+
+### Step 6: Order Tracking
+
+**Requestor Responsibilities:**
+- Monitor order status in portal
+- Follow up with vendor if delays
+- Coordinate delivery logistics
+- Notify procurement of any changes
+- Receive and inspect goods
+- Submit receipt confirmation
+
+**Track Your Order:**
+- Portal: procurement.company.com/track
+- Email updates sent automatically
+- Contact procurement with PO number
+
+## Receiving & Three-Way Match
+
+### Goods Receipt Process
+
+**When Delivery Arrives:**
+1. Verify PO number on packing slip
+2. Count and inspect items
+3. Check for damage
+4. Compare to PO (quantities, items)
+5. Sign delivery receipt
+6. Report discrepancies immediately
+
+**Log Receipt in System:**
+1. Go to procurement.company.com
+2. Find your PO
+3. Click "Record Receipt"
+4. Enter received quantities
+5. Note any damages or shortages
+6. Upload photos if damaged
+7. Submit receipt confirmation
+
+**Partial Receipts:**
+- Receive what arrived
+- Note items still pending
+- PO stays open until complete
+- Follow up with vendor on back-ordered items
+
+### Three-Way Match
+
+**Before Payment, Verify:**
+1. **Purchase Order** - What was authorized
+2. **Receipt** - What was actually received
+3. **Invoice** - What vendor is billing
+
+**All Three Must Match:**
+- Item descriptions
+- Quantities
+- Prices
+- Total amounts
+
+**If Discrepancy:**
+- Hold payment
+- Contact vendor
+- Resolve before paying
+- Procurement assists with disputes
+
+## PO Changes & Cancellations
+
+### Change Orders
+
+**Allowed Changes:**
+- Quantity adjustments (within 20%)
+- Delivery date changes
+- Ship-to address updates
+- Price corrections (with vendor agreement)
+
+**Process:**
+1. Contact procurement with PO number
+2. Explain needed changes
+3. Procurement coordinates with vendor
+4. Revised PO issued (new revision number)
+5. All parties notified
+
+**Requires Re-Approval:**
+- Total amount increase >10%
+- Scope changes
+- Vendor substitution
+- Budget code changes
+
+### Cancellations
+
+**Valid Reasons:**
+- No longer needed
+- Vendor cannot deliver
+- Found better pricing elsewhere
+- Budget no longer available
+- Project cancelled
+
+**Process:**
+1. Contact procurement immediately
+2. Provide PO number and reason
+3. Procurement contacts vendor
+4. Confirm cancellation in writing
+5. Check for cancellation fees
+6. Close PO in system
+
+**Cancellation Fees:**
+- May apply if vendor started work
+- Custom orders often non-refundable
+- Review vendor terms before ordering
+- Manager approval if fee >$500
+
+## Vendor Management
+
+### Preferred Vendor List
+
+**Benefits of Preferred Vendors:**
+- Pre-negotiated pricing
+- Faster processing
+- Established quality standards
+- Reliable delivery
+- Simplified paperwork
+
+**Access List:**
+- Portal: procurement.company.com/vendors
+- Organized by category
+- Contact information included
+- Negotiated terms listed
+
+### New Vendor Requests
+
+**Required Before First PO:**
+1. Complete Vendor Information Form
+2. Provide W-9 (US) or W-8 (International)
+3. Certificate of Insurance (if required)
+4. Banking information for ACH
+5. References (for vendors >$50K annually)
+6. Background check (for high-value vendors)
+
+**Procurement Reviews:**
+- Financial stability
+- Reputation and references
+- Insurance coverage
+- Terms and conditions
+- Pricing competitiveness
+
+**Timeline:** 7-10 business days for approval
+
+### Vendor Performance
+
+**Tracked Metrics:**
+- On-time delivery rate
+- Quality of goods/services
+- Responsiveness
+- Invoice accuracy
+- Issue resolution
+
+**Quarterly Reviews:**
+- Poor performers flagged
+- Alternative vendors identified
+- Continuous improvement discussions
+- Contracts renegotiated or terminated
+
+## Purchase Categories
+
+### Office Supplies & Materials
+- **Preferred Vendor:** Office Depot (blanket PO)
+- **Process:** Order online, auto-approved up to $500/order
+- **Delivery:** Next business day
+- **No PO Required:** Individual items <$100
+
+### Technology & Software
+- **Requires:** IT approval before procurement
+- **Process:** Submit request to IT first
+- **Security Review:** For new software vendors
+- **Licensing:** Track user counts and renewals
+
+### Professional Services
+- **Requires:** Statement of Work (SOW)
+- **Process:** Define deliverables and timeline
+- **Payment:** Often milestone-based
+- **Examples:** Consultants, contractors, agencies
+
+### Marketing & Advertising
+- **Requires:** Marketing manager approval
+- **Process:** Campaign details and ROI projections
+- **Vendors:** Agencies, printers, media buyers
+- **Budget:** Separate marketing budget codes
+
+### Facilities & Maintenance
+- **Vendors:** Pre-approved service providers
+- **Process:** Facilities manager coordinates
+- **Emergency:** 24-hour response available
+- **Blanket POs:** For routine maintenance
+
+## Compliance & Controls
+
+### Segregation of Duties
+- **Requestor:** Cannot approve own PO
+- **Approver:** Cannot be requestor
+- **Receiver:** Should not be requestor (when possible)
+- **Payment:** Processed by Finance, not requestor
+
+### Audit Trail
+**All Actions Logged:**
+- Who requested PO
+- Who approved at each level
+- When PO was issued
+- Receipt confirmation
+- Invoice matched
+- Payment made
+
+### Conflict of Interest
+**Disclosure Required:**
+- Personal relationship with vendor
+- Family member owns vendor
+- Financial interest in vendor company
+- Gifts or incentives from vendor
+
+**Report To:** procurement-ethics@company.com
+
+### Fraud Prevention
+**Red Flags:**
+- Rush orders without justification
+- Splitting purchases to avoid approval limits
+- Unusual vendor requests
+- Vendor contact changes
+- Duplicate invoices
+
+**Report Suspicious Activity:**
+- Email: procurement-fraud@company.com
+- Phone: (555) 123-4900
+- Confidential reporting available
+
+## Procurement Best Practices
+
+### Plan Ahead
+- Submit requests 2-4 weeks before needed
+- Account for approval time and delivery
+- Don't wait until last minute
+- Communicate urgent needs early
+
+### Be Specific
+- Detailed item descriptions
+- Part numbers and specifications
+- Exact quantities needed
+- Preferred delivery date
+
+### Get Competitive Quotes
+- 3 quotes for purchases >$10,000
+- Document why preferred vendor chosen
+- Consider total cost (shipping, support, warranty)
+
+### Leverage Volume
+- Combine orders when possible
+- Coordinate with other departments
+- Negotiate better pricing for bulk
+- Use blanket POs for recurring needs
+
+### Build Relationships
+- Communicate clearly with vendors
+- Pay invoices promptly
+- Provide feedback (positive and negative)
+- Partner for continuous improvement
+
+## Key Contacts
+
+**Procurement Team**  
+Email: procurement@company.com  
+Phone: (555) 123-4900  
+Portal: procurement.company.com  
+Hours: Monday-Friday, 8 AM - 5 PM
+
+**By Category:**
+- Technology: tech-procurement@company.com
+- Marketing: marketing-procurement@company.com
+- Facilities: facilities-procurement@company.com
+- Professional Services: services-procurement@company.com
+
+**Vendor Questions**  
+Email: vendor-support@company.com  
+New Vendor Setup: vendor-setup@company.com
+
+**Urgent Issues**  
+Phone: (555) 123-4901  
+Email: procurement-urgent@company.com
+
+---
+
+## Quick Reference
+
+**PO Required:** Purchases >$1,000  
+**Timeline:** 2-3 days (<$5K) to 2-4 weeks (>$100K)  
+**Quotes Required:** 3 quotes for >$10,000  
+**Portal:** procurement.company.com
+
+**Approval Limits:**
+- <$5K: Manager
+- $5K-$25K: Director
+- $25K-$100K: VP + CFO
+- >$100K: Executive Committee
+
+**Remember:**
+- Plan ahead (2-4 weeks)
+- Get competitive quotes
+- Record receipt promptly
+- Report discrepancies immediately
+
+---
+
+**Last Updated:** January 2024  
+**Policy Owner:** Chief Procurement Officer  
+**Questions:** procurement@company.com | (555) 123-4900
