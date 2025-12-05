@@ -10,75 +10,88 @@ The Copilot will ask the user if they want the report emailed, and only if the u
 - Connect the flow to the **Cash Flow Stability & Liquidity Outlook** topic.  
 - Ask the user whether the report should be emailed and execute escalation accordingly.
 
----
-
 ## Steps to Complete
 
 ### 1 — Create the Flow for Email Escalation  
-1. In Copilot Studio, open the **Financial Risk Advisor Copilot** project.  
-2. From the left navigation pane, select **Agent flows → + New flow**.  
-3. Choose **Send an email (V2)**.  
-4. Configure the flow:
+1. In Copilot Studio, from the left navigation pane, select **Flows → + New agent flow**
+
+1. You will be navigated to **Designer** pane, under the add a trigger pane, search for **When an agent calls the flow** and select it.
+
+1. Inside **When an agent calls the flow** node, select **Add an input** option to add a input variable and provide the name as **Body**.
+
+1. Once configured, add one more node by clicking on **+**.
+
+1. Search and Choose **Send an email (V2)** node. 
+
+1. In the configuration pane, provide **<inject key="AzureAdUserEmail"></inject>** in the **To** parameter.
+
+1. Configure the flow:
    - **Subject:** Risk with the financial report  
    - **Body:** Use the **body** variable (this will carry the complete financial summary from the Copilot)  
-   - **Importance:** High  
-5. After configuring these fields, add a **Send message** node at the end of the flow.  
-6. In the message text box, enter:  
-   *The email has been sent successfully.*  
-7. Select **Publish** to publish the flow.  
-8. Once published, open the **Flow Overview** page and click **Edit** on the Details card.  
-9. Change the flow name from **Untitled** to **Outlook Flow**.  
-10. Select **Save**.
+   - **Importance:** High
 
----
+1. After configuring these fields, add a **Send message** node at the end of the flow.
+
+1. In the message text box, enter:  
+   *The email has been sent successfully.*  
+
+1. Select **Publish** to publish the flow.  
+
+1. Once published, open the **Flow Overview** page and click **Edit** on the Details card.  
+
+1. Change the flow name from **Untitled** to **Outlook Flow**.  
+
+1. Select **Save**.
 
 ### 2 — Connect the Flow to the Cash Flow Topic  
 1. Navigate back to **Topics** → open **Cash Flow Stability & Liquidity Outlook**.  
-2. Scroll to the **last Generative Answers node** and select **Edit data source**.  
-3. Scroll down and expand **Advanced options**.  
-4. Under **Save agent response as**, select **Create new variable**.  
-5. Name the variable: **body**  
-   (This variable will pass the entire financial summary to the Outlook Flow.)
 
----
+1. Scroll to the **last Generative Answers node** and select **Edit data source**.  
+
+1. Scroll down and expand **Advanced options**.  
+
+1. Under **Save agent response as**, select **Create new variable**.  
+
+1. Name the variable: **body**  
+   (This variable will pass the entire financial summary to the Outlook Flow.)
 
 ### 3 — Add User Confirmation and Execute the Escalation Flow  
 1. Select **+ Add node** under the Generative Answers node.  
-2. Choose **Ask a question**.  
-3. In the question text, enter:  
+
+1. Choose **Ask a question**.  
+
+1. In the question text, enter:  
    *Do you want me to send this report to the CFO?*  
-4. Change the response type to **Multiple choice** with options:  
+
+1. Change the response type to **Multiple choice** with options:  
    • Yes  
    • No  
-5. Copilot Studio will automatically generate condition branches:
+   
+1. Copilot Studio will automatically generate condition branches:
    • If **Yes selected**  
    • If **No selected**
 
 #### Under the **Yes** branch:
 1. Select **Add node → Action**.  
-2. Choose **Outlook Flow**.
+1. Choose **Outlook Flow**.
 
 #### Under the **No** branch:
 1. Select **Add node → Send a message**.  
-2. Add message text such as:  
+1. Add message text such as:  
    *Thank you for reaching out. Let me know if you need anything else.*
 
-3. Select **Save**.
-
----
+1. Select **Save**.
 
 ### Test the Complete Escalation Experience  
 1. Click **Test** (top right).  
-2. Ask the Copilot:  
+1. Ask the Copilot:  
    *How does our cash flow look this quarter?*  
-3. Confirm the full flow:  
+1. Confirm the full flow:  
    • Copilot analyzes the cash flow  
    • Copilot displays the full summary  
    • Copilot asks whether to send the report to the CFO  
    • If **Yes** → Outlook Flow runs and email is sent  
    • If **No** → Copilot thanks the user without escalation
-
----
 
 ## Success Criteria  
 - The Outlook Flow successfully sends an escalation email only when the user selects **Yes**.  
@@ -91,4 +104,3 @@ The Copilot will ask the user if they want the report emailed, and only if the u
 - https://learn.microsoft.com/microsoft-copilot-studio/create-plugin  
 - https://learn.microsoft.com/power-automate/flows-overview
 
----
