@@ -1,82 +1,196 @@
-# Challenge: Knowledge Navigator Agent (Internal Copilot)
+# Challenge-Based Learning: Internal Knowledge Navigator
 
 **Estimated Time:** 4 Hours  
 
-**Industry Focus:** Cross-Enterprise Knowledge Management, Internal Productivity  
+**Industry Focus:** Internal Knowledge Management, Employee Productivity  
 
 ## Problem Statement
 
-Employees waste time searching for information spread across Teams, SharePoint, emails, and project tools. The lack of unified search and contextual reasoning leads to duplication of effort, inconsistent answers, and decreased productivity.
+Employees waste time searching for policies and procedures across different departments. Information is scattered in various document repositories, leading to repeated questions, inconsistent answers, and decreased productivity. HR, Finance, IT, and Procurement teams spend hours answering the same basic questions.
 
-In this challenge, you will build a **Knowledge Navigator Agent (Internal Copilot)** that uses Azure AI Foundry, Azure AI Search, and Copilot Studio to unify knowledge access. The agent will autonomously decide which data source to query, retrieve relevant information, summarize it, and return grounded responses with citations. It will also be able to launch contextual actions, such as opening documents or sending summaries.
+In this challenge, you will build an **Internal Knowledge Navigator** copilot using Microsoft Copilot Studio that helps employees quickly find information across departments with AI-powered search, citation-based answers, and automated actions.
 
 ## Goals
 
 By the end of this challenge, you will deliver a **conversational knowledge assistant** capable of:
 
-- Performing natural-language Q&A across multiple enterprise data sources.  
-- Using Azure AI Search for relevant and grounded retrieval.  
-- Summarizing and reasoning over retrieved content with context awareness.  
-- Citing sources and enabling users to navigate directly to underlying documents.  
-- Triggering contextual actions (open links, send summaries via Teams/Email).
+- Answering employee questions across HR, Finance, IT, and Procurement departments
+- Providing responses with citations showing document sources
+- Guiding employees through common processes with conversational topics
+- Emailing policy documents on request
+- Creating IT support tickets automatically
+- Sending conversation summaries to employees or managers
 
 ## Expected Outcomes
 
 You will have:
 
-- A conversational knowledge assistant with autonomous retrieval.  
-- Natural-language Q&A across enterprise data sources.  
-- Context-aware summarization and reasoning with proper citations.  
-- Improved internal productivity and collaboration patterns (simulated in the lab).
+- An Internal Knowledge Navigator copilot accessible via web or Teams
+- Knowledge base with 12 department documents (HR, Finance, IT, Procurement)
+- 4 department-specific conversational topics with smart routing
+- Citation-based answers showing document sources
+- 3 automated actions (email documents, create tickets, send summaries)
+- Production-ready solution helping employees find information 10x faster
 
 ## Prerequisites
 
-- **Skill Level:** Familiarity with Microsoft 365 and Azure AI Search.  
-- **Audience:** IT pros, solution architects, productivity engineers, and power users.  
+- **Skill Level:** Beginner to Intermediate
+- **Audience:** IT teams, business analysts, department coordinators, employee experience managers
 - **Technology Stack:**  
-  - Azure AI Foundry / Azure OpenAI  
-  - Azure AI Search  
-  - Microsoft Copilot Studio  
-  - Power Automate  
-  - Microsoft 365 services (Teams, SharePoint, Outlook)
+  - Microsoft Copilot Studio (no-code platform)
+  - Power Automate
+  - Microsoft 365 (Teams, Outlook)
+  - Optional: Freshdesk or other ticketing system
 
 ## Learning Objectives
 
 By completing this challenge, you will:
 
-- Learn to use retrieval-augmented generation (RAG) patterns.  
-- Implement data connectors and indexing via Azure AI Search.  
-- Build reasoning and orchestration layers in Azure AI Foundry.  
-- Integrate Copilot Studio for a user-friendly internal copilot interface.  
-- Wire in contextual actions through Power Automate.
+- Create and configure copilots in Microsoft Copilot Studio
+- Upload and manage multi-department knowledge bases
+- Design conversational topics with branching logic
+- Enable AI-powered answers with proper citations
+- Integrate Power Automate flows for automated actions
+- Test and deploy enterprise knowledge assistants
 
 ## Datasets / Content Sources
 
-Use the following representative content sources provided in the lab (or configured as part of the exercise):
+This challenge uses 12 internal policy documents across 4 departments:
 
-- **SharePoint Documents:** Policies, project documents, and internal guides.  
-- **Teams / Wiki Content:** Channel messages, FAQs, and how-to notes (sample exports or seeded content).  
-- **Knowledge Articles:** A small set of curated internal FAQs or KB articles stored as markdown, text, or pages.  
-- **Metadata:** Optional labels such as department, project, or topic tags to improve filtering and relevance.
+**HR Department (3 documents):**
+- Leave Policy (annual, sick, personal leave)
+- Onboarding Guide (first day checklist, orientation)
+- Benefits Guide (health insurance, retirement, wellness)
 
-Ensure any local sample files are stored under a path such as:  
-`C:\LabFiles\KnowledgeNavigator`  
+**Finance Department (3 documents):**
+- Expense Policy (business expenses, approval limits)
+- Travel Reimbursement (booking, per diem, receipts)
+- Budget Request (annual planning, approval workflow)
 
-(Actual enterprise connectors may be simulated via sample data in this lab.)
+**IT Department (3 documents):**
+- Software Access (request process, licenses)
+- Support Guide (common issues, troubleshooting)
+- Security Policy (passwords, MFA, data protection)
+
+**Procurement Department (3 documents):**
+- Purchase Request (approval thresholds, PO process)
+- Vendor Management (onboarding, performance)
+- Contract Process (legal review, signatures)
+
+All documents should be in PDF format. See the `datasets/` folder for detailed document specifications and creation guidelines.
 
 ## Challenge Objectives
 
-### **Challenge 1: Foundation – Set Up AI Foundry and AI Search**
+### **Challenge 1: Create Your Internal Knowledge Copilot**
+
+**Estimated Duration:** 30 Minutes  
+
+#### Objective
+
+Set up Microsoft Copilot Studio and create your first Internal Knowledge Navigator copilot with basic configuration.
+
+#### What You'll Do
+
+1. Sign in to Microsoft Copilot Studio
+2. Create a new copilot named "Internal Knowledge Navigator"
+3. Configure copilot settings and identity
+4. Customize welcome message and icon
+5. Verify environment setup
+
+#### Success Criteria
+- Copilot created and configured
+- Basic greeting functionality working
+- Ready for knowledge base upload
+
+---
+
+### **Challenge 2: Upload Department Documents**
 
 **Estimated Duration:** 45 Minutes  
 
 #### Objective
 
-Establish the foundational components for the Knowledge Navigator Agent, including AI resources and an Azure AI Search index.
+Upload policy and procedure documents from HR, Finance, IT, and Procurement departments to create a comprehensive knowledge base.
 
-#### Tasks
+#### What You'll Do
 
-1. Create or validate access to:
+1. Access the 12 department PDF documents
+2. Upload HR documents (Leave Policy, Onboarding, Benefits)
+3. Upload Finance documents (Expense, Travel, Budget)
+4. Upload IT documents (Software Access, Support, Security)
+5. Upload Procurement documents (Purchase Request, Vendor, Contract)
+6. Verify all knowledge sources are indexed
+7. Test basic knowledge retrieval
+
+#### Success Criteria
+- All 12 documents uploaded successfully
+- Knowledge sources show "Active" status
+- Test queries return relevant information from documents
+
+---
+
+### **Challenge 3: Design Department Topics**
+
+**Estimated Duration:** 60 Minutes  
+
+#### Objective
+
+Create guided conversational topics organized by department to handle common employee inquiries with smart routing and branching logic.
+
+#### What You'll Do
+
+1. Create HR Leave Policy topic with trigger phrases and conversation flow
+2. Create Finance Travel Reimbursement topic with conditional branching
+3. Create IT Software Access topic with ticket creation option
+4. Create Procurement Purchase Request topic with approval paths
+5. Add dynamic questions and user input handling
+6. Connect topics to relevant knowledge sources
+7. Test each department topic thoroughly
+
+#### Success Criteria
+- 4 department topics created with appropriate trigger phrases
+- Conversational flows include branching logic
+- Generative answers pull from correct department documents
+- All topics tested and working correctly
+
+---
+
+### **Challenge 4: Enable Citation Answers**
+
+**Estimated Duration:** 45 Minutes  
+
+#### Objective
+
+Configure your copilot to provide answers with proper citations showing document sources, building trust and transparency.
+
+#### What You'll Do
+
+1. Enable citations in generative AI settings
+2. Configure citation display format
+3. Update generative answer nodes in topics to show citations
+4. Test citation display across all departments
+5. Verify citations are clickable and accessible
+6. Test multi-source citations
+7. Create a help topic explaining citations
+
+#### Success Criteria
+- Citations enabled and displayed in all answers
+- Citations show document name and page number
+- Citations are clear and professionally formatted
+- Multi-source answers show multiple citations
+- Users can access source documents via citations
+
+---
+
+### **Challenge 5: Add Trigger Actions**
+
+**Estimated Duration:** 60 Minutes  
+
+#### Objective
+
+Integrate Power Automate flows to enable automated actions: emailing documents, creating support tickets, and sending conversation summaries.
+
+#### What You'll Do
    - An **Azure AI Foundry** (or Azure OpenAI) resource.  
    - An **Azure AI Search** service.
 2. Create a **search index** to store enterprise content with fields such as:

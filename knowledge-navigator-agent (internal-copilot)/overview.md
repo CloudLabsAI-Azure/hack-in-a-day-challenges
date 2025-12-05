@@ -1,54 +1,58 @@
 # Knowledge Navigator Agent (Internal Copilot) – Hack in a Day
 
-Welcome to the Knowledge Navigator Agent (Internal Copilot) Hack in a Day! Today, you'll explore how to design and build an AI-powered internal copilot that can intelligently navigate enterprise knowledge. Through this hands-on experience, you'll create an agent that unifies search across Microsoft 365 and other data sources, reasons over retrieved content, and delivers contextual answers with proper citations.
+Welcome to the Knowledge Navigator Agent (Internal Copilot) Hack in a Day! Today, you'll learn how to build an AI-powered internal knowledge assistant that helps employees search and access internal documents across different departments. Through this hands-on experience, you'll create a copilot that provides answers with proper citations and can trigger helpful actions automatically.
 
 ## Introduction
 
-Your mission is to build a **Knowledge Navigator Agent** that helps employees quickly find and understand information scattered across Teams, SharePoint, emails, and project tools. Using Azure AI Foundry, Azure AI Search, and Microsoft Copilot Studio, your agent will index enterprise content, autonomously choose the right data sources to query, and generate grounded responses with references.
+Your mission is to build a **Knowledge Navigator Agent** that helps employees quickly find information from HR, Finance, IT, and Procurement departments. Using Microsoft Copilot Studio's no-code platform, you'll create a conversational AI assistant that searches through department policies and procedures, provides accurate answers with document sources, and can send summaries or create tickets when needed.
 
-The solution will act as a reasoning layer on top of enterprise content. It will support conversational Q&A, summarize documents, and trigger contextual actions such as opening relevant files or sending recap messages—improving productivity and collaboration across the organization.
+The copilot will serve as a centralized knowledge hub for employees, capable of answering questions about leave policies, procurement requests, travel reimbursements, and IT procedures – with proper citations showing exactly where the information came from. You'll also integrate actions using Power Automate to email documents, create support tickets, and send summaries automatically.
 
 ## Key Tools / Services
 
 In this lab, you will primarily work with:
 
-- Azure AI Foundry / Azure OpenAI  
-- Azure AI Search  
-- Microsoft Copilot Studio  
-- Power Automate  
-- Microsoft 365 data sources (Teams, SharePoint, emails, etc.)
+- **Microsoft Copilot Studio** - No-code platform for building conversational AI
+- **Generative AI with Citations** - For answering questions with document sources
+- **Power Automate** - For creating flows to email documents and create tickets
+- **Microsoft Teams** - For receiving summaries and notifications
+- **Microsoft 365** - For authentication and integration across the platform
 
 ## Learning Objectives
 
 By participating in this Hack in a Day, you will learn how to:
 
-- Learn and apply retrieval-augmented generation (RAG) patterns for enterprise search.  
-- Implement data connectors and indexing pipelines using Azure AI Search.  
-- Build reasoning layers and orchestration flows in Azure AI Foundry.  
-- Integrate Copilot Studio to expose the Knowledge Navigator Agent via a user-friendly chat experience.  
-- Enable contextual actions (open docs, send summaries) using Power Automate.
+- Create and configure an internal knowledge copilot in Microsoft Copilot Studio
+- Upload and organize knowledge base documents from multiple departments
+- Design conversational topics grouped by department functions
+- Enable citation-based answers that show document sources
+- Configure trigger actions to email documents, create tickets, and send summaries
+- Test and publish your knowledge navigator for employee use
+- Implement best practices for enterprise knowledge management with AI
 
 ## Hack in a Day Format: Challenge-Based
 
-This hack in a day adopts a challenge-based learning format, providing a hands-on experience through four progressive stages that mirror a real-world internal knowledge copilot implementation. Each challenge focuses on a key capability of the Knowledge Navigator Agent:
+This hack in a day adopts a challenge-based learning format, providing a hands-on experience through five progressive stages that build a complete Internal Knowledge Navigator. Each challenge focuses on a key capability:
 
-- **Challenge 1: Foundation** – Set up core resources (AI Foundry, AI Search index, and sample M365 content).  
-- **Challenge 2: Data Connectors & Indexing** – Configure connectors and build a unified search index across internal data sources.  
-- **Challenge 3: Reasoning & RAG** – Implement retrieval-augmented generation and reasoning workflows in Azure AI Foundry.  
-- **Challenge 4: Copilot Experience & Actions** – Integrate with Copilot Studio and Power Automate for conversational UX and contextual actions.
+- **Challenge 1: Create Your Internal Knowledge Copilot** – Set up Copilot Studio and create your first copilot with basic configuration
+- **Challenge 2: Upload Department Documents** – Add policies and process documents from HR, Finance, IT, and Procurement departments
+- **Challenge 3: Design Department Topics** – Build conversational topics grouped by department (Leave policy, Procurement request, Travel reimbursement)
+- **Challenge 4: Enable Citation Answers** – Configure AI to provide answers with document source citations
+- **Challenge 5: Add Trigger Actions** – Integrate Power Automate to email documents, create tickets, or send summaries
 
 Throughout each challenge, you'll:
-- Analyze how employees search and consume information today.  
-- Strategize and design RAG-based patterns that balance relevance, grounding, and citations.  
-- Leverage your Microsoft cloud environment to deploy, integrate, and test the Knowledge Navigator Agent.
+- Build practical, real-world knowledge management capabilities
+- Learn through hands-on configuration and testing
+- See immediate results as you test each feature
+- Create a production-ready internal knowledge assistant
 
 ## Challenge Overview
 
-Your journey begins with setting up the necessary Azure AI and search resources, along with representative enterprise content samples (such as documents, wiki pages, and project notes). You’ll then configure Azure AI Search to index these sources and expose a unified search layer.
+Your journey begins with creating a new copilot in Microsoft Copilot Studio and configuring its basic identity. You'll then upload comprehensive internal documentation from HR (leave policies, onboarding guides), Finance (expense policies, reimbursement procedures), IT (support guides, software access), and Procurement (purchase request procedures, vendor management).
 
-Next, you will implement a RAG pipeline using Azure AI Foundry that autonomously selects the best data sources, retrieves relevant content, and produces grounded answers with citations. Finally, you’ll integrate the agent into Microsoft Copilot Studio for a chat-based experience and add contextual actions using Power Automate—such as opening documents or sending summaries to Teams.
+Next, you'll design interactive conversational topics grouped by department that guide employees to the right information with dynamic questions and smart routing. You'll configure Generative AI with citations enabled to automatically provide answers that reference the exact document source, building trust and allowing employees to verify information.
 
-By the end of this hack in a day, you'll have a working **Knowledge Navigator Agent (Internal Copilot)** capable of conversational Q&A, contextual summarization, and action launching across enterprise data sources.
+Finally, you'll integrate Power Automate to trigger helpful actions such as emailing a specific policy document to an employee, creating a support ticket for complex requests, or sending a summary of the conversation to their manager. By the end of this hack in a day, you'll have a fully functional Knowledge Navigator that helps employees find information 10x faster across all departments.
 
 ## Support Contact
 
