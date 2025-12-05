@@ -1,0 +1,529 @@
+# Corporate Credit Card Policy
+
+**Effective Date:** January 1, 2024  
+**Version:** 3.1  
+**Policy Owner:** Finance Department
+
+## Purpose
+
+This policy establishes guidelines for the issuance and use of corporate credit cards to facilitate business purchases while ensuring appropriate controls and compliance.
+
+## Eligibility & Application
+
+### Who Qualifies
+**Automatic Eligibility:**
+- Managers and above
+- Frequent travelers (5+ trips per year)
+- Employees with regular purchasing needs
+- Remote workers requiring office supplies
+
+**By Request:**
+- Individual contributors with demonstrated need
+- Project managers handling project expenses
+- Administrative staff managing department purchases
+
+### Application Process
+1. Complete credit card application form at finance.company.com/card-request
+2. Obtain manager approval with business justification
+3. Finance reviews and approves/denies
+4. Card issued and mailed to office address (7-10 business days)
+5. Activate card and complete mandatory training
+6. Sign cardholder agreement
+
+### Card Limits
+**Standard Limits:**
+- Individual Contributor: $2,500/month
+- Manager: $5,000/month
+- Senior Manager: $10,000/month
+- Director: $15,000/month
+- VP: $25,000/month
+- C-Suite: $50,000/month
+
+**Limit Increases:**
+- Temporary increase for specific event/purchase: Manager approval
+- Permanent increase: VP + Finance approval
+- Request at least 5 business days in advance
+
+## Appropriate Uses
+
+### Approved Business Expenses
+
+**Travel-Related:**
+- Airfare, hotels, rental cars
+- Ground transportation (rideshare, taxis, parking)
+- Business meals during travel
+- Baggage fees and travel necessities
+
+**Operating Expenses:**
+- Office supplies and equipment
+- Software subscriptions and licenses
+- Books and professional publications
+- Shipping and courier services
+
+**Business Development:**
+- Client meals and entertainment
+- Conference registration and materials
+- Networking events
+- Business gifts (within policy limits)
+
+**Professional Development:**
+- Training course fees
+- Professional membership dues
+- Certification exam fees
+- Educational materials
+
+**Department Expenses:**
+- Team meals and events
+- Departmental supplies
+- Marketing materials
+- Vendor payments (when no PO)
+
+### Strictly Prohibited Uses
+
+**Personal Expenses:**
+- Personal meals, groceries, household items
+- Personal entertainment or subscriptions
+- Family member expenses
+- Personal travel or vacation costs
+- Personal gifts or donations
+- Cash advances or ATM withdrawals (except international travel)
+
+**Other Prohibited:**
+- Splitting purchases to circumvent approval limits
+- Purchasing for other employees (except team events)
+- Alcohol purchases except with meals (1 drink limit)
+- Gift cards or prepaid cards
+- Cryptocurrency or speculative investments
+- Adult entertainment or inappropriate content
+- Political contributions
+
+**Consequences:**
+- Immediate repayment of personal charges
+- Card suspension or revocation
+- Disciplinary action
+- Termination for serious violations
+
+## Purchase Procedures
+
+### Before Making Purchase
+1. **Verify it's a business expense** - Would company reimburse if paid personally?
+2. **Check budget availability** - Ensure department has budget
+3. **Get pre-approval if required** - Over $1,000 or unusual expense
+4. **Confirm vendor accepts credit cards** - Some may require PO
+
+### Making the Purchase
+- Use card for business purposes only
+- Obtain itemized receipt (not just card slip)
+- Note business purpose if not obvious
+- Keep digital or physical copy of receipt
+- Report lost/stolen card immediately
+
+### After Purchase
+1. **Retain Receipt:** All receipts required, even under $25
+2. **Upload Receipt:** Within 5 business days to expense system
+3. **Add Details:** Business purpose, attendees (if meal), project code
+4. **Review Monthly:** Check statement for accuracy
+5. **Reconcile:** By 5th of following month
+6. **Manager Approval:** Required before payment processing
+
+## Receipt Requirements
+
+### What's Required
+- **All purchases:** Itemized receipt showing what was purchased
+- **Meals:** Names of attendees and business purpose
+- **Entertainment:** Who attended and business discussed
+- **Travel:** Dates and destination
+- **Software:** License details and users
+
+### Receipt Formats Accepted
+- Original paper receipts (scanned or photo)
+- Email receipts (forwarded to receipts@company.com)
+- PDF invoices
+- Digital wallet receipts (with transaction detail)
+
+### Missing Receipts
+- **Lost Receipt Affidavit** required within 10 days
+- Maximum $25 per item, $100 per statement without receipts
+- Pattern of missing receipts may result in card suspension
+- Charges without receipts after deadline may be treated as personal
+
+### Retention
+- Finance retains copies for 7 years
+- Cardholder should keep copies during employment
+- May be requested during audits or expense reviews
+
+## Reconciliation & Payment
+
+### Monthly Statement Cycle
+- **Statement Close:** Last day of month
+- **Statement Available:** 3rd business day of following month
+- **Receipts Due:** 5th business day of following month
+- **Reconciliation Due:** 10th business day of following month
+- **Manager Approval Due:** 15th business day of following month
+- **Payment:** 20th business day of following month
+
+### Reconciliation Process
+1. **Log in to expense system:** expenses.company.com
+2. **Review transactions:** Statement automatically imported
+3. **Match receipts:** Upload and link to each transaction
+4. **Categorize expenses:** Select appropriate expense category and cost center
+5. **Add business purpose:** Required for all transactions
+6. **Submit for approval:** Send to manager when complete
+7. **Respond to questions:** Answer any manager queries promptly
+
+### Payment Responsibility
+- **Company Pays:** All approved business expenses
+- **Employee Pays:** Personal charges, missing receipts after deadline, policy violations
+- **Finance processes payment** from company account to credit card company
+- **Cardholder is NOT personally responsible** for payment if properly reconciled and approved
+
+### Late Reconciliation
+- **First Occurrence:** Reminder email from Finance
+- **Second Occurrence:** Escalation to manager
+- **Third Occurrence:** Card suspended until reconciled
+- **Chronic Issues:** Card may be revoked
+
+## Travel Expenses
+
+### Airfare
+- Book at least 14 days in advance when possible
+- Use corporate travel tool for best rates: travel.company.com
+- Economy class for domestic flights under 3 hours
+- Premium economy for longer flights (manager approval)
+- Save boarding passes and receipts
+
+### Hotels
+- Book through corporate tool for negotiated rates
+- Stay within daily rate limits (see Travel Policy)
+- No mini-bar, movies, or personal services
+- Resort fees and parking reimbursable if unavoidable
+- Check out on time to avoid extra night charges
+
+### Meals While Traveling
+- Reasonable restaurant choices
+- Daily limits: Breakfast $15, Lunch $25, Dinner $50
+- Itemized receipts required over $25
+- One alcoholic beverage per meal acceptable ($12 limit)
+- Tips 15-20% on pre-tax amount
+
+### Ground Transportation
+- Rideshare preferred (Uber/Lyft standard service)
+- Taxis when rideshare unavailable
+- Rental cars only when necessary (mid-size or smaller)
+- Personal car mileage reimbursed separately (not on card)
+- Keep all receipts and note destination
+
+## Client Entertainment
+
+### Guidelines
+- Must have legitimate business purpose
+- Appropriate venue and cost for relationship
+- At least one client/customer must attend
+- Reasonable food and beverage
+- Alcohol limited to appropriate amount for occasion
+
+### Documentation Required
+- Itemized receipt
+- Names and companies of all attendees
+- Business purpose and topics discussed
+- Anticipated business outcome
+
+### Limits
+- **Manager:** Up to $500 without pre-approval
+- **Director:** Up to $2,000 without pre-approval
+- **VP:** Up to $10,000 without pre-approval
+- **Higher amounts:** CFO pre-approval required
+
+### Prohibited
+- Lavish or excessive entertainment
+- Activities that could be seen as bribes
+- Entertainment of government officials (requires legal approval)
+- Adult entertainment venues
+- Spouses/family unless business purpose
+
+## Software & Subscriptions
+
+### Allowed
+- Business tools and applications
+- Professional subscriptions (LinkedIn, industry publications)
+- Domain registrations and web hosting
+- Cloud storage for business use
+- Project management and collaboration tools
+
+### Requirements
+- IT approval for all software purchases
+- Security review for new vendors
+- Must be used for business purposes
+- Document users and business need
+- Coordinate with IT to avoid duplicate purchases
+
+### Recurring Subscriptions
+- Set calendar reminder for renewal dates
+- Cancel unused subscriptions promptly
+- Review annually for continued need
+- IT maintains master list of all subscriptions
+
+## International Use
+
+### Pre-Travel Setup
+- Notify card company of travel dates and countries: (888) XXX-XXXX
+- No foreign transaction fees on corporate cards
+- Verify card will work in destination country
+- Bring backup payment method
+- Know how to report lost/stolen card internationally
+
+### Currency & Conversions
+- Charges automatically converted to USD
+- Conversion rate set by Visa/Mastercard on transaction date
+- No need to manually convert for reconciliation
+- Avoid dynamic currency conversion (decline when offered)
+
+### Cash Advances
+- Generally prohibited
+- Allowed only when necessary in international locations
+- Limit $500 per trip
+- Requires pre-approval from manager
+- Repay unused cash within 5 days of return
+- Subject to cash advance fees and interest
+
+## Security & Fraud Prevention
+
+### Protect Your Card
+- Never share card number or security code
+- Don't store card details on unsecure websites
+- Use secure websites only (https://)
+- Don't let card out of your sight during transactions
+- Shred receipts with full card numbers
+
+### Suspicious Activity
+- Monitor transactions regularly
+- Report unauthorized charges immediately
+- Watch for small test charges (fraud indicator)
+- Review statement for unfamiliar merchants
+
+### Lost or Stolen Card
+**Immediate Actions:**
+1. Call card company 24/7 hotline: 1-888-XXX-XXXX
+2. Report to Finance: cardfraud@company.com
+3. Complete fraud affidavit if fraudulent charges
+4. Request replacement card (arrives in 3-5 days)
+5. Update any recurring charges to new card number
+
+**Your Protection:**
+- Zero liability for fraudulent charges
+- Company absorbs cost of fraud if reported promptly
+- Delay in reporting may result in cardholder liability
+
+### Data Breaches
+- Notify Finance if merchant announces breach
+- Monitor statement for 6 months after breach
+- Card may be reissued proactively
+- Company handles breach response
+
+## Card Termination
+
+### When Employment Ends
+- Card must be returned to HR on last day
+- Cut card in half if returning by mail
+- Final expense report due within 10 days
+- Any unreported charges billed to final paycheck
+- Unpaid personal charges deducted from final pay
+
+### Voluntary Surrender
+- May return card if no longer needed
+- Email Finance 2 weeks in advance
+- Complete final reconciliation
+- No penalty for voluntary return
+
+### Involuntary Revocation
+**Reasons:**
+- Policy violations
+- Late reconciliation (chronic)
+- Personal use violations
+- Fraud or misuse
+- Terminated employment
+- Position change
+
+**Process:**
+- Finance notifies cardholder and manager
+- Card deactivated immediately
+- Must return physical card
+- May affect performance review
+- May be eligible for reinstatement after 6 months
+
+## Audits & Compliance
+
+### Transaction Monitoring
+- All transactions reviewed by Finance
+- Automated alerts for unusual activity
+- Random monthly audits of expenses
+- Annual comprehensive review per cardholder
+
+### Red Flags
+- Purchases just under approval limits
+- High-risk merchant categories
+- Weekend or late-night purchases
+- Geographic anomalies
+- Frequent purchases from same vendor
+- Missing receipts pattern
+
+### Audit Process
+**If Selected for Audit:**
+1. Notification from Finance or Internal Audit
+2. Provide additional documentation as requested
+3. May include sample of transactions or full year review
+4. Results shared with cardholder and manager
+5. Action plan for any issues identified
+
+### Consequences of Non-Compliance
+**Minor Issues:**
+- Coaching and retraining
+- Increased monitoring
+- Temporary card suspension
+
+**Serious Violations:**
+- Card revocation
+- Repayment of misused funds
+- Written warning
+- Performance review impact
+
+**Severe Violations:**
+- Termination of employment
+- Legal action for fraud
+- Criminal charges if warranted
+- Repayment plus penalties
+
+## Reporting & Support
+
+### Expense System
+- **Access:** expenses.company.com
+- **Mobile App:** Available for iOS and Android
+- **Features:** Upload receipts, categorize expenses, submit for approval
+- **Support:** expense-help@company.com
+
+### Card Services
+- **Activate Card:** 1-888-XXX-XXXX
+- **Report Lost/Stolen:** 1-888-XXX-XXXX (24/7)
+- **Travel Notifications:** 1-888-XXX-XXXX
+- **Dispute Charge:** cardissues@company.com
+
+### Finance Team
+- **Policy Questions:** finance-policy@company.com
+- **Card Application:** cardrequest@company.com
+- **Fraud Reporting:** cardfraud@company.com
+- **General Support:** (555) 123-4800
+- **Hours:** Monday-Friday, 8:00 AM - 5:00 PM
+
+### Training & Resources
+- **New Cardholder Training:** Required before first use
+- **Annual Refresher:** All cardholders (30 min online)
+- **Policy Guide:** finance.company.com/card-policy
+- **Video Tutorials:** finance.company.com/training
+- **FAQ:** finance.company.com/card-faq
+
+## Best Practices
+
+### Do's
+✓ Review transactions weekly  
+✓ Upload receipts immediately after purchase  
+✓ Use for business expenses only  
+✓ Keep card secure  
+✓ Report suspicious activity immediately  
+✓ Complete reconciliation on time  
+✓ Provide detailed business purpose  
+✓ Cancel unused subscriptions  
+✓ Ask questions when unsure  
+
+### Don'ts
+✗ Make personal purchases  
+✗ Share card with others  
+✗ Procrastinate on reconciliation  
+✗ Lose receipts  
+✗ Split purchases to avoid approvals  
+✗ Store card numbers unsecurely  
+✗ Ignore suspicious charges  
+✗ Purchase without business need  
+✗ Exceed card limits  
+
+## Frequently Asked Questions
+
+**Q: Can I use my corporate card for personal emergencies?**
+A: No. Corporate cards are for business use only. Personal charges must be repaid immediately.
+
+**Q: What if I accidentally make a personal purchase?**
+A: Note it on your expense report as personal. Finance will bill you for repayment. One-time mistakes are understandable; patterns are not.
+
+**Q: Do I need approval for every purchase?**
+A: Purchases within policy and under $1,000 don't require pre-approval. Unusual or large purchases should be approved in advance.
+
+**Q: What if a merchant doesn't accept credit cards?**
+A: Pay personally and submit expense report for reimbursement, or request check payment from AP.
+
+**Q: Can I earn personal rewards on my corporate card?**
+A: No. Corporate cards don't earn personal points/miles. Business benefit of rebates goes to company.
+
+**Q: What if my manager is slow to approve?**
+A: Send reminder email. If no response in 3 days, escalate to manager's manager and CC Finance.
+
+**Q: Can I add my corporate card to Apple Pay/Google Pay?**
+A: Yes, digital wallets are acceptable. Still need itemized receipts showing what was purchased.
+
+**Q: What if the vendor doesn't provide itemized receipts?**
+A: Request itemized invoice. If unavailable, explain in expense system. Pattern may require alternative payment method.
+
+**Q: Can I use my card for employee gifts or recognition?**
+A: Yes, up to $50 per person for work anniversaries, birthdays, etc. Document recipient and occasion.
+
+**Q: What happens if I go over my card limit?**
+A: Transaction will decline. Request temporary increase in advance or use alternative payment method.
+
+---
+
+## Cardholder Agreement Summary
+
+By accepting and using a corporate credit card, I agree to:
+
+- Use card only for legitimate business expenses
+- Follow all policy guidelines and procedures
+- Obtain proper approvals for purchases
+- Provide receipts for all transactions
+- Reconcile monthly statements on time
+- Repay any personal charges immediately
+- Protect card from loss, theft, or misuse
+- Report suspicious activity or fraud immediately
+- Return card upon request or employment termination
+- Accept disciplinary action for policy violations
+
+---
+
+## Quick Reference
+
+### Contact Numbers
+- **Activate/Travel Notification:** 1-888-XXX-XXXX
+- **Lost/Stolen (24/7):** 1-888-XXX-XXXX
+- **Finance Support:** (555) 123-4800
+- **Fraud Reporting:** cardfraud@company.com
+
+### Important Deadlines
+- Upload receipts: Within 5 days of purchase
+- Reconcile statement: By 10th of following month
+- Manager approval: By 15th of following month
+
+### Monthly Limits (Standard)
+- Individual Contributor: $2,500
+- Manager: $5,000
+- Director: $15,000
+- VP: $25,000
+
+### Remember
+✓ Business use only  
+✓ Keep all receipts  
+✓ Reconcile on time  
+✓ Report fraud immediately  
+
+---
+
+**Policy Effective Date:** January 1, 2024  
+**Mandatory Review:** Annual (every January)  
+**Policy Owner:** Chief Financial Officer  
+**Questions:** finance-policy@company.com | (555) 123-4800

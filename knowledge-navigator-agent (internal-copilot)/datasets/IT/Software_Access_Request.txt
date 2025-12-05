@@ -1,0 +1,638 @@
+# Software Access Request Process
+
+**IT Department Guide**  
+**Version 4.2 | Effective January 2024**
+
+## Overview
+
+This guide outlines the process for requesting access to software applications, systems, and tools required for job responsibilities. Proper access management ensures security, compliance, and cost control.
+
+## Request Types
+
+### New User Access
+- First-time access to system or application
+- New hire onboarding
+- Role change requiring new tools
+- Project-based access needs
+
+### Access Modification
+- Additional permissions or roles
+- Upgraded license tier
+- Access to additional modules or features
+- Change from viewer to editor role
+
+### Access Removal
+- Employee termination or role change
+- End of project requiring temporary access
+- Compliance or security requirement
+- Unused license reclamation
+
+### Emergency Access
+- Critical business need requiring immediate access
+- Production incident requiring elevated privileges
+- Time-sensitive client deliverable
+- Compliance or audit requirement
+
+## Standard Software Catalog
+
+### Pre-Approved Applications
+These applications have standard access procedures and don't require additional approval:
+
+**Productivity & Collaboration:**
+- Microsoft 365 (Outlook, Teams, SharePoint, OneDrive)
+- Zoom (Standard license)
+- Slack (if department uses it)
+- Google Workspace (for approved departments)
+
+**Development & Technical:**
+- Visual Studio Code
+- Git and GitHub
+- Postman
+- Standard development tools per role
+
+**Business Applications:**
+- Salesforce (based on role)
+- SAP/ERP (based on department)
+- JIRA/Confluence
+- Tableau/Power BI (viewer access)
+
+**Request Process:** Simple IT ticket, approved within 24 hours
+
+### Approval-Required Applications
+Require manager or department head approval:
+
+**Premium Tools:**
+- Adobe Creative Cloud
+- Advanced analytics platforms
+- Specialized design software
+- Premium API access
+
+**Data Access:**
+- Database administrator access
+- Production environment access
+- Customer data systems
+- Financial systems
+
+**Enterprise Systems:**
+- ERP administration
+- HR systems (Workday, ADP)
+- CRM administration
+- IT infrastructure tools
+
+**Request Process:** IT ticket with business justification, 2-5 day turnaround
+
+### Restricted Applications
+Require elevated approval (VP or C-level):
+
+**High-Risk Systems:**
+- Domain administrator access
+- Production database write access
+- Financial transaction systems
+- Code signing certificates
+
+**Expensive Licenses:**
+- Applications over $5,000 annually
+- Specialized engineering tools
+- Professional certifications platforms
+- Enterprise analytics
+
+**Compliance-Controlled:**
+- Systems with PII/PHI data
+- Payment processing systems
+- Legal and regulatory systems
+- Audit and compliance tools
+
+**Request Process:** Detailed business case, security review, 1-2 week approval cycle
+
+## Access Request Process
+
+### Step 1: Determine Need
+**Questions to Answer:**
+- What specific application or system?
+- What level of access (viewer, editor, admin)?
+- Why is access needed?
+- How long is access needed?
+- Who else on your team has similar access?
+- What's the business impact if access is not granted?
+
+### Step 2: Check Alternative Solutions
+**Before Requesting New Software:**
+- Can existing tools meet the need?
+- Can someone with access help you?
+- Is there a free or open-source alternative?
+- Can access be shared or time-boxed?
+- Does IT have volume licensing available?
+
+### Step 3: Submit Request
+**Required Information:**
+1. **Requestor Details:**
+   - Full name and employee ID
+   - Department and cost center
+   - Manager name
+   - Email and phone
+
+2. **Application Details:**
+   - Software name and vendor
+   - Version or tier needed (Basic, Professional, Enterprise)
+   - Specific features or modules required
+   - URL or product website
+
+3. **Access Details:**
+   - Type of access (read-only, edit, admin)
+   - Specific permissions needed
+   - Duration (ongoing or temporary with end date)
+   - Number of users if group request
+
+4. **Business Justification:**
+   - How will this be used?
+   - What business problem does it solve?
+   - Why existing tools are insufficient
+   - Expected business benefit or impact
+   - Alternatives considered
+
+5. **Budget Information:**
+   - Cost (if known)
+   - Budget code to charge
+   - One-time vs. recurring cost
+   - Manager approval if >$500
+
+**Submission Methods:**
+- **IT Service Portal:** helpdesk.company.com/request-access (preferred)
+- **Email:** access-requests@company.com
+- **Phone:** (555) 123-4000 (emergency only)
+
+### Step 4: Approval Routing
+**Automatic Routing Based on Request Type:**
+
+**Standard Access (<$500/year):**
+1. IT Security: Validates request against security policy
+2. IT Admin: Provisions access
+3. Requestor notified (24-48 hours)
+
+**Manager Approval Required ($500-$5,000/year):**
+1. Manager: Reviews business need and budget
+2. IT Security: Security assessment
+3. IT Admin: Provisions access
+4. Requestor notified (2-5 business days)
+
+**Department Head Approval Required ($5,000-$25,000/year):**
+1. Manager: Initial approval
+2. Department Head: Business case review
+3. IT Architecture: Technical review
+4. IT Security: Security assessment
+5. IT Admin: Provisions access
+6. Requestor notified (5-10 business days)
+
+**Executive Approval Required (>$25,000/year):**
+1. Manager: Initial approval
+2. Department Head: Business case review
+3. VP/CIO: Strategic alignment review
+4. CFO: Budget approval
+5. IT Architecture: Technical review
+6. IT Security: Comprehensive security assessment
+7. Legal: Contract review
+8. IT Admin: Provisions access
+9. Requestor notified (2-4 weeks)
+
+### Step 5: Security Assessment
+**All Requests Reviewed For:**
+- Data classification and access controls
+- Authentication requirements (SSO, MFA)
+- Compliance requirements (GDPR, HIPAA, SOC 2)
+- Network security and firewall rules
+- Encryption standards
+- Vendor security posture
+- License compliance
+
+**May Require:**
+- Security questionnaire from vendor
+- SOC 2 Type II report
+- Penetration testing results
+- Data processing agreement
+- Privacy impact assessment
+
+### Step 6: Provisioning
+**IT Actions:**
+1. Verify all approvals received
+2. Procure license if needed (Procurement team)
+3. Create user account
+4. Configure permissions
+5. Enable SSO/MFA if available
+6. Add to asset inventory
+7. Document access in CMDB
+8. Send credentials to user (secure method)
+9. Provide quick start guide or training resources
+10. Update license tracking system
+
+**Timeline:**
+- Existing system: Same day to 2 days
+- New vendor: 1-2 weeks (procurement + setup)
+- Complex integration: 2-4 weeks
+
+### Step 7: User Notification & Onboarding
+**Provisioning Complete Email Includes:**
+- Access credentials (temporary password)
+- Login URL
+- Quick start guide
+- Training resources
+- Support contact information
+- Terms of use
+- Data handling requirements
+
+**User Responsibilities:**
+- Change temporary password immediately
+- Complete required training
+- Review terms of use
+- Acknowledge data handling responsibilities
+- Begin using application
+
+## Special Request Types
+
+### Temporary/Project-Based Access
+**Use Cases:**
+- Intern or contractor needs access
+- Short-term project (< 6 months)
+- Covering for someone on leave
+- One-time data export or analysis
+
+**Requirements:**
+- Specify exact end date
+- Justification for temporary need
+- Confirmation of project or coverage end date
+- Manager approval required
+
+**Process:**
+- Access auto-expires on end date
+- 1-week reminder sent before expiration
+- Can request extension with new justification
+- Unused licenses reclaimed immediately
+
+### Elevated/Administrative Access
+**Use Cases:**
+- System administrators
+- Application support staff
+- DevOps and infrastructure teams
+- Security and compliance teams
+
+**Requirements:**
+- Detailed justification for elevated access
+- Manager and IT Security approval required
+- Background check for production access
+- Mandatory security training
+- Agreement to privileged access policy
+- MFA enforcement
+- Access logging and monitoring
+
+**Additional Controls:**
+- Just-in-time (JIT) access when possible
+- Privileged access management (PAM) tool required
+- Session recording for auditing
+- Quarterly access recertification
+- Immediate revocation upon role change
+
+### Shared/Service Accounts
+**Generally Discouraged:** Use individual accounts with appropriate permissions instead
+
+**Allowed Only For:**
+- Application service accounts (non-interactive)
+- Integration and API accounts
+- Scheduled job accounts
+- Testing/development environments (never production)
+
+**Requirements:**
+- VP approval required
+- Documented business justification for why individual accounts won't work
+- Credentials stored in password vault
+- Access log maintained of who uses account
+- Password rotation every 90 days
+- Limited to specific IP addresses when possible
+
+### Third-Party/Vendor Access
+**Use Cases:**
+- Vendor support and troubleshooting
+- Consultant project work
+- Managed service providers
+- Auditor review access
+
+**Requirements:**
+- Vendor NDA and contract in place
+- Specific scope and duration
+- Time-bound access (max 90 days, renewable)
+- VPN or secure remote access
+- All activity logged and monitored
+- Vendor contact attestation
+- Legal/Procurement approval
+- Auto-expiration enforced
+
+**Process:**
+1. Internal sponsor submits vendor access request
+2. Legal verifies NDA/contract
+3. IT Security reviews and approves
+4. Provision limited access
+5. Monitor vendor activity
+6. Sponsor certifies work complete
+7. Revoke access promptly
+
+## Access Review & Recertification
+
+### Quarterly Access Reviews
+**Process:**
+- IT generates access reports by department
+- Managers review and certify appropriateness
+- Flag access that should be removed
+- Confirm continued business need
+- Update job role changes
+
+**Manager Responsibilities:**
+- Review within 10 business days
+- Remove access for terminated/transferred employees
+- Verify temporary access hasn't expired
+- Confirm elevated access still required
+- Document any concerns
+
+### Annual Recertification
+**Comprehensive Review:**
+- All user access across all systems
+- License utilization and cost
+- Compliance with security policies
+- Alignment with current roles
+- Vendor contract renewals
+
+**Actions Taken:**
+- Remove unused or unnecessary access
+- Reclaim unused licenses
+- Update role-based access groups
+- Renegotiate vendor contracts
+- Archive terminated user accounts
+
+### Automated Cleanup
+**System Automation:**
+- Temporary access auto-expires on end date
+- Unused accounts (no login 90 days) flagged
+- Accounts with last login >180 days disabled
+- Disabled accounts >1 year deleted
+- Terminated employee access revoked within 1 hour
+
+## Access Denial & Appeals
+
+### Common Reasons for Denial
+- Insufficient business justification
+- Budget not available
+- Security risk too high
+- Alternative solution available
+- Licensing restrictions
+- Compliance violation
+- Vendor not approved
+- Duplicate tool already exists
+
+### Denial Notification
+- Email sent to requestor and manager
+- Specific reason for denial documented
+- Alternative solutions suggested
+- Appeal process explained
+
+### Appeal Process
+1. **Requestor:** Submit additional justification within 5 days
+2. **Manager:** Add supporting business case
+3. **IT Leadership:** Reviews appeal
+4. **Decision:** Final determination within 5 business days
+5. **Escalation:** Can escalate to CIO if needed with VP support
+
+## License Management
+
+### License Types
+
+**Named User Licenses:**
+- Assigned to specific individual
+- Cannot be shared
+- Reclaimed when user leaves or role changes
+- Most common type
+
+**Concurrent User Licenses:**
+- Shared pool of licenses
+- First-come, first-served basis
+- Good for part-time usage
+- Requires check-in/check-out
+
+**Site/Enterprise Licenses:**
+- Unlimited users within organization
+- Cost-effective for wide adoption
+- Preferred for standard tools
+- Example: Microsoft 365, Zoom
+
+### License Optimization
+**IT Tracks:**
+- Active users vs. total licenses
+- Last login/usage dates
+- Feature utilization
+- Cost per user
+- Renewal dates
+
+**Actions:**
+- Reclaim unused licenses
+- Downgrade under-utilized licenses
+- Right-size license tiers
+- Consolidate duplicate tools
+- Negotiate better pricing at renewal
+
+### License Compliance
+- No software piracy tolerated
+- No personal licenses used for business
+- Vendor audits supported by IT
+- True-up licensing annually
+- Track license metrics
+
+## Security & Compliance
+
+### Identity & Access Management (IAM)
+**Standards:**
+- Single Sign-On (SSO) required when available
+- Multi-Factor Authentication (MFA) enforced
+- Strong password requirements (12+ characters)
+- Password rotation every 90 days
+- No password reuse across systems
+- Credentials never shared
+
+### Principle of Least Privilege
+**Grant Minimum Access Required:**
+- Start with read-only, escalate as needed
+- Role-based access control (RBAC)
+- No blanket admin access
+- Temporary elevated access for specific tasks
+- Regular review and adjustment
+
+### Data Classification
+**Access Based on Data Sensitivity:**
+- **Public:** No special access controls
+- **Internal:** Authentication required
+- **Confidential:** Need-to-know + approval
+- **Restricted:** Executive approval + training
+- **Regulated:** Compliance team approval
+
+### Audit & Logging
+**All Access Tracked:**
+- Who accessed what, when
+- Actions performed
+- Data viewed or modified
+- Privileged activity logged
+- Login attempts (success and failure)
+- 1 year retention minimum
+
+### Compliance Requirements
+**Industry Standards:**
+- SOC 2 Type II compliance
+- GDPR for EU data
+- CCPA for California data
+- HIPAA for healthcare data (if applicable)
+- PCI-DSS for payment data
+
+**Access Controls Required:**
+- Background checks for sensitive data access
+- Confidentiality agreements
+- Security awareness training
+- Role-specific compliance training
+- Annual recertification
+
+## Troubleshooting & Support
+
+### Common Issues
+
+**"I can't log in"**
+- Verify credentials are correct
+- Check if MFA is required
+- Ensure account is not locked
+- Confirm access was provisioned
+- Try incognito/private browser mode
+- Clear cache and cookies
+- Contact IT if still failing: (555) 123-4000
+
+**"I don't see the data/features I need"**
+- Verify you have appropriate permissions
+- Check if additional modules need to be enabled
+- Confirm with manager you should have access
+- Submit access modification request
+
+**"Access request is taking too long"**
+- Check status in IT portal: helpdesk.company.com
+- Email access-requests@company.com for update
+- Ensure manager approved (if required)
+- Escalate to IT manager if >5 days for standard request
+
+**"I need access urgently"**
+- Mark request as emergency in portal
+- Email access-urgent@company.com
+- Call IT Help Desk: (555) 123-4000
+- Provide detailed urgency justification
+- Have manager call to expedite if truly critical
+
+### Getting Help
+**IT Help Desk:**
+- Phone: (555) 123-4000 (24/7 for emergencies)
+- Email: helpdesk@company.com
+- Portal: helpdesk.company.com
+- Chat: Available 7 AM - 7 PM Mon-Fri
+
+**Access Team:**
+- Email: access-requests@company.com
+- Portal: helpdesk.company.com/access
+- Hours: 8 AM - 6 PM Mon-Fri
+- Emergency: Use main help desk after hours
+
+**Application-Specific Support:**
+- Check application's quick start guide
+- Internal knowledge base: kb.company.com
+- Application vendor support (if available)
+- Power users in your department
+
+## Best Practices
+
+### For Requestors
+- Request access before you need it (allow 2-5 days)
+- Provide detailed business justification
+- Specify exactly what you need (not more)
+- Check if alternative solutions exist
+- Complete required training promptly
+- Use access responsibly
+- Report access issues immediately
+- Notify IT when access no longer needed
+
+### For Managers
+- Review requests promptly (within 2 days)
+- Verify business need is legitimate
+- Ensure budget is available
+- Consider alternatives before approving
+- Participate in quarterly access reviews
+- Remove access when employees change roles
+- Monitor team's software usage
+- Provide feedback on access process
+
+### For IT
+- Respond to requests within SLA (24-48 hours)
+- Clearly communicate delays or issues
+- Provide helpful alternatives if denying
+- Automate provisioning where possible
+- Maintain accurate documentation
+- Track license usage and optimize
+- Proactively reclaim unused access
+- Keep security top of mind
+
+## Key Contacts
+
+**IT Help Desk**  
+Phone: (555) 123-4000  
+Email: helpdesk@company.com  
+Portal: helpdesk.company.com
+
+**Access Request Team**  
+Email: access-requests@company.com  
+Emergency: access-urgent@company.com
+
+**IT Security**  
+Email: security@company.com  
+Phone: (555) 123-4100
+
+**License Management**  
+Email: licenses@company.com  
+Phone: (555) 123-4200
+
+**Application Support**  
+Email: appsupport@company.com  
+Knowledge Base: kb.company.com
+
+---
+
+## Quick Reference
+
+### Request Timeline
+- Standard access: 24-48 hours
+- Manager approval required: 2-5 days
+- Department head approval: 5-10 days
+- Executive approval: 2-4 weeks
+- Emergency: Same day (if truly urgent)
+
+### Approval Thresholds
+- <$500/year: IT approval only
+- $500-$5,000: Manager approval
+- $5,000-$25,000: Department head approval
+- >$25,000: Executive approval
+
+### Required Information
+- What software/system
+- What level of access
+- Business justification
+- Duration needed
+- Budget information
+
+### After Access Granted
+- Change temporary password
+- Complete training
+- Review terms of use
+- Start using application
+- Provide feedback to IT
+
+---
+
+**Document Owner:** Chief Information Officer  
+**Last Updated:** January 2024  
+**Next Review:** July 2024  
+**Questions:** access-requests@company.com | (555) 123-4000

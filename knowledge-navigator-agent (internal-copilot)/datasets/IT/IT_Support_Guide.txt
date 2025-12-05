@@ -1,0 +1,604 @@
+# IT Support Ticket System Guide
+
+**Help Desk Reference | Version 5.1**
+
+## Getting IT Support
+
+### Help Desk Contact Methods
+
+**IT Service Portal (Preferred):**
+- URL: helpdesk.company.com
+- Submit tickets, track status, search knowledge base
+- Available 24/7
+- Fastest response for non-urgent issues
+
+**Phone Support:**
+- Main: (555) 123-4000
+- Available 24/7 for emergencies
+- 7 AM - 7 PM for general support (Mon-Fri)
+- After hours: Emergency/critical issues only
+
+**Email:**
+- General: helpdesk@company.com
+- Response within 4 business hours
+- Include screenshots and detailed description
+
+**Walk-Up Support:**
+- Location: Building A, 1st Floor, IT Help Desk
+- Hours: 8 AM - 6 PM, Monday-Friday
+- For hardware issues, equipment pickup, or urgent matters
+
+**Live Chat:**
+- Available in IT Portal
+- Hours: 7 AM - 7 PM, Monday-Friday
+- Quick questions and status updates
+
+## Ticket Priority Levels
+
+### Priority 1 - Critical (Response: 15 minutes)
+**Complete business stoppage affecting multiple users**
+
+Examples:
+- Network outage affecting entire office
+- Email system down company-wide
+- Critical business application unavailable
+- Data breach or security incident
+- Ransomware or malware outbreak
+- Complete phone system failure
+
+Actions:
+- Major incident declared
+- All-hands IT response
+- Executive notification
+- Regular status updates every 30 minutes
+
+### Priority 2 - High (Response: 1 hour)
+**Significant impact to business operations or individual completely unable to work**
+
+Examples:
+- Individual cannot access email
+- Laptop completely non-functional
+- Cannot access critical application for job
+- VPN not working (remote employee)
+- Shared printer down (department impact)
+- Database slow/timing out
+
+Actions:
+- Assigned to senior technician
+- Workaround provided if possible
+- Management notified if not resolved in 4 hours
+
+### Priority 3 - Medium (Response: 4 hours)
+**Moderate impact, workaround available, or non-critical function**
+
+Examples:
+- Software not working as expected
+- Slow computer performance
+- Minor email issues (attachments, formatting)
+- Non-critical application access
+- Desk phone issues (can use mobile)
+- Printer issues (other printer available)
+
+Actions:
+- Assigned during business hours
+- Resolution targeted within 1-2 business days
+- Status updated daily
+
+### Priority 4 - Low (Response: 1 business day)
+**Minimal impact, informational, or future request**
+
+Examples:
+- How-to questions
+- Feature requests
+- Software training request
+- Equipment upgrade request (cosmetic)
+- Report generation assistance
+- Nice-to-have improvements
+
+Actions:
+- Assigned as time permits
+- Batched with similar requests
+- Resolution within 5 business days
+- May be addressed in group training
+
+## Common Issue Categories
+
+### Hardware
+
+**Laptop/Desktop Issues:**
+- Computer won't start or boot
+- Blue screen or system crashes
+- Overheating or fan noise
+- Physical damage
+- Keyboard or trackpad malfunction
+- Screen issues (flickering, dead pixels)
+
+**Peripherals:**
+- Monitor not working
+- Keyboard/mouse problems
+- Docking station issues
+- Headset or webcam problems
+- External drive not recognized
+
+**Mobile Devices:**
+- Phone not receiving email
+- Cannot install or update apps
+- Device activation issues
+- Lost or stolen device (report immediately!)
+
+**Printers:**
+- Printer offline or not responding
+- Print quality issues (lines, fading, smudging)
+- Paper jams
+- Scanner not working
+- Network printer not found
+
+### Software & Applications
+
+**Microsoft 365:**
+- Outlook not sending/receiving
+- Teams video/audio issues
+- SharePoint access problems
+- OneDrive sync issues
+- Office applications crashing
+
+**Business Applications:**
+- Salesforce login or access issues
+- ERP/SAP problems
+- Database connection errors
+- Application errors or freezing
+- Report generation failures
+
+**Collaboration Tools:**
+- Zoom meeting issues
+- Slack notification problems
+- File sharing errors
+- Calendar sync issues
+
+### Access & Permissions
+
+**Login Issues:**
+- Forgot password
+- Account locked after failed attempts
+- MFA/2FA not working
+- Can't access VPN
+- SSO authentication failures
+
+**Permissions:**
+- Cannot access file or folder
+- Need access to application
+- Insufficient permissions error
+- SharePoint access denied
+- Drive mapping issues
+
+### Network & Connectivity
+
+**Internet/Network:**
+- No internet connection
+- Slow network speed
+- WiFi keeps disconnecting
+- Ethernet not working
+- Cannot connect to network drives
+
+**VPN:**
+- VPN won't connect
+- VPN very slow
+- Disconnects frequently
+- Can't access resources on VPN
+
+**Email:**
+- Cannot send emails
+- Emails not arriving
+- Large attachments failing
+- Email sync issues
+
+### Security
+
+**Urgent - Report Immediately:**
+- Suspected phishing email
+- Clicked suspicious link
+- Entered credentials on fake site
+- Lost or stolen device
+- Unauthorized access to account
+- Malware or virus detected
+- Ransomware message
+- Data leak or breach
+
+**Contact Security Team Directly:**
+- Email: security@company.com
+- Phone: (555) 123-4100
+- After hours emergency: (555) 123-9999
+
+## Creating Effective Tickets
+
+### Required Information
+
+**For All Tickets:**
+- Your name, email, phone, department
+- Brief descriptive subject line
+- Detailed description of issue
+- When did it start?
+- Does it happen consistently or intermittently?
+- Error messages (exact text or screenshot)
+- What were you trying to do?
+- What did you expect to happen?
+- What actually happened?
+
+**For Hardware Issues:**
+- Device type (laptop, desktop, phone, printer)
+- Asset tag number (sticker on device)
+- Model information
+- Is device under warranty?
+- Has it been dropped or damaged?
+
+**For Software Issues:**
+- Application name and version
+- Operating system (Windows, Mac, iOS, Android)
+- Browser name and version (if web-based)
+- Screenshot of error message
+- Steps to reproduce issue
+- Does it happen to others or just you?
+
+**For Access Issues:**
+- What system/application?
+- Your username
+- What access do you need?
+- Business justification
+- How long do you need access?
+- Who else has similar access?
+
+### Helpful Details to Include
+
+**Do:**
+- Be specific and detailed
+- Include screenshots (use Snipping Tool or Snip & Sketch)
+- List troubleshooting already attempted
+- Note if issue is urgent with reason
+- Provide callback number
+- Mention if multiple people affected
+- Note workaround if you found one
+
+**Don't:**
+- Write "urgent" unless truly critical
+- Say "it doesn't work" without details
+- Leave out contact information
+- Send multiple tickets for same issue
+- Include sensitive data like passwords
+- Demand specific technician
+- Use all caps or excessive punctuation
+
+### Screenshot Best Practices
+
+**What to Capture:**
+- Full error message with error code
+- Entire screen showing context
+- URL in browser address bar
+- System tray showing network/VPN status
+- Application version (usually in Help > About)
+
+**How to Take Screenshots:**
+- Windows: Win+Shift+S (Snipping Tool)
+- Mac: Cmd+Shift+4
+- Both: Use phone camera for screen crashes
+
+**Attach to Ticket:**
+- Upload to ticket portal
+- Email to helpdesk@company.com with ticket number in subject
+- Paste inline if using web form
+
+## Ticket Lifecycle
+
+### 1. Ticket Submission
+- You submit ticket via portal, email, or phone
+- Automated confirmation sent with ticket number
+- Ticket enters queue
+
+### 2. Initial Triage (within 30 minutes)
+- Help desk reviews and categorizes
+- Priority assigned
+- Ticket routed to appropriate team
+- May request additional information
+
+### 3. Assignment
+- Assigned to available technician based on skillset
+- Assignment notification sent to you
+- Technician may contact you for clarification
+
+### 4. Investigation
+- Technician researches and troubleshoots
+- May request remote access
+- Tests solutions in lab environment
+- Consults vendor or senior staff if needed
+
+### 5. Resolution
+- Solution implemented
+- Technician updates ticket with resolution
+- You receive notification
+- Asked to confirm issue resolved
+
+### 6. Closure
+- You confirm resolution (or request more help)
+- Ticket marked resolved
+- Satisfaction survey sent
+- Ticket closed after 3 days if no response
+
+### Throughout Process
+- Receive email updates when status changes
+- Can check ticket status anytime at helpdesk.company.com
+- Can add comments or information to ticket
+- Can request technician callback
+
+## Service Level Agreements (SLAs)
+
+### Response Times
+| Priority | Initial Response | Resolution Target |
+|----------|-----------------|-------------------|
+| Critical (P1) | 15 minutes | 4 hours |
+| High (P2) | 1 hour | 8 hours |
+| Medium (P3) | 4 hours | 2 business days |
+| Low (P4) | 1 business day | 5 business days |
+
+### Resolution Time
+- Clock starts when ticket submitted
+- Paused when waiting for your response
+- Paused during off-hours for non-emergency
+- Reset if issue complexity changes
+
+### If SLA is Missed
+- Automatic escalation to IT manager
+- You receive explanation
+- Priority escalated if appropriate
+- Workaround provided if possible
+
+## Self-Service Resources
+
+### Knowledge Base
+**Access:** kb.company.com
+
+**Popular Articles:**
+- How to reset your password
+- Setting up MFA/2FA
+- Connecting to VPN
+- Mapping network drives
+- Configuring email on mobile device
+- Installing approved software
+- Troubleshooting printer issues
+- Zoom best practices
+- Microsoft Teams tips and tricks
+
+**Search Tips:**
+- Use specific error messages
+- Try different keywords
+- Filter by application or category
+- Vote for helpful articles
+
+### Video Tutorials
+- Access at training.company.com
+- 5-10 minute how-to videos
+- Covers common tasks and applications
+- New videos added monthly
+
+### IT Newsletter
+- Monthly tips and announcements
+- Upcoming maintenance windows
+- New tools and features
+- Security awareness
+- Subscribe: it-newsletter@company.com
+
+## Remote Support
+
+### Remote Access Tools
+**IT uses:**
+- TeamViewer for remote desktop control
+- Bomgar for privileged access
+- Always with your permission
+
+### How It Works
+1. Technician sends connection request
+2. You see prompt on screen
+3. Accept to allow technician to view/control
+4. Technician troubleshoots
+5. You can end session anytime
+6. Session automatically ends when resolved
+
+### Security
+- Sessions are encrypted
+- Sessions are logged for security
+- You can see everything technician does
+- Never share passwords during session
+- Technician will never ask for passwords
+
+## Equipment & Hardware Requests
+
+### New Hire Equipment
+- Coordinated by HR and IT
+- Standard package based on role
+- Ready on or before start date
+- Includes laptop, accessories, accounts
+
+### Equipment Refresh
+- Laptops refreshed every 3 years
+- Desktop computers every 4 years
+- Monitors every 5 years
+- Phones every 2 years
+- Automatic notification when due
+
+### Additional Equipment
+**Request via IT Portal:**
+- External monitor
+- Keyboard/mouse upgrade
+- Headset
+- Webcam
+- Docking station
+- Mobile device
+
+**Approval Required:**
+- Manager approval for non-standard equipment
+- Business justification needed
+- Charged to department budget
+- 5-7 business day delivery
+
+### Equipment Return
+**When Required:**
+- Employment termination
+- Role change
+- Equipment upgrade
+- Extended leave (>90 days)
+
+**Process:**
+- HR coordinates with IT
+- Return to IT Help Desk or ship
+- Data backup available
+- Equipment sanitized and reused
+
+## Maintenance Windows
+
+### Planned Maintenance
+- Scheduled during off-hours when possible
+- Announced 2 weeks in advance minimum
+- Email notifications sent
+- Posted on IT portal
+- Calendar invites sent for major changes
+
+**Typical Windows:**
+- Monthly: 3rd Saturday, 12 AM - 6 AM
+- Quarterly: Sunday, 6 AM - 12 PM
+- Emergency: As needed with 24-hour notice
+
+### What to Expect
+- Some systems may be unavailable
+- Save work before maintenance window
+- Don't start large uploads/downloads
+- May need to reboot after maintenance
+- Extend window if issues encountered
+
+### Maintenance Types
+- Security patches and updates
+- System upgrades
+- Hardware replacements
+- Network changes
+- Application updates
+
+## Escalation Process
+
+### When to Escalate
+- Ticket priority incorrectly assigned
+- SLA not being met without explanation
+- Technician not responding
+- Solution not working as expected
+- Critical business impact
+- Dissatisfied with resolution
+
+### How to Escalate
+**Level 1: Add Comment to Ticket**
+- Request escalation
+- Explain increased urgency
+- Provide additional business impact
+
+**Level 2: Contact IT Manager**
+- Email: itsupport-manager@company.com
+- Phone: (555) 123-4050
+- Reference ticket number
+- Explain issue and concern
+
+**Level 3: Contact CIO Office**
+- Only for unresolved critical issues
+- Email: cio-office@company.com
+- Requires VP involvement
+
+### What to Expect
+- Manager reviews within 2 hours
+- New technician may be assigned
+- Priority may be adjusted
+- Regular status updates provided
+- Root cause analysis if repeated issues
+
+## Tips for Faster Resolution
+
+**Before Submitting Ticket:**
+- Restart computer (fixes 30% of issues)
+- Check cables and connections
+- Verify internet connection
+- Try different browser
+- Check if others have same issue
+- Search knowledge base
+
+**In Your Ticket:**
+- Use descriptive subject line
+- Include all relevant details
+- Attach screenshots
+- Note urgency and business impact
+- Provide callback number
+- Mention troubleshooting attempted
+
+**During Resolution:**
+- Respond to technician promptly
+- Be available for scheduled callbacks
+- Test solutions and provide feedback
+- Ask questions if you don't understand
+- Be patient - complex issues take time
+
+**After Resolution:**
+- Confirm issue is resolved
+- Complete satisfaction survey
+- Document solution for future reference
+- Thank your technician
+
+## FAQs
+
+**Q: How do I check my ticket status?**
+A: Log in to helpdesk.company.com and click "My Tickets" or check your email for updates.
+
+**Q: Can I request a specific technician?**
+A: Tickets are assigned based on availability and expertise. You can request specific technician in comments but cannot guarantee.
+
+**Q: What if I need help outside business hours?**
+A: Phone support available 24/7 for emergencies. Submit ticket online anytime; response during business hours unless emergency.
+
+**Q: How long do tickets stay open?**
+A: Active tickets stay open until resolved. If waiting your response over 5 days, ticket may be closed (can reopen if needed).
+
+**Q: Can I submit tickets for someone else?**
+A: Yes, but include their name, email, and contact info. They will be primary contact for ticket.
+
+**Q: What if my issue returns after ticket closed?**
+A: Reopen existing ticket or reference it in new ticket. Helps track related issues.
+
+**Q: Do you support personal devices?**
+A: Limited support for personal devices accessing company resources (email on phone). No support for personal use issues.
+
+**Q: How do I provide feedback on IT support?**
+A: Complete satisfaction survey after ticket closes or email feedback to itsupport-manager@company.com.
+
+---
+
+## Quick Reference
+
+**IT Help Desk**  
+Phone: (555) 123-4000 (24/7)  
+Email: helpdesk@company.com  
+Portal: helpdesk.company.com  
+Walk-Up: Building A, 1st Floor
+
+**Security Incidents**  
+Phone: (555) 123-4100  
+After Hours Emergency: (555) 123-9999  
+Email: security@company.com
+
+**Knowledge Base**  
+kb.company.com
+
+**IT Services Portal**  
+helpdesk.company.com
+
+**Service Hours**  
+Phone: 24/7 (emergency)  
+Email/Portal: 24/7  
+Walk-Up: 8 AM - 6 PM Mon-Fri  
+Chat: 7 AM - 7 PM Mon-Fri
+
+---
+
+**Last Updated:** January 2024  
+**Document Owner:** IT Support Manager  
+**Questions:** helpdesk@company.com

@@ -1,0 +1,256 @@
+# Information Security Policy
+
+**Version 3.0 | Effective January 2024**
+
+## Purpose
+Protect company information assets, ensure data confidentiality, integrity, and availability, and comply with regulatory requirements.
+
+## Scope
+All employees, contractors, vendors, and third parties with access to company systems or data.
+
+## Password Requirements
+
+### Strength
+- Minimum 12 characters
+- Must include: uppercase, lowercase, number, special character
+- No dictionary words or common patterns
+- Cannot reuse last 5 passwords
+- Different passwords for different systems
+
+### Management
+- Change every 90 days
+- Immediate change if compromised
+- Use company password manager: 1Password
+- Never share or write down passwords
+- No storing in browsers or unencrypted files
+
+### Multi-Factor Authentication (MFA)
+- Required for all business applications
+- Use Microsoft Authenticator or hardware token
+- Backup codes stored securely
+- Report lost MFA device immediately
+
+## Data Classification
+
+### Public
+- Marketing materials, press releases
+- Published content
+- No special controls required
+
+### Internal
+- General business information
+- Employee directory (basic info)
+- Internal policies and procedures
+- Access: Authenticated employees only
+
+### Confidential
+- Financial data, strategic plans
+- Customer lists, contracts
+- Employee personal information
+- Access: Need-to-know basis, manager approval
+
+### Restricted
+- Trade secrets, source code
+- M&A information, legal matters
+- Regulated data (PCI, HIPAA, PII)
+- Access: Executive approval, mandatory training
+
+## Data Handling
+
+### Storage
+- Company data only on approved systems
+- Use OneDrive/SharePoint for file storage
+- No personal cloud storage (Dropbox personal, Google Drive personal)
+- Encrypt confidential/restricted data at rest
+- USB drives encrypted or prohibited
+
+### Transmission
+- Email encryption for confidential data
+- Secure file transfer for restricted data
+- No sensitive data via SMS or personal messaging
+- Use company-approved sharing methods
+
+### Disposal
+- Shred paper documents with sensitive data
+- Wipe hard drives before disposal (IT does this)
+- Delete data when no longer needed
+- Secure erase for confidential/restricted data
+
+## Acceptable Use Policy
+
+### Approved Uses
+- Business communications and collaboration
+- Job-related research and learning
+- Reasonable personal use during breaks
+- Professional social media for business purposes
+
+### Prohibited Uses
+- Illegal activities or copyright violations
+- Accessing/distributing inappropriate content
+- Unauthorized access to systems or data
+- Installing unlicensed or unapproved software
+- Cryptocurrency mining
+- Personal business ventures
+- Excessive personal use impacting productivity
+
+### Email & Communication
+- Professional tone in business communications
+- No harassment, discrimination, or offensive content
+- Assume emails may be monitored or disclosed
+- Use work email for work, not personal business
+- Be cautious with "Reply All"
+
+### Internet & Web
+- Access appropriate business and personal sites
+- No streaming video/music excessively
+- No gambling or adult content sites
+- Social media okay during breaks
+- Be mindful of bandwidth usage
+
+## Device Security
+
+### Company-Issued Devices
+- Laptop/desktop, phone, tablet
+- Full disk encryption enabled
+- Antivirus/endpoint protection installed
+- Auto-lock after 5 minutes inactive
+- Keep OS and applications updated
+- Report lost/stolen immediately: (555) 123-4100
+
+### BYOD (Bring Your Own Device)
+- Must enroll in Mobile Device Management (MDM)
+- Company can wipe corporate data remotely
+- Separate work and personal data
+- Meet minimum security requirements
+- Not recommended for confidential data
+
+### Physical Security
+- Lock computer when away from desk (Win+L or Ctrl+Cmd+Q)
+- Don't leave devices unattended in public
+- Cable lock for laptops in office
+- Keep devices in sight while traveling
+- Report theft to police and IT immediately
+
+## Remote Work Security
+
+### Home Network
+- Secure WiFi with WPA2/WPA3 encryption
+- Change default router password
+- Keep router firmware updated
+- Separate network for smart devices if possible
+
+### Public WiFi
+- Always use VPN on public networks
+- No sensitive work without VPN
+- Verify network name with venue
+- Beware of fake hotspots
+- Use phone hotspot for sensitive work
+
+### VPN
+- Required for accessing company network remotely
+- Auto-connects for company apps
+- Contact IT if VPN issues: (555) 123-4000
+- Do not disable VPN while working
+
+### Work Environment
+- Privacy for confidential calls/video meetings
+- Screen not visible to family/visitors
+- Secure workspace for confidential documents
+- Lock door when handling restricted data
+
+## Phishing & Social Engineering
+
+### Warning Signs
+- Urgent requests for action
+- Requests for credentials or payment
+- Suspicious sender or reply-to address
+- Generic greetings ("Dear Customer")
+- Spelling and grammar errors
+- Unexpected attachments or links
+- Too-good-to-be-true offers
+
+### What To Do
+- Hover over links before clicking (check actual URL)
+- Verify sender by calling known phone number
+- Don't download unexpected attachments
+- Report suspicious emails: Click "Report Phishing" button or forward to phishing@company.com
+- When in doubt, call IT: (555) 123-4000
+
+### Never Share
+- Passwords or MFA codes
+- Social Security or bank details via email
+- Credit card numbers in email
+- Answers to security questions
+
+## Incident Response
+
+### Security Incidents (Report Immediately)
+- Suspected malware or ransomware
+- Lost or stolen device
+- Phishing email clicked / credentials entered
+- Unauthorized access to account
+- Data breach or leak
+- Suspicious activity on systems
+
+### Reporting
+**Security Team:**
+- Phone: (555) 123-4100 (24/7)
+- Email: security@company.com
+- After-hours emergency: (555) 123-9999
+
+**What to Report:**
+- What happened and when
+- What systems/data affected
+- Actions you've taken
+- Your contact information
+
+**Do NOT:**
+- Pay ransom (contact security first)
+- Try to "fix it" yourself
+- Delete evidence
+- Wait to report
+- Share incident details publicly
+
+## Compliance & Training
+
+### Annual Requirements
+- Security awareness training (required)
+- Phishing simulation tests (quarterly)
+- Policy acknowledgment (annual)
+- Role-specific training as assigned
+
+### Audits & Monitoring
+- IT may monitor systems for security
+- Random audits of access and usage
+- Logs retained for security investigations
+- Compliance with SOC 2, GDPR, CCPA
+
+### Violations & Consequences
+**Minor:** Warning, retraining
+**Moderate:** Written warning, access restrictions
+**Severe:** Termination, legal action
+
+## Key Contacts
+
+**IT Security Team**  
+Email: security@company.com  
+Phone: (555) 123-4100  
+Emergency: (555) 123-9999 (24/7)
+
+**IT Help Desk**  
+Email: helpdesk@company.com  
+Phone: (555) 123-4000  
+
+**Report Phishing**  
+Email: phishing@company.com  
+Or click "Report Phishing" button in Outlook
+
+**Privacy/Compliance**  
+Email: privacy@company.com  
+Phone: (555) 123-4150
+
+---
+
+**Policy Owner:** Chief Information Security Officer  
+**Last Updated:** January 2024  
+**Next Review:** January 2025

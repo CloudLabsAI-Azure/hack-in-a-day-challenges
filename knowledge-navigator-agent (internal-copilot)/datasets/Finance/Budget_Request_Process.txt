@@ -1,0 +1,610 @@
+# Budget Request & Planning Process
+
+**Fiscal Year 2024 Guide**  
+**Finance Department**
+
+## Overview
+
+This guide outlines the budget planning cycle, request procedures, and approval workflows for department budget planning and in-year budget requests.
+
+## Annual Budget Cycle
+
+### Timeline
+
+**July-August: Planning Phase**
+- Finance distributes budget templates and guidelines
+- Departments review prior year actuals and current year forecast
+- Strategic initiatives identified for upcoming year
+- Preliminary discussions with finance business partners
+
+**September: Budget Development**
+- Week 1-2: Department managers draft initial budgets
+- Week 3: Review with department heads
+- Week 4: Submit to finance for consolidation
+
+**October: Review & Refinement**
+- Week 1-2: Finance reviews and challenges submissions
+- Week 3: Department revisions and resubmissions
+- Week 4: Executive leadership review
+
+**November: Approval**
+- Week 1-2: Board review and feedback
+- Week 3-4: Final adjustments and board approval
+
+**December: Communication**
+- Final budgets distributed to departments
+- Budget loaded into financial systems
+- Budget training for managers
+
+**January 1: New Fiscal Year**
+- Budgets take effect
+- Monthly variance reporting begins
+
+## Budget Components
+
+### Operating Expenses
+
+**Personnel Costs (60-70% of budget)**
+- Base salaries for existing positions
+- Planned salary increases (merit, promotion, market adjustments)
+- New hire additions with justification
+- Benefits and payroll taxes (loaded at 30% of salary)
+- Contractor and temporary staff costs
+- Overtime projections
+
+**Technology & Software (10-15%)**
+- Software licenses and subscriptions (SaaS)
+- Hardware purchases and replacements
+- IT support and maintenance
+- Cloud computing costs
+- Cybersecurity tools
+
+**Professional Services (5-10%)**
+- Consultants and advisors
+- Legal services
+- Accounting and audit fees
+- Recruiting and staffing services
+- Training and development
+
+**Facilities & Operations (5-10%)**
+- Office rent and utilities (allocated by headcount)
+- Office supplies and equipment
+- Furniture and fixtures
+- Telecommunications
+- Postage and shipping
+
+**Travel & Entertainment (5-10%)**
+- Business travel costs
+- Client entertainment
+- Conference attendance
+- Team events and meals
+
+**Marketing & Sales (varies by dept)**
+- Advertising and promotion
+- Events and trade shows
+- Sales materials
+- Market research
+- Public relations
+
+**Other Operating Costs**
+- Dues and subscriptions
+- Insurance
+- Miscellaneous expenses
+
+### Capital Expenditures
+
+**Equipment & Hardware**
+- Computers and peripherals ($1,000+ per item)
+- Servers and network equipment
+- Manufacturing equipment
+- Vehicles
+
+**Software & Systems**
+- Enterprise software implementations
+- Custom software development
+- Major system upgrades
+
+**Facilities & Improvements**
+- Office renovations
+- Leasehold improvements
+- Furniture and fixtures
+
+**Capitalization Threshold:**
+- Individual items: $1,000+
+- Useful life: 3+ years
+- Depreciated over asset life
+
+## Budget Request Requirements
+
+### New Headcount Request
+
+**Required Information:**
+1. **Position Details**
+   - Job title and level
+   - Department and reporting structure
+   - Full-time or part-time
+   - Start date and ramp timeline
+
+2. **Business Justification**
+   - Specific business need or problem to solve
+   - Impact if position not filled
+   - Alternative solutions considered
+   - Strategic alignment
+
+3. **Financial Information**
+   - Estimated salary range
+   - Total compensation (salary + benefits)
+   - Additional costs (equipment, software, travel)
+   - Revenue impact or cost savings expected
+
+4. **Resource Plan**
+   - Workspace and equipment needs
+   - Onboarding and training plan
+   - Ongoing management and support
+
+**Approval Requirements:**
+- Department head approval
+- VP approval
+- CFO approval for director+ roles
+- CEO approval for VP+ roles
+
+### Technology Investment Request
+
+**Required Information:**
+1. **Solution Overview**
+   - Technology or software description
+   - Vendor information
+   - Implementation timeline
+   - Users/departments impacted
+
+2. **Business Case**
+   - Problem or opportunity addressed
+   - Benefits and expected outcomes
+   - Metrics to measure success
+   - Risks if not implemented
+
+3. **Cost Analysis**
+   - One-time costs (licensing, implementation, training)
+   - Recurring costs (subscriptions, maintenance, support)
+   - 3-year total cost of ownership
+   - FTE costs for implementation and ongoing support
+
+4. **Alternatives Considered**
+   - Other vendors or solutions evaluated
+   - Build vs. buy analysis
+   - Do nothing alternative
+
+5. **Implementation Plan**
+   - Project timeline and milestones
+   - Resources required
+   - Change management approach
+   - Risk mitigation
+
+**Approval Requirements:**
+- Department head approval
+- IT architecture review
+- CFO approval (>$50K)
+- Executive committee approval (>$250K)
+
+### Marketing Campaign Request
+
+**Required Information:**
+1. **Campaign Overview**
+   - Campaign objectives and target audience
+   - Channels and tactics
+   - Timeline and duration
+   - Creative and messaging approach
+
+2. **Budget Breakdown**
+   - Media costs (digital, print, outdoor)
+   - Agency and creative fees
+   - Production costs
+   - Technology and tools
+   - Event costs if applicable
+
+3. **Expected Outcomes**
+   - Lead generation targets
+   - Brand awareness metrics
+   - Conversion rate assumptions
+   - Revenue impact projections
+
+4. **Measurement Plan**
+   - KPIs and success metrics
+   - Tracking and attribution approach
+   - Reporting cadence
+
+**Approval Requirements:**
+- Marketing director approval
+- CMO approval
+- CFO approval (>$100K)
+
+### Capital Expenditure Request
+
+**Required Information:**
+1. **Asset Description**
+   - Type of asset
+   - Specifications and features
+   - Vendor and pricing
+   - Useful life
+
+2. **Justification**
+   - Business need
+   - Replacement vs. expansion
+   - Impact on productivity or revenue
+   - Required vs. nice-to-have
+
+3. **Financial Analysis**
+   - Purchase cost vs. lease/rent
+   - ROI calculation
+   - Payback period
+   - Ongoing maintenance costs
+
+4. **Alternatives**
+   - Repair existing equipment
+   - Lease or rent options
+   - Different vendors or models
+
+**Approval Requirements:**
+- Department head approval
+- Finance approval
+- CFO approval ($10K+)
+- Executive committee approval ($100K+)
+
+## Budget Request Form
+
+### Standard Template Sections
+
+**1. Request Summary**
+```
+Request ID: ____________________
+Requestor: ____________________
+Department: ____________________
+Date: ____________________
+Amount Requested: $____________________
+Budget Category: ☐ Personnel  ☐ Technology  ☐ Marketing  ☐ Capital  ☐ Other
+```
+
+**2. Business Justification** (250 words max)
+- Clearly articulate the business need
+- Explain strategic alignment
+- Describe the impact if not approved
+
+**3. Financial Details**
+
+| Year | Amount | Notes |
+|------|--------|-------|
+| Year 1 | $ | |
+| Year 2 | $ | |
+| Year 3 | $ | |
+| **Total** | **$** | |
+
+**4. Expected Benefits & Metrics**
+- Quantifiable outcomes
+- Timeline to realize benefits
+- How success will be measured
+
+**5. Alternatives Considered**
+- List at least 2 alternatives
+- Explain why recommended option is best
+
+**6. Risks & Mitigation**
+- Implementation risks
+- Financial risks
+- Mitigation strategies
+
+**7. Approvals Required**
+
+| Role | Name | Date | Approved |
+|------|------|------|----------|
+| Manager | | | ☐ Yes ☐ No |
+| Director | | | ☐ Yes ☐ No |
+| VP | | | ☐ Yes ☐ No |
+| CFO | | | ☐ Yes ☐ No |
+
+## In-Year Budget Requests
+
+### When Required
+- Expenses not included in annual budget
+- Costs exceeding budgeted amounts by >10%
+- New initiatives or opportunities arising mid-year
+- Response to competitive threats or market changes
+
+### Process
+1. **Assess Budget Availability**
+   - Check current budget vs. actuals in financial system
+   - Identify potential offsets within department budget
+   - Consult with finance business partner
+
+2. **Prepare Business Case**
+   - Use standard budget request template
+   - Provide compelling justification
+   - Explain urgency and timing
+   - Quantify expected benefits
+
+3. **Submit Request**
+   - Submit through budget request system: budget.company.com
+   - Attach supporting documentation
+   - Route for appropriate approvals
+
+4. **Review & Decision**
+   - Finance reviews within 1 week
+   - May request additional information
+   - Approval/denial communicated with rationale
+   - Approved requests added to budget
+
+### Approval Thresholds
+
+**Department Manager:**
+- Up to $5,000 (within department budget)
+
+**Department Director:**
+- Up to $25,000 (with budget offsets)
+
+**VP/Department Head:**
+- Up to $100,000 (with strong business case)
+
+**CFO:**
+- Up to $500,000
+
+**CEO:**
+- Over $500,000
+
+**Board of Directors:**
+- Over $2,000,000 or >5% of budget
+
+## Budget Monitoring & Reporting
+
+### Monthly Budget Reviews
+
+**Week 1 of Each Month:**
+- Finance closes prior month
+- Actuals loaded to financial system
+- Variance reports generated
+
+**Week 2:**
+- Department managers review reports
+- Identify and explain variances >10%
+- Forecast updated for remainder of year
+
+**Week 3:**
+- Department head reviews with team
+- Finance business partner discusses trends
+- Action plans for unfavorable variances
+
+**Week 4:**
+- Executive team receives consolidated report
+- Finance presents key insights and concerns
+- Decisions made on course corrections
+
+### Variance Explanations Required For:
+- Any line item >10% over/under budget
+- Any new expenses not budgeted
+- Timing differences affecting multiple months
+- One-time vs. recurring expense clarifications
+
+### Forecasting Updates
+
+**Quarterly Reforecasting:**
+- Update remaining months based on actuals and new information
+- Identify risks and opportunities
+- Adjust annual projections
+- Submit to finance by 15th day of quarter
+
+**Rolling Forecasts:**
+- Some departments use rolling 12-month forecasts
+- Updated monthly with actuals
+- Focuses on next 4-6 quarters
+
+## Budget Best Practices
+
+### Planning Tips
+1. **Start with Prior Year**
+   - Review last year's budget vs. actuals
+   - Understand variances and lessons learned
+   - Carry forward relevant trends
+
+2. **Build Bottom-Up**
+   - Detail all known expenses
+   - Get input from team members
+   - Validate assumptions with data
+
+3. **Plan for Growth**
+   - Factor in inflation (typically 3-5%)
+   - Account for volume increases
+   - Include strategic initiatives
+
+4. **Be Realistic**
+   - Don't lowball to appear efficient
+   - Don't pad excessively for cushion
+   - Use historical data to support estimates
+
+5. **Document Assumptions**
+   - Note key assumptions driving numbers
+   - Explain growth rates and drivers
+   - Provide context for reviewers
+
+### Ongoing Management
+
+1. **Monitor Monthly**
+   - Review actuals vs. budget regularly
+   - Identify trends early
+   - Take corrective action promptly
+
+2. **Communicate Changes**
+   - Alert finance to material changes
+   - Explain variances proactively
+   - Don't wait for budget reviews
+
+3. **Manage to Budget**
+   - Treat budget as commitment, not suggestion
+   - Get approval before exceeding budget
+   - Find offsets within budget when possible
+
+4. **Track Against Forecast**
+   - Update forecast as new information emerges
+   - Distinguish from budget (budget = plan, forecast = expected)
+   - Use forecast for decision-making
+
+5. **Learn and Improve**
+   - Analyze accuracy at year-end
+   - Identify what caused variances
+   - Apply learnings to next budget cycle
+
+## Common Budget Challenges
+
+### Challenge: Unexpected Costs
+**Solution:**
+- Build in contingency (5-10% of budget)
+- Maintain flexibility in discretionary spending
+- Reallocate from lower priorities
+- Submit in-year budget request if necessary
+
+### Challenge: Revenue Shortfall Impact
+**Solution:**
+- Identify non-essential expenses to cut
+- Delay discretionary projects
+- Renegotiate contracts where possible
+- Freeze hiring and travel if severe
+
+### Challenge: Competing Priorities
+**Solution:**
+- Use prioritization framework (strategic alignment, ROI, urgency)
+- Make trade-off decisions explicit
+- Document decisions and rationale
+- Revisit quarterly as conditions change
+
+### Challenge: Lack of Historical Data
+**Solution:**
+- Research industry benchmarks
+- Get quotes from vendors
+- Pilot programs for better estimates
+- Buffer estimates for uncertainty
+
+### Challenge: Scope Creep on Projects
+**Solution:**
+- Define project scope clearly upfront
+- Implement change control process
+- Track scope changes and budget impacts
+- Communicate trade-offs to stakeholders
+
+## Budget Tools & Resources
+
+### Financial Systems
+**Budget Planning Tool:** budget.company.com
+- Access: All managers with budget responsibility
+- Features: Templates, prior year data, workflow approvals
+- Support: finance-systems@company.com
+
+**Expense Tracking:** expenses.company.com
+- Real-time budget vs. actuals
+- Drill-down capabilities
+- Custom reports and exports
+
+**Forecasting Tool:** forecast.company.com
+- Monthly forecast updates
+- Scenario modeling
+- Integration with planning tool
+
+### Templates & Guides
+Available on Finance Intranet: finance.company.com/budget
+
+- Annual Budget Template
+- In-Year Request Form
+- Headcount Request Template
+- Capital Expenditure Request
+- ROI Calculator
+- Budget Presentation Template
+- Variance Explanation Guide
+
+### Training & Support
+
+**Budget Training:**
+- New Manager Budget Training (monthly)
+- Annual Budget Process Workshop (August)
+- Budget System Training (on-demand)
+- Register: training.company.com
+
+**Finance Business Partners:**
+Each department assigned dedicated finance partner
+- Budget planning support
+- Monthly review preparation
+- Ad-hoc analysis and guidance
+- Find your partner: finance.company.com/team
+
+**Help Desk:**
+- Email: finance-help@company.com
+- Phone: (555) 123-4800
+- Hours: Monday-Friday, 8 AM - 6 PM
+- Average response time: 24 hours
+
+## Budget Calendar
+
+### Annual Budget Cycle
+- **July 15:** Budget guidelines and templates distributed
+- **August 1:** Budget kickoff meetings by department
+- **September 15:** Initial budget submissions due
+- **October 1:** Finance review and feedback complete
+- **October 15:** Revised budgets due
+- **November 1:** Executive review
+- **November 15:** Board presentation
+- **December 1:** Final budgets approved and communicated
+- **January 1:** New fiscal year begins
+
+### Recurring Budget Activities
+- **Monthly (by 10th):** Prior month close and reporting
+- **Monthly (by 20th):** Variance explanations due
+- **Quarterly (by 15th):** Forecast updates due
+- **Annual (July-Dec):** Budget planning for next year
+
+### Important Deadlines
+- **In-Year Requests:** Submit at least 2 weeks before needed
+- **Headcount Requests:** 6 weeks before planned start date
+- **Capital Requests >$100K:** 90 days advance notice
+- **Budget Amendments:** By 20th of month for next month
+
+## Frequently Asked Questions
+
+**Q: What if I need to spend more than budgeted?**
+A: Submit an in-year budget request with justification. If urgent, discuss with your finance partner for possible interim approval.
+
+**Q: Can I move money between budget line items?**
+A: Within your department, yes, with manager approval. Between departments requires CFO approval. Submit reallocation request in budget system.
+
+**Q: What happens to unused budget at year-end?**
+A: Operating budget does not carry over. Capital project balances may carry forward with approval. Use-it-or-lose-it does not apply; don't waste budget.
+
+**Q: How do I request a new position?**
+A: Submit headcount request form with business case. Must be approved before posting role. Allow 6 weeks for approval and recruiting.
+
+**Q: What's the difference between budget and forecast?**
+A: Budget is the annual plan (doesn't change). Forecast is updated prediction of actuals (changes quarterly based on new information).
+
+**Q: Can I get a budget increase mid-year?**
+A: Yes, through in-year budget request process. Requires strong business case and appropriate approvals based on amount.
+
+**Q: Who can approve my budget requests?**
+A: Depends on amount. See approval thresholds section. Generally: small requests ($5K-$25K) by director, larger requests by VP or CFO.
+
+**Q: How do I explain variances in monthly reviews?**
+A: Provide specific explanation of what drove difference from budget. Include if temporary or ongoing, and any corrective actions.
+
+---
+
+## Contact Information
+
+**Finance Team**  
+Email: finance@company.com  
+Phone: (555) 123-4800
+
+**Budget Questions**  
+Email: budget@company.com  
+Budget System Support: (555) 123-4801
+
+**Your Finance Business Partner**  
+Find your assigned partner: finance.company.com/team
+
+---
+
+**Last Updated:** January 2024  
+**Next Review:** July 2024  
+**Policy Owner:** Chief Financial Officer

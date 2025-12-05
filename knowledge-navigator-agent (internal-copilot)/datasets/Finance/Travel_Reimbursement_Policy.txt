@@ -1,0 +1,444 @@
+# Travel & Expense Reimbursement Policy
+
+**Effective Date:** January 1, 2024  
+**Policy Owner:** Chief Financial Officer  
+**Version:** 4.3
+
+## 1. Purpose
+
+This policy establishes guidelines for business travel expenses and reimbursement procedures to ensure appropriate use of company funds while meeting business objectives.
+
+## 2. Scope
+
+Applies to all employees traveling for company business, including:
+- Client meetings and site visits
+- Conferences and training events
+- Internal meetings requiring travel
+- Recruiting and interview travel
+
+## 3. Travel Authorization
+
+### Pre-Approval Required
+All travel must be approved BEFORE booking:
+- **Domestic travel:** Manager approval
+- **International travel:** Manager + VP approval
+- **Conference attendance:** Manager approval + registration confirmation
+- **Non-standard travel:** CFO approval
+
+### Authorization Process
+1. Submit travel request in expense system 2 weeks in advance
+2. Include business justification and estimated costs
+3. Await approval before making reservations
+4. Book through preferred vendors when possible
+5. Save all receipts and documentation
+
+### Emergency Travel
+- Verbal approval from manager acceptable
+- Submit written request within 24 hours
+- Provide explanation of emergency circumstances
+
+## 4. Air Travel
+
+### Booking Requirements
+- **Advance Booking:** Book at least 14 days in advance when possible
+- **Preferred Vendor:** Use corporate travel agency (TravelPro) for best rates
+- **Online Booking Tool:** travel.company.com
+- **Direct Flights:** Book direct flights when cost difference is less than $100
+
+### Class of Service
+**Domestic Flights:**
+- Trips under 3 hours: Economy class only
+- Trips over 3 hours: Economy Plus/Comfort+ allowed
+- Executive level (VP+): Business class at discretion
+
+**International Flights:**
+- Flights under 6 hours: Economy Plus/Premium Economy
+- Flights 6-10 hours: Premium Economy or Business class
+- Flights over 10 hours: Business class allowed
+- C-suite: Business/First class at discretion
+
+### Additional Guidelines
+- **Baggage Fees:** One checked bag reimbursable for trips over 2 days
+- **Seat Selection:** Basic seat selection included; premium seats require justification
+- **Flight Changes:** Change fees reimbursable if business-related
+- **Cancellations:** Cancel unused tickets promptly for credit
+- **Travel Insurance:** Optional for international travel (company-paid)
+
+### Non-Reimbursable
+- Upgrades using personal funds
+- Frequent flyer program fees
+- Airport club memberships (unless executive level)
+- Premium seat selection without justification
+
+## 5. Ground Transportation
+
+### Rental Cars
+**When Approved:**
+- Multiple meeting locations requiring vehicle
+- Limited public transportation at destination
+- Group travel (3+ people)
+- Cost-effective compared to rideshare for trip duration
+
+**Requirements:**
+- Mid-size or smaller vehicle (SUV if 4+ passengers)
+- Book through corporate vendor (Enterprise, Hertz)
+- Decline rental car insurance (covered by company policy)
+- Fuel: Return with full tank to avoid premium charges
+- Tolls and parking reimbursable with receipts
+
+### Rideshare & Taxis
+- **Preferred:** Uber, Lyft for airport transfers and local travel
+- **Standard Service:** UberX, Lyft Standard (not luxury options)
+- **Taxis:** Reimbursable when rideshare unavailable
+- **Receipts:** Required for all rides over $25
+- **Tips:** 15-20% acceptable
+
+### Personal Vehicle Mileage
+- **Rate:** $0.655 per mile (current IRS rate)
+- **Documentation:** Submit start/end addresses and odometer readings
+- **Calculation:** Use Google Maps for mileage verification
+- **Parking & Tolls:** Reimbursable with receipts
+- **Insurance:** Personal auto insurance required
+
+### Public Transportation
+- Trains, subways, buses fully reimbursable
+- Purchase day/week passes when cost-effective
+- Retain tickets or provide transaction screenshots
+
+### Airport Parking
+- **Short trips (1-3 days):** Economy parking acceptable
+- **Longer trips (4+ days):** Airport parking or off-site economy lot
+- **Alternative:** Rideshare may be more cost-effective; compare costs
+- **Valet parking:** Not reimbursable unless medically necessary
+
+## 6. Lodging
+
+### Hotel Selection
+- **Preferred Hotels:** Marriott, Hilton, Hyatt (corporate rates available)
+- **Booking:** Use corporate travel tool for negotiated rates
+- **Location:** Stay near meeting location to minimize transportation costs
+- **Alternative:** Airbnb/VRBO acceptable for extended stays (5+ nights)
+
+### Rate Limits
+**Domestic:**
+- Major cities (NYC, SF, LA, Chicago): $250/night
+- Mid-size cities: $175/night
+- Small cities/suburbs: $125/night
+- Conferences: Conference hotel rate acceptable even if above limits
+
+**International:**
+- Tier 1 cities (London, Tokyo, Paris): $300/night
+- Tier 2 cities: $200/night
+- Other locations: $150/night
+
+### Extended Stay
+- Stays over 7 nights: Consider extended stay hotels or corporate housing
+- Weekly rates often more economical
+- Kitchen facilities reduce meal costs
+
+### Lodging Guidelines
+- **Check-in/out:** Standard dates to minimize extra nights
+- **Room Type:** Standard room; suites require VP approval
+- **Incidentals:** Personal items not reimbursable
+- **Resort Fees:** Reimbursable if unavoidable
+- **Early Check-in/Late Checkout:** Fees not reimbursable
+- **Mini-bar:** Not reimbursable
+- **Movies/Entertainment:** Not reimbursable
+- **Hotel Internet:** Reimbursable if needed for work
+
+## 7. Meals & Entertainment
+
+### Per Diem Rates (Daily Limits)
+**Domestic:**
+- Breakfast: $15
+- Lunch: $25
+- Dinner: $50
+- Total daily: $90
+
+**International:**
+- Use GSA rates for specific countries
+- Generally 25% higher than domestic rates
+
+### Meal Guidelines
+- **Actual Cost:** Submit actual meal costs with itemized receipts
+- **Receipts Required:** All meals over $25
+- **Alcohol:** One drink per meal reimbursable ($12 limit)
+- **Tips:** 15-20% on pre-tax amount
+- **Solo Dining:** Order reasonably; avoid expensive restaurants
+- **Group Meals:** Pre-approval required for 4+ people
+
+### Business Meals
+**Client/Customer Entertainment:**
+- Pre-approval required for meals over $100/person
+- Itemized receipt required
+- Document attendees and business purpose
+- Reasonable alcohol for clients acceptable
+- Select appropriate venue for business discussion
+
+**Team Meals:**
+- Manager may approve team dinners during travel
+- Reasonable cost per person
+- Alternative to individual meals, not in addition to
+- Builds team relationships and morale
+
+### Non-Reimbursable
+- Alcohol beyond one drink per meal
+- Room service (unless only option available)
+- Excessive or luxury dining
+- Meals with spouse/family (unless business purpose)
+- Snacks and beverages from hotel mini-bar
+
+## 8. Conference & Training
+
+### Registration Fees
+- Early bird rates required when booking in advance
+- Conference materials and sessions included
+- Supplemental workshops require separate approval
+
+### Conference Expenses
+**Reimbursable:**
+- Registration fees
+- Conference hotel (even if above daily rate)
+- Meals not provided by conference
+- Conference materials and books
+- Networking events (with receipt)
+
+**Not Reimbursable:**
+- Spouse/guest registration or travel
+- Tourist activities
+- Non-business social events
+
+## 9. Other Reimbursable Expenses
+
+### Communication
+- Mobile phone charges for business calls
+- International roaming (activate company plan)
+- WiFi charges when hotel WiFi inadequate for work
+
+### Business Services
+- Printing and shipping business documents
+- Business center services at hotel
+- Currency exchange fees (reasonable)
+
+### Miscellaneous
+- Passport and visa fees for business travel
+- TSA PreCheck/Global Entry ($85 every 5 years)
+- Required vaccinations for international travel
+- Baggage fees (one checked bag for 3+ day trips)
+
+## 10. Non-Reimbursable Expenses
+
+### Personal Items
+- Clothing and personal care items
+- Toiletries and medications
+- Gym fees and personal fitness
+- Laundry for trips under 5 days
+- Haircuts and personal services
+
+### Entertainment
+- In-flight entertainment
+- Hotel movies and games
+- Personal sightseeing and tours
+- Sporting events and concerts
+- Spa services
+
+### Other
+- Traffic violations and parking tickets
+- Lost luggage (file claim with airline)
+- Personal travel insurance
+- Excess baggage fees
+- Pet care during travel
+- Upgrades using personal preference
+
+## 11. Expense Reporting
+
+### Submission Timeline
+- **Deadline:** Submit expenses within 30 days of trip completion
+- **Late Submission:** Expenses over 60 days may be denied
+- **Monthly Travel:** Submit at month end
+
+### Required Documentation
+- **Receipts:** Required for all expenses over $25
+- **Itemized Receipts:** Required for meals, hotels, rental cars
+- **Credit Card Statements:** Not acceptable as sole documentation
+- **Missing Receipts:** Affidavit required; limit $25 per item, $100 per trip
+
+### Expense Report Format
+1. **Trip Information:** Dates, destination, business purpose
+2. **Expense Details:** Date, vendor, amount, category, business purpose
+3. **Attendees:** List for business meals
+4. **Receipts:** Attach all supporting documentation
+5. **Mileage:** Provide start/end locations
+6. **Approvals:** Manager approval before submission
+
+### Submission Process
+1. Log in to expense system: expenses.company.com
+2. Create new expense report
+3. Add expenses with receipts
+4. Categorize each expense correctly
+5. Provide business justification
+6. Submit to manager for approval
+7. Finance reviews and processes
+8. Reimbursement via direct deposit (2 weeks)
+
+### Corporate Credit Cards
+- Available to frequent travelers
+- Monthly reconciliation required
+- Personal charges prohibited
+- Report lost/stolen cards immediately
+- Charges due even if expense denied
+
+## 12. International Travel
+
+### Pre-Travel Requirements
+- Passport valid for 6+ months beyond travel dates
+- Obtain necessary visas (company reimburses fees)
+- Register travel with company security
+- Review country-specific travel advisories
+- Enroll in international phone plan
+- Obtain international health insurance (company-provided)
+
+### Currency & Payments
+- Use corporate credit card when possible (best exchange rates)
+- Limit cash advances to necessary amounts
+- Retain currency exchange receipts
+- Convert expenses to USD using rate on transaction date
+- Use Oanda.com or expense system for conversion rates
+
+### International Expense Limits
+- Follow host country GSA rates for meals
+- Hotel rates typically higher; use judgment
+- Tipping customs vary; research local practices
+- VAT/GST often reimbursable; retain tax receipts
+
+## 13. Compliance & Audit
+
+### Policy Violations
+- **Minor Violations:** Manager counseling and correction
+- **Pattern of Violations:** Written warning and training
+- **Serious Violations:** Reimbursement denial, potential termination
+- **Fraud:** Immediate termination and legal action
+
+### Audit Process
+- Random monthly audits of expense reports
+- Annual comprehensive audit by department
+- Anomaly detection by finance system
+- Manager review before approval
+
+### Consequences of Non-Compliance
+- Expense denial and personal liability
+- Loss of corporate card privileges
+- Disciplinary action up to termination
+- Legal action for fraudulent expenses
+
+## 14. Special Circumstances
+
+### Extended Business Travel
+**Trips over 30 days:**
+- Weekly calls home reimbursable (30 minutes)
+- Laundry and dry cleaning reimbursable
+- One trip home per month (if cost-effective)
+- Temporary housing allowance available
+
+### Relocations
+- Separate relocation policy applies
+- Coordinate with HR for relocation benefits
+- This policy does not cover relocation expenses
+
+### Recruitment Travel
+**Candidate Travel:**
+- Company pays for candidate travel to interviews
+- Standard policy rates apply
+- Arrange through recruiting coordinator
+
+**Employee Recruiting Travel:**
+- Standard travel policy applies
+- Campus recruiting trips pre-approved by HR
+
+### Spouse/Family Travel
+- Not reimbursable unless business necessity
+- CFO approval required for exceptions
+- Employee pays incremental costs (larger room, extra meal)
+- Additional baggage fees not reimbursable
+
+## 15. Resources & Contacts
+
+### Expense System
+- **Portal:** expenses.company.com
+- **Mobile App:** Available on iOS and Android
+- **Help:** expense-help@company.com
+
+### Travel Booking
+- **Corporate Travel Agency:** TravelPro
+  - Phone: 1-800-XXX-TRAVEL (8728)
+  - Email: booking@travelpro.com
+  - Available: 24/7 for emergencies
+- **Online Booking:** travel.company.com
+- **Corporate Rates:** Automatically applied when booking through system
+
+### Finance Team
+- **Expense Questions:** expenses@company.com
+- **Policy Questions:** finance@company.com
+- **Phone:** (555) 123-4800
+- **Office Hours:** Monday-Friday, 8 AM - 5 PM
+
+### Travel Safety & Security
+- **Emergency:** 1-800-XXX-HELP (4357) - 24/7
+- **Travel Registry:** Register international travel at travel-registry.company.com
+- **Travel Alerts:** Subscribe to country-specific alerts
+- **Travel Insurance Claims:** insurance@company.com
+
+### Manager Resources
+- **Approval Guidelines:** manager.company.com/travel
+- **Policy Training:** Required for all approving managers
+- **Quarterly Reviews:** Review team expense patterns
+
+## 16. Policy Updates
+
+This policy is reviewed annually and may be updated to reflect:
+- Changes in IRS mileage rates
+- Updated GSA per diem rates
+- Vendor partnerships and corporate rates
+- Company financial policies
+- Regulatory requirements
+
+**Employees will be notified of material policy changes via email and must acknowledge receipt.**
+
+---
+
+## Quick Reference Guide
+
+### Before You Travel
+- [ ] Submit travel request 2 weeks in advance
+- [ ] Get manager approval
+- [ ] Book through corporate tools
+- [ ] Compare transportation options
+- [ ] Check hotel rates against limits
+- [ ] Register international travel
+
+### During Your Trip
+- [ ] Keep all itemized receipts
+- [ ] Take photos of receipts immediately
+- [ ] Track mileage for personal vehicle
+- [ ] Document business meals with attendees
+- [ ] Stay within daily limits
+- [ ] Use corporate credit card
+
+### After Your Trip
+- [ ] Submit expenses within 30 days
+- [ ] Attach all receipts over $25
+- [ ] Provide business justification
+- [ ] List meal attendees
+- [ ] Convert foreign currency
+- [ ] Get manager approval
+
+### Need Help?
+**Expense System:** expenses.company.com  
+**Email:** expenses@company.com  
+**Phone:** (555) 123-4800
+
+---
+
+**Policy Effective Date:** January 1, 2024  
+**Next Review:** December 31, 2024  
+**Questions?** Contact finance@company.com
