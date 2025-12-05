@@ -17,8 +17,6 @@ In this challenge, you will create an AI-powered Internal Knowledge Copilot usin
 
 1. In the **Lab VM**, click on **Microsoft Edge** browser icon on the desktop.
 
-   ![](./media/zgr-gt.png)
-
 2. Navigate to the **Microsoft 365** portal:
 
    ```
@@ -57,8 +55,6 @@ In this challenge, you will create an AI-powered Internal Knowledge Copilot usin
 
 1. On **Copilot Studio**, select **+ Create (1)**, and then select **+ New agent (2)**.
 
-   ![image](./media/m-l1-22.png)
-
 2. On **Start building your agent** page, select **Configure (1)**.
 
 3. Provide the following details:
@@ -80,8 +76,6 @@ In this challenge, you will create an AI-powered Internal Knowledge Copilot usin
      - Offer to email policy documents or create IT tickets when appropriate
      - Maintain employee privacy and confidentiality at all times
      ```
-
-   ![image](./media/12-9-m49.png)
 
 4. Click **Create** to initialize your agent.
 

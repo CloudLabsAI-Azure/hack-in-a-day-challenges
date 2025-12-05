@@ -35,15 +35,9 @@ Now we'll create a flow to save knowledge requests to SharePoint and track their
 
 2. Select **Add node (1)** after the Adaptive card node, choose **Add a tool (2)**, and then select **New agent flow (3)**.
 
-   ![image](./media/12-9-m65.png)
-
 3. Select the **When an agent calls the flow (1)** action and click on **+ Add input (2)** under the **Parameters** section.
 
-   ![image](./media/30-9-l4-4.png)
-
    > **Note:** If the side panel does not open automatically, click the **panel icon** on the top-right to open it.
-
-   ![image](./media/30-9-l4-3.png)
 
 4. Add the following input parameters one by one (click **+ Add an input** between each):
 
@@ -55,11 +49,7 @@ Now we'll create a flow to save knowledge requests to SharePoint and track their
    | Urgency | Text |
    | EmployeeEmail | Text |
 
-   ![image](./media/12-9-m70.png)
-
 5. Select the **+ (1)** button to add an action, type **SharePoint (2)** in the search box, and select **Create item (3)**.
-
-   ![image](./media/30-9-l5-1.png)
 
    > **Note:** If the side panel does not open automatically, click the **panel icon** for a clearer view.
 
@@ -67,15 +57,11 @@ Now we'll create a flow to save knowledge requests to SharePoint and track their
 
 7. If prompted, select **Allow access**.
 
-   ![image](./media/12-9-m73.png)
-
 8. On the **Create item** action, configure the following parameters:
    - **Site Address:** Select **KnowledgeHub<inject key="DeploymentID" enableCopy="false"/>** SharePoint site **(1)**
    - **List name:** Select **Knowledge_Requests_List (2)**
    - **Title:** Enter **Knowledge Request (3)**
    - Click **Show all (4)**
-
-   ![image](./media/12-9-m74.png)
 
 9. Under **Advanced parameters**, map the SharePoint list columns to the flow input parameters:
    - **Title** → {RequestTitle}
@@ -87,26 +73,17 @@ Now we'll create a flow to save knowledge requests to SharePoint and track their
 
    Use the **dynamic content** icon to select variables from Input parameters.
 
-   ![image](./media/12-9-m75.png)
-   ![image](./media/12-9-m76.png)
-
 ### Step 3: Add Conditional Logic Based on Urgency
 
 1. Select the **+ (1)** button under the Create item action, type **Condition (2)** in the search box, and select **Condition (3)** from the control section.
-
-   ![image](./media/30-9-l5-2.png)
 
 2. On the Condition side screen, configure:
    - Choose a value → Select **Urgency** from input parameters **(1)**
    - Select **is equal to (2)**
    - Enter **High (3)**
 
-   ![image](./media/12-9-m79.png)
-
 3. Under the **True** branch (High urgency):
    - Select **+ (1)**, search for **Send an email (2)**, and select **Send an email (V2) (3)** from Office 365 Outlook
-
-   ![image](./media/30-9-l5-3.png)
 
 4. Configure the email action:
    - **To:** Your IT support team email (or use a Teams notification)
@@ -135,23 +112,15 @@ Now we'll create a flow to save knowledge requests to SharePoint and track their
    - **RequestID** (text) → Use SharePoint item ID
    - **ConfirmationMessage** (text) → "Your knowledge request has been submitted successfully"
 
-   ![image](./media/12-9-m90.png)
-
 3. Select **Publish** to save the flow.
 
-   ![image](./media/30-9-l5-8.png)
-
 4. Select **Go back to the agent**.
-
-   ![image](./media/12-9-m90.png)
 
 ### Step 5: Map Flow Variables in Topic
 
 1. In the **Knowledge Request Submission** topic, find the Power Automate action node.
 
 2. Map each input parameter by clicking **ellipsis (...) (1)** and selecting the corresponding adaptive card variable **(2)**.
-
-   ![image](./media/12-9-m91.png)
 
 3. After the action node, add a **Send a message (1)** node **(2)**:
 
@@ -163,8 +132,6 @@ Now we'll create a flow to save knowledge requests to SharePoint and track their
    
    We'll respond based on the urgency level you specified. You'll receive updates via email at {EmployeeEmail}.
    ```
-
-   ![image](./media/a21.png)
 
 4. Select **Save**.
 
@@ -452,55 +419,31 @@ Now let's create a simpler flow for emailing policy documents:
 
 2. Select **Publish** from the top navigation.
 
-   ![image](./media/12-9-m92.png)
-
 3. Click **Publish** again to confirm.
-
-   ![image](./media/12-9-m144.png)
 
 4. Select **Channels (1)**, then select **Teams and Microsoft 365 Copilot (2)**.
 
-   ![image](./media/m-l1-31.png)
-
 5. Make sure the checkbox **Make agent available in Microsoft 365 Copilot (1)** is enabled, then select **Add Channel (2)**.
-
-   ![image](./media/a25.png)
 
 6. **Close** the page.
 
-   ![image](./media/12-9-m94.png)
-
 7. Select **Publish** again to deploy the agent to Microsoft 365 Copilot.
 
-   ![image](./media/12-9-m95.png)
-
 8. Click **Publish** to confirm.
-
-   ![image](./media/12-9-m144.png)
 
 ### Step 9: Access Agent in Microsoft 365 Copilot
 
 1. Navigate back to **Channels (1)**, then select **Teams and Microsoft 365 Copilot (2)**.
 
-   ![image](./media/m-l1-31.png)
-
 2. Select the **See agent in Microsoft 365** option.
 
-   ![image](./media/m-l1-32.png)
-
 3. Select **Add** to deploy it in Microsoft 365 Copilot.
-
-   ![image](./media/12-9-m97.png)
 
 4. **Your Internal Knowledge Navigator agent is now available in Microsoft 365 Copilot!**
 
 5. Open the **Microsoft 365 desktop app**, and from the left panel, select **Internal Knowledge Navigator** under **Agents**.
 
-   ![image](./media/7-10-lab5-3.png)
-
    > **Note:** After adding the agent, if it opens in a browser, **open the Microsoft 365 desktop app** to access the deployed agent. If you don't see the newly created agent, **sign out** and **sign back in** using your credentials.
-
-   ![image](./media/7-10-lab5-2.png)
 
 ### Step 10: Test Knowledge Request Submission
 
@@ -531,8 +474,6 @@ Now let's create a simpler flow for emailing policy documents:
 7. Click **Site contents** and select **Knowledge_Requests_List**.
 
 8. Verify your request appears in the list with all the details filled in.
-
-   ![image](./media/m-l1-51.png)
 
 9. If urgency was "High", check if the notification email was sent.
 
@@ -593,8 +534,6 @@ Now let's create a simpler flow for emailing policy documents:
 5. Test the same queries you tested in Microsoft 365 Copilot.
 
 6. Verify the agent responds correctly in the Teams environment.
-
-   ![image](./media/30-9-l6-10.png)
 
 ### Step 13: Monitor and Review Analytics
 
