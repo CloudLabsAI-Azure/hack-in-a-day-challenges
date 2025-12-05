@@ -1,0 +1,406 @@
+# Invoice & Payment Terms Policy
+
+**Accounts Payable Guidelines**  
+**Version 2.5 | Effective January 2024**
+
+## Payment Terms
+
+### Standard Terms
+- **Net 30:** Payment due 30 days from invoice date (default for most vendors)
+- **Net 60:** Extended terms for approved strategic vendors
+- **Net 15:** Expedited payment for small vendors or urgent needs
+- **Due Upon Receipt:** Immediate payment required (utilities, subscriptions)
+
+### Early Payment Discounts
+- **2/10 Net 30:** 2% discount if paid within 10 days, otherwise due in 30 days
+- **1/15 Net 30:** 1% discount if paid within 15 days
+- Always take discounts when cash flow allows - effective annual interest rate is significant
+
+## Invoice Submission Requirements
+
+### Required Information
+All invoices must include:
+- Vendor legal name and address
+- Vendor tax ID or business registration number
+- Invoice number (unique identifier)
+- Invoice date
+- Purchase order number (if PO issued)
+- Detailed description of goods/services
+- Quantity, unit price, and total amount
+- Payment terms and due date
+- Remittance instructions (bank details or mailing address)
+
+### Preferred Submission Methods
+1. **Email:** ap@company.com (PDF format preferred)
+2. **Vendor Portal:** suppliers.company.com
+3. **Mail:** Accounts Payable, PO Box 12345, City, State 12345
+4. **Electronic Invoice:** EDI or API integration for high-volume vendors
+
+### Invoice Format
+- PDF format preferred for email submissions
+- Itemized detail required (not just lump sum)
+- Original invoice only (no duplicates)
+- One invoice per email for easier processing
+- Separate invoices by cost center or project
+
+## Approval Process
+
+### Three-Way Match
+All invoices require matching of:
+1. **Purchase Order** - Authorized PO in system
+2. **Invoice** - Vendor bill with correct details
+3. **Receipt** - Goods received or services performed confirmation
+
+### Approval Workflow
+**Step 1: Invoice Receipt (Day 1)**
+- AP logs invoice in system
+- Assigns to appropriate approver
+- Matches to PO (if applicable)
+
+**Step 2: Manager Review (Day 1-3)**
+- Department manager verifies accuracy
+- Confirms goods/services received
+- Approves or rejects with comments
+- Escalates discrepancies
+
+**Step 3: Finance Review (Day 4-5)**
+- AP verifies approval chain
+- Checks for duplicate invoices
+- Validates account coding
+- Flags any policy violations
+
+**Step 4: Payment Processing (Day 6-28)**
+- Approved invoices scheduled for payment
+- Batched by payment date and method
+- Released according to payment terms
+- Payment confirmation sent to vendor
+
+### Approval Authority Limits
+- **Department Manager:** Up to $5,000
+- **Director:** Up to $25,000
+- **VP:** Up to $100,000
+- **CFO:** Up to $500,000
+- **CEO:** Above $500,000
+
+### Rush Payment Requests
+- Submit to ap-urgent@company.com with justification
+- Requires VP approval
+- Additional $50 processing fee may apply
+- Must be truly urgent (penalties, service cutoff, etc.)
+
+## Payment Methods
+
+### ACH/Wire Transfer (Preferred)
+- Domestic: ACH (no fee)
+- International: Wire transfer ($25-45 fee)
+- Requires completed vendor W-9 and banking information
+- Most secure and efficient method
+- Payment typically arrives in 2-3 business days (ACH) or same day (wire)
+
+### Check
+- Standard check run: Weekly on Thursdays
+- Check mailed via USPS (5-7 business days to receive)
+- Overnight delivery available for urgent situations ($25 fee)
+- Being phased out; encourage vendors to switch to ACH
+
+### Credit Card
+- Available for subscriptions and recurring charges
+- One-time purchases up to $5,000
+- Vendor must accept credit card (3% processing fee)
+- Corporate card program for authorized users
+
+### Virtual Card
+- Single-use card numbers for specific transactions
+- Enhanced security and rebate opportunities
+- Preferred for large one-time purchases
+- Contact AP for virtual card setup
+
+## Common Scenarios
+
+### Recurring Invoices
+**Monthly Subscriptions:**
+- Software licenses, utilities, maintenance
+- Auto-approved if amount within 5% of prior month
+- Annual review to confirm continued need
+- Set up as recurring payment when possible
+
+**Example:** Office rent, SaaS subscriptions, cleaning services
+
+### Milestone-Based Payments
+**Project Work:**
+- Payment tied to deliverable completion
+- Requires project manager sign-off
+- Partial payments for multi-milestone projects
+- Final payment upon project acceptance
+
+**Example:** Construction, consulting projects, software development
+
+### Retainer Agreements
+**Professional Services:**
+- Monthly retainer billed in advance
+- Additional work beyond retainer requires separate invoice
+- Annual reconciliation of actual vs. retainer
+- Contract must specify retainer terms
+
+**Example:** Legal, accounting, PR firms
+
+### Reimbursement to Employees
+**Expense Reports:**
+- Submit through expense system (separate from AP process)
+- Requires receipts and manager approval
+- Reimbursed via payroll direct deposit
+- Due within 30 days of expense date
+
+See Travel & Expense Reimbursement Policy for details.
+
+## Vendor Management
+
+### New Vendor Setup
+**Required Before First Payment:**
+1. Complete vendor application form
+2. Provide W-9 (US vendors) or W-8 (international)
+3. Submit certificate of insurance (if required)
+4. Provide banking information for ACH
+5. Sign vendor terms and conditions
+6. Background check for vendors >$50K annually
+
+**Processing Time:** 5-7 business days
+
+### Vendor Information Updates
+- Submit changes via vendor portal: suppliers.company.com
+- Changes effective for invoices received after update date
+- New W-9 required for name or tax ID changes
+- Notify AP of banking changes via secure method
+
+### Vendor Portal Access
+**Benefits for Vendors:**
+- Real-time invoice status tracking
+- Payment history and remittance advice
+- Direct upload of invoices
+- Update contact and banking information
+- View POs and contracts
+
+**Access:** suppliers.company.com  
+**Support:** vendor-support@company.com
+
+## Disputed Invoices
+
+### Common Disputes
+- Goods not received or damaged
+- Services not performed as contracted
+- Pricing different from agreement
+- Incorrect quantities or calculations
+- Missing required documentation
+- Duplicate invoice
+
+### Resolution Process
+1. **Hold Payment:** Invoice placed on hold pending resolution
+2. **Vendor Notification:** AP contacts vendor with dispute details
+3. **Investigation:** Department manager works with vendor to resolve
+4. **Resolution Options:**
+   - Credit memo issued by vendor
+   - Revised invoice submitted
+   - Partial payment for acceptable portion
+   - Full payment if dispute unfounded
+5. **Payment Release:** Once resolved, payment processed in next cycle
+
+**Timeline:** Most disputes resolved within 14 days
+
+### Escalation
+- Unresolved disputes >30 days escalate to procurement
+- Legal involvement for contract disputes
+- May hold additional invoices until resolution
+
+## Compliance & Controls
+
+### Tax Compliance
+**1099 Reporting:**
+- Annual 1099s issued to US vendors for services >$600
+- Requires completed W-9 on file
+- Vendors must provide correct tax ID
+- Penalty for incorrect 1099s: Up to $280 per form
+
+**Sales Tax:**
+- Sales tax collected on applicable purchases
+- Exemption certificates maintained for exempt purchases
+- Compliance with multi-state tax regulations
+
+**International Withholding:**
+- 30% withholding required on payments to foreign vendors without W-8
+- Reduced rates available under tax treaties
+- Vendor responsible for providing proper documentation
+
+### Audit & Controls
+**Internal Controls:**
+- Segregation of duties (approval vs. payment)
+- Duplicate invoice detection
+- Vendor master file review
+- Payment authorization limits
+- Regular vendor statement reconciliation
+
+**Audit Trail:**
+- Full invoice approval history maintained
+- Payment batch reports archived
+- Vendor communications documented
+- Exception reports reviewed monthly
+
+### Fraud Prevention
+**Red Flags:**
+- Requests to change banking information
+- Pressure for immediate payment
+- Invoices from new vendors without PO
+- Unusual payment methods requested
+- Vendor contact information doesn't match records
+
+**Prevention Measures:**
+- Verify bank changes via phone to known vendor contact
+- Multi-person approval for new vendors
+- Regular vendor master file review
+- Employee training on fraud schemes
+- Report suspicious activity to ap-fraud@company.com
+
+## Metrics & Reporting
+
+### Key Metrics Tracked
+- **Days Payable Outstanding (DPO):** Target 30 days
+- **Invoice Processing Time:** Target 5 days from receipt to approval
+- **Early Payment Discount Capture:** Target >90%
+- **Invoice Exception Rate:** Target <5%
+- **Vendor Satisfaction:** Annual survey target >85%
+
+### Reporting
+**Weekly:**
+- Aged AP report (invoices >30 days)
+- Payment run summary
+- Exception and held invoice report
+
+**Monthly:**
+- Cash flow forecast
+- Vendor spending analysis
+- Department spending vs. budget
+- Metrics dashboard
+
+**Quarterly:**
+- Vendor performance review
+- Process improvement initiatives
+- Audit findings and remediation
+
+## Payment Schedule
+
+### Standard Payment Cycle
+**Weekly Check Run:**
+- Processed: Every Thursday
+- Mailed: Friday (arrives following week)
+
+**ACH Payment:**
+- Processed: Twice weekly (Tuesday & Thursday)
+- Funds available: 2-3 business days
+
+**Wire Transfer:**
+- Processed: Daily (by 2 PM cutoff)
+- Funds available: Same day (domestic) or 1-2 days (international)
+
+### Holiday Schedule
+- No processing on company holidays
+- Payment dates moved to prior business day
+- Holiday schedule published in December for following year
+
+### Month-End/Year-End
+- Accelerated processing for month-end accruals
+- Year-end cutoff: December 27th for December invoices
+- January invoices held until new fiscal year
+
+## Contact Information
+
+### Accounts Payable Team
+**General Inquiries:**  
+Email: ap@company.com  
+Phone: (555) 123-4850  
+Hours: Monday-Friday, 8:30 AM - 5:00 PM
+
+**Invoice Status:**  
+Portal: suppliers.company.com  
+Email: ap-status@company.com
+
+**Urgent Payment Requests:**  
+Email: ap-urgent@company.com  
+Phone: (555) 123-4851 (emergencies only)
+
+**New Vendor Setup:**  
+Email: vendor-setup@company.com  
+Form: finance.company.com/vendor-application
+
+**Payment Issues/Disputes:**  
+Email: ap-disputes@company.com  
+Phone: (555) 123-4852
+
+### Department Business Partners
+Each department has assigned AP contact for:
+- Invoice routing and approval questions
+- Department-specific payment questions
+- Budget and PO inquiries
+- Process improvement suggestions
+
+Find your AP partner: finance.company.com/ap-team
+
+## Vendor FAQs
+
+**Q: How long until my invoice is paid?**
+A: Standard terms are Net 30 from invoice date. If approved within 5 days of receipt, payment typically sent 2-3 days before due date.
+
+**Q: Why hasn't my invoice been paid?**
+A: Check status at suppliers.company.com or email ap-status@company.com with invoice number. Common reasons: awaiting approval, missing information, on hold for dispute.
+
+**Q: How do I sign up for ACH payment?**
+A: Complete ACH authorization form at suppliers.company.com/ach. Effective for invoices approved after form processed (5-7 days).
+
+**Q: Can you expedite payment?**
+A: Rush requests considered for genuine emergencies (service cutoff, penalty avoidance). Email ap-urgent@company.com with justification. Additional fee may apply.
+
+**Q: Who do I contact about a missing payment?**
+A: Email ap-status@company.com with invoice number and date. We'll research payment status and reissue if necessary (allow 7-10 days for replacement check).
+
+**Q: How do I update my company information?**
+A: Log in to supplier portal at suppliers.company.com to update address, contact, banking info. For tax ID or legal name changes, submit new W-9.
+
+**Q: Why do you need a W-9 from me?**
+A: IRS requires W-9 for all US vendors for 1099 tax reporting. Cannot process payments without valid W-9 on file.
+
+**Q: Do you accept credit card payments?**
+A: We pay by ACH or check. We don't accept credit cards for invoice payment. If you're asking about paying your invoice by credit card, contact your AR team.
+
+---
+
+## Quick Reference
+
+### Invoice Checklist
+- [ ] Complete vendor information
+- [ ] Unique invoice number
+- [ ] PO number (if applicable)
+- [ ] Itemized detail
+- [ ] Correct pricing and calculations
+- [ ] Payment terms stated
+- [ ] Submit to ap@company.com
+
+### Payment Timeline
+- **Day 1-3:** Invoice receipt and approval routing
+- **Day 4-5:** Finance review
+- **Day 6-28:** Payment processing per terms
+- **Day 30:** Payment sent (for Net 30 terms)
+
+### Common Issues & Solutions
+| Issue | Solution |
+|-------|----------|
+| No PO number | Contact ordering department |
+| Wrong pricing | Submit credit/debit memo |
+| Not received | Provide proof of delivery |
+| Missing info | Resubmit complete invoice |
+| Duplicate | Reference original invoice# |
+
+---
+
+**Policy Owner:** Controller  
+**Last Updated:** January 2024  
+**Next Review:** January 2025
+
+For policy questions: finance-policy@company.com
