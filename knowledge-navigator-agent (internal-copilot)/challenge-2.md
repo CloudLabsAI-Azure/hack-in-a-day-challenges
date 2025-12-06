@@ -88,113 +88,19 @@ Before starting this challenge, ensure you have:
 
 - If indexing is still in progress, wait a few more minutes and refresh the page.
 
-### Step 4: Configure Generative AI Settings
+### Step 4: Disable Web Search
 
-- Click on **Settings** (gear icon) in the top-right corner.
+- In the **Knowledge** section, scroll down to the **Web Search** area.
 
-- Navigate to the **Generative AI** section in the left panel.
+- Ensure that **Web Search** is set to **Disabled**.
 
-- Under **Knowledge sources** or **Data sources**, verify that your SharePoint knowledge source appears and is enabled (checkbox should be checked).
-
-- Configure the following options:
-
-   - **Content moderation:** Set to **Medium** (balances safety and response flexibility)
-   
-   - **Allow the AI to use its own general knowledge:** Toggle **Off** 
-     > **Important:** This ensures responses come ONLY from your Contoso documents, not from the AI's general knowledge.
-
-- Review other settings:
-   - **Response length:** Medium (recommended)
-   - **Response format:** Professional
-
-- Click **Save** to apply the changes.
-
-### Step 5: Test Basic Knowledge Retrieval
-
-- Click the **Test your copilot** button in the top-right corner to open the test pane.
-
-- Wait for the copilot to load and display the welcome message.
-
-- Try the following questions to test different Contoso documents:
-
-   **HR Questions:**
-   - Type: `"What's in the Contoso HR handbook?"`
-   - Expected: Information from Contoso_HR_Handbook.docx
-   
-   - Type: `"What are the onboarding procedures for new employees?"`
-   - Expected: Information from Contoso_HR_Onboarding_Checklist.docx
-   
-   - Type: `"Tell me about employee travel reimbursement"`
-   - Expected: Information from Employee-Travel-Reimbursement.xlsx
-
-   **IT & Governance Questions:**
-   - Type: `"What are Contoso's IT governance policies?"`
-   - Expected: Information from Contoso-Corp-IT-Governance&Compliance-Policy.docx
-   
-   - Type: `"What is the SLA for support?"`
-   - Expected: Information from Contos_Corp_SLA.docx
-   
-   - Type: `"Tell me about the data governance framework"`
-   - Expected: Information from Data_Governance_Framework.docx
-
-   **Procurement Questions:**
-   - Type: `"What are Contoso's procurement policies?"`
-   - Expected: Information from Contoso_Procurement_Data_With_Policies.docx
-   
-   - Type: `"How does contract management work?"`
-   - Expected: Information from Procurement_Contracts_Repository_List.xlsx
-
-   **Support & Operations Questions:**
-   - Type: `"What's the support policy?"`
-   - Expected: Information from Contoso_Support_Policy.docx
-   
-   - Type: `"Tell me about the sales playbook"`
-   - Expected: Information from Contoso_Sales_Playbook.docx
-
-- **Verify each response:**
-   - Contains specific information from Contoso documents (not generic answers)
-   - Is relevant and accurate to the question asked
-   - References company-specific information
-
-> **Troubleshooting:** If responses say "I don't have that information" or are too generic:
-> - Wait 5-10 more minutes for full indexing to complete
-> - Refresh the test pane
-> - Check that the SharePoint knowledge source shows **Active** status
-> - Verify "Allow AI to use its own general knowledge" is turned **Off**
-
-### Step 6: Test Multi-Department Knowledge
-
-- Test that the copilot can answer questions across different departments in a single conversation:
-
-   1. Ask: `"What's the HR onboarding process?"`
-   2. Then ask: `"What about the IT governance policies?"`
-   3. Then ask: `"How do procurement contracts work?"`
-
-- Verify that the copilot:
-   - Maintains context throughout the conversation
-   - Answers each question accurately using the appropriate Contoso document
-   - Doesn't confuse information between departments
-
-### Step 7: Review Response Quality
-
-- When reviewing all test responses, verify that they:
-   - **Are accurate:** Information matches what's in the actual documents
-   - **Are specific:** Contains company-specific details, not generic information
-   - **Are relevant:** Directly answers the question asked
-   - **Are clear:** Easy to understand and well-formatted
-
-- Take note of any questions that don't work well - you may need to wait longer for indexing.
-
-   > **Note:** In Challenge 4, you'll enable citations so users can see exactly which document each answer came from. For now, focus on verifying that the copilot is finding and using the Contoso documents.
+   > **Important:** This ensures the agent only uses information from your Contoso SharePoint documents and doesn't search the public web for answers.
 
 ## Success Criteria
 - SharePoint knowledge source is connected to Copilot Studio
 - SharePoint knowledge source shows **Active** or **Ready** status
 - Knowledge source has indexed 40+ Contoso documents
-- Generative AI settings configured (general knowledge turned OFF)
-- Test queries return relevant, specific responses from Contoso documents
-- Copilot can answer questions across all departments (HR, IT, Procurement, Finance, Support, Sales)
-- Responses contain company-specific information, not generic answers
+- Web Search is disabled for the agent
 
 ## Additional Resources
 - [Add knowledge sources to your copilot](https://learn.microsoft.com/microsoft-copilot-studio/nlu-boost-conversations)  
