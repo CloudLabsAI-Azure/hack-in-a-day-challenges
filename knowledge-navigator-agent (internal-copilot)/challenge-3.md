@@ -65,7 +65,7 @@ These flows will be created first so they're ready to use when you build convers
 
 - Configure the email action:
 
-   - **To:** Click in the field and select **EmployeeEmail** from the dynamic content (the parameter you created).
+   - **To:** Enter **<inject key="AzureAdUserEmail"></inject>**
    
    - **Subject:** Type: `Your Requested Document - ` and then select **DocumentName** from dynamic content.
    
@@ -136,7 +136,7 @@ These flows will be created first so they're ready to use when you build convers
    
    - **Post in:** Chat with Flow bot
    
-   - **Recipient:** Click in the field and enter **<inject key="AzureAdUserEmail"></inject>** (this will send to your own Teams account so you can see the request).
+   - **Recipient:** Enter **<inject key="AzureAdUserEmail"></inject>**
    
    - **Message:** Enter the following text and add dynamic content:
 
