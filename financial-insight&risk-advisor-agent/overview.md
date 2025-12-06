@@ -1,63 +1,70 @@
-# Financial Insight & Risk Advisor Agent – Hack in a Day
+# Financial Insight & Risk Advisor Agent
 
-Welcome to the Financial Insight & Risk Advisor Agent Hack in a Day! Today, you'll explore how to design and build an AI-powered agent that automatically analyzes financial reports, summarizes key trends, and flags potential risks or anomalies. Through this hands-on experience, you'll create an agent that reduces manual review time while improving the consistency and transparency of financial insight generation.
+Welcome to the Financial Insight & Risk Advisor Agent Hack in a Day! Today, you’ll explore how AI can drive smarter financial decision-making by building an intelligent Copilot that assists finance teams in analyzing reports and identifying risks.
+
+## Scenario
+
+A fast-growing organization is struggling to manually review quarterly financial reports and detect early signs of revenue slowdown or cash flow pressure. Important performance risks are often discovered late because analysts spend too much time extracting numbers instead of interpreting them. To address this, the company wants to build a Financial Risk Advisor Copilot that can analyze uploaded reports, summarize trends, classify business risk levels, and alert leadership when high-risk indicators appear. By automating insight generation and escalation, finance leaders can make faster, data-driven decisions.
 
 ## Introduction
 
-Your mission is to create an autonomous financial risk advisor agent that helps finance leaders move from reactive reporting to proactive, insight-driven decision making. Using Azure AI Foundry and Azure OpenAI, your agent will ingest structured and unstructured financial documents (such as PDFs and Excel files) via Azure Document Intelligence, extract key metrics, apply reasoning prompts to detect anomalies, and generate executive-ready summaries.
+Your mission is to build an **AI-powered Financial Risk Advisor Copilot** that helps finance leaders shift from reactive reporting to proactive insight generation. Using Copilot Studio and Power Automate, you will design a conversational agent that can:
 
-The solution will act as an intelligent assistant for finance teams, capable of combining document understanding, anomaly detection, and natural-language explanations. It will decide when to trigger alerts or generate summaries for CFO review, helping organizations catch early warning signals before they become critical issues.
+- Analyze uploaded financial documents such as quarterly reports and cash flow summaries
+- Identify strengths, weaknesses, anomalies, and financial pressure indicators
+- Classify business performance into **No Risk, Moderate Risk, or High Risk**
+- Escalate high-risk findings to the CFO automatically via Outlook email
+- Respond naturally inside Microsoft Teams with professional summary outputs
 
-## Key Tools / Services
-
-In this lab, you will primarily work with:
-
-- Azure AI Foundry / Azure OpenAI
-- Azure Document Intelligence
-- Power Automate
-- Power BI
-- Azure (for storage, APIs, and integration)
+The solution reduces manual review effort, speeds up financial reporting, and ensures that high-priority risks are surfaced early and consistently.
 
 ## Learning Objectives
 
 By participating in this Hack in a Day, you will learn how to:
 
-- Use Azure AI Foundry to chain document ingestion → reasoning → alerting.
-- Build agents that evaluate confidence and act autonomously on financial insights.
-- Create natural-language summaries and recommendations for finance stakeholders.
-- Implement explainability and traceability in AI-generated outputs.
+- Set up a Financial Risk Advisor Copilot using Copilot Studio
+- Upload and configure financial documents as knowledge sources
+- Build topics that evaluate revenue trends and cash flow using reasoning-driven prompts
+- Automate escalation workflows using Power Automate for Outlook email notifications
+- Publish the Copilot to Microsoft Teams for real-world enterprise use
 
 ## Hack in a Day Format: Challenge-Based
 
-This hack in a day adopts a challenge-based learning format, providing a hands-on experience through four progressive stages that mirror a real-world financial analytics workflow. Each challenge focuses on a key capability of the Financial Insight & Risk Advisor Agent:
+This hands-on lab is structured into five progressive challenges that model the lifecycle of a financial AI agent:
 
-- **Challenge 1: Foundation** – Set up the environment, data storage, and financial document samples.
-- **Challenge 2: Document Intelligence** – Ingest and extract data from financial reports using Azure Document Intelligence.
-- **Challenge 3: Reasoning & Risk Analysis** – Use Azure AI Foundry to summarize trends and detect anomalies with LLM-based reasoning.
-- **Challenge 4: Visualization & Alerting** – Build Power BI views, configure alerts via Power Automate, and surface CFO-ready summaries.
+- **Challenge 01: Create the Financial Risk Advisor Copilot**  
+  Configure the Copilot identity, purpose, and behavioral instructions.
 
-Throughout each challenge, you'll:
-- Analyze financial reporting requirements and risk scenarios.
-- Strategize and design an agentic solution that can reason over extracted data.
-- Leverage your Microsoft cloud environment to deploy, integrate, and test the financial risk advisor agent.
+- **Challenge 02: Upload Financial Knowledge Documents**  
+  Add quarterly reports, cash flow statements, and other financial records as knowledge sources.
+
+- **Challenge 03: Build Financial Analysis Topics**  
+  Create two interactive topics for *Revenue Trend & Growth Drivers* and *Cash Flow Stability & Liquidity Outlook*.
+
+- **Challenge 04: Configure Email Escalation Flow and Integrate it With the Copilot**  
+  Trigger an Outlook email to the CFO automatically when high risk is detected and HR approves.
+
+- **Challenge 05: Publish the Copilot to Microsoft Teams and Test the Full Workflow**  
+  Deploy the Copilot to Teams and validate the complete analysis and escalation experience.
+
+Across all challenges, you will:
+- Interpret the financial analysis use case
+- Design a knowledge-grounded conversational workflow
+- Integrate AI reasoning with real-world financial operations
+- Test end-to-end automation from insight → risk classification → escalation
 
 ## Challenge Overview
 
-Your journey begins with setting up the necessary Azure and AI resources, along with a sample financial dataset that simulates quarterly or monthly reports. You’ll then implement document ingestion and extraction workflows using Azure Document Intelligence to convert PDFs and spreadsheets into structured data.
+You will begin by creating the Copilot foundation and uploading financial documents. You will then build conversational topics that ask clarifying questions, analyze the right reporting period, and classify business risk. Next, you will create an automated escalation workflow that emails a summary report to the CFO when high risk is detected. Finally, you will deploy the Financial Risk Advisor Copilot to Microsoft Teams and validate the full workflow in a real-world collaboration environment.
 
-Next, you'll orchestrate LLM-based reasoning in Azure AI Foundry to summarize trends, calculate key ratios, and identify anomalies or risk indicators. Finally, you'll visualize insights in Power BI, implement automated alerts via Power Automate, and generate CFO-ready summaries that highlight key findings and explain model decisions.
-
-By the end of this hack in a day, you'll have a working Financial Insight & Risk Advisor Agent capable of ingesting financial reports, generating risk-aware summaries, and triggering alerts for finance stakeholders.
+By the end of this Hack in a Day, you will have a **fully functional Financial Risk Advisor Copilot** capable of analyzing performance, highlighting anomalies, classifying risk levels, and escalating critical issues to leadership, all through a natural conversational interface.
 
 ## Support Contact
 
-The CloudLabs support team is available 24/7, 365 days a year, via email and live chat to ensure seamless assistance at any time. We offer dedicated support channels tailored specifically for both learners and instructors, ensuring that all your needs are promptly and efficiently addressed.
+The CloudLabs support team is available 24/7, 365 days a year via email and live chat to ensure seamless assistance throughout the lab. We provide dedicated support channels for both learners and instructors.
 
-Learner Support Contacts:
-
+**Learner Support Contacts**
 - Email Support: cloudlabs-support@spektrasystems.com
 - Live Chat Support: https://cloudlabs.ai/labs-support
 
-Now, click on the **Next** from lower right corner to move on next page.
-
-## Happy Hacking!!
+Click **Next** from the lower right corner to continue.

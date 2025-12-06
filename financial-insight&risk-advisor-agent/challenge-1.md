@@ -1,11 +1,9 @@
 # Challenge 01: Create the Financial Risk Advisor Copilot  
 
 ## Introduction
-Finance teams spend significant time manually reviewing financial reports to identify risks and unusual trends.  
-To simplify the process, Contoso Finance wants to implement an AI-powered Copilot that acts as a **Financial Risk Advisor**.  
-This Copilot will later analyze reports, summarize trends, and flag anomalies for leadership review.
+Finance teams spend significant time manually reviewing financial reports to identify risks and unusual trends.To simplify the process, Contoso Finance wants to implement an AI-powered Copilot that acts as a **Financial Risk Advisor**. This Copilot will later analyze reports, summarize trends, and flag anomalies for leadership review.
 
-In this challenge, you will create the **Financial Risk Advisor Copilot** in Copilot Studio — serving as the foundation for the rest of the lab.
+In this challenge, you will create the **Financial Risk Advisor Copilot** in Copilot Studio, serving as the foundation for the rest of the lab.
 
 ## Challenge Objectives
 - Create a new Copilot in Copilot Studio.
@@ -13,12 +11,25 @@ In this challenge, you will create the **Financial Risk Advisor Copilot** in Cop
 - Enable the Copilot for multiple financial analysis use cases.
 
 ## Steps to Complete
+
 1. Open **Microsoft Copilot Studio**.
-2. Select **Create a copilot**.
-3. Configure the Copilot details as below:
+
+1. On the Copilot Studio pane, from left menu select **Create** and then click on **+New Agent** option to create a new agent.
+
+1. If any error shows up like `There was a problem creating your agent.`, then please click on **Create a blank agent**.
+
+1. On the overview pane of the agent, click on **edit** inside Details card to edit agent's name and description.
+
+1. Configure the Copilot details as below:
+
    - **Name:** `Financial Risk Advisor Copilot`
+
    - **Description:** `Assists finance teams by analyzing financial reports and identifying business risks and anomalies.`
-   - **Instruction:** 
+
+1. Click on save.
+
+1. Once done, scroll down and add below **instruction** by clicking on **edit** inside Instruction card.
+
      ```
      You are an autonomous Financial Risk Advisor Copilot designed to support finance teams.
      You extract information from uploaded financial documents and knowledge sources, identify trends in revenue, expenses, profitability, and cash flow, and summarize insights clearly.
@@ -28,11 +39,8 @@ In this challenge, you will create the **Financial Risk Advisor Copilot** in Cop
      If multiple reports are referenced, compare performance and call out material changes.
      Format insight summaries using bullet points for clarity, and only give recommendations based on the information available in the uploaded financial documents.
      ```
-4. Click **Create**.
-5. Wait for the workspace to open.
-6. Once created, verify:
-   - The Copilot appears in your Copilot list.
-   - You can access **Topics**, **Plugins**, and **Agent Flows** in the left navigation.
+
+1. Click on save.
 
 ## Success Criteria
 - The **Financial Risk Advisor Copilot** is successfully created and accessible in Copilot Studio.
@@ -40,7 +48,5 @@ In this challenge, you will create the **Financial Risk Advisor Copilot** in Cop
 ## Additional Resources
 - [Copilot Studio Overview](https://learn.microsoft.com/microsoft-copilot-studio/overview)
 - [Create your first Copilot](https://learn.microsoft.com/microsoft-copilot-studio/authoring-create-copilot)
-
----
 
 Click **Next** to continue to **Challenge 02: Upload Financial Knowledge Documents**.

@@ -1,9 +1,5 @@
 # Challenge: Financial Insight & Risk Advisor Agent
 
-**Estimated Time:** 4 Hours  
-
-**Industry Focus:** Financial Services, Corporate Finance, FP&A, Risk Management  
-
 ## Problem Statement
 
 Financial analysts spend days reviewing reports and identifying potential anomalies or risks manually. This process is slow and often subjective, increasing the chance of missed early-warning indicators in areas such as revenue trends, expense spikes, or liquidity risks.

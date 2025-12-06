@@ -18,11 +18,11 @@ In this challenge, you will upload **Job Description PDFs and Resume PDFs** to t
 
 1. Click **+ Add a knowledge source**.
 
-4. Choose **Upload files**.
+1. Choose **Upload files**.
 
-5. Upload the Job Description and Resume documents provided, which you downloaded and extracted earlier.
+1. Upload the Job Description and Resume documents provided, which you downloaded and extracted earlier.
 
-6. After uploading, verify each file shows the status **Ready**.
+1. After uploading, verify each file shows the status **Ready**.
 
    > Note: It may take up to 30 minutes for files to finish processing. You may continue to the next challenge while processing completes.
 

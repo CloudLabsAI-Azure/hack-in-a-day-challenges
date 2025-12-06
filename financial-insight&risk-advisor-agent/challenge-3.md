@@ -1,6 +1,7 @@
 # Challenge 03: Build Financial Analysis Topics  
 
 ## Introduction
+
 The Copilot now has access to financial datasets and documents.  
 In this challenge, you will create two interactive financial analysis topics.  
 When each topic is triggered, the Copilot will:
@@ -11,6 +12,7 @@ When each topic is triggered, the Copilot will:
 This makes the agent conversational and context-aware.
 
 ## Challenge Objectives
+
 - Create two interactive financial analysis topics.
 - Ask for user input before performing analysis.
 - Generate insights using the knowledge base + user input.
@@ -18,12 +20,15 @@ This makes the agent conversational and context-aware.
 
 ## Steps to Complete
 
-### Topic 1 — Revenue Trend & Growth Drivers
+### Topic 1: Revenue Trend & Growth Drivers
 
 1. Open the Financial Risk Advisor Copilot in Copilot Studio.
-1. Navigate to **Topics** → **New topic**.
+
+1. From the top navigation bar, select **topics** and click on **+ Add a topic** and select **From Blank** to create a new topic.
+
 1. Configure: 
    - **Describe what topic does:** Analyze revenue patterns across reporting periods using financial documents. Ask the user which period or report to analyze, then evaluate the revenue trend, identify drivers behind changes, and assign a risk level (No Risk / Moderate Risk / High Risk) with clear reasoning.
+
 1. In the topic flow editor, Add a new **ask a question** node and add the below question:
      ```
      Which reporting period or document would you like me to analyze for revenue performance? 
@@ -40,14 +45,16 @@ This makes the agent conversational and context-aware.
 
 1. Now, to Save the topic, click on save from top right corner and provide the name for the topic as `Revenue Trend & Growth Driver`.
 
-### Topic 2 — Cash Flow Stability & Liquidity Outlook
+### Topic 2: Cash Flow Stability & Liquidity Outlook
 
 1. On the **Topics** page, click **New topic** again.
 
 1. Configure:
+
    - **Describe what topic does:** Evaluate cash flow and liquidity using financial documents. Ask the user which period or report to examine, then assess whether the business is generating or burning cash, identify liquidity stress factors, and assign a risk level (No Risk / Moderate Risk / High Risk) with justification.
 
 1. In the topic flow editor, Add a new **ask a question** node and add the below question:
+
    ```
    Which period or document should I examine to evaluate cash flow and liquidity?
    ```
@@ -69,23 +76,47 @@ This makes the agent conversational and context-aware.
 
 1. Click **Test** from top right corner.
 
-1. Ask the Copilot:  
-   • “Analyse revenue performance"  
-   • “How is our cash flow looking?”
-4. Copilot should:
-   • Ask follow-up question (period/document)  
-   • Use user’s reply to reference the correct dataset  
-   • Produce bullet-point insights.
+1. Ask the Copilot:
+
+   ```
+   Analyse revenue performance
+   ```
+1. When the Agent asks for period, add any one of the follwoing as answer: 
+
+  - Q1-2024
+  - Q2-2024
+  - Q3-2024
+  - Q1-2025
+  - Q2-2025
+
+1. Again ask the Copilot:
+
+   ```
+   How is our cash flow ?
+   ```
+1. When the Agent asks for period, add any one of the follwoing as answer: 
+
+  - Q1-2024
+  - Q2-2024
+  - Q3-2024
+  - Q1-2025
+  - Q2-2025
+
+1. Copilot should
+
+   - Ask follow-up question (period/document)  
+   - Use user’s reply to reference the correct dataset  
+   - Produce bullet-point insights.
 
 ## Success Criteria
+
 - Both topics are created successfully and request clarification from the user.
 - Copilot references uploaded financial data based on user input (not generic advice).
 - Responses include:
-  • Numeric insights in bullet points  
-  • A final, clearly stated risk level  
+  - Numeric insights in bullet points  
+  - A final, clearly stated risk level  
 
 ## Additional Resources
 - https://learn.microsoft.com/microsoft-copilot-studio/topics  
 - https://learn.microsoft.com/microsoft-copilot-studio/knowledge
 
----
