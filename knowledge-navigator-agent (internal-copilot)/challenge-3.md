@@ -1,14 +1,14 @@
-# Challenge 03: Create Power Automate Flows for Actions
+# Challenge 03: Create Agent Flows for Actions
 
 ## Introduction
-Your copilot can answer questions using the Contoso knowledge base, but what if employees want to receive a document via email or submit a request to their team? In this challenge, you'll create two Power Automate flows that enable your copilot to take actions beyond just answering questions.
+Your copilot can answer questions using the Contoso knowledge base, but what if employees want to receive a document via email or submit a request to their team? In this challenge, you'll create two agent flows that enable your copilot to take actions beyond just answering questions.
 
 These flows will be created first so they're ready to use when you build conversational topics in Challenge 4.
 
 ## Challenge Objectives
-- Create a Power Automate flow to email documents to employees
-- Create a Power Automate flow to send requests to Microsoft Teams
-- Test both flows to ensure they work correctly
+- Create an agent flow to email documents to employees
+- Create an agent flow to send requests to Microsoft Teams
+- Verify both flows are configured correctly
 - Prepare flows for integration with copilot topics in the next challenge
 
 ## Steps to Complete
@@ -25,47 +25,39 @@ These flows will be created first so they're ready to use when you build convers
 
 - On the **Agent flows** page, click **+ New agent flow** button.
 
-- In the text box that appears, describe what the flow should do:
+- A new flow canvas will open.
 
-   ```
-   Send an email to an employee with information about a requested document
-   ```
+- At the top, name the flow: **Email Document to Employee**
 
-- Click the arrow or press **Enter** to generate the flow.
+### Step 3: Add Trigger - When an Agent Calls the Flow
 
-- Wait for Copilot Studio to generate the flow structure.
+- On the flow canvas, click **Add a trigger**.
 
-- Once the flow designer opens, you'll see the flow canvas.
+- Search for and select **When an agent calls the flow** (or **When Copilot Studio calls a flow**).
 
-- At the top, rename the flow to: **Email Document to Employee**
+- The trigger will be added to the canvas.
 
-- The flow should have the **Run a flow from Copilot** trigger already added.
+### Step 4: Add Input Parameters for Email Flow
 
-### Step 3: Add Input Parameters for Email Flow
-
-- Click on the **Run a flow from Copilot** trigger node to expand it.
-
-- Under **Inputs**, click **+ Add an input**.
+- In the **When an agent calls the flow** trigger, click **Add an input**.
 
 - Select **Text** as the input type.
 
-- Enter the following for the first parameter:
-   - **Input name:** EmployeeEmail
-   - Click outside or press Enter to save
+- Enter **EmployeeEmail** as the input name and press Enter.
 
-- Click **+ Add an input** again and add:
-   - **Input type:** Text
-   - **Input name:** DocumentName
+- Click **Add an input** again and add:
+   - Type: **Text**
+   - Name: **DocumentName**
 
-- Click **+ Add an input** one more time and add:
-   - **Input type:** Text  
-   - **Input name:** DocumentDescription
+- Click **Add an input** one more time and add:
+   - Type: **Text**
+   - Name: **DocumentDescription**
 
-- You should now have 3 input parameters defined.
+- You should now have 3 input parameters: EmployeeEmail, DocumentName, and DocumentDescription.
 
-### Step 4: Add Email Action
+### Step 5: Add Email Action
 
-- Click **+ (plus icon)** below the trigger to add a new step.
+- Click the **+** icon below the trigger to add a new step.
 
 - In the search box, type **Send an email** and select **Send an email (V2)** from **Office 365 Outlook**.
 
@@ -97,29 +89,29 @@ These flows will be created first so they're ready to use when you build convers
 
 - The flow is now saved and ready to use in your agent.
 
-### Step 5: Create Flow 2 - Send Request to Teams
+### Step 6: Create Flow 2 - Send Request to Teams
 
-- Click the back arrow or navigate back to the **Flows** page in Copilot Studio.
+- Navigate back to the **Flows** page by clicking the back arrow.
 
 - Click **+ New agent flow** button again.
 
-- In the text box, describe the second flow:
+- A new flow canvas will open.
 
-   ```
-   Send a request notification to Microsoft Teams with employee details
-   ```
+- At the top, name the flow: **Send Request to Teams**
 
-- Click the arrow or press **Enter** to generate the flow.
+### Step 7: Add Trigger - When an Agent Calls the Flow
 
-- Once the flow designer opens, rename the flow to: **Send Request to Teams**
+- On the flow canvas, click **Add a trigger**.
 
-- The **Run a flow from Copilot** trigger should already be present.
+- Search for and select **When an agent calls the flow** (or **When Copilot Studio calls a flow**).
 
-### Step 6: Add Input Parameters for Teams Flow
+- The trigger will be added to the canvas.
 
-- Click on the **Run a flow from Copilot** trigger to expand it.
+### Step 8: Add Input Parameters for Teams Flow
 
-- Click **+ Add an input** and select **Text**.
+- In the **When an agent calls the flow** trigger, click **Add an input**.
+
+- Select **Text** as the input type.
 
 - Add the following input parameters one by one:
 
@@ -130,9 +122,9 @@ These flows will be created first so they're ready to use when you build convers
 
 - You should now have 4 input parameters defined.
 
-### Step 7: Add Teams Action
+### Step 9: Add Teams Action
 
-- Click **+ (plus icon)** below the trigger to add a new step.
+- Click the **+** icon below the trigger to add a new step.
 
 - In the search box, type **Post message** and select **Post message in a chat or channel** from **Microsoft Teams**.
 
@@ -165,7 +157,7 @@ These flows will be created first so they're ready to use when you build convers
 
 - The flow is now saved and ready to use in your agent.
 
-### Step 8: Verify Both Flows are Created
+### Step 10: Verify Both Flows are Created
 
 - Navigate back to the **Flows** page by clicking the back arrow or selecting **Flows** from the left navigation.
 
@@ -178,15 +170,15 @@ These flows will be created first so they're ready to use when you build convers
    > **Note:** These flows are now ready to be used in your agent topics in Challenge 4.
 
 ## Success Criteria
-- Created **Email Document to Employee** flow in Power Automate
-- Created **Send Request to Teams** flow in Power Automate
+- Created **Email Document to Employee** agent flow
+- Created **Send Request to Teams** agent flow
 - Both flows have the correct input parameters configured
-- Both flows are published and available in Copilot Studio Actions
+- Both flows are saved and active in Copilot Studio
 - Flows are ready to be used in conversational topics in Challenge 4
 
 ## Additional Resources
 - [Create flows for Microsoft Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/advanced-flow)
-- [Power Automate documentation](https://learn.microsoft.com/power-automate/)
+- [Use flows in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/authoring-create-edit-flows)
 - [Office 365 Outlook connector](https://learn.microsoft.com/connectors/office365/)
 - [Microsoft Teams connector](https://learn.microsoft.com/connectors/teams/)
 
