@@ -13,8 +13,24 @@
                 "Order": 2
             },    
             {
-                "RawFilePath": "https://raw.githubusercontent.com/Girish1704/hack-in-a-day-challenges/refs/heads/main/recruitment-interview-prep-agent/challenge-based.md",
+                "RawFilePath": "https://raw.githubusercontent.com/Girish1704/hack-in-a-day-challenges/refs/heads/main/recruitment-interview-prep-agent/challenge-1.md",
                 "Order": 3
+            },
+                        {
+                "RawFilePath": "https://raw.githubusercontent.com/Girish1704/hack-in-a-day-challenges/refs/heads/main/recruitment-interview-prep-agent/challenge-2.md",
+                "Order": 4
+            },
+                        {
+                "RawFilePath": "https://raw.githubusercontent.com/Girish1704/hack-in-a-day-challenges/refs/heads/main/recruitment-interview-prep-agent/challenge-3.md",
+                "Order": 5
+            },
+                        {
+                "RawFilePath": "https://raw.githubusercontent.com/Girish1704/hack-in-a-day-challenges/refs/heads/main/recruitment-interview-prep-agent/challenge-4.md",
+                "Order": 6
+            },
+                        {
+                "RawFilePath": "https://raw.githubusercontent.com/Girish1704/hack-in-a-day-challenges/refs/heads/main/recruitment-interview-prep-agent/challenge-5.md",
+                "Order": 7
             }    
         ]
     }

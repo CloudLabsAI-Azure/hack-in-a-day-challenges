@@ -1,62 +1,51 @@
-# Challenge 05: Publish the Copilot to Microsoft Teams and Test the Full Workflow  
+# Challenge 05: Publish the HR Interview Copilot to Microsoft Teams and Test the Full Hiring Workflow
 
 ## Introduction
-Your Financial Risk Advisor Copilot can now analyze financial reports, classify risk and send escalation emails when required.  
-In this final challenge, you will publish the Copilot to **Microsoft Teams** so that finance stakeholders can interact with it directly inside their existing workflow.
+Your HR Interview Copilot can now evaluate resumes, generate role-specific interview questions, and send shortlist reports to the Hiring Manager based on HR approval.  
+In this final challenge, you will publish the Copilot to **Microsoft Teams**, so that recruiters and hiring managers can access it directly within their daily workflow.
 
-Once published, you will add the Copilot to Teams and test the full end-to-end experience — including analysis and escalation.
+Once published, you will add the Copilot to Teams and test the complete hiring workflow from resume evaluation through shortlisting.
 
 ## Challenge Objectives
 - Publish the Copilot as a channel for Microsoft Teams.
-- Add the Copilot to Teams for real-world testing.
-- Verify that the complete workflow works correctly inside Teams.
-
----
+- Add the Copilot to Microsoft Teams for real-world testing.
+- Verify that the full hiring workflow executes correctly inside Teams.
 
 ## Steps to Complete
 
-### 1 — Publish the Copilot to Teams
-1. Open the **Financial Risk Advisor Copilot** in Copilot Studio.
-2. In the top navigation, select the **Channels** tab.
-3. In the list of available channels, select:
-   **Microsoft Teams → Copilot**
-4. Click **Publish**.
-5. Wait for the confirmation message stating that the agent has been successfully published to Teams.
+### Step 1: Publish the Copilot to Microsoft Teams
 
----
+1. Open the **HR Interview Copilot** in Copilot Studio.
 
-### 2 — Open Microsoft Teams and Add the Copilot
-1. Open **Microsoft Teams (Web version preferred)**.
-2. In the left navigation bar, select **Apps** (or **More apps**).
-3. Search for your Copilot using the name:
-   **Financial Risk Advisor Copilot**
-4. Select the Copilot and click **Add**.
-5. The Copilot will now appear in the left toolbar or under the Messaging Extensions panel.
+1. In the top navigation bar, select the **Channels** tab.
 
----
+1. Under available channels, click **Microsoft Teams and Microsoft 365 copilot**.
 
-### 3 — Test the Copilot Inside Teams
-1. Open the Copilot from the Teams sidebar.
-2. Ask questions such as:
-   • *How is our revenue trending this quarter?*  
-   • *What is the current liquidity outlook?*  
-3. Confirm the following:
-   • Copilot analyzes the uploaded financial data  
-   • A risk level is clearly provided (No Risk / Moderate Risk / High Risk)  
-   • If High Risk is detected, the Copilot asks whether the report should be sent to the CFO  
-   • If the user selects **Yes**, the Outlook escalation flow is executed and email is sent  
-   • If the user selects **No**, the conversation ends politely
+1. In the next pane, click on **Add Channel**.
 
----
+1. In the pop up, Select **Publish**.
+
+1. Wait for the confirmation that the Copilot has been successfully published to Teams.
+
+### Step 2: Open Microsoft Teams, Add the Copilot and Test
+
+1. Once Published, click on the **Microsoft Teams and Microsoft 365 Copilot** channel again, and click on the option, **see your agent in teams**.
+
+1. Once clicked it will navigate to teams window, select **Use web app instead** option.
+
+1. In the Teams, add your Agent.
+
+1. Now test and evaluate the working of your agent.
 
 ## Success Criteria
-- The Copilot appears and responds correctly inside Microsoft Teams.
-- Analysis and risk classification behave the same as in Copilot Studio.
-- The escalation email workflow triggers only when the user selects **Yes**.
-- The final experience feels natural and conversational.
+- The HR Interview Copilot appears and responds correctly inside Microsoft Teams.
+- Resume evaluation, interview question generation, and report emailing behave the same as in Copilot Studio.
+- The email workflow triggers only when the user selects **Yes**.
+- The experience feels natural and demonstrates a complete HR hiring cycle.
 
 ## Additional Resources
 - https://learn.microsoft.com/microsoft-copilot-studio/channels-teams
 - https://learn.microsoft.com/microsoft-teams/platform/apps-in-teams-overview
 
----
+
+Congratulations — you have successfully built and deployed the HR Interview Copilot to Microsoft Teams!

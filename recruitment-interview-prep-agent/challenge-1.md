@@ -13,6 +13,7 @@ In this challenge, you will create the **HR Interview Copilot** in Copilot Studi
 - Enable the Copilot to support multiple recruitment assistance use cases.
 
 ## Steps to Complete
+
 1. Open **Microsoft Copilot Studio**.
 
 1. On the Copilot Studio pane, from left menu select **Create** and then click on **+New Agent** option to create a new agent.
@@ -22,7 +23,9 @@ In this challenge, you will create the **HR Interview Copilot** in Copilot Studi
 1. On the overview pane of the agent, click on **edit** inside Details card to edit agent's name and description.
 
 1. Configure the Copilot details as below:
+
    - **Name:** `HR Interview Copilot`
+
    - **Description:** `Assists HR teams in hiring Software Developers and AI Engineers by evaluating resumes against job descriptions and generating structured interview question sets.`
 
 1. Click on save.
@@ -35,8 +38,9 @@ In this challenge, you will create the **HR Interview Copilot** in Copilot Studi
      You generate role-specific technical and behavioral interview questions based on the job title, skill requirements, and experience expectations. If expertise level is unclear, ask clarifying questions before generating responses.
      When comparing candidate resumes with job descriptions, rate skill alignment as Strong Fit, Partial Fit, or Poor Fit and provide justification based on the information available in the uploaded documents.
      During live interview support, suggest follow-up questions based on candidate answers and highlight missing competencies aligned to the job description.
-     Always format insights using bullet points for clarity and maintain a neutral, professional hiring tone. Avoid speculation — only reference information grounded in the uploaded HR documents, resumes, and job descriptions.
+     Always format insights using bullet points for clarity and maintain a neutral, professional hiring tone. Avoid speculation, only reference information grounded in the uploaded HR documents, resumes, and job descriptions.
      ```
+
 1. Click on save.
 
 ## Success Criteria
@@ -45,7 +49,5 @@ In this challenge, you will create the **HR Interview Copilot** in Copilot Studi
 ## Additional Resources
 - [Copilot Studio Overview](https://learn.microsoft.com/microsoft-copilot-studio/overview)
 - [Create your first Copilot](https://learn.microsoft.com/microsoft-copilot-studio/authoring-create-copilot)
-
----
 
 Click **Next** to continue to **Challenge 02: Upload Job Descriptions and Resume Knowledge Documents**.

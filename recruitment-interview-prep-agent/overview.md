@@ -1,53 +1,68 @@
 # Recruitment Interview Prep Agent
 
-Welcome to the Recruitment Interview Prep Agent Hack in a Day! Today, you'll explore the power of AI-driven HR automation by building an intelligent recruitment assistant using Azure AI services and Copilot Studio. Through this hands-on experience, you'll learn how to design an end-to-end solution that can autonomously generate role-specific interview questions, evaluate candidate resumes, and provide intelligent scoring with explainable decision-making.
+Welcome to the Recruitment Interview Prep Agent Hack in a Day! Today, you’ll explore how AI can streamline HR operations by building an intelligent Copilot that assists with technical hiring. Through this hands-on lab, you will create a recruitment assistant capable of evaluating candidate resumes, generating role-specific interview questions, and sharing shortlist reports with hiring managers, all powered by Azure AI and Copilot Studio.
+
+## Scenario
+
+A fast-growing technology company is hiring for two critical roles , Software Developer and AI Engineer to support upcoming product launches. The HR team is receiving many resumes but is struggling to manually screen candidates, match their skills to job requirements, and prepare role-appropriate interview questions for each technical round. Important shortlisting updates for hiring managers are often delayed due to workload. To streamline this process, the company decides to build an HR Interview Copilot that can evaluate resumes, compare them to Job Descriptions, generate interview question sets based on experience level, and email shortlist reports to hiring managers for the next round. This ensures a faster, consistent, and more reliable hiring workflow.
 
 ## Introduction
 
-Your mission is to create an AI-powered HR Interview Copilot that transforms how organizations handle recruitment and interview preparation. Leveraging Azure AI Foundry, Azure OpenAI, Copilot Studio, and Power Automate, you'll design a system that can automatically parse resumes, generate contextual interview questions, evaluate candidate fit, and provide actionable insights—all while maintaining transparency and fairness in hiring decisions.
+Your mission is to build an **HR Interview Copilot** that supports recruitment teams in selecting the right candidate faster and more consistently. Using Microsoft Copilot Studio, Azure AI Foundry, Azure OpenAI, and Power Automate, you will design a conversational agent that can:
 
-This solution will act as a comprehensive recruitment assistant integrating document processing, intelligent reasoning, conversational AI, and workflow automation to deliver faster, smarter, and more consistent hiring experiences for HR teams and candidates alike.
+- Understand Job Descriptions for roles such as **Software Developer** and **AI Engineer**
+- Analyze resumes against skill requirements and identify strengths and gaps
+- Recommend whether a candidate should be shortlisted
+- Generate tailored interview questions based on experience level and job role
+- Email a structured shortlist report to the Hiring Manager for further evaluation
+
+This solution reduces manual effort in hiring, improves collaboration between recruiters and interviewers, and ensures more objective and insight-driven decision-making.
 
 ## Learning Objectives
 
 By participating in this Hack in a Day, you will learn how to:
 
-- Set up Azure AI Foundry and Azure OpenAI for intelligent document processing and reasoning.
-- Build automated resume parsing pipelines using Azure Document Intelligence.
-- Create role-specific interview questions using advanced prompt engineering techniques.
-- Develop AI-powered candidate evaluation systems with explainable scoring mechanisms.
-- Integrate conversational AI into Microsoft Teams using Copilot Studio for seamless HR workflows.
+- Upload and manage knowledge sources in Copilot Studio for resume understanding
+- Build topics that perform interactive resume evaluations and question generation
+- Use reasoning-driven prompts to deliver explainable HR recommendations
+- Automate interview workflows by emailing shortlist summaries through Power Automate
+- Publish the HR Interview Copilot to Microsoft Teams for real-world usage
 
 ## Hack in a Day Format: Challenge-Based
 
-This hack in a day adopts a challenge-based learning format, providing a hands-on experience through five progressive stages that mirror a real-world AI recruitment implementation. Each challenge focuses on a key capability of the HR Interview Copilot:
+This hands-on lab is structured into five progressive challenges that mirror a real HR automation implementation:
 
-- **Challenge 1: Foundation** - Set up Azure AI environment and deploy OpenAI models for intelligent reasoning.
-- **Challenge 2: Document Processing** - Build resume parsing and analysis pipeline using Azure Document Intelligence.
-- **Challenge 3: Question Generation** - Create AI-powered system for generating role-specific interview questions.
-- **Challenge 4: Candidate Evaluation** - Develop intelligent scoring and assessment system with explainable reasoning.
-- **Challenge 5: Copilot Integration** - Build interactive HR Copilot interface in Microsoft Teams for seamless collaboration.
+- **Challenge 1: Create the HR Interview Copilot**  
+  Set up the Copilot with the right purpose, instructions, and conversational identity.
 
-Throughout each challenge, you'll:
-- Analyze the recruitment workflow requirements and business scenario.
-- Strategize and design a scalable AI-powered HR solution.
-- Leverage your Azure environment to deploy, integrate, and test AI components.
+- **Challenge 2: Upload Recruitment Knowledge Sources**  
+  Add Job Descriptions and sample resumes to the knowledge base for grounding.
+
+- **Challenge 3: Build Resume Evaluation & Question Generation Topics**  
+  Create two conversational topics — one for evaluating candidates and one for generating interview questions.
+
+- **Challenge 4: Email Shortlist Reports to Hiring Managers**  
+  Integrate Power Automate so the Copilot can send structured reports when HR approves.
+
+- **Challenge 5: Publish the Copilot to Teams and Test the End-to-End Workflow**  
+  Deploy the agent to Microsoft Teams and validate the full hiring experience.
+
+Throughout each challenge, you will design, build, and test intelligent workflows that reflect real-world recruitment scenarios.
 
 ## Challenge Overview
 
-Your journey begins with setting up Azure AI infrastructure and deploying OpenAI models for advanced reasoning capabilities. You'll then implement document processing pipelines to parse and analyze candidate resumes. Next, you'll develop an intelligent question generation system that creates contextual, role-specific interview questions. Following that, you'll build a comprehensive candidate evaluation system with transparent scoring mechanisms. Finally, you'll integrate everything into a conversational Copilot interface deployed in Microsoft Teams.
+You will start by creating the HR Interview Copilot framework and uploading key hiring documents. Next, you will implement resume evaluation and interview question generation using knowledge-grounded conversational intelligence. You will then automate shortlist reporting through Outlook email using Power Automate. Finally, you will deploy the Copilot to Microsoft Teams to experience the full, conversational hiring workflow.
 
-By the end of this hack in a day, you'll have a fully functional HR Interview Copilot capable of automated resume parsing, intelligent question generation, fair candidate evaluation, and seamless team collaboration—all powered by explainable AI.
+By the end of this Hack in a Day, you will have a fully functional **HR Interview Copilot** that can evaluate technical candidates, prepare interview questions, email shortlist reports, and operate naturally inside Microsoft Teams, a complete and scalable HR automation solution.
 
 ## Support Contact
 
-The CloudLabs support team is available 24/7, 365 days a year, via email and live chat to ensure seamless assistance at any time. We offer dedicated support channels tailored specifically for both learners and instructors, ensuring that all your needs are promptly and efficiently addressed.
+The CloudLabs support team is available 24/7, 365 days a year via email and live chat to ensure seamless assistance throughout the lab. Dedicated support channels are available for both learners and instructors.
 
-Learner Support Contacts:
+**Learner Support Contacts**
+- Email: cloudlabs-support@spektrasystems.com  
+- Live Chat: https://cloudlabs.ai/labs-support
 
-- Email Support: cloudlabs-support@spektrasystems.com
-- Live Chat Support: https://cloudlabs.ai/labs-support
+---
 
-Now, click on the **Next** from lower right corner to move on next page.
-
-## Happy Hacking!!
+Click **Next** from the bottom-right corner to continue.

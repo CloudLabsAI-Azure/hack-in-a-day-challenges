@@ -13,6 +13,7 @@ The Copilot will ask the user if they want the report emailed, and only if the u
 ## Steps to Complete
 
 ### 1 — Create the Flow for Email Escalation  
+
 1. In Copilot Studio, from the left navigation pane, select **Flows → + New agent flow**
 
 1. You will be navigated to **Designer** pane, under the add a trigger pane, search for **When an agent calls the flow** and select it.
@@ -30,10 +31,15 @@ The Copilot will ask the user if they want the report emailed, and only if the u
    - **Body:** Use the **body** variable (this will carry the complete financial summary from the Copilot)  
    - **Importance:** High
 
-1. After configuring these fields, add a **Send message** node at the end of the flow.
+1. After configuring these fields, add a new **Respond to the agent** node at the end of the flow.
 
-1. In the message text box, enter:  
-   *The email has been sent successfully.*  
+1. Once added, click on **Add an output**.
+
+1. Name the output as **Response** and provide the value as:
+
+   ```
+   The email has been sent successfully.
+   ```
 
 1. Select **Publish** to publish the flow.  
 
@@ -50,7 +56,7 @@ The Copilot will ask the user if they want the report emailed, and only if the u
 
 1. Scroll down and expand **Advanced options**.  
 
-1. Under **Save agent response as**, select **Create new variable**.  
+1. Under **Save agent response as**, click on the input area and Select **Create new variable**.  
 
 1. Name the variable: **body**  
    (This variable will pass the entire financial summary to the Outlook Flow.)

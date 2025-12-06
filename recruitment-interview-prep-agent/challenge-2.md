@@ -13,11 +13,16 @@ In this challenge, you will upload **Job Description PDFs and Resume PDFs** to t
 
 ## Steps to Complete
 1. From the Copilot Studio home screen, open the **HR Interview Copilot** created previously.
-2. In the left navigation pane, select **Knowledge**.
-3. Click **+ Add a knowledge source**.
-4. Choose **Files** → **Upload file**.
+
+1. In top navigation bar, select **Knowledge**.
+
+1. Click **+ Add a knowledge source**.
+
+4. Choose **Upload files**.
+
 5. Upload the Job Description and Resume documents provided, which you downloaded and extracted earlier.
-6. After uploading, verify each file shows the status **Processed**.
+
+6. After uploading, verify each file shows the status **Ready**.
 
    > Note: It may take up to 30 minutes for files to finish processing. You may continue to the next challenge while processing completes.
 
@@ -28,7 +33,5 @@ In this challenge, you will upload **Job Description PDFs and Resume PDFs** to t
 ## Additional Resources
 - https://learn.microsoft.com/microsoft-copilot-studio/knowledge
 - https://learn.microsoft.com/microsoft-copilot-studio/knowledge#supported-file-formats
-
----
 
 Click **Next** to continue to **Challenge 03: Build Interview Topics (Question Generation & Resume Evaluation)**.
