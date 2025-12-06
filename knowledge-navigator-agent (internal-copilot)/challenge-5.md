@@ -58,7 +58,7 @@ Now we'll create a flow to save knowledge requests to SharePoint and track their
 - If prompted, select **Allow access**.
 
 - On the **Create item** action, configure the following parameters:
-   - **Site Address:** Select **KnowledgeHub<inject key="DeploymentID" enableCopy="false"/>** SharePoint site ****
+   - **Site Address:** Select **contoso-documents-<inject key="DeploymentID"></inject>** SharePoint site ****
    - **List name:** Select **Knowledge_Requests_List **
    - **Title:** Enter **Knowledge Request **
    - Click **Show all **
@@ -469,7 +469,7 @@ Now let's create a simpler flow for emailing policy documents:
 
 - Verify you receive the confirmation message with a Request ID.
 
-- Navigate to the **KnowledgeHub<inject key="DeploymentID" enableCopy="false"/>** SharePoint site.
+- Navigate to the **contoso-documents-<inject key="DeploymentID"></inject>** SharePoint site.
 
 - Click **Site contents** and select **Knowledge_Requests_List**.
 

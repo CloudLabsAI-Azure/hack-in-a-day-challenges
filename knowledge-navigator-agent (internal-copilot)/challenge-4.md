@@ -72,14 +72,14 @@ Now you'll update each topic to ensure citations are displayed properly.
 - Click to edit the node settings.
 
 - In the generative answers configuration:
-   - **Data sources:** Verify HR_Leave_Policy.pdf is selected
+   - **Data sources:** Verify your SharePoint knowledge source or specific HR documents are selected
    - **Citations:** Enable "Show citations"
    - **Citation format:** "According to [source], ..."
    - **Link to source:** Enabled
 
 - In the "Content" section, you can customize the prefix message:
    ```
-   Based on our HR Leave Policy documentation:
+   Based on Contoso's HR documentation:
    [AI Generated Answer with Citations]
    ```
 
@@ -129,24 +129,24 @@ Now you'll update each topic to ensure citations are displayed properly.
 
 - Click **Test your copilot**.
 
-- Ask: **"How many days of annual leave do I get?"**
+- Ask: **"What's in the Contoso HR Handbook?"**
 
 - Verify the response includes:
    - The actual answer
-   - A citation at the end, like: `[HR_Leave_Policy.pdf, Page 2]`
+   - A citation at the end, like: `[Contoso_HR_Handbook.docx]` or similar
    - The citation should be clickable/tappable
 
-- Try another: **"What's the sick leave policy?"**
+- Try another: **"What are the onboarding procedures?"**
 
-- Verify citations appear correctly.
+- Verify citations appear correctly referencing Contoso_HR_Onboarding_Checklist.docx.
 
-### Step 8: Test Citation Display - Finance Department
+### Step 8: Test Citation Display - Finance/Travel Department
 
-- In the test chat, ask: **"What expenses can I claim?"**
+- In the test chat, ask: **"How does travel reimbursement work at Contoso?"**
 
-- Check that the response cites the Finance_Expense_Policy.pdf document.
+- Check that the response cites the Employee-Travel-Reimbursement.xlsx document.
 
-- Ask: **"How do I submit travel receipts?"**
+- Ask: **"What's the process for expense reimbursement?"**
 
 - Verify it cites Finance_Travel_Reimbursement.pdf.
 
@@ -154,42 +154,42 @@ Now you'll update each topic to ensure citations are displayed properly.
 
 ### Step 9: Test Citation Display - IT Department
 
-- Ask: **"How do I reset my password?"**
+- Ask: **"What are the IT governance policies?"**
 
-- Verify the response cites IT_Security_Policy.pdf or IT_Support_Guide.pdf.
+- Verify the response cites Contoso-Corp-IT-Governance&Compliance-Policy.docx.
 
-- Ask: **"What software can I request?"**
+- Ask: **"What's the SLA for support?"**
 
-- Check for citations from IT_Software_Access.pdf.
+- Check for citations from Contos_Corp_SLA.docx.
 
 - Test if clicking a citation opens or provides a way to access the document.
 
 ### Step 10: Test Citation Display - Procurement Department
 
-- Ask: **"What's the purchase approval process?"**
+- Ask: **"What's the procurement process at Contoso?"**
 
-- Verify citations from Procurement_Purchase_Request.pdf appear.
+- Verify citations from Contoso_Procurement_Data_With_Policies.docx appear.
 
-- Ask: **"How do I add a new vendor?"**
+- Ask: **"How does contract management work?"**
 
-- Check for citations from Procurement_Vendor_Management.pdf.
+- Check for citations from Procurement_Contracts_Repository_List.xlsx.
 
 - Confirm citations are clear and helpful.
 
 ### Step 11: Test Multi-Source Citations
 
 - Ask a question that might span multiple documents:
-   - "What do I need to know about business travel and expenses?"
+   - "What do I need to know about Contoso's business operations?"
 
 - Verify the copilot:
    - Provides a comprehensive answer
-   - Cites MULTIPLE documents (Finance_Expense_Policy.pdf AND Finance_Travel_Reimbursement.pdf)
+   - May cite MULTIPLE documents (Contoso_Corp_Business_Performance_Report.docx, Contoso_Sales_Playbook.docx, etc.)
    - Clearly attributes which information came from which source
 
 - Test another cross-department question:
    - "I'm a new employee, what policies do I need to read?"
 
-- Check that it cites documents from HR onboarding and potentially IT security.
+- Check that it cites documents from HR onboarding (Contoso_HR_Onboarding_Checklist.docx) and potentially IT governance.
 
 ### Step 12: Verify Citation Accessibility
 
@@ -209,8 +209,8 @@ Now you'll update each topic to ensure citations are displayed properly.
 Based on testing, you may want to adjust:
 
 - **Citation style:**
-   - Too verbose: "[According to the HR Leave Policy document, page 3, section 2.1...]"
-   - Better: "[HR_Leave_Policy.pdf, p.3]"
+   - Too verbose: "[According to the Contoso HR Handbook document, page 3, section 2.1...]"
+   - Better: "[Contoso_HR_Handbook.docx]"
 
 - **Citation placement:**
    - End of answer (less intrusive)
@@ -257,13 +257,13 @@ Based on testing, you may want to adjust:
 
 ## Success Criteria
 - Citations are enabled in generative AI settings
-- All 12 knowledge sources are configured to provide citations
-- Citations appear in answers from all 4 department topics
-- Citations show document name and page number (where available)
+- SharePoint knowledge source is configured to provide citations
+- Citations appear in answers from all department topics
+- Citations show document name (and page number where available)
 - Citations are clickable/accessible to users
 - Multi-source answers show multiple citations correctly
 - Citation format is clear, concise, and professional
-- Test queries consistently show proper citations
+- Test queries consistently show proper citations from Contoso documents
 - Created a help topic explaining citations to users
 
 ## Additional Resources

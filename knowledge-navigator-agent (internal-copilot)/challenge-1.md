@@ -13,9 +13,26 @@ In this challenge, you will create an AI-powered Internal Knowledge Copilot usin
 
 ## Steps to Complete
 
-### Step 1: Get SharePoint Site URL
+### Step 1: Verify Local Documents Folder
 
-- In the **Lab VM**, click on **Microsoft Edge** browser icon on the desktop.
+- In the **Lab VM**, open **File Explorer**.
+
+- Navigate to the documents folder to verify all company documents are present:
+
+   ```
+   c:\Users\GirishR\OneDrive - Spektra Systems LLC\Documents\GitHub\hack-in-a-day-challenges\knowledge-navigator-agent (internal-copilot)\documents\
+   ```
+
+- Verify you can see multiple Contoso company documents (40+ files) including:
+   - Contoso_HR_Handbook.docx
+   - Contoso_Procurement_Data_With_Policies.docx
+   - Contoso-Corp-IT-Governance&Compliance-Policy.docx
+   - Employee-Travel-Reimbursement.xlsx
+   - And many more...
+
+- Keep this folder location accessible for uploading in Challenge 2.
+
+### Step 2: Create SharePoint Site
 
 - Navigate to the **Microsoft 365** portal:
 
@@ -31,25 +48,35 @@ In this challenge, you will create an AI-powered Internal Knowledge Copilot usin
 
 - From the Microsoft 365 apps, select **SharePoint**.
 
-- Click on **My Sites** and then select **KnowledgeHub<inject key="DeploymentID" enableCopy="false"/>**.
+- Click on **+ Create site** and select **Team site**.
 
-   > **Note:** This SharePoint site will store employee knowledge queries and department document metadata.
+- Configure the new site:
+   - **Site name:** `contoso-documents-<inject key="DeploymentID"></inject>`
+   - **Site description:** "Internal knowledge base for company policies and procedures"
+   - **Privacy settings:** Set to **Public** (anyone in the organization can access)
+
+- Click **Next** and add any additional owners if needed, then click **Finish**.
+
+- Once the site is created, navigate to the **Documents** section.
+
+- You can upload files now or in Challenge 2. To upload now, click **Upload** > **Files** and select all documents from:
+   ```
+   c:\Users\GirishR\OneDrive - Spektra Systems LLC\Documents\GitHub\hack-in-a-day-challenges\knowledge-navigator-agent (internal-copilot)\documents\
+   ```
+
+- Wait for all files to upload successfully (this may take several minutes for 40+ documents).
 
 - **Copy the SharePoint site URL** from the browser address bar and paste it into **Notepad** for use in upcoming steps.
 
-   Example format: `https://yourdomain.sharepoint.com/sites/KnowledgeHub<inject key="DeploymentID" enableCopy="false"/>`
+   Example format: `https://yourdomain.sharepoint.com/sites/contoso-documents-<inject key="DeploymentID"></inject>`
 
-### Step 2: Sign in to Microsoft Copilot Studio
-
-- Open a new browser tab and navigate to **Microsoft Copilot Studio**:
+- Navigate to **Microsoft Copilot Studio**:
 
    ```
    https://copilotstudio.microsoft.com
    ```
 
-- Sign in using the same credentials if prompted.
-
-- Wait for the Copilot Studio home page to load.
+- Ensure the environment is **ODL_User<inject key="DeploymentID"></inject>**.
 
 ### Step 3: Create a New Agent
 
@@ -58,23 +85,24 @@ In this challenge, you will create an AI-powered Internal Knowledge Copilot usin
 - On **Start building your agent** page, select **Configure**.
 
 - Provide the following details:
-   - **Name:** `Internal Knowledge Navigator (2)`
-   - **Description (3):**
+   - **Name:** `Internal Knowledge Navigator`
+   - **Description:**
      ```
-     This agent helps employees quickly find policies, procedures, and guidelines across HR, Finance, IT, and Procurement departments. It provides accurate answers with document citations, guides users through common processes, and can trigger helpful actions like emailing documents or creating support tickets.
+     This agent helps employees quickly find Contoso company policies, procedures, and guidelines across all departments including HR, IT, Procurement, Finance, Sales, and Operations. It provides accurate answers with document citations from official company documents, guides users through common processes, and can trigger helpful actions like emailing documents or creating support tickets.
      ```
-   - **Instructions (4):**
+   - **Instructions:**
      ```
-     - Respond only to queries related to internal company policies, procedures, and department-specific guidelines.
-     - Retrieve knowledge from uploaded department documents (HR, Finance, IT, Procurement).
+     - Respond only to queries related to Contoso internal company policies, procedures, business operations, and department-specific guidelines.
+     - Retrieve knowledge from the uploaded Contoso company documents stored in SharePoint, including HR handbooks, IT governance policies, procurement procedures, support policies, sales playbooks, business reports, and operational data.
      - When answering questions:
-       - Provide clear, accurate information based strictly on official policy documents
-       - Always cite the source document name and section
-       - Use professional, helpful language
+       - Provide clear, accurate information based strictly on official Contoso documents
+       - Always cite the source document name (e.g., Contoso_HR_Handbook.docx)
+       - Use professional, helpful language appropriate for internal employees
        - If information isn't in the knowledge base, direct users to the appropriate department contact
-     - For common scenarios, guide users through step-by-step processes
-     - Offer to email policy documents or create IT tickets when appropriate
+     - For common scenarios, guide users through step-by-step processes based on documented procedures
+     - Offer to email policy documents or create support tickets when appropriate
      - Maintain employee privacy and confidentiality at all times
+     - Focus on providing information from official Contoso documents rather than general knowledge
      ```
 
 - Click **Create** to initialize your agent.
@@ -97,32 +125,7 @@ In this challenge, you will create an AI-powered Internal Knowledge Copilot usin
 
 - Click **Save** to apply changes.
 
-### Step 5: Review Default Topics
-
-- In the left navigation pane, click on **Topics**.
-
-- Review the default system topics:
-   - **Greeting** - Welcome message for users
-   - **Conversational boosting** - Fallback for unmatched queries
-   - **End of conversation** - Closing message
-
-- These default topics will be enhanced in later challenges.
-
-### Step 6: Verify Copilot Environment
-
-- Click **Settings** (gear icon) again.
-
-- Navigate to **Generative AI** section.
-
-- Verify that the following settings are available:
-   - **How should your copilot interact with people?** - Set to **Generative**
-   - **How strictly should your copilot match the knowledge sources?** - Set to **Medium**
-
-- Do NOT make changes yet - you'll configure these in Challenge 4.
-
-- Click **Cancel** or navigate back.
-
-### Step 7: Test Basic Copilot Greeting
+### Step 5: Test Basic Copilot Greeting
 
 - Click **Test your copilot** button (usually in the top-right corner).
 

@@ -64,11 +64,11 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/gs-5.png)
 
-1. Inside the **Power Apps** portal, select **Tables (1)** from the left navigation menu and click **Create with Excel or .CSV file (2)** to begin importing the lab dataset.
+1. Inside the **Power Apps** portal, select **Tables (1)** from the left navigation menu and click **Create with Excel or .CSV file (2)** to begin the environment setup.
 
    ![](./media/ex1-travel-g1.png)
 
-   > **Environment Foundation:** This step creates the foundational environment that will support your agents with company-specific data and knowledge sources.
+   > **Environment Foundation:** This step creates the foundational environment that will support your agent with company knowledge sources from the documents folder.
 
 1. In the **Create in new environment?** dialog, click **Create** to provision a environment.
 
