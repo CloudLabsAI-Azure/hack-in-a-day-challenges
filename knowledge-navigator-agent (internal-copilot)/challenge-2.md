@@ -88,9 +88,50 @@ Before starting this challenge, ensure you have:
 
 - If indexing is still in progress, wait a few more minutes and refresh the page.
 
-### Step 4: Disable Web Search
+### Step 4: Create a Teams Channel for Document Requests
 
-- In the **Knowledge** section, scroll down to the **Web Search** area.
+Now you'll create a Microsoft Teams channel where employee requests will be posted by the agent flows you'll create in later challenges.
+
+- Open Microsoft Teams in your browser:
+
+   ```
+   https://teams.microsoft.com/v2/
+   ```
+
+- Sign in with your Microsoft 365 credentials if prompted.
+
+- Once Teams loads, look for the **Teams** section in the left navigation.
+
+- Click the **...** (More options) next to any available team, then select **Add channel**.
+
+   > **Note:** If you don't see any teams, you may need to join or create a team first. Use any available team in your tenant.
+
+- In the **Create a channel** dialog, enter the following:
+
+   - **Channel name:** `Document Request`
+   
+   - **Description:** 
+     ```
+     This channel is used to receive and manage employee document requests and support inquiries submitted through the Internal Knowledge Navigator agent.
+     ```
+
+   - **Channel type:** Select **Standard**
+
+   - **Layout:** Select **Threads**
+
+- Click **Create** to create the channel.
+
+- Verify the **Document Request** channel appears in your Teams list.
+
+   > **Important:** Save the team name and channel name for later use when configuring agent flows in Challenge 3.
+
+### Step 5: Disable Web Search
+
+- Go back to **Microsoft Copilot Studio** in your browser.
+
+- Navigate to the **Knowledge** section in the left navigation pane.
+
+- Scroll down to the **Web Search** area.
 
 - Ensure that **Web Search** is set to **Disabled**.
 
@@ -100,6 +141,7 @@ Before starting this challenge, ensure you have:
 - SharePoint knowledge source is connected to Copilot Studio
 - SharePoint knowledge source shows **Active** or **Ready** status
 - Knowledge source has indexed 40+ Contoso documents
+- Microsoft Teams channel "Document Request" created successfully
 - Web Search is disabled for the agent
 
 ## Additional Resources
