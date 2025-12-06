@@ -245,8 +245,6 @@ If you have access to a test account:
 - [Analyze copilot performance](https://learn.microsoft.com/microsoft-copilot-studio/analytics-overview)  
 - [Share your copilot](https://learn.microsoft.com/microsoft-copilot-studio/admin-share-bots)
 
----
-
 ## Congratulations!
 
 You have successfully built an **AI-powered IT Helpdesk Automation Copilot** using Microsoft Copilot Studio and Power Automate!
@@ -259,15 +257,6 @@ You have successfully built an **AI-powered IT Helpdesk Automation Copilot** usi
 - Deployed to Microsoft Teams for organization-wide access
 - Reduced manual helpdesk workload through automation
 - Built the entire solution with Copilot Studio agent flows (no external Power Automate)  
-
-### Next Steps:
-- Monitor analytics to identify improvement opportunities
-- Add more topics for additional support scenarios (printer issues, software requests, etc.)
-- Customize Freshdesk ticket fields (add custom fields for department, location, etc.)
-- Add priority-based routing in Freshdesk
-- Create automation rules in Freshdesk for ticket assignment
-- Expand knowledge base with more IT documentation
-- Configure SLA policies in Freshdesk for response times
 
 ### Business Impact:
 - **Faster Response Times** - 24/7 instant IT support

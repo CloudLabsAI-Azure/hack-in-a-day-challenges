@@ -28,6 +28,7 @@ In this challenge, you will activate your Freshdesk free trial, configure your a
 ### Step 2: Provide Registration Details
 
 1. In the registration pane, provide these details:
+
    - **First name:** `ODL`
    - **Last name:** `User`
    - **Work email:** <inject key="AzureAdUserEmail"></inject>
@@ -38,6 +39,7 @@ In this challenge, you will activate your Freshdesk free trial, configure your a
 ### Step 3: Complete Setup Questions
 
 1. In the next pane, provide these details:
+
    - **What industry are you from?:** From the list, select **Software and internet**
    - **How many employees are there in your company?:** Select **1-10**
    - Check the box: **I'm trying customer service software for the first time**
@@ -63,6 +65,7 @@ In this challenge, you will activate your Freshdesk free trial, configure your a
 ### Step 5: Set Your Password
 
 1. In the activation pane, provide:
+
    - **Enter password:** Create a strong password (e.g., `Freshdesk@2025`)
    - **Confirm password:** Re-enter the same password
 
@@ -127,23 +130,6 @@ In this challenge, you will activate your Freshdesk free trial, configure your a
 
 4. This structure will be used when creating tickets from Copilot Studio.
 
-### Step 10: Test Manual Ticket Creation (Optional)
-
-1. To familiarize yourself with Freshdesk, create a test ticket manually:
-   - Click **+ New Ticket** in the top-right corner
-   - Fill in:
-     - **Requester:** Your email
-     - **Subject:** `Test Ticket - Setup Complete`
-     - **Description:** `Testing Freshdesk setup before Copilot integration`
-     - **Priority:** Medium
-     - **Status:** Open
-
-2. Click **Submit** to create the ticket.
-
-3. Verify the ticket appears in the **Tickets** list with a unique Ticket ID.
-
-4. You can now close this test ticket by changing its status to **Closed**.
-
 ## Success Criteria
 - Freshdesk free trial successfully activated
 - Account verified via email activation
@@ -157,7 +143,5 @@ In this challenge, you will activate your Freshdesk free trial, configure your a
 - [Freshdesk Documentation](https://support.freshdesk.com/)  
 - [Freshdesk API Overview](https://developers.freshdesk.com/api/)  
 - [Freshdesk Getting Started Guide](https://freshdesk.com/resources/getting-started)
-
----
 
 Now, click **Next** to continue to **Challenge 03: Create Freshdesk Ticket Flow**.

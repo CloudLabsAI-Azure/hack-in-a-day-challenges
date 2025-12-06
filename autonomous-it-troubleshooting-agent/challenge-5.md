@@ -268,6 +268,4 @@ If you encounter issues during testing:
 - [Debug topic flows](https://learn.microsoft.com/microsoft-copilot-studio/authoring-create-edit-topics)  
 - [Freshdesk API troubleshooting](https://developers.freshdesk.com/api/)
 
----
-
 Now, click **Next** to continue to **Challenge 06: Publish Your Copilot to Microsoft Teams**.

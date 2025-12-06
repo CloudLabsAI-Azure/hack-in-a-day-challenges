@@ -195,6 +195,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 3. This flow is now ready to be called from any topic.
 
 ## Success Criteria
+
 - Agent flow created successfully in Copilot Studio
 - Flow trigger configured with 2 input parameters (Subject, Description)
 - Freshdesk connector added and connection established
@@ -209,7 +210,5 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 - [Create flows in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/advanced-flow)  
 - [Freshdesk connector documentation](https://learn.microsoft.com/connectors/freshdesk/)  
 - [Flow inputs and outputs](https://learn.microsoft.com/microsoft-copilot-studio/authoring-variables)
-
----
 
 Now, click **Next** to continue to **Challenge 04: Create Topics Using Generative AI**.

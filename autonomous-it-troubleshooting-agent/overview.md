@@ -1,22 +1,14 @@
-# IT Support Copilot with Microsoft Copilot Studio – Hack in a Day
+# IT Support Copilot with Microsoft Copilot Studio
 
 Welcome to the IT Support Copilot Hack in a Day! Today, you'll learn how to build an intelligent, conversational AI assistant that helps employees resolve common IT support issues instantly. Through this hands-on experience, you'll create a copilot that answers questions from knowledge base documents, guides users through troubleshooting steps, and automatically sends resolution summaries to your IT team.
+
+## Sceanrio
+
+A growing organization is overwhelmed with recurring IT support tickets such as password resets, VPN issues, slow devices, and printer problems. The helpdesk team is spending most of its time solving repeat requests instead of focusing on critical incidents and escalations. To reduce ticket volume and provide 24/7 assistance, the company decides to build an IT Support Copilot that can answer support questions using IT knowledge base documents, guide users through troubleshooting steps, and notify the IT team when intervention is required. This ensures faster issue resolution, happier employees, and reduced workload on IT support staff.
 
 ## Introduction
 
 Your mission is to create an IT Support Copilot that dramatically reduces the workload on your helpdesk by handling the most common support requests: password resets, VPN connection issues, slow laptop complaints, and printer problems. Using Microsoft Copilot Studio's no-code platform, you'll build a conversational AI that leverages generative AI to provide accurate, helpful responses based on your organization's IT support documentation.
-
-The copilot will serve as a 24/7 virtual IT assistant for employees, capable of handling routine inquiries instantly – from understanding the user's problem, to providing step-by-step guidance, to escalating complex cases to human support agents when needed. You'll also integrate the copilot with Microsoft Teams and Power Automate to send resolution summaries and notifications.
-
-## Key Tools / Services
-
-In this lab, you will primarily work with:
-
-- **Microsoft Copilot Studio** - No-code platform for building conversational AI
-- **Generative AI** - For answering questions from uploaded knowledge base documents
-- **Power Automate** - For creating flows to send notifications via Teams and email
-- **Microsoft Teams** - For receiving resolution summaries and escalation alerts
-- **Microsoft 365** - For authentication and integration across the platform
 
 ## Learning Objectives
 
