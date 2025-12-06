@@ -134,12 +134,12 @@ These flows will be created first so they're ready to use when you build convers
 
    - **Post as:** Flow bot
    
-   - **Post in:** Chat with Flow bot
-   
-   - **Recipient:** Enter **<inject key="AzureAdUserEmail"></inject>**
-   
-   - **Message:** Enter the following text and add dynamic content:
+   - **Post in:** Channel
 
+   - **Team:** Select Exisitng
+
+   - **Channel:** Document Request
+   
    ```
    New Employee Request Submitted
 
