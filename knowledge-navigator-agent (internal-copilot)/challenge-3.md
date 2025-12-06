@@ -1,354 +1,195 @@
-# Challenge 03: Design Department Topics Using Generative AI
+# Challenge 03: Create Power Automate Flows for Actions
 
 ## Introduction
-While your copilot can now answer general questions using the uploaded knowledge base, employees often have specific common requests that benefit from structured conversations. Instead of manually building conversation flows from scratch, Microsoft Copilot Studio allows you to create topics using generative AI. Simply describe what you want the topic to do, and AI will generate the conversation flow, trigger phrases, and responses automatically.
+Your copilot can answer questions using the Contoso knowledge base, but what if employees want to receive a document via email or submit a request to their team? In this challenge, you'll create two Power Automate flows that enable your copilot to take actions beyond just answering questions.
 
-In this challenge, you'll create one custom topic with an Adaptive Card for knowledge requests, plus four department-specific topics using AI generation to handle the most frequent employee inquiries across HR, Finance, IT, and Procurement.
+These flows will be created first so they're ready to use when you build conversational topics in Challenge 4.
 
 ## Challenge Objectives
-- Update the Conversation Start topic with a welcoming message
-- Create a custom Knowledge Request Submission topic using Adaptive Cards
-- Use generative AI to create 4 department topics:
-  - HR - Leave Policy Assistance
-  - Finance - Travel Reimbursement
-  - IT - Software Access Requests
-  - Procurement - Purchase Requests
-- Test each AI-generated topic thoroughly
-- Verify topics use knowledge sources effectively
+- Create a Power Automate flow to email documents to employees
+- Create a Power Automate flow to send requests to Microsoft Teams
+- Test both flows to ensure they work correctly
+- Prepare flows for integration with copilot topics in the next challenge
 
 ## Steps to Complete
 
-### Step 1: Update Conversation Start Topic
+### Step 1: Access Agent Flows in Copilot Studio
 
 - In **Microsoft Copilot Studio**, ensure your **Internal Knowledge Navigator** agent is open.
 
-- Select **Topics **, select **All **, then select **Conversation Start **.
+- In the left navigation pane, select **Flows** (or **Agent flows**).
 
-- Keep the first sentence in the message box and update the message by entering the following text ****. Then select **Save **:
+- You will see the **Agent flows** page with options to create new flows.
+
+### Step 2: Create Flow 1 - Email Document to Employee
+
+- On the **Agent flows** page, click **+ New agent flow** button.
+
+- In the text box that appears, describe what the flow should do:
 
    ```
-   I'm here to help you find information about company policies and procedures across HR, Finance, IT, and Procurement departments.
+   Send an email to an employee with information about a requested document
+   ```
+
+- Click the arrow or press **Enter** to generate the flow.
+
+- Wait for Copilot Studio to generate the flow structure.
+
+- Once the flow designer opens, you'll see the flow canvas.
+
+- At the top, rename the flow to: **Email Document to Employee**
+
+- The flow should have the **Run a flow from Copilot** trigger already added.
+
+### Step 3: Add Input Parameters for Email Flow
+
+- Click on the **Run a flow from Copilot** trigger node to expand it.
+
+- Under **Inputs**, click **+ Add an input**.
+
+- Select **Text** as the input type.
+
+- Enter the following for the first parameter:
+   - **Input name:** EmployeeEmail
+   - Click outside or press Enter to save
+
+- Click **+ Add an input** again and add:
+   - **Input type:** Text
+   - **Input name:** DocumentName
+
+- Click **+ Add an input** one more time and add:
+   - **Input type:** Text  
+   - **Input name:** DocumentDescription
+
+- You should now have 3 input parameters defined.
+
+### Step 4: Add Email Action
+
+- Click **+ (plus icon)** below the trigger to add a new step.
+
+- In the search box, type **Send an email** and select **Send an email (V2)** from **Office 365 Outlook**.
+
+- If prompted to sign in, use your credentials: **<inject key="AzureAdUserEmail"></inject>**
+
+- Configure the email action:
+
+   - **To:** Click in the field and select **EmployeeEmail** from the dynamic content (the parameter you created).
    
-   You can ask me about leave policies, expense reimbursement, software access, purchase requests, and much more.
+   - **Subject:** Type: `Your Requested Document - ` and then select **DocumentName** from dynamic content.
    
-   I'll provide answers with citations to our official policy documents, and I can also help you with actions like emailing documents or creating support tickets.
+   - **Body:** Enter the following text and add dynamic content where indicated:
+
+   ```
+   Hello,
+
+   As requested, here is information about the document you requested.
+
+   Document: [Click and add DocumentName dynamic content]
+   Description: [Click and add DocumentDescription dynamic content]
+
+   You can access this document through the Contoso SharePoint site or contact your department for more details.
+
+   Best regards,
+   Internal Knowledge Navigator
+   ```
+
+- Click **Save** in the top-right corner to save the flow.
+
+- The flow is now saved and ready to use in your agent.
+
+### Step 5: Create Flow 2 - Send Request to Teams
+
+- Click the back arrow or navigate back to the **Flows** page in Copilot Studio.
+
+- Click **+ New agent flow** button again.
+
+- In the text box, describe the second flow:
+
+   ```
+   Send a request notification to Microsoft Teams with employee details
+   ```
+
+- Click the arrow or press **Enter** to generate the flow.
+
+- Once the flow designer opens, rename the flow to: **Send Request to Teams**
+
+- The **Run a flow from Copilot** trigger should already be present.
+
+### Step 6: Add Input Parameters for Teams Flow
+
+- Click on the **Run a flow from Copilot** trigger to expand it.
+
+- Click **+ Add an input** and select **Text**.
+
+- Add the following input parameters one by one:
+
+   1. **EmployeeName** (Text)
+   2. **EmployeeEmail** (Text)
+   3. **RequestType** (Text)
+   4. **RequestDetails** (Text)
+
+- You should now have 4 input parameters defined.
+
+### Step 7: Add Teams Action
+
+- Click **+ (plus icon)** below the trigger to add a new step.
+
+- In the search box, type **Post message** and select **Post message in a chat or channel** from **Microsoft Teams**.
+
+- If prompted to sign in, use your credentials: **<inject key="AzureAdUserEmail"></inject>**
+
+- Configure the Teams action:
+
+   - **Post as:** Flow bot
    
-   What would you like to know today?
-   ```
-
-### Step 2: Access Topics for Custom Topic Creation
-
-- Select **Topics ** again, choose **+ Add a topic **, and then select **From blank ** or **Add from description with Copilot ** for faster creation.
-
-### Step 3: Create Knowledge Request Topic (Using Adaptive Card)
-
-This topic will allow employees to submit knowledge requests that get tracked in SharePoint.
-
-- On the **Add from description with Copilot** page:
-   - **Name your topic:** `Knowledge Request Submission `
-   - **Create a topic to...:** `User wants to submit a knowledge request or ask about missing information `
-   - Then select **Create **
-
-- On the newly created topic, review the **Trigger node** and **Describe what topic does** box.
-
-- Update the message node with the below text **** and click **Save **:
+   - **Post in:** Chat with Flow bot
+   
+   - **Recipient:** Click in the field and enter **<inject key="AzureAdUserEmail"></inject>** (this will send to your own Teams account so you can see the request).
+   
+   - **Message:** Enter the following text and add dynamic content:
 
    ```
-   I'd be happy to help you submit a knowledge request. Please fill out the form below with details about the information you're looking for.
+   New Employee Request Submitted
+
+   Employee: [Add EmployeeName dynamic content]
+   Email: [Add EmployeeEmail dynamic content]
+   Request Type: [Add RequestType dynamic content]
+
+   Details:
+   [Add RequestDetails dynamic content]
+
+   Please review and respond to this request.
    ```
 
-- Delete any auto-generated question nodes by clicking **ellipsis (...) ** and selecting **Delete **.
+- Click **Save** to save the flow.
 
-- Continue deleting all question nodes and the final message node until you have only the **Trigger node** and one **message node**.
+- The flow is now saved and ready to use in your agent.
 
-### Step 4: Add Adaptive Card for Knowledge Request
+### Step 8: Verify Both Flows are Created
 
-- Select **Add node ** after the message node, then click **Ask with adaptive card **.
+- Navigate back to the **Flows** page by clicking the back arrow or selecting **Flows** from the left navigation.
 
-- Select **Ellipsis(...) ** of the Adaptive card node, then select **Properties **.
+- You should now see both agent flows listed:
+   - Email Document to Employee
+   - Send Request to Teams
 
-- Select **Edit adaptive card**.
+- Both flows should show as **On** or **Active** status.
 
-- Enter the following Adaptive Card Script into the **Card payload editor** after removing the existing script:
-
-   ```json
-   {
-     "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
-     "type": "AdaptiveCard",
-     "version": "1.5",
-     "body": [
-       {
-         "type": "TextBlock",
-         "text": "Knowledge Request Form",
-         "weight": "Bolder",
-         "size": "Medium"
-       },
-       {
-         "type": "Input.ChoiceSet",
-         "id": "department",
-         "label": "Department",
-         "choices": [
-           { "title": "HR - Human Resources", "value": "HR" },
-           { "title": "Finance", "value": "Finance" },
-           { "title": "IT - Information Technology", "value": "IT" },
-           { "title": "Procurement", "value": "Procurement" }
-         ]
-       },
-       {
-         "type": "Input.Text",
-         "id": "requestTitle",
-         "placeholder": "Brief title of your request",
-         "label": "Request Title"
-       },
-       {
-         "type": "Input.Text",
-         "id": "questionDetails",
-         "placeholder": "Describe what information you're looking for",
-         "label": "Question Details",
-         "isMultiline": true
-       },
-       {
-         "type": "Input.ChoiceSet",
-         "id": "urgency",
-         "label": "Urgency",
-         "choices": [
-           { "title": "High - Need answer today", "value": "High" },
-           { "title": "Medium - Need within a week", "value": "Medium" },
-           { "title": "Low - No rush", "value": "Low" }
-         ]
-       },
-       {
-         "type": "Input.Text",
-         "id": "employeeEmail",
-         "placeholder": "Your email address",
-         "label": "Your Email"
-       }
-     ],
-     "actions": [
-       {
-         "type": "Action.Submit",
-         "title": "Submit Request"
-       }
-     ]
-   }
-   ```
-
-- After entering the script, review the form design at the top. Select **Save ** and then click **Close **.
-
-- **Close** the **Adaptive card node properties** window.
-
-- Expand the **Output** section of the Adaptive card and make all variables **Global** by selecting each variable **** and choosing **Global ** from the properties window.
-
-- Select **Save**.
-
-### Step 5: Create Topic 1 - HR Leave Policy Assistance
-
-- Select **Topics**, choose **+ Add a topic**, and select **Create from description with Copilot**.
-
-- On the **Create from description with Copilot** page, enter the following:
-
-   - **Name your topic:** `HR - Leave Policy Assistance`
-   - **Create a topic to...:**
-
-   ```
-   Help employees understand HR policies including leave policies, onboarding procedures, and employee resources. Ask the employee what type of HR information they need and save it as a variable. Use generative answers to retrieve policy details from the Contoso HR knowledge sources (Contoso_HR_Handbook.docx, Contoso_HR_Onboarding_Checklist.docx, Employee-Travel-Reimbursement.xlsx) whenever possible. Provide information about leave accrual, approval processes, onboarding procedures, employee benefits, and contact information. After sharing the information, ask the employee whether they need additional assistance with HR policies. If the employee requests the full policy document by email or has questions requiring HR review, offer helpful next steps. This topic should act as a comprehensive self-service HR assistant that provides accurate information directly from Contoso's HR documents and guides employees through common HR-related questions.
-   ```
-
-- Click **Create** or **Generate**.
-
-- Wait for the AI to generate the topic (15-30 seconds).
-
-- Review the generated topic:
-
-   - **Trigger phrases:** Verify it includes phrases like:
-     - "Leave policy"
-     - "How do I request leave"
-     - "Annual leave"
-     - "Sick leave"
-     - "Time off procedures"
-
-- Review the conversation flow to ensure it:
-   - Asks what type of leave information is needed
-   - Uses generative answers from HR knowledge sources
-   - Offers additional assistance
-
-- Click **Save** to save the topic.
-
-### Step 6: Create Topic 2 - Finance Travel Reimbursement
-
-- Click **+ Add a topic** Ã¢â€ â€™ **Create from description with Copilot**.
-
-- Enter the following:
-
-   - **Name your topic:** `Finance - Travel Reimbursement`
-   - **Create a topic to...:**
-
-   ```
-   Assist employees with travel booking and reimbursement procedures. Ask the employee what stage of the travel process they are in and save it as a variable - whether they are planning a trip (pre-approval), have already traveled (reimbursement), or have general policy questions. Use generative answers to provide detailed information about travel booking procedures, approval requirements, reimbursement submission steps, receipt requirements, reimbursement timelines, and expense policies by referring to the Employee-Travel-Reimbursement.xlsx document and related Contoso business documents. For employees planning trips, provide pre-approval guidance and booking procedures. For employees seeking reimbursement, explain the submission process, required documentation, and expected timelines. After sharing the information, ask whether they need additional assistance or would like more details about the reimbursement process. This topic should serve as a comprehensive travel and expense assistant that uses Contoso's travel reimbursement data to answer all travel-related questions and guide employees through the complete travel expense cycle.
-   ```
-
-- Click **Create** or **Generate**.
-
-- Review the generated topic:
-
-   - **Trigger phrases:** Verify it includes phrases like:
-     - "Travel reimbursement"
-     - "Book business travel"
-     - "Submit travel expenses"
-     - "Travel expense policy"
-     - "Business trip reimbursement"
-
-- Review the conversation flow to ensure it:
-   - Asks about the travel stage (planning, reimbursement, or policy questions)
-   - Uses generative answers from Finance knowledge sources
-   - Offers to email the policy document
-
-- Click **Save**.
-
-### Step 7: Create Topic 3 - IT Software Access Requests
-
-- Click **+ Add a topic** Ã¢â€ â€™ **Create from description with Copilot**.
-
-- Enter the following:
-
-   - **Name your topic:** `IT - Software Access Requests`
-   - **Create a topic to...:**
-
-   ```
-   Help employees with IT governance, compliance, and support procedures. Ask the employee what type of IT assistance they need and save it as a variable, such as software access, support requests, security policies, or compliance questions. Use generative answers to provide detailed instructions by referring to the Contoso IT knowledge sources (Contoso-Corp-IT-Governance&Compliance-Policy.docx, Contos_Corp_SLA.docx, Data_Governance_Framework.docx, Contoso_Support_Policy.docx). Provide step-by-step guidance for IT procedures, SLA expectations, compliance requirements, and data governance policies. After sharing the instructions, ask the employee whether they understand the process or need help creating an IT support ticket. If the employee requests assistance with submitting the ticket, offer to help them initiate the ticket creation process (note: actual ticket creation will be implemented in Challenge 5). This topic should serve as a comprehensive IT assistant that uses Contoso's IT governance and support documents to guide employees through all IT-related procedures and provide clear next steps.
-   ```
-
-- Click **Create** or **Generate**.
-
-- Review the generated topic:
-
-   - **Trigger phrases:** Verify it includes phrases like:
-     - "Software access request"
-     - "Install software"
-     - "Need software license"
-     - "Application access"
-     - "Request software"
-
-- Review the conversation flow to ensure it:
-   - Asks about software type and specific application name
-   - Uses generative answers from IT knowledge sources
-   - Offers to help create an IT support ticket
-
-- Click **Save**.
-
-### Step 8: Create Topic 4 - Procurement Purchase Requests
-
-- Click **+ Add a topic** Ã¢â€ â€™ **Create from description with Copilot**.
-
-- Enter the following:
-
-   - **Name your topic:** `Procurement - Purchase Requests`
-   - **Create a topic to...:**
-
-   ```
-   Guide employees through the purchase order and approval workflow. Ask the employee what the approximate purchase amount is and save it as a variable to determine the appropriate approval path. Use generative answers to provide detailed information about purchase request procedures, approval requirements based on amount thresholds, purchase order processes, vendor selection guidelines, and procurement policies by referring to the Contoso_Procurement_Data_With_Policies.docx document and Procurement_Contracts_Repository_List.xlsx. For different purchase amounts, explain the specific approval levels required - manager approval for small purchases, department head approval for medium purchases, and finance review for large purchases. Also ask whether this is from an existing approved vendor and save that response, then provide guidance on vendor management and contract procedures if needed. After sharing the procurement process, provide a clear summary of next steps including required forms, approval chain, and submission procedures. This topic should serve as a comprehensive procurement assistant that uses Contoso's procurement policies and contract data to guide employees through all purchasing procedures based on their specific purchase amount and vendor status.
-   ```
-
-- Click **Create** or **Generate**.
-
-- Review the generated topic:
-
-   - **Trigger phrases:** Verify it includes phrases like:
-     - "Purchase request"
-     - "Buy equipment"
-     - "Procurement process"
-     - "Purchase order"
-     - "Make a purchase"
-
-- Review the conversation flow to ensure it:
-   - Asks about purchase amount and provides amount-based guidance
-   - Asks about vendor status (existing or new)
-   - Uses generative answers from Procurement knowledge sources
-   - Provides clear next steps for submission
-
-- Click **Save**.
-
-### Step 9: Test Each Generated Topic
-
-- Click **Test your copilot** button in the top-right corner.
-
-- **Test HR Leave Policy Assistance topic:**
-   - Type: "I need to take leave"
-   - Follow the AI-generated conversation flow
-   - Verify the copilot asks about leave type
-   - Check that generative answers provide relevant information from HR documents
-   - Confirm the copilot offers additional assistance
-
-- **Test Finance Travel Reimbursement topic:**
-   - Type: "How do I get travel reimbursement"
-   - Verify the copilot asks about travel stage (planning, reimbursement, or policy)
-   - Check that responses include relevant Finance policy information
-   - Test different branches to ensure proper routing
-
-- **Test IT Software Access Requests topic:**
-   - Type: "I need Microsoft Project access"
-   - Verify the copilot asks for software type and name
-   - Check that instructions are relevant from IT documents
-   - Confirm it offers to help create a support ticket
-
-- **Test Procurement Purchase Requests topic:**
-   - Type: "I need to make a purchase"
-   - Provide a purchase amount when asked
-   - Verify approval path information matches the amount
-   - Check vendor-related questions appear
-   - Confirm next steps are clear
-
-### Step 10: Refine Generated Topics (If Needed)
-
-- If any generated topic needs improvement:
-   - Open the topic in edit mode
-   - Review the AI-generated nodes
-   - Add more trigger phrases manually if needed
-   - Adjust any message wording for clarity
-   - Ensure generative answers are connected to correct knowledge sources
-
-- Click **Save** after each refinement.
-
-- Test again to verify improvements.
-
-### Step 11: Organize Topics
-
-- In the Topics list view, you should now see:
-   - System topics (Conversation Start, Fallback, etc.)
-   - Your Knowledge Request Submission topic (from Step 3)
-   - Four new department topics (HR, Finance, IT, Procurement)
-
-- Verify all topics are **enabled** and **active**.
-
-- You can organize topics by:
-   - Department (HR, Finance, IT, Procurement)
-   - Priority for triggering
-   - Status (enabled/disabled)
+   > **Note:** These flows are now ready to be used in your agent topics in Challenge 4.
 
 ## Success Criteria
-- Created 5 topics total:
-  - 1 Knowledge Request Submission topic (with Adaptive Card)
-  - 4 AI-generated department topics:
-    - HR - Leave Policy Assistance
-    - Finance - Travel Reimbursement
-    - IT - Software Access Requests
-    - Procurement - Purchase Requests
-- Each AI-generated topic created using **Create from description with Copilot**
-- Topics automatically include:
-  - Relevant trigger phrases (generated by AI)
-  - Dynamic conversation flows based on AI understanding
-  - Generative answers connected to appropriate knowledge sources
-  - Clear next steps and helpful guidance
-- All topics tested and responding correctly to user queries
-- Topics provide accurate information from uploaded department documents
-- Conversation flows feel natural and helpful
+- Created **Email Document to Employee** flow in Power Automate
+- Created **Send Request to Teams** flow in Power Automate
+- Both flows have the correct input parameters configured
+- Both flows are published and available in Copilot Studio Actions
+- Flows are ready to be used in conversational topics in Challenge 4
 
 ## Additional Resources
-- [Create and edit topics](https://learn.microsoft.com/microsoft-copilot-studio/authoring-create-edit-topics)  
-- [Use conditions in topics](https://learn.microsoft.com/microsoft-copilot-studio/authoring-using-conditions)  
-- [Ask questions in topics](https://learn.microsoft.com/microsoft-copilot-studio/authoring-ask-a-question)  
-- [Generative answers node](https://learn.microsoft.com/microsoft-copilot-studio/nlu-boost-node)
+- [Create flows for Microsoft Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/advanced-flow)
+- [Power Automate documentation](https://learn.microsoft.com/power-automate/)
+- [Office 365 Outlook connector](https://learn.microsoft.com/connectors/office365/)
+- [Microsoft Teams connector](https://learn.microsoft.com/connectors/teams/)
 
 ---
 
-Now, click **Next** to continue to **Challenge 04: Enable Citation Answers**.
+Now, click **Next** to continue to **Challenge 04: Design Topics and Integrate Flows**.
