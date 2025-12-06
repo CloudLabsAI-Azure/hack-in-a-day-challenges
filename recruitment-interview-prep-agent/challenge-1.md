@@ -7,6 +7,14 @@ This Copilot will later evaluate resumes against job descriptions, generate tech
 
 In this challenge, you will create the **HR Interview Copilot** in Copilot Studio, serving as the foundation for the rest of the lab.
 
+## Accessing the Datasets
+
+Please download and extract the datasets required for this challenge here:
+
+```
+https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/hr-datasets.zip
+```
+
 ## Challenge Objectives
 - Create a new Copilot in Copilot Studio.
 - Configure the Copilot name, description, and HR-focused system instructions.

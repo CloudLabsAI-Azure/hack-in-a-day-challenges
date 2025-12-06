@@ -5,6 +5,14 @@ Finance teams spend significant time manually reviewing financial reports to ide
 
 In this challenge, you will create the **Financial Risk Advisor Copilot** in Copilot Studio, serving as the foundation for the rest of the lab.
 
+## Accessing the Datasets
+
+Please download and extract the datasets required for this challenge here:
+
+```
+https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/fin-datasets.zip
+```
+
 ## Challenge Objectives
 - Create a new Copilot in Copilot Studio.
 - Configure the Copilot name, description, and industry context.
