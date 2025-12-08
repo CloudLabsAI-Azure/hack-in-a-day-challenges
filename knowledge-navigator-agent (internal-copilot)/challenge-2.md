@@ -1,212 +1,148 @@
-# Challenge 02: Upload Department Documents
+# Challenge 02: Connect SharePoint Knowledge Source
 
 ## Introduction
-Now that you've created your Internal Knowledge Navigator copilot, it's time to add the knowledge base that will power its responses. In this challenge, you'll upload policy and procedure documents from four key departments: HR, Finance, IT, and Procurement.
+Now that you've created your Internal Knowledge Navigator copilot and uploaded all Contoso company documents to SharePoint in Challenge 1, it's time to connect that SharePoint site to your copilot as a knowledge source. This will enable your copilot to search through all 40+ company documents and provide accurate answers to employee questions.
 
-By organizing knowledge sources by department, your copilot will be able to provide accurate, cited answers to employee questions across all major business functions.
+In this challenge, you'll connect the SharePoint site to Copilot Studio, verify the knowledge source is properly indexed, and test basic knowledge retrieval to ensure your copilot can answer questions using the Contoso documents.
 
 ## Challenge Objectives
-- Access and review the department knowledge base documents
-- Upload HR policies and procedures to the copilot
-- Upload Finance policies and procedures
-- Upload IT support and access procedures
-- Upload Procurement request procedures
-- Verify all knowledge sources are successfully indexed
+- Connect the SharePoint site as a knowledge source in Copilot Studio
+- Verify all documents are successfully indexed
+- Configure knowledge source settings
+- Test basic knowledge retrieval across different document types
+- Ensure the copilot responds using Contoso company documents
 
-## Accessing the Datasets
+## Prerequisites
 
-The datasets required for this challenge are provided in the attached folder:
-
-```
-c:\Users\GirishR\OneDrive - Spektra Systems LLC\Documents\GitHub\hack-in-a-day-challenges\knowledge-navigator-agent (internal-copilot)\datasets\
-```
-
-Alternatively, you can download them here - [Datasets](https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/knowledge-navigator-datasets.zip)
+Before starting this challenge, ensure you have:
+- Created the **Internal Knowledge Navigator** agent in Challenge 1
+- Created the SharePoint site `contoso-documents-<inject key="DeploymentID"></inject>` in Challenge 1
+- Uploaded all 40+ Contoso documents to the SharePoint site in Challenge 1
+- Saved the SharePoint site URL
 
 ## Steps to Complete
 
-### Step 1: Review Available Knowledge Documents
+### Step 1: Add SharePoint Knowledge Source
 
-1. Open **File Explorer** in your lab VM.
+- Open **Microsoft Copilot Studio** in your browser:
 
-2. Navigate to the datasets folder:
    ```
-   c:\Users\GirishR\OneDrive - Spektra Systems LLC\Documents\GitHub\hack-in-a-day-challenges\knowledge-navigator-agent (internal-copilot)\datasets\
+   https://copilotstudio.microsoft.com
    ```
 
-3. Review the available department documents:
-   
-   **HR Department (Human Resources)**
-   - `HR_Leave_Policy.pdf` - Annual leave, sick leave, and time-off procedures
-   - `HR_Onboarding_Guide.pdf` - New employee onboarding checklist and procedures
-   - `HR_Benefits_Guide.pdf` - Health insurance, retirement, and benefits information
-   
-   **Finance Department**
-   - `Finance_Expense_Policy.pdf` - Business expense guidelines and approval limits
-   - `Finance_Travel_Reimbursement.pdf` - Travel booking and reimbursement procedures
-   - `Finance_Budget_Request.pdf` - Department budget request process
-   
-   **IT Department**
-   - `IT_Software_Access.pdf` - Software installation and access request procedures
-   - `IT_Support_Guide.pdf` - Common IT issues and troubleshooting steps
-   - `IT_Security_Policy.pdf` - Password policies and security best practices
-   
-   **Procurement Department**
-   - `Procurement_Purchase_Request.pdf` - Purchase order and approval workflow
-   - `Procurement_Vendor_Management.pdf` - Vendor onboarding and management procedures
-   - `Procurement_Contract_Process.pdf` - Contract review and signature process
+- Ensure you're in the **ODL_User<inject key="DeploymentID"></inject>** environment (check the environment selector in the top-right).
 
-### Step 2: Add SharePoint Knowledge Source
+- Select your **Internal Knowledge Navigator** agent from the agents list.
 
-1. Return to the **Microsoft Copilot Studio** browser tab with your **Internal Knowledge Navigator** agent open.
+- On the **Start building your agent** page, scroll down and select **+ Add** to add knowledge sources.
 
-2. Scroll down on the **Start building your agent** page and select **+ Add (1)** to add knowledge sources.
+- Select **SharePoint** from the **Add Knowledge** window.
 
-3. Select **SharePoint** from the **Add Knowledge** window.
+- Enter the **SharePoint site URL** that you copied in Challenge 1:
+   ```
+   https://yourdomain.sharepoint.com/sites/contoso-documents-<inject key="DeploymentID"></inject>
+   ```
 
-4. Enter the **SharePoint site KnowledgeHub link (1)** that you copied in Challenge 1, then select **Add (2)**.
+   > **Tip:** If you didn't save the URL, go back to your SharePoint site in another tab and copy it from the address bar.
+
+- Select **Add**.
 
    > **Note:** If the site link shows **"This item was not found in your SharePoint or OneDrive files"**, this may occur due to temporary indexing delays. Select **Add anyway** to continue.
 
-5. Select **Add to agent** to add the SharePoint knowledge source.
+- Select **Add to agent** to add the SharePoint knowledge source.
 
-6. The SharePoint site will now be indexed for knowledge retrieval.
+- Wait for the confirmation message that the SharePoint site has been added.
 
-### Step 3: Access Knowledge Section for Document Upload
+   > **What's happening:** Copilot Studio is now connecting to your SharePoint site and will automatically index all 40+ documents you uploaded in Challenge 1.
 
-1. After adding SharePoint, navigate to **Knowledge** in the left navigation pane.
+### Step 2: Verify Knowledge Source Connection
 
-2. You should see the SharePoint site listed as a knowledge source.
+- After adding SharePoint, navigate to **Knowledge** in the left navigation pane.
 
-3. Now you'll add individual department documents as additional knowledge sources.
+- You should see the SharePoint site listed as a knowledge source with the name: `contoso-documents-<inject key="DeploymentID"></inject>`
 
-### Step 3: Upload HR Department Documents
+- The status should show as **Processing** or **Syncing** initially.
 
-1. Click **+ Add knowledge** or **+ Upload files** button.
+- Wait for the status to change to **Active** or **Ready** (this may take 3-10 minutes for 40+ documents).
 
-2. Select **Upload files** if prompted to choose a source type.
+   > **Note:** The SharePoint connector will automatically index all documents in the Documents library. You don't need to upload individual files.
 
-3. Click **Browse** or drag and drop files.
+- If the status shows **Failed** or **Error**, try the following:
+   - Verify the SharePoint site URL is correct
+   - Check that you have access to the SharePoint site
+   - Remove and re-add the knowledge source
 
-4. Navigate to the datasets folder and select all three HR documents:
-   - `HR_Leave_Policy.pdf`
-   - `HR_Onboarding_Guide.pdf`
-   - `HR_Benefits_Guide.pdf`
+### Step 3: Verify Knowledge Source Indexing
 
-5. Click **Open** to upload.
+- In the **Knowledge** section, click on your SharePoint knowledge source to view details.
 
-6. Wait for the files to upload and begin processing (you'll see a progress indicator).
+- You should see information about:
+   - **Source type:** SharePoint
+   - **Status:** Active (or Ready)
+   - **Documents indexed:** Number of documents found and indexed
+   - **Last synced:** Timestamp of last indexing
 
-7. Once uploaded, you should see these documents listed with a status of **Processing** or **Indexing**.
+- Verify that the document count is approximately 40+ documents.
 
-### Step 4: Upload Finance Department Documents
+   > **Note:** The SharePoint connector automatically indexes all files in the Documents library. You'll see a single SharePoint entry, not individual files listed.
 
-1. Click **+ Add knowledge** or **+ Upload files** again.
+- If indexing is still in progress, wait a few more minutes and refresh the page.
 
-2. Navigate to the datasets folder and select all three Finance documents:
-   - `Finance_Expense_Policy.pdf`
-   - `Finance_Travel_Reimbursement.pdf`
-   - `Finance_Budget_Request.pdf`
+### Step 4: Create a Teams Channel for Document Requests
 
-3. Click **Open** to upload.
+Now you'll create a Microsoft Teams channel where employee requests will be posted by the agent flows you'll create in later challenges.
 
-4. Wait for the upload to complete.
+- Open Microsoft Teams in your browser:
 
-### Step 5: Upload IT Department Documents
+   ```
+   https://teams.microsoft.com/v2/
+   ```
 
-1. Click **+ Add knowledge** or **+ Upload files** again.
+- Sign in with your Microsoft 365 credentials if prompted.
 
-2. Navigate to the datasets folder and select all three IT documents:
-   - `IT_Software_Access.pdf`
-   - `IT_Support_Guide.pdf`
-   - `IT_Security_Policy.pdf`
+- Once Teams loads, look for the **Teams** section in the left navigation.
 
-3. Click **Open** to upload.
+- Click the **...** (More options) next to any available team, then select **Add channel**.
 
-4. Wait for the upload to complete.
+   > **Note:** If you don't see any teams, you may need to join or create a team first. Use any available team in your tenant.
 
-### Step 6: Upload Procurement Department Documents
+- In the **Create a channel** dialog, enter the following:
 
-1. Click **+ Add knowledge** or **+ Upload files** again.
+   - **Channel name:** `Document Request`
+   
+   - **Description:** 
+     ```
+     This channel is used to receive and manage employee document requests and support inquiries submitted through the Internal Knowledge Navigator agent.
+     ```
 
-2. Navigate to the datasets folder and select all three Procurement documents:
-   - `Procurement_Purchase_Request.pdf`
-   - `Procurement_Vendor_Management.pdf`
-   - `Procurement_Contract_Process.pdf`
+   - **Channel type:** Select **Standard**
 
-3. Click **Open** to upload.
+   - **Layout:** Select **Threads**
 
-4. Wait for the upload to complete.
+- Click **Create** to create the channel.
 
-### Step 7: Verify Knowledge Source Indexing
+- Verify the **Document Request** channel appears in your Teams list.
 
-1. On the Knowledge sources page, verify that all 12 documents are listed.
+   > **Important:** Save the team name and channel name for later use when configuring agent flows in Challenge 3.
 
-2. Wait for all documents to show a status of **Active** or **Ready** (this may take 2-5 minutes total).
+### Step 5: Disable Web Search
 
-   > **Note:** If any document shows **Failed** status, try re-uploading that specific file.
+- Go back to **Microsoft Copilot Studio** in your browser.
 
-3. The documents should be organized or tagged by department for easier management.
+- Navigate to the **Knowledge** section in the left navigation pane.
 
-### Step 8: Configure Knowledge Source Settings
+- Scroll down to the **Web Search** area.
 
-1. Click on **Settings** (gear icon) in the top navigation.
+- Ensure that **Web Search** is set to **Disabled**.
 
-2. Navigate to **Generative AI** section.
-
-3. Under **Data sources**, verify that all 12 uploaded documents are listed and enabled (checkboxes should be checked).
-
-4. Set the following options:
-   - **Content moderation:** Medium
-   - **Allow the AI to use its own general knowledge:** Off (to ensure responses come only from uploaded documents)
-
-5. Click **Save**.
-
-### Step 9: Test Basic Knowledge Retrieval
-
-1. Click **Test your copilot** button in the top-right corner.
-
-2. Try the following department-specific questions:
-
-   **HR Questions:**
-   - "How many days of annual leave do I get?"
-   - "What do I need to do on my first day at work?"
-   - "What health benefits are available?"
-
-   **Finance Questions:**
-   - "What's the expense approval limit?"
-   - "How do I request travel reimbursement?"
-   - "What's the budget request process?"
-
-   **IT Questions:**
-   - "How do I request software access?"
-   - "My laptop is running slow, what should I do?"
-   - "What's the password policy?"
-
-   **Procurement Questions:**
-   - "How do I submit a purchase request?"
-   - "What's the vendor onboarding process?"
-   - "How do I get a contract reviewed?"
-
-3. Verify that the copilot responds with relevant information from the uploaded documents.
-
-4. If responses are too generic or say "I don't have information," wait a bit longer for indexing to complete.
-
-### Step 10: Review Response Quality
-
-1. When testing, pay attention to whether responses:
-   - Are accurate and relevant to the question
-   - Come from the correct department's documents
-   - Are clear and easy to understand
-
-2. Note: In Challenge 4, you'll enable citations so users can see exactly which document the answer came from.
+   > **Important:** This ensures the agent only uses information from your Contoso SharePoint documents and doesn't search the public web for answers.
 
 ## Success Criteria
-- Successfully uploaded all 12 department documents (3 per department)
-- All knowledge sources show **Active** or **Ready** status
-- Verified documents are indexed and enabled in settings
-- Test queries return relevant responses from the knowledge base
-- Copilot can answer questions across all four departments (HR, Finance, IT, Procurement)
+- SharePoint knowledge source is connected to Copilot Studio
+- SharePoint knowledge source shows **Active** or **Ready** status
+- Knowledge source has indexed 40+ Contoso documents
+- Microsoft Teams channel "Document Request" created successfully
+- Web Search is disabled for the agent
 
 ## Additional Resources
 - [Add knowledge sources to your copilot](https://learn.microsoft.com/microsoft-copilot-studio/nlu-boost-conversations)  
