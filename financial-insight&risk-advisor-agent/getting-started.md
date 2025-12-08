@@ -38,23 +38,21 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
    https://make.powerapps.com/
    ```
 
-1. On the **Sign into Microsoft** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
+1. On the **Sign into Microsoft** tab, enter the provided credentials and click **Next**:
 
-   - Email/Username: `<inject key="AzureAdUserEmail"></inject>`
+   - Email/Username: **<inject key="AzureAdUserEmail"></inject>**
 
      ![](./media/gs-lab3-g2.png)
 
-1. Now, enter the following password and click on **Sign in**.
+1. Enter your password and click **Sign in**:
 
-   - Password: `<inject key="AzureAdUserPassword"></inject>`
+   - Password: **<inject key="AzureAdUserPassword"></inject>**
 
      ![](./media/gs-lab3-g3.png)
 
-     > **Note:** If you see the Action Required dialog box, then select **Ask Later** option.
+     > **Note:** If you see the Action Required dialog box, select **Ask Later**.
      
 1. If you see the pop-up **Stay Signed in?**, click **No**.
-
-   ![](./media/gs-4.png)
 
 1. If the **Welcome to Power Apps** pop-up appears, leave the default country/region selection and click **Get started**.
 
@@ -75,6 +73,8 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
    ![](./media/ex1-travel-g2.png)
 
 1. When the upload screen appears, click **Cancel**.
+
+   ![](./media/zgr-gt3.png)
 
 1. Still in Power Platform, click the **environment (1)** name in the top bar , expand **Build apps with Dataverse (2)**, and select your newly created **ODL_User<inject key="Deployment ID" enableCopy="false"></inject> (3)** to switch context to the new environment you just provisioned.
 

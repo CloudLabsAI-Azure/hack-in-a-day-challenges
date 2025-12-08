@@ -80,6 +80,8 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 1. When the upload screen appears, click **Cancel** (you won't upload any files here).
 
+   ![](./media/zgr-gt3.png)
+
 1. Click the **environment (1)** name in the top bar, expand **Build apps with Dataverse (2)**, and select **ODL_User<inject key="Deployment ID" enableCopy="false"></inject> (3)** to switch to your new environment.
 
    ![](./media/ex1-travel-g5.png)

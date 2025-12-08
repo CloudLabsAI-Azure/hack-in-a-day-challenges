@@ -76,6 +76,8 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 1. When the upload screen appears, click **Cancel**.
 
+   ![](./media/zgr-gt3.png)
+
 1. Still in Power Platform, click the **environment (1)** name in the top bar , expand **Build apps with Dataverse (2)**, and select your newly created **ODL_User<inject key="Deployment ID" enableCopy="false"></inject> (3)** to switch context to the new environment you just provisioned.
 
    ![](./media/ex1-travel-g5.png)
