@@ -71,6 +71,7 @@ In this challenge, you will configure the environment variables, install depende
 
 
 ### **Congratulations — you have now completed the Visual Inspection Assistant application!**
+
 You have successfully combined **computer vision + generative AI** to automate manufacturing surface inspection.
 
 

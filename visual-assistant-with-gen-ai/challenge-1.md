@@ -21,20 +21,28 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 - Understand where custom image models are trained and hosted.
 
 ## Steps to Complete  
-1. In the Azure Portal, search for **Custom vision** in the search bar.  
-1. On the **Custom Vision** page, then click **Create**.  
+1. In the Azure Portal, search for **Custom vision** in the search bar.
+
+1. On the **Custom Vision** page, then click **Create**.
+
 1. Under **Basics**, configure:
+
    - **Create Options:** Select **both**  
    - **Subscription:** Use your sandbox subscription.  
    - **Resource Group:** challenge-rg-<inject key="DeploymentID"></inject>.  
    - **Region:** <inject key="Region"></inject>.  
+
 1. Scroll down to **Custom Vision Types** and ensure:  
    - **Create both Training and Prediction resources** is selected.  
+
 1. Specify resource name:  
    - **Training Resource Name:** **cv-train-mfg-<inject key="DeploymentID"></inject>** 
+
 1. Select **Pricing Tier**:  
    - *Free (F0)* for both training and prediction resources.
-1. Click **Review + Create**, then **Create**.  
+
+1. Click **Review + Create**, then **Create**. 
+ 
 1. Once deployment completes, open cvtrainmfg<inject key="DeploymentID"></inject>-Prediction:  
    - Go to **Keys and Endpoint**.  
    - Copy the following and paste it in a notepad for later challenges:  
@@ -49,6 +57,5 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 - [Azure Custom Vision Overview](https://learn.microsoft.com/azure/ai-services/custom-vision-service/overview)  
 - [Quickstart: Build a Classifier with Custom Vision](https://learn.microsoft.com/azure/ai-services/custom-vision-service/getting-started-build-a-classifier)
 
----
 
 Now, click **Next** to continue to **Challenge 02: Upload and Analyze Sample Manufacturing Images**.

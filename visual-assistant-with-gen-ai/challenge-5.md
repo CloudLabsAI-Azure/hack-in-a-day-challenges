@@ -41,6 +41,4 @@ To support this, you will deploy an **Azure Foundry resource** and configure a *
 - [Azure Foundry Overview](https://learn.microsoft.com/azure/)  
 - [Deploy Models in Foundry](https://learn.microsoft.com/azure/ai-services/openai/how-to/deploy-models)
 
----
-
-Now, click **Next** to continue to **Challenge 06: Generate Inspection Commentary Using GPT-4.1-Mini**.
+Now, click **Next** to continue to **Challenge 06: Configure the Application and Run the Visual Inspection Assistant**.

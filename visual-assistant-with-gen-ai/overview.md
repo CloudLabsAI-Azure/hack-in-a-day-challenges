@@ -1,9 +1,6 @@
-# Manufacturing – Visual Assistant with Generative AI (GenAI)
-*Build an AI-powered visual inspection assistant to detect defects, analyze images, and generate actionable insights using Azure AI Vision and Generative AI.*
+# Visual Assistant with Generative AI (GenAI)
 
-**Duration:** 6 hours  
-
-**Tags:** `Manufacturing`, `Generative AI`, `Computer Vision`, `Azure AI`, `Quality Control`
+**Overall Estimated Duration:** 6 hours  
 
 ## Overview
 In this lab, participants will learn how to combine **Azure AI Vision** with **Generative AI** to create a **Visual Assistant** capable of analyzing manufacturing images for defects or anomalies and generating natural-language explanations.  
@@ -16,7 +13,7 @@ Production lines in manufacturing frequently rely on visual inspections for defe
 
 ## Solution Overview
 
-Provide a beginner-friendly prototype where teams build a “visual assistant” that uses generative AI + computer-vision to assist shop-floor operators. The assistant ingests images or video frames from a manufacturing line (or sample dataset), analyses them for anomalies (defects, misalignment, missing parts), generates natural-language commentary (e.g., “Component X appears misaligned by approx 3mm; recommend repositioning”), and presents a simple UI dashboard for review and action. By combining vision models + generative AI commentary, the lab allows teams to show how manufacturing visual inspection and assistance can be automated and augmented.
+Provide a beginner-friendly prototype where teams build a “visual assistant” that uses generative AI + computer-vision to assist shop-floor operators. The assistant ingests images from a manufacturing line (sample dataset), analyses them for anomalies (defects, misalignment, missing parts), generates natural-language commentary (e.g., “Component X appears misaligned by approx 3mm; recommend repositioning”), and presents a simple UI dashboard for review and action. By combining vision models + generative AI commentary, the lab allows teams to show how manufacturing visual inspection and assistance can be automated and augmented.
 
 ## Learning Objectives
 

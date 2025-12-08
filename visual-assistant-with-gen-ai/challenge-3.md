@@ -35,6 +35,4 @@ In this challenge, you will upload images to the existing project, assign the co
 - [Upload and Tag Images in Custom Vision](https://learn.microsoft.com/azure/ai-services/custom-vision-service/getting-started-build-a-classifier#upload-and-tag-images)  
 - [Train and Evaluate Custom Vision Models](https://learn.microsoft.com/azure/ai-services/custom-vision-service/getting-started-build-a-classifier#train-the-classifier)
 
----
-
-Now, click **Next** to continue to **Challenge 04: Evaluate Model Performance and Improve Accuracy**.
+Now, click **Next** to continue to **Challenge 04: Publish and Test the Surface Defect Detection Model**.
