@@ -274,4 +274,4 @@ You have successfully built an **AI-powered Internal Knowledge Navigator Agent**
 - **Centralized Knowledge** - Single source of truth for company information
 - **Enhanced Productivity** - Less time searching for documents and policies
 
-Great work on completing this challenge! 🚀
+Great work on completing this challenge! 

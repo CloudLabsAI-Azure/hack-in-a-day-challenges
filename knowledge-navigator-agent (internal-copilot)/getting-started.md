@@ -1,6 +1,6 @@
-## Getting Started with Challenge
+## Getting Started with Your Lab
 
-Welcome to Hack in a Day: Knowledge Navigator Agent (Internal Copilot) challenge! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
+Welcome to Hack in a Day: Knowledge Navigator Agent (Internal Copilot)! We've prepared a complete environment with 40+ Contoso company documents ready for you to build an AI-powered knowledge assistant. Let's begin by setting up your workspace.
 
 ### Accessing Your Challenge Environment
 
@@ -26,31 +26,33 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 ![](./media/gs-leave-4.png)
 
-## Let's Get Started with Copilot Studio and Microsoft 365
+## Let's Get Started with Your Environment Setup
+
+### Step 1: Sign In to Power Apps and Create Your Environment
 
 1. In the JumpVM, click on **Microsoft Edge** browser which is created on desktop.
 
    ![](./media/zgr-gt.png)
 
-1. Open a new browser tab and navigate to the Power Apps portal using the link below:
+1. Open a new browser tab and navigate to the Power Apps portal:
 
    ```
    https://make.powerapps.com/
    ```
 
-1. On the **Sign into Microsoft** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
+1. On the **Sign into Microsoft** tab, enter the provided credentials and click **Next**:
 
    - Email/Username: `<inject key="AzureAdUserEmail"></inject>`
 
      ![](./media/gs-lab3-g2.png)
 
-1. Now, enter the following password and click on **Sign in**.
+1. Enter your password and click **Sign in**:
 
    - Password: `<inject key="AzureAdUserPassword"></inject>`
 
      ![](./media/gs-lab3-g3.png)
 
-     > **Note:** If you see the Action Required dialog box, then select **Ask Later** option.
+     > **Note:** If you see the Action Required dialog box, select **Ask Later**.
      
 1. If you see the pop-up **Stay Signed in?**, click **No**.
 
@@ -60,23 +62,25 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/gs-travel-g1.png)
 
-1. You have now successfully logged in to the Power Apps portal. Keep the portal open, as you will be using it later in the lab.
+1. You're now in the Power Apps portal. Keep it open as you'll use it throughout the lab.
 
    ![](./media/gs-5.png)
 
-1. Inside the **Power Apps** portal, select **Tables (1)** from the left navigation menu and click **Create with Excel or .CSV file (2)** to begin the environment setup.
+### Step 2: Provision Your Copilot Studio Environment
+
+1. Inside the **Power Apps** portal, select **Tables (1)** from the left navigation menu and click **Create with Excel or .CSV file (2)**.
 
    ![](./media/ex1-travel-g1.png)
 
-   > **Environment Foundation:** This step creates the foundational environment that will support your agent with company knowledge sources from the documents folder.
+   > **Important:** This creates the foundational Dataverse environment that will support your agent with SharePoint knowledge sources and agent flows.
 
-1. In the **Create in new environment?** dialog, click **Create** to provision a environment.
+1. In the **Create in new environment?** dialog, click **Create** to provision your environment.
 
    ![](./media/ex1-travel-g2.png)
 
-1. When the upload screen appears, click **Cancel**.
+1. When the upload screen appears, click **Cancel** (you won't upload any files here).
 
-1. Still in Power Platform, click the **environment (1)** name in the top bar , expand **Build apps with Dataverse (2)**, and select your newly created **ODL_User<inject key="Deployment ID" enableCopy="false"></inject> (3)** to switch context to the new environment you just provisioned.
+1. Click the **environment (1)** name in the top bar, expand **Build apps with Dataverse (2)**, and select **ODL_User<inject key="Deployment ID" enableCopy="false"></inject> (3)** to switch to your new environment.
 
    ![](./media/ex1-travel-g5.png)
 
@@ -125,6 +129,41 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
       ![](./media/cor2-gs-g7.png)
 
 1. You are now ready to start building your **Knowledge Navigator Agent**.
+
+### Step 4: Verify Document Folder Access
+
+1. Before starting the challenges, verify you have access to the Contoso documents folder.
+
+1. Open **File Explorer** and navigate to:
+
+   ```
+   c:\Users\GirishR\OneDrive - Spektra Systems LLC\Documents\GitHub\hack-in-a-day-challenges\knowledge-navigator-agent (internal-copilot)\documents\
+   ```
+
+1. You should see 40+ company documents including:
+   - Contoso_HR_Handbook.docx
+   - Contoso_Procurement_Data_With_Policies.docx
+   - Contoso-Corp-IT-Governance&Compliance-Policy.docx
+   - Employee-Travel-Reimbursement.xlsx
+   - And many more business documents
+
+1. Keep this folder path accessible—you'll upload these documents to SharePoint in Challenge 1.
+
+---
+
+## You're Ready to Begin!
+
+Your environment is now fully configured with:
+- ✅ Power Apps portal access
+- ✅ Copilot Studio environment provisioned
+- ✅ Correct environment selected (ODL_User<inject key="Deployment ID" enableCopy="false"></inject>'s Environment)
+- ✅ 40+ Contoso documents ready for upload
+
+**What You'll Build:**
+- Agent with SharePoint knowledge source (40+ documents)
+- 2 Agent Flows (Email Document, Send Request to Teams)
+- 4 AI-Generated Topics (DocumentSearch, EmailDocument, SubmitRequest, NewEmployeeOnboarding)
+- Deployment to Microsoft Teams
 
 Now, click on the **Next** from lower right corner to move on next page.
 
