@@ -2,6 +2,10 @@
 
 Welcome to the Customer Care Copilot Hack in a Day! Today, you'll explore the power of AI-driven customer service by building an intelligent copilot that handles customer inquiries, complaints, and service requests automatically. Through this hands-on experience, you'll learn how to design a conversational AI system using Microsoft Copilot Studio that integrates with Freshdesk for automated ticket creation.
 
+## Scenario
+
+Contoso is experiencing a dramatic increase in customer inquiries across email, chat, and social channels, mainly around order tracking, delayed deliveries, product returns, and service complaints. Support agents are overwhelmed by repeated questions, causing longer wait times and reduced customer satisfaction. To improve responsiveness and reduce manual workload, the company has decided to build a Customer Care Copilot that can assist customers conversationally, collect required details, and automatically create support tickets in Freshdesk when escalation is required. This solution ensures fast, consistent, and proactive customer service without overloading support teams.
+
 ## Introduction
 
 Your mission is to create a customer care copilot that transforms how organizations handle customer support. Leveraging Microsoft Copilot Studio's no-code platform and Freshdesk integration, you'll design an intelligent agent that can automatically assist customers with order tracking, product returns, delivery delays, and service complaints, escalating to human support when needed.

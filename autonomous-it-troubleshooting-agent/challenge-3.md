@@ -15,43 +15,33 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 ## Steps to Complete
 
-### Step 1: Navigate to Actions in Copilot Studio
+### Step 1: Navigate to Flows in Copilot Studio
 
-1. In **Copilot Studio**, with your **IT Support Copilot** open, click **Actions** (or **Flows**) in the left navigation.
+1. In Copilot Studio, from the left navigation pane, select **Flows → + New agent flow**
 
-2. Click **+ Add an action** at the top.
+1. You will be navigated to **Designer** pane, under the add a trigger pane, search for **When an agent calls the flow** and select it.
 
-3. Select **Create a new flow** (or **Create from blank**).
+1. Inside **When an agent calls the flow** node.
 
-4. This will open the flow designer.
-
-### Step 2: Configure Flow Trigger
-
-1. The flow will start with a trigger node: **When an agent calls the flow** (or **Power Virtual Agents**).
-
-2. Click on the trigger node to expand it.
-
-3. You'll now add input parameters that topics will pass to this flow.
-
-### Step 3: Add Input Parameters
+1. You'll now add input parameters that topics will pass to this flow.
 
 1. In the trigger node, click **+ Add an input**.
 
-2. Select **Text** as the datatype.
+1. Select **Text** as the datatype.
 
-3. Provide `Subject` as the **Input name**.
+1. Provide `Subject` as the **Input name**.
 
-4. Add one more input:
+1. Add one more input:
 
    **Input 2:**
    - Type: **Text**
    - Name: `Description`
 
-5. Your trigger should now have 2 text input parameters.
+1. Your trigger should now have 2 text input parameters.
 
    > **Note:** These are reference variables. Topics will pass actual values when calling this flow. Email, Priority, and Status will be preset in the flow.
 
-### Step 4: Add Freshdesk Connector
+### Step 2: Add Freshdesk Connector
 
 1. Below the trigger node, click **+ New step** (or **+**).
 
@@ -61,7 +51,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 4. Select the action **Create a ticket**.
 
-### Step 5: Configure Freshdesk Connection
+### Step 3: Configure Freshdesk Connection
 
 1. In the **Create a ticket** action pane, you'll be prompted to create a new connection.
 
@@ -77,7 +67,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 5. Wait for the connection to be validated.
 
-### Step 6: Map Flow Inputs to Freshdesk Fields
+### Step 4: Map Flow Inputs to Freshdesk Fields
 
 1. Once the connection is created, configure the **Create a ticket** action fields:
 
@@ -92,7 +82,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
    - Select **Description** variable
 
 4. **Email** parameter:
-   - Enter your email address: `<inject key="AzureAdUserEmail"></inject>`
+   - Enter your email address: **<inject key="AzureAdUserEmail"></inject>**
 
 5. **Priority** parameter:
    - Select **Medium** from the dropdown
@@ -102,7 +92,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 7. Leave other optional fields blank.
 
-### Step 7: Add Return Values to Agent
+### Step 5: Add Return Values to Agent
 
 1. Below the **Create a ticket** action, click **+ New step**.
 
@@ -119,7 +109,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 6. Optionally, you can add another output for Ticket ID if Freshdesk returns it in the response.
 
-### Step 8: Save the Flow
+### Step 6: Save the Flow
 
 1. Click **Save** in the top-right corner of the flow designer.
 
@@ -127,7 +117,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 3. Wait for the flow to save successfully.
 
-### Step 9: Test the Flow Independently
+### Step 7: Test the Flow Independently
 
 1. Click **Test** in the top-right corner of the flow designer.
 
@@ -145,31 +135,26 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 7. You should see a green checkmark on each action.
 
-### Step 10: Verify Ticket in Freshdesk
+### Step 8: Verify Ticket in Freshdesk
 
 1. Open a new tab and navigate to your **Freshdesk portal**:
-   ```
-   https://your-account.freshdesk.com
-   ```
 
-2. Sign in if prompted.
+1. Click on **Tickets** in the left navigation.
 
-3. Click on **Tickets** in the left navigation.
-
-4. You should see a new ticket with:
+1. You should see a new ticket with:
    - **Subject:** Test Ticket - Flow Validation
    - **Description:** Testing the Freshdesk flow before connecting to topics
    - **Priority:** Medium
    - **Status:** Open
    - **Requester:** Your email address
 
-5. Click on the ticket to view full details.
+1. Click on the ticket to view full details.
 
-6. Verify all information is correctly populated.
+1. Verify all information is correctly populated.
 
-7. If the ticket appears correctly, your flow is working!
+1. If the ticket appears correctly, your flow is working!
 
-### Step 11: Publish the Flow
+### Step 9: Publish the Flow
 
 1. Go back to the flow designer in Copilot Studio.
 
@@ -181,9 +166,9 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 5. Click **Go back to agent** to return to Copilot Studio.
 
-### Step 12: Rename the Flow
+### Step 10: Rename the Flow
 
-1. In Copilot Studio, click **Actions** in the left navigation.
+1. In Copilot Studio, click **Flows** in the left navigation.
 
 2. Find your newly published flow in the list.
 
@@ -204,7 +189,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 9. Click **Go back to agent** to return to Copilot Studio.
 
-### Step 14: Verify Flow is Available in Actions
+### Step 11: Verify Flow is Available in Actions
 
 1. In Copilot Studio, go back to **Actions** in the left navigation.
 

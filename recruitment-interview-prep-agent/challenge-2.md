@@ -34,4 +34,4 @@ In this challenge, you will upload **Job Description PDFs and Resume PDFs** to t
 - https://learn.microsoft.com/microsoft-copilot-studio/knowledge
 - https://learn.microsoft.com/microsoft-copilot-studio/knowledge#supported-file-formats
 
-Click **Next** to continue to **Challenge 03: Build Interview Topics (Question Generation & Resume Evaluation)**.
+Click **Next** to continue to **Challenge 03: Build Interview Topics**.

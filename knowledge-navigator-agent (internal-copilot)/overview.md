@@ -2,6 +2,10 @@
 
 Welcome to the Knowledge Navigator Agent (Internal Copilot) Hack in a Day! Today, you'll learn how to build an AI-powered internal knowledge assistant that helps employees search and access 40+ Contoso company documents across multiple departments. Through this hands-on experience, you'll create an agent with conversational topics, agent flows, and deploy it to Microsoft Teams.
 
+## Scenario
+
+As Contoso continues to grow, employees are finding it increasingly difficult to locate information spread across multiple departments such as HR, Finance, IT, Procurement, Sales, and Operations. Common questions from “Where can I find the expense reimbursement policy?” to “What is the process to request new hardware?”, generate thousands of internal support emails every month. To eliminate knowledge silos and reduce dependency on manual help, the company decides to build a Knowledge Navigator Agent that can instantly search internal documents, answer employee questions, and share the right files or send requests to Teams channels. The goal is to streamline knowledge access and boost productivity across the organization.
+
 ## Introduction
 
 Your mission is to build a **Knowledge Navigator Agent** that helps employees quickly find information from Contoso's comprehensive document library including HR, Finance, IT, Procurement, Sales, Support, and Operations documents. Using Microsoft Copilot Studio's no-code platform, you'll create a conversational AI assistant that searches through company policies and procedures, provides accurate answers from the knowledge base, and can trigger automated actions.

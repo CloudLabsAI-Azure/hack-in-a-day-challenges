@@ -34,4 +34,4 @@ In this challenge, you will upload **quarterly finance PDFs, cash flow reports, 
 - [Use Knowledge Sources in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/knowledge)
 - [Supported Document Formats](https://learn.microsoft.com/microsoft-copilot-studio/knowledge#supported-file-formats)
 
-Click **Next** to continue to **Challenge 03: Build Financial Analysis Topics (Revenue Trends, Cash Flow Health)**.
+Click **Next** to continue to **Challenge 03: Build Financial Analysis Topics**.

@@ -46,3 +46,7 @@ Once published, you will add the Copilot to Teams and test the full end-to-end e
 ## Additional Resources
 - https://learn.microsoft.com/microsoft-copilot-studio/channels-teams
 - https://learn.microsoft.com/microsoft-teams/platform/apps-in-teams-overview
+
+## Congratulations!
+
+You have successfully built an **Financial Insight & Risk Advisor Agent** using Microsoft Copilot Studio.

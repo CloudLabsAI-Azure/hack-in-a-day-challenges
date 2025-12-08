@@ -48,4 +48,6 @@ Once published, you will add the Copilot to Teams and test the complete hiring w
 - https://learn.microsoft.com/microsoft-teams/platform/apps-in-teams-overview
 
 
-Congratulations — you have successfully built and deployed the HR Interview Copilot to Microsoft Teams!
+## Congratulations!
+
+you have successfully built and deployed the HR Interview Copilot to Microsoft Teams!

@@ -120,3 +120,4 @@ This makes the agent conversational and context-aware.
 - https://learn.microsoft.com/microsoft-copilot-studio/topics  
 - https://learn.microsoft.com/microsoft-copilot-studio/knowledge
 
+Click **Next** to continue to **Challenge 04: Configure Email Escalation Flow and Integrate it With the Copilot**.
