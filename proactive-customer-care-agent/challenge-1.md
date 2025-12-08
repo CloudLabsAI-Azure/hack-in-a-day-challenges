@@ -13,10 +13,10 @@ In this challenge, you will create an AI-powered Customer Care Copilot using Mic
 
 ## Accessing the Datasets
 
-Please download and extract the datasets required for this challenge here - [Datasets](https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/c1-datasets.zip)
+Please download and extract the datasets required for this challenge here - [Datasets](https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/proactive-dataset.zip)
 
    ```
-   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/c1-datasets.zip/
+   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/proactive-dataset.zip
    ```
 
 ## Steps to Complete
@@ -43,93 +43,57 @@ Please download and extract the datasets required for this challenge here - [Dat
 
 ### Step 2: Create a New Copilot
 
-1. On the Copilot Studio home page, click **+ Create** in the left navigation pane.
+1. On the Copilot Studio pane, from left menu select **Create** and then click on **+New Agent** option to create a new agent.
 
-2. Select **New copilot** from the options.
+2. If any error shows up like `There was a problem creating your agent.`, then please click on **Create a blank agent**.
 
-3. In the creation dialog, choose **Skip to configure** or **Create from blank** to manually configure.
+3. On the overview pane of the agent, click on **edit** inside Details card to edit agent's name and description.
 
-### Step 3: Configure Basic Copilot Settings
+4. Configure the Copilot details as below:
 
-1. In the copilot configuration screen, provide the following details:
    - **Name:** `Customer Care Copilot`
+
    - **Description:** `AI-powered assistant for customer service automation including order tracking, complaint management, service inquiries, and product support`
-   - **Language:** English
-   - **Environment:** Select the **odl_user_<inject key="DeploymentID"></inject>**.
 
-2. Click **Create** to initialize your copilot.
+5. Click on save.
 
-3. Wait for the copilot to be created (this may take 30-60 seconds).
+6. Once done, scroll down and add below **instructions** by clicking on **edit** inside Instruction card.
 
-### Step 4: Customize Copilot Icon and Identity
+     ```
+     - You are a Customer Care Copilot designed to help customers with order tracking, product returns, delivery delays, and service complaints.
+     - Handle inquiries related to order status, return policies, delivery issues, and service quality concerns.
+     - When answering questions:
+       - Provide clear, helpful guidance to resolve customer issues quickly
+       - Use friendly, professional language when explaining solutions
+       - Ask clarifying questions to understand the issue better before providing solutions
+     - For order tracking requests:
+       - Ask for the order number
+       - Provide tracking information and delivery status
+       - If tracking issues persist, offer to create a support ticket with Freshdesk
+     - For product return requests:
+       - Ask for order number and return reason
+       - Provide return policy information and instructions
+       - If customer needs assistance with processing, escalate to Freshdesk ticket
+     - For delivery delay issues:
+       - Ask for order number and details about the delay
+       - Provide information about common delays and resolution steps
+       - If issue is not resolved, offer to create a priority support ticket
+     - For service quality complaints:
+       - Listen empathetically and ask for details about the complaint
+       - Offer immediate solutions when appropriate
+       - If customer is not satisfied, escalate to Freshdesk ticket for management review
+     - Always be professional, empathetic, and helpful
+     - When creating tickets, generate clear subject lines and detailed descriptions with all relevant information including order numbers
+     ```
 
-1. Once the copilot is created, you'll see the authoring canvas.
-
-2. Click on **Settings** (gear icon) in the top-right corner.
-
-3. Navigate to **Details** section.
-
-4. Under **Icon** or **Avatar**, select an appropriate icon for customer service (e.g., support, chat, or service icon).
-
-5. Click **Save** to apply changes.
-
-### Step 5: Upload Knowledge Base
-
-1. In the left navigation pane, click on **Knowledge** (or **Generative AI** section).
-
-2. Click **+ Add knowledge** or **Upload**.
-
-3. Select **Upload files**.
-
-4. Navigate to and select the knowledge base files from:
-   ```
-   c:\Users\GirishR\OneDrive - Spektra Systems LLC\Documents\GitHub\hack-in-a-day-challenges\proactive-customer-care-agent\datasets\
-   ```
-
-5. Upload all four PDF files:
-   - customer-care-ecommerce.pdf
-   - customer-care-food-delivery.pdf
-   - customer-care-retail.pdf
-   - customer-care-telecom.pdf
-
-6. Click **Open** to upload.
-
-7. Wait for the files to be processed and indexed (this may take 2-3 minutes).
-
-8. Verify all knowledge sources appear in your list with status **Active** or **Ready**.
-
-### Step 6: Configure Generative AI Settings
-
-1. In the **Settings** → **Generative AI** section, ensure the following are enabled:
-   - **Generative answers**: On
-   - **Content moderation**: Medium
-   - **Classic fallback**: On (for graceful degradation)
-
-2. Under **Data sources**, verify that all four PDF files are listed and enabled.
-
-3. Click **Save**.
-
-### Step 7: Test Basic Knowledge Retrieval
-
-1. Click **Test your copilot** button (usually in the top-right or bottom-right corner).
-
-2. In the test pane, try these questions:
-   - "How do I track my order?"
-   - "I want to return a product"
-   - "My delivery is delayed"
-   - "I need to speak with customer service"
-
-3. Verify that the copilot responds with relevant information from the knowledge base.
-
-4. If responses are generic or unhelpful, wait a bit longer for indexing to complete and test again.
+7. Click on save.
 
 ## Success Criteria
 - Successfully signed in to Microsoft Copilot Studio
-- Created a new copilot named **Customer Care Copilot**
-- Configured copilot with appropriate description and icon
-- Uploaded all four knowledge base files as sources
-- Verified knowledge bases are active and indexed
-- Test queries return relevant responses from the knowledge base
+- Created a new agent named **Customer Care Copilot**
+- Configured agent with appropriate description and instructions for customer service scenarios
+- Agent instructions configured with proper customer service behavior guidelines
+- Copilot ready for Freshdesk integration in next challenges
 
 ## Additional Resources
 - [Microsoft Copilot Studio Overview](https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-what-is-copilot-studio)

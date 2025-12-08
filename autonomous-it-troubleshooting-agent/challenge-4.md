@@ -3,7 +3,7 @@
 ## Introduction
 Instead of manually building conversation flows from scratch, Microsoft Copilot Studio allows you to create topics using generative AI. Simply describe what you want the topic to do, and AI will generate the conversation flow, trigger phrases, and responses automatically. You'll then connect these topics to your Freshdesk flow for ticket escalation.
 
-In this challenge, you will create 3 essential IT helpdesk topics using generative AI: Credential Reset Support, VPN Connectivity Support, and Hardware Support Assistant. Each topic will call your published Freshdesk flow when escalation is needed.
+In this challenge, you will create 3 essential IT support topics using generative AI: CredentialResetSupport, VPNConnectivitySupport, and HardwareSupportAssistant. Each topic will call your published Freshdesk flow when escalation is needed.
 
 ## Challenge Objectives
 - Use Copilot Studio's generative AI to create 3 topics
@@ -23,7 +23,7 @@ In this challenge, you will create 3 essential IT helpdesk topics using generati
 
 4. Select **Create from description with Copilot** (or similar option for AI-generated topics).
 
-### Step 2: Create Topic 1 - Credential Reset Support
+### Step 2: Create Topic 1 - CredentialResetSupport
 
 1. In the topic creation dialog, enter the following:
 
@@ -53,9 +53,14 @@ In this challenge, you will create 3 essential IT helpdesk topics using generati
    - Should ask if issue is resolved
    - Should offer escalation to ticket creation
 
-6. Click **Save** to keep this topic.
+6. **Important:** Check variable scope settings:
+   - Click on each variable in the topic
+   - If you see an error about "limited scope" or variables not being accessible
+   - Enable the checkbox for **"Can be used by other topics"** or **"Receive values from other topics"**
 
-### Step 3: Create Topic 2 - VPN Connectivity Support
+7. Click **Save** to keep this topic.
+
+### Step 3: Create Topic 2 - VPNConnectivitySupport
 
 1. Click **+ Add** → **Create from description with Copilot**.
 
@@ -87,9 +92,14 @@ In this challenge, you will create 3 essential IT helpdesk topics using generati
    - Should ask if issue is resolved
    - Should offer ticket creation with location in subject
 
-6. Click **Save**.
+6. **Important:** Check variable scope settings:
+   - Click on each variable in the topic
+   - If you see an error about "limited scope" or variables not being accessible
+   - Enable the checkbox for **"Can be used by other topics"** or **"Receive values from other topics"**
 
-### Step 4: Create Topic 3 - Hardware Support Assistant
+7. Click **Save**.
+
+### Step 4: Create Topic 3 - HardwareSupportAssistant
 
 1. Click **+ Add** → **Create from description with Copilot**.
 
@@ -121,7 +131,12 @@ In this challenge, you will create 3 essential IT helpdesk topics using generati
    - Should ask if issue is resolved
    - Should offer ticket creation with device type in subject
 
-6. Click **Save**.
+6. **Important:** Check variable scope settings:
+   - Click on each variable in the topic
+   - If you see an error about "limited scope" or variables not being accessible
+   - Enable the checkbox for **"Can be used by other topics"** or **"Receive values from other topics"**
+
+7. Click **Save**.
 
 ### Step 5: Review All Topics
 
@@ -142,57 +157,106 @@ Now connect each topic to your published **Freshdesk** flow. The AI-generated to
 
 2. Locate the point in the conversation where the user indicates the issue is NOT resolved (after troubleshooting).
 
-3. At that escalation point, add a new node:
-   - Click **+** → **Call an action** → Select **Freshdesk** flow.
+3. At that escalation point, you'll see a message node. Click the **three dots (...)** menu on the message node and select **Delete** to remove it.
 
-4. Map the flow inputs using the variables captured in the topic:
-   - **Subject:** `"Password Reset Assistance - " & Topic.Username`
-   - **Description:** `"User unable to reset password. Username: " & Topic.Username & ". Additional details: " & Topic.IssueReason`
+4. Click the **+** button below where the message was, then select **Add a tool**.
 
-   > **Note:** Variable names may differ based on AI generation. Use the actual variable names from your generated topic (e.g., `Topic.username`, `Topic.UserName`, etc.).
+5. In the **Add a tool** pane that opens on the right:
+   - Search for **Freshdesk** in the search box
+   - Select **Freshdesk** from the list (it should show as "Updated" with your flow description)
 
-5. After the flow action, add a **Message** node:
-   - Type: `"I've created a support ticket for your password reset request. Our IT team will contact you shortly."`
+6. The **Action** node will be added with your Freshdesk flow's input parameters.
 
-6. Save the topic.
+7. Configure the flow inputs by mapping the variables captured in the topic:
+   
+   - For **Subject** field:
+     - Click on the **Subject** input field
+     - Click the **{x}** icon to open variable selector
+     - Select the appropriate variable from your generated topic
+   
+   - For **Description** field:
+     - Click on the **Description** input field
+     - Click the **{x}** icon to open variable selector
+     - Select the relevant variables that capture the issue details
+
+   > **Note:** If your topic doesn't have all the required variables, you may need to add additional **Question** nodes in your topic to collect missing information before calling the flow.
+
+8. After configuring the flow inputs, click the **+** button below the Action node.
+
+9. Select **Send a message** to add a **Message** node.
+
+10. In the message field, type:
+    ```
+    I've created a support ticket for your password reset request. Our IT team will contact you shortly.
+    ```
+
+11. Click **Save** at the top to save the topic.
 
 #### For VPNConnectivitySupport Topic:
 
-1. Open **VPNConnectivitySupport** topic.
+1. Open **VPNConnectivitySupport** topic in the editor.
 
 2. Locate the point where the user indicates the issue is NOT resolved (after troubleshooting).
 
-3. Add **Call an action** node at the escalation point → Select **Freshdesk** flow.
+3. Delete any existing message node at the escalation point by clicking **three dots (...)** → **Delete**.
 
-4. Map inputs using the variables captured in the topic:
-   - **Subject:** `"Connectivity Issue - " & Topic.Location`
-   - **Description:** `"User experiencing connectivity problems. Location: " & Topic.Location & ". Error/Issue: " & Topic.ErrorMessage`
+4. Click the **+** button, then select **Add a tool**.
 
-   > **Note:** Use the actual variable names from your generated topic for location and error message.
+5. Search for and select **Freshdesk** from the tool list.
 
-5. Add a **Message** node:
-   - Type: `"I've created a support ticket for your connectivity issue. Our IT team will contact you shortly."`
+6. Configure the flow inputs:
+   
+   - For **Subject** field:
+     - Click the input field and then the **{x}** icon
+     - Select the appropriate variable from your topic
+   
+   - For **Description** field:
+     - Click the input field and then the **{x}** icon
+     - Select the relevant variables that capture the connectivity issue details
 
-6. Save the topic.
+   > **Note:** If your topic doesn't capture all necessary information, add **Question** nodes to collect missing details before calling the flow.
+
+7. Click **+** below the Action node and select **Send a message**.
+
+8. Type the message:
+   ```
+   I've created a support ticket for your connectivity issue. Our IT team will contact you shortly.
+   ```
+
+9. Click **Save** to save the topic.
 
 #### For HardwareSupportAssistant Topic:
 
-1. Open **HardwareSupportAssistant** topic.
+1. Open **HardwareSupportAssistant** topic in the editor.
 
 2. Locate the point where the user indicates the issue is NOT resolved (after troubleshooting).
 
-3. Add **Call an action** node → Select **Freshdesk** flow.
+3. Delete any existing message node at the escalation point by clicking **three dots (...)** → **Delete**.
 
-4. Map inputs using the variables captured in the topic:
-   - **Subject:** `"Hardware Issue - " & Topic.Device`
-   - **Description:** `"User experiencing hardware problems. Device: " & Topic.Device & ". Issue description: " & Topic.IssueDescription`
+4. Click the **+** button, then select **Add a tool**.
 
-   > **Note:** Use the actual variable names from your generated topic for device type and issue description.
+5. Search for and select **Freshdesk** from the tool list.
 
-5. Add a **Message** node:
-   - Type: `"I've created a support ticket for your hardware issue. Our IT team will contact you shortly."`
+6. Configure the flow inputs:
+   
+   - For **Subject** field:
+     - Click the input field and then the **{x}** icon
+     - Select the device type variable from your topic
+   
+   - For **Description** field:
+     - Click the input field and then the **{x}** icon
+     - Select the variables that describe the hardware problem
 
-6. Save the topic.
+   > **Note:** If your topic doesn't have the necessary variables, add **Question** nodes to gather the required information before calling the flow.
+
+7. Click **+** below the Action node and select **Send a message**.
+
+8. Type the message:
+   ```
+   I've created a support ticket for your hardware issue. Our IT team will contact you shortly.
+   ```
+
+9. Click **Save** to save the topic.
 
 ### Step 7: Test Topics with Flow Integration
 

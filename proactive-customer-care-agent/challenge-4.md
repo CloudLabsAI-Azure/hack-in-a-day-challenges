@@ -53,7 +53,12 @@ In this challenge, you will create 4 essential customer care topics using genera
    - Should ask if issue is resolved
    - Should offer escalation to ticket creation
 
-6. Click **Save** to keep this topic.
+6. **Important:** Check variable scope settings:
+   - Click on each variable in the topic
+   - If you see an error about "limited scope" or variables not being accessible
+   - Enable the checkbox for **"Can be used by other topics"** or **"Receive values from other topics"**
+
+7. Click **Save** to keep this topic.
 
 ### Step 3: Create Topic 2 - Product Return Processing
 
@@ -86,7 +91,12 @@ In this challenge, you will create 4 essential customer care topics using genera
    - Should ask if customer needs assistance
    - Should offer ticket creation with order number in subject
 
-6. Click **Save**.
+6. **Important:** Check variable scope settings:
+   - Click on each variable in the topic
+   - If you see an error about "limited scope" or variables not being accessible
+   - Enable the checkbox for **"Can be used by other topics"** or **"Receive values from other topics"**
+
+7. Click **Save**.
 
 ### Step 4: Create Topic 3 - Delivery Delay Management
 
@@ -118,7 +128,12 @@ In this challenge, you will create 4 essential customer care topics using genera
    - Should ask if issue is resolved
    - Should offer ticket creation with order number in subject
 
-6. Click **Save**.
+6. **Important:** Check variable scope settings:
+   - Click on each variable in the topic
+   - If you see an error about "limited scope" or variables not being accessible
+   - Enable the checkbox for **"Can be used by other topics"** or **"Receive values from other topics"**
+
+7. Click **Save**.
 
 ### Step 5: Create Topic 4 - Service Quality Complaint Handling
 
@@ -151,7 +166,12 @@ In this challenge, you will create 4 essential customer care topics using genera
    - Should ask if customer is satisfied
    - Should offer ticket creation for escalation
 
-6. Click **Save**.
+6. **Important:** Check variable scope settings:
+   - Click on each variable in the topic
+   - If you see an error about "limited scope" or variables not being accessible
+   - Enable the checkbox for **"Can be used by other topics"** or **"Receive values from other topics"**
+
+7. Click **Save**.
 
 ### Step 6: Review All Topics
 
@@ -167,63 +187,82 @@ In this challenge, you will create 4 essential customer care topics using genera
 
 Now connect each topic to your published **CustomerServiceFlow**. The AI-generated topics should already have the conversation flow with variables captured. You'll add the action to call the CustomerServiceFlow when escalation is needed.
 
-#### For OrderTrackingAssistance Topic:
+#### Connect OrderTrackingAssistance Topic to Flow:
 
 1. Open **OrderTrackingAssistance** topic in the editor.
 
-2. Locate the point in the conversation where the customer indicates they need assistance (after providing tracking information).
+2. Navigate through the topic flow and find the appropriate place where escalation to ticket creation should happen.
 
-3. At that escalation point, add a new node:
-   - Click **+** → **Call an action** → Select **CustomerServiceFlow** flow.
+3. Add the **CustomerServiceFlow** tool at that point:
+   - Click **+** to add a node
+   - Select **Add a tool**
+   - Search for and select **CustomerServiceFlow**
 
-4. Map the flow inputs using the variables captured in the topic:
-   - **Subject:** `"Order Tracking Request - " & Topic.OrderNumber`
-   - **Description:** `"Customer needs assistance with order tracking. Order Number: " & Topic.OrderNumber & ". Additional details: " & Topic.TrackingIssue`
+4. Map the flow inputs using the **{x}** icon:
+   - **Subject:** Select the appropriate variable from your topic
+   - **Description:** Select the relevant variables that capture the tracking issue details
 
-   > **Note:** Variable names may differ based on AI generation. Use the actual variable names from your generated topic (e.g., `Topic.ordernumber`, `Topic.OrderNum`, etc.).
+   > **Note:** If your topic doesn't have all the required variables, add **Question** nodes to collect missing information before calling the flow.
 
-5. After the flow action, add a **Message** node:
-   - Type: `"I've created a support ticket for your order tracking request. Our customer service team will contact you shortly with an update."`
+5. Add a confirmation message after the flow action and click **Save**.
 
-6. Save the topic.
+#### Connect ProductReturnProcessing Topic to Flow:
 
-#### For ProductReturnProcessing Topic:
+1. Open **ProductReturnProcessing** topic in the editor.
 
-1. Open **ProductReturnProcessing** topic.
+2. Navigate through the topic flow and find the appropriate place for ticket creation.
 
-2. Locate the point where the customer requests assistance with processing the return.
+3. Add the **CustomerServiceFlow** tool:
+   - Click **+** to add a node
+   - Select **Add a tool**
+   - Search for and select **CustomerServiceFlow**
 
-3. Add **Call an action** node at the escalation point → Select **CustomerServiceFlow**.
+4. Map the flow inputs using the **{x}** icon:
+   - **Subject:** Select the appropriate variable from your topic
+   - **Description:** Select the relevant variables about the return request
 
-4. Map inputs using the variables captured in the topic:
-   - **Subject:** `"Product Return Request - " & Topic.OrderNumber`
-   - **Description:** `"Customer requesting return assistance. Order Number: " & Topic.OrderNumber & ". Return Reason: " & Topic.ReturnReason`
+   > **Note:** If your topic doesn't capture all necessary information, add **Question** nodes to collect missing details before calling the flow.
 
-   > **Note:** Use the actual variable names from your generated topic.
+5. Add a confirmation message after the flow action and click **Save**.
 
-5. Add a **Message** node:
-   - Type: `"I've created a priority support ticket for your delivery issue. Our logistics team will investigate and contact you shortly."`
+#### For DeliveryDelayManagement Topic:
 
-6. Save the topic.
+1. Open **DeliveryDelayManagement** topic in the editor.
 
-#### For ServiceQualityComplaintHandling Topic:
+2. Locate the point where the customer indicates the issue is not resolved.
 
-1. Open **ServiceQualityComplaintHandling** topic.
+3. Delete any existing message node at the escalation point by clicking **three dots (...)** → **Delete**.
 
-2. Locate the point where the customer is not satisfied or requests escalation.
+4. Click the **+** button, then select **Add a tool**.
 
-3. Add **Call an action** node → Select **Customer Service Request** flow.
+5. Search for and select **CustomerServiceFlow** from the tool list.
 
-4. Map inputs using the variables captured in the topic:
-   - **Subject:** `"Service Quality Complaint - " & Topic.OrderNumber`
-   - **Description:** `"Customer complaint regarding service quality. Order Number: " & Topic.OrderNumber & ". Complaint Details: " & Topic.ComplaintDetails`
+6. Map the flow inputs using the **{x}** icon:
+   - **Subject:** Select the delivery-related variable from your topic
+   - **Description:** Select the variables that describe the delivery delay
 
-   > **Note:** Use the actual variable names from your generated topic. If no order number, use a generic identifier.
+   > **Note:** If your topic doesn't have the necessary variables, add **Question** nodes to gather the required information before calling the flow.
 
-5. Add a **Message** node:
-   - Type: `"I've escalated your complaint to our management team. A senior customer service representative will contact you shortly to address your concerns."`
+7. Add a confirmation message after the flow action and click **Save**.
 
-6. Save the topic.
+#### Connect ServiceQualityComplaintHandling Topic to Flow:
+
+1. Open **ServiceQualityComplaintHandling** topic in the editor.
+
+2. Navigate through the topic flow and find the escalation point.
+
+3. Add the **CustomerServiceFlow** tool:
+   - Click **+** to add a node
+   - Select **Add a tool**
+   - Search for and select **CustomerServiceFlow**
+
+4. Map the flow inputs using the **{x}** icon:
+   - **Subject:** Select the complaint category variable from your topic
+   - **Description:** Select the variables that capture the complaint details
+
+   > **Note:** If your topic doesn't have the necessary variables, add **Question** nodes to gather the required information before calling the flow.
+
+5. Add a confirmation message after the flow action and click **Save**.
 
 ### Step 8: Test Topics with Flow Integration
 
@@ -268,7 +307,7 @@ Now connect each topic to your published **CustomerServiceFlow**. The AI-generat
 - Created 4 topics using generative AI (OrderTrackingAssistance, ProductReturnProcessing, DeliveryDelayManagement, ServiceQualityComplaintHandling)
 - All topics have relevant trigger phrases configured
 - Topics capture customer input in variables (order numbers, issues, complaints, etc.)
-- Connected each topic to your Customer Service Request flow via "Call an action"
+- Connected each topic to your CustomerServiceFlow via "Call an action"
 - Mapped flow inputs (Subject and Description) correctly using topic variables
 - Test pane successfully creates tickets through topics with dynamic subject lines
 - Confirmation messages are displayed to customers

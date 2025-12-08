@@ -1,6 +1,6 @@
 ## Getting Started with Challenge
 
-Welcome to Hack in a Day: Build a Proactive Customer Care Agent challenge! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
+Welcome to Hack in a Day: Build a Customer Care Copilot challenge! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
 
 ### Accessing Your Challenge Environment
 
@@ -124,7 +124,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
       ![](./media/cor2-gs-g7.png)
 
-1. You are now ready to start building your **Proactive Customer Care Agent**.
+1. You are now ready to start building your **Customer Care Copilot** using Microsoft Copilot Studio! This copilot will help customers with order tracking, product returns, delivery delays, and service complaints, and will integrate with Freshdesk for automated ticket creation.
 
 Now, click on the **Next** from lower right corner to move on next page.
 
