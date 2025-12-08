@@ -92,7 +92,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
    - Select **Description** variable
 
 4. **Email** parameter:
-   - Enter your email address: `<inject key="AzureAdUserEmail"></inject>`
+   - Enter your email address: **<inject key="AzureAdUserEmail"></inject>**
 
 5. **Priority** parameter:
    - Select **Medium** from the dropdown

@@ -42,13 +42,13 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 1. On the **Sign into Microsoft** tab, enter the provided credentials and click **Next**:
 
-   - Email/Username: `<inject key="AzureAdUserEmail"></inject>`
+   - Email/Username: **<inject key="AzureAdUserEmail"></inject>**
 
      ![](./media/gs-lab3-g2.png)
 
 1. Enter your password and click **Sign in**:
 
-   - Password: `<inject key="AzureAdUserPassword"></inject>`
+   - Password: **<inject key="AzureAdUserPassword"></inject>**
 
      ![](./media/gs-lab3-g3.png)
 
