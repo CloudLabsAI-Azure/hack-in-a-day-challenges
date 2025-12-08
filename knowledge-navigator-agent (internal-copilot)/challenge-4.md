@@ -266,13 +266,15 @@ Open the **Test your agent** pane and test each topic.
 
 - Ensure all steps in the flows completed successfully.
 
+<validation step="09e05d19-df23-42fd-8688-4262e3dcdb95" />
+ 
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ## Success Criteria
-- Created 4 topics using generative AI:
-  - **DocumentSearch** - General document search using knowledge base
-  - **EmailDocument** - Connected to Email Document to Employee flow
-  - **SubmitRequest** - Connected to Send Request to Teams flow
-  - **NewEmployeeOnboarding** - New employee assistance using knowledge base
-- All topics have appropriate trigger phrases
+- Created topics using generative AI:
 - Flow-connected topics successfully call their respective agent flows
 - Topic variables correctly mapped to flow inputs
 - Test conversations trigger flows successfully
