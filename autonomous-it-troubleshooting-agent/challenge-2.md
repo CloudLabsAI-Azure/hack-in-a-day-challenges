@@ -44,8 +44,6 @@ In this challenge, you will activate your Freshdesk free trial, configure your a
    - **How many employees are there in your company?:** Select **1-10**
    - Check the box: **I'm trying customer service software for the first time**
 
-2. Click **Next**.
-
 ### Step 4: Activate Your Account via Email
 
 1. Open a new tab and navigate to **Outlook**:
@@ -110,34 +108,12 @@ In this challenge, you will activate your Freshdesk free trial, configure your a
    API Key: [Your API Key Here]
    ```
 
-### Step 9: Explore Freshdesk Dashboard
-
-1. Take a moment to explore the Freshdesk interface:
-   - **Tickets** - View and manage support tickets
-   - **Contacts** - Manage customer contacts
-   - **Reports** - View ticket analytics
-   - **Admin** - Configure settings and integrations
-
-2. Click on **Tickets** in the left navigation to see the tickets dashboard (it will be empty for now).
-
-3. Note the ticket structure:
-   - Subject
-   - Description
-   - Priority (Low, Medium, High, Urgent)
-   - Status (Open, Pending, Resolved, Closed)
-   - Type
-   - Source
-
-4. This structure will be used when creating tickets from Copilot Studio.
-
 ## Success Criteria
 - Freshdesk free trial successfully activated
 - Account verified via email activation
 - Profile settings accessed successfully
 - API Key retrieved and saved securely
 - Account URL copied and documented
-- Freshdesk dashboard explored and understood
-- Test ticket created manually (optional) to understand ticket structure  
 
 ## Additional Resources
 - [Freshdesk Documentation](https://support.freshdesk.com/)  

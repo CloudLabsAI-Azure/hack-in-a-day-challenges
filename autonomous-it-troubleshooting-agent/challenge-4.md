@@ -3,7 +3,7 @@
 ## Introduction
 Instead of manually building conversation flows from scratch, Microsoft Copilot Studio allows you to create topics using generative AI. Simply describe what you want the topic to do, and AI will generate the conversation flow, trigger phrases, and responses automatically. You'll then connect these topics to your Freshdesk flow for ticket escalation.
 
-In this challenge, you will create 3 essential IT helpdesk topics using generative AI: Credential Reset Support, VPN Connectivity Support, and Hardware Support Assistant. Each topic will call your published Freshdesk flow when escalation is needed.
+In this challenge, you will create 3 essential IT support topics using generative AI: CredentialResetSupport, VPNConnectivitySupport, and HardwareSupportAssistant. Each topic will call your published Freshdesk flow when escalation is needed.
 
 ## Challenge Objectives
 - Use Copilot Studio's generative AI to create 3 topics
@@ -23,7 +23,7 @@ In this challenge, you will create 3 essential IT helpdesk topics using generati
 
 4. Select **Create from description with Copilot** (or similar option for AI-generated topics).
 
-### Step 2: Create Topic 1 - Credential Reset Support
+### Step 2: Create Topic 1 - CredentialResetSupport
 
 1. In the topic creation dialog, enter the following:
 
@@ -55,7 +55,7 @@ In this challenge, you will create 3 essential IT helpdesk topics using generati
 
 6. Click **Save** to keep this topic.
 
-### Step 3: Create Topic 2 - VPN Connectivity Support
+### Step 3: Create Topic 2 - VPNConnectivitySupport
 
 1. Click **+ Add** → **Create from description with Copilot**.
 
@@ -89,7 +89,7 @@ In this challenge, you will create 3 essential IT helpdesk topics using generati
 
 6. Click **Save**.
 
-### Step 4: Create Topic 3 - Hardware Support Assistant
+### Step 4: Create Topic 3 - HardwareSupportAssistant
 
 1. Click **+ Add** → **Create from description with Copilot**.
 

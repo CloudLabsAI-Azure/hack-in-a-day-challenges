@@ -20,9 +20,9 @@ In this challenge, you will test all 3 topics comprehensively, verify Freshdesk 
 1. Open your **IT Support Copilot** in Copilot Studio.
 
 2. Ensure all 3 topics are **enabled**:
-   - Password Reset Support
-   - VPN Troubleshooting
-   - Slow Laptop Performance
+   - CredentialResetSupport
+   - VPNConnectivitySupport
+   - HardwareSupportAssistant
 
 3. Verify your **Freshdesk** flow is **published** (check in Actions list).
 
@@ -35,7 +35,7 @@ In this challenge, you will test all 3 topics comprehensively, verify Freshdesk 
 
 6. Keep both windows visible for testing.
 
-### Step 2: Test Password Reset Support Topic
+### Step 2: Test CredentialResetSupport Topic
 
 1. In Copilot Studio, open the **Test your copilot** pane.
 
@@ -59,13 +59,13 @@ In this challenge, you will test all 3 topics comprehensively, verify Freshdesk 
 6. **Switch to Freshdesk portal** → Go to **Tickets** section.
 
 7. Verify the new ticket:
-   - **Subject:** Should contain "Password Reset Request"
-   - **Description:** Should mention username
+   - **Subject:** Should contain "Password Reset Assistance"
+   - **Description:** Should mention username and issue details
    - **Priority:** Medium
    - **Requester Email:** Should match your email
    - **Status:** Open
 
-### Step 3: Test VPN Troubleshooting Topic
+### Step 3: Test VPNConnectivitySupport Topic
 
 1. Reset the conversation in the test pane.
 
@@ -86,18 +86,18 @@ In this challenge, you will test all 3 topics comprehensively, verify Freshdesk 
    - Ticket appears in Freshdesk
 
 6. In **Freshdesk**, check the new ticket:
-   - **Subject:** Should contain "VPN Connection Issue"
-   - **Description:** Should include error details
+   - **Subject:** Should contain "Connectivity Issue" with location
+   - **Description:** Should include error message and location details
    - **Priority:** Medium
    - **Status:** Open
 
-### Step 4: Test Slow Laptop Performance Topic
+### Step 4: Test HardwareSupportAssistant Topic
 
 1. Reset the test conversation.
 
 2. Type:
    ```
-   My computer is running really slow
+   My laptop is slow
    ```
 
 3. Complete the conversation flow:
@@ -110,14 +110,14 @@ In this challenge, you will test all 3 topics comprehensively, verify Freshdesk 
 5. Check ticket confirmation message in copilot.
 
 6. In **Freshdesk**, verify the ticket:
-   - **Subject:** Contains "Slow Laptop Performance"
-   - **Description:** Includes symptoms
+   - **Subject:** Contains "Hardware Issue" with device type
+   - **Description:** Includes device type and issue description
    - **Priority:** Medium
    - **Status:** Open
 
 ### Step 5: Test Knowledge Base Integration
 
-Test if your copilot can answer questions directly from the **it-support.pdf** knowledge base without creating tickets.
+Test if your copilot can answer questions directly from the **IT_Support_QA.pdf** knowledge base without creating tickets.
 
 1. Reset the conversation.
 
@@ -140,14 +140,14 @@ Test if your copilot can answer questions directly from the **it-support.pdf** k
 
 6. If responses are generic, verify:
    - Knowledge source is enabled in **Settings** → **Generative AI**
-   - **it-support.pdf** is uploaded and indexed
+   - **IT_Support_QA.pdf** is uploaded and indexed with status **Ready**
 
 ### Step 6: Test Multiple Tickets in Sequence
 
 1. Create 3 tickets in quick succession to test flow reliability:
-   - Password reset ticket
-   - VPN issue ticket
-   - Slow laptop ticket
+   - Credential reset ticket (CredentialResetSupport)
+   - VPN connectivity ticket (VPNConnectivitySupport)
+   - Hardware issue ticket (HardwareSupportAssistant)
 
 2. Verify all 3 tickets appear in Freshdesk.
 
@@ -156,7 +156,7 @@ Test if your copilot can answer questions directly from the **it-support.pdf** k
 ### Step 7: Test Edge Cases and Error Handling
 
 1. Test what happens if user provides incomplete information:
-   - Start password reset topic
+   - Start CredentialResetSupport topic
    - Skip username when asked
    - See how copilot handles it
 
@@ -203,10 +203,10 @@ Test if your copilot can answer questions directly from the **it-support.pdf** k
 
    | Topic | Trigger Phrase | Ticket Created | Priority | Status |
    |-------|----------------|----------------|----------|--------|
-   | Password Reset | I forgot my password | Yes | Medium | Pass |
-   | VPN Troubleshooting | VPN won't connect | Yes | Medium | Pass |
-   | Slow Laptop | Computer is slow | Yes | Medium | Pass |
-   | Knowledge Base | Clear browser cache | N/A | N/A | Pass |
+   | CredentialResetSupport | I forgot my password | Yes | Medium | Pass |
+   | VPNConnectivitySupport | VPN won't connect | Yes | Medium | Pass |
+   | HardwareSupportAssistant | My laptop is slow | Yes | Medium | Pass |
+   | Knowledge Base | Password reset steps | N/A | N/A | Pass |
 
 2. Note any issues encountered during testing.
 

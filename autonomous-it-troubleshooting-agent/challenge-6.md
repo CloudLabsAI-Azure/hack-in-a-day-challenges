@@ -79,25 +79,33 @@ In this challenge, you will publish your copilot, add it to Teams, test the comp
    ```
 
 2. Follow the conversation:
-   - Answer any questions the copilot asks
-   - Review the instructions provided
-   - When prompted to create a ticket, respond: **Yes**
+   - Provide your username when asked
+   - Review the self-service reset instructions from knowledge base
+   - When asked if issue is resolved, say: **No**
+   - Confirm you want to create a ticket
 
-3. Verify you receive a helpful confirmation message that the support ticket was created.
+3. Verify you receive a confirmation message that the support ticket was created.
 
 4. Try another test:
    ```
    VPN won't connect
    ```
 
-5. Verify the VPN topic triggers correctly and creates a ticket.
+5. Verify the VPNConnectivitySupport topic triggers, provides troubleshooting steps, and creates a ticket when escalated.
 
-6. Test knowledge base query:
+6. Test hardware topic:
    ```
-   How do I clear browser cache?
+   My laptop is slow
    ```
 
-7. Verify response comes from your knowledge base.
+7. Verify HardwareSupportAssistant topic provides device-specific troubleshooting.
+
+8. Test knowledge base query:
+   ```
+   What are the password reset steps?
+   ```
+
+9. Verify response comes from your IT_Support_QA.pdf knowledge base.
 
 ### Step 5: Configure Copilot Availability
 
@@ -128,12 +136,12 @@ In this challenge, you will publish your copilot, add it to Teams, test the comp
 
 4. Example message to share:
    ```
-   New IT Helpdesk Copilot Available!
+   New IT Support Copilot Available!
 
    Get instant IT support directly in Teams. Our new copilot can help with:
-   - Password resets
-   - VPN troubleshooting
-   - Slow laptop performance
+   - Credential resets and account lockouts
+   - VPN and connectivity issues
+   - Hardware troubleshooting (laptops, printers, monitors, keyboards)
    - And more!
 
    Click here to start chatting: [Copilot Link]
@@ -156,10 +164,10 @@ If you have access to a test account:
 
 1. Sign in to Teams with a different user account.
 
-2. Search for your IT Helpdesk Copilot in Teams Apps.
+2. Search for your IT Support Copilot in Teams Apps.
 
 3. Add it and test:
-   - Trigger a topic
+   - Trigger a topic (CredentialResetSupport, VPNConnectivitySupport, or HardwareSupportAssistant)
    - Create a test ticket
    - Verify it appears in Freshdesk
 
@@ -178,14 +186,14 @@ If you have access to a test account:
    - Go to **Topics** → **Conversation Start**
    - Customize welcome message:
      ```
-     Welcome to IT Helpdesk Support!
+     Welcome to IT Support Copilot!
 
      I can help you with:
-     - Password resets
-     - VPN connection issues
-     - Slow laptop performance
+     - Credential resets and account lockouts
+     - VPN and connectivity issues  
+     - Hardware problems (laptops, printers, monitors, keyboards, etc.)
 
-     Or ask me any IT question!
+     Or ask me any IT support question!
 
      What can I help you with today?
      ```
@@ -230,14 +238,14 @@ If you have access to a test account:
 ## Success Criteria
 - Copilot successfully published from Copilot Studio
 - Copilot deployed and accessible in Microsoft Teams
-- All 3 topics tested successfully in Teams
-- Tickets created through Teams appear in Freshdesk
-- Confirmation messages are displayed to users in Teams
-- Knowledge base queries work correctly in Teams
-- Copilot availability configured appropriately
-- Share link created and distributed
+- All 3 topics tested successfully in Teams (CredentialResetSupport, VPNConnectivitySupport, HardwareSupportAssistant)
+- Tickets created through Teams appear in Freshdesk with correct subject lines and descriptions
+- Confirmation messages are displayed to users in Teams after ticket creation
+- Knowledge base queries return responses from IT_Support_QA.pdf
+- Copilot availability configured appropriately for organization
+- Share link created and distributed to team
 - Analytics reviewed for usage insights
-- Complete solution working end-to-end  
+- Complete end-to-end solution working from Teams to Freshdesk  
 
 ## Additional Resources
 - [Publish your copilot](https://learn.microsoft.com/microsoft-copilot-studio/publication-fundamentals-publish-channels)  
@@ -250,13 +258,13 @@ If you have access to a test account:
 You have successfully built an **AI-powered IT Helpdesk Automation Copilot** using Microsoft Copilot Studio and Power Automate!
 
 ### What You Accomplished:
-- Created an intelligent IT Helpdesk Copilot with knowledge base
-- Built 3 automated support topics using generative AI
+- Created an intelligent IT Support Copilot with IT_Support_QA.pdf knowledge base
+- Built 3 automated support topics using generative AI (CredentialResetSupport, VPNConnectivitySupport, HardwareSupportAssistant)
 - Created reusable Freshdesk integration flow in Copilot Studio
-- Integrated Freshdesk API for ticket management
+- Integrated Freshdesk API for automated ticket creation with dynamic subject lines and descriptions
 - Deployed to Microsoft Teams for organization-wide access
-- Reduced manual helpdesk workload through automation
-- Built the entire solution with Copilot Studio agent flows (no external Power Automate)  
+- Reduced manual IT support workload through automation and self-service troubleshooting
+- Built the entire solution with Copilot Studio agent flows (no external Power Automate portal)  
 
 ### Business Impact:
 - **Faster Response Times** - 24/7 instant IT support

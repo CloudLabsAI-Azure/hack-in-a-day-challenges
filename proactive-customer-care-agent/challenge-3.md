@@ -119,14 +119,11 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 6. Optionally, you can add another output for Ticket ID if Freshdesk returns it in the response.
 
-### Step 8: Save and Name the Flow
+### Step 8: Save the Flow
 
-2. Click **Save** in the top-right corner of the flow designer.
+1. Click **Save** in the top-right corner of the flow designer.
 
-3. When prompted for a name, enter:
-   ```
-   CustomerServiceFlow
-   ```
+2. The flow will be saved with a default name initially.
 
 3. Wait for the flow to save successfully.
 
@@ -184,12 +181,35 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 5. Click **Go back to agent** to return to Copilot Studio.
 
-### Step 12: Verify Flow is Available in Actions
+### Step 12: Rename the Flow
 
 1. In Copilot Studio, click **Actions** in the left navigation.
 
+2. Find your newly published flow in the list.
+
+3. Click on the flow to open the **Flow overview** page.
+
+4. Click **Edit** in the top-right corner.
+
+5. In the flow designer, click on the flow name at the top (it will have a default name).
+
+6. Change the name to:
+   ```
+   CustomerServiceFlow
+   ```
+
+7. Click **Save** to save the renamed flow.
+
+8. Click **Publish** again to publish the updated flow name.
+
+9. Click **Go back to agent** to return to Copilot Studio.
+
+### Step 13: Verify Flow is Available in Actions
+
+1. In Copilot Studio, go back to **Actions** in the left navigation.
+
 2. You should see your flow listed:
-   - **Name:** CustomerServiceFLow
+   - **Name:** CustomerServiceFlow
    - **Status:** Published
 
 3. This flow is now ready to be called from any topic.
@@ -200,10 +220,11 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 - Freshdesk connector added and connection established
 - Freshdesk "Create a ticket" action configured with dynamic inputs and preset values
 - Return value added to send status back to agent
-- Flow saved with the name "CustomerServiceFlow"
-- Flow tested independently with manual test inputs
+- Flow saved and tested independently with manual test inputs
 - Test ticket created successfully in Freshdesk portal
-- Flow published and available in Actions list
+- Flow published successfully
+- Flow renamed to "CustomerServiceFlow" after initial publish
+- Flow available in Actions list with correct name
 
 ## Additional Resources
 - [Create flows in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/advanced-flow)

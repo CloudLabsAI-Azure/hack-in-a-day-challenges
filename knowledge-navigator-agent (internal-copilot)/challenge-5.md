@@ -254,7 +254,7 @@ You have successfully built an **AI-powered Internal Knowledge Navigator Agent**
 
 ### What You Built:
 - **Agent with SharePoint Knowledge Source** - Connected 40+ Contoso company documents for intelligent search
-- **4 AI-Generated Conversational Topics** - Document search, email delivery, request submission, and employee onboarding
+- **3 AI-Generated Conversational Topics** - Document search, email delivery, request submission.
 - **2 Agent Flows** - Automated email and Teams channel notifications created entirely in Copilot Studio
 - **Teams Deployment** - Organization-wide access through Microsoft Teams integration
 

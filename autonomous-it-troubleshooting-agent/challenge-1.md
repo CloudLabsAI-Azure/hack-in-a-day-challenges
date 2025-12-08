@@ -1,22 +1,22 @@
-# Challenge 01: Create IT Helpdesk Copilot in Copilot Studio
+# Challenge 01: Create IT Support Copilot in Copilot Studio
 
 ## Introduction
-IT departments frequently face overwhelming volumes of repetitive support requests—password resets, software access, connectivity issues, or device setup queries. Traditional manual helpdesk processes lead to delayed responses, inconsistent resolutions, and poor visibility into support trends.
+IT departments frequently face overwhelming volumes of repetitive support requests—password resets, VPN connectivity issues, hardware problems, and printer troubleshooting. Traditional manual helpdesk processes lead to delayed responses, inconsistent resolutions, and poor visibility into support trends.
 
-In this challenge, you will create an AI-powered IT Helpdesk Copilot using Microsoft Copilot Studio that will serve as your intelligent assistant to handle common IT support requests automatically.
+In this challenge, you will create an AI-powered IT Support Copilot using Microsoft Copilot Studio that will serve as your intelligent assistant to handle common IT support requests automatically.
 
 ## Challenge Objectives
 - Sign in to Microsoft Copilot Studio
-- Create a new Copilot for IT Helpdesk automation
+- Create a new Copilot for IT support automation
 - Configure basic copilot settings and identity
-- Upload knowledge base (it-support.pdf) for intelligent responses
+- Upload IT_Support_QA.pdf knowledge base for intelligent responses
 
 ## Accessing the Datasets
 
 Please download and extract the datasets required for this challenge here:
 
 ```
-https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/c1-datasets.zip/
+https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/it-support-dataset.zip
 ```
 
 ## Steps to Complete
@@ -39,41 +39,66 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
 1. Click on save.
 
-1. Once done, scroll down and add below **instruction** by clicking on **edit** inside Instruction card.
+1. Once done, scroll down and add below **instructions** by clicking on **edit** inside Instruction card.
 
      ```
-
+     - You are an IT Support Copilot designed to help employees resolve common IT issues quickly and efficiently.
+     - Handle inquiries related to password resets, account lockouts, VPN connectivity, slow device performance, and printer problems.
+     - When answering questions:
+       - First, check the uploaded IT support knowledge base (IT_Support_QA.pdf) for documented solutions
+       - Provide clear, step-by-step troubleshooting guidance
+       - Use simple, non-technical language when explaining solutions
+       - Ask clarifying questions to understand the issue better before providing solutions
+     - For password reset requests:
+       - Collect the username
+       - Provide self-service reset instructions from the knowledge base
+       - If unsuccessful, offer to create a support ticket with Freshdesk
+     - For VPN and connectivity issues:
+       - Guide users through common troubleshooting steps
+       - Check if the issue is resolved after each step
+       - Escalate to Freshdesk ticket if unresolved
+     - For hardware/performance issues:
+       - Gather details about the problem (slow startup, applications, etc.)
+       - Suggest troubleshooting steps from the knowledge base
+       - Create a ticket if the issue persists
+     - Always be professional, patient, and helpful
+     - When creating tickets, generate clear subject lines and detailed descriptions with all relevant information
      ```
 
 1. Click on save.
 
 ### Step 2: Upload Knowledge Base
 
-1. From the Copilot Studio home screen, open the **HR Interview Copilot** created previously.
+1. From the Copilot Studio home screen, open the **IT Support Copilot** you just created.
 
 1. In top navigation bar, select **Knowledge**.
 
-1. Click **+ Add a knowledge source**.
+1. Click **+ Add knowledge** or **+ Add a knowledge source**.
 
-1. Choose **Upload files**.
+1. Choose **Upload files** or **Files**.
 
-1. Upload the Job Description and Resume documents provided, which you downloaded and extracted earlier.
+1. Click **Browse** and navigate to the extracted dataset folder from Step 1.
 
-1. After uploading, verify each file shows the status **Ready**.
+1. Upload the files.
 
-   > Note: It may take up to 30 minutes for files to finish processing. You may continue to the next challenge while processing completes.
+1. After uploading, verify the file shows the status **Ready** or **Synced**.
+
+   > **Note:** The knowledge base may take 15-25 minutes to process and index. You can proceed to the next challenge while the knowledge base finishes processing.
 
 ## Success Criteria
 - Successfully signed in to Microsoft Copilot Studio
-- Created a new copilot named **IT Support Copilot**
-- Configured copilot with appropriate description and icon
-- Uploaded **it-support.pdf** as knowledge source
-- Verified knowledge base is active and indexed
-- Test queries return relevant responses from the knowledge base  
+- Created a new agent named **IT Support Copilot**
+- Configured agent with appropriate description and instructions for IT support scenarios
+- Downloaded and extracted IT support dataset
+- Uploaded **IT_Support_QA.pdf** as knowledge source
+- Verified knowledge base is processing (status will show **Ready** after 2-5 minutes)
+- Knowledge base is now available for use in topics
 
 ## Additional Resources
 - [Microsoft Copilot Studio Overview](https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-what-is-copilot-studio)  
 - [Add knowledge sources](https://learn.microsoft.com/microsoft-copilot-studio/nlu-boost-conversations)  
 - [Generative AI in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/nlu-gpt-overview)
 
-Now, click **Next** to continue to **Challenge 02: Create Topics Using Generative AI**.
+---
+
+Now, click **Next** to continue to **Challenge 02: Setup Freshdesk & Get API Credentials**.

@@ -124,7 +124,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
       ![](./media/cor2-gs-g7.png)
 
-1. You are now ready to start building your **IT Support Copilot** using Microsoft Copilot Studio! This copilot will help employees with common IT issues like password resets, VPN problems, slow laptops, and printer troubleshooting.
+1. You are now ready to start building your **IT Support Copilot** using Microsoft Copilot Studio! This copilot will help employees with common IT issues like credential resets, VPN connectivity problems, hardware troubleshooting (laptops, printers, monitors, keyboards), and will integrate with Freshdesk for automated ticket creation.
 
 Now, click on the **Next** from lower right corner to move on next page.
 
