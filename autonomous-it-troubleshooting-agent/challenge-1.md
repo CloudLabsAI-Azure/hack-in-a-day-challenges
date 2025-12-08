@@ -16,7 +16,7 @@ In this challenge, you will create an AI-powered IT Helpdesk Copilot using Micro
 Please download and extract the datasets required for this challenge here:
 
 ```
-https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/c1-datasets.zip/
+https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/it-support-dataset.zip
 ```
 
 ## Steps to Complete
