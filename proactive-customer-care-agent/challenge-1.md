@@ -88,6 +88,13 @@ Please download and extract the datasets required for this challenge here - [Dat
 
 7. Click on save.
 
+<validation step="fd23ac57-641a-4da5-8f64-44bbb4ae7722" />
+ 
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ## Success Criteria
 - Successfully signed in to Microsoft Copilot Studio
 - Created a new agent named **Customer Care Copilot**
