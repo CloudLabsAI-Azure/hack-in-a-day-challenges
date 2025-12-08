@@ -51,7 +51,7 @@ In this challenge, you will create an AI-powered Internal Knowledge Copilot usin
 - Click on **+ Create site** and select **Team site**.
 
 - Configure the new site:
-   - **Site name:** `contoso-documents-<inject key="DeploymentID"></inject>`
+   - **Site name:** **contoso-documents-<inject key="DeploymentID"></inject>**
    - **Site description:** "Internal knowledge base for company policies and procedures"
    - **Privacy settings:** Set to **Public** (anyone in the organization can access)
 
@@ -68,7 +68,7 @@ In this challenge, you will create an AI-powered Internal Knowledge Copilot usin
 
 - **Copy the SharePoint site URL** from the browser address bar and paste it into **Notepad** for use in upcoming steps.
 
-   Example format: `https://yourdomain.sharepoint.com/sites/contoso-documents-<inject key="DeploymentID"></inject>`
+   Example format: **https://yourdomain.sharepoint.com/sites/contoso-documents-<inject key="DeploymentID"></inject>**
 
 - Navigate to **Microsoft Copilot Studio**:
 

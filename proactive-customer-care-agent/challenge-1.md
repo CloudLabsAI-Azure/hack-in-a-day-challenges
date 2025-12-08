@@ -34,8 +34,8 @@ Please download and extract the datasets required for this challenge here - [Dat
 3. Click **Sign in**.
 
 4. Enter the provided credentials:
-   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
-   - **Password:** <inject key="AzureAdUserPassword"></inject>
+   - **Email/Username: <inject key="AzureAdUserEmail"></inject>**
+   - **Password: <inject key="AzureAdUserPassword"></inject>**
 
 5. If prompted with **"Stay signed in?"**, click **No**.
 

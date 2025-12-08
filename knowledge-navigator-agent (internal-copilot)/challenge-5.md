@@ -58,8 +58,8 @@ In this challenge, you will publish your agent, add it to Teams, test the comple
    ```
 
 2. Sign in with your credentials:
-   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
-   - **Password:** <inject key="AzureAdUserPassword"></inject>
+   - **Email/Username: <inject key="AzureAdUserEmail"></inject>**
+   - **Password: <inject key="AzureAdUserPassword"></inject>**
 
 3. In Teams, click **Apps** in the left sidebar.
 

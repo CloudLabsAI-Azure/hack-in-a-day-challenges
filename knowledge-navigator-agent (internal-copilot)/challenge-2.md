@@ -16,7 +16,7 @@ In this challenge, you'll connect the SharePoint site to Copilot Studio, verify 
 
 Before starting this challenge, ensure you have:
 - Created the **Internal Knowledge Navigator** agent in Challenge 1
-- Created the SharePoint site `contoso-documents-<inject key="DeploymentID"></inject>` in Challenge 1
+- Created the SharePoint site **contoso-documents-<inject key="DeploymentID"></inject>** in Challenge 1
 - Uploaded all 40+ Contoso documents to the SharePoint site in Challenge 1
 - Saved the SharePoint site URL
 
@@ -40,7 +40,7 @@ Before starting this challenge, ensure you have:
 
 - Enter the **SharePoint site URL** that you copied in Challenge 1:
    ```
-   https://yourdomain.sharepoint.com/sites/contoso-documents-<inject key="DeploymentID"></inject>
+   https://yourdomain.sharepoint.com/sites/contoso-documents-######
    ```
 
    > **Tip:** If you didn't save the URL, go back to your SharePoint site in another tab and copy it from the address bar.
@@ -59,7 +59,7 @@ Before starting this challenge, ensure you have:
 
 - After adding SharePoint, navigate to **Knowledge** in the left navigation pane.
 
-- You should see the SharePoint site listed as a knowledge source with the name: `contoso-documents-<inject key="DeploymentID"></inject>`
+- You should see the SharePoint site listed as a knowledge source with the name: **contoso-documents-<inject key="DeploymentID"></inject>**
 
 - The status should show as **Processing** or **Syncing** initially.
 
