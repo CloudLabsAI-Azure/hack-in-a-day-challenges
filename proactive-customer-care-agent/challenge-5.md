@@ -1,9 +1,9 @@
 # Challenge 05: Test Your Customer Care Copilot End-to-End
 
 ## Introduction
-Now that you've built your Customer Care Copilot with 4 topics, a reusable Customer Service Request flow, and knowledge base integration, it's time to thoroughly test the complete solution. End-to-end testing ensures all components work together seamlessly from customer input to ticket creation in Freshdesk.
+Now that you've built your Customer Care Copilot with 4 topics and a reusable CustomerServiceFlow, it's time to thoroughly test the complete solution. End-to-end testing ensures all components work together seamlessly from customer input to ticket creation in Freshdesk.
 
-In this challenge, you will test all 4 topics comprehensively, verify Customer Service Request flow integration, confirm tickets are created in Freshdesk, and validate the entire customer experience.
+In this challenge, you will test all 4 topics comprehensively, verify CustomerServiceFlow integration, confirm tickets are created in Freshdesk, and validate the entire customer experience.
  
 ## Challenge Objectives
  - Test all 4 topics in Copilot Studio test pane
@@ -25,7 +25,7 @@ In this challenge, you will test all 4 topics comprehensively, verify Customer S
    - DeliveryDelayManagement
    - ServiceQualityComplaintHandling
 
-3. Verify your **Customer Service Request** flow is **published** (check in Actions list).
+3. Verify your **CustomerServiceFlow** is **published** (check in Actions list).
 
 4. Open a second browser tab or window with **Freshdesk** portal:
    ```
@@ -53,7 +53,7 @@ In this challenge, you will test all 4 topics comprehensively, verify Customer S
    - When asked if you need additional assistance, say: **Yes, I need help**
 
 5. Verify the copilot:
-   - Calls the Customer Service Request flow
+   - Calls the CustomerServiceFlow
    - Displays confirmation message
    - Shows appropriate response
 
@@ -282,7 +282,7 @@ If you encounter issues during testing:
 ## Success Criteria
 - All 4 topics tested successfully in Copilot Studio
 - Each topic correctly triggers from appropriate phrases
-- Customer Service Request flow is called from each topic without errors
+- CustomerServiceFlow is called from each topic without errors
 - Tickets appear in Freshdesk portal with correct details
 - Confirmation messages are displayed to customers
 - Knowledge base queries return accurate responses

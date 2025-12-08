@@ -1,4 +1,4 @@
-# Challenge 03: Create Customer Service Flow
+# Challenge 03: Create CustomerServiceFlow
 
 ## Introduction
 Now that your Freshdesk account is ready, you'll create a reusable flow in Copilot Studio that connects to Freshdesk. This flow will be called by your topics to create support tickets automatically when customers need assistance beyond self-service troubleshooting.
