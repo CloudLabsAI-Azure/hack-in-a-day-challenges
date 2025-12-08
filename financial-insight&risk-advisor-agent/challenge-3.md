@@ -108,6 +108,13 @@ This makes the agent conversational and context-aware.
    - Use user’s reply to reference the correct dataset  
    - Produce bullet-point insights.
 
+<validation step="183bb9c4-7a12-4b80-987b-157ef978914a" />
+ 
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ## Success Criteria
 
 - Both topics are created successfully and request clarification from the user.
