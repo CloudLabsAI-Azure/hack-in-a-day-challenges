@@ -111,26 +111,17 @@ In this challenge, you will publish your copilot, add it to Teams, test the comp
 - [Analyze copilot performance](https://learn.microsoft.com/microsoft-copilot-studio/analytics-overview)
 - [Share your copilot](https://learn.microsoft.com/microsoft-copilot-studio/admin-share-bots)
 
+## Congratulations!
 
-## Congratulations
+You have successfully built an **AI-powered Customer Care Copilot** using Microsoft Copilot Studio!
 
-You have successfully built an **AI-powered Customer Care Copilot** using Microsoft Copilot Studio and Power Automate.
+### Real-World Applications:
+This solution can transform customer service across:
+- **E-commerce & Retail** - Order tracking, returns, delivery issues, product inquiries
+- **Telecommunications** - Service quality complaints, billing questions, technical support
+- **Banking & Finance** - Account inquiries, transaction disputes, card services
+- **Travel & Hospitality** - Booking assistance, cancellations, itinerary changes
+- **Healthcare** - Appointment scheduling, insurance claims, patient inquiries
+- **SaaS & Technology** - Subscription management, product support, feature requests
 
-### What You Accomplished:
-- Created an intelligent Customer Care Copilot with knowledge base
-- Built 4 automated customer service topics using generative AI
-- Created reusable CustomerServiceFlow in Copilot Studio
-- Integrated Freshdesk API for ticket management
-- Deployed to Microsoft Teams for organization-wide access
-- Reduced manual customer service workload through automation
-- Built the entire solution with Copilot Studio agent flows
-
-### Business Impact:
-- **Faster Response Times** - 24/7 instant customer service
-- **Reduced Ticket Volume** - Self-service resolution via knowledge base
-- **Improved Customer Satisfaction** - Quick issue resolution in Teams
-- **Better Ticket Management** - Centralized customer service in Freshdesk
-- **Cost Savings** - Reduced manual support workload and automated repetitive tasks
-- **Better Insights** - Data-driven customer service improvements
-
-Great work on completing this challenge.
+Congratulations on completing this challenge!
