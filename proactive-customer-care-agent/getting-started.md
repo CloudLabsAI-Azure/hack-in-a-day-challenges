@@ -78,9 +78,51 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/zgr-gt3.png)
 
-1. Still in Power Platform, click the **environment (1)** name in the top bar , expand **Build apps with Dataverse (2)**, and select your newly created **ODL_User<inject key="Deployment ID" enableCopy="false"></inject> (3)** to switch context to the new environment you just provisioned.
+1. Once done, please navigate to power platform admin center by using the below URL:
 
-   ![](./media/ex1-travel-g5.png)
+   ```
+   https://admin.powerplatform.microsoft.com/
+   ```
+
+1. Once you are in the power **platform admin center**, select **Manage** from left menu and click on the environmnet with the name, ODL_User <inject key="Deployment ID" enableCopy="false"></inject>'s Environment.
+
+   ![](./media/powadminimg1.png)
+
+1. In the environmnet page, click on **See all** under **S2S apps**.
+
+   ![](./media/powadminimg2.png)
+
+1. In the next pane, click on **+ New app user**.
+
+   ![](./media/powadminimg3.png)
+
+1. In the create a new app user pane, under **App**, click on **+ Add an app**.
+
+   ![](./media/powadminimg4.png)
+
+1. From the list of apps, search for `https://cloudlabssandbox.onmicrosoft.com/cloudlabs.ai/` and select it.
+
+   ![](./media/powadminimg5.png)
+
+1. Once done, under **Business unit** search for **org** and select the only business unit that comes in the list.
+
+   ![](./media/powadminimg6.png)
+
+1. Beside **Security roles** click on **Edit** icon.
+
+   ![](./media/powadminimg9.png)
+
+1. From the list of roles, search and select **System Administrator** and click on **Save**.
+
+   ![](./media/powadminimg10.png)
+
+1. In the pop-up window, select **save**.
+
+   ![](./media/powadminimg11.png)
+
+1. Review all the details and click on **Create**.
+
+   ![](./media/powadminimg12.png)
 
 1. Navigate to **Microsoft Copilot Studio** by opening a new browser tab and using the link below:
 

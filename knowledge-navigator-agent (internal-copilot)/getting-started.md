@@ -26,33 +26,31 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 ![](./media/gs-leave-4.png)
 
-## Let's Get Started with Your Environment Setup
-
-### Step 1: Sign In to Power Apps and Create Your Environment
+## Let's Get Started with Copilot Studio and Microsoft 365
 
 1. In the JumpVM, click on **Microsoft Edge** browser which is created on desktop.
 
    ![](./media/zgr-gt.png)
 
-1. Open a new browser tab and navigate to the Power Apps portal:
+1. Open a new browser tab and navigate to the Power Apps portal using the link below:
 
    ```
    https://make.powerapps.com/
    ```
 
-1. On the **Sign into Microsoft** tab, enter the provided credentials and click **Next**:
+1. On the **Sign into Microsoft** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
 
    - Email/Username: **<inject key="AzureAdUserEmail"></inject>**
 
      ![](./media/gs-lab3-g2.png)
 
-1. Enter your password and click **Sign in**:
+1. Now, enter the following password and click on **Sign in**.
 
    - Password: **<inject key="AzureAdUserPassword"></inject>**
 
      ![](./media/gs-lab3-g3.png)
 
-     > **Note:** If you see the Action Required dialog box, select **Ask Later**.
+     > **Note:** If you see the Action Required dialog box, then select **Ask Later** option.
      
 1. If you see the pop-up **Stay Signed in?**, click **No**.
 
@@ -62,29 +60,69 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/gs-travel-g1.png)
 
-1. You're now in the Power Apps portal. Keep it open as you'll use it throughout the lab.
+1. You have now successfully logged in to the Power Apps portal. Keep the portal open, as you will be using it later in the lab.
 
    ![](./media/gs-5.png)
 
-### Step 2: Provision Your Copilot Studio Environment
-
-1. Inside the **Power Apps** portal, select **Tables (1)** from the left navigation menu and click **Create with Excel or .CSV file (2)**.
+1. Inside the **Power Apps** portal, select **Tables (1)** from the left navigation menu and click **Create with Excel or .CSV file (2)** to begin importing the lab dataset.
 
    ![](./media/ex1-travel-g1.png)
 
-   > **Important:** This creates the foundational Dataverse environment that will support your agent with SharePoint knowledge sources and agent flows.
+   > **Environment Foundation:** This step creates the foundational environment that will support your agents with company-specific data and knowledge sources.
 
-1. In the **Create in new environment?** dialog, click **Create** to provision your environment.
+1. In the **Create in new environment?** dialog, click **Create** to provision a environment.
 
    ![](./media/ex1-travel-g2.png)
 
-1. When the upload screen appears, click **Cancel** (you won't upload any files here).
+1. When the upload screen appears, click **Cancel**.
 
    ![](./media/zgr-gt3.png)
 
-1. Click the **environment (1)** name in the top bar, expand **Build apps with Dataverse (2)**, and select **ODL_User<inject key="Deployment ID" enableCopy="false"></inject> (3)** to switch to your new environment.
+1. Once done, please navigate to power platform admin center by using the below URL:
 
-   ![](./media/ex1-travel-g5.png)
+   ```
+   https://admin.powerplatform.microsoft.com/
+   ```
+
+1. Once you are in the power **platform admin center**, select **Manage** from left menu and click on the environmnet with the name, ODL_User <inject key="Deployment ID" enableCopy="false"></inject>'s Environment.
+
+   ![](./media/powadminimg1.png)
+
+1. In the environmnet page, click on **See all** under **S2S apps**.
+
+   ![](./media/powadminimg2.png)
+
+1. In the next pane, click on **+ New app user**.
+
+   ![](./media/powadminimg3.png)
+
+1. In the create a new app user pane, under **App**, click on **+ Add an app**.
+
+   ![](./media/powadminimg4.png)
+
+1. From the list of apps, search for `https://cloudlabssandbox.onmicrosoft.com/cloudlabs.ai/` and select it.
+
+   ![](./media/powadminimg5.png)
+
+1. Once done, under **Business unit** search for **org** and select the only business unit that comes in the list.
+
+   ![](./media/powadminimg6.png)
+
+1. Beside **Security roles** click on **Edit** icon.
+
+   ![](./media/powadminimg9.png)
+
+1. From the list of roles, search and select **System Administrator** and click on **Save**.
+
+   ![](./media/powadminimg10.png)
+
+1. In the pop-up window, select **save**.
+
+   ![](./media/powadminimg11.png)
+
+1. Review all the details and click on **Create**.
+
+   ![](./media/powadminimg12.png)
 
 1. Navigate to **Microsoft Copilot Studio** by opening a new browser tab and using the link below:
 
@@ -129,43 +167,6 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
    1. You will be navigated to the **Copilot Studio** portal. Verify that **ODL_User <inject key="Deployment ID" enableCopy="false"></inject>’s Environment** is visible and selected under **Supported environments**.
 
       ![](./media/cor2-gs-g7.png)
-
-1. You are now ready to start building your **Knowledge Navigator Agent**.
-
-### Step 4: Verify Document Folder Access
-
-1. Before starting the challenges, verify you have access to the Contoso documents folder.
-
-1. Open **File Explorer** and navigate to:
-
-   ```
-   c:\Users\GirishR\OneDrive - Spektra Systems LLC\Documents\GitHub\hack-in-a-day-challenges\knowledge-navigator-agent (internal-copilot)\documents\
-   ```
-
-1. You should see 40+ company documents including:
-   - Contoso_HR_Handbook.docx
-   - Contoso_Procurement_Data_With_Policies.docx
-   - Contoso-Corp-IT-Governance&Compliance-Policy.docx
-   - Employee-Travel-Reimbursement.xlsx
-   - And many more business documents
-
-1. Keep this folder path accessible—you'll upload these documents to SharePoint in Challenge 1.
-
----
-
-## You're Ready to Begin!
-
-Your environment is now fully configured with:
-- ✅ Power Apps portal access
-- ✅ Copilot Studio environment provisioned
-- ✅ Correct environment selected (ODL_User<inject key="Deployment ID" enableCopy="false"></inject>'s Environment)
-- ✅ 40+ Contoso documents ready for upload
-
-**What You'll Build:**
-- Agent with SharePoint knowledge source (40+ documents)
-- 2 Agent Flows (Email Document, Send Request to Teams)
-- 4 AI-Generated Topics (DocumentSearch, EmailDocument, SubmitRequest, NewEmployeeOnboarding)
-- Deployment to Microsoft Teams
 
 Now, click on the **Next** from lower right corner to move on next page.
 
