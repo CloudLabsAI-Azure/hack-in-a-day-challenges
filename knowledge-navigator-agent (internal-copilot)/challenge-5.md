@@ -248,15 +248,9 @@ Test all 4 topics you created in Challenge 4:
 
 ---
 
-## Congratulations! 🎉
+## Congratulations!
 
 You have successfully built an **AI-powered Internal Knowledge Navigator Agent** using Microsoft Copilot Studio!
-
-### What You Built:
-- **Agent with SharePoint Knowledge Source** - Connected 40+ Contoso company documents for intelligent search
-- **3 AI-Generated Conversational Topics** - Document search, email delivery, request submission.
-- **2 Agent Flows** - Automated email and Teams channel notifications created entirely in Copilot Studio
-- **Teams Deployment** - Organization-wide access through Microsoft Teams integration
 
 ### Real-World Applications:
 This solution can transform knowledge management across:
@@ -266,12 +260,4 @@ This solution can transform knowledge management across:
 - **Sales Enablement** - Playbooks, product information, pricing guidelines
 - **Operations** - Process documentation, vendor management, procurement workflows
 
-### Next Steps & Enhancements:
-- **Expand Knowledge Base** - Add more departments and document types
-- **Advanced Analytics** - Track top queries and identify knowledge gaps
-- **Multi-Language Support** - Serve global teams with localized content
-- **Integration** - Connect to CRM, ticketing systems, or HR platforms
-- **Proactive Notifications** - Send policy updates or reminders through the agent
-- **Voice & Mobile** - Enable voice interactions and mobile app access
-
-Great work on completing this challenge! 🚀 
+Congratulations on completing this challenge! 
