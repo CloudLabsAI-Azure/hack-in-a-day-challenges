@@ -1,57 +1,69 @@
 # Visual Assistant with Generative AI (GenAI)
 
-**Overall Estimated Duration:** 6 hours  
+Welcome to the Visual Assistant Hack in a Day! Today, you’ll explore how AI can transform quality inspection by building an intelligent assistant that detects surface defects from manufacturing images and generates natural-language inspection commentary. Through this hands-on lab, you will create a Visual Inspection Assistant capable of identifying manufacturing defects, classifying severity, and producing engineer-ready insights, powered by Azure AI Custom Vision, Azure AI Foundry, and GPT-4.1-Mini.
 
-## Overview
-In this lab, participants will learn how to combine **Azure AI Vision** with **Generative AI** to create a **Visual Assistant** capable of analyzing manufacturing images for defects or anomalies and generating natural-language explanations.  
-You will build a lightweight workflow that processes sample images, detects issues, and uses a large language model to generate inspection summaries and corrective recommendations.
+## Scenario
 
-The goal is to demonstrate how GenAI can enhance human inspection tasks, improve quality control efficiency, and enable data-driven manufacturing insights.
+A manufacturing company is receiving thousands of product images every week from its production line. Quality engineers manually inspect images for surface defects such as crazing, patches, and scratches, but high workload and fatigue cause delays and oversight. To improve efficiency and accuracy, the company decides to build a Visual Assistant that can analyze images, detect defects using Custom Vision, and generate inspection commentary using a generative AI model. This allows engineers to review defects instantly, make faster decisions, and maintain consistent product quality across every batch.
 
-## Problem Statement
-Production lines in manufacturing frequently rely on visual inspections for defects, deviations, or maintenance issues (e.g., component misalignment, surface blemishes, missing parts). Manual visual review is time-consuming, inconsistent, and difficult to scale. Teams often struggle with using images or videos from cameras, identifying issues quickly, documenting them, and routing these insights for action. This slows throughput, increases scrap/rework, and limits real-time decision making.
+## Introduction
 
-## Solution Overview
+Your mission is to build an AI-powered **Visual Inspection Assistant** that supports quality and production teams by detecting defects and generating human-readable inspection reports. Using Azure AI Custom Vision, Azure AI Foundry, and a Python application, you will design an end-to-end solution that can:
 
-Provide a beginner-friendly prototype where teams build a “visual assistant” that uses generative AI + computer-vision to assist shop-floor operators. The assistant ingests images from a manufacturing line (sample dataset), analyses them for anomalies (defects, misalignment, missing parts), generates natural-language commentary (e.g., “Component X appears misaligned by approx 3mm; recommend repositioning”), and presents a simple UI dashboard for review and action. By combining vision models + generative AI commentary, the lab allows teams to show how manufacturing visual inspection and assistance can be automated and augmented.
+- Classify surface defects in images using a trained Custom Vision model
+- Predict the defect category with probability-based confidence scoring
+- Generate professional commentary and suggestions using the GPT-4.1-Mini model
+- Display predictions and insights in a user-friendly application interface
+
+This solution reduces manual inspection time, increases defect detection accuracy, and allows quality engineers to focus on decision-making rather than repetitive visual checks.
 
 ## Learning Objectives
 
-**Description:**  
-By the end of this lab, you will learn to:
+By participating in this Hack in a Day, you will learn how to:
 
-- Understand how to combine computer vision (image/frame ingestion) with generative AI to produce commentary and recommended actions.
-- Pre-process visual data (images/frames), detect anomalies/defects, and use retrieval/prompting pipelines to generate natural-language insights.
-- Build a simple UI or dashboard that shows visual input, detected issues, commentary and next-steps.
-- Recognise challenges: camera calibration, lighting, anomaly-detection false positives, generative AI hallucination, human-in-loop review.
-- Learn how to deploy a lightweight prototype using accessible Azure (or cloud) services and clean up resources.
+- Create Azure AI Custom Vision resources for training and prediction
+- Build a Custom Vision project for surface defect detection
+- Upload, tag, and train datasets for supervised learning
+- Publish and test a production-ready surface defect classification model
+- Deploy the GPT-4.1-Mini model in Azure AI Foundry for commentary generation
+- Configure and run the Streamlit-based Visual Assistant using environment variables
 
-## Challenges Overview
+## Hack in a Day Format: Challenge-Based
 
-- **Challenge 01: Create Azure AI Vision Resource**  
-Provision the Azure AI Vision service in the Azure Portal to perform image analysis on manufacturing components.
+This hands-on lab is structured into six progressive challenges that model the lifecycle of building a real-world AI visual inspection application:
 
-- **Challenge 02: Upload and Analyze Sample Manufacturing Images**  
-Upload synthetic manufacturing images to Azure Blob Storage and analyze them using the AI Vision service to detect objects and potential anomalies.
+- **Challenge 01: Create Azure AI Custom Vision Resources**  
+  Provision Custom Vision training and prediction resources in Azure.
 
-- **Challenge 03: Deploy Azure OpenAI Service for Commentary Generation**  
-Deploy the Azure OpenAI Service and use the gpt-35-turbo model to generate text-based commentary from the detected visual results.
+- **Challenge 02: Create Custom Vision Project for Surface Defect Detection**  
+  Create a classification project to analyze surface defects.
 
-- **Challenge 04: Generate Visual Inspection Reports**  
-Combine AI Vision and Generative AI outputs to produce comprehensive visual inspection summaries highlighting detected issues and recommendations.
+- **Challenge 03: Upload and Tag Images for Surface Defect Training**  
+  Upload dataset images and tag them for crazing, patches, and scratches.
 
-- **Challenge 05: Build a Visual Assistant Web Interface**  
-Create a simple Streamlit-based dashboard to upload images, view AI results, and interact with Generative AI commentary in real-time.
+- **Challenge 04: Publish and Test the Surface Defect Detection Model**  
+  Train and publish the model, then test predictions with uploaded images.
+
+- **Challenge 05: Deploy Foundry Resource and GPT-4.1-Mini Model**  
+  Set up Azure AI Foundry and deploy GPT-4.1-Mini for inspection commentary.
+
+- **Challenge 06: Configure the Application and Run the Visual Inspection Assistant**  
+  Provide environment variables, run the Streamlit app, and validate end-to-end predictions and commentary.
+
+Throughout each challenge, you will iteratively design, build, and test your Visual Assistant, from dataset preparation to model deployment and application integration.
+
+## Challenge Overview
+
+You will begin by provisioning Custom Vision and creating a surface defect detection project. Next, you will upload and tag image datasets and train a model capable of identifying crazing, patches, and scratches. You will then publish the model and perform live defect predictions. After that, you will deploy the GPT-4.1-Mini model in Azure AI Foundry to generate natural-language inspection reports. Finally, you will configure and run a Streamlit application to test the complete visual inspection workflow, from image upload to AI-generated inspection summary.
+
+By the end of this Hack in a Day, you will have a fully functional **Visual Assistant** that can automatically detect surface defects, generate professional commentary, and support faster decision-making on the production line.
 
 ## Support Contact
 
-The CloudLabs support team is available 24/7, 365 days a year, via email and live chat to ensure seamless assistance at any time. We offer dedicated support channels tailored specifically for both learners and instructors, ensuring that all your needs are promptly and efficiently addressed.
+The CloudLabs support team is available 24/7, 365 days a year via email and live chat to ensure seamless assistance throughout the lab. Dedicated support channels are available for both learners and instructors.
 
-Learner Support Contacts:
+**Learner Support Contacts**  
+- Email: cloudlabs-support@spektrasystems.com  
+- Live Chat: https://cloudlabs.ai/labs-support
 
-- Email Support: cloudlabs-support@spektrasystems.com
-- Live Chat Support: https://cloudlabs.ai/labs-support
-
-Now, click on the **Next** from lower right corner to move on next page.
-
-## Happy Hacking!!
+Click **Next** from the bottom-right corner to continue.
