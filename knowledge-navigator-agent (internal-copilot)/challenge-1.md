@@ -66,17 +66,24 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
 ### Step 2: Create a New Agent
 
-- On **Copilot Studio**, select **+ Create**, and then select **+ New agent**.
+1. Open **Microsoft Copilot Studio**.
 
-- On **Start building your agent** page, select **Configure**.
+1. On the Copilot Studio pane, from left menu select **Create** and then click on **+New Agent** option to create a new agent.
 
-- Provide the following details:
+1. If any error shows up like `There was a problem creating your agent.`, then please click on **Create a blank agent**.
+
+1. On the overview pane of the agent, click on **edit** inside Details card to edit agent's name and description.
+
+1. Configure the Copilot details as below:
+
    - **Name:** `Internal Knowledge Navigator`
-   - **Description:**
-     ```
-     This agent helps employees quickly find Contoso company policies, procedures, and guidelines across all departments including HR, IT, Procurement, Finance, Sales, and Operations. It provides accurate answers with document citations from official company documents, guides users through common processes, and can trigger helpful actions like emailing documents or creating support tickets.
-     ```
-   - **Instructions:**
+
+   - **Description:** `This agent helps employees quickly find Contoso company policies, procedures, and guidelines across all departments including HR, IT, Procurement, Finance, Sales, and Operations. It provides accurate answers with document citations from official company documents, guides users through common processes, and can trigger helpful actions like emailing documents or creating support tickets.`
+
+1. Click on save.
+
+1. Once done, scroll down and add below **instructions** by clicking on **edit** inside Instruction card.
+
      ```
      - Respond only to queries related to Contoso internal company policies, procedures, business operations, and department-specific guidelines.
      - Retrieve knowledge from the uploaded Contoso company documents stored in SharePoint, including HR handbooks, IT governance policies, procurement procedures, support policies, sales playbooks, business reports, and operational data.
@@ -91,9 +98,7 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
      - Focus on providing information from official Contoso documents rather than general knowledge
      ```
 
-- Click **Create** to initialize your agent.
-
-- Wait for the agent to be created (this may take 30-60 seconds).
+1. Click on save.
 
 ### Step 3: Customize Copilot Icon and Identity
 
