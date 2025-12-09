@@ -41,12 +41,12 @@ In this challenge, you will create 4 topics that help employees: Document Search
 
 - Review the generated topic:
 
-   - **Trigger phrases:** Verify phrases like:
-     - "I'm a new employee"
-     - "New hire help"
-     - "Onboarding information"
-     - "First day at Contoso"
-     - "What should I know as a new employee"
+- **Trigger phrases:** Verify phrases like:
+   - "I'm a new employee"
+   - "New hire help"
+   - "Onboarding information"
+   - "First day at Contoso"
+   - "What should I know as a new employee"
 
 - Review the conversation flow to ensure it uses generative answers.
 
