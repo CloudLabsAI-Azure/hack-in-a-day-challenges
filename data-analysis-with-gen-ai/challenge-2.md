@@ -19,11 +19,11 @@ Azure OpenAI Service provides API access to models like gpt-4.1-mini, which can 
    - **Resource Group:** challenge-rg-<inject key="DeploymentID"></inject>.
    - **Name:** openai-mfg-<inject key="DeploymentID"></inject>.
    - **Region:** <inject key="Region"></inject>.
-   - **Default Project Name:** `mfg-proj-<inject key="DeploymentID"></inject>`.
+   - **Default Project Name: mfg-proj-<inject key="DeploymentID"></inject>**.
 
 3. Click **Review + Create** → **Create** and wait for deployment to complete.
 
-4. After deployment, open the Microsoft Foundry resource and navigate to the project `mfg-proj-<inject key="DeploymentID"></inject>`.
+4. After deployment, open the Microsoft Foundry resource and navigate to the project **mfg-proj-<inject key="DeploymentID"></inject>**.
 
 5. From the Foundry resource **Overview** page click **Go to Foundry portal** 
 

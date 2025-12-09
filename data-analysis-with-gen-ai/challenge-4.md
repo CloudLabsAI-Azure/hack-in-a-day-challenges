@@ -13,7 +13,7 @@ In this challenge, you’ll use Microsoft Foundry (LLM capabilities) to summariz
 
 ## Steps to Complete
 
-1. Open **Microsoft Foundry Studio** (or the Foundry project UI) and open your project `mfg-proj-<inject key="DeploymentID"></inject>`.
+1. Open **Microsoft Foundry Studio** (or the Foundry project UI) and open your project **mfg-proj-<inject key="DeploymentID"></inject>**.
 
 2. Choose the deployed LLM model (for example `gpt-4.1-mini`) within the Foundry project.
 

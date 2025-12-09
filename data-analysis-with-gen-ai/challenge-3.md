@@ -45,7 +45,7 @@ This index will serve as the contextual knowledge base that the model will later
 9. When prompted to **Vectorize your text**, configure vectorization for the dataset:
   - **Column to vectorize:** `machine_id` (or `MachineID` depending on the detected field name).
   - **Kind:** **Azure AI Foundry (preview)**.
-  - Select **Subscription** and choose your **Azure AI Foundry/Hub project** (for example `mfg-proj-<inject key="DeploymentID"></inject>`).
+  - Select **Subscription** and choose your **Azure AI Foundry/Hub project**,**mfg-proj-<inject key="DeploymentID"></inject>**).
   - **Model deployment:** `text-embedding-ada-002`.
   - **Authentication type:** `API key` and provide the Foundry API key when prompted.
   - Check the acknowledgement box to accept preview terms, then click **Next**.
