@@ -41,11 +41,11 @@ In this challenge, you will create 3 essential IT support topics using generativ
 4. Review the generated topic:
 
    - **Trigger phrases:** Verify it includes phrases like:
-     - "I forgot my password"
-     - "Reset my password"
-     - "Account locked"
-     - "Can't log in"
-     - "Password reset"
+   - "I forgot my password"
+   - "Reset my password"
+   - "Account locked"
+   - "Can't log in"
+   - "Password reset"
 
 5. Review the conversation flow:
    - Should ask for username and save as variable
@@ -85,12 +85,12 @@ In this challenge, you will create 3 essential IT support topics using generativ
 4. Review and customize:
 
    - **Trigger phrases:** Verify phrases like:
-     - "VPN not connecting"
-     - "VPN authentication failed"
-     - "Can't connect to VPN"
-     - "Internet not working"
-     - "Connectivity issues"
-     - "Network problems"
+   - "VPN not connecting"
+   - "VPN authentication failed"
+   - "Can't connect to VPN"
+   - "Internet not working"
+   - "Connectivity issues"
+   - "Network problems"
 
 5. Review the conversation flow:
    - Should ask about error message and save as variable
@@ -123,13 +123,13 @@ In this challenge, you will create 3 essential IT support topics using generativ
 
 4. Review and customize:
    - **Trigger phrases:** Verify phrases like:
-     - "My laptop is slow"
-     - "Printer not working"
-     - "Mouse not responding"
-     - "Keyboard issue"
-     - "Monitor problems"
-     - "Hardware issue"
-     - "Device not working"
+   - "My laptop is slow"
+   - "Printer not working"
+   - "Mouse not responding"
+   - "Keyboard issue"
+   - "Monitor problems"
+   - "Hardware issue"
+   - "Device not working"
 
 5. Review the conversation flow:
    - Should ask which device and save as variable
@@ -177,14 +177,14 @@ Now connect each topic to your published **Freshdesk** flow. The AI-generated to
 7. Configure the flow inputs by mapping the variables captured in the topic:
    
    - For **Subject** field:
-     - Click on the **Subject** input field
-     - Click the **{x}** icon to open variable selector
-     - Select the appropriate variable from your generated topic
+   - Click on the **Subject** input field
+   - Click the **{x}** icon to open variable selector
+   - Select the appropriate variable from your generated topic
    
    - For **Description** field:
-     - Click on the **Description** input field
-     - Click the **{x}** icon to open variable selector
-     - Select the relevant variables that capture the issue details
+   - Click on the **Description** input field
+   - Click the **{x}** icon to open variable selector
+   - Select the relevant variables that capture the issue details
 
    > **Note:** If your topic doesn't have all the required variables, you may need to add additional **Question** nodes in your topic to collect missing information before calling the flow.
 
@@ -214,12 +214,12 @@ Now connect each topic to your published **Freshdesk** flow. The AI-generated to
 6. Configure the flow inputs:
    
    - For **Subject** field:
-     - Click the input field and then the **{x}** icon
-     - Select the appropriate variable from your topic
+   - Click the input field and then the **{x}** icon
+   - Select the appropriate variable from your topic
    
    - For **Description** field:
-     - Click the input field and then the **{x}** icon
-     - Select the relevant variables that capture the connectivity issue details
+   - Click the input field and then the **{x}** icon
+   - Select the relevant variables that capture the connectivity issue details
 
    > **Note:** If your topic doesn't capture all necessary information, add **Question** nodes to collect missing details before calling the flow.
 
@@ -247,12 +247,12 @@ Now connect each topic to your published **Freshdesk** flow. The AI-generated to
 6. Configure the flow inputs:
    
    - For **Subject** field:
-     - Click the input field and then the **{x}** icon
-     - Select the device type variable from your topic
+   - Click the input field and then the **{x}** icon
+   - Select the device type variable from your topic
    
    - For **Description** field:
-     - Click the input field and then the **{x}** icon
-     - Select the variables that describe the hardware problem
+   - Click the input field and then the **{x}** icon
+   - Select the variables that describe the hardware problem
 
    > **Note:** If your topic doesn't have the necessary variables, add **Question** nodes to gather the required information before calling the flow.
 
