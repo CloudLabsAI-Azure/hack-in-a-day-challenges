@@ -3,7 +3,7 @@
 
 **Duration:** 6 hours
 
-**Tags:** `Intelligent Document Processing`, `Azure AI, Document` `Intelligence`, `Automation`
+**Tags:** `Intelligent Document Processing`, `Azure AI`, `Document Intelligence`, `Automation`
 
 ## Overview
 In this lab, participants will learn how to build an **Intelligent Document Processing (IDP)** solution for finance teams using **Azure AI Document Intelligence**.  

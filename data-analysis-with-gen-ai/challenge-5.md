@@ -14,7 +14,7 @@ In this challenge, you’ll build a simple chat-style interface using Streamlit 
 ## Steps to Complete
 
 1. Open **VS Code** or Azure Cloud Shell.  
-2. Create a Python file `app.py` and paste a lightweight example (pseudocode) that calls the Foundry/LLM endpoint via your preferred client library. Replace the `YOUR_API_KEY` and `YOUR_ENDPOINT` placeholders with values from your Foundry project:
+1. Create a Python file `app.py` and paste a lightweight example (pseudocode) that calls the Foundry/LLM endpoint via your preferred client library. Replace the `YOUR_API_KEY` and `YOUR_ENDPOINT` placeholders with values from your Foundry project:
 
    ```python
    # PSEUDOCODE: replace with Foundry SDK or REST call
@@ -32,9 +32,9 @@ In this challenge, you’ll build a simple chat-style interface using Streamlit 
        r = requests.post(ENDPOINT, json=payload, headers=headers)
        st.write(r.json().get("output", "No response"))
    ```
-3. Run the app: streamlit run app.py and open the shown URL.
+1. Run the app: streamlit run app.py and open the shown URL.
 
-4. Ask questions such as “Which machine had maximum downtime?” or “What trend do you see in temperatures?”
+1. Ask questions such as “Which machine had maximum downtime?” or “What trend do you see in temperatures?”
 
 <validation step="2ea74b2b-34e6-4ae2-84eb-be669c59f8a9" />
  
