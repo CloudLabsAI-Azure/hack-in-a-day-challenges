@@ -85,11 +85,11 @@ In this challenge, you will create 4 essential customer care topics using genera
 4. Review and customize:
 
    - **Trigger phrases:** Verify phrases like:
-     - "I want to return a product"
-     - "Return my order"
-     - "Exchange item"
-     - "Refund request"
-     - "Return policy"
+   - "I want to return a product"
+   - "Return my order"
+   - "Exchange item"
+   - "Refund request"
+   - "Return policy"
 
 5. Review the conversation flow:
    - Should ask for order number and save as variable
@@ -122,11 +122,11 @@ In this challenge, you will create 4 essential customer care topics using genera
 
 4. Review and customize:
    - **Trigger phrases:** Verify phrases like:
-     - "My delivery is late"
-     - "Order not delivered"
-     - "Delayed shipment"
-     - "Package not arrived"
-     - "Missed delivery"
+   - "My delivery is late"
+   - "Order not delivered"
+   - "Delayed shipment"
+   - "Package not arrived"
+   - "Missed delivery"
 
 5. Review the conversation flow:
    - Should ask for order number and save as variable
@@ -159,12 +159,12 @@ In this challenge, you will create 4 essential customer care topics using genera
 
 4. Review and customize:
    - **Trigger phrases:** Verify phrases like:
-     - "I have a complaint"
-     - "Poor service"
-     - "Product quality issue"
-     - "Unsatisfied with service"
-     - "Speak to manager"
-     - "File a complaint"
+   - "I have a complaint"
+   - "Poor service"
+   - "Product quality issue"
+   - "Unsatisfied with service"
+   - "Speak to manager"
+   - "File a complaint"
 
 5. Review the conversation flow:
    - Should ask for complaint details and save as variable

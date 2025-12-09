@@ -88,43 +88,43 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 1. Once you are in the power **platform admin center**, select **Manage** from left menu and click on the environmnet with the name, ODL_User <inject key="Deployment ID" enableCopy="false"></inject>'s Environment.
 
-   ![](./media/powadminimg1.png)
+   ![](./media/uppowadminimg1.png)
 
 1. In the environmnet page, click on **See all** under **S2S apps**.
 
-   ![](./media/powadminimg2.png)
+   ![](./media/uppowadminimg2.png)
 
 1. In the next pane, click on **+ New app user**.
 
-   ![](./media/powadminimg3.png)
+   ![](./media/uppowadminimg3.png)
 
 1. In the create a new app user pane, under **App**, click on **+ Add an app**.
 
-   ![](./media/powadminimg4.png)
+   ![](./media/uppowadminimg4.png)
 
 1. From the list of apps, search for `https://cloudlabssandbox.onmicrosoft.com/cloudlabs.ai/` and select it.
 
-   ![](./media/powadminimg5.png)
+   ![](./media/uppowadminimg5.png)
 
 1. Once done, under **Business unit** search for **org** and select the only business unit that comes in the list.
 
-   ![](./media/powadminimg6.png)
+   ![](./media/uppowadminimg6.png)
 
 1. Beside **Security roles** click on **Edit** icon.
 
-   ![](./media/powadminimg9.png)
+   ![](./media/uppowadminimg9.png)
 
 1. From the list of roles, search and select **System Administrator** and click on **Save**.
 
-   ![](./media/powadminimg10.png)
+   ![](./media/uppowadminimg10.png)
 
 1. In the pop-up window, select **save**.
 
-   ![](./media/powadminimg11.png)
+   ![](./media/uppowadminimg11.png)
 
 1. Review all the details and click on **Create**.
 
-   ![](./media/powadminimg12.png)
+   ![](./media/uppowadminimg12.png)
 
 1. Navigate to **Microsoft Copilot Studio** by opening a new browser tab and using the link below:
 
