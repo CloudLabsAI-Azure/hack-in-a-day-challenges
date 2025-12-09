@@ -1,40 +1,58 @@
-# Challenge 05: Add a Chat-Style Interface for Insights
+# Challenge 05: Configure the Application and Run the Manufacturing Data Analysis Assistant
 
 ## Introduction
 
-Contoso wants operators to ask questions about data in natural language.  
-In this challenge, you’ll build a simple chat-style interface using Streamlit or Flask to query the LLM for insights.
+Now that all AI services are deployed and configured, Contoso will integrate them into the sample application.  
+In this challenge, you will configure the environment variables, install dependencies, and run the Manufacturing Data Analysis Assistant locally to perform real-time data analysis using RAG (Retrieval-Augmented Generation).
 
 ## Challenge Objectives
 
-- Create a lightweight UI to accept user queries.  
-    - Send queries to the Foundry LLM and display responses.  
-- Demonstrate interactive data exploration with GenAI.
+- Configure the `.env` file with Azure OpenAI and Azure AI Search credentials.  
+- Install required Python dependencies.  
+- Run the Streamlit application and test interactive data analysis.
 
 ## Steps to Complete
 
-1. Open **VS Code** or Azure Cloud Shell.  
-1. Create a Python file `app.py` and paste a lightweight example (pseudocode) that calls the Foundry/LLM endpoint via your preferred client library. Replace the `YOUR_API_KEY` and `YOUR_ENDPOINT` placeholders with values from your Foundry project:
+1. Open **Visual Studio Code**.
 
-   ```python
-   # PSEUDOCODE: replace with Foundry SDK or REST call
-   import requests
-   import streamlit as st
+1. From VS Code, select **File → Open Folder** and open the `Codefiles` folder extracted in Challenge-1.
 
-   API_KEY = "YOUR_API_KEY"
-   ENDPOINT = "YOUR_ENDPOINT"
+1. Ensure the folder contains the following files: 
 
-   st.title("Manufacturing Data Chat Assistant")
-   user_query = st.text_input("Ask about machine performance:")
-   if user_query:
-       payload = {"model": "gpt-4.1-mini", "prompt": user_query, "temperature": 0.5}
-       headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
-       r = requests.post(ENDPOINT, json=payload, headers=headers)
-       st.write(r.json().get("output", "No response"))
+   - `app.py`  
+   - `.env.example`  
+   - `requirements.txt`
+
+1. In VS Code File Explorer, right-click on `.env.example` file and select **Rename**, then rename it to `.env`.
+
+1. Open the `.env` file and add the values and **save**.
+
+1. Open the VS Code terminal (Terminal → New Terminal).
+
+1. In the terminal, install dependencies by running this command:
+
    ```
-1. Run the app: streamlit run app.py and open the shown URL.
+   pip install -r requirements.txt
+   ```
 
-1. Ask questions such as “Which machine had maximum downtime?” or “What trend do you see in temperatures?”
+1. After installation completes, run the application:
+
+   ```
+   streamlit run app.py
+   ```
+
+1. Once the Streamlit application launches in a browser, try asking questions such as:
+   - Which machine had the most downtime this week?
+   - Show me all machines with RUNNING status
+   - What is the average temperature for MACHINE_001?
+   - Find machines with high vibration levels
+   - Which machines are currently in maintenance?
+   - Analyze temperature trends across all machines
+
+1. Review the output:  
+   - AI-generated insights based on retrieved data  
+   - Retrieved data from Azure AI Search  
+   - Chat-style interface for interactive analysis
 
 <validation step="2ea74b2b-34e6-4ae2-84eb-be669c59f8a9" />
  
@@ -43,17 +61,19 @@ In this challenge, you’ll build a simple chat-style interface using Streamlit 
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
-
 ## Success Criteria
 
-- Chat interface runs locally and responds to user queries.
-
-- Model provides relevant answers about the dataset.
+- Environment variables populated correctly.  
+- Streamlit application runs successfully.  
+- User can ask questions and receive AI-generated insights based on manufacturing data.
 
 ## Additional Resources
 
-- [Streamlit Documentation](https://docs.streamlit.io/)
+- [Working with Environment Variables in Python](https://code.visualstudio.com/docs/python/tutorial-env-file)  
+- [Streamlit Documentation](https://docs.streamlit.io)
+- [Azure AI Search Documentation](https://learn.microsoft.com/azure/search/)
+- [Azure OpenAI Documentation](https://learn.microsoft.com/azure/ai-services/openai/)
 
-- Foundry/LLM docs and SDKs: https://learn.microsoft.com/azure/ai-foundry/
+### **Congratulations — you have now completed the Manufacturing Data Analysis Assistant application!**
 
-Now, click **Next** to continue to **Clean Up**.
+You have successfully combined **Azure AI Search + Azure OpenAI** to create an intelligent manufacturing data analysis solution using RAG (Retrieval-Augmented Generation).
