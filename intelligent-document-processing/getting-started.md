@@ -1,6 +1,6 @@
 ## Getting Started with Challenge
 
-Welcome to Hack in a Day: Build A Fabric Real-Time Intelligence Solution challenge! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
+Welcome to Hack in a Day: Intelligent Document Processing challenge! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
 
 ### Accessing Your Challenge Environment
 
@@ -26,13 +26,11 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 ![](./media/gs-leave-4.png)
 
-## Let's Get Started with Microsoft Fabric Real-Time Intelligence
+## Let's Get Started with Azure AI Document Intelligence
 
-1. In the JumpVM, click on **Microsoft Edge** browser which is created on desktop.
+1. In the JumpVM, click on **Azure Portal** shortcut of Microsoft Edge browser which is created on desktop.
 
    ![](./media/gs-up1.png)
-
-1. Navigate to **Microsoft Fabric** portal by typing `https://fabric.microsoft.com` in the address bar.
 
 1. On the **Sign into Microsoft** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
 
@@ -52,7 +50,9 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/gs-4.png)
 
-1. Welcome to **Microsoft Fabric**! You're now ready to start building your real-time intelligence solution using Eventhouse, Eventstream, Lakehouse, and Data Activator.
+1. Welcome to **Azure Portal**! You're now ready to start building your intelligent document processing solution using Azure AI Document Intelligence, Azure Storage, and Power BI for automated invoice extraction and financial reporting.
+
+1. You can also open **Power BI Desktop** from the desktop to create visualizations and reports from your extracted invoice data.
 
 Now, click on the **Next** from lower right corner to move on next page.
 

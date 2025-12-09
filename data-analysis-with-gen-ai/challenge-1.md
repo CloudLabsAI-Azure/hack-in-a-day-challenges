@@ -20,17 +20,27 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
 ## Steps to Complete
 
-1. In the Azure Portal, create a **Storage Account** with name: mfgdatagenai<inject key="DeploymentID"></inject>.  
+1. In the Azure Portal, search **Storage Account** in the search bar and select it.
 
-2. Open **Containers** → click **+ Container** → name it manufacturing-logs-<inject key="DeploymentID"></inject>.  
+1. Create a **Storage Account** with: 
+    
+    - Subscription: Select the **defualt Subscription**.
+    - Resource group: Select **challenge-rg-<inject key="DeploymentID"></inject>**.
+    - Storage account name: Type **mfgdatagenai<inject key="DeploymentID"></inject>**.  
+    - Region: **<inject key="Region"></inject>**.
+    - Performance: **Standard**.
+    - Redundancy: **Locally-redundant storage (LRS)**
+    - Click **Review Create** and press **Create** again.
 
-3. Set **Access Level** to *Private*.  
+1. Open **Containers** → click **+ Container** → name it manufacturing-logs-<inject key="DeploymentID"></inject>.  
 
-4. Upload the provided CSV files from the downloads folder. 
+1. Set **Access Level** to *Private*.  
 
-5. After upload, click the file and note the Blob URL (location for later use). 
+1. Upload the provided CSV files from the downloads folder. 
 
-6. (Optional) Open the CSV in Excel or VS Code to inspect columns and data range.
+1. After upload, click the file and note the Blob URL (location for later use). 
+
+1. (Optional) Open the CSV in Excel or VS Code to inspect columns and data range.
 
 ## Success Criteria
 

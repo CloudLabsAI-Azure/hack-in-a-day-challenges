@@ -15,13 +15,13 @@ In this challenge, you’ll use Microsoft Foundry (LLM capabilities) to summariz
 
 1. Open **Microsoft Foundry Studio** (or the Foundry project UI) and open your project **mfg-proj-<inject key="DeploymentID"></inject>**.
 
-2. Choose the deployed LLM model (for example `gpt-4.1-mini`) within the Foundry project.
+1. Choose the deployed LLM model (for example `gpt-4.1-mini`) within the Foundry project.
 
-3. Prepare a prompt such as:  
+1. Prepare a prompt such as:  
    - Temprature of MACHINE_001
    - All Running MACHINE.
 
-4. Run the prompt and observe the output summary.   
+1. Run the prompt and observe the output summary.   
 
 ## Success Criteria
 
