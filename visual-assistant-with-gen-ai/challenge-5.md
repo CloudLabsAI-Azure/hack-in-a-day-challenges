@@ -32,6 +32,13 @@ To support this, you will deploy an **Azure Foundry resource** and configure a *
     - **AZURE_OPENAI_KEY**
 11. Save all three values in a notepad — they will be required for the application integration challenge.
 
+<validation step="c6e9d110-4432-4176-afd3-053e201fd380" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ## Success Criteria
 - The Foundry resource is deployed successfully.  
 - A **GPT-4.1-Mini** model deployment is created and active.  
