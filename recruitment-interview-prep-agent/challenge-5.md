@@ -43,6 +43,13 @@ Once published, you will add the Copilot to Teams and test the complete hiring w
 - The email workflow triggers only when the user selects **Yes**.
 - The experience feels natural and demonstrates a complete HR hiring cycle.
 
+<validation step="2a5b1b60-20f7-438c-b026-02527c906a13" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ## Additional Resources
 - https://learn.microsoft.com/microsoft-copilot-studio/channels-teams
 - https://learn.microsoft.com/microsoft-teams/platform/apps-in-teams-overview

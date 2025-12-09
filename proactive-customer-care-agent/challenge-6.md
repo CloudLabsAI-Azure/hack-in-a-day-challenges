@@ -99,6 +99,13 @@ In this challenge, you will publish your copilot, add it to Teams, test the comp
 
 7. Verify response comes from your knowledge base.
 
+<validation step="ee184267-2451-441d-a53d-a838535aa8a6" />
+ 
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ## Success Criteria
 - Copilot successfully published from Copilot Studio
 - Copilot deployed and accessible in Microsoft Teams

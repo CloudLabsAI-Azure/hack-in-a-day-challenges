@@ -126,13 +126,6 @@ The Copilot can now analyze financial documents and classify risk. In this chall
    - If **Yes** → Outlook Flow runs and email is sent  
    - If **No** → Copilot thanks the user without escalation
 
-<validation step="2812d8c8-6bad-4e9e-b977-ad4db07c797b" />
- 
-> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
-> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
-
 ## Success Criteria  
 
 - The Outlook Flow successfully sends an escalation email only when the user selects **Yes**.  

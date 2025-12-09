@@ -105,13 +105,6 @@ In this challenge, you will create 4 essential customer care topics using genera
 
 7. Click **Save**.
 
-<validation step="ee184267-2451-441d-a53d-a838535aa8a6" />
- 
-> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
-> - Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task. 
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
-
 ### Step 4: Create Topic 3 - Delivery Delay Management
 
 1. Click **+ Add** → **Create from description with Copilot**.

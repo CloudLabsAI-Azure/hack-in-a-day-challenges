@@ -149,13 +149,6 @@ This transforms the Copilot into a practical assistant that supports the full re
    ```
 1. Verify that you recived a mail.
 
-<validation step="2a5b1b60-20f7-438c-b026-02527c906a13" />
- 
-> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
-> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
-
 ## Success Criteria
 - The Copilot now supports a full recruitment workflow, not just Q&A.
 - The shortlist report email includes real evaluation details from uploaded documents.
