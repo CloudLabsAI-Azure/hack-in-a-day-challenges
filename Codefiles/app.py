@@ -112,22 +112,24 @@ def search_manufacturing_data(search_client, query, top_k=5):
         list: Search results
     """
     try:
+        # Search without specifying field names to get all fields
         results = search_client.search(
             search_text=query,
-            top=top_k,
-            select=["machine_id", "timestamp", "temperature", "vibration", "status", "downtime_minutes"]
+            top=top_k
         )
         
         search_results = []
         for result in results:
-            search_results.append({
-                "machine_id": result.get("machine_id", "N/A"),
-                "timestamp": result.get("timestamp", "N/A"),
-                "temperature": result.get("temperature", "N/A"),
-                "vibration": result.get("vibration", "N/A"),
-                "status": result.get("status", "N/A"),
-                "downtime_minutes": result.get("downtime_minutes", 0)
-            })
+            # Create a dictionary with all available fields from the result
+            result_dict = {}
+            
+            # Iterate through all fields in the search result
+            for key in result.keys():
+                if key.startswith('@'):  # Skip metadata fields like @search.score
+                    continue
+                result_dict[key] = result.get(key, "N/A")
+            
+            search_results.append(result_dict)
         
         return search_results
         
@@ -153,12 +155,10 @@ def generate_insights_with_rag(openai_client, user_query, search_results):
         context = "Here is the manufacturing data:\n\n"
         for idx, result in enumerate(search_results, 1):
             context += f"Record {idx}:\n"
-            context += f"- Machine ID: {result['machine_id']}\n"
-            context += f"- Timestamp: {result['timestamp']}\n"
-            context += f"- Temperature: {result['temperature']}°C\n"
-            context += f"- Vibration: {result['vibration']}\n"
-            context += f"- Status: {result['status']}\n"
-            context += f"- Downtime: {result['downtime_minutes']} minutes\n\n"
+            # Dynamically format all fields from the result
+            for key, value in result.items():
+                context += f"- {key}: {value}\n"
+            context += "\n"
         
         # Create prompt with context
         system_prompt = """You are a manufacturing operations analyst. Analyze the provided manufacturing data 
@@ -174,19 +174,38 @@ Please analyze the data and provide insights to answer the question. Include:
 2. Key patterns or trends observed
 3. Recommendations for operations team (if applicable)"""
 
-        # Call Azure OpenAI
-        response = openai_client.chat.completions.create(
-            model=AZURE_OPENAI_DEPLOYMENT_NAME,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ],
-            temperature=0.5,
-            max_tokens=500
-        )
+        # Call Azure OpenAI with retry logic for rate limiting
+        max_retries = 3
+        retry_delay = 5
         
-        insights = response.choices[0].message.content.strip()
-        return insights
+        for attempt in range(max_retries):
+            try:
+                response = openai_client.chat.completions.create(
+                    model=AZURE_OPENAI_DEPLOYMENT_NAME,
+                    messages=[
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_prompt}
+                    ],
+                    temperature=0.5,
+                    max_tokens=300
+                )
+                
+                insights = response.choices[0].message.content.strip()
+                return insights
+                
+            except Exception as api_error:
+                error_str = str(api_error)
+                if "429" in error_str or "RateLimitReached" in error_str:
+                    if attempt < max_retries - 1:
+                        import time
+                        st.warning(f"Rate limit reached. Retrying in {retry_delay} seconds... (Attempt {attempt + 1}/{max_retries})")
+                        time.sleep(retry_delay)
+                        retry_delay *= 2  # Exponential backoff
+                    else:
+                        st.error("Rate limit exceeded. Please wait 60 seconds and try again, or increase your Azure OpenAI quota.")
+                        return "Rate limit exceeded. Please try again in a moment."
+                else:
+                    raise api_error
         
     except Exception as e:
         st.error(f"Azure OpenAI generation error: {str(e)}")
@@ -277,8 +296,8 @@ def main():
         # Generate response
         with st.chat_message("assistant"):
             with st.spinner("Searching data and generating insights..."):
-                # Search for relevant data
-                search_results = search_manufacturing_data(search_client, prompt, top_k=10)
+                # Search for relevant data (limited to 1 to avoid rate limits)
+                search_results = search_manufacturing_data(search_client, prompt, top_k=1)
                 
                 if search_results:
                     # Generate insights using RAG
