@@ -16,51 +16,67 @@ This index will serve as the contextual knowledge base that the model will later
 
 ## Steps to Complete
 
-1. In the **Azure Portal**, select **Create a resource** → search for **Azure AI Search** → click **Create**.  
+1. In the **Azure Portal**, search for **Azure AI Search**.
 
-1. Under **Basics**, fill in the following details:
-   - **Subscription:** Select your active subscription.  
-  - **Resource Group:** Use challenge-rg-<inject key="DeploymentID"></inject>.  
-   - **Service Name:** mfg-search-<inject key="DeploymentID"></inject>.
-   - **Region:** <inject key="Region"></inject>. 
-   - **Pricing Tier:** Choose *Basic (B)* or *Free (F)*. 
+1. Create an **Azure AI Search** resource with the following details:
+
+  - Subscription: **Select the defualt Subscription**.  
+  - Resource Group: **Use challenge-rg-<inject key="DeploymentID"></inject>**.  
+  - Service Name: **mfg-search-<inject key="DeploymentID"></inject>**.
+  - Location: **<inject key="Region"></inject>**. 
+  - Pricing Tier: Choose **Basic**. 
 
 1. Click **Review + Create** → **Create**.  
 
 1. Once deployment completes, open your **Azure AI Search** resource and note:
-   - **Endpoint URL**  
-   - **Admin Key**
 
-1. In the left pane, select **Import data (new)**.  
+  - **Endpoint URL**  
+  - **Admin Key**
+
+  > **Hint:** The Azure AI Search URL shown on the **Overview** page is your endpoint.
+
+1. In the top pane, select **Import data (new)**.  
 
 1. Choose **Azure Blob Storage** as the Data Source.  
 
 1. When asked **What scenario are you targeting?**, choose **RAG** (Retrieval-Augmented Generation).  
 
-1. Configure your Azure Blob Storage connection:
-  - Select **Subscription** and the **Storage account** where you uploaded `datasets`.
-  - Choose the **Blob container** that contains the file.
-  - Set **Parsing mode** to **Delimited Text** and enable **First line contains header**.
+1. Configure your Azure Blob Storage connection with:
 
-1. When prompted to **Vectorize your text**, configure vectorization for the dataset:
-  - **Column to vectorize:** `machine_id` (or `MachineID` depending on the detected field name).
-  - **Kind:** **Azure AI Foundry (preview)**.
-  - Select **Subscription** and choose your **Azure AI Foundry/Hub project**,**mfg-proj-<inject key="DeploymentID"></inject>**).
-  - **Model deployment:** `text-embedding-ada-002`.
-  - **Authentication type:** `API key` and provide the Foundry API key when prompted.
-  - Check the acknowledgement box to accept preview terms, then click **Next**.
+  - Subscription: **Select the defualt Subscription**.  
+  - Storage account: **mfgdatagenai<inject key="DeploymentID"></inject>**.  
+  - Blob container: **manufacturing-logs-<inject key="DeploymentID"></inject>**.
+  - Parsing mode: **Delimited text**. 
+  - Check the option **First line contains headers**.
+  - Click **Next**.
 
-1. Proceed through the remaining steps, review settings, and click **Create** to build the index and vector store.
+1. Vectorize your text with:
 
-  - On the **Review and create** page, Azure will show a summary of the resources and object names that will be created. By default there will be an **Objects name prefix** or similar generated name. Review this prefix (it is used to name the index/vector objects) and click **Create**.
+  - Column to vectorize: **machine_id**.  
+  - Kind: **Azure AI Foundary (Preview)**.  
+  - Subscription: **Select the defualt Subscription**.
+  - Azure AI Foundry/Hub project: **openai-mfg-<inject key="DeploymentID"></inject>**. 
+  - Model deployment: **text-embedding-ada-002**.
+  - Authentication type: **API key**.
+  - Check the **Acknowledge** checkbox.
+  - Click **Next**.
 
-1. Once the index builds successfully, test it:  
-    - In the **Search Explorer**, enter a query to Get all RUNNING records for MACHINE_001:  
-    
-      ```
-      search=machine_id:"MACHINE_001"&$filter=status eq 'RUNNING'
-      ```  
-    - Observe returned data (Json).
+1. Advanced ranking and relevancy:
+
+  - Click **Next**.
+
+
+1. On the **Review and create** page, Azure will show a summary of the resources and object names that will be created. By default there will be an **Objects name prefix**. Review this prefix (it is used to name the index/vector objects) and click **Create**.
+
+1. Once the index builds successfully, test it: 
+
+  - In the **Search Explorer**, enter a query to Get all RUNNING records for MACHINE_001:  
+
+  ```
+  search=machine_id:"MACHINE_001"&$filter=status eq 'RUNNING'
+  ``` 
+       
+  - Observe returned data (Json).
 
 <validation step="c0d4027b-c42a-4776-861a-3368fdb6f29c" />
  
