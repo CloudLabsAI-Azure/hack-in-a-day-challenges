@@ -40,13 +40,13 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 1. On the **Sign into Microsoft** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
 
-   - Email/Username: `<inject key="AzureAdUserEmail"></inject>`
+   - Email/Username: **<inject key="AzureAdUserEmail"></inject>**
 
      ![](./media/gs-lab3-g2.png)
 
 1. Now, enter the following password and click on **Sign in**.
 
-   - Password: `<inject key="AzureAdUserPassword"></inject>`
+   - Password: **<inject key="AzureAdUserPassword"></inject>**
 
      ![](./media/gs-lab3-g3.png)
 
@@ -150,23 +150,23 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/cor2-gs-g4.png)
 
-   1. Go back to the **Power Apps** portal, on your **ODL_User <inject key="Deployment ID" enableCopy="false"></inject>’s Environment** copy the **Environment ID** from the browser URL as highlighted.
+1. Go back to the **Power Apps** portal, on your **ODL_User <inject key="Deployment ID" enableCopy="false"></inject>’s Environment** copy the **Environment ID** from the browser URL as highlighted.
 
-      ![](./media/cor2-gs-g5.png)
+   ![](./media/cor2-gs-g5.png)
    
-   1. Open a **new browser tab**, and paste the copied **Environment ID** at the end of the following URL to verify access:
+1. Open a **new browser tab**, and paste the copied **Environment ID** at the end of the following URL to verify access:
 
-      ```
-      https://copilotstudio.microsoft.com/environments/(Environment ID)
-      ```
+   ```
+   https://copilotstudio.microsoft.com/environments/(Environment ID)
+   ```
 
-      ![](./media/cor2-gs-g6.png)
+   ![](./media/cor2-gs-g6.png)
 
-      > **Note:** Replace **(Environment ID)** with the ID you copied in the previous step.
+   > **Note:** Replace **(Environment ID)** with the ID you copied in the previous step.
    
-   1. You will be navigated to the **Copilot Studio** portal. Verify that **ODL_User <inject key="Deployment ID" enableCopy="false"></inject>’s Environment** is visible and selected under **Supported environments**.
+1. You will be navigated to the **Copilot Studio** portal. Verify that **ODL_User <inject key="Deployment ID" enableCopy="false"></inject>’s Environment** is visible and selected under **Supported environments**.
 
-      ![](./media/cor2-gs-g7.png)
+   ![](./media/cor2-gs-g7.png)
 
 1. You are now ready to start building your **IT Support Copilot** using Microsoft Copilot Studio! This copilot will help employees with common IT issues like credential resets, VPN connectivity problems, hardware troubleshooting (laptops, printers, monitors, keyboards), and will integrate with Freshdesk for automated ticket creation.
 
