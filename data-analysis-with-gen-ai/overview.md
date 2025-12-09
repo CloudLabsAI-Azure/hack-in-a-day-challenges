@@ -22,11 +22,12 @@ Provide a streamlined 6-hour prototype environment where participants use genera
 
 ## Learning Objectives
 
-- Understand how to combine computer vision (image/frame ingestion) with generative AI to produce commentary and recommended actions.
-- Pre-process visual data (images/frames), detect anomalies/defects, and use retrieval/prompting pipelines to generate natural-language insights.
-- Build a simple UI or dashboard that shows visual input, detected issues, commentary and next-steps.
-- Recognise challenges: camera calibration, lighting, anomaly-detection false positives, generative AI hallucination, human-in-loop review.
-- Learn how to deploy a lightweight prototype using accessible Azure (or cloud) services and clean up resources.
+- Understand how to ingest and prepare manufacturing operational data (machine logs, sensor data) for AI analysis.
+- Deploy and configure Microsoft Foundry with LLM capabilities (gpt-4.1-mini) and embedding models for semantic search.
+- Create Azure AI Search indexes to enable Retrieval-Augmented Generation (RAG) scenarios with manufacturing data.
+- Use generative AI prompts to extract insights, detect patterns, and generate natural-language summaries from structured data.
+- Build a chat-style interface (Streamlit) to interact with data through conversational queries.
+- Recognize challenges: prompt engineering, data quality, hallucination risks, and best practices for GenAI in manufacturing contexts.
 
 ## Challenges Overview
 
