@@ -70,11 +70,11 @@ In this challenge, you will create 4 topics that help employees: Document Search
 
 - Review the generated topic:
 
-   - **Trigger phrases:** Verify phrases like:
-     - "Email me a document"
-     - "Send document to my email"
-     - "I need a document emailed"
-     - "Can you email the policy"
+- **Trigger phrases:** Verify phrases like:
+   - "Email me a document"
+   - "Send document to my email"
+   - "I need a document emailed"
+   - "Can you email the policy"
 
 - Review the conversation flow to ensure it collects all required information.
 
@@ -123,11 +123,11 @@ In this challenge, you will create 4 topics that help employees: Document Search
 
 - Review the generated topic:
 
-   - **Trigger phrases:** Verify phrases like:
-     - "Submit a request"
-     - "Send request to team"
-     - "I need help from the team"
-     - "Post my question to Teams"
+- **Trigger phrases:** Verify phrases like:
+   - "Submit a request"
+   - "Send request to team"
+   - "I need help from the team"
+   - "Post my question to Teams"
 
 - Review the conversation flow to ensure it collects all necessary details.
 
