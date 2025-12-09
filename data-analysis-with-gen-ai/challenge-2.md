@@ -14,24 +14,26 @@ Azure OpenAI Service provides API access to models like gpt-4.1-mini, which can 
 
 1. In the Azure Portal search for **Microsoft Foundry** and choose **Create a Foundry resource**.
 
-1. Fill in the basics for the Foundry resource:
-   - **Subscription:** Your active subscription.
-   - **Resource Group:** challenge-rg-<inject key="DeploymentID"></inject>.
-   - **Name:** openai-mfg-<inject key="DeploymentID"></inject>.
-   - **Region:** <inject key="Region"></inject>.
-   - **Default Project Name: mfg-proj-<inject key="DeploymentID"></inject>**.
+1. Create the Foundry resource with the following details:
 
-1. Click **Review + Create** → **Create** and wait for deployment to complete.
+   - Subscription: Select the **defualt Subscription**.
+   - Resource group: Select **challenge-rg-<inject key="DeploymentID"></inject>**.
+   - Name: **openai-mfg-<inject key="DeploymentID"></inject>**.
+   - Region: **<inject key="Region"></inject>**.
+   - Default Project Name: **mfg-proj-<inject key="DeploymentID"></inject>**.
 
-4. After deployment, open the Microsoft Foundry resource and navigate to the project `mfg-proj-<inject key="DeploymentID"></inject>`.
+   > **Note:** Keep clicking **Next** until you reach **Review + Create**, then select **Create**.
+
+1. After deployment, open the Microsoft Foundry resource and navigate to the project **mfg-proj-<inject key="DeploymentID"></inject>**.
 
 1. From the Foundry resource **Overview** page click **Go to Foundry portal** 
 
-1. Deploy or enable the following model capabilities in the **models + endpoints** section in Foundry project (or equivalent model deployment area):
-   - **gpt-4.1-mini** — *Global Standard* tier with **20,000 TPM** capacity.
-   - **text-embedding-ada-002** — *Global Standard* with **30,000 TPM** capacity (Requried for semantic search).
+1. Deploy the following models in the **Models + Endpoints** section by selecting **Deploy base model**:
 
-1. Note any endpoints, project identifiers, and keys provided by Foundry for later use.
+   - **gpt-4.1-mini**: **Global Standard** tierx` with **20,000 TPM** capacity.
+   - **text-embedding-ada-002**: *Global Standard* with **30,000 TPM** capacity (Requried for semantic search).
+
+   > **Hint:** If a model doesn’t appear when you search for it, click **Go to model catalog** in the model selection screen and deploy it from there.
 
 <validation step="0e3316a0-8749-494b-b375-e696faea24f2" />
  

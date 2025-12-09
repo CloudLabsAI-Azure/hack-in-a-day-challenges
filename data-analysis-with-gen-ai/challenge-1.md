@@ -20,9 +20,9 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
 ## Steps to Complete
 
-1. In the Azure Portal, search **Storage Account** in the search bar and select it.
+1. Inside the Azure Portal.
 
-1. Create a **Storage Account** with: 
+1. Create a **Storage Account** with below details: 
     
     - Subscription: Select the **defualt Subscription**.
     - Resource group: Select **challenge-rg-<inject key="DeploymentID"></inject>**.
@@ -30,22 +30,20 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
     - Region: **<inject key="Region"></inject>**.
     - Performance: **Standard**.
     - Redundancy: **Locally-redundant storage (LRS)**
-    - Click **Review Create** and press **Create** again.
 
-1. Open **Containers** → click **+ Container** → name it manufacturing-logs-<inject key="DeploymentID"></inject>.  
+1. Inside the Storage Account, under the **Data storage** section, create a **container** with the following details:
 
-1. Set **Access Level** to *Private*.  
+    - Name: **manufacturing-logs-<inject key="DeploymentID"></inject>**.
 
-1. Upload the provided CSV files from the downloads folder. 
-
-1. After upload, click the file and note the Blob URL (location for later use). 
+1. Upload the provided CSV files (previously extracted dataset) from the Downloads folder into the newly created **Container**.
 
 1. (Optional) Open the CSV in Excel or VS Code to inspect columns and data range.
 
 ## Success Criteria
 
-- Dataset uploaded successfully to Azure Blob Storage.  
-- Data structure understood and ready for AI processing.
+- The Storage Account is created successfully with the specified configuration.
+- Dataset uploaded to the Blob container.
+- Dataset structure reviewed and ready for AI processing.
 
 ## Additional Resources
 
