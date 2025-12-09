@@ -6,7 +6,7 @@ Each machine logs temperature, vibration, and downtime events. Before using Gene
 
 ## Accessing the Datasets
 
-Please copy the below link and paste in a new browser tab inside your LabVM to download the required datasets for the usecase and extract it.
+Please copy the link below and paste it into a new browser tab inside your LabVM to download the required datasets and code files for the use case and extract them.
 
 ```
 https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/c2-datasets.zip
