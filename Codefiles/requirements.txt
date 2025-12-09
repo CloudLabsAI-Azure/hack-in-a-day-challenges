@@ -1,0 +1,17 @@
+# Azure OpenAI SDK
+openai==1.58.1
+
+# Azure AI Search SDK
+azure-search-documents==11.6.0b7
+
+# Azure Core (dependency for Search SDK)
+azure-core==1.32.0
+
+# Streamlit for web UI
+streamlit==1.40.2
+
+# Python dotenv for environment variables
+python-dotenv==1.0.1
+
+# Data processing
+pandas==2.2.3
