@@ -246,8 +246,6 @@ Test all 4 topics you created in Challenge 4:
 - [Analyze agent performance](https://learn.microsoft.com/microsoft-copilot-studio/analytics-overview)  
 - [Share your agent](https://learn.microsoft.com/microsoft-copilot-studio/admin-share-bots)
 
----
-
 ## Congratulations!
 
 You have successfully built an **AI-powered Internal Knowledge Navigator Agent** using Microsoft Copilot Studio!

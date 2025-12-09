@@ -13,11 +13,11 @@ In this challenge, you will create an AI-powered Customer Care Copilot using Mic
 
 ## Accessing the Datasets
 
-Please download and extract the datasets required for this challenge here - [Datasets](https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/proactive-dataset.zip)
+Please download and extract the datasets required for this challenge here:
 
-   ```
-   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/proactive-dataset.zip
-   ```
+```
+https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/proactive-dataset.zip
+```
 
 ## Steps to Complete
 
@@ -90,8 +90,8 @@ Please download and extract the datasets required for this challenge here - [Dat
 
 <validation step="fd23ac57-641a-4da5-8f64-44bbb4ae7722" />
  
-> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
-> - Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task. 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 

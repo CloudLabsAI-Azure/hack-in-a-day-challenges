@@ -5,6 +5,14 @@ Employees across organizations waste valuable time searching for internal polici
 
 In this challenge, you will create an AI-powered Internal Knowledge Copilot using Microsoft Copilot Studio that will serve as your intelligent assistant to help employees access information from HR, Finance, IT, and Procurement departments.
 
+## Accessing the Datasets
+
+Please download and extract the datasets required for this challenge here:
+
+```
+https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/knowledge-datasets.zip
+```
+
 ## Challenge Objectives
 - Sign in to Microsoft Copilot Studio
 - Create a new Copilot for internal knowledge navigation
@@ -13,26 +21,7 @@ In this challenge, you will create an AI-powered Internal Knowledge Copilot usin
 
 ## Steps to Complete
 
-### Step 1: Verify Local Documents Folder
-
-- In the **Lab VM**, open **File Explorer**.
-
-- Navigate to the documents folder to verify all company documents are present:
-
-   ```
-   c:\Users\GirishR\OneDrive - Spektra Systems LLC\Documents\GitHub\hack-in-a-day-challenges\knowledge-navigator-agent (internal-copilot)\documents\
-   ```
-
-- Verify you can see multiple Contoso company documents (40+ files) including:
-   - Contoso_HR_Handbook.docx
-   - Contoso_Procurement_Data_With_Policies.docx
-   - Contoso-Corp-IT-Governance&Compliance-Policy.docx
-   - Employee-Travel-Reimbursement.xlsx
-   - And many more...
-
-- Keep this folder location accessible for uploading in Challenge 2.
-
-### Step 2: Create SharePoint Site
+### Step 1: Create SharePoint Site
 
 - Navigate to the **Microsoft 365** portal:
 
@@ -59,10 +48,7 @@ In this challenge, you will create an AI-powered Internal Knowledge Copilot usin
 
 - Once the site is created, navigate to the **Documents** section.
 
-- You can upload files now or in Challenge 2. To upload now, click **Upload** > **Files** and select all documents from:
-   ```
-   c:\Users\GirishR\OneDrive - Spektra Systems LLC\Documents\GitHub\hack-in-a-day-challenges\knowledge-navigator-agent (internal-copilot)\documents\
-   ```
+- You can upload files now or in Challenge 2. To upload now, click **Upload** > **Files** and select all documents from where you have extracted the datasets.
 
 - Wait for all files to upload successfully (this may take several minutes for 40+ documents).
 
@@ -78,7 +64,7 @@ In this challenge, you will create an AI-powered Internal Knowledge Copilot usin
 
 - Ensure the environment is **ODL_User<inject key="DeploymentID"></inject>**.
 
-### Step 3: Create a New Agent
+### Step 2: Create a New Agent
 
 - On **Copilot Studio**, select **+ Create**, and then select **+ New agent**.
 
@@ -109,7 +95,7 @@ In this challenge, you will create an AI-powered Internal Knowledge Copilot usin
 
 - Wait for the agent to be created (this may take 30-60 seconds).
 
-### Step 4: Customize Copilot Icon and Identity
+### Step 3: Customize Copilot Icon and Identity
 
 - Once the copilot is created, you'll see the authoring canvas.
 
@@ -125,7 +111,7 @@ In this challenge, you will create an AI-powered Internal Knowledge Copilot usin
 
 - Click **Save** to apply changes.
 
-### Step 5: Test Basic Copilot Greeting
+### Step 4: Test Basic Copilot Greeting
 
 - Click **Test your copilot** button (usually in the top-right corner).
 
@@ -139,7 +125,7 @@ In this challenge, you will create an AI-powered Internal Knowledge Copilot usin
 
 - Note that specific knowledge questions won't work yet - you'll add knowledge sources in the next challenge.
 
-### Step 8: Save Your Progress
+### Step 5: Save Your Progress
 
 - Ensure all settings are saved.
 
@@ -149,8 +135,8 @@ In this challenge, you will create an AI-powered Internal Knowledge Copilot usin
 
 <validation step="1b18cb99-3de1-4ea8-8c3f-1839a06f8bf4" />
  
-> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
-> - Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task. 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
