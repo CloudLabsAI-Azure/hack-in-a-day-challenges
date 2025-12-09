@@ -169,7 +169,7 @@ These flows will be created first so they're ready to use when you build convers
 
 - Change the name to:
    ```
-   Email Document to Employee
+   Email Document Flow
    ```
 
 - Click **Save** to save the renamed flow.
@@ -186,7 +186,7 @@ These flows will be created first so they're ready to use when you build convers
 
 - Change the name to:
    ```
-   Send Request to Teams
+   Request Teams Flow
    ```
 
 - Click **Save** to save the renamed flow.
