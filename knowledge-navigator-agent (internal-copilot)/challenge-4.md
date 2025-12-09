@@ -33,9 +33,9 @@ In this challenge, you will create 4 topics that help employees: Document Search
    
    - **Description:**
 
-   ```
-   Assist new employees who are learning about the company. Help them understand company policies, procedures, organizational structure, benefits, workplace resources, and onboarding requirements. Use generative answers to search the SharePoint knowledge base for information from documents like the HR Handbook, Onboarding Checklist, IT Governance Policy, Employee Travel Reimbursement guidelines, and other relevant company documents. Provide comprehensive, helpful responses to help new employees get oriented and feel welcomed.
-   ```
+      ```
+      Assist new employees who are learning about the company. Help them understand company policies, procedures, organizational structure, benefits, workplace resources, and onboarding requirements. Use generative answers to search the SharePoint knowledge base for information from documents like the HR Handbook, Onboarding Checklist, IT Governance Policy, Employee Travel Reimbursement guidelines, and other relevant company documents. Provide comprehensive, helpful responses to help new employees get oriented and feel welcomed.
+      ```
 
 - Click **Create**.
 
@@ -62,9 +62,9 @@ In this challenge, you will create 4 topics that help employees: Document Search
    
    - **Description:**
 
-   ```
-   Help employees who want to receive a company document via email. Ask which document they need and save it as a variable. Ask for their email address and save it as a variable. Ask them to briefly describe the document or why they need it and save that as a variable. Then call the Email Document to Employee agent flow and map the email address to EmployeeEmail input, document name to DocumentName input, and description to DocumentDescription input. After the flow completes, confirm that an email with the document information has been sent to their inbox.
-   ```
+      ```
+      Help employees who want to receive a company document via email. Ask which document they need and save it as a variable. Ask for their email address and save it as a variable. Ask them to briefly describe the document or why they need it and save that as a variable. Then call the Email Document to Employee agent flow and map the email address to EmployeeEmail input, document name to DocumentName input, and description to DocumentDescription input. After the flow completes, confirm that an email with the document information has been sent to their inbox.
+      ```
 
 - Click **Create**.
 
@@ -115,9 +115,9 @@ In this challenge, you will create 4 topics that help employees: Document Search
    
    - **Description:**
 
-   ```
-   Help employees submit requests or questions to the team via Microsoft Teams. Ask for their name and save it as a variable. Ask for their email address and save it as a variable. Ask what type of request this is using multiple choice options (IT support, HR question, Facility issue, Access request, Other) and save the selection as a variable. After capturing the selection, create a new text variable called RequestTypeText and set it to the value of the multiple choice selection to convert it to string format. Ask them to describe their request in detail and save the request details as a variable. Then call the Send Request to Teams agent flow and map the employee name to EmployeeName input, email to EmployeeEmail input, the RequestTypeText variable to RequestType input, and request details to RequestDetails input. After the flow completes, confirm that their request has been posted to the team channel in Microsoft Teams and someone will respond soon.
-   ```
+      ```
+      Help employees submit requests or questions to the team via Microsoft Teams. Ask for their name and save it as a variable. Ask for their email address and save it as a variable. Ask what type of request this is using multiple choice options (IT support, HR question, Facility issue, Access request, Other) and save the selection as a variable. After capturing the selection, create a new text variable called RequestTypeText and set it to the value of the multiple choice selection to convert it to string format. Ask them to describe their request in detail and save the request details as a variable. Then call the Send Request to Teams agent flow and map the employee name to EmployeeName input, email to EmployeeEmail input, the RequestTypeText variable to RequestType input, and request details to RequestDetails input. After the flow completes, confirm that their request has been posted to the team channel in Microsoft Teams and someone will respond soon.
+      ```
 
 - Click **Create**.
 
