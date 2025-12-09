@@ -89,7 +89,26 @@ These flows will be created first so they're ready to use when you build convers
 
 - The flow is now saved with a default name. You'll rename it shortly.
 
-### Step 6: Create Flow 2 - Send Request to Teams
+### Step 6: Rename Flow 1 - Email Document to Employee
+
+- Navigate back to the **Flows** page by clicking the back arrow or selecting **Flows** from the left navigation.
+
+- Find your first flow in the list and click on it to open the **Flow overview** page.
+
+- Click **Edit** in the top-right corner.
+
+- In the flow designer, click on the flow name at the top (it will have a default name).
+
+- Change the name to:
+   ```
+   Email Document Flow
+   ```
+
+- Click **Save** to save the renamed flow.
+
+- Click the back arrow to return to the **Flows** page.
+
+### Step 7: Create Flow 2 - Send Request to Teams
 
 - Navigate back to the **Flows** page by clicking the back arrow.
 
@@ -99,7 +118,7 @@ These flows will be created first so they're ready to use when you build convers
 
 - The flow will have a default name initially.
 
-### Step 7: Add Trigger - When an Agent Calls the Flow
+### Step 8: Add Trigger - When an Agent Calls the Flow
 
 - On the flow canvas, click **Add a trigger**.
 
@@ -107,7 +126,7 @@ These flows will be created first so they're ready to use when you build convers
 
 - The trigger will be added to the canvas.
 
-### Step 8: Add Input Parameters for Teams Flow
+### Step 9: Add Input Parameters for Teams Flow
 
 - In the **When an agent calls the flow** trigger, click **Add an input**.
 
@@ -122,7 +141,7 @@ These flows will be created first so they're ready to use when you build convers
 
 - You should now have 4 input parameters defined.
 
-### Step 9: Add Teams Action
+### Step 10: Add Teams Action
 
 - Click the **+** icon below the trigger to add a new step.
 
@@ -156,25 +175,6 @@ These flows will be created first so they're ready to use when you build convers
 - Click **Save** to save the flow.
 
 - The flow is now saved with a default name. You'll rename it next.
-
-### Step 10: Rename Flow 1 - Email Document to Employee
-
-- Navigate back to the **Flows** page by clicking the back arrow or selecting **Flows** from the left navigation.
-
-- Find your first flow in the list and click on it to open the **Flow overview** page.
-
-- Click **Edit** in the top-right corner.
-
-- In the flow designer, click on the flow name at the top (it will have a default name).
-
-- Change the name to:
-   ```
-   Email Document Flow
-   ```
-
-- Click **Save** to save the renamed flow.
-
-- Click the back arrow to return to the **Flows** page.
 
 ### Step 11: Rename Flow 2 - Send Request to Teams
 
