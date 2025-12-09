@@ -49,6 +49,13 @@ In this challenge, you will create a container in Azure Storage and upload the e
    - Copy the **Storage account name** and **Key1** (connection string or key) and store them securely — you will need these to connect Power BI or programmatic clients.
    - Keep keys private; rotate or revoke them when the lab is complete.
 
+<validation step="a25a62f8-6a37-4812-ad34-69f2b01476c2" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ## Success Criteria
 - Extracted data securely stored in Azure Blob Storage.  
 - Files ready for analysis and visualization.
