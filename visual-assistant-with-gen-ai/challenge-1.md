@@ -1,6 +1,7 @@
 # Challenge 01: Create Azure AI Custom Vision Resources  
 
 ## Introduction  
+
 Contoso Manufacturing aims to automate defect detection by analyzing images captured from production lines.  
 Azure **Custom Vision** enables you to **train your own image classification and object detection models**, allowing the system to recognize factory defects, missing components, and anomalies with high accuracy.
 
@@ -15,12 +16,14 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 ```
 > Once the file is downloaded, please extract it in any desired path in the LabVM. You will be able to see `Codefiles` and `Datasets` folders.
 
-## Challenge Objectives  
+## Challenge Objectives 
+
 - Create **Azure Custom Vision Training** and **Prediction** resources.  
 - Note the **Endpoint** and **API Keys** for later use.  
 - Understand where custom image models are trained and hosted.
 
 ## Steps to Complete  
+
 1. In the Azure Portal, search for **Custom vision** in the search bar.
 
 1. On the **Custom Vision** page, then click **Create**.
@@ -57,6 +60,7 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
 ## Success Criteria  
+
 - Custom Vision Training and Prediction resources created successfully.  
 - All four values recorded successfully for use in model training and inference.
 

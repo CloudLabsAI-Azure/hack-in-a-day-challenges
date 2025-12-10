@@ -13,6 +13,8 @@ Please download and extract the datasets required for this challenge here:
 https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/fin-datasets.zip
 ```
 
+> Once the file is downloaded, please extract it in any desired path in the LabVM. You will be able to see `Codefiles` and `Datasets` folders.
+
 ## Challenge Objectives
 - Create a new Copilot in Copilot Studio.
 - Configure the Copilot name, description, and industry context.
