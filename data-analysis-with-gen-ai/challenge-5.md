@@ -41,13 +41,17 @@ In this challenge, you will configure the environment variables, install depende
    streamlit run app.py
    ```
 
-1. Once the Streamlit application launches in a browser, try asking questions such as:
-   - Which machine had the most downtime this week?
-   - Show me all machines with RUNNING status
+1. Once the Streamlit application launches in a browser, try asking prompts such as:
+   
+   ```
+   All Running MACHINE
+   ```
+
+   ```
+   MACHINE_001 status
+   ```
 
 1. Review the output:  
-   - AI-generated insights based on retrieved data  
-   - Retrieved data from Azure AI Search  
 
 <validation step="2ea74b2b-34e6-4ae2-84eb-be669c59f8a9" />
  
