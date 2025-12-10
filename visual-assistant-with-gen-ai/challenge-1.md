@@ -35,6 +35,8 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
    - **Resource Group:** challenge-rg-<inject key="DeploymentID"></inject>.  
    - **Region:** <inject key="Region"></inject>.  
 
+   >**Note:** If you don't see **Free** option listed, please change the region to some other vailable region from the list and deploy the resource.
+
 1. Scroll down to **Custom Vision Types** and ensure:  
    - **Create both Training and Prediction resources** is selected.  
 
