@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Once invoice data is stored, finance teams want quick visual insights — such as total spending, vendor breakdowns, and invoice trends.  
+Once invoice data is stored, finance teams want quick visual insights, such as total spending, vendor breakdowns, and invoice trends.  
 Azure Storage integrates seamlessly with **Power BI** and **Excel**, enabling instant data visualization and reporting.
 
 In this challenge, you’ll visualize extracted invoice data using Power BI to create an invoice summary dashboard.

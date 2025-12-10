@@ -4,7 +4,7 @@
 
 Now that the Document Intelligence service is ready, Contoso Finance wants to test its **AI-powered invoice extraction**.  
 Azure Document Intelligence provides **Prebuilt Models** trained on thousands of invoices.  
-You can upload a PDF or image and instantly get structured output — including vendor name, invoice ID, dates, subtotals, and totals.
+You can upload a PDF or image and instantly get structured output, including vendor name, invoice ID, dates, subtotals, and totals.
 
 In this challenge, you’ll use the **Prebuilt Invoice Model** through the Azure Portal UI to extract data from a sample invoice.
 

@@ -6,7 +6,7 @@ Contoso Finance, a leading enterprise, processes hundreds of invoices daily. Man
 To solve this, Contoso plans to implement an **AI-based invoice automation solution** using **Azure AI Document Intelligence**.  
 This service extracts structured data such as invoice numbers, totals, vendor names, and dates, saving hours of repetitive manual effort.
 
-In this challenge, you’ll create the **Azure AI Document Intelligence** resource — the foundation for the rest of your Intelligent Document Processing solution.
+In this challenge, you’ll create the **Azure AI Document Intelligence** resource, the foundation for the rest of your Intelligent Document Processing solution.
 
 ## Accessing the Datasets
 
@@ -30,8 +30,8 @@ Please download and extract the datasets required for this challenge here - [Dat
    - **Subscription:** Use the available subscription.  
    - **Resource Group:** Select challenge-rg-<inject key="DeploymentID"></inject>.  
    - **Region:** <inject key="Region"></inject>.  
-   - **Name:** `finance-doc-intl-<inject key="DeploymentID"></inject>.  
-   - **Pricing Tier:** Choose *Free (F0)* or *Standard (S0)*.  
+   - **Name:** **finance-doc-intl-<inject key="DeploymentID"></inject>**.  
+   - **Pricing Tier:** Choose **Free (F0)**.  
 
 1. Click **Review + Create** → **Create**.  
 
