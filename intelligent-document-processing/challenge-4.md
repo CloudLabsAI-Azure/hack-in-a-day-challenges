@@ -16,7 +16,6 @@ In this challenge, you will create a container in Azure Storage and upload the e
 ## Steps to Complete
 
 1. Create a Storage Account for this lab:
-
    - In the Azure Portal click **Create a resource** → **Storage** → **Storage account**.  
    - Select **Subscription**
    - Select **Resource Group**: challenge-rg-<inject key="DeploymentID"></inject>.
@@ -25,7 +24,6 @@ In this challenge, you will create a container in Azure Storage and upload the e
    - And click **Review + Create** → **Create**.  
 
 1. To allow anonymous/public access for the container, configure it now:
-
    - Open the newly created Storage Account in the Azure Portal, select **Settings → Configuration** (or **Containers** → the container's Access level after you create it).  
    - Under **Blob public access**, set the option to enable public/anonymous access if your scenario requires it.  
    - Save the configuration changes. Note: Enabling anonymous access allows anyone with the blob URL to read blobs — only use this when necessary for demos and ensure you remove public access after the lab.
@@ -45,7 +43,6 @@ In this challenge, you will create a container in Azure Storage and upload the e
 1. Refresh the container list to verify the uploaded file appears.
 
 1. Copy the Storage Account name and access key for later use:
-
    - In the Storage Account blade, select **Access keys** under **Security + networking**.
    - Copy the **Storage account name** and **Key1** (connection string or key) and store them securely — you will need these to connect Power BI or programmatic clients.
    - Keep keys private; rotate or revoke them when the lab is complete.

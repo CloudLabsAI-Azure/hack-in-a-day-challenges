@@ -74,7 +74,7 @@ In this challenge, you will configure the environment variables, install depende
    - Predicted defect category & confidence score  
    - AI-generated inspection commentary
 
- <validation step="56bca8de-b1ad-4ce2-a404-ca37e30617d8" />
+<validation step="56bca8de-b1ad-4ce2-a404-ca37e30617d8" />
  
 > **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
 > - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 

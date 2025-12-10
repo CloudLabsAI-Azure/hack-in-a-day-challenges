@@ -25,7 +25,6 @@ In this challenge, you’ll perform validation checks on the extracted invoice d
    - `Total`
 
 1. Manually confirm:
-
    - **Subtotal + Tax ≈ Total** (allowing rounding differences).  
    - **Invoice Date** is formatted as `YYYY-MM-DD`.  
    - **VendorName** and **InvoiceId** are not empty. 

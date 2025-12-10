@@ -26,7 +26,6 @@ In this challenge, you’ll visualize extracted invoice data using Power BI to c
 1. Use **Transform Data** to flatten fields.  
 
 1. Create visuals such as:
-
    - Total Invoices  
    - Total Amount Processed  
    - Vendor Distribution  
