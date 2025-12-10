@@ -26,6 +26,8 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 ![](./media/gs-leave-4.png)
 
+> **Note:** If the VM is not in use, please **deallocate** it to avoid unnecessary resource consumption.
+
 ## Let's Get Started with Azure AI Document Intelligence
 
 1. In the JumpVM, click on **Azure Portal** shortcut of Microsoft Edge browser which is created on desktop.
