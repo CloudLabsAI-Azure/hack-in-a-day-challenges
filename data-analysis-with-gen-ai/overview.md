@@ -1,9 +1,4 @@
-# Manufacturing – Data Analysis with Generative AI (GenAI)
-*Apply generative AI to analyze, summarize, and interpret manufacturing data for actionable insights.*
-
-**Duration:** 6 hours  
-  
-**Tags:** `Manufacturing`, `Generative AI`, `Data Analytics`, `Microsoft Foundry`, `Industry 4.0`
+# Data Analysis with Generative AI (GenAI)
 
 ## Overview
 

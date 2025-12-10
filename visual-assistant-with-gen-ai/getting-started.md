@@ -28,7 +28,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 > **Note:** If the VM is not in use, please **deallocate** it to avoid unnecessary resource consumption.
 
-## Let's Get Started with Microsoft Fabric Real-Time Intelligence
+## Let's Get Started with Microsoft Azure
 
 1. In the JumpVM, click on **Microsoft Edge** browser which is created on desktop.
 

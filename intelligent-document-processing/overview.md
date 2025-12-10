@@ -1,12 +1,7 @@
-# Finance – Intelligent Document Processing (IDP)
-*Automate financial document extraction, validation, and storage using Azure AI services.*
-
-**Duration:** 6 hours
-
-**Tags:** `Intelligent Document Processing`, `Azure AI`, `Document Intelligence`, `Automation`
+# Intelligent Document Processing (IDP)
 
 ## Overview
-In this lab, participants will learn how to build an **Intelligent Document Processing (IDP)** solution for finance teams using **Azure AI Document Intelligence**.  
+In this challenge, participants will learn how to build an **Intelligent Document Processing (IDP)** solution for finance teams using **Azure AI Document Intelligence**.  
 You will automate the extraction of data from invoices, validate it against simple business rules, and store structured results for reporting or integration.
 
 The goal is to experience how AI-driven document automation can reduce manual data entry, minimize errors, and accelerate financial processing.
@@ -17,12 +12,12 @@ Finance teams spend large amounts of time on manual capture, validation and reco
 
 ## Solution Overview
 
-Provide a lightweight, production-style prototype that automates end-to-end invoice ingestion, extraction, validation and routing using modern IDP and serverless services. The accelerator demonstrates how to: ingest mixed-format invoices (PDFs, scanned images, emails), extract structured data (supplier, invoice number, dates, line items, totals), validate against simple business rules (PO match, tax rounding), and route results to downstream systems (save to storage / produce a CSV / queue for human review). The lab uses Azure AI Document Intelligence (Form Recognizer lineage), serverless glue (Functions/Logic Apps)  to show how finance teams cut processing time and errors. Azure’s Document Intelligence provides prebuilt and custom model options to speed extraction and maintain accuracy. 
+Provide a lightweight, production-style prototype that automates end-to-end invoice ingestion, extraction, validation and routing using modern IDP and serverless services. The accelerator demonstrates how to: ingest mixed-format invoices (PDFs, scanned images, emails), extract structured data (supplier, invoice number, dates, line items, totals), validate against simple business rules (PO match, tax rounding), and route results to downstream systems (save to storage / produce a CSV / queue for human review). The challenge uses Azure AI Document Intelligence (Form Recognizer lineage), serverless glue (Functions/Logic Apps)  to show how finance teams cut processing time and errors. Azure’s Document Intelligence provides prebuilt and custom model options to speed extraction and maintain accuracy. 
 
 ## Learning Objectives
 
 **Description:**  
-By the end of this lab, you will learn:
+By the end of this challenge, you will learn:
 
 - Understand Document Intelligence concepts: prebuilt vs custom models, layout/read/table extraction. 
 - Ingest different document types (PDF, scanned images) into a processing pipeline.
@@ -30,7 +25,6 @@ By the end of this lab, you will learn:
 - Implement basic validation/business rules (PO matching, totals check) and human-in-the-loop review.
 - Export structured results to storage / CSV / downstream API and demonstrate a simple reconciliation UI or automated flagging.
 - Discuss accuracy, monitoring, and resource cleanup considerations for short demo deployments.
-
 
 ## Challenges Overview
 
@@ -51,12 +45,12 @@ Transform the extracted invoice data into actionable insights. Use Power BI or E
 
 ## Support Contact
 
-The CloudLabs support team is available 24/7, 365 days a year, via email and live chat to ensure seamless assistance at any time. We offer dedicated support channels tailored specifically for both learners and instructors, ensuring that all your needs are promptly and efficiently addressed.
+The Cloudchallenges support team is avaichallengele 24/7, 365 days a year, via email and live chat to ensure seamless assistance at any time. We offer dedicated support channels tailored specifically for both learners and instructors, ensuring that all your needs are promptly and efficiently addressed.
 
 Learner Support Contacts:
 
-- Email Support: cloudlabs-support@spektrasystems.com
-- Live Chat Support: https://cloudlabs.ai/labs-support
+- Email Support: cloudchallenges-support@spektrasystems.com
+- Live Chat Support: https://cloudchallenges.ai/challenges-support
 
 Now, click on the **Next** from lower right corner to move on next page.
 
