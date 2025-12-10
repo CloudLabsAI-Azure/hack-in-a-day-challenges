@@ -20,13 +20,20 @@ In this challenge, you’ll use the **Prebuilt Invoice Model** through the Azure
 
 1. Click **Go to Document Intelligence Studio** (opens in a new tab).  
 
-1. In the Studio, scroll to **Prebuilt Models** and select **Invoice**.  
+1. Click on **Start with Document Intelligence**.
 
-1. Choose **Try the model**.  
+1. In the Studio, scroll to **Prebuilt Models** and select **Invoice**. 
 
-1. Upload a sample invoice from the dataset provided.  
+1. In **Configure service resource** section:
+   - Subscription: Select the **defualt Subscription**.
+   - Resource group: Select **challenge-rg-<inject key="DeploymentID"></inject>**.
+   - Document Intelligence: Type **finance-doc-intl-<inject key="DeploymentID"></inject>**.  
+   - Click **Continue**.
+   - Click **Finsih**.
 
-1. Wait for the analysis to complete.  
+1. Upload the sample invoices from the dataset provided.  
+
+1. **Run analysis** to complete on each invoice.  
 
 1. Observe the structured output:
    - **Vendor Name**
