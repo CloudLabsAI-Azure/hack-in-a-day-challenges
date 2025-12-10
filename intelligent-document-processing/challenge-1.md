@@ -28,7 +28,7 @@ Please download and extract the datasets required for this challenge here - [Dat
 
 1. Under **Basics**, provide:
    - **Subscription:** Use the available subscription.  
-   - **Resource Group:** Select ODL-demolab-<inject key="DeploymentID"></inject>.  
+   - **Resource Group:** Select challenge-rg-<inject key="DeploymentID"></inject>.  
    - **Region:** <inject key="Region"></inject>.  
    - **Name:** `finance-doc-intl-<inject key="DeploymentID"></inject>.  
    - **Pricing Tier:** Choose *Free (F0)* or *Standard (S0)*.  

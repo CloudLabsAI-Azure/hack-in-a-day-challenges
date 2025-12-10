@@ -19,7 +19,7 @@ In this challenge, you will create a container in Azure Storage and upload the e
 
    - In the Azure Portal click **Create a resource** → **Storage** → **Storage account**.  
    - Select **Subscription**
-   - Select **Resource Group**: ODL-demolab-<inject key="DeploymentID"></inject>.
+   - Select **Resource Group**: challenge-rg-<inject key="DeploymentID"></inject>.
    - Choose **Region:** <inject key="Region"></inject>.
    - And enter a **Name**: storagefinanceidp<inject key="DeploymentID"></inject>.  
    - And click **Review + Create** → **Create**.  
