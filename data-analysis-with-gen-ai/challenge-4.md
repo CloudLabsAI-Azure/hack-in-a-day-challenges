@@ -8,7 +8,7 @@ In this challenge, you’ll use Microsoft Foundry (LLM capabilities) to summariz
 ## Challenge Objectives
 
 - Load the CSV data from Azure Blob Storage.  
--- Send structured chunks of data to the Foundry LLM via prompt.  
+- Send structured chunks of data to the Foundry LLM via prompt.  
 - Generate natural-language summaries and recommendations.
 
 ## Steps to Complete

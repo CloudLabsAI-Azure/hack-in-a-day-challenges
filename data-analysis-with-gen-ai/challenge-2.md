@@ -28,10 +28,10 @@ Azure OpenAI Service provides API access to models like gpt-4.1-mini, which can 
 
 1. From the Foundry resource **Overview** page click **Go to Foundry portal** 
 
-1. Deploy the following models in the **Models + Endpoints** section by selecting **Deploy base model**:
+1. Deploy the following models in the **Models + Endpoints** section by selecting **Deploy base model** and once after choosing the mode, please edit their properties as provided:
 
-   - **gpt-4.1-mini**: **Global Standard** tierx` with **20,000 TPM** capacity.
-   - **text-embedding-ada-002**: *Global Standard* with **30,000 TPM** capacity (Requried for semantic search).
+   - **gpt-4.1-mini**: **Global Standard** tierx` with **20K TPM** capacity.
+   - **text-embedding-ada-002**: *Global Standard* with **30K TPM** capacity (Requried for semantic search).
 
    > **Hint:** If a model doesn’t appear when you search for it, click **Go to model catalog** in the model selection screen and deploy it from there.
 

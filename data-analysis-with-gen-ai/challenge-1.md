@@ -37,8 +37,6 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
 1. Upload the provided CSV files (previously extracted dataset) from the Downloads folder into the newly created **Container**.
 
-1. (Optional) Open the CSV in Excel or VS Code to inspect columns and data range.
-
 ## Success Criteria
 
 - The Storage Account is created successfully with the specified configuration.
