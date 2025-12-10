@@ -53,4 +53,4 @@ Azure OpenAI Service provides API access to models like gpt-4.1-mini, which can 
 - [Azure OpenAI Service Overview](https://learn.microsoft.com/azure/ai-services/openai/overview)
 - [Deploy a model in Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/how-to/create-resource)
 
-Now, click **Next** to continue to **Challenge 03: Analyze Data Using GenAI Prompts**.
+Now, click **Next** to continue to **Challenge 03**.

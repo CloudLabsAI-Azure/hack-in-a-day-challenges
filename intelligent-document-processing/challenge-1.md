@@ -24,20 +24,18 @@ Please download and extract the datasets required for this challenge here - [Dat
 
 ## Steps to Complete
 
-1. In the Azure Portal, select **Create a resource**.  
+1. In the Azure Portal, search for **Document Intelligence** and click **Create**. 
 
-2. Search for **Document Intelligence** and click **Create**. 
-
-3. Under **Basics**, provide:
+1. Under **Basics**, provide:
    - **Subscription:** Use the available subscription.  
    - **Resource Group:** Select ODL-demolab-<inject key="DeploymentID"></inject>.  
    - **Region:** <inject key="Region"></inject>.  
    - **Name:** `finance-doc-intl-<inject key="DeploymentID"></inject>.  
    - **Pricing Tier:** Choose *Free (F0)* or *Standard (S0)*.  
 
-4. Click **Review + Create** → **Create**.  
+1. Click **Review + Create** → **Create**.  
 
-5. After deployment succeeds, open the resource.  
+1. After deployment succeeds, open the resource.  
 
 <validation step="54001904-186d-42a7-bee3-a6508c5797c5" />
  
@@ -52,7 +50,8 @@ Please download and extract the datasets required for this challenge here - [Dat
 - Endpoint and API Key recorded for future use.  
 
 ## Additional Resources
+
 - [Azure AI Document Intelligence Overview](https://learn.microsoft.com/azure/ai-services/document-intelligence/overview)  
 - [Quickstart: Create Document Intelligence Resource](https://learn.microsoft.com/azure/ai-services/document-intelligence/quickstarts/create-resource)
 
-Now, click **Next** (bottom right corner) to continue to **Challenge 02: Extract Data Using the Prebuilt Invoice Model**.
+Now, click **Next** to continue to **Challenge 02**.

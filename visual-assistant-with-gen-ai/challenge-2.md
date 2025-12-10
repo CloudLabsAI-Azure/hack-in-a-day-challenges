@@ -33,4 +33,4 @@ To enable automated defect detection, you will now create a **Custom Vision proj
 - [Custom Vision Portal](https://www.customvision.ai)  
 - [Classification Models with Custom Vision](https://learn.microsoft.com/azure/ai-services/custom-vision-service/getting-started-build-a-classifier)
 
-Now, click **Next** to continue to **Challenge 03: Upload and Tag Manufacturing Images for Model Training**.
+Now, click **Next** to continue to **Challenge 03**.

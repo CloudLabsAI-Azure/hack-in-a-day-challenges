@@ -44,15 +44,10 @@ In this challenge, you will configure the environment variables, install depende
 1. Once the Streamlit application launches in a browser, try asking questions such as:
    - Which machine had the most downtime this week?
    - Show me all machines with RUNNING status
-   - What is the average temperature for MACHINE_001?
-   - Find machines with high vibration levels
-   - Which machines are currently in maintenance?
-   - Analyze temperature trends across all machines
 
 1. Review the output:  
    - AI-generated insights based on retrieved data  
    - Retrieved data from Azure AI Search  
-   - Chat-style interface for interactive analysis
 
 <validation step="2ea74b2b-34e6-4ae2-84eb-be669c59f8a9" />
  
@@ -74,6 +69,18 @@ In this challenge, you will configure the environment variables, install depende
 - [Azure AI Search Documentation](https://learn.microsoft.com/azure/search/)
 - [Azure OpenAI Documentation](https://learn.microsoft.com/azure/ai-services/openai/)
 
-### **Congratulations — you have now completed the Manufacturing Data Analysis Assistant application!**
+## Congratulations!
 
-You have successfully combined **Azure AI Search + Azure OpenAI** to create an intelligent manufacturing data analysis solution using RAG (Retrieval-Augmented Generation).
+You have successfully built an **AI-powered Manufacturing Data Analysis Assistant** using Azure AI Search + Azure OpenAI!
+
+### Real-World Applications:
+
+This solution can transform manufacturing operations across:
+
+- **Data Analysis & Insights** - Trend analysis, anomaly detection, predictive maintenance
+- **Quality Control** - Defect identification, process optimization, compliance monitoring
+- **Operational Efficiency** - Production monitoring, resource allocation, downtime reduction
+- **Decision Support** - Real-time reporting, KPI tracking, strategic planning
+- **Maintenance & Reliability** - Equipment health monitoring, preventive maintenance scheduling
+
+# Congratulations on completing this challenge!

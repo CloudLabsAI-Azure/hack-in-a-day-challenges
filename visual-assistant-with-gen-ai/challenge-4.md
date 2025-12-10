@@ -36,4 +36,4 @@ In this challenge, you will publish the trained model and test it using sample i
 - [Publish and Test Custom Vision Models](https://learn.microsoft.com/azure/ai-services/custom-vision-service/use-predictions-from-custom-vision)  
 - [Quick Test in Custom Vision Portal](https://learn.microsoft.com/azure/ai-services/custom-vision-service/getting-started-build-a-classifier#test-your-model)
 
-Now, click **Next** to continue to **Challenge 05: Deploy Foundry Resource and GPT-4.1-Mini Model**.
+Now, click **Next** to continue to **Challenge 05**.

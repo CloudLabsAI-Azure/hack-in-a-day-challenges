@@ -1,6 +1,7 @@
 # Challenge 04: Store Extracted Results in Azure Storage
 
 ## Introduction
+
 After validating the invoice data, Contoso Finance needs a secure way to store the extracted results.  
 Azure Blob Storage provides a cost-effective, scalable, and durable location to keep structured data for auditing and analytics.
 
@@ -23,27 +24,27 @@ In this challenge, you will create a container in Azure Storage and upload the e
    - And enter a **Name**: storagefinanceidp<inject key="DeploymentID"></inject>.  
    - And click **Review + Create** → **Create**.  
 
-2. To allow anonymous/public access for the container, configure it now:
+1. To allow anonymous/public access for the container, configure it now:
 
    - Open the newly created Storage Account in the Azure Portal, select **Settings → Configuration** (or **Containers** → the container's Access level after you create it).  
    - Under **Blob public access**, set the option to enable public/anonymous access if your scenario requires it.  
    - Save the configuration changes. Note: Enabling anonymous access allows anyone with the blob URL to read blobs — only use this when necessary for demos and ensure you remove public access after the lab.
 
-3. Open the **Storage Account** created in your environment.  
+1. Open the **Storage Account** created in your environment.  
 
-3. Select **Containers** from the left-hand menu.  
+1. Select **Containers** from the left-hand menu.  
 
-4. Click **+ Container** and configure:
+1. Click **+ Container** and configure:
    - **Name:** invoices-output-<inject key="DeploymentID"></inject>
    - **Public Access Level:** *(allow anonymous access)*  
 
-5. Return to **Document Intelligence Studio** and click **Download Results** to save the invoice JSON output.  
+1. Return to **Document Intelligence Studio** and click **Download Results** to save the invoice JSON output.  
 
-6. In your container, click **Upload** → select the downloaded JSON file → click **Upload**.  
+1. In your container, click **Upload** → select the downloaded JSON file → click **Upload**.  
 
-7. Refresh the container list to verify the uploaded file appears.
+1. Refresh the container list to verify the uploaded file appears.
 
-8. Copy the Storage Account name and access key for later use:
+1. Copy the Storage Account name and access key for later use:
 
    - In the Storage Account blade, select **Access keys** under **Security + networking**.
    - Copy the **Storage account name** and **Key1** (connection string or key) and store them securely — you will need these to connect Power BI or programmatic clients.
@@ -64,4 +65,4 @@ In this challenge, you will create a container in Azure Storage and upload the e
 - [Azure Blob Storage Overview](https://learn.microsoft.com/azure/storage/blobs/storage-blobs-overview)  
 - [Upload and Manage Blobs in Portal](https://learn.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal)
 
-Now, click **Next** to continue to **Challenge 05: Visualize Extracted Invoice Summary**.
+Now, click **Next** to continue to **Challenge 05**.
