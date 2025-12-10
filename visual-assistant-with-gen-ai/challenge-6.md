@@ -48,7 +48,6 @@ In this challenge, you will configure the environment variables, install depende
    > Then the **Project ID** is: `f63d1b26-0a6e-4970-b30f-0c5053c9c7fe`
 
 1. Azure OpenAI Configuration
-
    - AZURE_OPENAI_ENDPOINT=<foundry_endpoint_value>
    - AZURE_OPENAI_KEY=<foundry_key_value>
    - AZURE_OPENAI_DEPLOYMENT_NAME=gpt-4.1-mini
