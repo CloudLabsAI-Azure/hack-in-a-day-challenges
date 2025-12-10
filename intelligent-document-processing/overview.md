@@ -1,57 +1,68 @@
 # Intelligent Document Processing (IDP)
 
-## Overview
-In this challenge, participants will learn how to build an **Intelligent Document Processing (IDP)** solution for finance teams using **Azure AI Document Intelligence**.  
-You will automate the extraction of data from invoices, validate it against simple business rules, and store structured results for reporting or integration.
+Welcome to the Intelligent Document Processing Hack in a Day! Today, you'll explore how AI can transform financial document workflows by building an automated invoice processing solution that extracts, validates, and stores structured data from invoices. Through this hands-on lab, you will create an intelligent system capable of processing invoices in multiple formats, extracting key financial data, and generating actionable insights, powered by Azure AI Document Intelligence, Azure Blob Storage, and Power BI.
 
-The goal is to experience how AI-driven document automation can reduce manual data entry, minimize errors, and accelerate financial processing.
+## Scenario
 
-## Problem Statement
+Contoso Finance, a leading enterprise, processes hundreds of invoices daily from various vendors. Manual data entry from PDFs and scanned images causes frequent errors, delays payment processing, and creates bottlenecks during month-end closing. Quality analysts spend hours transcribing invoice numbers, vendor names, dates, line items, and totals, but high workload and inconsistent document formats lead to mistakes and lost early-payment discounts. To improve efficiency and accuracy, Contoso decides to build an Intelligent Document Processing solution that can automatically extract invoice data, validate it against business rules, and store results for reporting. This allows finance teams to process invoices instantly, make faster payment decisions, and maintain accurate audit trails across every transaction.
 
-Finance teams spend large amounts of time on manual capture, validation and reconciliation of invoice and payment documents. Typical pain points include: slow invoice turnaround, human errors when transcribing fields (PO number, line-items, totals), inconsistent formats across vendors, and difficult audit trails. These manual processes cause late payments, lost early-payment discounts, and slow month-end closes.
+## Introduction
 
-## Solution Overview
+Your mission is to build an AI-powered **Intelligent Document Processing solution** that supports finance teams by automating invoice data extraction and validation. Using Azure AI Document Intelligence, Azure Blob Storage, and Power BI, you will design an end-to-end solution that can:
 
-Provide a lightweight, production-style prototype that automates end-to-end invoice ingestion, extraction, validation and routing using modern IDP and serverless services. The accelerator demonstrates how to: ingest mixed-format invoices (PDFs, scanned images, emails), extract structured data (supplier, invoice number, dates, line items, totals), validate against simple business rules (PO match, tax rounding), and route results to downstream systems (save to storage / produce a CSV / queue for human review). The challenge uses Azure AI Document Intelligence (Form Recognizer lineage), serverless glue (Functions/Logic Apps)  to show how finance teams cut processing time and errors. Azure’s Document Intelligence provides prebuilt and custom model options to speed extraction and maintain accuracy. 
+- Extract structured data from invoice PDFs using the prebuilt invoice model
+- Capture vendor details, invoice numbers, dates, subtotals, tax amounts, and line items
+- Validate extracted data against business rules (totals verification, required fields)
+- Store validated invoice data in Azure Blob Storage for audit and reporting
+- Visualize invoice summaries and spending trends using Power BI dashboards
+
+This solution reduces manual data entry time, increases invoice processing accuracy, and allows finance teams to focus on strategic analysis rather than repetitive document transcription.
 
 ## Learning Objectives
 
-**Description:**  
-By the end of this challenge, you will learn:
+By participating in this Hack in a Day, you will learn how to:
 
-- Understand Document Intelligence concepts: prebuilt vs custom models, layout/read/table extraction. 
-- Ingest different document types (PDF, scanned images) into a processing pipeline.
-- Train or configure a custom extraction model (if needed) and use prebuilt invoice models for quick wins. 
-- Implement basic validation/business rules (PO matching, totals check) and human-in-the-loop review.
-- Export structured results to storage / CSV / downstream API and demonstrate a simple reconciliation UI or automated flagging.
-- Discuss accuracy, monitoring, and resource cleanup considerations for short demo deployments.
+- Deploy Azure AI Document Intelligence resources for invoice processing
+- Use the prebuilt invoice model in Document Intelligence Studio for automatic field extraction
+- Extract and review structured invoice data including vendor information and line items
+- Validate extracted data against financial business rules and accuracy requirements
+- Store processed invoice data in Azure Blob Storage containers
+- Create Power BI visualizations to analyze total spending, vendor distribution, and invoice trends
 
-## Challenges Overview
+
+## Hack in a Day Format: Challenge-Based
+
+This hands-on lab is structured into five progressive challenges that model the lifecycle of building a real-world intelligent document processing application:
 
 - **Challenge 01: Create Azure AI Document Intelligence Resource**  
-Set up the Azure AI Document Intelligence service within your subscription. This challenge focuses on deploying the foundational resource required to enable intelligent document processing across your finance workflows.
+  Deploy the Azure AI Document Intelligence service and configure endpoint access.
 
 - **Challenge 02: Extract Data Using the Prebuilt Invoice Model**  
-Leverage the Prebuilt Invoice Model in Document Intelligence Studio to automatically extract structured data such as vendor details, invoice numbers, and totals from uploaded PDF invoices.
+  Use Document Intelligence Studio to analyze sample invoices and extract structured data.
 
 - **Challenge 03: Validate Extracted Invoice Data**  
-Review and verify the accuracy of the extracted invoice data against key business rules. Ensure totals match calculations and mandatory fields are correctly captured before data storage.
+  Review JSON output and verify accuracy against business rules and data completeness.
 
 - **Challenge 04: Store Extracted Results in Azure Storage**  
-Securely store validated invoice data in Azure Blob Storage for audit, reporting, and downstream integration. Learn to manage containers and handle JSON output securely through the Azure Portal.
+  Create a Storage Account and blob container to securely store validated invoice data.
 
 - **Challenge 05: Visualize Extracted Invoice Summary**  
-Transform the extracted invoice data into actionable insights. Use Power BI or Excel to visualize total spending, vendor distribution, and invoice trends for better financial decision-making.
+  Connect Power BI to Azure Storage and create dashboards for financial insights.
+
+Throughout each challenge, you will iteratively design, build, and test your invoice processing solution, from resource deployment to data extraction, validation, storage, and visualization.
+
+## Challenge Overview
+
+You will begin by provisioning Azure AI Document Intelligence and exploring its capabilities. Next, you will upload sample invoices and use the prebuilt invoice model to automatically extract vendor names, invoice numbers, dates, and totals. You will then validate the extracted data to ensure accuracy and completeness. After that, you will create Azure Storage resources and upload validated JSON results for long-term storage and audit. Finally, you will connect Power BI to your storage container and build visualizations to analyze spending trends, vendor distribution, and invoice volumes.
+
+By the end of this Hack in a Day, you will have a fully functional **Intelligent Document Processing solution** that can automatically process invoices, validate financial data, and generate insights to support faster payment decisions and better financial reporting.
 
 ## Support Contact
 
-The Cloudchallenges support team is avaichallengele 24/7, 365 days a year, via email and live chat to ensure seamless assistance at any time. We offer dedicated support channels tailored specifically for both learners and instructors, ensuring that all your needs are promptly and efficiently addressed.
+The CloudLabs support team is available 24/7, 365 days a year via email and live chat to ensure seamless assistance throughout the lab. Dedicated support channels are available for both learners and instructors.
 
-Learner Support Contacts:
+**Learner Support Contacts**  
+- Email: cloudlabs-support@spektrasystems.com  
+- Live Chat: https://cloudlabs.ai/labs-support
 
-- Email Support: cloudchallenges-support@spektrasystems.com
-- Live Chat Support: https://cloudchallenges.ai/challenges-support
-
-Now, click on the **Next** from lower right corner to move on next page.
-
-## Happy Hacking!!
+Click **Next** from the bottom-right corner to continue.
