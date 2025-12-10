@@ -65,4 +65,4 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 - [Quickstart: Build a Classifier with Custom Vision](https://learn.microsoft.com/azure/ai-services/custom-vision-service/getting-started-build-a-classifier)
 
 
-Now, click **Next** to continue to **Challenge 02: Upload and Analyze Sample Manufacturing Images**.
+Now, click **Next** to continue to **Challenge 02**.

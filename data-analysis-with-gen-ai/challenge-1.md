@@ -50,4 +50,4 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 - [Quickstart: Upload data to Azure Blob Storage](https://learn.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal)
 - [Sample Manufacturing Data Generator (GitHub)](https://github.com/Azure-Samples)
 
-Now, click **Next** to continue to **Challenge 02: Deploy Microsoft Foundry**.
+Now, click **Next** to continue to **Challenge 02**.

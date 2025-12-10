@@ -64,4 +64,4 @@ In this challenge, you’ll use Microsoft Foundry (LLM capabilities) to summariz
 - [Prompt Engineering Guidance](https://learn.microsoft.com/azure/ai-services/openai/concepts/prompt-engineering)
 - Microsoft Foundry documentation: https://learn.microsoft.com/azure/ai-foundry/
 
-Now, click **Next** to continue to **Challenge 04: Build a Summary Report and Dashboard**.
+Now, click **Next** to continue to **Challenge 05**.

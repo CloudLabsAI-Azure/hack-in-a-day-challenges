@@ -16,22 +16,23 @@ In this challenge, you’ll perform validation checks on the extracted invoice d
 ## Steps to Complete
 
 1. In **Document Intelligence Studio**, click **View JSON Output** on your analyzed invoice.  
-2. Review extracted fields such as:
+
+1. Review extracted fields such as:
    - `InvoiceId`
    - `VendorName`
    - `Subtotal`
    - `Tax`
    - `Total`
 
-3. Manually confirm:
+1. Manually confirm:
 
    - **Subtotal + Tax ≈ Total** (allowing rounding differences).  
    - **Invoice Date** is formatted as `YYYY-MM-DD`.  
    - **VendorName** and **InvoiceId** are not empty. 
 
-4. Document any inconsistencies in your Notes section or workspace comments.  
+1. Document any inconsistencies in your Notes section or workspace comments.  
 
-5. (Optional) Download the JSON output for later storage.
+1. (Optional) Download the JSON output for later storage.
 
 ## Success Criteria
 
@@ -43,4 +44,4 @@ In this challenge, you’ll perform validation checks on the extracted invoice d
 - [Azure Document Intelligence Field Output Reference](https://learn.microsoft.com/azure/ai-services/document-intelligence/concept-fields)  
 - [Best Practices for Model Accuracy](https://learn.microsoft.com/azure/ai-services/document-intelligence/how-to-improve-results)
 
-Now, click **Next** to proceed to **Challenge 04: Store Extracted Results in Azure Storage**.
+Now, click **Next** to continue to **Challenge 04**.

@@ -18,17 +18,17 @@ In this challenge, you’ll use the **Prebuilt Invoice Model** through the Azure
 
 1. In the Azure Portal, open your **Document Intelligence** resource.  
 
-2. Click **Go to Document Intelligence Studio** (opens in a new tab).  
+1. Click **Go to Document Intelligence Studio** (opens in a new tab).  
 
-3. In the Studio, scroll to **Prebuilt Models** and select **Invoice**.  
+1. In the Studio, scroll to **Prebuilt Models** and select **Invoice**.  
 
-4. Choose **Try the model**.  
+1. Choose **Try the model**.  
 
-5. Upload a sample invoice from the dataset provided.  
+1. Upload a sample invoice from the dataset provided.  
 
-6. Wait for the analysis to complete.  
+1. Wait for the analysis to complete.  
 
-7. Observe the structured output:
+1. Observe the structured output:
    - **Vendor Name**
    - **Invoice ID**
    - **Invoice Date**
@@ -45,4 +45,4 @@ In this challenge, you’ll use the **Prebuilt Invoice Model** through the Azure
 - [Prebuilt Invoice Model](https://learn.microsoft.com/azure/ai-services/document-intelligence/concept-invoice)  
 - [Document Intelligence Studio](https://documentintelligence.ai.azure.com/studio)
 
-Now, click **Next** (bottom right corner) to continue to **Challenge 03: Validate Extracted Invoice Data**.
+Now, click **Next** to continue to **Challenge 03**.

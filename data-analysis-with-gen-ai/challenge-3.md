@@ -65,7 +65,6 @@ This index will serve as the contextual knowledge base that the model will later
 
   - Click **Next**.
 
-
 1. On the **Review and create** page, Azure will show a summary of the resources and object names that will be created. By default there will be an **Objects name prefix**. Review this prefix (it is used to name the index/vector objects) and click **Create**.
 
 1. Once the index builds successfully, test it: 
@@ -97,4 +96,4 @@ This index will serve as the contextual knowledge base that the model will later
 - [Import Data into Azure AI Search](https://learn.microsoft.com/azure/search/search-import-data-portal)  
 - [Use Search Explorer](https://learn.microsoft.com/azure/search/search-explorer)
 
-Now, click **Next** (bottom right corner) to continue to **Challenge 04: Analyze Data Using GenAI Prompts**.
+Now, click **Next** to continue to **Challenge 04**.

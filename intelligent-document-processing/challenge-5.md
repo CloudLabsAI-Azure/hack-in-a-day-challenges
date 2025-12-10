@@ -1,12 +1,14 @@
 # Challenge 05: Visualize Extracted Invoice Summary
 
 ## Introduction
+
 Once invoice data is stored, finance teams want quick visual insights — such as total spending, vendor breakdowns, and invoice trends.  
 Azure Storage integrates seamlessly with **Power BI** and **Excel**, enabling instant data visualization and reporting.
 
 In this challenge, you’ll visualize extracted invoice data using Power BI to create an invoice summary dashboard.
 
 ## Challenge Objectives
+
 - Import JSON data from Azure Storage.  
 - Build visual summaries for financial reporting.  
 - Highlight total invoices, vendors, and tax summaries.
@@ -14,11 +16,17 @@ In this challenge, you’ll visualize extracted invoice data using Power BI to c
 ## Steps to Complete
 
 1. Open **Power BI Desktop** in your environment.  
-2. Click **Get Data → Azure → Azure Blob Storage**.  
-3. Enter your Storage Account name and key.  
-4. Navigate to `invoices-output` container and load the JSON file.  
-5. Use **Transform Data** to flatten fields.  
-6. Create visuals such as:
+
+1. Click **Get Data → Azure → Azure Blob Storage**.  
+
+1. Enter your Storage Account name and key.  
+
+1. Navigate to `invoices-output` container and load the JSON file. 
+
+1. Use **Transform Data** to flatten fields.  
+
+1. Create visuals such as:
+
    - Total Invoices  
    - Total Amount Processed  
    - Vendor Distribution  
@@ -31,11 +39,27 @@ In this challenge, you’ll visualize extracted invoice data using Power BI to c
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
 ## Success Criteria
+
 - Working financial summary report generated from extracted data.  
 - Key metrics displayed clearly.
 
 ## Additional Resources
+
 - [Import JSON into Excel](https://support.microsoft.com/office/import-json-data-into-excel)  
 - [Connect Power BI to Azure Blob Storage](https://learn.microsoft.com/power-bi/connect-data/desktop-connect-azure-blob-storage)
 
-Now, click **Next** to continue to **Challenge 06: Clean Up Resources**.
+## Congratulations!
+
+You have successfully built an **Intelligent Document Processing solution** for finance teams using Azure AI Document Intelligence!
+
+### Real-World Applications:
+
+This solution can transform financial operations across:
+- **Invoice Processing** - Automated data extraction from invoices, reducing manual entry
+- **Financial Reporting** - Structured data storage for audit trails and compliance
+- **Vendor Management** - Vendor distribution analysis and payment tracking
+- **Accounts Payable** - Accelerated invoice validation and approval workflows
+- **Audit & Compliance** - Secure storage and easy retrieval of financial documents
+- **Business Intelligence** - Power BI dashboards for spending insights and trends
+
+# Congratulations on completing this challenge!
