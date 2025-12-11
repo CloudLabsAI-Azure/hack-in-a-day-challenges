@@ -64,7 +64,7 @@ In this challenge, you will configure the environment variables, install depende
 1. After installation completes, run the application:
 
    ```
-   stramlit run app.py
+   streamlit run app.py
    ```
 
 1. Once the Streamlit application launches in a browser, upload any manufacturing test image.
