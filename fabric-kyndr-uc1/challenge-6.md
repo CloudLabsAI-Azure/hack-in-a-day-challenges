@@ -285,8 +285,6 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
    - Enter email addresses of stakeholders
    - Grant appropriate permissions (View only recommended)
 
-<validation step="f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c" />
-
 > **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
 > - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.

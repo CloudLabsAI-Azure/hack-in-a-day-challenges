@@ -225,8 +225,6 @@ Contoso's data science team uses Azure Databricks for advanced machine learning 
 
 1. Confirm that data written from Databricks is accessible in Fabric.
 
-<validation step="e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b" />
-
 > **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
 > - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.

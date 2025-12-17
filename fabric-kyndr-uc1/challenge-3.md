@@ -217,8 +217,6 @@ The Bronze layer contains raw, unprocessed data with potential quality issues—
    ORDER BY TotalRevenue DESC;
    ```
 
-<validation step="c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f" />
-
 > **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
 > - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.

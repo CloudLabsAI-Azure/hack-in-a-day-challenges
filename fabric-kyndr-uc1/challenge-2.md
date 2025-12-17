@@ -106,7 +106,6 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
    SELECT TOP 10 * FROM bronze_sales ORDER BY OrderDate DESC;
    ```
 
-<validation step="b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e" />
 
 > **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
 > - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
