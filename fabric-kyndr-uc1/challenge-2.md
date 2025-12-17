@@ -95,18 +95,6 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
 1. Click on any CSV file to preview its contents and verify data loaded correctly.
 
-1. If you created Delta tables in Part 3, query them using SQL analytics endpoint:
-
-   - Click on **SQL analytics endpoint** in the top-right corner
-   - Run a query:
-
-   ```sql
-   -- Query bronze tables if created
-   SELECT COUNT(*) as TotalCustomers FROM bronze_customers;
-   SELECT TOP 10 * FROM bronze_sales ORDER BY OrderDate DESC;
-   ```
-
-
 > **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
 > - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
