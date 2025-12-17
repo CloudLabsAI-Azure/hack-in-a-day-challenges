@@ -32,9 +32,13 @@ Contoso's data science team uses Azure Databricks for advanced machine learning 
 
 ### Part 2: Configure OneLake Access from Databricks
 
-1. In the Azure Portal, navigate to your **Microsoft Fabric** workspace:
+1. In the **Edge browser**, navigate to the **Microsoft Fabric** portal:
 
-   - Workspace: **fabric-workspace-<inject key="DeploymentID"></inject>**
+   ```
+   https://app.fabric.microsoft.com/
+   ```
+
+1. Navigate to your workspace: **fabric-workspace-<inject key="DeploymentID"></inject>**
 
 1. Open your Lakehouse: **contoso-lakehouse-<inject key="DeploymentID"></inject>**
 

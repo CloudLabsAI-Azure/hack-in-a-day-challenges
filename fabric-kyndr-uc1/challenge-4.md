@@ -16,6 +16,14 @@ The Silver layer contains clean, standardized data, but it's still organized by 
 
 ### Part 1: Define Business Domains
 
+1. In the **Edge browser**, navigate to the **Microsoft Fabric** portal (if not already open):
+
+   ```
+   https://app.fabric.microsoft.com/
+   ```
+
+1. Navigate to your **Microsoft Fabric workspace**: **fabric-workspace-<inject key="DeploymentID"></inject>**
+
 1. Navigate to your **Fabric Notebook**: **Bronze-to-Silver-Transformation** or create a new one:
 
    - Name: **Silver-to-Gold-Business-Models**

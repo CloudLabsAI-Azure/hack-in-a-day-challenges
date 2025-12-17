@@ -13,16 +13,29 @@ Contoso Enterprises operates across multiple business units with data scattered 
 
 ## Steps to Complete
 
-1. In the Azure Portal, navigate to the **Microsoft Fabric** service.
+1. In the **Edge browser**, navigate to the **Microsoft Fabric** portal.
 
-   > **Note:** If you don't see Microsoft Fabric in the portal, search for **Microsoft Fabric** in the search bar at the top.
+   ```
+   https://app.fabric.microsoft.com/
+   ```
 
-1. Click on **Create** to set up a new Fabric workspace with the following details:
+   > **Note:** If prompted, sign in with the provided credentials: <inject key="AzureAdUserEmail"></inject>
+
+1. Once logged in, verify your **Fabric trial** is active:
+
+   - Click on your **Profile icon** (top-right corner)
+   - Verify "Fabric and Power BI trial status" shows days remaining
+   - If trial is not activated, click **Start trial** to enable Fabric capacity
+
+1. Click on **Workspaces** from the left navigation pane.
+
+1. Click **+ New workspace** to create a workspace:
 
    - Workspace Name: **fabric-workspace-<inject key="DeploymentID"></inject>**
-   - Region: **<inject key="Region"></inject>**
-   - Subscription: **Select the default Subscription**
-   - Resource Group: **challenge-rg-<inject key="DeploymentID"></inject>**
+   - Description: **Contoso unified analytics workspace**
+   - Advanced settings:
+     - License mode: **Trial** (automatically uses pre-deployed capacity)
+   - Click **Apply**
 
 1. Once the workspace is created, explore the **Home** page to familiarize yourself with Fabric components:
 

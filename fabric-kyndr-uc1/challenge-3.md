@@ -16,6 +16,12 @@ The Bronze layer contains raw, unprocessed data with potential quality issues—
 
 ### Part 1: Create a Transformation Notebook
 
+1. In the **Edge browser**, navigate to the **Microsoft Fabric** portal (if not already open):
+
+   ```
+   https://app.fabric.microsoft.com/
+   ```
+
 1. Navigate to your **Microsoft Fabric workspace**: **fabric-workspace-<inject key="DeploymentID"></inject>**
 
 1. Select **+ New** → **Notebook**

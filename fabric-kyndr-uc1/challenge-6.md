@@ -16,9 +16,13 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 ### Part 1: Connect Power BI to Fabric Lakehouse
 
-1. In your **Microsoft Fabric workspace**, navigate to:
+1. In the **Edge browser**, navigate to the **Microsoft Fabric** portal (if not already open):
 
-   - Workspace: **fabric-workspace-<inject key="DeploymentID"></inject>**
+   ```
+   https://app.fabric.microsoft.com/
+   ```
+
+1. Navigate to your workspace: **fabric-workspace-<inject key="DeploymentID"></inject>**
 
 1. Open your Lakehouse: **contoso-lakehouse-<inject key="DeploymentID"></inject>**
 
@@ -237,6 +241,8 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 1. Click **Publish** in the Home ribbon
 
 1. Select destination workspace: **fabric-workspace-<inject key="DeploymentID"></inject>**
+
+   > **Note:** Your workspace is using the Fabric trial capacity, which supports all publishing features.
 
 1. Click **Select**
 

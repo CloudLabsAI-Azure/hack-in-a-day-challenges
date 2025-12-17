@@ -41,7 +41,13 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
 ### Part 2: Create Data Pipeline for Structured Data Ingestion
 
-1. Navigate back to your **Microsoft Fabric workspace**: **fabric-workspace-<inject key="DeploymentID"></inject>**
+1. In the **Edge browser**, navigate to the **Microsoft Fabric** portal (if not already open):
+
+   ```
+   https://app.fabric.microsoft.com/
+   ```
+
+1. Navigate to your **Microsoft Fabric workspace**: **fabric-workspace-<inject key="DeploymentID"></inject>**
 
 1. Select **+ New** → **Data Pipeline**
 
