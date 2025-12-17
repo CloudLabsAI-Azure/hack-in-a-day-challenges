@@ -57,33 +57,44 @@ The Bronze layer contains raw, unprocessed data with potential quality issues—
 
 ### Part 2: Apply Data Quality Checks and Cleansing
 
-1. Add a new cell to inspect data quality:
+1. Add a new cell to inspect data quality and profile the data:
 
    ```python
-   # Check for null values in customers
-   from pyspark.sql.functions import col, count, when
+   # Profile the data - check data completeness and distribution
+   from pyspark.sql.functions import col, count, when, countDistinct
    
-   df_customers.select([
-       count(when(col(c).isNull(), c)).alias(c) 
-       for c in df_customers.columns
-   ]).show()
+   print("=== Customer Data Profile ===")
+   print(f"Total Records: {df_customers.count()}")
+   print(f"Unique Customers: {df_customers.select(countDistinct('CustomerID')).collect()[0][0]}")
+   
+   # Check for potential duplicates
+   duplicate_check = df_customers.groupBy("CustomerID").count().filter("count > 1")
+   print(f"Duplicate CustomerIDs: {duplicate_check.count()}")
+   
+   # Display sample data to inspect quality
+   print("\n=== Sample Customer Data ===")
+   df_customers.show(10, truncate=False)
    ```
 
-1. Add a cell to handle null values and duplicates:
+1. Add a cell to check data types and standardize:
 
    ```python
-   # Remove rows with null CustomerID (critical field)
-   df_customers_clean = df_customers.filter(col("CustomerID").isNotNull())
+   # Check current data types
+   print("=== Current Schema ===")
+   df_customers.printSchema()
    
-   # Fill null values in non-critical fields
-   df_customers_clean = df_customers_clean.fillna({
-       "FirstName": "Unknown",
-       "LastName": "Unknown",
-       "EmailAddress": "noemail@adventure-works.com"
-   })
+   # Ensure CustomerID is integer type
+   from pyspark.sql.types import IntegerType
    
-   # Remove duplicate customers based on CustomerID
+   df_customers_clean = df_customers.withColumn(
+       "CustomerID", col("CustomerID").cast(IntegerType())
+   )
+   
+   # Remove duplicate customers based on CustomerID (defensive coding)
    df_customers_clean = df_customers_clean.dropDuplicates(["CustomerID"])
+   
+   # Ensure critical fields are not null (defensive filter)
+   df_customers_clean = df_customers_clean.filter(col("CustomerID").isNotNull())
    
    print(f"Cleaned Customers: {df_customers_clean.count()} records")
    ```
