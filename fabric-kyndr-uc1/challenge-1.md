@@ -45,7 +45,7 @@ Contoso Enterprises operates across multiple business units with data scattered 
    - **Real-Time Analytics**: Event streams and KQL databases
    - **Power BI**: Reports and dashboards
 
-1. Navigate to **OneLake data hub** from the left navigation pane to understand:
+1. Navigate to **OneLake catalog** from the left navigation pane to understand:
 
    - OneLake provides a **single unified namespace** for all data across your organization
    - All Fabric workloads (Lakehouses, Warehouses, KQL databases) automatically store data in OneLake
@@ -60,7 +60,7 @@ Contoso Enterprises operates across multiple business units with data scattered 
 1. Create your first **Lakehouse** that will hold all three layers:
 
    - In the Fabric workspace, select **+ New** → **Lakehouse**
-   - Name: **contoso-lakehouse-<inject key="DeploymentID"></inject>**
+   - Name: **contoso_lakehouse_<inject key="DeploymentID"></inject>**
    - Click **Create**
 
 1. Once created, explore the Lakehouse structure:
