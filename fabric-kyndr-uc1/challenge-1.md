@@ -1,0 +1,94 @@
+# Challenge 01: Understand Fabric, OneLake & Medallion Architecture
+
+## Introduction
+
+Contoso Enterprises operates across multiple business units with data scattered across different systems—ERP, CRM, legacy databases, and unstructured file storage. To unify this data landscape, Contoso has decided to adopt Microsoft Fabric and OneLake as their single logical data lake. Before building data pipelines, it's essential to understand the platform architecture, OneLake's unified storage model, and the Medallion architecture pattern (Bronze → Silver → Gold) that will structure your data transformation journey.
+
+## Challenge Objectives
+
+- Explore Microsoft Fabric workspace and understand its key components.
+- Learn about OneLake as a single logical data lake for all analytics workloads.
+- Understand the Medallion architecture pattern: Bronze (raw data), Silver (cleansed data), and Gold (curated business models).
+- Create a new Lakehouse in Microsoft Fabric to serve as your data foundation.
+
+## Steps to Complete
+
+1. In the Azure Portal, navigate to the **Microsoft Fabric** service.
+
+   > **Note:** If you don't see Microsoft Fabric in the portal, search for **Microsoft Fabric** in the search bar at the top.
+
+1. Click on **Create** to set up a new Fabric workspace with the following details:
+
+   - Workspace Name: **fabric-workspace-<inject key="DeploymentID"></inject>**
+   - Region: **<inject key="Region"></inject>**
+   - Subscription: **Select the default Subscription**
+   - Resource Group: **challenge-rg-<inject key="DeploymentID"></inject>**
+
+1. Once the workspace is created, explore the **Home** page to familiarize yourself with Fabric components:
+
+   - **Data Engineering**: Lakehouses, Data Pipelines, Notebooks
+   - **Data Science**: ML models, experiments
+   - **Data Warehouse**: SQL analytics endpoints
+   - **Real-Time Analytics**: Event streams and KQL databases
+   - **Power BI**: Reports and dashboards
+
+1. Navigate to **OneLake data hub** from the left navigation pane to understand:
+
+   - OneLake provides a **single unified namespace** for all data across your organization
+   - All Fabric workloads (Lakehouses, Warehouses, KQL databases) automatically store data in OneLake
+   - OneLake uses **Delta Lake** format by default for transactional consistency
+
+1. Review the **Medallion Architecture** pattern you'll implement:
+
+   - **Bronze Layer (Raw Zone)**: Stores raw, unprocessed data exactly as ingested from source systems (CSV, JSON, Parquet, logs)
+   - **Silver Layer (Cleansed Zone)**: Contains validated, deduplicated, and standardized data with quality checks applied
+   - **Gold Layer (Curated Zone)**: Business-level aggregates, star schemas, and domain-specific models ready for analytics
+
+1. Create your first **Lakehouse** that will hold all three layers:
+
+   - In the Fabric workspace, select **+ New** → **Lakehouse**
+   - Name: **contoso-lakehouse-<inject key="DeploymentID"></inject>**
+   - Click **Create**
+
+1. Once created, explore the Lakehouse structure:
+
+   - **Files**: For storing raw files (Bronze layer)
+   - **Tables**: For Delta Lake tables (Silver and Gold layers)
+   - **SQL analytics endpoint**: For querying tables using T-SQL
+
+1. Within the Lakehouse, create folder structure for the Medallion layers:
+
+   - In the **Files** section, create three folders:
+     - **bronze**
+     - **silver** 
+     - **gold**
+
+   > **Hint:** Click on the **...** (more options) next to Files and select **New subfolder**.
+
+1. Take note of the **OneLake path** displayed in the properties:
+
+   - Format: `abfss://[workspace]@onelake.dfs.fabric.microsoft.com/[lakehouse]/Files`
+   - This path can be used across all Fabric workloads and Azure Databricks for unified access
+
+<validation step="a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d" />
+
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
+## Success Criteria
+
+- Microsoft Fabric workspace created successfully.
+- Understanding of OneLake as a unified data lake demonstrated.
+- Medallion architecture pattern (Bronze → Silver → Gold) explained.
+- Lakehouse created with proper folder structure for data layers.
+
+## Additional Resources
+
+- [What is Microsoft Fabric?](https://learn.microsoft.com/fabric/get-started/microsoft-fabric-overview)
+- [OneLake Overview](https://learn.microsoft.com/fabric/onelake/onelake-overview)
+- [Medallion Architecture in Fabric](https://learn.microsoft.com/fabric/onelake/onelake-medallion-lakehouse-architecture)
+- [Create a Lakehouse in Microsoft Fabric](https://learn.microsoft.com/fabric/data-engineering/create-lakehouse)
+
+Now, click **Next** to continue to **Challenge 02**.
