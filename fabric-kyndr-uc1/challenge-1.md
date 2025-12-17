@@ -4,6 +4,16 @@
 
 Contoso Enterprises operates across multiple business units with data scattered across different systems—ERP, CRM, legacy databases, and unstructured file storage. To unify this data landscape, Contoso has decided to adopt Microsoft Fabric and OneLake as their single logical data lake. Before building data pipelines, it's essential to understand the platform architecture, OneLake's unified storage model, and the Medallion architecture pattern (Bronze → Silver → Gold) that will structure your data transformation journey.
 
+## Accessing the Datasets
+
+Please copy the link below and paste it into a new browser tab inside your LabVM to download the required datasets for the lab and extract them.
+
+```
+https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/c3-datasets.zip
+```
+
+> **Note:** Extract the downloaded ZIP file to `C:\LabFiles\` so that the dataset folder is located at `C:\LabFiles\fabric-kyndr-uc1\dataset\`
+
 ## Challenge Objectives
 
 - Explore Microsoft Fabric workspace and understand its key components.

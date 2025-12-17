@@ -6,40 +6,33 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
 ## Challenge Objectives
 
-- Use **Data Pipelines** to orchestrate data ingestion from Azure Blob Storage.
-- Use **Dataflows Gen2** to ingest CSV and Parquet files.
-- Ingest sample ERP/CRM tables into Bronze as-is.
-- Load unstructured files (JSON, logs) into the Bronze Files section.
+- Access and verify sample dataset files downloaded in Challenge 01.
+- Upload CSV files directly to the Bronze layer in Fabric Lakehouse.
+- Optionally create Delta tables for direct SQL querying.
 - Validate data ingestion using the Lakehouse Explorer.
 
 ## Steps to Complete
 
-### Part 1: Set Up Sample Data Source
+### Part 1: Access Sample Dataset Files
 
-1. In the **Azure Portal**, create a **Storage Account** for sample source data:
+1. On the **LabVM**, open **File Explorer** and navigate to the dataset folder:
 
-   - Subscription: **Select the default Subscription**
-   - Resource Group: **challenge-rg-<inject key="DeploymentID"></inject>**
-   - Storage Account Name: **contosodata<inject key="DeploymentID"></inject>**
-   - Region: **<inject key="Region"></inject>**
-   - Performance: **Standard**
-   - Redundancy: **Locally-redundant storage (LRS)**
+   ```
+   C:\LabFiles\fabric-kyndr-uc1\dataset\
+   ```
 
-1. Inside the Storage Account, under **Data storage** section, create a **container** named:
+   > **Note:** If you haven't downloaded the datasets yet, refer to Challenge 01 for the download link and extract the ZIP file to `C:\LabFiles\`
 
-   - Name: **raw-source-data**
+1. Verify the following sample files are available:
 
-1. Upload sample files to the container (download provided sample datasets):
+   - `customers.csv` - Customer master data (848 records)
+   - `orders.csv` - Sales order details (544 records)
+   - `products.csv` - Product catalog (296 products)
+   - `sales.csv` - Sales transaction data (32,720 records)
 
-   - `customers.csv` - Customer master data
-   - `orders.parquet` - Sales orders
-   - `products.csv` - Product catalog
-   - `transactions.json` - Transaction logs (unstructured)
-   - `app-logs.txt` - Application logs
+1. Keep the File Explorer window open for easy access during upload steps.
 
-   > **Note:** Sample files should be extracted from the provided dataset package in your lab environment.
-
-### Part 2: Create Data Pipeline for Structured Data Ingestion
+### Part 2: Upload Sample Data to Bronze Layer
 
 1. In the **Edge browser**, navigate to the **Microsoft Fabric** portal (if not already open):
 
@@ -49,110 +42,68 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
 1. Navigate to your **Microsoft Fabric workspace**: **fabric-workspace-<inject key="DeploymentID"></inject>**
 
-1. Select **+ New** → **Data Pipeline**
+1. Open your Lakehouse: **contoso-lakehouse-<inject key="DeploymentID"></inject>**
 
-   - Name: **Bronze-Ingestion-Pipeline**
+1. In the Lakehouse Explorer, navigate to **Files** → **bronze** folder.
 
-1. In the pipeline canvas, add a **Copy Data** activity:
+1. Upload **customers.csv** to Bronze layer:
 
-   - Activity name: **Copy-Customers-CSV**
+   - Click the **...** (more options) next to the **bronze** folder
+   - Select **Upload** → **Upload files**
+   - Browse to `C:\LabFiles\fabric-kyndr-uc1\dataset\`
+   - Select **customers.csv**
+   - Click **Upload**
 
-1. Configure the **Source** settings:
+1. Repeat the upload process for the remaining files:
 
-   - Connection: Create new connection to **Azure Blob Storage**
-   - Storage account: **contosodata<inject key="DeploymentID"></inject>**
-   - Container: **raw-source-data**
-   - File path: **customers.csv**
-   - File format: **DelimitedText**
-   - First row as header: **Checked**
+   - **orders.csv** → Upload to `bronze/` folder
+   - **products.csv** → Upload to `bronze/` folder
+   - **sales.csv** → Upload to `bronze/` folder
 
-1. Configure the **Destination** settings:
+1. Verify all files are uploaded:
 
-   - Workspace: **fabric-workspace-<inject key="DeploymentID"></inject>**
-   - Lakehouse: **contoso-lakehouse-<inject key="DeploymentID"></inject>**
-   - Root folder: **Files**
-   - File path: **bronze/customers/**
-   - File format: **Parquet** (preserve raw data in optimized format)
+   - Navigate to **Files** → **bronze**
+   - Confirm you see all 4 CSV files listed
 
-1. Add additional **Copy Data** activities for:
+### Part 3: Load CSV Files as Delta Tables (Optional - For Direct Querying)
 
-   - **Copy-Orders-Parquet**: Source `orders.parquet` → Destination `bronze/orders/`
-   - **Copy-Products-CSV**: Source `products.csv` → Destination `bronze/products/`
+1. In the Lakehouse, you can optionally convert CSV files to Delta tables:
 
-1. **Save** and **Run** the pipeline:
+   - Right-click on **customers.csv** in the bronze folder
+   - Select **Load to Tables**
+   - Table name: **bronze_customers**
+   - Click **Load**
 
-   - Click **Run** from the toolbar
-   - Monitor execution in the **Output** pane
-   - Verify all activities complete successfully
+1. Repeat for other CSV files if needed:
 
-### Part 3: Ingest Unstructured Data (JSON & Logs)
+   - **orders.csv** → **bronze_orders**
+   - **products.csv** → **bronze_products**
+   - **sales.csv** → **bronze_sales**
 
-1. In the Fabric workspace, create a new **Dataflow Gen2**:
+   > **Note:** This step is optional. In Part 3 (Challenge 3), you'll read directly from CSV files in the bronze folder.
 
-   - Name: **Bronze-Unstructured-Ingestion**
+### Part 4: Validate Bronze Layer Ingestion
 
-1. Select **Get Data** → **Azure Blob Storage**
+1. Navigate to your **Lakehouse**: **contoso-lakehouse-<inject key="DeploymentID"></inject>** (if not already open)
 
-1. Connect to the storage account and select **transactions.json**
+1. In the **Files** section, verify the bronze folder contains:
 
-1. In the Power Query editor:
+   - `customers.csv`
+   - `orders.csv`
+   - `products.csv`
+   - `sales.csv`
 
-   - Keep the JSON structure as-is (no transformations)
-   - Set destination to: **bronze/transactions/** in the Lakehouse
+1. Click on any CSV file to preview its contents and verify data loaded correctly.
 
-1. Add another query to ingest **app-logs.txt**:
+1. If you created Delta tables in Part 3, query them using SQL analytics endpoint:
 
-   - Destination: **bronze/logs/**
-
-1. Click **Publish** to save and run the dataflow
-
-### Part 4: Create Bronze Tables from ERP/CRM Sample Data
-
-1. In the Fabric workspace, select **+ New** → **Dataflow Gen2**
-
-   - Name: **Bronze-ERP-CRM-Ingestion**
-
-1. Select **Get Data** → **Blank table** (for simulation of ERP data)
-
-   > **Note:** In production, you would connect to actual ERP/CRM systems using connectors like SAP, Dynamics 365, Salesforce, etc.
-
-1. Create a sample ERP table with columns:
-
-   ```
-   OrderID, CustomerID, OrderDate, Amount, Region, Status
-   ```
-
-1. Add sample rows manually or import from CSV provided in lab files
-
-1. Set destination:
-
-   - Lakehouse: **contoso-lakehouse-<inject key="DeploymentID"></inject>**
-   - Table name: **bronze_erp_orders**
-   - Write mode: **Append**
-
-1. **Publish** the dataflow
-
-### Part 5: Validate Bronze Layer Ingestion
-
-1. Navigate to your **Lakehouse**: **contoso-lakehouse-<inject key="DeploymentID"></inject>**
-
-1. In the **Files** section, verify the following folders contain data:
-
-   - `bronze/customers/`
-   - `bronze/orders/`
-   - `bronze/products/`
-   - `bronze/transactions/`
-   - `bronze/logs/`
-
-1. In the **Tables** section, verify:
-
-   - **bronze_erp_orders** table exists and contains records
-
-1. Query the data using SQL analytics endpoint:
+   - Click on **SQL analytics endpoint** in the top-right corner
+   - Run a query:
 
    ```sql
-   SELECT COUNT(*) FROM bronze_erp_orders;
-   SELECT * FROM bronze_erp_orders LIMIT 10;
+   -- Query bronze tables if created
+   SELECT COUNT(*) as TotalCustomers FROM bronze_customers;
+   SELECT TOP 10 * FROM bronze_sales ORDER BY OrderDate DESC;
    ```
 
 <validation step="b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e" />
@@ -164,11 +115,11 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
 ## Success Criteria
 
-- Storage Account created and sample files uploaded successfully.
-- Data Pipeline created and executed to ingest structured files into Bronze layer.
-- Dataflow Gen2 used to ingest unstructured JSON and log files.
-- Bronze layer validated with all expected files and tables present in Lakehouse Explorer.
-- SQL queries return data from Bronze tables successfully.
+- Sample dataset files located in the LabVM.
+- All 4 CSV files (customers, orders, products, sales) uploaded to Bronze layer in Lakehouse.
+- Files are visible in the Lakehouse Files explorer under the bronze folder.
+- File preview shows data loaded correctly.
+- (Optional) Delta tables created from CSV files for direct SQL querying.
 
 ## Additional Resources
 

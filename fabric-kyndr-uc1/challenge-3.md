@@ -34,17 +34,23 @@ The Bronze layer contains raw, unprocessed data with potential quality issues—
    - Select **Existing Lakehouse**
    - Choose: **contoso-lakehouse-<inject key="DeploymentID"></inject>**
 
-1. In the first cell, load Bronze data from files:
+1. In the first cell, load Bronze data from CSV files:
 
    ```python
-   # Load Bronze layer data
-   df_customers = spark.read.parquet("Files/bronze/customers/")
-   df_orders = spark.read.parquet("Files/bronze/orders/")
-   df_products = spark.read.parquet("Files/bronze/products/")
+   # Load Bronze layer data from CSV files
+   df_customers = spark.read.option("header", "true").option("inferSchema", "true").csv("Files/bronze/customers.csv")
+   df_orders = spark.read.option("header", "true").option("inferSchema", "true").csv("Files/bronze/orders.csv")
+   df_products = spark.read.option("header", "true").option("inferSchema", "true").csv("Files/bronze/products.csv")
+   df_sales = spark.read.option("header", "true").option("inferSchema", "true").csv("Files/bronze/sales.csv")
    
    print(f"Customers: {df_customers.count()} records")
    print(f"Orders: {df_orders.count()} records")
    print(f"Products: {df_products.count()} records")
+   print(f"Sales: {df_sales.count()} records")
+   
+   # Display schema
+   print("\n=== Customers Schema ===")
+   df_customers.printSchema()
    ```
 
 1. Run the cell to verify data loads successfully.
@@ -71,8 +77,9 @@ The Bronze layer contains raw, unprocessed data with potential quality issues—
    
    # Fill null values in non-critical fields
    df_customers_clean = df_customers_clean.fillna({
-       "Phone": "Unknown",
-       "Email": "noemail@contoso.com"
+       "FirstName": "Unknown",
+       "LastName": "Unknown",
+       "EmailAddress": "noemail@adventure-works.com"
    })
    
    # Remove duplicate customers based on CustomerID
@@ -84,53 +91,33 @@ The Bronze layer contains raw, unprocessed data with potential quality issues—
 1. Add a cell to standardize data types and formats:
 
    ```python
-   from pyspark.sql.functions import upper, trim, to_date
+   from pyspark.sql.functions import upper, trim, to_date, concat_ws
    from pyspark.sql.types import IntegerType, DoubleType
    
    # Standardize text fields: trim whitespace and convert to uppercase
+   # Combine FirstName and LastName into FullName
    df_customers_clean = df_customers_clean.withColumn(
-       "CustomerName", upper(trim(col("CustomerName")))
+       "FullName", concat_ws(" ", col("FirstName"), col("LastName"))
    )
    
-   # Cast datatypes
+   # Clean Orders data - cast datatypes
    df_orders_clean = df_orders.withColumn(
-       "OrderID", col("OrderID").cast(IntegerType())
+       "SalesOrderID", col("SalesOrderID").cast(IntegerType())
    ).withColumn(
-       "Amount", col("Amount").cast(DoubleType())
+       "OrderQty", col("OrderQty").cast(IntegerType())
+   ).withColumn(
+       "LineItemTotal", col("LineItemTotal").cast(DoubleType())
    ).withColumn(
        "OrderDate", to_date(col("OrderDate"))
    )
    
    # Remove duplicates from orders
-   df_orders_clean = df_orders_clean.dropDuplicates(["OrderID"])
+   df_orders_clean = df_orders_clean.dropDuplicates(["SalesOrderID", "LineItem"])
+   
+   print(f"Cleaned Orders: {df_orders_clean.count()} records")
    ```
 
-1. Add a cell to standardize codes:
-
-   ```python
-   from pyspark.sql.functions import when
-   
-   # Standardize Region codes
-   df_orders_clean = df_orders_clean.withColumn(
-       "Region",
-       when(col("Region").isin(["East", "EAST", "E"]), "EAST")
-       .when(col("Region").isin(["West", "WEST", "W"]), "WEST")
-       .when(col("Region").isin(["North", "NORTH", "N"]), "NORTH")
-       .when(col("Region").isin(["South", "SOUTH", "S"]), "SOUTH")
-       .otherwise("UNKNOWN")
-   )
-   
-   # Standardize Status codes
-   df_orders_clean = df_orders_clean.withColumn(
-       "Status",
-       when(col("Status").isin(["Completed", "COMPLETED", "Complete"]), "COMPLETED")
-       .when(col("Status").isin(["Pending", "PENDING", "In Progress"]), "PENDING")
-       .when(col("Status").isin(["Cancelled", "CANCELLED", "Cancel"]), "CANCELLED")
-       .otherwise("UNKNOWN")
-   )
-   ```
-
-### Part 3: Join Related Datasets
+### Part 3: Clean Products and Sales Data
 
 1. Add a cell to clean Products data:
 
@@ -139,45 +126,35 @@ The Bronze layer contains raw, unprocessed data with potential quality issues—
    df_products_clean = df_products.filter(col("ProductID").isNotNull())
    df_products_clean = df_products_clean.dropDuplicates(["ProductID"])
    
-   # Standardize Product Family
+   # Cast ListPrice to Double
    df_products_clean = df_products_clean.withColumn(
-       "ProductFamily", upper(trim(col("ProductFamily")))
+       "ListPrice", col("ListPrice").cast(DoubleType())
    )
+   
+   print(f"Cleaned Products: {df_products_clean.count()} records")
    ```
 
-1. Add a cell to join Orders with Customers and Products:
+1. Add a cell to clean and enrich Sales data:
 
    ```python
-   # Join Orders with Customers
-   df_silver_orders = df_orders_clean.join(
-       df_customers_clean,
-       on="CustomerID",
-       how="left"
+   # Clean Sales data
+   df_sales_clean = df_sales.withColumn(
+       "OrderDate", to_date(col("OrderDate"))
+   ).withColumn(
+       "Quantity", col("Quantity").cast(IntegerType())
+   ).withColumn(
+       "UnitPrice", col("UnitPrice").cast(DoubleType())
+   ).withColumn(
+       "TaxAmount", col("TaxAmount").cast(DoubleType())
    )
    
-   # Join with Products
-   df_silver_orders = df_silver_orders.join(
-       df_products_clean,
-       on="ProductID",
-       how="left"
+   # Calculate total amount
+   df_sales_clean = df_sales_clean.withColumn(
+       "TotalAmount", (col("Quantity") * col("UnitPrice")) + col("TaxAmount")
    )
    
-   # Select relevant columns for Silver layer
-   df_silver_orders = df_silver_orders.select(
-       "OrderID",
-       "OrderDate",
-       "CustomerID",
-       "CustomerName",
-       "ProductID",
-       "ProductName",
-       "ProductFamily",
-       "Amount",
-       "Region",
-       "Status"
-   )
-   
-   print(f"Silver Orders (joined): {df_silver_orders.count()} records")
-   df_silver_orders.show(10)
+   print(f"Cleaned Sales: {df_sales_clean.count()} records")
+   df_sales_clean.show(10)
    ```
 
 ### Part 4: Write to Silver Layer
@@ -191,8 +168,11 @@ The Bronze layer contains raw, unprocessed data with potential quality issues—
    # Write Products to Silver layer
    df_products_clean.write.format("delta").mode("overwrite").saveAsTable("silver_products")
    
-   # Write joined Orders to Silver layer
-   df_silver_orders.write.format("delta").mode("overwrite").saveAsTable("silver_orders")
+   # Write Orders to Silver layer
+   df_orders_clean.write.format("delta").mode("overwrite").saveAsTable("silver_orders")
+   
+   # Write Sales to Silver layer
+   df_sales_clean.write.format("delta").mode("overwrite").saveAsTable("silver_sales")
    
    print("✅ Silver layer tables created successfully!")
    ```
@@ -206,15 +186,18 @@ The Bronze layer contains raw, unprocessed data with potential quality issues—
    silver_customers = spark.read.table("silver_customers")
    silver_products = spark.read.table("silver_products")
    silver_orders = spark.read.table("silver_orders")
+   silver_sales = spark.read.table("silver_sales")
    
    print(f"Silver Customers: {silver_customers.count()} records")
    print(f"Silver Products: {silver_products.count()} records")
    print(f"Silver Orders: {silver_orders.count()} records")
+   print(f"Silver Sales: {silver_sales.count()} records")
    
    # Check for nulls in critical fields
-   silver_orders.select([
+   print("\n=== Null Check on Silver Sales ===")
+   silver_sales.select([
        count(when(col(c).isNull(), c)).alias(c) 
-       for c in ["OrderID", "CustomerID", "ProductID"]
+       for c in ["SalesOrderNumber", "CustomerName", "Item"]
    ]).show()
    ```
 
@@ -222,10 +205,16 @@ The Bronze layer contains raw, unprocessed data with potential quality issues—
 
    ```sql
    %%sql
-   SELECT Region, Status, COUNT(*) as OrderCount, SUM(Amount) as TotalAmount
-   FROM silver_orders
-   GROUP BY Region, Status
-   ORDER BY TotalAmount DESC;
+   -- Analyze sales by product category
+   SELECT 
+       p.Category, 
+       COUNT(DISTINCT s.SalesOrderNumber) as OrderCount, 
+       SUM(s.TotalAmount) as TotalRevenue,
+       AVG(s.TotalAmount) as AvgOrderValue
+   FROM silver_sales s
+   INNER JOIN silver_products p ON s.Item = p.ProductName
+   GROUP BY p.Category
+   ORDER BY TotalRevenue DESC;
    ```
 
 <validation step="c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f" />

@@ -66,10 +66,10 @@ The Silver layer contains clean, standardized data, but it's still organized by 
    # Create Customer Dimension with SCD Type 1 approach
    df_dim_customer = df_silver_customers.select(
        col("CustomerID").alias("CustomerKey"),
-       col("CustomerName"),
-       col("Email"),
-       col("Phone"),
-       col("Region").alias("CustomerRegion"),
+       col("FullName").alias("CustomerName"),
+       col("FirstName"),
+       col("LastName"),
+       col("EmailAddress"),
        current_timestamp().alias("LoadDate")
    ).distinct()
    
@@ -77,6 +77,7 @@ The Silver layer contains clean, standardized data, but it's still organized by 
    df_dim_customer.write.format("delta").mode("overwrite").saveAsTable("gold_dim_customer")
    
    print(f"✅ Gold Dim_Customer created: {df_dim_customer.count()} records")
+   df_dim_customer.show(5)
    ```
 
 1. Create **Dim_Product** dimension table:
@@ -86,8 +87,8 @@ The Silver layer contains clean, standardized data, but it's still organized by 
    df_dim_product = df_silver_products.select(
        col("ProductID").alias("ProductKey"),
        col("ProductName"),
-       col("ProductFamily").alias("Category"),
-       col("UnitPrice"),
+       col("Category"),
+       col("ListPrice"),
        current_timestamp().alias("LoadDate")
    ).distinct()
    
@@ -95,6 +96,7 @@ The Silver layer contains clean, standardized data, but it's still organized by 
    df_dim_product.write.format("delta").mode("overwrite").saveAsTable("gold_dim_product")
    
    print(f"✅ Gold Dim_Product created: {df_dim_product.count()} records")
+   df_dim_product.show(5)
    ```
 
 1. Create **Dim_Date** dimension table:
@@ -130,88 +132,61 @@ The Silver layer contains clean, standardized data, but it's still organized by 
 1. Create **Fact_Sales** table with business logic:
 
    ```python
-   from pyspark.sql.functions import sum, count, avg, round
+   from pyspark.sql.functions import sum, count, avg, round, year, month
    
-   # Create Sales Fact table from Silver Orders
-   df_fact_sales = df_silver_orders.select(
-       col("OrderID").alias("SalesKey"),
+   # Create Sales Fact table from Silver Sales
+   # Join with products to get ProductID for dimensional modeling
+   df_products_lookup = df_silver_products.select("ProductID", "ProductName")
+   
+   df_fact_sales = df_silver_sales.join(
+       df_products_lookup,
+       df_silver_sales.Item == df_products_lookup.ProductName,
+       "left"
+   ).select(
+       col("SalesOrderNumber").alias("OrderNumber"),
+       col("SalesOrderLineNumber").alias("LineNumber"),
        col("OrderDate").alias("DateKey"),
-       col("CustomerID").alias("CustomerKey"),
+       col("CustomerName"),
        col("ProductID").alias("ProductKey"),
-       col("Region"),
-       col("Status"),
-       col("Amount").alias("SalesAmount"),
-       (col("Amount") * 0.7).alias("Cost"),  # Assume 30% margin
-       (col("Amount") * 0.3).alias("Profit")  # 30% profit
+       col("Item").alias("ProductName"),
+       col("Quantity"),
+       col("UnitPrice"),
+       col("TaxAmount"),
+       col("TotalAmount").alias("SalesAmount"),
+       (col("TotalAmount") * 0.7).alias("Cost"),  # Assume 30% margin
+       (col("TotalAmount") * 0.3).alias("Profit")  # 30% profit
    )
    
    # Write to Gold layer
    df_fact_sales.write.format("delta").mode("overwrite").saveAsTable("gold_fact_sales")
    
    print(f"✅ Gold Fact_Sales created: {df_fact_sales.count()} records")
+   df_fact_sales.show(5)
    ```
 
 1. Create aggregated sales summary for performance:
 
    ```python
-   # Create aggregated Sales Summary by Region and Month
+   # Create aggregated Sales Summary by Year and Month
    df_sales_summary = df_fact_sales.groupBy(
-       "Region",
        year(col("DateKey")).alias("Year"),
-       month(col("DateKey")).alias("Month")
+       month(col("DateKey")).alias("Month"),
+       col("ProductKey")
    ).agg(
-       count("SalesKey").alias("OrderCount"),
+       count("OrderNumber").alias("OrderCount"),
        round(sum("SalesAmount"), 2).alias("TotalSales"),
        round(sum("Profit"), 2).alias("TotalProfit"),
-       round(avg("SalesAmount"), 2).alias("AvgOrderValue")
+       round(avg("SalesAmount"), 2).alias("AvgLineItemValue")
    )
    
    # Write to Gold layer
    df_sales_summary.write.format("delta").mode("overwrite").saveAsTable("gold_sales_summary")
    
    print(f"✅ Gold Sales_Summary created: {df_sales_summary.count()} records")
+   df_sales_summary.show(10)
    ```
 
-### Part 4: Create Operations Domain Tables
-
-1. Create **Fact_Order_Fulfillment** table:
-
-   ```python
-   # Create Order Fulfillment Fact for Operations domain
-   df_fact_operations = df_silver_orders.select(
-       col("OrderID").alias("OrderKey"),
-       col("OrderDate"),
-       col("Status"),
-       col("Region"),
-       when(col("Status") == "COMPLETED", 1).otherwise(0).alias("IsCompleted"),
-       when(col("Status") == "CANCELLED", 1).otherwise(0).alias("IsCancelled"),
-       when(col("Status") == "PENDING", 1).otherwise(0).alias("IsPending")
-   )
-   
-   # Write to Gold layer
-   df_fact_operations.write.format("delta").mode("overwrite").saveAsTable("gold_fact_operations")
-   
-   print(f"✅ Gold Fact_Operations created: {df_fact_operations.count()} records")
-   ```
-
-1. Create operational KPI table:
-
-   ```python
-   # Create Operations KPI summary
-   df_operations_kpi = df_fact_operations.groupBy("Region", "Status").agg(
-       count("OrderKey").alias("OrderCount"),
-       (sum("IsCompleted") / count("OrderKey") * 100).alias("CompletionRate"),
-       (sum("IsCancelled") / count("OrderKey") * 100).alias("CancellationRate")
-   )
-   
-   # Write to Gold layer
-   df_operations_kpi.write.format("delta").mode("overwrite").saveAsTable("gold_operations_kpi")
-   
-   print(f"✅ Gold Operations_KPI created")
-   df_operations_kpi.show()
-   ```
-
-### Part 5: Create Finance Domain View
+### Part 4: Create Finance Domain View
 
 1. Create a consolidated Finance view:
 
@@ -220,15 +195,15 @@ The Silver layer contains clean, standardized data, but it's still organized by 
    CREATE OR REPLACE VIEW gold_finance_revenue AS
    SELECT 
        YEAR(DateKey) as FiscalYear,
-       Region,
+       MONTH(DateKey) as FiscalMonth,
        SUM(SalesAmount) as TotalRevenue,
        SUM(Cost) as TotalCost,
        SUM(Profit) as NetProfit,
-       (SUM(Profit) / SUM(SalesAmount) * 100) as ProfitMarginPercent
+       (SUM(Profit) / SUM(SalesAmount) * 100) as ProfitMarginPercent,
+       COUNT(DISTINCT OrderNumber) as TotalOrders
    FROM gold_fact_sales
-   WHERE Status = 'COMPLETED'
-   GROUP BY YEAR(DateKey), Region
-   ORDER BY FiscalYear DESC, TotalRevenue DESC;
+   GROUP BY YEAR(DateKey), MONTH(DateKey)
+   ORDER BY FiscalYear DESC, FiscalMonth DESC;
    ```
 
 1. Query the Finance view:
@@ -238,7 +213,7 @@ The Silver layer contains clean, standardized data, but it's still organized by 
    SELECT * FROM gold_finance_revenue;
    ```
 
-### Part 6: Validate Gold Layer and Star Schema
+### Part 5: Validate Gold Layer and Star Schema
 
 1. Add a cell to validate all Gold tables:
 
@@ -259,18 +234,20 @@ The Silver layer contains clean, standardized data, but it's still organized by 
    ⭐ Star Schema Design:
    
    FACT TABLES:
-   - gold_fact_sales (Grain: One row per order)
-   - gold_fact_operations (Grain: One row per order status)
+   - gold_fact_sales (Grain: One row per sales order line item)
    
    DIMENSION TABLES:
-   - gold_dim_customer (Customer attributes)
-   - gold_dim_product (Product attributes)
-   - gold_dim_date (Date attributes)
+   - gold_dim_customer (Customer attributes: ID, Name, Email)
+   - gold_dim_product (Product attributes: ID, Name, Category, Price)
+   - gold_dim_date (Date attributes: Year, Quarter, Month, Day)
+   
+   AGGREGATE TABLES:
+   - gold_sales_summary (Pre-aggregated by Year/Month/Product)
    
    RELATIONSHIPS:
-   - Fact_Sales -> Dim_Customer (CustomerKey)
-   - Fact_Sales -> Dim_Product (ProductKey)
-   - Fact_Sales -> Dim_Date (DateKey)
+   - Fact_Sales -> Dim_Product (ProductKey = ProductID)
+   - Fact_Sales -> Dim_Date (DateKey = OrderDate)
+   - Fact_Sales -> Dim_Customer (CustomerName lookup)
    """)
    ```
 
