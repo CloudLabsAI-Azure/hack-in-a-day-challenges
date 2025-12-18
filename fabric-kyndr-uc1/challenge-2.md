@@ -25,10 +25,15 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
 1. Verify the following sample files are available:
 
-   - `customers.csv` - Customer master data (848 records)
-   - `orders.csv` - Sales order details (544 records)
-   - `products.csv` - Product catalog (296 products)
-   - `sales.csv` - Sales transaction data (32,720 records)
+   - `flight.csv` - Flight loyalty program data with data quality issues (62,990 records)
+   - `customer_transactions.json` - Customer transaction data in JSON format with inconsistencies (15 records)
+
+   > **Note:** These datasets intentionally contain data quality issues (nulls, duplicates, inconsistent formatting) to demonstrate real-world data cleansing scenarios.
+
+1. Preview the data to identify quality issues:
+
+   - **flight.csv** contains: Missing values (".", empty strings), inconsistent city names, mixed data types
+   - **customer_transactions.json** contains: Null values, duplicate records, inconsistent casing, invalid data, date format variations
 
 1. Keep the File Explorer window open for easy access during upload steps.
 
@@ -46,41 +51,55 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
 1. In the Lakehouse Explorer, navigate to **Files** → **bronze** folder.
 
-1. Upload **customers.csv** to Bronze layer:
+1. Upload **flight.csv** to Bronze layer:
 
    - Click the **...** (more options) next to the **bronze** folder
    - Select **Upload** → **Upload files**
    - Browse to `C:\LabFiles\fabric-kyndr-uc1\dataset\`
-   - Select **customers.csv**
+   - Select **flight.csv**
    - Click **Upload**
 
-1. Repeat the upload process for the remaining files:
+   > **Note:** This may take a moment as the file contains ~63K records.
 
-   - **orders.csv** → Upload to `bronze/` folder
-   - **products.csv** → Upload to `bronze/` folder
-   - **sales.csv** → Upload to `bronze/` folder
+1. Upload **customer_transactions.json** to Bronze layer:
+
+   - Click the **...** (more options) next to the **bronze** folder
+   - Select **Upload** → **Upload files**
+   - Browse to `C:\LabFiles\fabric-kyndr-uc1\dataset\`
+   - Select **customer_transactions.json**
+   - Click **Upload**
 
 1. Verify all files are uploaded:
 
    - Navigate to **Files** → **bronze**
-   - Confirm you see all 4 CSV files listed
+   - Confirm you see:
+     - `flight.csv` (CSV format)
+     - `customer_transactions.json` (JSON format)
 
-### Part 3: Load CSV Files as Delta Tables (Optional - For Direct Querying)
+### Part 3: Preview Raw Data and Identify Quality Issues
 
-1. In the Lakehouse, you can optionally convert CSV files to Delta tables:
+1. In the Lakehouse, preview the **flight.csv** file:
 
-   - Right-click on **customers.csv** in the bronze folder
-   - Select **Load to Tables**
-   - Table name: **bronze_customers**
-   - Click **Load**
+   - Click on **flight.csv** in the bronze folder
+   - Review the data preview
+   - Observe data quality issues:
+     - Missing values represented as "." or empty strings
+     - Inconsistent city/province names (e.g., "beijing", ".", empty)
+     - Mixed data types in some columns
 
-1. Repeat for other CSV files if needed:
+1. Preview the **customer_transactions.json** file:
 
-   - **orders.csv** → **bronze_orders**
-   - **products.csv** → **bronze_products**
-   - **sales.csv** → **bronze_sales**
+   - Click on **customer_transactions.json**
+   - Review the JSON structure
+   - Observe data quality issues:
+     - Null values in critical fields (customer_id, amount)
+     - Inconsistent status values ("completed", "COMPLETED", "pending", "PENDING")
+     - Duplicate transactions
+     - Invalid email formats
+     - Inconsistent date formats
+     - Mixed case region names
 
-   > **Note:** This step is optional. In Part 3 (Challenge 3), you'll read directly from CSV files in the bronze folder.
+   > **Note:** In Challenge 3, you'll clean and standardize this data as part of the Bronze → Silver transformation.
 
 ### Part 4: Validate Bronze Layer Ingestion
 
@@ -88,12 +107,21 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
 1. In the **Files** section, verify the bronze folder contains:
 
-   - `customers.csv`
-   - `orders.csv`
-   - `products.csv`
-   - `sales.csv`
+   - `flight.csv` (~63K records)
+   - `customer_transactions.json` (15 records)
 
-1. Click on any CSV file to preview its contents and verify data loaded correctly.
+1. Click on **flight.csv** to preview and verify:
+
+   - File contains headers: MEMBER_NO, FFP_DATE, GENDER, WORK_CITY, WORK_PROVINCE, AGE, etc.
+   - Data quality issues are visible (missing values, inconsistent formatting)
+
+1. Click on **customer_transactions.json** to preview and verify:
+
+   - JSON structure is intact
+   - Each record contains: transaction_id, customer_id, customer_name, email, purchase_date, amount, status, payment_method, region
+   - Data quality issues are visible (nulls, duplicates, inconsistent values)
+
+<validation step="b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e" />
 
 > **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
 > - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
@@ -102,11 +130,11 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
 ## Success Criteria
 
-- Sample dataset files located in the LabVM.
-- All 4 CSV files (customers, orders, products, sales) uploaded to Bronze layer in Lakehouse.
+- Sample dataset files located in the LabVM at `C:\LabFiles\fabric-kyndr-uc1\dataset\`.
+- Both files (flight.csv and customer_transactions.json) uploaded successfully to Bronze layer.
 - Files are visible in the Lakehouse Files explorer under the bronze folder.
-- File preview shows data loaded correctly.
-- (Optional) Delta tables created from CSV files for direct SQL querying.
+- File preview displays data with identifiable quality issues.
+- Ready to proceed to Challenge 3 for data cleansing and transformation.
 
 ## Additional Resources
 

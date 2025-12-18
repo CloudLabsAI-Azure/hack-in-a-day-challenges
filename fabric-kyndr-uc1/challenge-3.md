@@ -2,14 +2,15 @@
 
 ## Introduction
 
-The Bronze layer contains raw, unprocessed data with potential quality issues—duplicates, null values, inconsistent formats, and unjoined datasets. Contoso's analytics team needs clean, standardized data for reliable reporting and analysis. The Silver layer serves as the cleansed and validated zone where data quality rules are applied, datatypes are standardized, and related datasets are joined. In this challenge, you will use PySpark and SQL in Fabric Notebooks to transform Bronze data into clean Silver tables.
+The Bronze layer contains raw, unprocessed data with significant quality issues—missing values, duplicates, inconsistent formats, and mixed data types. Contoso's analytics team needs clean, standardized data for reliable reporting and analysis. The Silver layer serves as the cleansed and validated zone where data quality rules are applied, datatypes are standardized, and inconsistencies are resolved. In this challenge, you will use PySpark and SQL in Fabric Notebooks to transform dirty Bronze data (flight loyalty program data and customer transactions) into clean Silver tables.
 
 ## Challenge Objectives
 
 - Create a Fabric Notebook for data transformation.
-- Apply data quality checks: handle nulls, remove duplicates, validate data types.
-- Join related datasets (Customers, Orders, Products) into unified Silver tables.
-- Standardize codes and formats (Region, Product Family, Status codes).
+- Load and inspect flight loyalty data (CSV) and customer transaction data (JSON).
+- Apply data quality checks: identify and handle nulls, remove duplicates, validate data types.
+- Standardize inconsistent values (status codes, region names, date formats).
+- Clean and transform both structured (CSV) and semi-structured (JSON) data.
 - Write transformed outputs to **Silver layer** as Delta Lake tables.
 
 ## Steps to Complete
@@ -34,138 +35,220 @@ The Bronze layer contains raw, unprocessed data with potential quality issues—
    - Select **Existing Lakehouse**
    - Choose: **contoso-lakehouse-<inject key="DeploymentID"></inject>**
 
-1. In the first cell, load Bronze data from CSV files:
+1. In the first cell, load Bronze data from CSV and JSON files:
 
    ```python
-   # Load Bronze layer data from CSV files
-   df_customers = spark.read.option("header", "true").option("inferSchema", "true").csv("Files/bronze/customers.csv")
-   df_orders = spark.read.option("header", "true").option("inferSchema", "true").csv("Files/bronze/orders.csv")
-   df_products = spark.read.option("header", "true").option("inferSchema", "true").csv("Files/bronze/products.csv")
-   df_sales = spark.read.option("header", "true").option("inferSchema", "true").csv("Files/bronze/sales.csv")
+   # Load Bronze layer data - Flight loyalty data (CSV) and Transactions (JSON)
+   from pyspark.sql.functions import col
    
-   print(f"Customers: {df_customers.count()} records")
-   print(f"Orders: {df_orders.count()} records")
-   print(f"Products: {df_products.count()} records")
-   print(f"Sales: {df_sales.count()} records")
+   # Load flight data from CSV
+   df_flights = spark.read.option("header", "true").option("inferSchema", "true").csv("Files/bronze/flight.csv")
    
-   # Display schema
-   print("\n=== Customers Schema ===")
-   df_customers.printSchema()
+   # Load customer transactions from JSON
+   df_transactions = spark.read.json("Files/bronze/customer_transactions.json")
+   
+   print(f"Flight Records: {df_flights.count()}")
+   print(f"Transaction Records: {df_transactions.count()}")
+   
+   # Display schema to understand structure
+   print("\n=== Flight Data Schema ===")
+   df_flights.printSchema()
+   
+   print("\n=== Transaction Data Schema ===")
+   df_transactions.printSchema()
    ```
 
 1. Run the cell to verify data loads successfully.
 
-### Part 2: Apply Data Quality Checks and Cleansing
+### Part 2: Apply Data Quality Checks and Cleansing - Flight Data
 
-1. Add a new cell to inspect data quality and profile the data:
+1. Add a new cell to inspect data quality issues in flight data:
 
    ```python
-   # Profile the data - check data completeness and distribution
-   from pyspark.sql.functions import col, count, when, countDistinct
+   # Profile the flight data - check for data quality issues
+   from pyspark.sql.functions import col, count, when, countDistinct, isnan
    
-   print("=== Customer Data Profile ===")
-   print(f"Total Records: {df_customers.count()}")
-   print(f"Unique Customers: {df_customers.select(countDistinct('CustomerID')).collect()[0][0]}")
+   print("=== Flight Data Quality Profile ===")
+   print(f"Total Records: {df_flights.count()}")
+   print(f"Unique Members: {df_flights.select(countDistinct('MEMBER_NO')).collect()[0][0]}")
    
-   # Check for potential duplicates
-   duplicate_check = df_customers.groupBy("CustomerID").count().filter("count > 1")
-   print(f"Duplicate CustomerIDs: {duplicate_check.count()}")
+   # Check for missing values in critical fields
+   print("\n=== Missing Values Check ===")
+   missing_check = df_flights.select([
+       count(when(col(c) == ".", c)).alias(c + "_dot") 
+       for c in ["WORK_CITY", "WORK_PROVINCE", "WORK_COUNTRY"]
+   ])
+   missing_check.show()
    
-   # Display sample data to inspect quality
-   print("\n=== Sample Customer Data ===")
-   df_customers.show(10, truncate=False)
+   # Check for null values
+   null_check = df_flights.select([
+       count(when(col(c).isNull(), c)).alias(c + "_null") 
+       for c in ["MEMBER_NO", "AGE", "GENDER"]
+   ])
+   null_check.show()
+   
+   # Display sample records with quality issues
+   print("\n=== Sample Records with Missing City/Province ===")
+   df_flights.filter((col("WORK_CITY") == ".") | (col("WORK_PROVINCE") == "")).select(
+       "MEMBER_NO", "WORK_CITY", "WORK_PROVINCE", "WORK_COUNTRY", "AGE"
+   ).show(10, truncate=False)
    ```
 
-1. Add a cell to check data types and standardize:
+1. Add a cell to clean and standardize flight data:
 
    ```python
-   # Check current data types
-   print("=== Current Schema ===")
-   df_customers.printSchema()
+   from pyspark.sql.functions import when, trim, upper, regexp_replace
+   from pyspark.sql.types import IntegerType, DoubleType, DateType
    
-   # Ensure CustomerID is integer type
-   from pyspark.sql.types import IntegerType
+   # Start with the raw data
+   df_flights_clean = df_flights
    
-   df_customers_clean = df_customers.withColumn(
-       "CustomerID", col("CustomerID").cast(IntegerType())
+   # Replace "." with null for better handling
+   for column in ["WORK_CITY", "WORK_PROVINCE", "AGE"]:
+       df_flights_clean = df_flights_clean.withColumn(
+           column,
+           when(col(column) == ".", None).otherwise(col(column))
+       )
+   
+   # Handle empty strings as null
+   df_flights_clean = df_flights_clean.withColumn(
+       "WORK_CITY",
+       when((col("WORK_CITY") == "") | (col("WORK_CITY").isNull()), "Unknown").otherwise(col("WORK_CITY"))
    )
    
-   # Remove duplicate customers based on CustomerID (defensive coding)
-   df_customers_clean = df_customers_clean.dropDuplicates(["CustomerID"])
+   df_flights_clean = df_flights_clean.withColumn(
+       "WORK_PROVINCE",
+       when((col("WORK_PROVINCE") == "") | (col("WORK_PROVINCE").isNull()), "Unknown").otherwise(col("WORK_PROVINCE"))
+   )
    
-   # Ensure critical fields are not null (defensive filter)
-   df_customers_clean = df_customers_clean.filter(col("CustomerID").isNotNull())
+   # Standardize city and province names - trim and convert to proper case
+   df_flights_clean = df_flights_clean.withColumn(
+       "WORK_CITY", trim(col("WORK_CITY"))
+   ).withColumn(
+       "WORK_PROVINCE", trim(col("WORK_PROVINCE"))
+   )
    
-   print(f"Cleaned Customers: {df_customers_clean.count()} records")
+   # Ensure AGE is proper integer type
+   df_flights_clean = df_flights_clean.withColumn(
+       "AGE", col("AGE").cast(IntegerType())
+   )
+   
+   # Remove duplicates based on MEMBER_NO (keep first occurrence)
+   df_flights_clean = df_flights_clean.dropDuplicates(["MEMBER_NO"])
+   
+   # Filter out records where critical fields are still null
+   df_flights_clean = df_flights_clean.filter(col("MEMBER_NO").isNotNull())
+   
+   print(f"✅ Cleaned Flight Records: {df_flights_clean.count()}")
+   print(f"Records removed: {df_flights.count() - df_flights_clean.count()}")
+   
+   # Show sample of cleaned data
+   df_flights_clean.select("MEMBER_NO", "WORK_CITY", "WORK_PROVINCE", "AGE", "GENDER").show(10, truncate=False)
    ```
 
-1. Add a cell to standardize data types and formats:
+### Part 3: Clean and Standardize JSON Transaction Data
+
+1. Add a cell to inspect transaction data quality:
 
    ```python
-   from pyspark.sql.functions import upper, trim, to_date, concat_ws
-   from pyspark.sql.types import IntegerType, DoubleType
+   # Profile transaction data quality
+   print("=== Transaction Data Quality Profile ===")
+   print(f"Total Records: {df_transactions.count()}")
+   print(f"Unique Transactions: {df_transactions.select(countDistinct('transaction_id')).collect()[0][0]}")
    
-   # Standardize text fields: trim whitespace and convert to uppercase
-   # Combine FirstName and LastName into FullName
-   df_customers_clean = df_customers_clean.withColumn(
-       "FullName", concat_ws(" ", col("FirstName"), col("LastName"))
-   )
+   # Check for null values in critical fields
+   print("\n=== Null Values Check ===")
+   null_check_txn = df_transactions.select([
+       count(when(col(c).isNull(), c)).alias(c) 
+       for c in ["customer_id", "amount", "payment_method"]
+   ])
+   null_check_txn.show()
    
-   # Clean Orders data - cast datatypes
-   df_orders_clean = df_orders.withColumn(
-       "SalesOrderID", col("SalesOrderID").cast(IntegerType())
-   ).withColumn(
-       "OrderQty", col("OrderQty").cast(IntegerType())
-   ).withColumn(
-       "LineItemTotal", col("LineItemTotal").cast(DoubleType())
-   ).withColumn(
-       "OrderDate", to_date(col("OrderDate"))
-   )
+   # Check for duplicate transactions
+   duplicate_txn = df_transactions.groupBy("transaction_id").count().filter("count > 1")
+   print(f"\nDuplicate Transactions: {duplicate_txn.count()}")
    
-   # Remove duplicates from orders
-   df_orders_clean = df_orders_clean.dropDuplicates(["SalesOrderID", "LineItem"])
-   
-   print(f"Cleaned Orders: {df_orders_clean.count()} records")
+   # Display sample records with issues
+   print("\n=== Sample Records with Quality Issues ===")
+   df_transactions.filter(
+       col("customer_id").isNull() | col("amount").isNull() | (col("email") == "")
+   ).show(truncate=False)
    ```
 
-### Part 3: Clean Products and Sales Data
-
-1. Add a cell to clean Products data:
+1. Add a cell to clean and standardize transaction data:
 
    ```python
-   # Clean Products data
-   df_products_clean = df_products.filter(col("ProductID").isNotNull())
-   df_products_clean = df_products_clean.dropDuplicates(["ProductID"])
+   from pyspark.sql.functions import lower, upper, regexp_replace, to_date, coalesce, lit
    
-   # Cast ListPrice to Double
-   df_products_clean = df_products_clean.withColumn(
-       "ListPrice", col("ListPrice").cast(DoubleType())
+   # Start cleaning transactions
+   df_transactions_clean = df_transactions
+   
+   # Handle null customer_ids - filter them out or assign default
+   df_transactions_clean = df_transactions_clean.filter(col("customer_id").isNotNull())
+   
+   # Standardize status values to lowercase
+   df_transactions_clean = df_transactions_clean.withColumn(
+       "status",
+       lower(trim(col("status")))
    )
    
-   print(f"Cleaned Products: {df_products_clean.count()} records")
-   ```
-
-1. Add a cell to clean and enrich Sales data:
-
-   ```python
-   # Clean Sales data
-   df_sales_clean = df_sales.withColumn(
-       "OrderDate", to_date(col("OrderDate"))
-   ).withColumn(
-       "Quantity", col("Quantity").cast(IntegerType())
-   ).withColumn(
-       "UnitPrice", col("UnitPrice").cast(DoubleType())
-   ).withColumn(
-       "TaxAmount", col("TaxAmount").cast(DoubleType())
+   # Standardize region names - convert to proper case
+   df_transactions_clean = df_transactions_clean.withColumn(
+       "region",
+       when(col("region").isNull() | (col("region") == ""), "Unknown")
+       .otherwise(trim(upper(col("region"))))
    )
    
-   # Calculate total amount
-   df_sales_clean = df_sales_clean.withColumn(
-       "TotalAmount", (col("Quantity") * col("UnitPrice")) + col("TaxAmount")
+   # Standardize payment_method - clean up inconsistencies
+   df_transactions_clean = df_transactions_clean.withColumn(
+       "payment_method",
+       when(col("payment_method").isNull() | (col("payment_method") == "."), "unknown")
+       .when(lower(col("payment_method")).like("%credit%card%"), "credit_card")
+       .when(lower(col("payment_method")).like("%debit%card%"), "debit_card")
+       .when(lower(col("payment_method")).like("%paypal%"), "paypal")
+       .when(lower(col("payment_method")).like("%wire%transfer%"), "wire_transfer")
+       .otherwise(lower(trim(col("payment_method"))))
    )
    
-   print(f"Cleaned Sales: {df_sales_clean.count()} records")
-   df_sales_clean.show(10)
+   # Standardize email - convert to lowercase
+   df_transactions_clean = df_transactions_clean.withColumn(
+       "email",
+       when((col("email") == "") | (col("email") == "invalid-email"), None)
+       .otherwise(lower(trim(col("email"))))
+   )
+   
+   # Handle invalid amounts - filter out or set to 0
+   df_transactions_clean = df_transactions_clean.withColumn(
+       "amount",
+       when(col("amount").isNull() | (col("amount") == "invalid"), 0.0)
+       .otherwise(col("amount").cast(DoubleType()))
+   )
+   
+   # Standardize date format (handle multiple formats)
+   df_transactions_clean = df_transactions_clean.withColumn(
+       "purchase_date",
+       coalesce(
+           to_date(col("purchase_date"), "yyyy-MM-dd"),
+           to_date(col("purchase_date"), "MM/dd/yyyy"),
+           to_date(col("purchase_date"), "yyyy/MM/dd")
+       )
+   )
+   
+   # Remove duplicate transactions
+   df_transactions_clean = df_transactions_clean.dropDuplicates(["transaction_id"])
+   
+   # Handle missing customer names
+   df_transactions_clean = df_transactions_clean.withColumn(
+       "customer_name",
+       when((col("customer_name") == "") | (col("customer_name") == "."), "Unknown")
+       .otherwise(trim(col("customer_name")))
+   )
+   
+   print(f"✅ Cleaned Transaction Records: {df_transactions_clean.count()}")
+   print(f"Records removed: {df_transactions.count() - df_transactions_clean.count()}")
+   
+   # Show sample of cleaned data
+   df_transactions_clean.show(10, truncate=False)
    ```
 
 ### Part 4: Write to Silver Layer
@@ -173,19 +256,15 @@ The Bronze layer contains raw, unprocessed data with potential quality issues—
 1. Add a cell to write Silver tables:
 
    ```python
-   # Write Customers to Silver layer
-   df_customers_clean.write.format("delta").mode("overwrite").saveAsTable("silver_customers")
+   # Write cleaned Flight data to Silver layer
+   df_flights_clean.write.format("delta").mode("overwrite").saveAsTable("silver_flights")
    
-   # Write Products to Silver layer
-   df_products_clean.write.format("delta").mode("overwrite").saveAsTable("silver_products")
-   
-   # Write Orders to Silver layer
-   df_orders_clean.write.format("delta").mode("overwrite").saveAsTable("silver_orders")
-   
-   # Write Sales to Silver layer
-   df_sales_clean.write.format("delta").mode("overwrite").saveAsTable("silver_sales")
+   # Write cleaned Transaction data to Silver layer
+   df_transactions_clean.write.format("delta").mode("overwrite").saveAsTable("silver_transactions")
    
    print("✅ Silver layer tables created successfully!")
+   print(f"  - silver_flights: {df_flights_clean.count()} records")
+   print(f"  - silver_transactions: {df_transactions_clean.count()} records")
    ```
 
 ### Part 5: Validate Silver Layer
@@ -194,36 +273,81 @@ The Bronze layer contains raw, unprocessed data with potential quality issues—
 
    ```python
    # Validate Silver tables
-   silver_customers = spark.read.table("silver_customers")
-   silver_products = spark.read.table("silver_products")
-   silver_orders = spark.read.table("silver_orders")
-   silver_sales = spark.read.table("silver_sales")
+   silver_flights = spark.read.table("silver_flights")
+   silver_transactions = spark.read.table("silver_transactions")
    
-   print(f"Silver Customers: {silver_customers.count()} records")
-   print(f"Silver Products: {silver_products.count()} records")
-   print(f"Silver Orders: {silver_orders.count()} records")
-   print(f"Silver Sales: {silver_sales.count()} records")
+   print("=== Silver Layer Validation ===")
+   print(f"Silver Flights: {silver_flights.count()} records")
+   print(f"Silver Transactions: {silver_transactions.count()} records")
    
-   # Check for nulls in critical fields
-   print("\n=== Null Check on Silver Sales ===")
-   silver_sales.select([
+   # Check for null values in critical fields after cleaning
+   print("\n=== Silver Flights - Null Check ===")
+   silver_flights.select([
        count(when(col(c).isNull(), c)).alias(c) 
-       for c in ["SalesOrderNumber", "CustomerName", "Item"]
+       for c in ["MEMBER_NO", "WORK_CITY", "WORK_PROVINCE"]
    ]).show()
+   
+   print("\n=== Silver Transactions - Null Check ===")
+   silver_transactions.select([
+       count(when(col(c).isNull(), c)).alias(c) 
+       for c in ["transaction_id", "customer_id", "status", "region"]
+   ]).show()
+   
+   # Verify data standardization
+   print("\n=== Standardized Status Values ===")
+   silver_transactions.groupBy("status").count().show()
+   
+   print("\n=== Standardized Region Values ===")
+   silver_transactions.groupBy("region").count().show()
+   
+   print("\n=== Standardized Payment Methods ===")
+   silver_transactions.groupBy("payment_method").count().show()
    ```
 
 1. Query Silver tables using SQL:
 
    ```sql
    %%sql
-   -- Analyze sales by product category
+   -- Analyze transactions by region and status
    SELECT 
-       p.Category, 
-       COUNT(DISTINCT s.SalesOrderNumber) as OrderCount, 
-       SUM(s.TotalAmount) as TotalRevenue,
-       AVG(s.TotalAmount) as AvgOrderValue
-   FROM silver_sales s
-   INNER JOIN silver_products p ON s.Item = p.ProductName
+       region,
+       status,
+       COUNT(*) as transaction_count,
+       SUM(amount) as total_amount,
+       AVG(amount) as avg_amount
+   FROM silver_transactions
+   WHERE amount > 0
+   GROUP BY region, status
+   ORDER BY total_amount DESC;
+   ```
+
+<validation step="c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f" />
+
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
+## Success Criteria
+
+- Fabric Notebook created and attached to Lakehouse successfully.
+- Flight data (CSV) and transaction data (JSON) loaded from Bronze layer.
+- Data quality issues identified: missing values (".", empty strings, nulls), inconsistent formatting, duplicates.
+- Data quality checks applied: nulls handled, duplicates removed, datatypes standardized.
+- Inconsistent values standardized (status, region, payment_method, city/province names).
+- Both structured (CSV) and semi-structured (JSON) data cleaned successfully.
+- Silver layer tables created in Delta Lake format with validated data quality.
+- SQL queries return clean, standardized data from Silver tables.
+
+## Additional Resources
+
+- [Notebooks in Microsoft Fabric](https://learn.microsoft.com/fabric/data-engineering/how-to-use-notebook)
+- [PySpark DataFrame API](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/dataframe.html)
+- [Delta Lake in Fabric](https://learn.microsoft.com/fabric/data-engineering/lakehouse-and-delta-tables)
+- [Data Quality Best Practices](https://learn.microsoft.com/azure/databricks/lakehouse/data-quality)
+- [Working with JSON in PySpark](https://spark.apache.org/docs/latest/sql-data-sources-json.html)
+
+Now, click **Next** to continue to **Challenge 04**.
    GROUP BY p.Category
    ORDER BY TotalRevenue DESC;
    ```
