@@ -1,6 +1,6 @@
-# Unified Data Foundation with Fabric
+# Microsoft Fabric OneLake Data Engineering with Medallion Architecture
 
-Welcome to the Unified Data Foundation with Fabric Hack in a Day! Today, you'll explore how to build an enterprise-grade data lakehouse using Microsoft Fabric's unified analytics platform. Through hands-on challenges, you will implement the Medallion architecture (Bronze-Silver-Gold layers), perform data quality transformations, create dimensional models, and integrate with Azure Databricks for advanced machine learning analytics.
+Welcome to the Microsoft Fabric OneLake Data Engineering Hack in a Day! Today, you'll explore how to build an enterprise-grade data lakehouse using Microsoft Fabric's unified analytics platform. Through hands-on challenges, you will implement the Medallion architecture (Bronze-Silver-Gold layers), perform data quality transformations, create dimensional models, and integrate with Azure Databricks for advanced machine learning analytics.
 
 ## Scenario
 
