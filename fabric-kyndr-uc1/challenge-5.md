@@ -1,249 +1,430 @@
-# Challenge 05: Integrate Azure Databricks Workloads
+# Challenge 5: Integrate Azure Databricks for Advanced Analytics
+
+**Estimated Time:** 45 minutes
 
 ## Introduction
 
-Contoso's data science team uses Azure Databricks for advanced machine learning and large-scale data processing. To avoid data silos and duplication, the team needs seamless access to the unified data stored in Microsoft Fabric's OneLake. Microsoft Fabric provides enterprise interoperability with Azure Databricks through OneLake integration—enabling Databricks clusters to directly read and write Delta Lake tables stored in Fabric Lakehouses. In this challenge, you will integrate Azure Databricks with your Fabric Lakehouse, demonstrating how both platforms can work together on the same data without data movement.
+While Microsoft Fabric provides powerful data engineering capabilities, many organizations have existing investments in Azure Databricks for machine learning and advanced analytics. In this challenge, you'll integrate Azure Databricks with your Fabric Lakehouse to perform customer segmentation analysis on your flight loyalty and transaction data using Databricks' ML capabilities.
 
-## Challenge Objectives
+## Prerequisites
 
-- Create an Azure Databricks workspace.
-- Configure OneLake integration with Azure Databricks.
-- Access Fabric Lakehouse Delta tables from Databricks notebooks.
-- Perform data science workloads on Gold layer data using Databricks.
-- Write enriched data back to Fabric Lakehouse from Databricks.
+- Completed Challenge 4 (Gold layer tables created)
+- Azure subscription with permissions to create Databricks workspace
+- Access to Microsoft Fabric workspace
+- Gold layer tables: `dim_customers`, `fact_flights`, `fact_transactions`, `kpi_customer_value`
 
-## Steps to Complete
+---
 
-### Part 1: Create Azure Databricks Workspace
+## Learning Objectives
 
-1. In the **Azure Portal**, search for **Azure Databricks**.
+By the end of this challenge, you will:
+- Create and configure Azure Databricks workspace
+- Set up OneLake integration for seamless data access
+- Access Fabric Lakehouse Delta tables from Databricks
+- Perform customer segmentation using ML clustering
+- Write enriched analytics back to Fabric Lakehouse
 
-1. Click **Create** to provision a new Databricks workspace:
+---
 
-   - Subscription: **Select the default Subscription**
-   - Resource Group: **challenge-rg-<inject key="DeploymentID"></inject>**
-   - Workspace Name: **contoso-databricks-<inject key="DeploymentID"></inject>**
-   - Region: **<inject key="Region"></inject>**
-   - Pricing Tier: **Premium** (required for Unity Catalog and OneLake integration)
+## Part 1: Create Azure Databricks Workspace
 
-1. Click **Review + Create** → **Create**
+1. **Open the Azure Portal**: Navigate to [https://portal.azure.com](https://portal.azure.com)
 
-1. Once deployment completes, click **Launch Workspace** to open Azure Databricks.
+2. **Create Databricks workspace**:
+   - Search for **"Azure Databricks"** in the top search bar
+   - Click **+ Create**
+   - Configure the workspace:
+     - **Subscription**: Your Azure subscription
+     - **Resource Group**: Create new or use existing
+     - **Workspace Name**: `databricks-fabric-integration`
+     - **Region**: Same as your Fabric workspace (**<inject key="Region"></inject>**)
+     - **Pricing Tier**: **Premium** (required for advanced features)
+   
+3. Click **Review + Create** → **Create**
 
-### Part 2: Configure OneLake Access from Databricks
+4. Wait for deployment (3-5 minutes)
 
-1. In the **Edge browser**, navigate to the **Microsoft Fabric** portal:
+5. Once complete, click **Go to resource** → **Launch Workspace**
 
+---
+
+## Part 2: Configure OneLake Access from Databricks
+
+### Get Fabric Lakehouse Connection Details
+
+1. **Return to Microsoft Fabric portal**: [https://app.fabric.microsoft.com](https://app.fabric.microsoft.com)
+
+2. Navigate to your **Lakehouse**
+
+3. Click on the **SQL analytics endpoint** in the top ribbon
+
+4. Copy the **SQL connection string** - you'll need the workspace and lakehouse names
+
+5. Note the **OneLake path** format:
    ```
-   https://app.fabric.microsoft.com/
+   abfss://[WorkspaceName]@onelake.dfs.fabric.microsoft.com/[LakehouseName].Lakehouse/Tables
    ```
 
-1. Navigate to your workspace: **fabric-workspace-<inject key="DeploymentID"></inject>**
+### Create Service Principal for Authentication
 
-1. Open your Lakehouse: **contoso-lakehouse-<inject key="DeploymentID"></inject>**
+1. **In Azure Portal**, go to **Microsoft Entra ID** (formerly Azure AD)
 
-1. Copy the **OneLake path** from the Lakehouse properties:
+2. Navigate to **App registrations** → **+ New registration**
 
-   - Format: `abfss://[workspace]@onelake.dfs.fabric.microsoft.com/[lakehouse]/Files`
-   - Example: `abfss://fabric-workspace-12345@onelake.dfs.fabric.microsoft.com/contoso-lakehouse-12345.Lakehouse/Files`
-
-   > **Important:** Note down this path for Databricks configuration.
-
-1. In the Azure Portal, go to **Microsoft Entra ID** (formerly Azure Active Directory):
-
-   - Navigate to **App registrations** → **New registration**
-   - Name: **databricks-fabric-integration**
+3. Configure the app:
+   - **Name**: `databricks-onelake-access`
+   - **Supported account types**: Single tenant
    - Click **Register**
 
-1. After registration, note down:
-
+4. **Copy the following values** (save them securely):
    - **Application (client) ID**
    - **Directory (tenant) ID**
 
-1. Create a **Client Secret**:
+5. **Create a client secret**:
+   - Go to **Certificates & secrets** → **+ New client secret**
+   - **Description**: `fabric-access`
+   - **Expires**: 12 months
+   - Click **Add**
+   - **⚠️ Copy the secret VALUE immediately** (you can't view it again)
 
-   - Go to **Certificates & secrets** → **New client secret**
-   - Description: **OneLake Access**
-   - Expiry: **12 months**
-   - Click **Add** and **copy the secret value immediately**
+6. **Grant Fabric workspace permissions**:
+   - Return to **Fabric portal** → Your workspace
+   - Click **Manage access**
+   - Click **+ Add people or groups**
+   - Search for your app registration name: `databricks-onelake-access`
+   - Grant **Contributor** role
+   - Click **Add**
 
-1. Grant permissions to access Fabric:
+---
 
-   - In the Fabric workspace, go to **Manage access**
-   - Add the service principal (app registration) as **Contributor**
+## Part 3: Create Databricks Cluster and Notebook
 
-### Part 3: Create Databricks Cluster and Configure Access
+1. **In Databricks workspace**, click **Compute** in left sidebar
 
-1. In the **Azure Databricks workspace**, create a new **Compute cluster**:
-
-   - Cluster name: **contoso-analytics-cluster**
-   - Cluster mode: **Single Node** (for lab purposes)
-   - Databricks Runtime: **13.3 LTS** or later (includes Delta Lake support)
-   - Node type: **Standard_DS3_v2**
+2. **Create new cluster**:
+   - **Cluster name**: `fabric-analytics-cluster`
+   - **Cluster mode**: Single Node (for lab)
+   - **Databricks Runtime**: **13.3 LTS** or later
+   - **Node type**: `Standard_DS3_v2` (4 cores, 14 GB)
+   - **Terminate after**: 30 minutes of inactivity
    - Click **Create Cluster**
 
-1. While the cluster is starting, create a **Databricks notebook**:
+3. Wait for cluster to start (2-3 minutes)
 
-   - Click **Create** → **Notebook**
-   - Name: **Fabric-OneLake-Integration**
-   - Language: **Python**
-   - Cluster: **contoso-analytics-cluster**
+4. **Create a new notebook**:
+   - Click **Workspace** in left sidebar
+   - Click your username folder
+   - Click **⋮** (three dots) → **Create** → **Notebook**
+   - **Name**: `Fabric_OneLake_Customer_Analytics`
+   - **Default Language**: Python
+   - **Cluster**: Select `fabric-analytics-cluster`
 
-1. In the notebook, configure OneLake access using the service principal:
+---
 
-   ```python
-   # Configure OneLake access credentials
-   tenant_id = "<your-tenant-id>"
-   client_id = "<your-client-id>"
-   client_secret = "<your-client-secret>"
-   
-   spark.conf.set("fs.azure.account.auth.type.onelake.dfs.fabric.microsoft.com", "OAuth")
-   spark.conf.set("fs.azure.account.oauth.provider.type.onelake.dfs.fabric.microsoft.com", 
-                  "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider")
-   spark.conf.set("fs.azure.account.oauth2.client.id.onelake.dfs.fabric.microsoft.com", client_id)
-   spark.conf.set("fs.azure.account.oauth2.client.secret.onelake.dfs.fabric.microsoft.com", client_secret)
-   spark.conf.set("fs.azure.account.oauth2.client.endpoint.onelake.dfs.fabric.microsoft.com", 
-                  f"https://login.microsoftonline.com/{tenant_id}/oauth2/token")
-   
-   print("✅ OneLake access configured")
-   ```
+## Part 4: Configure OneLake Access in Databricks
 
-   > **Note:** Replace `<your-tenant-id>`, `<your-client-id>`, and `<your-client-secret>` with values from Part 2.
+Add the following code cells to your Databricks notebook:
 
-### Part 4: Read Fabric Lakehouse Tables from Databricks
+### Cell 1: Set up authentication
 
-1. Add a cell to read Gold layer tables from OneLake:
+```python
+# Configure OneLake access credentials
+# Replace with your actual values
+tenant_id = "<YOUR_TENANT_ID>"
+client_id = "<YOUR_CLIENT_ID>"
+client_secret = "<YOUR_CLIENT_SECRET>"
 
-   ```python
-   # Define OneLake path to your Lakehouse
-   onelake_path = "abfss://fabric-workspace-<inject key='DeploymentID'></inject>@onelake.dfs.fabric.microsoft.com/contoso-lakehouse-<inject key='DeploymentID'></inject>.Lakehouse/Tables"
-   
-   # Read Gold layer tables
-   df_fact_sales = spark.read.format("delta").load(f"{onelake_path}/gold_fact_sales")
-   df_dim_customer = spark.read.format("delta").load(f"{onelake_path}/gold_dim_customer")
-   df_dim_product = spark.read.format("delta").load(f"{onelake_path}/gold_dim_product")
-   
-   print(f"✅ Fact_Sales: {df_fact_sales.count()} records")
-   print(f"✅ Dim_Customer: {df_dim_customer.count()} records")
-   print(f"✅ Dim_Product: {df_dim_product.count()} records")
-   
-   # Display sample data
-   display(df_fact_sales.limit(10))
-   ```
+# Configure Spark to use OAuth for OneLake access
+spark.conf.set("fs.azure.account.auth.type.onelake.dfs.fabric.microsoft.com", "OAuth")
+spark.conf.set("fs.azure.account.oauth.provider.type.onelake.dfs.fabric.microsoft.com", 
+               "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider")
+spark.conf.set("fs.azure.account.oauth2.client.id.onelake.dfs.fabric.microsoft.com", client_id)
+spark.conf.set("fs.azure.account.oauth2.client.secret.onelake.dfs.fabric.microsoft.com", client_secret)
+spark.conf.set("fs.azure.account.oauth2.client.endpoint.onelake.dfs.fabric.microsoft.com", 
+               f"https://login.microsoftonline.com/{tenant_id}/oauth2/token")
 
-1. Verify that data from Fabric Lakehouse is accessible in Databricks.
+print("✅ OneLake authentication configured")
+```
 
-### Part 5: Perform Data Science Workloads on Fabric Data
+### Cell 2: Read Gold layer tables from Fabric
 
-1. Add a cell to perform advanced analytics on the Gold layer:
+```python
+# Define your OneLake path - REPLACE with your actual workspace and lakehouse names
+workspace_name = "your-workspace-name"  # e.g., "fabric-workspace-12345"
+lakehouse_name = "your-lakehouse-name"  # e.g., "DataLakehouse"
 
-   ```python
-   # Calculate customer lifetime value (CLV)
-   from pyspark.sql.functions import sum, count, avg, round
-   
-   df_customer_metrics = df_fact_sales.join(
-       df_dim_customer, 
-       df_fact_sales.CustomerKey == df_dim_customer.CustomerKey
-   ).groupBy("CustomerName", "CustomerRegion").agg(
-       count("SalesKey").alias("TotalOrders"),
-       round(sum("SalesAmount"), 2).alias("TotalSpent"),
-       round(avg("SalesAmount"), 2).alias("AvgOrderValue"),
-       round(sum("Profit"), 2).alias("TotalProfit")
-   ).orderBy(col("TotalSpent").desc())
-   
-   print("📊 Top 10 Customers by Total Spent:")
-   display(df_customer_metrics.limit(10))
-   ```
+onelake_base_path = f"abfss://{workspace_name}@onelake.dfs.fabric.microsoft.com/{lakehouse_name}.Lakehouse/Tables"
 
-1. Add a cell to create ML features for predictive modeling:
+# Read Gold layer tables
+df_customers = spark.read.format("delta").load(f"{onelake_base_path}/dim_customers")
+df_flights = spark.read.format("delta").load(f"{onelake_base_path}/fact_flights")
+df_transactions = spark.read.format("delta").load(f"{onelake_base_path}/fact_transactions")
+df_kpi = spark.read.format("delta").load(f"{onelake_base_path}/kpi_customer_value")
 
-   ```python
-   # Prepare features for ML (customer segmentation)
-   df_ml_features = df_customer_metrics.select(
-       "CustomerName",
-       "TotalOrders",
-       "TotalSpent",
-       "AvgOrderValue"
-   )
-   
-   # Create customer segments based on spending
-   from pyspark.sql.functions import when
-   
-   df_customer_segments = df_ml_features.withColumn(
-       "Segment",
-       when(col("TotalSpent") > 50000, "Premium")
-       .when(col("TotalSpent") > 20000, "Gold")
-       .when(col("TotalSpent") > 5000, "Silver")
-       .otherwise("Bronze")
-   )
-   
-   print("✅ Customer Segments Created")
-   display(df_customer_segments.groupBy("Segment").count())
-   ```
+print(f"✅ Customers: {df_customers.count()}")
+print(f"✅ Flight Facts: {df_flights.count()}")
+print(f"✅ Transactions: {df_transactions.count()}")
+print(f"✅ KPI Data: {df_kpi.count()}")
 
-### Part 6: Write Enriched Data Back to Fabric Lakehouse
+# Preview data
+display(df_kpi.limit(10))
+```
 
-1. Add a cell to write the customer segments back to OneLake:
+---
 
-   ```python
-   # Write customer segments to Gold layer in Fabric Lakehouse
-   output_path = f"{onelake_path}/gold_customer_segments"
-   
-   df_customer_segments.write \
-       .format("delta") \
-       .mode("overwrite") \
-       .save(output_path)
-   
-   print(f"✅ Customer segments written to: {output_path}")
-   ```
+## Part 5: Perform Customer Segmentation with ML
 
-1. Verify the data is written successfully:
+Now use Databricks ML to perform RFM (Recency, Frequency, Monetary) segmentation:
 
-   ```python
-   # Read back to verify
-   df_verify = spark.read.format("delta").load(output_path)
-   print(f"✅ Verified: {df_verify.count()} customer segments written")
-   display(df_verify.limit(10))
-   ```
+### Cell 3: Prepare features for ML clustering
 
-### Part 7: Validate Integration in Fabric
+```python
+from pyspark.sql.functions import col, when, lit
+from pyspark.ml.feature import VectorAssembler, StandardScaler
 
-1. Return to **Microsoft Fabric workspace** in the browser.
+# Create enhanced features for clustering
+df_ml_features = df_kpi.select(
+    col("customer_key"),
+    col("age"),
+    col("total_flights"),
+    col("total_km_flown"),
+    col("total_loyalty_points"),
+    col("days_since_last_flight"),
+    col("total_spent"),
+    col("transaction_count"),
+    # Create RFM-like scores
+    when(col("days_since_last_flight") <= 90, 5)
+     .when(col("days_since_last_flight") <= 180, 4)
+     .when(col("days_since_last_flight") <= 365, 3)
+     .when(col("days_since_last_flight") <= 730, 2)
+     .otherwise(1).alias("recency_score"),
+    
+    when(col("total_flights") >= 40, 5)
+     .when(col("total_flights") >= 20, 4)
+     .when(col("total_flights") >= 10, 3)
+     .when(col("total_flights") >= 5, 2)
+     .otherwise(1).alias("frequency_score"),
+    
+    when(col("total_loyalty_points") >= 50000, 5)
+     .when(col("total_loyalty_points") >= 20000, 4)
+     .when(col("total_loyalty_points") >= 10000, 3)
+     .when(col("total_loyalty_points") >= 5000, 2)
+     .otherwise(1).alias("monetary_score")
+).na.drop()
 
-1. Navigate to your Lakehouse: **contoso-lakehouse-<inject key="DeploymentID"></inject>**
+print(f"✅ ML dataset prepared: {df_ml_features.count()} customers")
+display(df_ml_features.limit(10))
+```
 
-1. In the **Tables** section, verify that **gold_customer_segments** table appears.
+### Cell 4: Feature engineering and scaling
 
-1. Query the table using SQL analytics endpoint:
+```python
+# Assemble features into vector
+feature_cols = ["age", "total_flights", "total_km_flown", "total_loyalty_points", 
+                "days_since_last_flight", "total_spent", "transaction_count",
+                "recency_score", "frequency_score", "monetary_score"]
 
-   ```sql
-   SELECT Segment, COUNT(*) as CustomerCount, SUM(TotalSpent) as TotalRevenue
-   FROM gold_customer_segments
-   GROUP BY Segment
-   ORDER BY TotalRevenue DESC;
-   ```
+assembler = VectorAssembler(inputCols=feature_cols, outputCol="features_raw")
+df_assembled = assembler.transform(df_ml_features)
 
-1. Confirm that data written from Databricks is accessible in Fabric.
+# Scale features for better clustering
+scaler = StandardScaler(inputCol="features_raw", outputCol="features", withStd=True, withMean=True)
+scaler_model = scaler.fit(df_assembled)
+df_scaled = scaler_model.transform(df_assembled)
 
-> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
-> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+print("✅ Features scaled and ready for clustering")
+display(df_scaled.select("customer_key", "features").limit(5))
+```
+
+### Cell 5: K-Means clustering
+
+```python
+from pyspark.ml.clustering import KMeans
+from pyspark.ml.evaluation import ClusteringEvaluator
+
+# Train K-Means with 5 customer segments
+kmeans = KMeans(k=5, seed=42, featuresCol="features", predictionCol="segment")
+model = kmeans.fit(df_scaled)
+
+# Make predictions
+df_segmented = model.transform(df_scaled)
+
+# Evaluate clustering quality
+evaluator = ClusteringEvaluator(featuresCol="features", predictionCol="segment", metricName="silhouette")
+silhouette = evaluator.evaluate(df_segmented)
+
+print(f"✅ Customer segmentation complete!")
+print(f"Silhouette Score: {silhouette:.4f}")
+print(f"\nCluster Centers:")
+centers = model.clusterCenters()
+for i, center in enumerate(centers):
+    print(f"Segment {i}: {center[:3]}")  # Show first 3 dimensions
+
+# Show segment distribution
+display(df_segmented.groupBy("segment").count().orderBy("segment"))
+```
+
+### Cell 6: Analyze segment characteristics
+
+```python
+from pyspark.sql.functions import avg, count, round
+
+# Analyze each segment's profile
+segment_profile = df_segmented.groupBy("segment").agg(
+    count("*").alias("customer_count"),
+    round(avg("age"), 1).alias("avg_age"),
+    round(avg("total_flights"), 1).alias("avg_flights"),
+    round(avg("total_km_flown"), 0).alias("avg_km"),
+    round(avg("total_loyalty_points"), 0).alias("avg_points"),
+    round(avg("days_since_last_flight"), 0).alias("avg_days_since_flight"),
+    round(avg("total_spent"), 2).alias("avg_spent"),
+    round(avg("recency_score"), 2).alias("avg_recency"),
+    round(avg("frequency_score"), 2).alias("avg_frequency"),
+    round(avg("monetary_score"), 2).alias("avg_monetary")
+).orderBy("segment")
+
+print("=== Customer Segment Profiles ===")
+display(segment_profile)
+
+# Assign business-friendly names based on characteristics
+# You can customize these based on your actual results
+segment_names = {
+    0: "Occasional Travelers",
+    1: "Loyal Frequent Flyers",
+    2: "At-Risk Customers",
+    3: "Premium Elite Members",
+    4: "New Joiners"
+}
+```
+
+### Cell 7: Create enriched customer table with segments
+
+```python
+from pyspark.sql.functions import when, col
+
+# Join segments back with original customer data
+df_customers_enriched = df_kpi.join(
+    df_segmented.select("customer_key", "segment"),
+    on="customer_key",
+    how="left"
+)
+
+# Add business-friendly segment names
+df_customers_enriched = df_customers_enriched.withColumn(
+    "segment_name",
+    when(col("segment") == 0, "Occasional Travelers")
+    .when(col("segment") == 1, "Loyal Frequent Flyers")
+    .when(col("segment") == 2, "At-Risk Customers")
+    .when(col("segment") == 3, "Premium Elite Members")
+    .when(col("segment") == 4, "New Joiners")
+    .otherwise("Uncategorized")
+)
+
+print("✅ Customer data enriched with ML segments")
+display(df_customers_enriched.select("customer_key", "age", "total_flights", 
+                                      "total_loyalty_points", "customer_status", 
+                                      "segment", "segment_name").limit(20))
+```
+
+---
+
+## Part 6: Write Enriched Data Back to Fabric
+
+### Cell 8: Write ML results back to OneLake
+
+```python
+# Write the enriched customer segments back to Fabric Gold layer
+output_path = f"{onelake_base_path}/gold_customer_segments_ml"
+
+df_customers_enriched.write \
+    .format("delta") \
+    .mode("overwrite") \
+    .option("overwriteSchema", "true") \
+    .save(output_path)
+
+print(f"✅ ML-enriched customer segments written back to Fabric!")
+print(f"📍 Location: {output_path}")
+print(f"📊 Records: {df_customers_enriched.count()}")
+
+# Also create a summary table
+segment_summary = df_customers_enriched.groupBy("segment", "segment_name").agg(
+    count("*").alias("customer_count"),
+    round(avg("total_flights"), 1).alias("avg_flights"),
+    round(avg("total_loyalty_points"), 0).alias("avg_points"),
+    round(avg("total_spent"), 2).alias("avg_revenue")
+).orderBy("segment")
+
+summary_path = f"{onelake_base_path}/gold_segment_summary"
+segment_summary.write \
+    .format("delta") \
+    .mode("overwrite") \
+    .save(summary_path)
+
+print(f"✅ Segment summary table created!")
+display(segment_summary)
+```
+
+---
+
+## Part 7: Verify in Fabric Lakehouse
+
+1. **Return to Microsoft Fabric portal**
+
+2. **Navigate to your Lakehouse**
+
+3. **Refresh the Tables view** - you should now see:
+   - `gold_customer_segments_ml` - Full enriched customer data with ML segments
+   - `gold_segment_summary` - Aggregated segment profiles
+
+4. **Query the new tables** using SQL endpoint:
+
+```sql
+-- View segment distribution
+SELECT segment_name, COUNT(*) as customer_count
+FROM gold_customer_segments_ml
+GROUP BY segment_name
+ORDER BY customer_count DESC;
+
+-- Compare segments by loyalty tier
+SELECT segment_name, loyalty_tier, COUNT(*) as count
+FROM gold_customer_segments_ml
+GROUP BY segment_name, loyalty_tier
+ORDER BY segment_name, loyalty_tier;
+```
+
+---
 
 ## Success Criteria
 
-- Azure Databricks workspace created and cluster provisioned.
-- OneLake access configured using service principal authentication.
-- Fabric Lakehouse Gold layer tables successfully read from Databricks.
-- Data science workloads (customer analytics, segmentation) performed on Fabric data.
-- Enriched data written back to Fabric Lakehouse from Databricks.
-- Bidirectional integration validated: Databricks ↔️ Fabric OneLake.
+- ✅ Azure Databricks workspace created and configured
+- ✅ OneLake authentication working (can read Fabric tables)
+- ✅ Successfully loaded Gold layer tables in Databricks
+- ✅ ML customer segmentation completed (5 segments)
+- ✅ Enriched data written back to Fabric Lakehouse
+- ✅ New Gold tables visible in Fabric (gold_customer_segments_ml, gold_segment_summary)
+- ✅ Silhouette score > 0.3 (indicates reasonable clustering quality)
 
-## Additional Resources
+---
 
-- [Azure Databricks Overview](https://learn.microsoft.com/azure/databricks/introduction/)
-- [OneLake Integration with Databricks](https://learn.microsoft.com/fabric/onelake/onelake-access-databricks)
-- [Service Principal Authentication](https://learn.microsoft.com/azure/databricks/dev-tools/service-principals)
-- [Delta Lake Best Practices](https://learn.microsoft.com/azure/databricks/delta/best-practices)
+## Validation Checkpoint
 
-Now, click **Next** to continue to **Challenge 06**.
+**Copy this GUID and submit for validation:** `{{guid-challenge-5}}`
+
+---
+
+## Summary
+
+In this challenge, you:
+- **Integrated Azure Databricks** with Microsoft Fabric OneLake
+- **Performed advanced ML analytics** using K-Means clustering for customer segmentation
+- **Created 5 customer segments** based on flight behavior, loyalty points, and spending
+- **Wrote results back to Fabric** seamlessly without data duplication
+- **Enabled bi-directional data flow** between Databricks and Fabric
+
+Your enriched customer segments are now available in Fabric for Power BI dashboards!
+
+---
+
+## Next Steps
+
+Proceed to **Challenge 6** to build a Power BI dashboard visualizing your ML-enhanced customer segments and business KPIs.
