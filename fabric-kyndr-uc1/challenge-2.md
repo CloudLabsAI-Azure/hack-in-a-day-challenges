@@ -121,13 +121,6 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
    - Each record contains: transaction_id, customer_id, customer_name, email, purchase_date, amount, status, payment_method, region
    - Data quality issues are visible (nulls, duplicates, inconsistent values)
 
-<validation step="b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e" />
-
-> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
-> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
-
 ## Success Criteria
 
 - Sample dataset files located in the LabVM at `C:\LabFiles\fabric-kyndr-uc1\dataset\`.

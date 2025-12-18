@@ -139,7 +139,7 @@ The Bronze layer contains raw, unprocessed data with significant quality issuesâ
    # Filter out records where critical fields are still null
    df_flights_clean = df_flights_clean.filter(col("MEMBER_NO").isNotNull())
    
-   print(f"âœ… Cleaned Flight Records: {df_flights_clean.count()}")
+   print(f"Cleaned Flight Records: {df_flights_clean.count()}")
    print(f"Records removed: {df_flights.count() - df_flights_clean.count()}")
    
    # Show sample of cleaned data
@@ -244,7 +244,7 @@ The Bronze layer contains raw, unprocessed data with significant quality issuesâ
        .otherwise(trim(col("customer_name")))
    )
    
-   print(f"âœ… Cleaned Transaction Records: {df_transactions_clean.count()}")
+   print(f"Cleaned Transaction Records: {df_transactions_clean.count()}")
    print(f"Records removed: {df_transactions.count() - df_transactions_clean.count()}")
    
    # Show sample of cleaned data
@@ -262,7 +262,7 @@ The Bronze layer contains raw, unprocessed data with significant quality issuesâ
    # Write cleaned Transaction data to Silver layer
    df_transactions_clean.write.format("delta").mode("overwrite").saveAsTable("silver_transactions")
    
-   print("âœ… Silver layer tables created successfully!")
+   print("Silver layer tables created successfully!")
    print(f"  - silver_flights: {df_flights_clean.count()} records")
    print(f"  - silver_transactions: {df_transactions_clean.count()} records")
    ```
@@ -320,13 +320,6 @@ The Bronze layer contains raw, unprocessed data with significant quality issuesâ
    GROUP BY region, status
    ORDER BY total_amount DESC;
    ```
-
-<validation step="c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f" />
-
-> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
-> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
 ## Success Criteria
 

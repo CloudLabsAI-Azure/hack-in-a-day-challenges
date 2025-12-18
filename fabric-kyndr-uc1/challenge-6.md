@@ -34,12 +34,12 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
    - Name: **Contoso-Sales-Analytics-Model**
    - Select the following Gold layer tables:
-     - ✅ gold_fact_sales
-     - ✅ gold_dim_customer
-     - ✅ gold_dim_product
-     - ✅ gold_dim_date
-     - ✅ gold_sales_summary
-     - ✅ gold_customer_segments (from Databricks integration)
+     - gold_fact_sales
+     - gold_dim_customer
+     - gold_dim_product
+     - gold_dim_date
+     - gold_sales_summary
+     - gold_customer_segments (from Databricks integration)
 
 1. Click **Confirm** to create the semantic model.
 
@@ -285,11 +285,6 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
    - Enter email addresses of stakeholders
    - Grant appropriate permissions (View only recommended)
 
-> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
-> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
-
 ## Success Criteria
 
 - Semantic model created from Fabric Lakehouse Gold layer tables.
@@ -325,10 +320,10 @@ This solution enables enterprise-grade analytics across:
 
 ### What You've Built:
 
-✅ **Bronze Layer**: Raw data ingestion from multiple sources  
-✅ **Silver Layer**: Cleansed, standardized, joined datasets  
-✅ **Gold Layer**: Business-ready dimensional models (Star Schema)  
-✅ **Databricks Integration**: Advanced analytics and ML workloads  
-✅ **Power BI Dashboards**: Interactive visualizations for business insights  
+**Bronze Layer**: Raw data ingestion from multiple sources  
+**Silver Layer**: Cleansed, standardized, joined datasets  
+**Gold Layer**: Business-ready dimensional models (Star Schema)  
+**Databricks Integration**: Advanced analytics and ML workloads  
+**Power BI Dashboards**: Interactive visualizations for business insights  
 
 # Congratulations on completing this challenge!

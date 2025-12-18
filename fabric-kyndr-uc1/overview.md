@@ -1,60 +1,76 @@
-# Data Analysis with Generative AI (GenAI)
+# Microsoft Fabric OneLake Data Engineering with Medallion Architecture
 
-Welcome to the Data Analysis with Generative AI Hack in a Day! Today, you'll explore how AI can transform manufacturing data analysis by building an intelligent assistant that analyzes machine logs, detects patterns, and generates natural-language insights from operational data. Through this hands-on lab, you will create a Manufacturing Data Analysis Assistant capable of querying production data conversationally, identifying trends, and producing actionable recommendations, powered by Microsoft Foundry (Azure OpenAI), Azure AI Search, and Streamlit.
+Welcome to the Microsoft Fabric OneLake Data Engineering Hack in a Day! Today, you'll explore how to build an enterprise-grade data lakehouse using Microsoft Fabric's unified analytics platform. Through hands-on challenges, you will implement the Medallion architecture (Bronze-Silver-Gold layers), perform data quality transformations, create dimensional models, and integrate with Azure Databricks for advanced machine learning analytics.
 
 ## Scenario
 
-Contoso Manufacturing operates a network of machines across multiple plants. Each machine logs temperature, vibration, status, and downtime events continuously. Operations engineers need to analyze this data to identify performance trends, detect anomalies, and troubleshoot issues, but high data volume and complexity make manual analysis time-consuming and error-prone. To improve efficiency and insight generation, Contoso decides to build a Data Analysis Assistant that can analyze machine logs using Generative AI, answer natural-language queries, and generate automated insights. This allows engineers to ask questions like "Which machine had the most downtime?" or "Temperature of MACHINE_001" and receive instant AI-generated answers based on actual production data.
+A large airline operates a flight loyalty program with millions of members worldwide. The program tracks customer demographics, flight history, loyalty tier progression, and transaction data. The data team needs to build a unified data lakehouse that can:
+
+- Ingest raw data from multiple sources (CSV files, JSON transactions)
+- Clean and standardize data with quality checks
+- Create dimensional models for analytics
+- Perform customer segmentation using machine learning
+- Enable self-service analytics for business users
+
+Using Microsoft Fabric OneLake and the Medallion architecture, you will build a complete data engineering solution that handles real-world data quality issues, implements best practices for data organization, and creates analytics-ready datasets for reporting and ML workloads.
 
 ## Introduction
 
-Your mission is to build an AI-powered **Manufacturing Data Analysis Assistant** that supports operations teams by analyzing machine data and generating conversational insights. Using Microsoft Foundry (Azure OpenAI), Azure AI Search, Azure Blob Storage, and Streamlit, you will design an end-to-end solution that can:
+Your mission is to build a **Data Lakehouse Solution** using Microsoft Fabric OneLake that enables the airline to analyze flight loyalty program data and transaction patterns. Using Microsoft Fabric, Azure Databricks, and Power BI, you will design an end-to-end solution that can:
 
-- Ingest and store manufacturing data (machine logs, temperature, vibration, status) in Azure Blob Storage
-- Index data using Azure AI Search with vectorization for semantic search capabilities
-- Deploy gpt-4.1-mini and text-embedding-ada-002 models for natural-language analysis
-- Implement Retrieval-Augmented Generation (RAG) to ground AI responses in actual production data
-- Build a Streamlit chat interface for querying data conversationally
+- Create a Fabric Lakehouse with Bronze, Silver, and Gold folder structure
+- Ingest dirty datasets with missing values, duplicates, and inconsistent formatting
+- Transform data using PySpark notebooks for data cleansing and standardization
+- Implement dimensional modeling with star schema (facts and dimensions)
+- Integrate Azure Databricks for customer segmentation using K-Means clustering
+- Build Power BI dashboards for business intelligence and reporting
 
-This solution reduces manual data analysis time, enables conversational data exploration, and allows operations engineers to focus on decision-making rather than repetitive data queries.
+This solution enables data-driven decision making, reduces manual data processing, and provides a scalable foundation for advanced analytics and machine learning.
 
 ## Learning Objectives
 
 By participating in this Hack in a Day, you will learn how to:
 
-- Upload and prepare manufacturing datasets in Azure Blob Storage for AI analysis
-- Deploy Microsoft Foundry with gpt-4.1-mini and text-embedding-ada-002 models
-- Create Azure AI Search indexes with vectorization for semantic search
-- Implement Retrieval-Augmented Generation (RAG) to connect LLMs with manufacturing data
-- Use Microsoft Foundry Studio playground to test AI-driven data queries
-- Configure and run a Streamlit application for conversational data analysis
+- Create Microsoft Fabric workspaces with Trial capacity
+- Build OneLake Lakehouses with folder structures for Medallion architecture
+- Upload and manage datasets in OneLake (CSV and JSON files)
+- Write PySpark transformations in Fabric Notebooks for data quality and cleansing
+- Implement Silver layer transformations to handle missing values and standardize data
+- Create Gold layer dimensional models with fact and dimension tables
+- Integrate Azure Databricks with Fabric OneLake for seamless data access
+- Perform machine learning customer segmentation using K-Means clustering
+- Write enriched ML data back to Fabric from Databricks
+- Build Power BI dashboards connected to Gold layer tables
 
 ## Hack in a Day Format: Challenge-Based
 
-This hands-on lab is structured into five progressive challenges that model the lifecycle of building a real-world AI-powered data analysis application:
+This hands-on lab is structured into six progressive challenges that model the lifecycle of building a real-world data lakehouse solution:
 
-- **Challenge 01: Create and Review the Sample Manufacturing Dataset**  
-  Create an Azure Storage Account, upload synthetic manufacturing data to a blob container, and explore the dataset structure.
+- **Challenge 1: Set Up Microsoft Fabric Workspace and OneLake Lakehouse**  
+  Create a Fabric workspace using Trial capacity, build a Lakehouse with Bronze/Silver/Gold folders, and download the flight and transaction datasets.
 
-- **Challenge 02: Deploy Azure OpenAI Service**
-  Create a Microsoft Foundry resource, deploy the gpt-4.1-mini model (20K TPM), and deploy the text-embedding-ada-002 model (30K TPM) for semantic search.
+- **Challenge 2: Ingest Raw Data to Bronze Layer**  
+  Upload flight loyalty data (62,988 records) and customer transaction data (JSON format) to the Bronze layer, preview the data to identify quality issues.
 
-- **Challenge 03: Create Azure AI Search Resource and Import Manufacturing Data**  
-  Create an Azure AI Search service, import data from Blob Storage, configure RAG, vectorize data using embeddings, and test search queries.
+- **Challenge 3: Transform and Cleanse Data for Silver Layer**  
+  Use PySpark notebooks to clean data, handle missing values, standardize inconsistent values, remove duplicates, and write to Silver layer Delta tables.
 
-- **Challenge 04: Analyze Data Using GenAI Prompts**  
-  Use Microsoft Foundry Studio playground to connect Azure AI Search as a data source and test prompts like "Temperature of MACHINE_001" to generate AI-driven insights.
+- **Challenge 4: Build Gold Layer - Dimensional Modeling**  
+  Create dimension tables (customers, geography, time) and fact tables (flight activity, transactions), implement business KPIs, and write analytics queries.
 
-- **Challenge 05: Configure the Application and Run the Manufacturing Data Analysis Assistant**  
-  Configure environment variables, install Python dependencies, and run the Streamlit application to query manufacturing data conversationally.
+- **Challenge 5: Integrate Azure Databricks for Advanced Analytics**  
+  Configure OneLake access from Databricks, load Gold layer tables, perform customer segmentation with K-Means ML clustering, and write enriched data back to Fabric.
 
-Throughout each challenge, you will iteratively design, build, and test your Data Analysis Assistant, from data preparation to model deployment and application integration.
+- **Challenge 6: Build Power BI Dashboard**  
+  Connect Power BI to Fabric Lakehouse, create semantic models, build visualizations for loyalty program insights, and publish interactive dashboards.
+
+Throughout each challenge, you will iteratively design, build, and test your data lakehouse, from raw data ingestion to business intelligence reporting.
 
 ## Challenge Overview
 
-You will begin by provisioning Azure Storage and uploading manufacturing machine logs with temperature, vibration, and status data. Next, you will deploy Microsoft Foundry with gpt-4.1-mini and text-embedding-ada-002 models for natural-language analysis and semantic search. You will then create an Azure AI Search index with vectorization to enable Retrieval-Augmented Generation. After that, you will test AI prompts in Foundry Studio to query data and generate insights. Finally, you will configure and run a Streamlit chat application to interact with your manufacturing data conversationally, asking questions and receiving AI-generated answers.
+You will begin by creating a Microsoft Fabric workspace and Lakehouse with a Medallion architecture folder structure. Next, you will upload dirty flight and transaction datasets to the Bronze layer. Then, you will write PySpark transformations to cleanse data and create Silver layer tables. After that, you will build Gold layer dimensional models with star schema design. You will then integrate Azure Databricks to perform ML-based customer segmentation and write results back to Fabric. Finally, you will create Power BI dashboards to visualize loyalty program metrics and customer insights.
 
-By the end of this Hack in a Day, you will have a fully functional **Manufacturing Data Analysis Assistant** that can answer natural-language queries about production data, detect patterns, and support faster operational decision-making on the factory floor.
+By the end of this Hack in a Day, you will have a fully functional **Data Lakehouse Solution** with Bronze-Silver-Gold layers, ML-enriched customer segments, and interactive Power BI dashboards for business analytics.
 
 ## Support Contact
 

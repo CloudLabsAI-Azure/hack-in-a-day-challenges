@@ -213,7 +213,7 @@ fact_transactions.write \
     .option("overwriteSchema", "true") \
     .saveAsTable("fact_transactions")
 
-print("✅ Gold layer tables created successfully!")
+print("Gold layer tables created successfully!")
 print(f"  - dim_customers: {spark.read.table('dim_customers').count()} records")
 print(f"  - dim_geography: {spark.read.table('dim_geography').count()} records")
 print(f"  - dim_time: {spark.read.table('dim_time').count()} records")
@@ -371,7 +371,7 @@ kpi_customer_value.write \
     .option("overwriteSchema", "true") \
     .saveAsTable("kpi_customer_value")
 
-print("✅ Business KPI table created!")
+print("Business KPI table created!")
 print(f"  - kpi_customer_value: {spark.read.table('kpi_customer_value').count()} records")
 
 # Preview KPIs
@@ -399,12 +399,12 @@ kpi_customer_value.show(10, truncate=False)
 
 ## Success Criteria
 
-- ✅ Customer, geography, and time dimensions created
-- ✅ Fact tables for flights and transactions created
-- ✅ Business KPI table for customer value analysis
-- ✅ All tables saved to Gold layer with Delta Lake format
-- ✅ Analytics queries return meaningful insights
-- ✅ Tables visible in OneLake catalog
+- Customer, geography, and time dimensions created
+- Fact tables for flights and transactions created
+- Business KPI table for customer value analysis
+- All tables saved to Gold layer with Delta Lake format
+- Analytics queries return meaningful insights
+- Tables visible in OneLake catalog
 
 ---
 

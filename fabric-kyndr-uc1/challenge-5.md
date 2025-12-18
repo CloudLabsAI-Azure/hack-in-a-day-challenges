@@ -85,7 +85,7 @@ By the end of this challenge, you will:
    - **Description**: `fabric-access`
    - **Expires**: 12 months
    - Click **Add**
-   - **⚠️ Copy the secret VALUE immediately** (you can't view it again)
+   - **Copy the secret VALUE immediately** (you can't view it again)
 
 6. **Grant Fabric workspace permissions**:
    - Return to **Fabric portal** → Your workspace
@@ -143,7 +143,7 @@ spark.conf.set("fs.azure.account.oauth2.client.secret.onelake.dfs.fabric.microso
 spark.conf.set("fs.azure.account.oauth2.client.endpoint.onelake.dfs.fabric.microsoft.com", 
                f"https://login.microsoftonline.com/{tenant_id}/oauth2/token")
 
-print("✅ OneLake authentication configured")
+print("OneLake authentication configured")
 ```
 
 ### Cell 2: Read Gold layer tables from Fabric
@@ -161,10 +161,10 @@ df_flights = spark.read.format("delta").load(f"{onelake_base_path}/fact_flights"
 df_transactions = spark.read.format("delta").load(f"{onelake_base_path}/fact_transactions")
 df_kpi = spark.read.format("delta").load(f"{onelake_base_path}/kpi_customer_value")
 
-print(f"✅ Customers: {df_customers.count()}")
-print(f"✅ Flight Facts: {df_flights.count()}")
-print(f"✅ Transactions: {df_transactions.count()}")
-print(f"✅ KPI Data: {df_kpi.count()}")
+print(f"Customers: {df_customers.count()}")
+print(f"Flight Facts: {df_flights.count()}")
+print(f"Transactions: {df_transactions.count()}")
+print(f"KPI Data: {df_kpi.count()}")
 
 # Preview data
 display(df_kpi.limit(10))
@@ -212,7 +212,7 @@ df_ml_features = df_kpi.select(
      .otherwise(1).alias("monetary_score")
 ).na.drop()
 
-print(f"✅ ML dataset prepared: {df_ml_features.count()} customers")
+print(f"ML dataset prepared: {df_ml_features.count()} customers")
 display(df_ml_features.limit(10))
 ```
 
@@ -232,7 +232,7 @@ scaler = StandardScaler(inputCol="features_raw", outputCol="features", withStd=T
 scaler_model = scaler.fit(df_assembled)
 df_scaled = scaler_model.transform(df_assembled)
 
-print("✅ Features scaled and ready for clustering")
+print("Features scaled and ready for clustering")
 display(df_scaled.select("customer_key", "features").limit(5))
 ```
 
@@ -253,7 +253,7 @@ df_segmented = model.transform(df_scaled)
 evaluator = ClusteringEvaluator(featuresCol="features", predictionCol="segment", metricName="silhouette")
 silhouette = evaluator.evaluate(df_segmented)
 
-print(f"✅ Customer segmentation complete!")
+print(f"Customer segmentation complete!")
 print(f"Silhouette Score: {silhouette:.4f}")
 print(f"\nCluster Centers:")
 centers = model.clusterCenters()
@@ -320,7 +320,7 @@ df_customers_enriched = df_customers_enriched.withColumn(
     .otherwise("Uncategorized")
 )
 
-print("✅ Customer data enriched with ML segments")
+print("Customer data enriched with ML segments")
 display(df_customers_enriched.select("customer_key", "age", "total_flights", 
                                       "total_loyalty_points", "customer_status", 
                                       "segment", "segment_name").limit(20))
@@ -342,9 +342,9 @@ df_customers_enriched.write \
     .option("overwriteSchema", "true") \
     .save(output_path)
 
-print(f"✅ ML-enriched customer segments written back to Fabric!")
-print(f"📍 Location: {output_path}")
-print(f"📊 Records: {df_customers_enriched.count()}")
+print(f"ML-enriched customer segments written back to Fabric!")
+print(f"Location: {output_path}")
+print(f"Records: {df_customers_enriched.count()}")
 
 # Also create a summary table
 segment_summary = df_customers_enriched.groupBy("segment", "segment_name").agg(
@@ -360,7 +360,7 @@ segment_summary.write \
     .mode("overwrite") \
     .save(summary_path)
 
-print(f"✅ Segment summary table created!")
+print(f"Segment summary table created!")
 display(segment_summary)
 ```
 
@@ -396,13 +396,13 @@ ORDER BY segment_name, loyalty_tier;
 
 ## Success Criteria
 
-- ✅ Azure Databricks workspace created and configured
-- ✅ OneLake authentication working (can read Fabric tables)
-- ✅ Successfully loaded Gold layer tables in Databricks
-- ✅ ML customer segmentation completed (5 segments)
-- ✅ Enriched data written back to Fabric Lakehouse
-- ✅ New Gold tables visible in Fabric (gold_customer_segments_ml, gold_segment_summary)
-- ✅ Silhouette score > 0.3 (indicates reasonable clustering quality)
+- Azure Databricks workspace created and configured
+- OneLake authentication working (can read Fabric tables)
+- Successfully loaded Gold layer tables in Databricks
+- ML customer segmentation completed (5 segments)
+- Enriched data written back to Fabric Lakehouse
+- New Gold tables visible in Fabric (gold_customer_segments_ml, gold_segment_summary)
+- Silhouette score > 0.3 (indicates reasonable clustering quality)
 
 ---
 

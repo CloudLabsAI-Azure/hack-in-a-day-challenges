@@ -1,6 +1,6 @@
 ## Getting Started with Challenge
 
-Welcome to Hack in a Day: Data Analysis with GenAI challenge! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
+Welcome to Hack in a Day: Microsoft Fabric OneLake Data Engineering challenge! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
 
 ### Accessing Your Challenge Environment
 
@@ -28,11 +28,17 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 > **Note:** If the VM is not in use, please **deallocate** it to avoid unnecessary resource consumption.
 
-## Let's Get Started with Microsoft Foundry and GenAI Manufacturing Analytics
+## Let's Get Started with Microsoft Fabric and OneLake
 
-1. In the JumpVM, click on **Azure Portal** shortcut of Microsoft Edge browser which is created on desktop.
+1. In the JumpVM, click on **Microsoft Edge** browser shortcut which is created on desktop.
 
    ![](./media/gs-up1.png)
+
+1. Navigate to the **Microsoft Fabric portal**:
+
+   ```
+   https://app.fabric.microsoft.com/
+   ```
 
 1. On the **Sign into Microsoft** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
 
@@ -52,10 +58,14 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/gs-4.png)
 
-1. Welcome to **Azure Portal**! You're now ready to start building your manufacturing GenAI solution using Microsoft Foundry, Azure AI Search, and Azure Storage for intelligent data analysis and insights generation.
+1. Welcome to **Microsoft Fabric**! You're now ready to start building your data lakehouse solution using Microsoft Fabric, OneLake, and the Medallion architecture for data engineering with flight loyalty and transaction data.
 
-1. You can also open **VS Code** from the desktop to work with Python scripts and Streamlit applications for hands-on development.
+1. The lab environment includes:
+   - Microsoft Fabric with Trial capacity (59 days)
+   - Pre-deployed F2 capacity: **capacity2007681**
+   - Dataset files in **C:\LabFiles\fabric-kyndr-uc1\dataset\**
+   - Access to create Lakehouses, Notebooks, and Databricks integration
 
 Now, click on the **Next** from lower right corner to move on next page.
 
-## Happy Hacking!!
+## Happy Hacking!
