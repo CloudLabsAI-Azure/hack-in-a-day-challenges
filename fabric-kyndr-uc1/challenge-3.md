@@ -44,8 +44,8 @@ The Bronze layer contains raw, unprocessed data with significant quality issuesâ
    # Load flight data from CSV
    df_flights = spark.read.option("header", "true").option("inferSchema", "true").csv("Files/bronze/flight.csv")
    
-   # Load customer transactions from JSON
-   df_transactions = spark.read.json("Files/bronze/customer_transactions.json")
+   # Load customer transactions from JSON (multiLine option for array format)
+   df_transactions = spark.read.option("multiLine", "true").json("Files/bronze/customer_transactions.json")
    
    print(f"Flight Records: {df_flights.count()}")
    print(f"Transaction Records: {df_transactions.count()}")
