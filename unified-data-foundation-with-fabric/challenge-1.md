@@ -9,7 +9,7 @@ Contoso Enterprises operates across multiple business units with data scattered 
 Please copy the link below and paste it into a new browser tab inside your LabVM to download the required datasets for the lab and extract them.
 
 ```
-https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/c3-datasets.zip
+https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/unified-data-foundation-with-fabric.zip
 ```
 
 > **Note:** Extract the downloaded ZIP file to `C:\LabFiles\` so that the dataset folder is located at `C:\LabFiles\fabric-kyndr-uc1\dataset\`
