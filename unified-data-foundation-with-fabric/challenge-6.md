@@ -288,7 +288,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 ## Success Criteria
 
 - Semantic model created from Fabric Lakehouse Gold layer tables.
-- Relationships configured correctly between fact and dimension tables.
+- Relationships are configured correctly between fact and dimension tables.
 - Calculated measures created using DAX (Total Sales, Profit Margin, etc.).
 - Multi-page interactive dashboard created with various visualizations.
 - Slicers and filters implemented for user interactivity.
@@ -311,7 +311,7 @@ You have successfully built an **end-to-end unified analytics platform** using M
 
 This solution enables enterprise-grade analytics across:
 
-- **Unified Data Platform** - Single source of truth with OneLake eliminating data silos
+- **Unified Data Platform** - Single source of truth with OneLake, eliminating data silos
 - **Medallion Architecture** - Structured data quality layers (Bronze → Silver → Gold)
 - **Cross-Platform Analytics** - Seamless integration between Fabric and Databricks
 - **Self-Service BI** - Business users empowered with governed, high-quality data
