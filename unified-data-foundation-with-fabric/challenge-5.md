@@ -1,26 +1,28 @@
-# Challenge 5: Understand Databricks Integration (Optional - Conceptual)
+# Challenge 5: Integrate Azure Databricks for Advanced Analytics
 
-**Estimated Time:** 15 minutes
+**Estimated Time:** 45 minutes
 
 ## Introduction
 
-While Microsoft Fabric provides powerful data engineering capabilities, many organizations have existing investments in Azure Databricks for machine learning and advanced analytics. This challenge provides a conceptual understanding of how Azure Databricks can integrate with your Fabric Lakehouse for advanced analytics scenarios. This challenge is **optional** and focuses on understanding the integration architecture rather than hands-on implementation.
+While Microsoft Fabric provides powerful data engineering capabilities, many organizations have existing investments in Azure Databricks for machine learning and advanced analytics. In this challenge, you'll integrate Azure Databricks with your Fabric Lakehouse to perform customer segmentation analysis on your flight loyalty and transaction data using Databricks' ML capabilities.
 
 ## Prerequisites
 
 - Completed Challenge 4 (Gold layer tables created)
-- Understanding of data lakehouse architecture
-- Familiarity with OneLake concepts from Challenge 1
+- Azure subscription with permissions to create Databricks workspace
+- Access to Microsoft Fabric workspace
+- Gold layer tables: `dim_customers`, `fact_flights`, `fact_transactions`, `kpi_customer_value`
 
 ---
 
 ## Learning Objectives
 
-By the end of this challenge, you will understand:
-- How Azure Databricks integrates with Microsoft Fabric OneLake
-- The benefits of unified lakehouse architecture across platforms
-- Common use cases for Databricks + Fabric integration
-- Authentication and connectivity options between platforms
+By the end of this challenge, you will:
+- Create and configure Azure Databricks workspace
+- Set up OneLake integration for seamless data access
+- Access Fabric Lakehouse Delta tables from Databricks
+- Perform customer segmentation using ML clustering
+- Write enriched analytics back to Fabric Lakehouse
 
 ## Common Use Cases
 
@@ -62,37 +64,74 @@ By the end of this challenge, you will understand:
 
 ### Step 1: OneLake Path Structure
 
-Each Fabric Lakehouse has a unique OneLake path:
+Each Fabric Lakehouse has a unique OneLake path using workspace and lakehouse GUIDs:
 
 ```
-abfss://[workspace-name]@onelake.dfs.fabric.microsoft.com/[lakehouse-name].Lakehouse/Tables/[table-name]
+abfss://[workspace-guid]@onelake.dfs.fabric.microsoft.com/[lakehouse-guid].Lakehouse/Tables/[table-name]
 ```
 
-Example:
+**To find your path**:
+
+1. In Fabric, open your Lakehouse
+2. Click on **Files** folder
+3. Copy the path shown (it will contain GUIDs)
+4. Replace `/Files` with `.Lakehouse/Tables/[table-name]`
+
+Example discovered path:
 ```
-abfss://fabric-workspace-12345@onelake.dfs.fabric.microsoft.com/contoso_lakehouse_12345.Lakehouse/Tables/fact_flights
+abfss://0fe8c64f-c1a6-4a15-900c-4480d68680b1@onelake.dfs.fabric.microsoft.com/6656b396-074a-467e-b6e3-4578c08168c3/Files
+```
+
+Convert to table path:
+```
+abfss://0fe8c64f-c1a6-4a15-900c-4480d68680b1@onelake.dfs.fabric.microsoft.com/6656b396-074a-467e-b6e3-4578c08168c3.Lakehouse/Tables/fact_flights
 ```
 
 ### Step 2: Reading Data in Databricks
 
 ```python
-# Configure OneLake authentication
+# Configure OneLake authentication with Service Principal
+tenant_id = "<YOUR_TENANT_ID>"
+client_id = "<YOUR_CLIENT_ID>"
+client_secret = "<YOUR_CLIENT_SECRET>"
+
 spark.conf.set("fs.azure.account.auth.type.onelake.dfs.fabric.microsoft.com", "OAuth")
 spark.conf.set("fs.azure.account.oauth.provider.type.onelake.dfs.fabric.microsoft.com", 
                "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider")
+spark.conf.set("fs.azure.account.oauth2.client.id.onelake.dfs.fabric.microsoft.com", client_id)
+spark.conf.set("fs.azure.account.oauth2.client.secret.onelake.dfs.fabric.microsoft.com", client_secret)
+spark.conf.set("fs.azure.account.oauth2.client.endpoint.onelake.dfs.fabric.microsoft.com", 
+               f"https://login.microsoftonline.com/{tenant_id}/oauth2/token")
 
-# Read Delta table from OneLake
-onelake_path = "abfss://workspace@onelake.dfs.fabric.microsoft.com/lakehouse.Lakehouse/Tables/fact_flights"
+# Read Delta table from OneLake (replace with your actual GUIDs)
+workspace_guid = "0fe8c64f-c1a6-4a15-900c-4480d68680b1"  # Your workspace GUID
+lakehouse_guid = "6656b396-074a-467e-b6e3-4578c08168c3"  # Your lakehouse GUID
+
+onelake_path = f"abfss://{workspace_guid}@onelake.dfs.fabric.microsoft.com/{lakehouse_guid}.Lakehouse/Tables/fact_flights"
 df_flights = spark.read.format("delta").load(onelake_path)
 
+print(f"Loaded {df_flights.count()} records from Fabric")
+df_flights.show(5)
+
 # Perform ML operations
+from pyspark.ml.feature import VectorAssembler
 from pyspark.ml.clustering import KMeans
-kmeans = KMeans(k=5, seed=42)
-model = kmeans.fit(df_flights)
+
+# Prepare features
+assembler = VectorAssembler(inputCols=["total_flights", "total_loyalty_points"], outputCol="features")
+df_features = assembler.transform(df_flights)
+
+# Train model
+kmeans = KMeans(k=5, seed=42, featuresCol="features", predictionCol="segment")
+model = kmeans.fit(df_features)
+df_results = model.transform(df_features)
 
 # Write results back to OneLake
-output_path = "abfss://workspace@onelake.dfs.fabric.microsoft.com/lakehouse.Lakehouse/Tables/customer_segments_ml"
-df_results.write.format("delta").mode("overwrite").save(output_path)
+output_path = f"abfss://{workspace_guid}@onelake.dfs.fabric.microsoft.com/{lakehouse_guid}.Lakehouse/Tables/customer_segments_ml"
+df_results.select("customer_key", "segment", "total_flights", "total_loyalty_points") \
+    .write.format("delta").mode("overwrite").save(output_path)
+
+print(f"Results written to: {output_path}")
 ```
 
 ### Step 3: Accessing in Fabric
@@ -198,11 +237,11 @@ Once written back, the table appears automatically in your Fabric Lakehouse and 
 
 In this conceptual challenge, you learned:
 
-✅ How Azure Databricks integrates with Microsoft Fabric through OneLake  
-✅ The benefits of a unified lakehouse architecture  
-✅ Common use cases for Fabric + Databricks integration  
-✅ Technical implementation patterns for reading/writing data  
-✅ Best practices for cross-platform data workflows  
+- How Azure Databricks integrates with Microsoft Fabricthrough OneLake  
+- The benefits of a unified lakehouse architecture  
+- Common use cases for Fabric + Databricks integration  
+- Technical implementation patterns for reading/writing data  
+- Best practices for cross-platform data workflows  
 
 While you didn't perform hands-on implementation, you now understand how organizations leverage both platforms together for end-to-end data and AI solutions. This knowledge will help you design scalable architectures that use the right tool for each workload.
 
