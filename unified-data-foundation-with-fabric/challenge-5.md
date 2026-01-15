@@ -297,7 +297,7 @@ segment_names = {
 }
 ```
 
-### Cell 7: Create enriched customer table with segments
+### Cell 7: Create an enriched customer table with segments
 
 ```python
 from pyspark.sql.functions import when, col
