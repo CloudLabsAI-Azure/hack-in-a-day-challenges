@@ -32,14 +32,15 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 1. Click **New semantic model** (formerly known as Dataset):
 
-   - Name: **Contoso-Sales-Analytics-Model**
+   - Name: **Contoso-Flight-Analytics-Model**
    - Select the following Gold layer tables:
-     - gold_fact_sales
-     - gold_dim_customer
-     - gold_dim_product
-     - gold_dim_date
-     - gold_sales_summary
-     - gold_customer_segments (from Databricks integration)
+     - fact_flights
+     - fact_transactions
+     - dim_customers
+     - dim_geography
+     - dim_time
+     - kpi_customer_value
+     - gold_customer_segments_ml (from Databricks integration)
 
 1. Click **Confirm** to create the semantic model.
 
@@ -49,41 +50,60 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 1. Create relationships between tables by dragging between fields:
 
-   - **gold_fact_sales[CustomerKey]** → **gold_dim_customer[CustomerKey]**  
+   - **fact_flights[customer_key]** → **dim_customers[customer_key]**  
      Cardinality: Many-to-One (*)
    
-   - **gold_fact_sales[ProductKey]** → **gold_dim_product[ProductKey]**  
+   - **fact_transactions[customer_key]** → **dim_customers[customer_key]**  
      Cardinality: Many-to-One (*)
    
-   - **gold_fact_sales[DateKey]** → **gold_dim_date[DateKey]**  
+   - **fact_transactions[transaction_date]** → **dim_time[date]**  
+     Cardinality: Many-to-One (*)
+   
+   - **kpi_customer_value[customer_key]** → **dim_customers[customer_key]**  
      Cardinality: Many-to-One (*)
 
 1. Verify that all relationships are **active** and have the correct **cross-filter direction**:
 
    - Set cross-filter direction to **Single** for all relationships (default)
 
-1. Add calculated measures to the **gold_fact_sales** table:
+1. Add calculated measures to the **fact_transactions** table:
 
-   - Right-click **gold_fact_sales** → **New measure**
+   - Right-click **fact_transactions** → **New measure**
    
    ```DAX
-   Total Sales = SUM(gold_fact_sales[SalesAmount])
+   Total Revenue = SUM(fact_transactions[transaction_amount])
    ```
    
    ```DAX
-   Total Profit = SUM(gold_fact_sales[Profit])
+   Total Transactions = COUNTROWS(fact_transactions)
    ```
    
    ```DAX
-   Profit Margin % = DIVIDE([Total Profit], [Total Sales], 0) * 100
+   Average Transaction Value = DIVIDE([Total Revenue], [Total Transactions], 0)
    ```
    
    ```DAX
-   Total Orders = COUNTROWS(gold_fact_sales)
+   Completed Revenue = CALCULATE([Total Revenue], fact_transactions[status] = "completed")
+   ```
+
+1. Add calculated measures to the **fact_flights** table:
+
+   - Right-click **fact_flights** → **New measure**
+   
+   ```DAX
+   Total Flights = SUM(fact_flights[total_flights])
    ```
    
    ```DAX
-   Average Order Value = DIVIDE([Total Sales], [Total Orders], 0)
+   Total Loyalty Points = SUM(fact_flights[total_loyalty_points])
+   ```
+   
+   ```DAX
+   Total Distance KM = SUM(fact_flights[total_km_flown])
+   ```
+   
+   ```DAX
+   Average Flights Per Member = AVERAGE(fact_flights[total_flights])
    ```
 
 1. **Save** the semantic model.
@@ -94,90 +114,95 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 1. The Power BI report canvas will open with your data model connected.
 
-#### Page 1: Sales Overview Dashboard
+#### Page 1: Business Overview Dashboard
 
-1. Add a **Card visual** for Total Sales:
+1. Add a **Card visual** for Total Revenue:
 
-   - Drag **Total Sales** measure to the canvas
+   - Drag **Total Revenue** measure to the canvas
    - Format: Currency, no decimals
-   - Title: "Total Revenue"
+   - Title: "Total Transaction Revenue"
 
 1. Add three more **Card visuals** for KPIs:
 
-   - **Total Profit**
-   - **Total Orders**
-   - **Average Order Value**
+   - **Total Flights**
+   - **Total Loyalty Points**
+   - **Total Transactions**
 
-1. Add a **Line chart** for Sales Trend over Time:
+1. Add a **Line chart** for Transaction Trend over Time:
 
-   - Axis: **gold_dim_date[Year]** and **gold_dim_date[Month]**
-   - Values: **Total Sales**
-   - Title: "Monthly Sales Trend"
+   - Axis: **dim_time[year]** and **dim_time[month]**
+   - Values: **Total Revenue**
+   - Title: "Monthly Transaction Trend"
 
-1. Add a **Clustered column chart** for Sales by Region:
+1. Add a **Clustered column chart** for Revenue by Region:
 
-   - Axis: **gold_fact_sales[Region]**
-   - Values: **Total Sales**, **Total Profit**
-   - Title: "Sales & Profit by Region"
+   - Axis: **fact_transactions[region]**
+   - Values: **Total Revenue**, **Total Transactions**
+   - Title: "Revenue & Transactions by Region"
 
-1. Add a **Pie chart** for Sales by Product Category:
+1. Add a **Pie chart** for Transactions by Payment Method:
 
-   - Legend: **gold_dim_product[Category]**
-   - Values: **Total Sales**
-   - Title: "Sales Distribution by Category"
+   - Legend: **fact_transactions[payment_method]**
+   - Values: **Total Transactions**
+   - Title: "Payment Method Distribution"
 
-1. Add a **Table visual** for Top 10 Products:
+1. Add a **Table visual** for Top 10 Customers:
 
-   - Columns: **gold_dim_product[ProductName]**, **Total Sales**, **Total Profit**
-   - Add visual-level filter: Top 10 by **Total Sales**
-   - Title: "Top 10 Products by Revenue"
+   - Columns: **dim_customers[customer_key]**, **kpi_customer_value[total_spent]**, **kpi_customer_value[total_flights]**, **kpi_customer_value[customer_status]**
+   - Add visual-level filter: Top 10 by **total_spent**
+   - Title: "Top 10 Customers by Spending"
 
-#### Page 2: Regional Performance Analysis
+#### Page 2: Geographic & Loyalty Analysis
 
 1. Add a new page: Click **+ Add page** at the bottom
 
-1. Add a **Map visual** for Regional Sales:
+1. Add a **Map visual** for Customer Distribution:
 
-   - Location: **gold_fact_sales[Region]**
-   - Bubble size: **Total Sales**
-   - Title: "Sales by Region Map"
+   - Location: **dim_customers[province]**, **dim_customers[country]**
+   - Bubble size: **Total Flights**
+   - Title: "Customer Distribution by Province"
 
-1. Add a **Matrix visual** for detailed regional breakdown:
+1. Add a **Matrix visual** for geographic breakdown:
 
-   - Rows: **gold_fact_sales[Region]**
-   - Columns: **gold_dim_date[Year]**
-   - Values: **Total Sales**, **Total Profit**, **Profit Margin %**
-   - Title: "Regional Performance Matrix"
+   - Rows: **dim_customers[province]**, **dim_customers[country]**
+   - Columns: **dim_customers[loyalty_tier]**
+   - Values: Count of **customer_key**, **Total Flights**, **Total Loyalty Points**
+   - Title: "Geographic Loyalty Analysis"
 
-1. Add a **Stacked bar chart** for Status by Region:
+1. Add a **Stacked bar chart** for Flight Activity by Loyalty Tier:
 
-   - Axis: **gold_fact_sales[Region]**
-   - Legend: **gold_fact_sales[Status]**
-   - Values: **Total Orders**
-   - Title: "Order Status Distribution by Region"
+   - Axis: **dim_customers[loyalty_tier]**
+   - Values: **Total Flights**, **Total Distance KM**
+   - Title: "Flight Activity by Loyalty Tier"
 
-#### Page 3: Customer Insights
+1. Add a **Donut chart** for Transaction Status:
 
-1. Add a new page for customer analysis
+   - Legend: **fact_transactions[status]**
+   - Values: **Total Transactions**
+   - Title: "Transaction Status Distribution"
 
-1. Add a **Donut chart** for Customer Segments:
+#### Page 3: Customer Segmentation Insights
 
-   - Legend: **gold_customer_segments[Segment]**
-   - Values: Count of **CustomerName**
-   - Title: "Customer Segmentation"
+1. Add a new page for customer ML segmentation analysis
 
-1. Add a **Table visual** for Top Customers:
+1. Add a **Donut chart** for Customer Segments (if gold_customer_segments_ml exists):
 
-   - Columns: **gold_dim_customer[CustomerName]**, **gold_customer_segments[TotalSpent]**, **gold_customer_segments[TotalOrders]**, **gold_customer_segments[Segment]**
-   - Sort by: **TotalSpent** descending
-   - Visual filter: Top 15
-   - Title: "Top 15 Customers"
+   - Legend: **gold_customer_segments_ml[segment_name]**
+   - Values: Count of **customer_key**
+   - Title: "ML-Based Customer Segmentation"
 
-1. Add a **Clustered bar chart** for Customer Segment Revenue:
+1. Add a **Table visual** for Customer Value Analysis:
 
-   - Axis: **gold_customer_segments[Segment]**
-   - Values: **gold_customer_segments[TotalSpent]**
-   - Title: "Revenue by Customer Segment"
+   - Columns: **kpi_customer_value[customer_key]**, **kpi_customer_value[total_flights]**, **kpi_customer_value[total_loyalty_points]**, **kpi_customer_value[total_spent]**, **kpi_customer_value[customer_status]**
+   - Sort by: **total_spent** descending
+   - Visual filter: Top 20
+   - Title: "Top 20 Customers by Lifetime Value"
+
+1. Add a **Clustered bar chart** for Customer Status Distribution:
+
+   - Axis: **kpi_customer_value[customer_status]**
+   - Values: Count of **customer_key**, **Total Revenue**, **Total Loyalty Points**
+   - Title: "Customer Engagement Status"
 
 ### Part 4: Add Interactivity with Slicers
 
@@ -185,19 +210,24 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 1. Add a **Slicer** for Year filter:
 
-   - Field: **gold_dim_date[Year]**
+   - Field: **dim_time[year]**
    - Style: Dropdown
    - Position: Top-left corner
 
 1. Add a **Slicer** for Region filter:
 
-   - Field: **gold_fact_sales[Region]**
+   - Field: **fact_transactions[region]**
    - Style: List
    - Position: Left side panel
 
-1. Add a **Slicer** for Product Category:
+1. Add a **Slicer** for Loyalty Tier:
 
-   - Field: **gold_dim_product[Category]**
+   - Field: **dim_customers[loyalty_tier]**
+   - Style: Dropdown
+
+1. Add a **Slicer** for Customer Status:
+
+   - Field: **kpi_customer_value[customer_status]**
    - Style: Dropdown
 
 1. **Sync slicers** across all pages:
@@ -215,7 +245,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 1. Add report title and description:
 
    - Insert **Text box** at the top
-   - Title: "Contoso Sales Analytics Dashboard"
+   - Title: "Contoso Flight Loyalty & Customer Analytics Dashboard"
    - Subtitle: "Real-time insights from unified data platform"
 
 1. Add last refresh timestamp:
@@ -236,7 +266,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 1. Click **File** → **Save**
 
-   - Report name: **Contoso-Sales-Dashboard**
+   - Report name: **Contoso-Flight-Loyalty-Dashboard**
 
 1. Click **Publish** in the Home ribbon
 
@@ -246,7 +276,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 1. Click **Select**
 
-1. Once published, click **Open 'Contoso-Sales-Dashboard' in Power BI** to view in the service
+1. Once published, click **Open 'Contoso-Flight-Loyalty-Dashboard' in Power BI** to view in the service
 
 ### Part 7: Configure Automatic Refresh (Optional)
 
@@ -270,14 +300,15 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 1. Test interactivity:
 
-   - Click on different regions in the map → other visuals should filter accordingly
-   - Use slicers to filter by Year, Region, Category
+   - Click on different provinces in the map → other visuals should filter accordingly
+   - Use slicers to filter by Year, Region, Loyalty Tier, Customer Status
    - Drill through from summary visuals to detailed tables
 
 1. Verify data accuracy:
 
-   - Compare Total Sales in Power BI with SQL query results from Lakehouse
-   - Confirm customer segments match data written from Databricks
+   - Compare Total Revenue in Power BI with SQL query results from Lakehouse
+   - Verify Total Flights and Loyalty Points match fact_flights table
+   - Confirm customer segments match data written from Databricks (if Challenge 5 was completed)
 
 1. Share the dashboard:
 
@@ -287,11 +318,11 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 ## Success Criteria
 
-- Semantic model created from Fabric Lakehouse Gold layer tables.
-- Relationships are configured correctly between fact and dimension tables.
-- Calculated measures created using DAX (Total Sales, Profit Margin, etc.).
-- Multi-page interactive dashboard created with various visualizations.
-- Slicers and filters implemented for user interactivity.
+- Semantic model created from Fabric Lakehouse Gold layer tables (fact_flights, fact_transactions, dim_customers, dim_geography, dim_time, kpi_customer_value).
+- Relationships configured correctly between fact and dimension tables.
+- Calculated measures created using DAX (Total Revenue, Total Flights, Total Loyalty Points, etc.).
+- Multi-page interactive dashboard created with flight loyalty and transaction visualizations.
+- Slicers and filters implemented for user interactivity (Year, Region, Loyalty Tier, Customer Status).
 - Dashboard published to Power BI Service successfully.
 - Data accuracy validated between Power BI and source Lakehouse tables.
 

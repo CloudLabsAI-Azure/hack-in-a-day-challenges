@@ -12,6 +12,8 @@ Please copy the link below and paste it into a new browser tab inside your LabVM
 https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/unified-data-foundation-with-fabric.zip
 ```
 
+> **Note:** Extract the downloaded ZIP file to `C:\LabFiles\` so that the dataset folder is located at `C:\LabFiles\unified-data-foundation-with-fabric\dataset\`
+
 ## Challenge Objectives
 
 - Explore Microsoft Fabric workspace and understand its key components.

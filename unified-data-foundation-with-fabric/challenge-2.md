@@ -18,7 +18,7 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 1. On the **LabVM**, open **File Explorer** and navigate to the dataset folder:
 
    ```
-   C:\LabFiles\fabric-kyndr-uc1\dataset\
+   C:\LabFiles\unified-data-foundation-with-fabric\dataset\
    ```
 
    > **Note:** If you haven't downloaded the datasets yet, refer to Challenge 01 for the download link and extract the ZIP file to `C:\LabFiles\`
@@ -55,7 +55,7 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
    - Click the **...** (more options) next to the **bronze** folder
    - Select **Upload** → **Upload files**
-   - Browse to `C:\LabFiles\fabric-kyndr-uc1\dataset\`
+   - Browse to `C:\LabFiles\unified-data-foundation-with-fabric\dataset\`
    - Select **flight.csv**
    - Click **Upload**
 
@@ -65,7 +65,7 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
    - Click the **...** (more options) next to the **bronze** folder
    - Select **Upload** → **Upload files**
-   - Browse to `C:\LabFiles\fabric-kyndr-uc1\dataset\`
+   - Browse to `C:\LabFiles\unified-data-foundation-with-fabric\dataset\`
    - Select **customer_transactions.json**
    - Click **Upload**
 
@@ -123,7 +123,7 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
 ## Success Criteria
 
-- Sample dataset files located in the LabVM at `C:\LabFiles\fabric-kyndr-uc1\dataset\`.
+- Sample dataset files located in the LabVM at `C:\LabFiles\unified-data-foundation-with-fabric\dataset\`.
 - Both files (flight.csv and customer_transactions.json) were uploaded successfully to the Bronze layer.
 - Files are visible in the Lakehouse Files explorer under the bronze folder.
 - File preview displays data with identifiable quality issues.
