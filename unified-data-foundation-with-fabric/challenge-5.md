@@ -140,10 +140,10 @@ Add the following code cells to your Databricks notebook:
 
 ```python
 # Configure OneLake access credentials
-# Replace with your actual values
-tenant_id = "<YOUR_TENANT_ID>"
-client_id = "<YOUR_CLIENT_ID>"
-client_secret = "<YOUR_CLIENT_SECRET>"
+# Replace with your actual values from Part 2
+tenant_id = "<YOUR_TENANT_ID>"  # From App registration Overview
+client_id = "<YOUR_CLIENT_ID>"  # Application (client) ID
+client_secret = "<YOUR_CLIENT_SECRET>"  # Secret VALUE (not Secret ID!)
 
 # Configure Spark to use OAuth for OneLake access
 spark.conf.set("fs.azure.account.auth.type.onelake.dfs.fabric.microsoft.com", "OAuth")
@@ -152,19 +152,45 @@ spark.conf.set("fs.azure.account.oauth.provider.type.onelake.dfs.fabric.microsof
 spark.conf.set("fs.azure.account.oauth2.client.id.onelake.dfs.fabric.microsoft.com", client_id)
 spark.conf.set("fs.azure.account.oauth2.client.secret.onelake.dfs.fabric.microsoft.com", client_secret)
 spark.conf.set("fs.azure.account.oauth2.client.endpoint.onelake.dfs.fabric.microsoft.com", 
-               f"https://login.microsoftonline.com/{tenant_id}/oauth2/token")
+               f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token")
 
 print("OneLake authentication configured")
 ```
 
-### Cell 2: Read Gold layer tables from Fabric
+> **CRITICAL NOTES:**
+> - Use the **Secret VALUE** (looks like `DXm8Q~abc123...`), NOT the Secret ID (GUID format)
+> - Use `/oauth2/v2.0/token` endpoint (with `v2.0`)
+> - If you get authentication errors, restart your Databricks cluster to clear cached configs
+
+### Cell 2: Find your OneLake path
 
 ```python
-# Define your OneLake path - REPLACE with your actual workspace and lakehouse names
-workspace_name = "your-workspace-name"  # e.g., "fabric-workspace-12345"
-lakehouse_name = "your-lakehouse-name"  # e.g., "DataLakehouse"
+# Get your workspace and lakehouse GUIDs from Fabric
+# 1. In Fabric portal, open your Lakehouse
+# 2. Click on Files folder
+# 3. Copy the path from the URL or properties panel
+# 4. Example path: abfss://WORKSPACE-GUID@onelake.dfs.fabric.microsoft.com/LAKEHOUSE-GUID/Files
 
-onelake_base_path = f"abfss://{workspace_name}@onelake.dfs.fabric.microsoft.com/{lakehouse_name}.Lakehouse/Tables"
+# Replace these with YOUR actual GUIDs
+workspace_guid = "<YOUR_WORKSPACE_GUID>"  # From Fabric URL
+lakehouse_guid = "<YOUR_LAKEHOUSE_GUID>"  # From Fabric URL
+
+print(f"Workspace GUID: {workspace_guid}")
+print(f"Lakehouse GUID: {lakehouse_guid}")
+```
+
+> **How to find your GUIDs:**
+> 1. In Fabric, navigate to your Lakehouse
+> 2. Click on the **Files** folder
+> 3. Look at the browser URL or properties panel
+> 4. You'll see: `abfss://[workspace-guid]@onelake.dfs.fabric.microsoft.com/[lakehouse-guid]/Files`
+> 5. Copy both GUIDs
+
+### Cell 3: Read Gold layer tables from Fabric
+
+```python
+# Define your OneLake path - tables are in /Tables/dbo/ directory
+onelake_base_path = f"abfss://{workspace_guid}@onelake.dfs.fabric.microsoft.com/{lakehouse_guid}/Tables/dbo"
 
 # Read Gold layer tables
 df_customers = spark.read.format("delta").load(f"{onelake_base_path}/dim_customers")
@@ -180,6 +206,15 @@ print(f"KPI Data: {df_kpi.count()}")
 # Preview data
 display(df_kpi.limit(10))
 ```
+
+> **SUCCESS CHECK:**
+> - You should see record counts for all 4 tables
+> - A table preview should display at the bottom
+> - If you get errors, verify:
+>   - GUIDs are correct
+>   - Service Principal has Contributor access to Fabric workspace
+>   - Secret VALUE is used (not Secret ID)
+>   - Cluster was restarted if configs were changed
 
 ---
 
@@ -409,8 +444,9 @@ ORDER BY segment_name, loyalty_tier;
 ## Success Criteria
 
 - Azure Databricks workspace created and configured
+- Service Principal created with proper permissions
 - OneLake authentication working (can read Fabric tables)
-- Successfully loaded Gold layer tables in Databricks
+- Successfully loaded Gold layer tables in Databricks (4 tables with correct record counts)
 - ML customer segmentation completed (5 segments)
 - Enriched data written back to Fabric Lakehouse
 - New Gold tables visible in Fabric (gold_customer_segments_ml, gold_segment_summary)
@@ -418,9 +454,68 @@ ORDER BY segment_name, loyalty_tier;
 
 ---
 
-## Validation Checkpoint
+## Troubleshooting Guide
 
-**Copy this GUID and submit for validation:** `{{guid-challenge-5}}`
+### Issue: "Invalid client secret provided" (Error 7000215)
+
+**Cause:** Using Secret ID instead of Secret VALUE
+
+**Solution:**
+1. Go to Azure Portal → Microsoft Entra ID → App registrations → Your app
+2. Go to **Certificates & secrets**
+3. Look at the **Value** column (NOT Secret ID)
+4. If you can't see it, **create a NEW secret** and copy the VALUE immediately
+5. The VALUE looks like: `DXm8Q~abc123...` (NOT a GUID!)
+
+### Issue: Authentication still fails after fixing secret
+
+**Cause:** Spark cached old configurations
+
+**Solution:**
+1. In Databricks, go to **Compute**
+2. Find your cluster and click **Restart**
+3. Wait for cluster to start
+4. Re-run ALL cells from the beginning
+
+### Issue: "Table not found" or "Path does not exist"
+
+**Cause:** Incorrect OneLake path format
+
+**Solution:**
+1. In Fabric, open your Lakehouse → Click **Files**
+2. Copy the path from properties or URL
+3. Example: `abfss://WORKSPACE-GUID@onelake.dfs.fabric.microsoft.com/LAKEHOUSE-GUID/Files`
+4. For tables, replace `/Files` with `/Tables/dbo/`
+5. Correct path: `/{lakehouse_guid}/Tables/dbo/{table_name}`
+
+### Issue: "Access denied" or "403 Forbidden"
+
+**Cause:** Service Principal not added to Fabric workspace
+
+**Solution:**
+1. Go to Fabric portal → Your workspace
+2. Click **Manage access** → **+ Add people or groups**
+3. Search for your app name: `databricks-onelake-access`
+4. Grant **Contributor** or **Admin** role
+5. Click **Add**
+
+### Issue: Can't find workspace/lakehouse GUIDs
+
+**Solution:**
+1. In Fabric, open your Lakehouse
+2. Click on **Files** folder in the explorer
+3. Look at the browser URL bar
+4. You'll see: `...onelake.../WORKSPACE-GUID/LAKEHOUSE-GUID/Files`
+5. Copy both GUIDs (they look like: `0fe8c64f-c1a6-4a15-900c-4480d68680b1`)
+
+---
+
+## Additional Resources
+
+- [OneLake and Databricks Integration](https://learn.microsoft.com/fabric/onelake/onelake-azure-databricks)
+- [Access OneLake from Databricks](https://learn.microsoft.com/fabric/onelake/onelake-access-databricks)
+- [Delta Lake in Microsoft Fabric](https://learn.microsoft.com/fabric/data-engineering/lakehouse-and-delta-tables)
+- [Azure Databricks ML Runtime](https://learn.microsoft.com/azure/databricks/release-notes/runtime/mlruntime)
 
 ---
 
