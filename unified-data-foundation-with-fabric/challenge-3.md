@@ -8,10 +8,10 @@ The Bronze layer contains raw, unprocessed data with significant quality issuesâ
 
 - Create a Fabric Notebook for data transformation.
 - Load and inspect flight loyalty data (CSV) and customer transaction data (JSON).
-- Apply data quality checks: identify and handle nulls, remove duplicates, validate data types.
+- Apply data quality checks: identify and handle nulls, remove duplicates, and validate data types.
 - Standardize inconsistent values (status codes, region names, date formats).
 - Clean and transform both structured (CSV) and semi-structured (JSON) data.
-- Write transformed outputs to **Silver layer** as Delta Lake tables.
+- Write transformed outputs to the **Silver layer** as Delta Lake tables.
 
 ## Steps to Complete
 
@@ -324,11 +324,11 @@ The Bronze layer contains raw, unprocessed data with significant quality issuesâ
 ## Success Criteria
 
 - Fabric Notebook created and attached to Lakehouse successfully.
-- Flight data (CSV) and transaction data (JSON) loaded from Bronze layer.
+- Flight data (CSV) and transaction data (JSON) loaded from the Bronze layer.
 - Data quality issues identified: missing values (".", empty strings, nulls), inconsistent formatting, duplicates.
 - Data quality checks applied: nulls handled, duplicates removed, datatypes standardized.
 - Inconsistent values standardized (status, region, payment_method, city/province names).
-- Both structured (CSV) and semi-structured (JSON) data cleaned successfully.
+- Both structured (CSV) and semi-structured (JSON) data were cleaned successfully.
 - Silver layer tables created in Delta Lake format with validated data quality.
 - SQL queries return clean, standardized data from Silver tables.
 
