@@ -343,7 +343,6 @@ The Bronze layer contains raw, unprocessed data with significant quality issuesâ
 Now, click **Next** to continue to **Challenge 04**.
    GROUP BY p.Category
    ORDER BY TotalRevenue DESC;
-   ```
 
 > **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
 > - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
