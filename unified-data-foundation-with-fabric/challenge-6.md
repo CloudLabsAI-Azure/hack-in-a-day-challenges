@@ -40,8 +40,10 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
      - dim_geography
      - dim_time
      - kpi_customer_value
+     - gold_customer_segments_ml (if Challenge 5 was completed)
+     - gold_segment_summary (if Challenge 5 was completed)
 
-   > **Note**: If you completed the optional Challenge 5 and have ML segments, you can also include `gold_customer_segments_ml`
+   > **Note**: If you completed Challenge 5's Databricks integration, you'll have ML-enriched customer segment tables for advanced behavioral analysis.
 
 1. Click **Confirm** to create the semantic model.
 
@@ -62,6 +64,9 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
    
    - **kpi_customer_value[customer_key]** → **dim_customers[customer_key]**  
      Cardinality: Many-to-One (*)
+   
+   - **gold_customer_segments_ml[customer_key]** → **dim_customers[customer_key]** (if table exists)  
+     Cardinality: One-to-One (1:1)
 
 1. Verify that all relationships are **active** and have the correct **cross-filter direction**:
 
@@ -105,6 +110,27 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
    
    ```DAX
    Average Flights Per Member = AVERAGE(fact_flights[total_flights])
+   ```
+
+1. Add calculated measures for **ML Segment Analysis** (if gold_customer_segments_ml exists):
+
+   - Right-click **gold_customer_segments_ml** → **New measure**
+   
+   ```DAX
+   Total Customers in Segments = COUNTROWS(gold_customer_segments_ml)
+   ```
+   
+   ```DAX
+   Average RFM Score = AVERAGE(gold_customer_segments_ml[recency_score]) + 
+                       AVERAGE(gold_customer_segments_ml[frequency_score]) + 
+                       AVERAGE(gold_customer_segments_ml[monetary_score])
+   ```
+   
+   ```DAX
+   High Value Customers = CALCULATE(
+       COUNTROWS(gold_customer_segments_ml), 
+       gold_customer_segments_ml[segment_name] IN {"Loyal Frequent Flyers", "Premium Elite Members"}
+   )
    ```
 
 1. **Save** the semantic model.
@@ -182,28 +208,67 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
    - Values: **Total Transactions**
    - Title: "Transaction Status Distribution"
 
-#### Page 3: Customer Segmentation Insights
+#### Page 3: ML-Powered Customer Segmentation Insights
+
+> **Note**: This page showcases the advanced analytics from Challenge 5's Databricks ML integration. If you didn't complete Challenge 5, skip to Part 4.
 
 1. Add a new page for customer ML segmentation analysis
 
-1. Add a **Donut chart** for Customer Segments (if gold_customer_segments_ml exists):
+1. Add **Card visuals** for ML Segment KPIs:
+
+   - **Total Customers in Segments**
+   - **High Value Customers** (count)
+   - **Average RFM Score**
+
+1. Add a **Donut chart** for Customer Segment Distribution:
 
    - Legend: **gold_customer_segments_ml[segment_name]**
    - Values: Count of **customer_key**
    - Title: "ML-Based Customer Segmentation"
+   - Enable data labels showing percentages
 
-1. Add a **Table visual** for Customer Value Analysis:
+1. Add a **Clustered column chart** for Segment Performance:
 
-   - Columns: **kpi_customer_value[customer_key]**, **kpi_customer_value[total_flights]**, **kpi_customer_value[total_loyalty_points]**, **kpi_customer_value[total_spent]**, **kpi_customer_value[customer_status]**
-   - Sort by: **total_spent** descending
-   - Visual filter: Top 20
-   - Title: "Top 20 Customers by Lifetime Value"
+   - Axis: **gold_customer_segments_ml[segment_name]**
+   - Values: **Total Flights**, **Total Loyalty Points**, **Total Revenue**
+   - Title: "Revenue & Engagement by Customer Segment"
+   - Legend: Show all three metrics
 
-1. Add a **Clustered bar chart** for Customer Status Distribution:
+1. Add a **Matrix visual** for Segment Profile Analysis:
 
-   - Axis: **kpi_customer_value[customer_status]**
-   - Values: Count of **customer_key**, **Total Revenue**, **Total Loyalty Points**
-   - Title: "Customer Engagement Status"
+   - Rows: **gold_customer_segments_ml[segment_name]**
+   - Columns: **dim_customers[loyalty_tier]**
+   - Values: Count of **customer_key**, **Total Revenue**, **Average Transaction Value**
+   - Title: "Segment x Loyalty Tier Analysis"
+
+1. Add a **Scatter chart** for RFM Behavioral Mapping:
+
+   - X-axis: **gold_customer_segments_ml[recency_score]**
+   - Y-axis: **gold_customer_segments_ml[monetary_score]**
+   - Legend: **gold_customer_segments_ml[segment_name]**
+   - Size: **Total Flights**
+   - Title: "Customer Behavioral Patterns (RFM Analysis)"
+
+1. Add a **Table visual** for Segment Summary Statistics (from gold_segment_summary):
+
+   - Columns: **segment_name**, **customer_count**, **avg_age**, **avg_total_flights**, **avg_loyalty_points**
+   - Sort by: **avg_loyalty_points** descending
+   - Title: "Customer Segment Profiles"
+   - Format numbers appropriately (no decimals for counts, 1 decimal for averages)
+
+1. Add a **Stacked bar chart** for Segment Value Analysis:
+
+   - Axis: **gold_customer_segments_ml[segment_name]**
+   - Values: **Total Revenue**
+   - Color saturation: **Total Customers in Segments**
+   - Title: "Revenue Contribution by Segment"
+   - Sort by Total Revenue descending
+
+> **💡 Business Insight**: This page enables data-driven marketing strategies:
+> - Target "At-Risk Customers" with retention campaigns
+> - Design VIP experiences for "Premium Elite Members"
+> - Nurture "New Joiners" with onboarding programs
+> - Re-engage "Occasional Travelers" with targeted promotions
 
 ### Part 4: Add Interactivity with Slicers
 
@@ -320,12 +385,17 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 ## Success Criteria
 
 - Semantic model created from Fabric Lakehouse Gold layer tables (fact_flights, fact_transactions, dim_customers, dim_geography, dim_time, kpi_customer_value).
-- Relationships configured correctly between fact and dimension tables.
-- Calculated measures created using DAX (Total Revenue, Total Flights, Total Loyalty Points, etc.).
-- Multi-page interactive dashboard created with flight loyalty and transaction visualizations.
-- Slicers and filters implemented for user interactivity (Year, Region, Loyalty Tier, Customer Status).
+- ML-enriched tables included (gold_customer_segments_ml, gold_segment_summary) if Challenge 5 was completed.
+- Relationships configured correctly between fact, dimension, and ML segment tables.
+- Calculated DAX measures created for revenue, flights, loyalty points, and segment analysis.
+- Multi-page interactive dashboard created:
+  - Page 1: Business Overview (revenue, transactions, trends)
+  - Page 2: Geographic & Loyalty Analysis (maps, matrices, distributions)
+  - Page 3: ML Customer Segmentation (behavioral insights, RFM analysis)
+- Slicers and filters implemented for user interactivity (Year, Region, Loyalty Tier, Customer Status, Segments).
 - Dashboard published to Power BI Service successfully.
 - Data accuracy validated between Power BI and source Lakehouse tables.
+- ML segment visualizations display 5 distinct customer personas (if Challenge 5 completed).
 
 ## Additional Resources
 
