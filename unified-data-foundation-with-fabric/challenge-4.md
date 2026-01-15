@@ -12,8 +12,6 @@ In this challenge, you'll create the Gold layer of your Medallion architecture. 
 - Access to your Fabric workspace
 - Silver layer tables: `silver_flights`, `silver_transactions`
 
----
-
 ## Learning Objectives
 
 By the end of this challenge, you will:
@@ -393,7 +391,7 @@ kpi_customer_value.show(10, truncate=False)
    - `kpi_customer_value` table exists
 
 3. **Check the Tables folder** in Lakehouse explorer:
-   - All Gold layer tables should be visible with Delta Lake format
+   - All Gold layer tables should be visible with the Delta Lake format
 
 ---
 
@@ -402,7 +400,7 @@ kpi_customer_value.show(10, truncate=False)
 - Customer, geography, and time dimensions created
 - Fact tables for flights and transactions created
 - Business KPI table for customer value analysis
-- All tables saved to Gold layer with Delta Lake format
+- All tables saved to the Gold layer with the Delta Lake format
 - Analytics queries return meaningful insights
 - Tables visible in OneLake catalog
 
