@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Contoso Enterprises operates across multiple business units with data scattered across different systems—ERP, CRM, legacy databases, and unstructured file storage. To unify this data landscape, Contoso has decided to adopt Microsoft Fabric and OneLake as their single logical data lake. Before building data pipelines, it's essential to understand the platform architecture, OneLake's unified storage model, and the Medallion architecture pattern (Bronze → Silver → Gold) that will structure your data transformation journey.
+Contoso Enterprises operates across multiple business units with data scattered across different systems—ERP, CRM, legacy databases, and unstructured file storage. To unify this data landscape, Contoso has decided to adopt Microsoft Fabric and OneLake as its single logical data lake. Before building data pipelines, it's essential to understand the platform architecture, OneLake's unified storage model, and the Medallion architecture pattern (Bronze → Silver → Gold) that will structure your data transformation journey.
 
 ## Accessing the Datasets
 
@@ -11,8 +11,6 @@ Please copy the link below and paste it into a new browser tab inside your LabVM
 ```
 https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/unified-data-foundation-with-fabric.zip
 ```
-
-> **Note:** Extract the downloaded ZIP file to `C:\LabFiles\` so that the dataset folder is located at `C:\LabFiles\fabric-kyndr-uc1\dataset\`
 
 ## Challenge Objectives
 
@@ -35,7 +33,7 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
    - Click on your **Profile icon** (top-right corner)
    - Verify "Fabric and Power BI trial status" shows days remaining
-   - If trial is not activated, click **Start trial** to enable Fabric capacity
+   - If the trial is not activated, click **Start trial** to enable Fabric capacity
 
 1. Click on **Workspaces** from the left navigation pane.
 
@@ -55,7 +53,7 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
    - **Real-Time Analytics**: Event streams and KQL databases
    - **Power BI**: Reports and dashboards
 
-1. Navigate to **OneLake catalog** from the left navigation pane to understand:
+1. Navigate to the **OneLake catalog** from the left navigation pane to understand:
 
    - OneLake provides a **single unified namespace** for all data across your organization
    - All Fabric workloads (Lakehouses, Warehouses, KQL databases) automatically store data in OneLake
@@ -79,7 +77,7 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
    - **Tables**: For Delta Lake tables (Silver and Gold layers)
    - **SQL analytics endpoint**: For querying tables using T-SQL
 
-1. Within the Lakehouse, create folder structure for the Medallion layers:
+1. Within the Lakehouse, create a folder structure for the Medallion layers:
 
    - In the **Files** section, create three folders:
      - **bronze**
@@ -96,7 +94,7 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 ## Success Criteria
 
 - Microsoft Fabric workspace created successfully.
-- Understanding of OneLake as a unified data lake demonstrated.
+- Understanding of OneLake as a unified data lake is demonstrated.
 - Medallion architecture pattern (Bronze → Silver → Gold) explained.
 - Lakehouse created with proper folder structure for data layers.
 
