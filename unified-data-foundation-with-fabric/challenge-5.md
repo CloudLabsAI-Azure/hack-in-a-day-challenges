@@ -31,22 +31,28 @@ By the end of this challenge, you will:
 1. **Open the Azure Portal**: Navigate to [https://portal.azure.com](https://portal.azure.com)
 
 2. **Create Databricks workspace**:
+
    - Search for **"Azure Databricks"** in the top search bar
    - Click **+ Create**
    - Configure the workspace:
      - **Subscription**: Your Azure subscription
-     - **Resource Group**: Create new or use existing
+     - **Resource Group**: **challenge-rg-<inject key="DeploymentID"></inject>**
      - **Workspace Name**: `databricks-fabric-integration`
-     - **Region**: Same as your Fabric workspace (**<inject key="Region"></inject>**)
-     - **Pricing Tier**: **Premium** (required for advanced features)
+     - **Region**: **<inject key="Region"></inject>**
+     - **Pricing Tier**: **Standard** (Apache Spark, Secure with Microsoft Entra ID)
+     - **Workspace type**: **Hybrid**
+   - Click **Next: Networking**
+
+3. **Under Networking tab** (keep defaults):
+
+   - **Deploy Azure Databricks workspace with Secure Cluster Connectivity (No Public IP)**: Select **No**
+   - **Deploy Azure Databricks workspace in your own Virtual Network (VNet)**: Select **No**
    
-3. Click **Review + Create** → **Create**
+4. Click **Review + Create** → **Create**
 
-4. Wait for deployment (3-5 minutes)
+5. Wait for deployment (3-5 minutes)
 
-5. Once complete, click **Go to resource** → **Launch Workspace**
-
----
+6. Once complete, click **Go to resource** → **Launch Workspace**
 
 ## Part 2: Configure OneLake Access from Databricks
 
@@ -77,10 +83,12 @@ By the end of this challenge, you will:
    - Click **Register**
 
 4. **Copy the following values** (save them securely):
+
    - **Application (client) ID**
    - **Directory (tenant) ID**
 
 5. **Create a client secret**:
+
    - Go to **Certificates & secrets** → **+ New client secret**
    - **Description**: `fabric-access`
    - **Expires**: 12 months
@@ -88,6 +96,7 @@ By the end of this challenge, you will:
    - **Copy the secret VALUE immediately** (you can't view it again)
 
 6. **Grant Fabric workspace permissions**:
+
    - Return to **Fabric portal** → Your workspace
    - Click **Manage access**
    - Click **+ Add people or groups**
@@ -102,6 +111,7 @@ By the end of this challenge, you will:
 1. **In Databricks workspace**, click **Compute** in left sidebar
 
 2. **Create new cluster**:
+
    - **Cluster name**: `fabric-analytics-cluster`
    - **Cluster mode**: Single Node (for lab)
    - **Databricks Runtime**: **13.3 LTS** or later
@@ -112,6 +122,7 @@ By the end of this challenge, you will:
 3. Wait for cluster to start (2-3 minutes)
 
 4. **Create a new notebook**:
+
    - Click **Workspace** in left sidebar
    - Click your username folder
    - Click **⋮** (three dots) → **Create** → **Notebook**
@@ -373,6 +384,7 @@ display(segment_summary)
 2. **Navigate to your Lakehouse**
 
 3. **Refresh the Tables view** - you should now see:
+
    - `gold_customer_segments_ml` - Full enriched customer data with ML segments
    - `gold_segment_summary` - Aggregated segment profiles
 

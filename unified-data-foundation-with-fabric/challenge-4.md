@@ -383,6 +383,7 @@ kpi_customer_value.show(10, truncate=False)
 1. **Navigate to your Lakehouse** in the Fabric portal
 
 2. **Open the Tables section** and verify:
+
    - `dim_customers` table exists
    - `dim_geography` table exists
    - `dim_time` table exists
@@ -391,6 +392,7 @@ kpi_customer_value.show(10, truncate=False)
    - `kpi_customer_value` table exists
 
 3. **Check the Tables folder** in Lakehouse explorer:
+
    - All Gold layer tables should be visible with the Delta Lake format
 
 ---
