@@ -32,7 +32,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 1. Click **New semantic model** (formerly known as Dataset):
 
-   - Name: **Contoso-Flight-Analytics-Model**
+   - **Name**: **Contoso-Flight-Analytics-Model**
    - Select the following Gold layer tables:
      - fact_flights
      - fact_transactions
@@ -40,7 +40,8 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
      - dim_geography
      - dim_time
      - kpi_customer_value
-     - gold_customer_segments_ml (from Databricks integration)
+
+   > **Note**: If you completed the optional Challenge 5 and have ML segments, you can also include `gold_customer_segments_ml`
 
 1. Click **Confirm** to create the semantic model.
 

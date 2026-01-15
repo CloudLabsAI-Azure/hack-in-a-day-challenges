@@ -41,10 +41,10 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
 1. Click **+ New workspace** to create a workspace:
 
-   - Workspace Name: **fabric-workspace-<inject key="DeploymentID"></inject>**
-   - Description: **Contoso unified analytics workspace**
-   - Advanced settings:
-     - License mode: **Trial** (automatically uses pre-deployed capacity)
+   - **Workspace Name**: **fabric-workspace-<inject key="DeploymentID"></inject>**
+   - **Description**: **Contoso unified analytics workspace**
+   - **Advanced settings**:
+     - **License mode**: **Trial** (automatically uses pre-deployed capacity)
    - Click **Apply**
 
 1. Once the workspace is created, explore the **Home** page to familiarize yourself with Fabric components:
