@@ -140,7 +140,7 @@ fact_flights.show(5, truncate=False)
 # === 2. Fact Transactions ===
 fact_transactions = df_silver_transactions.select(
     col("transaction_id"),
-    col("customer_id").alias("customer_key"),
+    col("customer_id").cast("int").alias("customer_key"),  # Cast to int to match dim_customers
     to_date(col("purchase_date")).alias("transaction_date"),
     col("amount").cast("double").alias("transaction_amount"),
     col("status"),
