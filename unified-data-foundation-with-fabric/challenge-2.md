@@ -6,7 +6,7 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
 ## Challenge Objectives
 
-- Access and verify sample dataset files downloaded in Challenge 01.
+- Access and verify the sample dataset files downloaded in Challenge 01.
 - Upload CSV files directly to the Bronze layer in Fabric Lakehouse.
 - Optionally create Delta tables for direct SQL querying.
 - Validate data ingestion using the Lakehouse Explorer.
@@ -124,7 +124,7 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 ## Success Criteria
 
 - Sample dataset files located in the LabVM at `C:\LabFiles\fabric-kyndr-uc1\dataset\`.
-- Both files (flight.csv and customer_transactions.json) uploaded successfully to Bronze layer.
+- Both files (flight.csv and customer_transactions.json) were uploaded successfully to the Bronze layer.
 - Files are visible in the Lakehouse Files explorer under the bronze folder.
 - File preview displays data with identifiable quality issues.
 - Ready to proceed to Challenge 3 for data cleansing and transformation.
