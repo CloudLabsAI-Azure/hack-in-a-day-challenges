@@ -33,15 +33,16 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 1. Click **New semantic model** (formerly known as Dataset):
 
    - **Name**: **Contoso-Flight-Analytics-Model**
-   - Select the following Gold layer tables:
-     - fact_flights
-     - fact_transactions
-     - dim_customers
-     - dim_geography
-     - dim_time
-     - kpi_customer_value
-     - gold_customer_segments_ml (if Challenge 5 was completed)
-     - gold_segment_summary (if Challenge 5 was completed)
+
+1. Select the following Gold layer tables:
+   - fact_flights
+   - fact_transactions
+   - dim_customers
+   - dim_geography
+   - dim_time
+   - kpi_customer_value
+   - gold_customer_segments_ml (if Challenge 5 was completed)
+   - gold_segment_summary (if Challenge 5 was completed)
 
    > **Note**: If you completed Challenge 5's Fabric Data Science ML modeling, you'll have ML-enriched customer segment tables for advanced behavioral analysis.
 
@@ -144,37 +145,31 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 #### Page 1: Business Overview Dashboard
 
 1. Add a **Card visual** for Total Revenue:
-
    - Drag **Total Revenue** measure to the canvas
    - Format: Currency, no decimals
    - Title: "Total Transaction Revenue"
 
 1. Add three more **Card visuals** for KPIs:
-
    - **Total Flights**
    - **Total Loyalty Points**
    - **Total Transactions**
 
 1. Add a **Line chart** for Transaction Trend over Time:
-
    - Axis: **dim_time[year]** and **dim_time[month]**
    - Values: **Total Revenue**
    - Title: "Monthly Transaction Trend"
 
 1. Add a **Clustered column chart** for Revenue by Region:
-
    - Axis: **fact_transactions[region]**
    - Values: **Total Revenue**, **Total Transactions**
    - Title: "Revenue & Transactions by Region"
 
 1. Add a **Pie chart** for Transactions by Payment Method:
-
    - Legend: **fact_transactions[payment_method]**
    - Values: **Total Transactions**
    - Title: "Payment Method Distribution"
 
 1. Add a **Table visual** for Top 10 Customers:
-
    - Columns: **dim_customers[customer_key]**, **kpi_customer_value[total_spent]**, **kpi_customer_value[total_flights]**, **kpi_customer_value[customer_status]**
    - Add visual-level filter: Top 10 by **total_spent**
    - Title: "Top 10 Customers by Spending"
@@ -184,26 +179,22 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 1. Add a new page: Click **+ Add page** at the bottom
 
 1. Add a **Map visual** for Customer Distribution:
-
    - Location: **dim_customers[province]**, **dim_customers[country]**
    - Bubble size: **Total Flights**
    - Title: "Customer Distribution by Province"
 
 1. Add a **Matrix visual** for geographic breakdown:
-
    - Rows: **dim_customers[province]**, **dim_customers[country]**
    - Columns: **dim_customers[loyalty_tier]**
    - Values: Count of **customer_key**, **Total Flights**, **Total Loyalty Points**
    - Title: "Geographic Loyalty Analysis"
 
 1. Add a **Stacked bar chart** for Flight Activity by Loyalty Tier:
-
    - Axis: **dim_customers[loyalty_tier]**
    - Values: **Total Flights**, **Total Distance KM**
    - Title: "Flight Activity by Loyalty Tier"
 
 1. Add a **Donut chart** for Transaction Status:
-
    - Legend: **fact_transactions[status]**
    - Values: **Total Transactions**
    - Title: "Transaction Status Distribution"
@@ -215,34 +206,29 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 1. Add a new page for customer ML segmentation analysis
 
 1. Add **Card visuals** for ML Segment KPIs:
-
    - **Total Customers in Segments**
    - **High Value Customers** (count)
    - **Average RFM Score**
 
 1. Add a **Donut chart** for Customer Segment Distribution:
-
    - Legend: **gold_customer_segments_ml[segment_name]**
    - Values: Count of **customer_key**
    - Title: "ML-Based Customer Segmentation"
    - Enable data labels showing percentages
 
 1. Add a **Clustered column chart** for Segment Performance:
-
    - Axis: **gold_customer_segments_ml[segment_name]**
    - Values: **Total Flights**, **Total Loyalty Points**, **Total Revenue**
    - Title: "Revenue & Engagement by Customer Segment"
    - Legend: Show all three metrics
 
 1. Add a **Matrix visual** for Segment Profile Analysis:
-
    - Rows: **gold_customer_segments_ml[segment_name]**
    - Columns: **dim_customers[loyalty_tier]**
    - Values: Count of **customer_key**, **Total Revenue**, **Average Transaction Value**
    - Title: "Segment x Loyalty Tier Analysis"
 
 1. Add a **Scatter chart** for RFM Behavioral Mapping:
-
    - X-axis: **gold_customer_segments_ml[recency_score]**
    - Y-axis: **gold_customer_segments_ml[monetary_score]**
    - Legend: **gold_customer_segments_ml[segment_name]**
@@ -250,14 +236,12 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
    - Title: "Customer Behavioral Patterns (RFM Analysis)"
 
 1. Add a **Table visual** for Segment Summary Statistics (from gold_segment_summary):
-
    - Columns: **segment_name**, **customer_count**, **avg_age**, **avg_total_flights**, **avg_loyalty_points**
    - Sort by: **avg_loyalty_points** descending
    - Title: "Customer Segment Profiles"
    - Format numbers appropriately (no decimals for counts, 1 decimal for averages)
 
 1. Add a **Stacked bar chart** for Segment Value Analysis:
-
    - Axis: **gold_customer_segments_ml[segment_name]**
    - Values: **Total Revenue**
    - Color saturation: **Total Customers in Segments**
@@ -275,70 +259,59 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 1. Go back to **Page 1: Sales Overview**
 
 1. Add a **Slicer** for Year filter:
-
    - Field: **dim_time[year]**
    - Style: Dropdown
    - Position: Top-left corner
 
 1. Add a **Slicer** for Region filter:
-
    - Field: **fact_transactions[region]**
    - Style: List
    - Position: Left side panel
 
 1. Add a **Slicer** for Loyalty Tier:
-
    - Field: **dim_customers[loyalty_tier]**
    - Style: Dropdown
 
 1. Add a **Slicer** for Customer Status:
-
    - Field: **kpi_customer_value[customer_status]**
    - Style: Dropdown
 
-1. **Sync slicers** across all pages:
-
+1. Sync slicers across all pages:
    - Select a slicer → **View** tab → **Sync slicers**
    - Enable sync for all relevant pages
 
 ### Part 5: Format and Polish the Dashboard
 
 1. Apply consistent theme:
-
    - Go to **View** → **Themes**
    - Select a professional theme (e.g., "Executive")
 
 1. Add report title and description:
-
    - Insert **Text box** at the top
    - Title: "Contoso Flight Loyalty & Customer Analytics Dashboard"
    - Subtitle: "Real-time insights from unified data platform"
 
 1. Add last refresh timestamp:
-
    - Insert **Text box**
    - Add: "Data refreshed: [Current Date]"
 
 1. Configure visual interactions:
-
    - Select visuals and use **Format** → **Edit interactions** to control how visuals filter each other
 
 1. Add navigation buttons between pages:
-
    - Insert **Buttons** → **Navigator**
    - Configure to jump between dashboard pages
 
 ### Part 6: Publish Dashboard to Power BI Service
 
 1. Click **File** → **Save**
-
    - Report name: **Contoso-Flight-Loyalty-Dashboard**
 
 1. Click **Publish** in the Home ribbon
 
 1. Select destination workspace: **fabric-workspace-<inject key="DeploymentID"></inject>**
 
-   > **Note:** Your workspace is using the Fabric trial capacity, which supports all publishing features.
+   > **Note:** Your workspace is using the Fabric capacity (F2 SKU) you deployed from Azure, which supports all publishing features.
 
 1. Click **Select**
 
@@ -351,7 +324,6 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 1. Go to **Settings** → **Scheduled refresh**
 
 1. Configure refresh schedule:
-
    - Frequency: **Daily**
    - Time: **6:00 AM**
    - Time zone: **Your local timezone**
@@ -365,19 +337,16 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 1. Open the published dashboard in **Power BI Service**
 
 1. Test interactivity:
-
    - Click on different provinces in the map → other visuals should filter accordingly
    - Use slicers to filter by Year, Region, Loyalty Tier, Customer Status
    - Drill through from summary visuals to detailed tables
 
 1. Verify data accuracy:
-
    - Compare Total Revenue in Power BI with SQL query results from Lakehouse
    - Verify Total Flights and Loyalty Points match fact_flights table
    - Confirm customer segments match data written from Fabric Data Science notebook (if Challenge 5 was completed)
 
 1. Share the dashboard:
-
    - Click **Share** button
    - Enter email addresses of stakeholders
    - Grant appropriate permissions (View only recommended)

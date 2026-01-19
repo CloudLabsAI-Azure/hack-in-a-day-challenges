@@ -72,9 +72,10 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 1. Verify all files are uploaded:
 
    - Navigate to **Files** → **bronze**
-   - Confirm you see:
-     - `flight.csv` (CSV format)
-     - `customer_transactions.json` (JSON format)
+
+1. Confirm you see:
+   - `flight.csv` (CSV format)
+   - `customer_transactions.json` (JSON format)
 
 ### Part 3: Preview Raw Data and Identify Quality Issues
 
@@ -82,22 +83,24 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
    - Click on **flight.csv** in the bronze folder
    - Review the data preview
-   - Observe data quality issues:
-     - Missing values represented as "." or empty strings
-     - Inconsistent city/province names (e.g., "beijing", ".", empty)
-     - Mixed data types in some columns
+
+1. Observe data quality issues:
+   - Missing values represented as "." or empty strings
+   - Inconsistent city/province names (e.g., "beijing", ".", empty)
+   - Mixed data types in some columns
 
 1. Preview the **customer_transactions.json** file:
 
    - Click on **customer_transactions.json**
    - Review the JSON structure
-   - Observe data quality issues:
-     - Null values in critical fields (customer_id, amount)
-     - Inconsistent status values ("completed", "COMPLETED", "pending", "PENDING")
-     - Duplicate transactions
-     - Invalid email formats
-     - Inconsistent date formats
-     - Mixed case region names
+
+1. Observe data quality issues:
+   - Null values in critical fields (customer_id, amount)
+   - Inconsistent status values ("completed", "COMPLETED", "pending", "PENDING")
+   - Duplicate transactions
+   - Invalid email formats
+   - Inconsistent date formats
+   - Mixed case region names
 
    > **Note:** In Challenge 3, you'll clean and standardize this data as part of the Bronze → Silver transformation.
 
@@ -106,17 +109,14 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 1. Navigate to your **Lakehouse**: **contoso-lakehouse-<inject key="DeploymentID"></inject>** (if not already open)
 
 1. In the **Files** section, verify the bronze folder contains:
-
    - `flight.csv` (~63K records)
    - `customer_transactions.json` (15 records)
 
 1. Click on **flight.csv** to preview and verify:
-
    - File contains headers: MEMBER_NO, FFP_DATE, GENDER, WORK_CITY, WORK_PROVINCE, AGE, etc.
    - Data quality issues are visible (missing values, inconsistent formatting)
 
 1. Click on **customer_transactions.json** to preview and verify:
-
    - JSON structure is intact
    - Each record contains: transaction_id, customer_id, customer_name, email, purchase_date, amount, status, payment_method, region
    - Data quality issues are visible (nulls, duplicates, inconsistent values)
