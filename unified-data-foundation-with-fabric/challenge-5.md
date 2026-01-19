@@ -30,7 +30,6 @@ By the end of this challenge, you will:
 
    - Click **+ New** → **Notebook**
 
-
 1. Attach the Lakehouse:
 
    - Click **Add** (next to Lakehouses in the left pane)
@@ -394,7 +393,7 @@ display(ml_segments.select("customer_key", "age", "gender", "loyalty_tier",
 
 1. Click on the left navigation and select **Data Science**
 
-1. Find your experiment: **Customer_Segmentation_Experiment**
+1. Find your experiment: **Customer-Segmentation-Experiment**
 
 1. Click on the experiment to view:
    - Run history
