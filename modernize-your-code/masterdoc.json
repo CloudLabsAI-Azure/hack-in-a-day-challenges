@@ -1,238 +1,41 @@
-{
-  "id": "modernize-your-code",
-  "title": "Modernize Your Code: Oracle to Azure SQL Migration with AI",
-  "description": "Build an AI-powered SQL modernization platform that automatically translates Oracle PL/SQL to Azure SQL T-SQL using Azure OpenAI multi-agent architecture with validation and optimization capabilities.",
-  "duration": "6 hours",
-  "difficulty": "Intermediate",
-  "format": "Challenge-based",
-  "prerequisites": [
-    "Basic Python programming knowledge",
-    "Familiarity with SQL (Oracle or Azure SQL)",
-    "Understanding of cloud concepts",
-    "Azure subscription with access to create resources"
-  ],
-  "learning_objectives": [
-    "Provision Azure OpenAI, AI Foundry, Cosmos DB, and Azure SQL resources",
-    "Build a Translation Agent using GPT-4 for Oracle to Azure SQL conversion",
-    "Implement a Validation Agent with hybrid AI and parser-based validation",
-    "Create an Optimization Agent for Azure SQL performance tuning recommendations",
-    "Integrate Azure Cosmos DB for persistent storage of translation workflows",
-    "Develop and deploy a Streamlit web application for SQL modernization",
-    "Containerize the application and deploy to Azure Container Apps"
-  ],
-  "technologies": [
-    "Azure OpenAI Service",
-    "Azure AI Foundry",
-    "Azure Cosmos DB",
-    "Azure SQL Database",
-    "Azure Container Apps",
-    "Python",
-    "Streamlit",
-    "Docker",
-    "GPT-4"
-  ],
-  "architecture": {
-    "components": [
-      "Azure OpenAI Service (GPT-4 deployment)",
-      "Azure AI Foundry (Jupyter notebook environment)",
-      "Azure Cosmos DB (NoSQL database with 3 containers)",
-      "Azure Storage Account (SQL file uploads)",
-      "Azure SQL Database (optional validation)",
-      "Azure Container Apps (application deployment)",
-      "Streamlit Web Application (user interface)"
-    ],
-    "data_flow": [
-      "User uploads Oracle SQL file to Streamlit app",
-      "Translation Agent converts Oracle syntax to Azure SQL using GPT-4",
-      "Validation Agent validates translated SQL using AI + parser + optional DB execution",
-      "Optimization Agent analyzes code and suggests performance improvements",
-      "Results saved to Cosmos DB (TranslationResults, ValidationLogs, OptimizationResults)",
-      "User downloads translated SQL and optimization report"
-    ]
-  },
-  "challenges": [
+[
     {
-      "number": 1,
-      "title": "Set Up Azure Infrastructure",
-      "description": "Provision Azure OpenAI with GPT-4 deployment, Azure AI Foundry project, Cosmos DB with three containers, Storage Account, and optional Azure SQL Database for validation testing.",
-      "duration": "45 minutes",
-      "file": "challenge-1.md",
-      "objectives": [
-        "Create Azure OpenAI resource and deploy GPT-4 model",
-        "Set up Azure AI Foundry project with compute instance",
-        "Provision Cosmos DB with TranslationResults, ValidationLogs, and OptimizationResults containers",
-        "Create Storage Account for SQL file uploads",
-        "Optionally create Azure SQL Database for validation"
-      ]
-    },
-    {
-      "number": 2,
-      "title": "Build the Translation Agent",
-      "description": "Create a Jupyter notebook in Azure AI Foundry to build a Translation Agent that converts Oracle PL/SQL syntax to Azure SQL T-SQL using Azure OpenAI GPT-4 with comprehensive translation rules.",
-      "duration": "60 minutes",
-      "file": "challenge-2.md",
-      "objectives": [
-        "Configure Azure OpenAI client in Jupyter notebook",
-        "Design translation system prompt with Oracle to Azure SQL rules",
-        "Implement translate_oracle_to_azure_sql function",
-        "Test translations with sample Oracle queries",
-        "Handle edge cases and complex PL/SQL constructs",
-        "Save translation results to local files"
-      ]
-    },
-    {
-      "number": 3,
-      "title": "Build the Validation Agent",
-      "description": "Implement a Validation Agent using hybrid approach combining AI-based semantic validation, parser-based syntax checking, and optional database execution testing to ensure translated SQL correctness.",
-      "duration": "60 minutes",
-      "file": "challenge-3.md",
-      "objectives": [
-        "Create validation system prompt for AI-based validation",
-        "Implement parser-based validation using sqlparse library",
-        "Add optional database validation with pyodbc and Azure SQL",
-        "Combine validation methods into hybrid validation function",
-        "Generate validation reports with confidence scoring",
-        "Test validation with correct and incorrect SQL"
-      ]
-    },
-    {
-      "number": 4,
-      "title": "Build the Optimization Agent",
-      "description": "Develop an Optimization Agent that analyzes translated Azure SQL code and provides actionable performance recommendations including index suggestions, query rewrites, and Azure-specific features.",
-      "duration": "60 minutes",
-      "file": "challenge-4.md",
-      "objectives": [
-        "Design optimization system prompt with performance analysis rules",
-        "Implement analyze_sql_optimization function",
-        "Identify missing indexes based on query patterns",
-        "Suggest query rewrites for cursors and suboptimal code",
-        "Recommend Azure SQL specific features (In-Memory OLTP, columnstore)",
-        "Generate optimization reports with priority rankings"
-      ]
-    },
-    {
-      "number": 5,
-      "title": "Integrate with Cosmos DB for Data Persistence",
-      "description": "Connect the multi-agent system to Azure Cosmos DB to persist translation results, validation logs, and optimization recommendations with retry logic for reliable cloud operations.",
-      "duration": "60 minutes",
-      "file": "challenge-5.md",
-      "objectives": [
-        "Install Azure Cosmos DB Python SDK",
-        "Create data models for TranslationResult, ValidationLog, and OptimizationResult",
-        "Implement save functions with retry logic for transient failures",
-        "Save translation, validation, and optimization results to respective containers",
-        "Query historical results for analysis",
-        "Implement batch workflow storage for complete pipelines"
-      ]
-    },
-    {
-      "number": 6,
-      "title": "Build and Deploy the Streamlit Application",
-      "description": "Create a complete web application using Streamlit that integrates all three agents with file upload, real-time translation, validation reports, optimization recommendations, and containerized deployment to Azure Container Apps.",
-      "duration": "75 minutes",
-      "file": "challenge-6.md",
-      "objectives": [
-        "Build Streamlit multi-page application with navigation",
-        "Integrate Translation, Validation, and Optimization agents",
-        "Implement file upload for batch SQL processing",
-        "Display results with syntax highlighting and downloadable reports",
-        "Create agent helper modules and Cosmos DB integration",
-        "Containerize application with Docker",
-        "Deploy to Azure Container Apps with public URL"
-      ]
+        "Name": "modernize-your-code",
+        "Language": "English",
+        "BaseURL": "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges",
+        "Files": [
+             {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/overview.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/getting-started.md",
+                "Order": 2
+            },    
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/challenge-1.md",
+                "Order": 3
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/challenge-2.md",
+                "Order": 4
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/challenge-3.md",
+                "Order": 5
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/challenge-4.md",
+                "Order": 6
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/challenge-5.md",
+                "Order": 7
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/challenge-6.md",
+                "Order": 8
+            }    
+        ]
     }
-  ],
-  "sample_data": {
-    "oracle_queries": [
-      "Simple SELECT with SYSDATE and ROWNUM",
-      "PL/SQL procedure with cursor loops",
-      "Complex join with Oracle (+) outer join syntax",
-      "DECODE and NVL function usage",
-      "Sequence.NEXTVAL usage",
-      "TO_DATE conversions",
-      "CONNECT BY hierarchical query",
-      "Package procedures",
-      "Triggers with :NEW and :OLD references",
-      "Analytical functions with custom syntax"
-    ]
-  },
-  "deployment": {
-    "local": {
-      "requirements": [
-        "Python 3.11+",
-        "Azure account with sufficient quota",
-        "Visual Studio Code or Azure AI Foundry Studio",
-        "Docker Desktop (for containerization)"
-      ],
-      "steps": [
-        "Clone or download challenge files",
-        "Complete Challenge 1 to provision Azure resources",
-        "Work through Challenges 2-5 in Azure AI Foundry notebooks",
-        "Test Streamlit app locally in Challenge 6",
-        "Containerize and deploy to Azure Container Apps"
-      ]
-    },
-    "cloud": {
-      "services": [
-        "Azure OpenAI Service (Standard tier with GPT-4 quota)",
-        "Azure AI Foundry (with compute instance)",
-        "Azure Cosmos DB for NoSQL (Serverless or Provisioned)",
-        "Azure Storage Account (Standard LRS)",
-        "Azure SQL Database (optional, Basic tier sufficient)",
-        "Azure Container Apps (Consumption tier)"
-      ],
-      "estimated_cost": "$15-25 for 6-hour hackathon session"
-    }
-  },
-  "success_criteria": {
-    "challenge_1": "All Azure resources provisioned and accessible",
-    "challenge_2": "Translation Agent successfully converts Oracle SQL to Azure SQL",
-    "challenge_3": "Validation Agent validates translated SQL with hybrid approach",
-    "challenge_4": "Optimization Agent provides actionable performance recommendations",
-    "challenge_5": "All workflow results persisted to Cosmos DB containers",
-    "challenge_6": "Streamlit application deployed to Azure Container Apps with public URL"
-  },
-  "additional_resources": [
-    {
-      "title": "Azure OpenAI Service Documentation",
-      "url": "https://learn.microsoft.com/azure/ai-services/openai/"
-    },
-    {
-      "title": "Azure AI Foundry Documentation",
-      "url": "https://learn.microsoft.com/azure/ai-studio/"
-    },
-    {
-      "title": "Azure Cosmos DB Python SDK",
-      "url": "https://learn.microsoft.com/azure/cosmos-db/nosql/quickstart-python"
-    },
-    {
-      "title": "Azure SQL Database Performance Best Practices",
-      "url": "https://learn.microsoft.com/azure/azure-sql/database/performance-guidance"
-    },
-    {
-      "title": "Streamlit Documentation",
-      "url": "https://docs.streamlit.io/"
-    },
-    {
-      "title": "Azure Container Apps Overview",
-      "url": "https://learn.microsoft.com/azure/container-apps/overview"
-    },
-    {
-      "title": "Oracle to Azure SQL Migration Guide",
-      "url": "https://learn.microsoft.com/azure/azure-sql/migration-guides/database/oracle-to-sql-database-guide"
-    }
-  ],
-  "tags": [
-    "Azure OpenAI",
-    "GPT-4",
-    "SQL Modernization",
-    "Oracle Migration",
-    "Azure SQL",
-    "Multi-Agent AI",
-    "Cosmos DB",
-    "Streamlit",
-    "Container Apps",
-    "Python",
-    "AI Foundry"
-  ]
-}
+]
