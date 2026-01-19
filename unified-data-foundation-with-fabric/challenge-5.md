@@ -26,13 +26,13 @@ By the end of this challenge, you will:
 
 1. **Navigate to your Fabric workspace**: **fabric-workspace-<inject key="DeploymentID"></inject>**
 
-2. **Create a new notebook**:
+1. Create a new notebook:
 
    - Click **+ New** → **Notebook**
    - **Name**: `ML_Customer_Segmentation`
    - The notebook will automatically be attached to your workspace
 
-3. **Attach the Lakehouse**:
+1. Attach the Lakehouse:
 
    - Click **Add** (next to Lakehouses in the left pane)
    - Select **Existing Lakehouse**
@@ -391,21 +391,19 @@ display(ml_segments.select("customer_key", "age", "gender", "loyalty_tier",
 
 ## Part 6: View ML Experiments in Fabric
 
-1. **Navigate to your Fabric workspace**
+1. Navigate to your Fabric workspace
 
-2. **Click on the left navigation** and select **Data Science**
+1. Click on the left navigation and select **Data Science**
 
-3. **Find your experiment**: **Customer_Segmentation_Experiment**
+1. Find your experiment: **Customer_Segmentation_Experiment**
 
-4. **Click on the experiment** to view:
-
+1. Click on the experiment to view:
    - Run history
    - Parameters (n_clusters, algorithm, random_state)
    - Metrics (silhouette_score, inertia)
    - Artifacts (models, visualizations)
 
-5. **View the registered model**:
-
+1. View the registered model:
    - Click on **Models** in the left navigation
    - Find your **kmeans_model**
    - View model details, versions, and lineage

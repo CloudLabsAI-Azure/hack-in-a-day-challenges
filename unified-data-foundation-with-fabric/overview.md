@@ -31,7 +31,8 @@ This solution enables data-driven decision making, reduces manual data processin
 
 By participating in this Hack in a Day, you will learn how to:
 
-- Create Microsoft Fabric workspaces with Trial capacity
+- Deploy Microsoft Fabric capacity (F2 SKU) from Azure portal
+- Create Microsoft Fabric workspaces with Fabric capacity
 - Build OneLake Lakehouses with folder structures for Medallion architecture
 - Upload and manage datasets in OneLake (CSV and JSON files)
 - Write PySpark transformations in Fabric Notebooks for data quality and cleansing
@@ -47,7 +48,7 @@ By participating in this Hack in a Day, you will learn how to:
 This hands-on lab is structured into six progressive challenges that model the lifecycle of building a real-world data lakehouse solution:
 
 - **Challenge 1: Set Up Microsoft Fabric Workspace and OneLake Lakehouse**  
-  Create a Fabric workspace using Trial capacity, build a Lakehouse with Bronze/Silver/Gold folders, and download the flight and transaction datasets.
+  Deploy a Fabric capacity (F2 SKU) from Azure, create a Fabric workspace with the deployed capacity, build a Lakehouse with Bronze/Silver/Gold folders, and download the flight and transaction datasets.
 
 - **Challenge 2: Ingest Raw Data to Bronze Layer**  
   Upload flight loyalty data (62,988 records) and customer transaction data (JSON format) to the Bronze layer, preview the data to identify quality issues.

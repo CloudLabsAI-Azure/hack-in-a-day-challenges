@@ -31,21 +31,20 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
    > **Note:** If prompted, sign in with the provided credentials: <inject key="AzureAdUserEmail"></inject>
 
-1. Once logged in, verify your **Fabric trial** is active:
-
-   - Click on your **Profile icon** (top-right corner)
-   - Verify "Fabric and Power BI trial status" shows days remaining
-   - If the trial is not activated, click **Start trial** to enable Fabric capacity
-
 1. Click on **Workspaces** from the left navigation pane.
 
 1. Click **+ New workspace** to create a workspace:
 
    - **Workspace Name**: **fabric-workspace-<inject key="DeploymentID"></inject>**
    - **Description**: **Contoso unified analytics workspace**
-   - **Advanced settings**:
-     - **License mode**: **Trial** (automatically uses pre-deployed capacity)
-   - Click **Apply**
+
+1. In the **Advanced settings** section:
+   - **License mode**: Select **Fabric capacity**
+   - **Fabric capacity**: Select the F2 capacity you deployed from Azure (**fabric-capacity-<inject key="DeploymentID"></inject>**)
+
+1. Click **Apply**
+
+   > **Important:** Make sure to select the Fabric capacity you created from Azure. The workspace will not function properly without an active Fabric capacity assigned.
 
 1. Once the workspace is created, explore the **Home** page to familiarize yourself with Fabric components:
 
@@ -81,11 +80,10 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
 1. Within the Lakehouse, create a folder structure for the Medallion layers:
 
-   - In the **Files** section, create three folders:
-   
-     - **bronze**
-     - **silver** 
-     - **gold**
+1. In the **Files** section, create three folders:
+   - **bronze**
+   - **silver** 
+   - **gold**
 
    > **Hint:** Click on the **...** (more options) next to Files and select **New subfolder**.
 
