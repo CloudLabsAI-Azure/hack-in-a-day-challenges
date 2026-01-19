@@ -91,7 +91,7 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 1. Take note of the **OneLake path** displayed in the properties:
 
    - Format: `abfss://[workspace]@onelake.dfs.fabric.microsoft.com/[lakehouse]/Files`
-   - This path can be used across all Fabric workloads and Azure Databricks for unified access
+   - This path can be used across all Fabric workloads for unified data access
 
 ## Success Criteria
 

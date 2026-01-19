@@ -21,8 +21,6 @@ By the end of this challenge, you will:
 - Implement business KPIs and aggregations
 - Write optimized queries for analytics
 
----
-
 ## Part 1: Load Silver Layer Data
 
 1. **Create a new notebook** in your workspace named **"04_Gold_Layer_Dimensional_Modeling"**
@@ -49,8 +47,6 @@ print("\n=== Transaction Data Sample ===")
 df_silver_transactions.select("transaction_id", "customer_id", "amount", 
                               "status", "region", "payment_method").show(5)
 ```
-
----
 
 ## Part 2: Create Dimension Tables
 
@@ -105,8 +101,6 @@ print("\n=== Time Dimension ===")
 print(f"Total Date Records: {dim_time.count()}")
 dim_time.show(5, truncate=False)
 ```
-
----
 
 ## Part 3: Create Fact Tables
 
@@ -169,8 +163,6 @@ fact_transactions.filter(col("status") == "completed").select(
 ).show()
 ```
 
----
-
 ## Part 4: Write to Gold Layer
 
 Save dimension and fact tables to the Gold layer:
@@ -218,8 +210,6 @@ print(f"  - dim_time: {spark.read.table('dim_time').count()} records")
 print(f"  - fact_flights: {spark.read.table('fact_flights').count()} records")
 print(f"  - fact_transactions: {spark.read.table('fact_transactions').count()} records")
 ```
-
----
 
 ## Part 5: Run Analytics Queries
 
@@ -323,8 +313,6 @@ spark.sql("""
 """).show(truncate=False)
 ```
 
----
-
 ## Part 6: Create Business KPI Table
 
 Create a summary table for dashboard consumption:
@@ -376,8 +364,6 @@ print(f"  - kpi_customer_value: {spark.read.table('kpi_customer_value').count()}
 kpi_customer_value.show(10, truncate=False)
 ```
 
----
-
 ## Part 7: Verify Gold Layer in OneLake
 
 1. **Navigate to your Lakehouse** in the Fabric portal
@@ -395,8 +381,6 @@ kpi_customer_value.show(10, truncate=False)
 
    - All Gold layer tables should be visible with the Delta Lake format
 
----
-
 ## Success Criteria
 
 - Customer, geography, and time dimensions created
@@ -406,13 +390,9 @@ kpi_customer_value.show(10, truncate=False)
 - Analytics queries return meaningful insights
 - Tables visible in OneLake catalog
 
----
-
 ## Validation Checkpoint
 
 **Copy this GUID and submit for validation:** `{{guid-challenge-4}}`
-
----
 
 ## Summary
 
@@ -424,8 +404,6 @@ In this challenge, you built a complete Gold layer with:
 
 Your data is now structured for optimal analytics performance and ready for Power BI dashboards!
 
----
-
 ## Next Steps
 
-Proceed to **Challenge 5** to integrate your Fabric Lakehouse with Azure Databricks for advanced analytics.
+Proceed to **Challenge 5** to build machine learning models using Fabric's Data Science workload for advanced customer analytics.

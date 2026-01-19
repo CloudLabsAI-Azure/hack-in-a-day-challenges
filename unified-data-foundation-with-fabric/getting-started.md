@@ -64,7 +64,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
    - Microsoft Fabric with Trial capacity (59 days)
    - Pre-deployed F2 capacity: **capacity2007681**
    - Dataset files in **C:\LabFiles\fabric-kyndr-uc1\dataset\**
-   - Access to create Lakehouses, Notebooks, and Databricks integration
+   - Access to create Lakehouses, Notebooks, and Data Science experiments
 
 Now, click on the **Next** from lower right corner to move on next page.
 

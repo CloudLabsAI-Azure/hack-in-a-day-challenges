@@ -337,7 +337,7 @@ The Bronze layer contains raw, unprocessed data with significant quality issuesâ
 - [Notebooks in Microsoft Fabric](https://learn.microsoft.com/fabric/data-engineering/how-to-use-notebook)
 - [PySpark DataFrame API](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/dataframe.html)
 - [Delta Lake in Fabric](https://learn.microsoft.com/fabric/data-engineering/lakehouse-and-delta-tables)
-- [Data Quality Best Practices](https://learn.microsoft.com/azure/databricks/lakehouse/data-quality)
+- [Data Quality in Fabric](https://learn.microsoft.com/fabric/data-engineering/data-quality-overview)
 - [Working with JSON in PySpark](https://spark.apache.org/docs/latest/sql-data-sources-json.html)
 
 Now, click **Next** to continue to **Challenge 04**.
@@ -362,6 +362,6 @@ Now, click **Next** to continue to **Challenge 04**.
 - [Notebooks in Microsoft Fabric](https://learn.microsoft.com/fabric/data-engineering/how-to-use-notebook)
 - [PySpark DataFrame API](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/dataframe.html)
 - [Delta Lake in Fabric](https://learn.microsoft.com/fabric/data-engineering/lakehouse-and-delta-tables)
-- [Data Quality Best Practices](https://learn.microsoft.com/azure/databricks/lakehouse/data-quality)
+- [Data Quality in Fabric](https://learn.microsoft.com/fabric/data-engineering/data-quality-overview)
 
 Now, click **Next** to continue to **Challenge 04**.
