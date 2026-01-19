@@ -42,8 +42,8 @@ print("Validation libraries imported successfully")
 1. Add a new cell to set up the OpenAI client (use same credentials from Challenge 2):
 
 ```python
-# Azure OpenAI configuration
-AZURE_OPENAI_ENDPOINT = "https://sql-modernization-openai-xxxxx.openai.azure.com/"  # Replace
+# AI Foundry configuration (from Challenge 1)
+AZURE_OPENAI_ENDPOINT = "https://your-ai-foundry-endpoint.openai.azure.com/"  # Replace
 AZURE_OPENAI_KEY = "your-api-key-here"  # Replace
 AZURE_OPENAI_DEPLOYMENT = "gpt-4-sql-translator"
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"

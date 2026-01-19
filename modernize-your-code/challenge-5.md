@@ -41,7 +41,7 @@ from datetime import datetime
 import time
 
 # Cosmos DB configuration
-COSMOS_ENDPOINT = "https://sql-modernization-cosmosdb-xxxxx.documents.azure.com:443/"  # Replace
+COSMOS_ENDPOINT = "https://your-cosmos-account.documents.azure.com:443/"  # Replace
 COSMOS_KEY = "your-cosmos-primary-key-here"  # Replace
 DATABASE_NAME = "SQLModernization"
 

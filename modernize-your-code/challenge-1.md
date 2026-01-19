@@ -2,12 +2,11 @@
 
 ## Introduction
 
-Before building the AI-powered SQL modernization pipeline, you need to provision the necessary Azure infrastructure. This challenge involves creating Azure OpenAI Service for LLM-based translation, Azure AI Foundry for agent orchestration, Cosmos DB for storing results and logs, Azure Storage for SQL file uploads, and an optional Azure SQL Database for validation testing.
+Before building the AI-powered SQL modernization pipeline, you need to provision the necessary Azure infrastructure. This challenge involves creating Azure AI Foundry project with GPT-4 model deployment, Cosmos DB for storing results and logs, Azure Storage for SQL file uploads, and an optional Azure SQL Database for validation testing.
 
 ## Challenge Objectives
 
-- Create an Azure OpenAI Service instance and deploy GPT-4 model
-- Set up an Azure AI Foundry project for development
+- Set up an Azure AI Foundry project with GPT-4 model deployment
 - Provision Cosmos DB with appropriate database and containers
 - Create an Azure Storage Account for SQL file uploads
 - (Optional) Set up Azure SQL Database for real query validation
@@ -30,51 +29,65 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 5. Wait for the resource group to be created (approximately 10 seconds).
 
-### Part 2: Create Azure OpenAI Service
+### Part 2: Create Azure AI Foundry Project with Model Deployment
 
-1. In the **Azure Portal**, search for **Azure OpenAI** and select it.
+1. In the **Azure Portal**, search for **Azure AI Foundry** or **Azure AI Studio** and select it.
 
-2. Click **+ Create** to create a new Azure OpenAI resource.
+2. Click **+ New project** to create a new AI Foundry project.
 
-3. Configure the Azure OpenAI service:
-   - **Subscription**: Your Azure subscription
+3. Configure the AI Foundry project:
+   - **Project name**: **sql-modernization-ai-project**
    - **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
-   - **Region**: **<inject key="Region"></inject>** (ensure OpenAI is available in this region)
-   - **Name**: **sql-modernization-openai-<inject key="DeploymentID"></inject>**
-   - **Pricing Tier**: **Standard S0**
+   - **Region**: **<inject key="Region"></inject>** (ensure GPT-4 is available in this region)
 
-4. Click **Next** through the remaining tabs, accepting defaults.
+4. Click **Create**.
 
-5. Click **Review + Create**, then **Create**.
+5. Wait for deployment (2-3 minutes).
 
-6. Wait for deployment to complete (2-3 minutes).
+6. Once created, click **Go to project** or navigate to **Azure AI Foundry Studio**.
 
-7. Once deployed, click **Go to resource**.
+### Part 3: Deploy GPT-4 Model in AI Foundry
 
-### Part 3: Deploy GPT-4 Model
+1. In **Azure AI Foundry Studio**, navigate to your project.
 
-1. In your Azure OpenAI resource, navigate to **Overview** and click **Go to Azure OpenAI Studio**.
+2. Click on **Deployments** in the left navigation menu.
 
-2. In Azure OpenAI Studio, click on **Deployments** in the left navigation.
+3. Click **+ Deploy model** and select **Deploy base model**.
 
-3. Click **+ Create new deployment**.
+4. Search for and select **gpt-4** from the model catalog.
 
-4. Configure the deployment:
-   - **Select a model**: **gpt-4** (or **gpt-4-32k** if available)
-   - **Model version**: Select the latest version
+5. Configure the deployment:
    - **Deployment name**: `gpt-4-sql-translator`
+   - **Model version**: Select the latest available version
    - **Deployment type**: **Standard**
-   - **Tokens per Minute Rate Limit**: **30K** (or maximum available)
+   - **Tokens per Minute Rate Limit**: **30K** (or maximum quota available)
 
-5. Click **Create**.
+6. Click **Deploy**.
 
-6. Verify the deployment shows as **Succeeded**.
+7. Wait for deployment to complete (1-2 minutes).
 
-7. Copy and save the following values (you'll need them later):
-   - **Endpoint**: From the resource overview page
-   - **Key**: From **Keys and Endpoint** section in the Azure OpenAI resource
+8. Verify the deployment shows as **Succeeded** in the Deployments list.
 
-### Part 4: Create Azure AI Foundry Project
+9. Click on your deployment to view details and copy:
+   - **Target URI** (this is your endpoint)
+   - Navigate to **Keys and Endpoint** section and copy **Primary Key**
+
+### Part 4: Test the Model Deployment
+
+1. In AI Foundry Studio, click on **Playground** in the left navigation.
+
+2. Select **Chat** playground.
+
+3. Choose your `gpt-4-sql-translator` deployment.
+
+4. Test with a simple prompt:
+   ```
+   Translate this Oracle SQL to Azure SQL: SELECT * FROM dual WHERE ROWNUM <= 5;
+   ```
+
+5. Verify you get a response with Azure SQL translation.
+
+6. This confirms your model is working correctly.
 
 1. In the **Azure Portal**, search for **Azure AI Foundry** (or **Azure AI Studio**).
 
@@ -85,7 +98,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
    - **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
    - **Project name**: **sql-modernization-ai-project**
    - **Region**: **<inject key="Region"></inject>**
-   - **Connect Azure AI Services**: Select your existing Azure OpenAI resource
+
 
 4. Click **Review + Create**, then **Create**.
 
@@ -237,8 +250,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 1. Navigate back to your resource group: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
 
 2. Verify you see the following resources:
-   - Azure OpenAI Service
-   - Azure AI Foundry project
+   - Azure AI Foundry hub and project resources
    - Cosmos DB account
    - Storage account
    - (Optional) SQL database server and database
@@ -250,9 +262,9 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 Create a text file or note with the following information (you'll need these in subsequent challenges):
 
 ```text
-Azure OpenAI:
-- Endpoint: https://sql-modernization-openai-xxxxx.openai.azure.com/
-- API Key: [your-key]
+Azure AI Foundry (with GPT-4 deployment):
+- Endpoint: [your-ai-foundry-endpoint or target-uri]
+- API Key: [your-primary-key]
 - Deployment Name: gpt-4-sql-translator
 
 Cosmos DB:
@@ -275,8 +287,8 @@ Azure SQL (Optional):
 
 ## Success Criteria
 
-- Azure OpenAI Service created with GPT-4 model deployed successfully
-- Azure AI Foundry project created and connected to OpenAI
+- Azure AI Foundry project created with GPT-4 model deployed successfully
+- Model tested in Chat Playground and working correctly
 - Cosmos DB account created with database and three containers (TranslationResults, ValidationLogs, OptimizationResults)
 - Azure Storage Account created with sql-uploads container
 - (Optional) Azure SQL Database created with firewall configured
@@ -285,7 +297,7 @@ Azure SQL (Optional):
 
 ## Additional Resources
 
-- [Azure OpenAI Service Documentation](https://learn.microsoft.com/azure/ai-services/openai/)
+- [Azure OpenAI in AI Foundry](https://learn.microsoft.com/azure/ai-services/openai/)
 - [Azure AI Foundry Overview](https://learn.microsoft.com/azure/ai-studio/)
 - [Azure Cosmos DB for NoSQL](https://learn.microsoft.com/azure/cosmos-db/nosql/)
 - [Azure Storage Accounts](https://learn.microsoft.com/azure/storage/common/storage-account-overview)

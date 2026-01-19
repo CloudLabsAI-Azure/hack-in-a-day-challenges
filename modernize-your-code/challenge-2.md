@@ -2,12 +2,12 @@
 
 ## Introduction
 
-The Translation Agent is the core component of the SQL modernization pipeline. It uses Azure OpenAI's GPT-4 model to convert Oracle PL/SQL syntax to Azure SQL T-SQL syntax. This challenge focuses on designing effective prompts, handling dialect-specific conversions, and managing common translation scenarios including stored procedures, functions, cursors, and complex queries.
+The Translation Agent is the core component of the SQL modernization pipeline. It uses Azure AI Foundry's GPT-4 model to convert Oracle PL/SQL syntax to Azure SQL T-SQL syntax. This challenge focuses on designing effective prompts, handling dialect-specific conversions, and managing common translation scenarios including stored procedures, functions, cursors, and complex queries.
 
 ## Challenge Objectives
 
 - Set up Azure AI Foundry development environment with Jupyter notebooks
-- Create a Translation Agent using Azure OpenAI API
+- Create a Translation Agent using Azure AI Foundry's OpenAI API
 - Design prompts for accurate Oracle to Azure SQL translation
 - Handle common PL/SQL to T-SQL conversions (data types, functions, syntax)
 - Test translations with sample Oracle SQL files
@@ -44,21 +44,21 @@ print("Libraries installed successfully")
 
 2. Run the cell and wait for installation to complete.
 
-### Part 3: Configure Azure OpenAI Connection
+### Part 3: Configure AI Foundry Model Connection
 
-1. Add a new cell and configure the Azure OpenAI client:
+1. Add a new cell and configure the AI Foundry OpenAI client (uses same SDK):
 
 ```python
 import os
 from openai import AzureOpenAI
 
-# Azure OpenAI configuration
-AZURE_OPENAI_ENDPOINT = "https://sql-modernization-openai-xxxxx.openai.azure.com/"  # Replace with your endpoint
-AZURE_OPENAI_KEY = "your-api-key-here"  # Replace with your key
-AZURE_OPENAI_DEPLOYMENT = "gpt-4-sql-translator"
+# AI Foundry OpenAI configuration (from Challenge 1)
+AZURE_OPENAI_ENDPOINT = "https://your-ai-foundry-endpoint.openai.azure.com/"  # Replace with your AI Foundry endpoint
+AZURE_OPENAI_KEY = "your-api-key-here"  # Replace with your key from AI Foundry
+AZURE_OPENAI_DEPLOYMENT = "gpt-4-sql-translator"  # Your deployment name from Challenge 1
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 
-# Initialize Azure OpenAI client
+# Initialize client (uses Azure OpenAI SDK)
 client = AzureOpenAI(
     azure_endpoint=AZURE_OPENAI_ENDPOINT,
     api_key=AZURE_OPENAI_KEY,

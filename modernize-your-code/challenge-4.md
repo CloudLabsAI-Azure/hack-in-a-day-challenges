@@ -36,8 +36,8 @@ print("Optimization libraries imported")
 1. Add a new cell with OpenAI configuration:
 
 ```python
-# Azure OpenAI configuration
-AZURE_OPENAI_ENDPOINT = "https://sql-modernization-openai-xxxxx.openai.azure.com/"  # Replace
+# AI Foundry configuration
+AZURE_OPENAI_ENDPOINT = "https://your-ai-foundry-endpoint.openai.azure.com/"  # Replace
 AZURE_OPENAI_KEY = "your-api-key-here"  # Replace
 AZURE_OPENAI_DEPLOYMENT = "gpt-4-sql-translator"
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
