@@ -82,6 +82,7 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 1. Within the Lakehouse, create a folder structure for the Medallion layers:
 
    - In the **Files** section, create three folders:
+   
      - **bronze**
      - **silver** 
      - **gold**
