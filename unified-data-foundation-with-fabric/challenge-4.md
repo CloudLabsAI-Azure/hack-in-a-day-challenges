@@ -23,9 +23,9 @@ By the end of this challenge, you will:
 
 ## Part 1: Load Silver Layer Data
 
-1. **Create a new notebook** in your workspace named **"04_Gold_Layer_Dimensional_Modeling"**
+1. In your workspace, click **+ New** → **Notebook**
 
-2. **Add and run the following code** to load Silver layer tables:
+1. Add and run the following code to load Silver layer tables:
 
 ```python
 from pyspark.sql.functions import *
@@ -380,6 +380,15 @@ kpi_customer_value.show(10, truncate=False)
 3. **Check the Tables folder** in Lakehouse explorer:
 
    - All Gold layer tables should be visible with the Delta Lake format
+
+## Part 8: Save the Notebook
+
+1. Click the **Save** icon (or press Ctrl+S)
+
+1. In the "Save as new notebook" dialog:
+   - **Name**: **04_Gold_Layer_Dimensional_Modeling**
+   - **Select location**: **fabric-workspace-<inject key="DeploymentID"></inject>**
+   - Click **Save**
 
 ## Success Criteria
 

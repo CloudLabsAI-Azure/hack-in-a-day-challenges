@@ -27,8 +27,6 @@ The Bronze layer contains raw, unprocessed data with significant quality issuesâ
 
 1. Select **+ New** â†’ **Notebook**
 
-   - Name: **Bronze-to-Silver-Transformation**
-
 1. Attach the notebook to your Lakehouse:
 
    - Click **Add** (next to Lakehouses in the left pane)
@@ -320,6 +318,15 @@ The Bronze layer contains raw, unprocessed data with significant quality issuesâ
    GROUP BY region, status
    ORDER BY total_amount DESC;
    ```
+
+### Part 6: Save the Notebook
+
+1. Click the **Save** icon (or press Ctrl+S)
+
+1. In the "Save as new notebook" dialog:
+   - **Name**: **Bronze-to-Silver-Transformation**
+   - **Select location**: **fabric-workspace-<inject key="DeploymentID"></inject>**
+   - Click **Save**
 
 ## Success Criteria
 
