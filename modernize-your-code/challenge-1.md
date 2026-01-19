@@ -23,7 +23,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 3. Configure the resource group:
    - **Subscription**: Select your Azure subscription
-   - **Resource Group**: `sql-modernization-rg-<inject key="DeploymentID"></inject>`
+   - **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
    - **Region**: **<inject key="Region"></inject>**
 
 4. Click **Review + Create**, then **Create**.
@@ -38,9 +38,9 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 3. Configure the Azure OpenAI service:
    - **Subscription**: Your Azure subscription
-   - **Resource Group**: `sql-modernization-rg-<inject key="DeploymentID"></inject>`
+   - **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
    - **Region**: **<inject key="Region"></inject>** (ensure OpenAI is available in this region)
-   - **Name**: `sql-modernization-openai-<inject key="DeploymentID"></inject>`
+   - **Name**: **sql-modernization-openai-<inject key="DeploymentID"></inject>**
    - **Pricing Tier**: **Standard S0**
 
 4. Click **Next** through the remaining tabs, accepting defaults.
@@ -82,8 +82,8 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 3. Configure the AI Foundry project:
    - **Subscription**: Your Azure subscription
-   - **Resource Group**: `sql-modernization-rg-<inject key="DeploymentID"></inject>`
-   - **Project name**: `sql-modernization-ai-project`
+   - **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
+   - **Project name**: **sql-modernization-ai-project**
    - **Region**: **<inject key="Region"></inject>**
    - **Connect Azure AI Services**: Select your existing Azure OpenAI resource
 
@@ -103,8 +103,8 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 4. Configure Cosmos DB:
    - **Subscription**: Your Azure subscription
-   - **Resource Group**: `sql-modernization-rg-<inject key="DeploymentID"></inject>`
-   - **Account Name**: `sql-modernization-cosmos-<inject key="DeploymentID"></inject>`
+   - **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
+   - **Account Name**: **sql-modernization-cosmos-<inject key="DeploymentID"></inject>**
    - **Location**: **<inject key="Region"></inject>**
    - **Capacity mode**: **Provisioned throughput** (400 RU/s minimum)
    - **Apply Free Tier Discount**: Select **Apply** if available
@@ -165,8 +165,8 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 3. Configure the storage account:
    - **Subscription**: Your Azure subscription
-   - **Resource Group**: `sql-modernization-rg-<inject key="DeploymentID"></inject>`
-   - **Storage account name**: `sqlmodernization<inject key="DeploymentID"></inject>` (lowercase, no hyphens)
+   - **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
+   - **Storage account name**: **sqlmodernization<inject key="DeploymentID"></inject>** (lowercase, no hyphens)
    - **Region**: **<inject key="Region"></inject>**
    - **Performance**: **Standard**
    - **Redundancy**: **Locally-redundant storage (LRS)**
@@ -198,10 +198,10 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 3. Configure the SQL database:
    - **Subscription**: Your Azure subscription
-   - **Resource Group**: `sql-modernization-rg-<inject key="DeploymentID"></inject>`
+   - **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
    - **Database name**: `ValidationTestDB`
    - **Server**: Click **Create new**
-     - **Server name**: `sql-validation-<inject key="DeploymentID"></inject>`
+     - **Server name**: **sql-validation-<inject key="DeploymentID"></inject>**
      - **Location**: **<inject key="Region"></inject>**
      - **Authentication method**: **Use SQL authentication**
      - **Server admin login**: `sqladmin`
@@ -234,7 +234,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 ### Part 9: Verify All Resources
 
-1. Navigate back to your resource group: `sql-modernization-rg-<inject key="DeploymentID"></inject>`
+1. Navigate back to your resource group: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
 
 2. Verify you see the following resources:
    - Azure OpenAI Service
