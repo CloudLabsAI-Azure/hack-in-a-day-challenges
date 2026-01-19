@@ -41,7 +41,7 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
    - **Subscription**: Select the default subscription
    - **Resource group**: **challenge-rg-<inject key="DeploymentID"></inject>**
-   - **Capacity name**: **fabric-capacity-<inject key="DeploymentID"></inject>**
+   - **Capacity name**: **fabriccapacity<inject key="DeploymentID"></inject>**
    - **Region**: **<inject key="Region"></inject>**
    - **Size**: Select **F2** (2 vCores, 4 GB RAM)
    - **Fabric capacity administrator**: Select **odl_user_<inject key="DeploymentID"></inject>@...**
