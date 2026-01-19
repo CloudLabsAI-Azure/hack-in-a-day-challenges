@@ -29,8 +29,7 @@ By the end of this challenge, you will:
 1. Create a new notebook:
 
    - Click **+ New** → **Notebook**
-   - **Name**: `ML_Customer_Segmentation`
-   - The notebook will automatically be attached to your workspace
+
 
 1. Attach the Lakehouse:
 
@@ -407,6 +406,15 @@ display(ml_segments.select("customer_key", "age", "gender", "loyalty_tier",
    - Click on **Models** in the left navigation
    - Find your **kmeans_model**
    - View model details, versions, and lineage
+
+## Part 7: Save the Notebook
+
+1. Click the **Save** icon (or press Ctrl+S)
+
+1. In the "Save as new notebook" dialog:
+   - **Name**: **ML_Customer_Segmentation**
+   - **Select location**: **fabric-workspace-<inject key="DeploymentID"></inject>**
+   - Click **Save**
 
 ## Success Criteria
 
