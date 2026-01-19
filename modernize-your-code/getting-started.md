@@ -1,6 +1,6 @@
 ## Getting Started with Challenge
 
-Welcome to Hack in a Day: Unified Data Foundation with Fabric challenge! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
+Welcome to Hack in a Day: Modernize Your Code! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
 
 ### Accessing Your Challenge Environment
 
@@ -16,7 +16,7 @@ To get a better understanding of your challenge resources and credentials, navig
 
 ### Utilizing the Split Window Feature
 
-For convenience, you can open the challenge guide in a separate window by selecting the Split Window button from the Top right corner
+For convenience, you can open the challenge guide in a separate window by selecting the Split Window button from the Top right corner.
 
 ![](./media/gs-leave-3.png)
 
@@ -28,19 +28,19 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 > **Note:** If the VM is not in use, please **deallocate** it to avoid unnecessary resource consumption.
 
-## Let's Get Started with Unified Data Foundation
+## Let's Get Started with SQL Modernization
 
 1. In the JumpVM, click on **Microsoft Edge** browser shortcut which is created on desktop.
 
    ![](./media/gs-up1.png)
 
-1. Navigate to the **Microsoft Fabric portal**:
+1. Navigate to the **Azure Portal**:
 
    ```
-   https://app.fabric.microsoft.com/
+   https://portal.azure.com/
    ```
 
-1. On the **Sign into Microsoft** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
+1. On the **Sign into Microsoft Azure** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
 
    - Email/Username: <inject key="AzureAdUserEmail"></inject>
 
@@ -58,13 +58,14 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/gs-4.png)
 
-1. Welcome to **Microsoft Fabric**! You're now ready to start building your data lakehouse solution using Microsoft Fabric, OneLake, and the Medallion architecture for data engineering with flight loyalty and transaction data.
+1. Welcome to **Azure Portal**! You're now ready to start building your AI-powered SQL modernization pipeline using Azure OpenAI, AI Foundry, Cosmos DB, and Container Apps.
 
 1. The lab environment includes:
-   - Microsoft Fabric with Trial capacity (59 days)
-   - Pre-deployed F2 capacity: **capacity2007681**
-   - Dataset files in **C:\LabFiles\fabric-kyndr-uc1\dataset\**
-   - Access to create Lakehouses, Notebooks, and Data Science experiments
+   - Azure subscription with Owner permissions
+   - Pre-configured resource group for deployments
+   - Access to Azure OpenAI Service and AI Foundry
+   - Sample Oracle PL/SQL files for testing
+   - Code templates and starter files in the lab VM
 
 Now, click on the **Next** from lower right corner to move on next page.
 

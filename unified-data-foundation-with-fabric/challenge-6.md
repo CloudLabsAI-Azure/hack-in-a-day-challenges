@@ -43,7 +43,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
      - gold_customer_segments_ml (if Challenge 5 was completed)
      - gold_segment_summary (if Challenge 5 was completed)
 
-   > **Note**: If you completed Challenge 5's Databricks integration, you'll have ML-enriched customer segment tables for advanced behavioral analysis.
+   > **Note**: If you completed Challenge 5's Fabric Data Science ML modeling, you'll have ML-enriched customer segment tables for advanced behavioral analysis.
 
 1. Click **Confirm** to create the semantic model.
 
@@ -210,7 +210,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 #### Page 3: ML-Powered Customer Segmentation Insights
 
-> **Note**: This page showcases the advanced analytics from Challenge 5's Databricks ML integration. If you didn't complete Challenge 5, skip to Part 4.
+> **Note**: This page showcases the advanced analytics from Challenge 5's Fabric Data Science ML integration. If you didn't complete Challenge 5, skip to Part 4.
 
 1. Add a new page for customer ML segmentation analysis
 
@@ -264,7 +264,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
    - Title: "Revenue Contribution by Segment"
    - Sort by Total Revenue descending
 
-> **💡 Business Insight**: This page enables data-driven marketing strategies:
+> **Business Insight**: This page enables data-driven marketing strategies:
 > - Target "At-Risk Customers" with retention campaigns
 > - Design VIP experiences for "Premium Elite Members"
 > - Nurture "New Joiners" with onboarding programs
@@ -374,7 +374,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
    - Compare Total Revenue in Power BI with SQL query results from Lakehouse
    - Verify Total Flights and Loyalty Points match fact_flights table
-   - Confirm customer segments match data written from Databricks (if Challenge 5 was completed)
+   - Confirm customer segments match data written from Fabric Data Science notebook (if Challenge 5 was completed)
 
 1. Share the dashboard:
 
@@ -407,7 +407,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 ## Congratulations!
 
-You have successfully built an **end-to-end unified analytics platform** using Microsoft Fabric, OneLake, Azure Databricks, and Power BI!
+You have successfully built an **end-to-end unified analytics platform** using Microsoft Fabric, OneLake, Fabric Data Science, and Power BI!
 
 ### Real-World Applications:
 
@@ -415,7 +415,7 @@ This solution enables enterprise-grade analytics across:
 
 - **Unified Data Platform** - Single source of truth with OneLake, eliminating data silos
 - **Medallion Architecture** - Structured data quality layers (Bronze → Silver → Gold)
-- **Cross-Platform Analytics** - Seamless integration between Fabric and Databricks
+- **Integrated ML & Analytics** - Native Data Science capabilities within Fabric
 - **Self-Service BI** - Business users empowered with governed, high-quality data
 - **Scalable Architecture** - Cloud-native platform ready for enterprise-scale workloads
 - **Real-Time Insights** - Direct connectivity eliminates ETL latency
@@ -425,7 +425,7 @@ This solution enables enterprise-grade analytics across:
 **Bronze Layer**: Raw data ingestion from multiple sources  
 **Silver Layer**: Cleansed, standardized, joined datasets  
 **Gold Layer**: Business-ready dimensional models (Star Schema)  
-**Databricks Integration**: Advanced analytics and ML workloads  
+**Fabric Data Science**: ML models for customer segmentation with MLflow tracking  
 **Power BI Dashboards**: Interactive visualizations for business insights  
 
 # Congratulations on completing this challenge!
