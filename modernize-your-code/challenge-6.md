@@ -49,12 +49,13 @@ pip install -r requirements.txt
 1. Create a `.env` file for configuration:
 
 ```text
-AZURE_OPENAI_ENDPOINT=https://sql-modernization-openai-xxxxx.openai.azure.com/
+# AI Foundry Configuration
+AZURE_OPENAI_ENDPOINT=https://your-ai-foundry-endpoint.openai.azure.com/
 AZURE_OPENAI_KEY=your-api-key-here
 AZURE_OPENAI_DEPLOYMENT=gpt-4-sql-translator
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 
-COSMOS_ENDPOINT=https://sql-modernization-cosmosdb-xxxxx.documents.azure.com:443/
+COSMOS_ENDPOINT=https://your-cosmos-account.documents.azure.com:443/
 COSMOS_KEY=your-cosmos-key-here
 DATABASE_NAME=SQLModernization
 

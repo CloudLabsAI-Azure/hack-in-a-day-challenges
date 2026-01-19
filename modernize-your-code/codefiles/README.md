@@ -15,7 +15,7 @@ Complete Streamlit application for Oracle to Azure SQL migration with AI-powered
 
 - Python 3.11 or higher
 - Azure subscription with:
-  - Azure OpenAI Service (with GPT-4 deployment)
+  - Azure AI Foundry (with GPT-4 deployment)
   - Azure Cosmos DB for NoSQL
   - (Optional) Azure SQL Database for validation
 
@@ -38,9 +38,9 @@ cp .env.example .env
 Edit `.env` file:
 
 ```env
-# Azure OpenAI Configuration
-AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
-AZURE_OPENAI_KEY=your-openai-key-here
+# AI Foundry Configuration
+AZURE_OPENAI_ENDPOINT=https://your-ai-foundry-endpoint.openai.azure.com/
+AZURE_OPENAI_KEY=your-ai-foundry-key-here
 AZURE_OPENAI_DEPLOYMENT=gpt-4-sql-translator
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 
@@ -183,7 +183,7 @@ Main Streamlit application with three pages:
 
 If you see connection errors, verify:
 - `.env` file exists and has correct values
-- Azure OpenAI endpoint and key are valid
+- AI Foundry endpoint and key are valid (from your deployment)
 - Cosmos DB endpoint and key are correct
 - Firewall rules allow your IP address
 

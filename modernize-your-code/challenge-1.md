@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Before building the AI-powered SQL modernization pipeline, you need to provision the necessary Azure infrastructure. This challenge involves creating Azure OpenAI Service for LLM-based translation, Azure AI Foundry for agent orchestration, Cosmos DB for storing results and logs, Azure Storage for SQL file uploads, and an optional Azure SQL Database for validation testing.
+Before building the AI-powered SQL modernization pipeline, you need to provision the necessary Azure infrastructure. This challenge involves creating Azure AI Foundry project with GPT-4 model deployment, Cosmos DB for storing results and logs, Azure Storage for SQL file uploads, and an optional Azure SQL Database for validation testing.
 
 ## Challenge Objectives
 
@@ -98,7 +98,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
    - **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
    - **Project name**: **sql-modernization-ai-project**
    - **Region**: **<inject key="Region"></inject>**
-   - **Connect Azure AI Services**: Select your existing Azure OpenAI resource
+
 
 4. Click **Review + Create**, then **Create**.
 
@@ -262,7 +262,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 Create a text file or note with the following information (you'll need these in subsequent challenges):
 
 ```text
-Azure AI Foundry / Azure OpenAI:
+Azure AI Foundry (with GPT-4 deployment):
 - Endpoint: [your-ai-foundry-endpoint or target-uri]
 - API Key: [your-primary-key]
 - Deployment Name: gpt-4-sql-translator
@@ -297,7 +297,7 @@ Azure SQL (Optional):
 
 ## Additional Resources
 
-- [Azure OpenAI Service Documentation](https://learn.microsoft.com/azure/ai-services/openai/)
+- [Azure OpenAI in AI Foundry](https://learn.microsoft.com/azure/ai-services/openai/)
 - [Azure AI Foundry Overview](https://learn.microsoft.com/azure/ai-studio/)
 - [Azure Cosmos DB for NoSQL](https://learn.microsoft.com/azure/cosmos-db/nosql/)
 - [Azure Storage Accounts](https://learn.microsoft.com/azure/storage/common/storage-account-overview)
