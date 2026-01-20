@@ -1,589 +1,408 @@
-# Challenge 05: Integrate with Cosmos DB for Data Persistence
+# Challenge 05: Add Cosmos DB Actions for Persistence
 
 ## Introduction
 
-Azure Cosmos DB provides a scalable NoSQL database to store translation results, validation logs, and optimization recommendations. This challenge focuses on integrating your multi-agent system with Cosmos DB to persist all workflow data, enable audit trails, and support batch processing of large SQL file sets. You will create data models for each workflow stage and implement retry logic for reliable cloud operations.
+Your three-agent pipeline is working beautifully! Now you need to persist the results from each agent to Cosmos DB for audit trails, history tracking, and reporting. Azure AI Foundry Agents support "Actions" - custom functions that agents can call. You'll create Cosmos DB Actions that each agent will use to automatically save their results.
 
 ## Challenge Objectives
 
-- Connect to Azure Cosmos DB using Python SDK
-- Create data models for translation, validation, and optimization results
-- Implement CRUD operations for each Cosmos DB container
-- Add retry logic for transient failures
-- Store complete workflow results with metadata
-- Query historical results for analysis and reporting
+- Understand Azure AI Foundry Agent Actions
+- Create Cosmos DB connection configuration
+- Add Actions to Translation Agent for saving translations
+- Add Actions to Validation Agent for saving validation logs
+- Add Actions to Optimization Agent for saving optimization results
+- Test that data is being saved to Cosmos DB containers
+- Verify complete workflow saves results at each stage
 
 ## Steps to Complete
 
-### Part 1: Install Cosmos DB SDK
+### Part 1: Understand Agent Actions
 
-1. In **Azure AI Foundry Studio**, create a new notebook named `Cosmos_Integration`.
+**What are Actions?**
+Actions let agents execute code or call APIs as part of their workflow. Instead of just returning text, agents can:
+- Save data to databases
+- Call external APIs
+- Execute custom functions
+- Trigger workflows
 
-2. In the first cell, install the Cosmos DB SDK:
+For this challenge, we'll use Actions to save each agent's output to Cosmos DB.
+
+### Part 2: Prepare Cosmos DB Information
+
+1. From Challenge 1, gather your Cosmos DB details:
+   - **Cosmos DB Endpoint**: `https://your-cosmos-account.documents.azure.com:443/`
+   - **Cosmos DB Key**: Your primary key
+   - **Database Name**: `SQLModernizationDB`
+   - **Containers**:
+     - `TranslationResults` (for Agent 1)
+     - `ValidationLogs` (for Agent 2)
+     - `OptimizationResults` (for Agent 3)
+
+2. Keep these handy for the next steps.
+
+### Part 3: Create Azure Function for Cosmos DB Actions
+
+Since AI Foundry Actions work best with HTTP endpoints, we'll create a simple Azure Function to handle Cosmos DB writes.
+
+1. In the **Azure Portal**, search for **Function App**.
+
+2. Click **+ Create**.
+
+3. Configure:
+   - **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
+   - **Function App name**: **sql-mod-actions-<inject key="DeploymentID"></inject>**
+   - **Runtime**: **Python**
+   - **Version**: **3.11**
+   - **Region**: **<inject key="Region"></inject>**
+   - **Operating System**: **Linux**
+   - **Plan type**: **Consumption (Serverless)**
+
+4. Click **Review + Create**, then **Create**.
+
+5. Wait for deployment (2-3 minutes).
+
+### Part 4: Create HTTP Function for Translation Results
+
+1. Go to your **Function App**.
+
+2. Click **Functions** in the left menu.
+
+3. Click **+ Create**.
+
+4. Select **HTTP trigger**.
+
+5. Configure:
+   - **Name**: `SaveTranslation`
+   - **Authorization level**: **Function**
+
+6. Click **Create**.
+
+7. Click on the function, then **Code + Test**.
+
+8. Replace the code with:
 
 ```python
-%pip install azure-cosmos azure-identity --quiet
-
-print("Azure Cosmos DB SDK installed")
-```
-
-3. Run the cell.
-
-### Part 2: Configure Cosmos DB Connection
-
-1. Add a new cell with Cosmos DB configuration:
-
-```python
-from azure.cosmos import CosmosClient, PartitionKey, exceptions
-from azure.identity import DefaultAzureCredential
+import azure.functions as func
 import json
+import logging
+from azure.cosmos import CosmosClient
+import os
+import uuid
 from datetime import datetime
-import time
 
-# Cosmos DB configuration
-COSMOS_ENDPOINT = "https://your-cosmos-account.documents.azure.com:443/"  # Replace
-COSMOS_KEY = "your-cosmos-primary-key-here"  # Replace
-DATABASE_NAME = "SQLModernization"
-
-# Container names
-TRANSLATION_CONTAINER = "TranslationResults"
-VALIDATION_CONTAINER = "ValidationLogs"
-OPTIMIZATION_CONTAINER = "OptimizationResults"
-
-# Initialize Cosmos client
-cosmos_client = CosmosClient(COSMOS_ENDPOINT, credential=COSMOS_KEY)
-
-# Get database
-database = cosmos_client.get_database_client(DATABASE_NAME)
-
-print(f"Connected to Cosmos DB: {DATABASE_NAME}")
-```
-
-2. Run the cell.
-
-### Part 3: Create Data Models
-
-1. Add a new cell to define data models:
-
-```python
-class TranslationResult:
-    """Data model for translation results"""
-    
-    def __init__(self, source_sql: str, translated_sql: str, source_dialect: str = "Oracle"):
-        self.id = self._generate_id()
-        self.source_sql = source_sql
-        self.translated_sql = translated_sql
-        self.source_dialect = source_dialect
-        self.target_dialect = "Azure SQL"
-        self.timestamp = datetime.utcnow().isoformat()
-        self.status = "completed"
-        self.metadata = {}
-    
-    def _generate_id(self):
-        """Generate unique ID"""
-        import uuid
-        return str(uuid.uuid4())
-    
-    def add_metadata(self, key: str, value):
-        """Add metadata field"""
-        self.metadata[key] = value
-    
-    def to_dict(self):
-        """Convert to dictionary for Cosmos DB"""
-        return {
-            "id": self.id,
-            "source_sql": self.source_sql,
-            "translated_sql": self.translated_sql,
-            "source_dialect": self.source_dialect,
-            "target_dialect": self.target_dialect,
-            "timestamp": self.timestamp,
-            "status": self.status,
-            "metadata": self.metadata
-        }
-
-
-class ValidationLog:
-    """Data model for validation logs"""
-    
-    def __init__(self, translation_id: str, sql_code: str, validation_results: dict):
-        self.id = self._generate_id()
-        self.translation_id = translation_id
-        self.sql_code = sql_code
-        self.validation_results = validation_results
-        self.timestamp = datetime.utcnow().isoformat()
-        self.is_valid = validation_results.get('overall_valid', False)
-        self.validation_methods = []
-    
-    def _generate_id(self):
-        import uuid
-        return str(uuid.uuid4())
-    
-    def add_validation_method(self, method: str, result: bool):
-        """Add validation method result"""
-        self.validation_methods.append({
-            "method": method,
-            "result": result,
-            "timestamp": datetime.utcnow().isoformat()
-        })
-    
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "translation_id": self.translation_id,
-            "sql_code": self.sql_code,
-            "validation_results": self.validation_results,
-            "timestamp": self.timestamp,
-            "is_valid": self.is_valid,
-            "validation_methods": self.validation_methods
-        }
-
-
-class OptimizationResult:
-    """Data model for optimization results"""
-    
-    def __init__(self, translation_id: str, sql_code: str, optimization_data: dict):
-        self.id = self._generate_id()
-        self.translation_id = translation_id
-        self.sql_code = sql_code
-        self.optimization_score = optimization_data.get('overall_score', 0)
-        self.priority_optimizations = optimization_data.get('priority_optimizations', [])
-        self.index_recommendations = optimization_data.get('index_recommendations', [])
-        self.azure_features = optimization_data.get('azure_features', [])
-        self.timestamp = datetime.utcnow().isoformat()
-    
-    def _generate_id(self):
-        import uuid
-        return str(uuid.uuid4())
-    
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "translation_id": self.translation_id,
-            "sql_code": self.sql_code,
-            "optimization_score": self.optimization_score,
-            "priority_optimizations": self.priority_optimizations,
-            "index_recommendations": self.index_recommendations,
-            "azure_features": self.azure_features,
-            "timestamp": self.timestamp
-        }
-
-print("Data models created")
-```
-
-2. Run the cell.
-
-### Part 4: Implement Save Functions with Retry Logic
-
-1. Add a new cell to create save functions:
-
-```python
-def save_to_cosmos(container_name: str, item: dict, partition_key: str, max_retries: int = 3):
-    """
-    Save item to Cosmos DB with retry logic.
-    
-    Args:
-        container_name (str): Container name
-        item (dict): Item to save
-        partition_key (str): Partition key value
-        max_retries (int): Maximum retry attempts
-    
-    Returns:
-        dict: Created item or error
-    """
-    container = database.get_container_client(container_name)
-    
-    for attempt in range(max_retries):
-        try:
-            # Ensure partition key is in item
-            if 'translation_id' not in item and partition_key:
-                item['partition_key'] = partition_key
-            
-            created_item = container.create_item(body=item)
-            print(f"Item saved to {container_name}: {item['id']}")
-            return created_item
-            
-        except exceptions.CosmosHttpResponseError as e:
-            if e.status_code == 409:
-                print(f"Item {item['id']} already exists in {container_name}")
-                return item
-            elif e.status_code == 429:
-                # Rate limit exceeded, wait and retry
-                wait_time = 2 ** attempt
-                print(f"Rate limited. Retrying in {wait_time} seconds...")
-                time.sleep(wait_time)
-            else:
-                print(f"Error saving to Cosmos DB: {e.message}")
-                if attempt == max_retries - 1:
-                    raise
-        except Exception as e:
-            print(f"Unexpected error: {str(e)}")
-            if attempt == max_retries - 1:
-                raise
-    
-    return None
-
-
-def save_translation_result(translation_result: TranslationResult):
-    """Save translation result to Cosmos DB"""
-    return save_to_cosmos(
-        container_name=TRANSLATION_CONTAINER,
-        item=translation_result.to_dict(),
-        partition_key=translation_result.id
-    )
-
-
-def save_validation_log(validation_log: ValidationLog):
-    """Save validation log to Cosmos DB"""
-    return save_to_cosmos(
-        container_name=VALIDATION_CONTAINER,
-        item=validation_log.to_dict(),
-        partition_key=validation_log.translation_id
-    )
-
-
-def save_optimization_result(optimization_result: OptimizationResult):
-    """Save optimization result to Cosmos DB"""
-    return save_to_cosmos(
-        container_name=OPTIMIZATION_CONTAINER,
-        item=optimization_result.to_dict(),
-        partition_key=optimization_result.translation_id
-    )
-
-print("Save functions with retry logic created")
-```
-
-2. Run the cell.
-
-### Part 5: Test Translation Result Storage
-
-1. Add a new cell to test saving translation results:
-
-```python
-# Sample translation to save
-oracle_sql = """
-SELECT emp_id, emp_name, salary
-FROM employees
-WHERE hire_date > SYSDATE - 30;
-"""
-
-azure_sql = """
-SELECT emp_id, emp_name, salary
-FROM employees
-WHERE hire_date > DATEADD(day, -30, GETDATE());
-"""
-
-# Create translation result
-translation = TranslationResult(
-    source_sql=oracle_sql,
-    translated_sql=azure_sql,
-    source_dialect="Oracle PL/SQL"
-)
-
-# Add metadata
-translation.add_metadata("tokens_used", 250)
-translation.add_metadata("translation_time_ms", 1250)
-translation.add_metadata("source_file", "employee_report.sql")
-
-# Save to Cosmos DB
-saved_translation = save_translation_result(translation)
-
-print(f"Translation saved with ID: {translation.id}")
-print(f"Timestamp: {translation.timestamp}")
-```
-
-2. Run the cell.
-
-### Part 6: Test Validation Log Storage
-
-1. Add a new cell to test saving validation logs:
-
-```python
-# Sample validation results
-validation_results = {
-    "overall_valid": True,
-    "ai_validation": {
-        "valid": True,
-        "confidence": 0.95,
-        "issues": []
-    },
-    "parser_validation": {
-        "valid": True,
-        "syntax_errors": []
-    },
-    "database_validation": {
-        "executed": False,
-        "reason": "Optional validation skipped"
-    }
-}
-
-# Create validation log
-validation = ValidationLog(
-    translation_id=translation.id,
-    sql_code=azure_sql,
-    validation_results=validation_results
-)
-
-# Add validation methods
-validation.add_validation_method("AI-based", True)
-validation.add_validation_method("Parser-based", True)
-
-# Save to Cosmos DB
-saved_validation = save_validation_log(validation)
-
-print(f"Validation log saved with ID: {validation.id}")
-print(f"Linked to translation: {validation.translation_id}")
-print(f"Overall valid: {validation.is_valid}")
-```
-
-2. Run the cell.
-
-### Part 7: Test Optimization Result Storage
-
-1. Add a new cell to test saving optimization results:
-
-```python
-# Sample optimization data
-optimization_data = {
-    "overall_score": 75,
-    "priority_optimizations": [
-        {
-            "priority": "HIGH",
-            "category": "Index",
-            "recommendation": "Add index on employees(hire_date)",
-            "reason": "Frequent date range filtering",
-            "estimated_impact": "40-60% query time reduction"
-        }
-    ],
-    "index_recommendations": [
-        {
-            "index_name": "IX_Employees_HireDate",
-            "index_type": "Non-clustered",
-            "columns": "hire_date",
-            "reason": "WHERE clause filtering"
-        }
-    ],
-    "azure_features": [
-        {
-            "feature_name": "Automatic Tuning",
-            "benefit": "Auto-create missing indexes",
-            "implementation_notes": "Enable via Azure Portal"
-        }
-    ]
-}
-
-# Create optimization result
-optimization = OptimizationResult(
-    translation_id=translation.id,
-    sql_code=azure_sql,
-    optimization_data=optimization_data
-)
-
-# Save to Cosmos DB
-saved_optimization = save_optimization_result(optimization)
-
-print(f"Optimization result saved with ID: {optimization.id}")
-print(f"Optimization score: {optimization.optimization_score}/100")
-print(f"Recommendations: {len(optimization.priority_optimizations)}")
-```
-
-2. Run the cell.
-
-### Part 8: Query Historical Results
-
-1. Add a new cell to query stored results:
-
-```python
-def query_translations(limit: int = 10, source_dialect: str = None):
-    """
-    Query translation results.
-    
-    Args:
-        limit (int): Maximum results to return
-        source_dialect (str): Filter by source dialect
-    
-    Returns:
-        list: Translation results
-    """
-    container = database.get_container_client(TRANSLATION_CONTAINER)
-    
-    query = "SELECT * FROM c"
-    parameters = []
-    
-    if source_dialect:
-        query += " WHERE c.source_dialect = @dialect"
-        parameters.append({"name": "@dialect", "value": source_dialect})
-    
-    query += " ORDER BY c.timestamp DESC"
-    
-    items = list(container.query_items(
-        query=query,
-        parameters=parameters,
-        max_item_count=limit
-    ))
-    
-    return items
-
-
-def query_validations_by_translation(translation_id: str):
-    """Query validation logs for a specific translation"""
-    container = database.get_container_client(VALIDATION_CONTAINER)
-    
-    query = "SELECT * FROM c WHERE c.translation_id = @translation_id"
-    parameters = [{"name": "@translation_id", "value": translation_id}]
-    
-    items = list(container.query_items(
-        query=query,
-        parameters=parameters
-    ))
-    
-    return items
-
-
-def query_optimizations_by_score(min_score: int = 0, max_score: int = 100):
-    """Query optimizations by score range"""
-    container = database.get_container_client(OPTIMIZATION_CONTAINER)
-    
-    query = """
-    SELECT * FROM c 
-    WHERE c.optimization_score >= @min_score 
-      AND c.optimization_score <= @max_score
-    ORDER BY c.optimization_score ASC
-    """
-    
-    parameters = [
-        {"name": "@min_score", "value": min_score},
-        {"name": "@max_score", "value": max_score}
-    ]
-    
-    items = list(container.query_items(
-        query=query,
-        parameters=parameters
-    ))
-    
-    return items
-
-print("Query functions created")
-```
-
-2. Run the cell.
-
-### Part 9: Test Query Operations
-
-1. Add a new cell to test queries:
-
-```python
-# Query recent translations
-print("Recent Translations:")
-recent_translations = query_translations(limit=5)
-for trans in recent_translations:
-    print(f"  - {trans['id'][:8]}... | {trans['source_dialect']} -> {trans['target_dialect']} | {trans['timestamp']}")
-
-print(f"\nTotal translations found: {len(recent_translations)}")
-
-# Query validations for our test translation
-print(f"\nValidations for translation {translation.id[:8]}...:")
-validations = query_validations_by_translation(translation.id)
-for val in validations:
-    print(f"  - Valid: {val['is_valid']} | Methods: {len(val['validation_methods'])} | {val['timestamp']}")
-
-# Query low-score optimizations (need improvement)
-print("\nQueries needing optimization (score < 70):")
-low_score_opts = query_optimizations_by_score(min_score=0, max_score=69)
-for opt in low_score_opts:
-    print(f"  - Score: {opt['optimization_score']} | Recommendations: {len(opt['priority_optimizations'])}")
-```
-
-2. Run the cell.
-
-### Part 10: Implement Batch Workflow Storage
-
-1. Add a final cell to handle complete workflow results:
-
-```python
-def save_complete_workflow(oracle_sql: str, translated_sql: str, 
-                          validation_results: dict, optimization_data: dict):
-    """
-    Saves complete workflow (translation -> validation -> optimization).
-    
-    Args:
-        oracle_sql (str): Original Oracle SQL
-        translated_sql (str): Translated Azure SQL
-        validation_results (dict): Validation results
-        optimization_data (dict): Optimization recommendations
-    
-    Returns:
-        dict: Workflow IDs
-    """
-    workflow_ids = {}
+def main(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('SaveTranslation function triggered')
     
     try:
-        # Step 1: Save translation
-        translation = TranslationResult(
-            source_sql=oracle_sql,
-            translated_sql=translated_sql
+        req_body = req.get_json()
+        
+        # Cosmos DB configuration
+        endpoint = os.environ["COSMOS_ENDPOINT"]
+        key = os.environ["COSMOS_KEY"]
+        database_name = os.environ["DATABASE_NAME"]
+        
+        client = CosmosClient(endpoint, credential=key)
+        database = client.get_database_client(database_name)
+        container = database.get_container_client("TranslationResults")
+        
+        # Prepare item
+        item = {
+            "id": str(uuid.uuid4()),
+            "sourceDialect": "Oracle",
+            "source_sql": req_body.get("source_sql"),
+            "translated_sql": req_body.get("translated_sql"),
+            "target_dialect": "Azure SQL",
+            "timestamp": datetime.utcnow().isoformat(),
+            "metadata": req_body.get("metadata", {})
+        }
+        
+        # Save to Cosmos DB
+        created = container.create_item(body=item)
+        
+        return func.HttpResponse(
+            json.dumps({"status": "success", "id": created["id"]}),
+            mimetype="application/json",
+            status_code=200
         )
-        save_translation_result(translation)
-        workflow_ids['translation_id'] = translation.id
-        
-        # Step 2: Save validation
-        validation = ValidationLog(
-            translation_id=translation.id,
-            sql_code=translated_sql,
-            validation_results=validation_results
-        )
-        save_validation_log(validation)
-        workflow_ids['validation_id'] = validation.id
-        
-        # Step 3: Save optimization
-        optimization = OptimizationResult(
-            translation_id=translation.id,
-            sql_code=translated_sql,
-            optimization_data=optimization_data
-        )
-        save_optimization_result(optimization)
-        workflow_ids['optimization_id'] = optimization.id
-        
-        print(f"Complete workflow saved:")
-        print(f"  Translation ID: {translation.id}")
-        print(f"  Validation ID: {validation.id}")
-        print(f"  Optimization ID: {optimization.id}")
-        
-        return workflow_ids
         
     except Exception as e:
-        print(f"Error saving workflow: {str(e)}")
-        return workflow_ids
-
-
-# Test complete workflow save
-test_oracle = "SELECT * FROM employees WHERE ROWNUM <= 10;"
-test_azure = "SELECT TOP 10 * FROM employees;"
-test_validation = {"overall_valid": True, "ai_validation": {"valid": True}}
-test_optimization = {"overall_score": 85, "priority_optimizations": []}
-
-workflow_ids = save_complete_workflow(test_oracle, test_azure, test_validation, test_optimization)
+        logging.error(f"Error: {str(e)}")
+        return func.HttpResponse(
+            json.dumps({"status": "error", "message": str(e)}),
+            mimetype="application/json",
+            status_code=500
+        )
 ```
 
-2. Run the cell.
+9. Click **Save**.
+
+### Part 5: Add Environment Variables to Function App
+
+1. Go back to your Function App overview.
+
+2. Click **Configuration** in the left menu.
+
+3. Click **+ New application setting** and add:
+   - **Name**: `COSMOS_ENDPOINT`
+   - **Value**: Your Cosmos DB endpoint
+
+4. Add another:
+   - **Name**: `COSMOS_KEY`
+   - **Value**: Your Cosmos DB primary key
+
+5. Add another:
+   - **Name**: `DATABASE_NAME`
+   - **Value**: `SQLModernizationDB`
+
+6. Click **Save**, then **Continue**.
+
+### Part 6: Create Functions for Validation and Optimization
+
+1. Create another function: **SaveValidation**
+
+Code:
+```python
+import azure.functions as func
+import json
+import logging
+from azure.cosmos import CosmosClient
+import os
+import uuid
+from datetime import datetime
+
+def main(req: func.HttpRequest) -> func.HttpResponse:
+    try:
+        req_body = req.get_json()
+        
+        endpoint = os.environ["COSMOS_ENDPOINT"]
+        key = os.environ["COSMOS_KEY"]
+        database_name = os.environ["DATABASE_NAME"]
+        
+        client = CosmosClient(endpoint, credential=key)
+        database = client.get_database_client(database_name)
+        container = database.get_container_client("ValidationLogs")
+        
+        item = {
+            "id": str(uuid.uuid4()),
+            "translationId": req_body.get("translation_id"),
+            "sql_code": req_body.get("sql_code"),
+            "validation_results": req_body.get("validation_results"),
+            "is_valid": req_body.get("validation_results", {}).get("valid", False),
+            "timestamp": datetime.utcnow().isoformat()
+        }
+        
+        created = container.create_item(body=item)
+        
+        return func.HttpResponse(
+            json.dumps({"status": "success", "id": created["id"]}),
+            mimetype="application/json",
+            status_code=200
+        )
+    except Exception as e:
+        return func.HttpResponse(
+            json.dumps({"status": "error", "message": str(e)}),
+            mimetype="application/json",
+            status_code=500
+        )
+```
+
+2. Create another function: **SaveOptimization**
+
+Code:
+```python
+import azure.functions as func
+import json
+import logging
+from azure.cosmos import CosmosClient
+import os
+import uuid
+from datetime import datetime
+
+def main(req: func.HttpRequest) -> func.HttpResponse:
+    try:
+        req_body = req.get_json()
+        
+        endpoint = os.environ["COSMOS_ENDPOINT"]
+        key = os.environ["COSMOS_KEY"]
+        database_name = os.environ["DATABASE_NAME"]
+        
+        client = CosmosClient(endpoint, credential=key)
+        database = client.get_database_client(database_name)
+        container = database.get_container_client("OptimizationResults")
+        
+        item = {
+            "id": str(uuid.uuid4()),
+            "translationId": req_body.get("translation_id"),
+            "sql_code": req_body.get("sql_code"),
+            "optimization_score": req_body.get("optimization_results", {}).get("optimization_score", 0),
+            "optimization_results": req_body.get("optimization_results"),
+            "timestamp": datetime.utcnow().isoformat()
+        }
+        
+        created = container.create_item(body=item)
+        
+        return func.HttpResponse(
+            json.dumps({"status": "success", "id": created["id"]}),
+            mimetype="application/json",
+            status_code=200
+        )
+    except Exception as e:
+        return func.HttpResponse(
+            json.dumps({"status": "error", "message": str(e)}),
+            mimetype="application/json",
+            status_code=500
+        )
+```
+
+### Part 7: Get Function URLs
+
+1. Go to each function (SaveTranslation, SaveValidation, SaveOptimization).
+
+2. Click **Get Function URL**.
+
+3. Copy the URL (includes the function key).
+
+4. Save all three URLs.
+
+### Part 8: Add Actions to Translation Agent
+
+1. Go to **Azure AI Foundry Studio** → **Agents**.
+
+2. Click on **SQL-Translation-Agent**.
+
+3. Scroll to **Actions** section.
+
+4. Click **+ Add**.
+
+5. Configure the action:
+   - **Action Type**: **Function**
+   - **Name**: `save_translation`
+   - **Description**: `Saves the translation result to Cosmos DB`
+   - **Function URL**: Paste your SaveTranslation function URL
+   - **Method**: **POST**
+
+6. Add **Parameters** schema:
+```json
+{
+  "type": "object",
+  "properties": {
+    "source_sql": {
+      "type": "string",
+      "description": "Original Oracle SQL code"
+    },
+    "translated_sql": {
+      "type": "string",
+      "description": "Translated Azure SQL T-SQL code"
+    }
+  },
+  "required": ["source_sql", "translated_sql"]
+}
+```
+
+7. Click **Add**.
+
+8. Update Translation Agent **Instructions** to include:
+```
+After translating the SQL, call the save_translation action with the source_sql and translated_sql to persist the result.
+```
+
+### Part 9: Add Actions to Validation Agent
+
+1. Go to **SQL-Validation-Agent**.
+
+2. Add Action:
+   - **Name**: `save_validation`
+   - **Description**: `Saves validation results to Cosmos DB`
+   - **Function URL**: SaveValidation URL
+   - **Method**: **POST**
+
+Parameters schema:
+```json
+{
+  "type": "object",
+  "properties": {
+    "translation_id": {"type": "string"},
+    "sql_code": {"type": "string"},
+    "validation_results": {"type": "object"}
+  },
+  "required": ["sql_code", "validation_results"]
+}
+```
+
+3. Update instructions:
+```
+After validating the SQL, call save_validation with the validation results to persist the log.
+```
+
+### Part 10: Add Actions to Optimization Agent
+
+1. Go to **SQL-Optimization-Agent**.
+
+2. Add Action:
+   - **Name**: `save_optimization`
+   - **Function URL**: SaveOptimization URL
+   - **Method**: **POST**
+
+Parameters:
+```json
+{
+  "type": "object",
+  "properties": {
+    "translation_id": {"type": "string"},
+    "sql_code": {"type": "string"},
+    "optimization_results": {"type": "object"}
+  },
+  "required": ["sql_code", "optimization_results"]
+}
+```
+
+3. Update instructions:
+```
+After analyzing the SQL, call save_optimization with the optimization results to persist the recommendations.
+```
+
+### Part 11: Test the Complete Workflow
+
+1. Go to **SQL-Translation-Agent** playground.
+
+2. Send Oracle SQL:
+```sql
+SELECT emp_id, emp_name, NVL(salary, 0) as salary
+FROM employees
+WHERE hire_date > SYSDATE - 30
+AND ROWNUM <= 10;
+```
+
+3. Wait for all three agents to process.
+
+4. Go to **Azure Portal** → **Cosmos DB** → **Data Explorer**.
+
+5. Check **TranslationResults** container - you should see a new item.
+
+6. Check **ValidationLogs** container - should have validation entry.
+
+7. Check **OptimizationResults** container - should have optimization entry.
+
+8. All three containers should have data!
 
 ## Success Criteria
 
-- Azure Cosmos DB Python SDK installed successfully
-- Connected to Cosmos DB database and containers
-- Data models created for TranslationResult, ValidationLog, and OptimizationResult
-- Save functions implemented with retry logic for transient failures
-- Translation results saved to TranslationResults container
-- Validation logs saved with linkage to translation ID
-- Optimization results saved with score and recommendations
-- Query operations retrieve historical data successfully
-- Batch workflow function saves complete translation pipeline
-- All operations handle errors gracefully with appropriate logging
+- Azure Function App created successfully
+- Three HTTP functions created (SaveTranslation, SaveValidation, SaveOptimization)
+- Cosmos DB environment variables configured
+- Function URLs obtained and saved
+- Actions added to all three agents
+- Agent instructions updated to call actions
+- Complete pipeline tested: Translation → Validation → Optimization
+- Data saved to TranslationResults container
+- Data saved to ValidationLogs container
+- Data saved to OptimizationResults container
+- All records have proper timestamps and structure
 
 ## Additional Resources
 
-- [Azure Cosmos DB Python SDK](https://learn.microsoft.com/azure/cosmos-db/nosql/quickstart-python)
-- [Cosmos DB Query Language](https://learn.microsoft.com/azure/cosmos-db/nosql/query/getting-started)
-- [Partitioning in Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/partitioning-overview)
-- [Retry Logic Best Practices](https://learn.microsoft.com/azure/architecture/best-practices/retry-service-specific)
+- [Azure Functions Python Developer Guide](https://learn.microsoft.com/azure/azure-functions/functions-reference-python)
+- [Azure AI Foundry Agent Actions](https://learn.microsoft.com/azure/ai-studio/how-to/develop/agents#actions)
+- [Cosmos DB Python SDK](https://learn.microsoft.com/azure/cosmos-db/nosql/quickstart-python)
 
 Now, click **Next** to continue to **Challenge 06**.

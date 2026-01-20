@@ -1,491 +1,239 @@
-# Challenge 02: Build the Translation Agent
+# Challenge 02: Create the Translation Agent
 
 ## Introduction
 
-The Translation Agent is the core component of the SQL modernization pipeline. It uses Azure AI Foundry's GPT-4 model to convert Oracle PL/SQL syntax to Azure SQL T-SQL syntax. This challenge focuses on designing effective prompts, handling dialect-specific conversions, and managing common translation scenarios including stored procedures, functions, cursors, and complex queries.
+In this challenge, you will create your first AI agent directly in the Azure AI Foundry UI. The Translation Agent is responsible for converting Oracle PL/SQL syntax to Azure SQL T-SQL syntax using the GPT-4 model you deployed in Challenge 1. You will configure the agent with specialized instructions, set up the deployment, and test it using the playground.
 
 ## Challenge Objectives
 
-- Set up Azure AI Foundry development environment with Jupyter notebooks
-- Create a Translation Agent using Azure AI Foundry's OpenAI API
-- Design prompts for accurate Oracle to Azure SQL translation
-- Handle common PL/SQL to T-SQL conversions (data types, functions, syntax)
-- Test translations with sample Oracle SQL files
-- Implement error handling and retry logic
+- Navigate to the Agents section in Azure AI Foundry Studio
+- Create a new Translation Agent with a descriptive name
+- Configure the agent to use your GPT-4 deployment
+- Write comprehensive instructions for Oracle to Azure SQL translation
+- Test the agent with sample Oracle SQL queries
+- Verify translation accuracy and adjust instructions if needed
 
 ## Steps to Complete
 
-### Part 1: Set Up AI Foundry Development Environment
+### Part 1: Navigate to Agents Section
 
-1. Navigate to the **Azure Portal** and open your **AI Foundry project**: `sql-modernization-ai-project`
+1. Open **Azure AI Foundry Studio** (https://ai.azure.com).
 
-2. Click on **Launch Azure AI Foundry Studio** (or similar button to open the studio interface).
+2. Select your project: **sql-modernization-ai-project** (from Challenge 1).
 
-3. In AI Foundry Studio, navigate to **Build** or **Develop** section.
+3. In the left navigation menu, click on **Build and customize**.
 
-4. Click on **+ New Notebook** to create a Jupyter notebook.
+4. Click on **Agents**.
 
-5. Name the notebook: `Translation_Agent`
+5. You should see the "Create and debug your agents" page.
 
-6. Select **Python 3.10** or later as the kernel.
+### Part 2: Create Translation Agent
 
-7. Wait for the notebook environment to initialize (30-60 seconds).
+1. Click the **+ New agent** button.
 
-### Part 2: Install Required Libraries
+2. In the Setup panel on the right, configure:
+   - **Agent name**: `SQL-Translation-Agent`
+   - **Deployment**: Select **gpt-4-sql-translator** (the deployment from Challenge 1)
 
-1. In the first cell of your notebook, install necessary Python packages:
+3. Leave other settings at default for now.
 
-```python
-# Install required libraries
-!pip install openai azure-identity python-dotenv --quiet
+### Part 3: Write Agent Instructions
 
-print("Libraries installed successfully")
+1. In the **Instructions** text box, paste the following comprehensive instructions:
+
+```
+You are an expert SQL translation specialist. Your role is to convert Oracle PL/SQL code to Azure SQL T-SQL code with 100% accuracy.
+
+TRANSLATION RULES:
+
+1. Date Functions:
+   - Oracle SYSDATE → Azure SQL GETDATE()
+   - Oracle CURRENT_DATE → Azure SQL CAST(GETDATE() AS DATE)
+   - Oracle TO_DATE(string, format) → Azure SQL CONVERT(DATETIME, string, style_code)
+   - Oracle TRUNC(date) → Azure SQL CAST(date AS DATE)
+   - Oracle ADD_MONTHS(date, n) → Azure SQL DATEADD(MONTH, n, date)
+
+2. String Functions:
+   - Oracle NVL(expr1, expr2) → Azure SQL ISNULL(expr1, expr2) or COALESCE(expr1, expr2)
+   - Oracle NVL2(expr, val1, val2) → Azure SQL CASE WHEN expr IS NOT NULL THEN val1 ELSE val2 END
+   - Oracle SUBSTR(str, start, length) → Azure SQL SUBSTRING(str, start, length)
+   - Oracle INSTR(str, substr) → Azure SQL CHARINDEX(substr, str)
+   - Oracle LENGTH(str) → Azure SQL LEN(str)
+   - Oracle CONCAT(str1, str2) → Azure SQL CONCAT(str1, str2) or str1 + str2
+
+3. Conditional Logic:
+   - Oracle DECODE(expr, search1, result1, search2, result2, default) → Azure SQL CASE WHEN expr = search1 THEN result1 WHEN expr = search2 THEN result2 ELSE default END
+
+4. Row Limiting:
+   - Oracle ROWNUM <= N → Azure SQL TOP N
+   - Oracle FETCH FIRST N ROWS ONLY → Azure SQL TOP N
+   - Oracle OFFSET n ROWS FETCH NEXT m ROWS ONLY → Azure SQL OFFSET n ROWS FETCH NEXT m ROWS ONLY (same syntax)
+
+5. Joins:
+   - Oracle (+) outer join syntax → Azure SQL LEFT JOIN or RIGHT JOIN
+   - Example: WHERE a.id = b.id(+) → FROM a LEFT JOIN b ON a.id = b.id
+
+6. Hierarchical Queries:
+   - Oracle START WITH ... CONNECT BY PRIOR → Azure SQL Recursive Common Table Expressions (CTE)
+   - Example pattern:
+     Oracle: SELECT * FROM employees START WITH manager_id IS NULL CONNECT BY PRIOR emp_id = manager_id
+     Azure SQL: WITH RecursiveCTE AS (SELECT * FROM employees WHERE manager_id IS NULL UNION ALL SELECT e.* FROM employees e INNER JOIN RecursiveCTE r ON e.manager_id = r.emp_id) SELECT * FROM RecursiveCTE
+
+7. Sequences:
+   - Oracle sequence_name.NEXTVAL → Azure SQL NEXT VALUE FOR sequence_name
+   - Oracle sequence_name.CURRVAL → Not directly supported (use variables or OUTPUT clause)
+
+8. Data Types:
+   - Oracle VARCHAR2 → Azure SQL VARCHAR or NVARCHAR
+   - Oracle NUMBER → Azure SQL INT, BIGINT, DECIMAL, or FLOAT (choose based on precision)
+   - Oracle CLOB → Azure SQL VARCHAR(MAX) or NVARCHAR(MAX)
+   - Oracle BLOB → Azure SQL VARBINARY(MAX)
+
+9. Dual Table:
+   - Oracle SELECT ... FROM DUAL → Azure SQL SELECT ... (no FROM clause needed for scalar expressions)
+
+10. PL/SQL to T-SQL:
+    - Oracle DECLARE/BEGIN/END blocks → Azure SQL equivalent with proper syntax
+    - Oracle CURSOR FOR loops → Azure SQL CURSOR with FETCH NEXT pattern or set-based alternatives
+    - Oracle :NEW and :OLD (in triggers) → Azure SQL INSERTED and DELETED tables
+    - Oracle RAISE_APPLICATION_ERROR → Azure SQL RAISERROR or THROW
+
+OUTPUT REQUIREMENTS:
+- Return ONLY the translated Azure SQL T-SQL code
+- Do NOT include explanations, comments about the translation process, or markdown code blocks
+- Preserve the original query logic and structure
+- Ensure proper T-SQL syntax
+- Maintain readability with proper indentation
 ```
 
-2. Run the cell and wait for installation to complete.
+2. Click somewhere outside the instructions box to save.
 
-### Part 3: Configure AI Foundry Model Connection
+### Part 4: Configure Agent Description (Optional)
 
-1. Add a new cell and configure the AI Foundry OpenAI client (uses same SDK):
+1. Expand the **Agent Description** section.
 
-```python
-import os
-from openai import AzureOpenAI
-
-# AI Foundry OpenAI configuration (from Challenge 1)
-AZURE_OPENAI_ENDPOINT = "https://your-ai-foundry-endpoint.openai.azure.com/"  # Replace with your AI Foundry endpoint
-AZURE_OPENAI_KEY = "your-api-key-here"  # Replace with your key from AI Foundry
-AZURE_OPENAI_DEPLOYMENT = "gpt-4-sql-translator"  # Your deployment name from Challenge 1
-AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
-
-# Initialize client (uses Azure OpenAI SDK)
-client = AzureOpenAI(
-    azure_endpoint=AZURE_OPENAI_ENDPOINT,
-    api_key=AZURE_OPENAI_KEY,
-    api_version=AZURE_OPENAI_API_VERSION
-)
-
-print("Azure OpenAI client initialized successfully")
+2. Add a description:
+```
+Translates Oracle PL/SQL code to Azure SQL T-SQL code using comprehensive syntax conversion rules. This agent handles date functions, string operations, joins, hierarchical queries, and procedural code translation.
 ```
 
-3. Replace the placeholder values with your actual Azure OpenAI endpoint and API key from Challenge 1.
+### Part 5: Test the Agent in Playground
 
-4. Run the cell to verify the connection works.
+1. Click the **Try in playground** button in the top right.
 
-### Part 4: Design the Translation Prompt
+2. In the chat interface, test with this simple Oracle query:
 
-1. Add a new cell to create the system prompt for SQL translation:
-
-```python
-# System prompt for Oracle to Azure SQL translation
-TRANSLATION_SYSTEM_PROMPT = """You are an expert database migration specialist with deep knowledge of Oracle PL/SQL and Azure SQL (T-SQL). 
-Your task is to translate Oracle PL/SQL code to Azure SQL T-SQL accurately while preserving the original logic and functionality.
-
-Follow these translation rules:
-
-1. Data Type Conversions:
-   - Oracle NUMBER -> SQL Server INT, BIGINT, DECIMAL, or NUMERIC (choose based on precision)
-   - Oracle VARCHAR2 -> SQL Server VARCHAR or NVARCHAR
-   - Oracle DATE -> SQL Server DATETIME2 or DATE
-   - Oracle CLOB -> SQL Server NVARCHAR(MAX) or VARCHAR(MAX)
-   - Oracle BLOB -> SQL Server VARBINARY(MAX)
-
-2. Function Conversions:
-   - Oracle NVL() -> SQL Server ISNULL() or COALESCE()
-   - Oracle SYSDATE -> SQL Server GETDATE() or SYSDATETIME()
-   - Oracle DECODE() -> SQL Server CASE WHEN
-   - Oracle TO_DATE() -> SQL Server CONVERT() or CAST()
-   - Oracle TO_CHAR() -> SQL Server CONVERT() or FORMAT()
-   - Oracle SUBSTR() -> SQL Server SUBSTRING()
-   - Oracle INSTR() -> SQL Server CHARINDEX()
-   - Oracle ROWNUM -> SQL Server ROW_NUMBER() or TOP
-
-3. Syntax Conversions:
-   - Oracle sequences -> SQL Server IDENTITY or SEQUENCE
-   - Oracle packages -> SQL Server schemas with stored procedures
-   - Oracle cursors -> SQL Server cursors (or suggest set-based alternatives)
-   - Oracle EXECUTE IMMEDIATE -> SQL Server EXEC sp_executesql
-   - Oracle PRAGMA AUTONOMOUS_TRANSACTION -> SQL Server separate transaction handling
-   - Oracle RAISE_APPLICATION_ERROR -> SQL Server THROW or RAISERROR
-
-4. Stored Procedure Syntax:
-   - Oracle CREATE OR REPLACE PROCEDURE -> SQL Server CREATE PROCEDURE (with DROP IF EXISTS pattern)
-   - Oracle IN/OUT/IN OUT parameters -> SQL Server INPUT/OUTPUT parameters
-   - Oracle RETURN in functions -> SQL Server RETURNS and RETURN
-   - Oracle BEGIN/END blocks remain similar but check exception handling
-
-5. Exception Handling:
-   - Oracle EXCEPTION WHEN OTHERS -> SQL Server TRY...CATCH with ERROR_MESSAGE()
-   - Oracle SQLCODE and SQLERRM -> SQL Server ERROR_NUMBER() and ERROR_MESSAGE()
-
-6. Best Practices:
-   - Add comments explaining significant translations
-   - Maintain original formatting and structure where possible
-   - Flag any code that requires manual review with /* TODO: Review */ comments
-   - Suggest Azure SQL optimizations where applicable
-
-Translate the provided Oracle SQL code to Azure SQL T-SQL. Provide only the translated code without additional explanations unless there are critical warnings."""
-
-print("Translation prompt configured")
 ```
-
-2. Run the cell.
-
-### Part 5: Create the Translation Agent Function
-
-1. Add a new cell with the core translation function:
-
-```python
-def translate_oracle_to_azure_sql(oracle_sql: str, include_explanations: bool = False) -> dict:
-    """
-    Translates Oracle PL/SQL code to Azure SQL T-SQL using Azure OpenAI.
-    
-    Args:
-        oracle_sql (str): The Oracle SQL code to translate
-        include_explanations (bool): Whether to include translation explanations
-    
-    Returns:
-        dict: Contains translated_sql, success status, and any warnings
-    """
-    try:
-        # Prepare user message
-        user_message = f"Translate the following Oracle PL/SQL code to Azure SQL T-SQL:\n\n{oracle_sql}"
-        
-        # Call Azure OpenAI
-        response = client.chat.completions.create(
-            model=AZURE_OPENAI_DEPLOYMENT,
-            messages=[
-                {"role": "system", "content": TRANSLATION_SYSTEM_PROMPT},
-                {"role": "user", "content": user_message}
-            ],
-            temperature=0.3,  # Lower temperature for more deterministic translations
-            max_tokens=4000,
-            top_p=0.95
-        )
-        
-        # Extract translated SQL
-        translated_sql = response.choices[0].message.content.strip()
-        
-        # Remove markdown code blocks if present
-        if translated_sql.startswith("```sql"):
-            translated_sql = translated_sql.replace("```sql", "").replace("```", "").strip()
-        elif translated_sql.startswith("```"):
-            translated_sql = translated_sql.replace("```", "").strip()
-        
-        return {
-            "success": True,
-            "translated_sql": translated_sql,
-            "original_sql": oracle_sql,
-            "tokens_used": response.usage.total_tokens,
-            "warnings": []
-        }
-        
-    except Exception as e:
-        return {
-            "success": False,
-            "translated_sql": None,
-            "original_sql": oracle_sql,
-            "error": str(e),
-            "warnings": [f"Translation failed: {str(e)}"]
-        }
-
-print("Translation agent function created")
-```
-
-2. Run the cell.
-
-### Part 6: Test with Sample Oracle SQL
-
-1. Add a new cell to test the translation with a simple Oracle query:
-
-```python
-# Test 1: Simple SELECT query
-oracle_query_1 = """
-SELECT employee_id, first_name, last_name, 
-       NVL(commission_pct, 0) as commission,
-       TO_CHAR(hire_date, 'YYYY-MM-DD') as hire_date_formatted
+SELECT emp_id, emp_name, hire_date
 FROM employees
-WHERE hire_date > TO_DATE('2020-01-01', 'YYYY-MM-DD')
-ORDER BY hire_date DESC;
-"""
-
-print("Original Oracle SQL:")
-print(oracle_query_1)
-print("\n" + "="*80 + "\n")
-
-result = translate_oracle_to_azure_sql(oracle_query_1)
-
-if result["success"]:
-    print("Translated Azure SQL:")
-    print(result["translated_sql"])
-    print(f"\nTokens used: {result['tokens_used']}")
-else:
-    print(f"Translation failed: {result['error']}")
+WHERE hire_date > SYSDATE - 30
+AND ROWNUM <= 10;
 ```
 
-2. Run the cell and review the translated SQL.
+3. Send the message and wait for the response.
 
-3. Add another test with a stored procedure:
+4. Verify the agent returns Azure SQL like:
 
-```python
-# Test 2: Oracle stored procedure
-oracle_procedure = """
-CREATE OR REPLACE PROCEDURE update_employee_salary(
-    p_employee_id IN NUMBER,
-    p_new_salary IN NUMBER,
-    p_status OUT VARCHAR2
-)
-IS
-    v_current_salary NUMBER;
-BEGIN
-    SELECT salary INTO v_current_salary
-    FROM employees
-    WHERE employee_id = p_employee_id;
-    
-    IF v_current_salary IS NULL THEN
-        p_status := 'Employee not found';
-        RETURN;
-    END IF;
-    
-    UPDATE employees
-    SET salary = p_new_salary,
-        last_updated = SYSDATE
-    WHERE employee_id = p_employee_id;
-    
-    COMMIT;
-    p_status := 'Success';
-    
-EXCEPTION
-    WHEN OTHERS THEN
-        ROLLBACK;
-        p_status := 'Error: ' || SQLERRM;
-        RAISE_APPLICATION_ERROR(-20001, 'Salary update failed');
-END;
-"""
-
-print("Original Oracle Procedure:")
-print(oracle_procedure)
-print("\n" + "="*80 + "\n")
-
-result = translate_oracle_to_azure_sql(oracle_procedure)
-
-if result["success"]:
-    print("Translated Azure SQL Procedure:")
-    print(result["translated_sql"])
-    print(f"\nTokens used: {result['tokens_used']}")
-else:
-    print(f"Translation failed: {result['error']}")
+```sql
+SELECT TOP 10 emp_id, emp_name, hire_date
+FROM employees
+WHERE hire_date > DATEADD(DAY, -30, GETDATE());
 ```
 
-4. Run the cell and verify the stored procedure translation.
+### Part 6: Test with More Complex Query
 
-### Part 7: Handle Batch Translations
+1. Test with an Oracle NVL and DECODE query:
 
-1. Add a new cell to handle multiple SQL files:
-
-```python
-def translate_batch(sql_statements: list) -> list:
-    """
-    Translates a batch of Oracle SQL statements.
-    
-    Args:
-        sql_statements (list): List of Oracle SQL code strings
-    
-    Returns:
-        list: List of translation result dictionaries
-    """
-    results = []
-    
-    for idx, sql in enumerate(sql_statements, 1):
-        print(f"Translating statement {idx}/{len(sql_statements)}...")
-        result = translate_oracle_to_azure_sql(sql)
-        results.append(result)
-        
-        if not result["success"]:
-            print(f"  Warning: Translation {idx} failed")
-    
-    print(f"\nBatch translation complete: {len(results)} statements processed")
-    return results
-
-# Example batch translation
-sample_queries = [
-    "SELECT * FROM employees WHERE ROWNUM <= 10;",
-    "SELECT employee_id, DECODE(status, 'A', 'Active', 'I', 'Inactive', 'Unknown') FROM emp_status;",
-    "SELECT employee_id, SUBSTR(email, 1, INSTR(email, '@')-1) AS username FROM employees;"
-]
-
-batch_results = translate_batch(sample_queries)
-
-# Display results
-for idx, result in enumerate(batch_results, 1):
-    print(f"\nQuery {idx}:")
-    if result["success"]:
-        print(result["translated_sql"])
-    else:
-        print(f"Failed: {result.get('error', 'Unknown error')}")
+```
+SELECT emp_id,
+       emp_name,
+       NVL(commission, 0) AS commission,
+       DECODE(dept_id, 10, 'Sales', 20, 'Marketing', 'Other') AS department
+FROM employees;
 ```
 
-2. Run the cell.
+2. Verify the translation uses ISNULL/COALESCE and CASE WHEN.
 
-### Part 8: Implement Retry Logic for Failed Translations
+### Part 7: Test with Cursor-Based Code
 
-1. Add a new cell with retry mechanism:
+1. Test with Oracle PL/SQL procedure:
 
-```python
-import time
-
-def translate_with_retry(oracle_sql: str, max_retries: int = 3, delay: int = 2) -> dict:
-    """
-    Translates Oracle SQL with retry logic for handling transient failures.
-    
-    Args:
-        oracle_sql (str): Oracle SQL code to translate
-        max_retries (int): Maximum number of retry attempts
-        delay (int): Delay in seconds between retries
-    
-    Returns:
-        dict: Translation result
-    """
-    for attempt in range(1, max_retries + 1):
-        result = translate_oracle_to_azure_sql(oracle_sql)
-        
-        if result["success"]:
-            return result
-        
-        if attempt < max_retries:
-            print(f"Attempt {attempt} failed. Retrying in {delay} seconds...")
-            time.sleep(delay)
-        else:
-            print(f"All {max_retries} attempts failed.")
-            return result
-    
-    return result
-
-# Test retry logic
-test_query = "SELECT employee_id, NVL(manager_id, 0) as manager FROM employees;"
-result = translate_with_retry(test_query, max_retries=2)
-
-if result["success"]:
-    print("Translation successful:")
-    print(result["translated_sql"])
 ```
-
-2. Run the cell.
-
-### Part 9: Save Translations to Files
-
-1. Add a new cell to export translations:
-
-```python
-import json
-from datetime import datetime
-
-def save_translation_result(result: dict, output_folder: str = "translations"):
-    """
-    Saves translation result to a JSON file.
-    
-    Args:
-        result (dict): Translation result dictionary
-        output_folder (str): Folder to save results
-    """
-    import os
-    
-    # Create output folder if it doesn't exist
-    os.makedirs(output_folder, exist_ok=True)
-    
-    # Generate filename with timestamp
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"{output_folder}/translation_{timestamp}.json"
-    
-    # Save to file
-    with open(filename, 'w') as f:
-        json.dump(result, f, indent=2)
-    
-    print(f"Translation saved to: {filename}")
-    return filename
-
-# Test saving
-if batch_results:
-    for idx, result in enumerate(batch_results):
-        save_translation_result(result, output_folder="translations")
-```
-
-2. Run the cell.
-
-### Part 10: Validate Translation Agent
-
-1. Create a final test cell with complex Oracle SQL:
-
-```python
-# Complex test with cursor and exception handling
-complex_oracle_sql = """
 DECLARE
-    CURSOR emp_cursor IS
-        SELECT employee_id, salary, department_id
-        FROM employees
-        WHERE department_id = 50;
-    
-    v_emp_id NUMBER;
-    v_salary NUMBER;
-    v_dept_id NUMBER;
-    v_total_salary NUMBER := 0;
+  CURSOR emp_cursor IS
+    SELECT emp_id, salary FROM employees WHERE dept_id = 10;
 BEGIN
-    OPEN emp_cursor;
-    
-    LOOP
-        FETCH emp_cursor INTO v_emp_id, v_salary, v_dept_id;
-        EXIT WHEN emp_cursor%NOTFOUND;
-        
-        v_total_salary := v_total_salary + NVL(v_salary, 0);
-        
-        DBMS_OUTPUT.PUT_LINE('Employee: ' || v_emp_id || ', Salary: ' || v_salary);
-    END LOOP;
-    
-    CLOSE emp_cursor;
-    
-    DBMS_OUTPUT.PUT_LINE('Total Salary: ' || v_total_salary);
-    
-EXCEPTION
-    WHEN OTHERS THEN
-        IF emp_cursor%ISOPEN THEN
-            CLOSE emp_cursor;
-        END IF;
-        RAISE;
+  FOR emp_rec IN emp_cursor LOOP
+    UPDATE employees
+    SET bonus = emp_rec.salary * 0.1
+    WHERE emp_id = emp_rec.emp_id;
+  END LOOP;
+  COMMIT;
 END;
-"""
-
-print("Translating complex Oracle PL/SQL block...\n")
-result = translate_oracle_to_azure_sql(complex_oracle_sql)
-
-if result["success"]:
-    print("Translated Azure SQL:")
-    print(result["translated_sql"])
-    print(f"\nTokens used: {result['tokens_used']}")
-else:
-    print(f"Translation failed: {result['error']}")
 ```
 
-2. Run the cell and verify the translation handles cursors, loops, and exception handling correctly.
+2. Verify the agent converts it to T-SQL cursor syntax or suggests a set-based approach.
+
+### Part 8: Refine Instructions (If Needed)
+
+1. If the translations aren't accurate, go back to the agent configuration.
+
+2. Update the **Instructions** to be more specific about problem areas.
+
+3. Test again in the playground.
+
+4. Repeat until translations are consistently accurate.
+
+### Part 9: Save and Note Agent ID
+
+1. Once testing is successful, the agent is automatically saved.
+
+2. Go back to the **Agents** list page.
+
+3. Find your **SQL-Translation-Agent**.
+
+4. Copy the **Agent ID** (looks like `asst_xxxxxxxxxxxxx`).
+
+5. Save this ID - you'll need it in Challenge 6 for the Streamlit app.
+
+### Part 10: Test Sample SQL Files
+
+1. Navigate to your challenge files folder where you have sample queries.
+
+2. Open `sample_queries/simple_select.sql`:
+
+```sql
+SELECT emp_id, emp_name, hire_date, salary
+FROM employees
+WHERE hire_date > SYSDATE - 30
+  AND ROWNUM <= 10
+ORDER BY salary DESC;
+```
+
+3. Paste it into the playground and verify translation.
+
+4. Test with other sample files:
+   - `nvl_decode.sql`
+   - `hierarchical.sql`
+
+5. Verify all translations are accurate.
 
 ## Success Criteria
 
-- Azure AI Foundry notebook environment set up successfully
-- Azure OpenAI client configured and connected
-- Translation system prompt designed with comprehensive conversion rules
-- Translation agent function created and tested
-- Simple SELECT queries translated correctly (NVL, TO_CHAR, TO_DATE functions)
-- Stored procedures translated with proper parameter handling
-- Batch translation function processes multiple queries
-- Retry logic implemented for handling failures
-- Translation results saved to JSON files
-- Complex PL/SQL blocks (cursors, loops, exceptions) translated successfully
-- All tests demonstrate accurate Oracle to Azure SQL conversion
+- Translation Agent created successfully in Azure AI Foundry
+- Agent configured with GPT-4 deployment
+- Comprehensive Oracle to Azure SQL translation instructions added
+- Agent tested with simple SELECT queries and produces correct T-SQL
+- Agent handles NVL, DECODE, ROWNUM, and SYSDATE correctly
+- Agent can translate PL/SQL cursor code to T-SQL
+- Complex queries (hierarchical, outer joins) translate accurately
+- Agent ID copied and saved for later use
+- Agent consistently provides clean T-SQL output without extra formatting
 
 ## Additional Resources
 
-- [Azure OpenAI Service API Reference](https://learn.microsoft.com/azure/ai-services/openai/reference)
-- [Oracle to SQL Server Migration Guide](https://learn.microsoft.com/sql/sql-server/migrate/guides/oracle-to-sql-server)
-- [T-SQL Function Reference](https://learn.microsoft.com/sql/t-sql/functions/functions)
-- [Prompt Engineering for Code Translation](https://learn.microsoft.com/azure/ai-services/openai/concepts/advanced-prompt-engineering)
+- [Azure AI Foundry Agents Documentation](https://learn.microsoft.com/azure/ai-studio/how-to/develop/agents)
+- [Oracle to Azure SQL Migration Guide](https://learn.microsoft.com/azure/azure-sql/migration-guides/database/oracle-to-sql-database-guide)
+- [T-SQL Reference](https://learn.microsoft.com/sql/t-sql/language-reference)
 
 Now, click **Next** to continue to **Challenge 03**.

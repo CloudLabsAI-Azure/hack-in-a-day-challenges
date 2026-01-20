@@ -24,28 +24,28 @@ Using Azure AI Foundry (with GPT-4), Cosmos DB, and Azure Container Apps, you wi
 
 ## Introduction
 
-Your mission is to build a Multi-Agent SQL Modernization Pipeline that automates the translation, validation, and optimization of legacy SQL code. The system consists of three specialized AI agents:
+Your mission is to build a Multi-Agent SQL Modernization Pipeline using Azure AI Foundry Agents that automates the translation, validation, and optimization of legacy SQL code. The system consists of three specialized AI agents built using the visual Agent builder:
 
-1. **Translation Agent**: Converts Oracle PL/SQL syntax to Azure SQL T-SQL syntax using GPT-4
-2. **Validation Agent**: Verifies syntax correctness, checks for semantic errors, and optionally executes queries against a test database
-3. **Optimization Agent**: Analyzes translated SQL and suggests performance improvements for Azure SQL
+1. **SQL-Translation-Agent**: Converts Oracle PL/SQL syntax to Azure SQL T-SQL syntax using GPT-4
+2. **SQL-Validation-Agent**: Verifies syntax correctness, checks for semantic errors, and validates translated SQL
+3. **SQL-Optimization-Agent**: Analyzes translated SQL and suggests performance improvements for Azure SQL
 
-The pipeline processes SQL files uploaded to Azure Storage, orchestrates agent execution, stores results in Cosmos DB, and provides an interactive Streamlit web interface for monitoring and managing translations.
+The agents are connected in a pipeline using AI Foundry's "Connected agents" feature, enabling automatic hand-off from Translation to Validation to Optimization. Results are stored in Cosmos DB using built-in Actions, and a Streamlit web interface provides an intuitive front-end for users.
 
 ## Learning Objectives
 
 By participating in this Hack in a Day, you will learn how to:
 
-- Create Azure AI Foundry project and deploy GPT-4 model for SQL translation
-- Build an Azure AI Foundry project for orchestrating AI agents
-- Design multi-agent systems with specialized roles (translation, validation, optimization)
+- Create Azure AI Foundry project and deploy GPT-4 model
+- Build AI agents using the visual Agent builder in Azure AI Foundry
+- Design multi-agent systems with connected pipeline orchestration
 - Implement prompt engineering techniques for accurate SQL dialect conversion
-- Use Azure Cosmos DB to store translation results, logs, and error tracking
-- Validate SQL syntax and semantics using hybrid AI and database execution
-- Deploy AI applications to Azure Container Apps for production use
-- Build interactive web interfaces with Streamlit for AI-powered tools
-- Handle retries, error logging, and audit trails for enterprise workflows
-- Optimize SQL queries for cloud database performance
+- Configure agent hand-off for automated multi-phase processing
+- Use Cosmos DB Actions to persist agent results automatically
+- Create Azure Functions as agent Actions for database integration
+- Deploy agent APIs and consume them from web applications
+- Build interactive web interfaces with Streamlit
+- Package and deploy containerized AI applications to Azure Container Apps
 
 ## Hack in a Day Format: Challenge-Based
 
@@ -55,27 +55,27 @@ This hands-on lab is structured into six progressive challenges:
 Create Azure AI Foundry project with GPT-4 deployment, Cosmos DB, Storage Account, and Azure SQL Database for validation testing.
 
 **Challenge 2: Build the Translation Agent**  
-Design a GPT-4 powered agent that converts Oracle PL/SQL to Azure SQL T-SQL, handling syntax differences, deprecated functions, and dialect-specific features.
+Create your first AI agent using the visual Agent builder in Azure AI Foundry. Configure comprehensive Oracle-to-T-SQL translation rules and test in the playground.
 
-**Challenge 3: Build the Validation Agent**  
-Create a hybrid validation system that performs AI-based syntax checking, semantic error detection, and optional real database execution for verification.
+**Challenge 3: Build the Validation Agent and Connect Pipeline**  
+Create a second agent for validation and use the "Connected agents" feature to link it to the Translation Agent, enabling automatic hand-off.
 
-**Challenge 4: Build the Optimization Agent**  
-Implement an agent that analyzes translated SQL and provides Azure SQL specific optimization recommendations for indexes, query hints, and performance tuning.
+**Challenge 4: Build the Optimization Agent and Complete Pipeline**  
+Create the final agent for SQL optimization and connect it to the Validation Agent, completing the three-agent pipeline with automatic orchestration.
 
-**Challenge 5: Integrate Cosmos DB for Storage and Logging**  
-Store translation results, validation logs, optimization suggestions, and error details in Cosmos DB with proper data models and retry logic.
+**Challenge 5: Add Cosmos DB Actions for Persistence**  
+Create Azure Functions that act as agent Actions, allowing each agent to automatically save results to Cosmos DB containers for audit trails and history.
 
-**Challenge 6: Deploy Streamlit App and Container Apps**  
-Package the solution as a containerized Streamlit application and deploy to Azure Container Apps for production-ready access.
+**Challenge 6: Build Streamlit App with Agent API Integration**  
+Deploy your agents as APIs and build a Streamlit web application that calls the Translation Agent, receives results from all three connected agents, and displays them in a user-friendly interface. Deploy to Azure Container Apps.
 
 Throughout each challenge, you will iteratively build, test, and enhance your SQL modernization pipeline using real Oracle SQL samples.
 
 ## Challenge Overview
 
-You will begin by provisioning Azure resources including AI Foundry with GPT-4, Cosmos DB, and Azure SQL Database. Next, you will build three specialized AI agents using Python and AI Foundry's OpenAI API. Then, you will integrate Cosmos DB to persist all translation artifacts and enable audit trails. Finally, you will deploy a complete Streamlit web application to Azure Container Apps, creating a production-ready SQL modernization platform.
+You will begin by provisioning Azure resources including AI Foundry with GPT-4 deployment, Cosmos DB, and Storage Account. Next, you will build three specialized AI agents using the visual Agent builder in Azure AI Foundry and connect them in a pipeline. Then, you will create Azure Functions as Actions to enable agents to save results to Cosmos DB. Finally, you will deploy the agents as APIs and build a Streamlit web application that integrates with the agent pipeline, creating a production-ready SQL modernization platform deployed to Azure Container Apps.
 
-By the end of this Hack in a Day, you will have a fully functional Multi-Agent SQL Modernization System capable of translating thousands of Oracle queries to Azure SQL with validation, optimization, and enterprise-grade logging.
+By the end of this Hack in a Day, you will have a fully functional Multi-Agent SQL Modernization System with connected agents, automatic persistence, and an intuitive web interface.
 
 ## Support Contact
 
