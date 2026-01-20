@@ -1,67 +1,67 @@
-# Challenge 04: Analyze Data Using GenAI Prompts
+# Challenge 04: Analyze Clinical Research Data Using Foundry Playground
 
 ## Introduction
 
-With data available and LLM deployed, Contoso wants to generate natural-language insights from machine logs.  
-In this challenge, you’ll use Microsoft Foundry (LLM capabilities) to summarize and interpret manufacturing data.
+With clinical research documents indexed in Azure AI Search and Foundry models deployed, the next step is to validate Retrieval-Augmented Generation (RAG).
+
+In this challenge, you will connect Azure AI Search as a data source in **Microsoft Foundry Playground** and test natural-language prompts. The AI model will retrieve relevant medical literature and generate grounded, citation-aware responses.
 
 ## Challenge Objectives
 
-- Load the CSV data from Azure Blob Storage.  
-- Send structured chunks of data to the Foundry LLM via prompt.  
-- Generate natural-language summaries and recommendations.
+- Connect Azure AI Search to Foundry Playground  
+- Enable RAG for clinical research queries  
+- Validate grounded responses from indexed medical data  
 
 ## Steps to Complete
 
-1. Open **Microsoft Foundry Studio** and open your project **mfg-proj-<inject key="DeploymentID"></inject>**.
+1. Open **Microsoft Foundry** from the Azure Portal.
 
-1. Choose the deployed LLM model **gpt-4.1-mini** within the Foundry project.
+1. Navigate to the project:
+   **health-proj-<inject key="DeploymentID"></inject>**
 
-1. Click **Open in playground**. 
+1. Select the deployed model:
+   **gpt-4.1-mini**
 
-1. Select **Add a data source** under the **Add your data** section.
+1. Click **Open in Playground**.
 
-1. In the Select or add data source pane configure:
+1. In the Playground, select **Add a data source** under **Add your data**.
 
-   - Select data source: **Azure AI Search**.
-   - Subscription: **Select the defualt Subscription**.  
-   - Azure AI Search service: **mfg-search-<inject key="DeploymentID"></inject>**.  
-   - Azure AI Search index: Select the default **index** that was created in the previous challenge.
-   - Click **Next**.
+1. Configure the data source:
 
-1. In the Data management pane configure:
+   - Data source type: **Azure AI Search**
+   - Subscription: **default Subscription**
+   - Azure AI Search service: **health-search-<inject key="DeploymentID"></inject>**
+   - Azure AI Search index: Select the default index created in Challenge 03
+   - Click **Next**
 
-   - Search type: **Azure AI Search**.
-   - Semantic search configuration: **Select the exisitng**.  
-   - Click **Next**.
+1. In **Data management**:
+   - Search type: **Azure AI Search**
+   - Semantic configuration: **Use existing**
+   - Click **Next**
 
-1. In the Data connection pane configure:
+1. In **Data connection**:
+   - Authentication type: **API key**
+   - Click **Next**
 
-   - Azure resource authentication type: **API key**. 
-   - Click **Next**.
+1. Review settings and click **Save and close**.
 
-1. Review and click **Save and close**.
+1. In the Playground prompt window, test the following queries:
 
-1. In the Playground test with prompts such as:  
+   - `What are the latest treatments for glioblastoma in patients over 60?`
 
-   ```
-   Temprature of MACHINE_001
-   ```
+   - `Compare chemotherapy and immunotherapy outcomes for glioblastoma`
 
-   ```
-   All Running MACHINE
-   ```
-
-1. Observe the output summary.   
+1. Observe how the model retrieves information from indexed documents and generates grounded responses.
 
 ## Success Criteria
 
-- Model produces coherent, context-aware summaries of data.  
-- Insights include metrics and recommendations based on patterns.
+- Azure AI Search connected successfully to Foundry Playground  
+- Model responses reference indexed clinical data  
+- Answers are coherent, relevant, and grounded  
 
 ## Additional Resources
 
-- [Prompt Engineering Guidance](https://learn.microsoft.com/azure/ai-services/openai/concepts/prompt-engineering)
-- Microsoft Foundry documentation: https://learn.microsoft.com/azure/ai-foundry/
+- [Prompt Engineering Best Practices](https://learn.microsoft.com/azure/ai-services/openai/concepts/prompt-engineering)
+- [RAG with Azure AI Search](https://learn.microsoft.com/azure/architecture/ai-ml/guide/rag)
 
 Now, click **Next** to continue to **Challenge 05**.

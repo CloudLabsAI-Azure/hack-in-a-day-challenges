@@ -1,51 +1,58 @@
-# Challenge 01: Create and Review the Sample Manufacturing Dataset
+# Challenge 01: Upload and Review B2B Account Intelligence Data
 
 ## Introduction
-Contoso Manufacturing operates a network of machines across multiple plants.  
-Each machine logs temperature, vibration, and downtime events. Before using Generative AI to analyze this data, you’ll first upload and familiarize yourself with a synthetic dataset.
 
-## Accessing the Datasets
+Sales teams depend on account intelligence from multiple sources such as CRM systems, news updates, financial reports, and sentiment analysis.  
+Before enabling AI-powered insights, this information must be centralized and stored securely.
 
-Please copy the link below and paste it into a new browser tab inside your LabVM to download the required datasets and code files for the use case and extract them.
-
-```
-https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/c2-datasets.zip
-```
+In this challenge, you will upload synthetic B2B account intelligence documents into Azure Blob Storage, forming the data foundation for the Account Intelligence Assistant.
 
 ## Challenge Objectives
 
-- Access the sample manufacturing dataset provided in your lab environment.  
-- Upload the dataset to Azure Storage for easy access.  
-- Explore the data schema (columns such as timestamp, machine ID, temperature, status).
+- Create an Azure Storage Account for account intelligence data  
+- Upload synthetic CRM and market intelligence documents  
+- Review dataset structure to ensure readiness for AI search and retrieval  
 
 ## Steps to Complete
 
-1. Inside the Azure Portal.
+1. Sign in to the **Azure Portal**.
 
-1. Create a **Storage Account** with below details: 
-    
-    - Subscription: Select the **defualt Subscription**.
-    - Resource group: Select **challenge-rg-<inject key="DeploymentID"></inject>**.
-    - Storage account name: Type **mfgdatagenai<inject key="DeploymentID"></inject>**.  
-    - Region: **<inject key="Region"></inject>**.
-    - Performance: **Standard**.
-    - Redundancy: **Locally-redundant storage (LRS)**
+1. Search for **Storage accounts** and select **Create**.
 
-1. Inside the Storage Account, under the **Data storage** section, create a **container** with the following details:
+1. Create a **Storage Account** using the following details:
 
-    - Name: **manufacturing-logs-<inject key="DeploymentID"></inject>**.
+   - Subscription: Select the **default Subscription**
+   - Resource group: **agentic-ai-<inject key="DeploymentID"></inject>**
+   - Storage account name: **storage<inject key="DeploymentID"></inject>**
+   - Region: **<inject key="Region"></inject>**
+   - Performance: **Standard**
+   - Redundancy: **Locally-redundant storage (LRS)**
 
-1. Upload the provided CSV files (previously extracted dataset) from the Downloads folder into the newly created **Container**.
+1. Click **Review + Create**, then select **Create**.
+
+1. After deployment, open the Storage Account.
+
+1. Navigate to **Containers** under **Data storage** and select **+ Container**.
+
+1. Create a container with:
+
+   - Name: **datasets**
+   - Public access level: **Private (no anonymous access)**
+
+1. Upload the synthetic account intelligence documents (company briefs, CRM summaries, news reports) into the **datasets** container.
+
+1. Review the uploaded documents to understand the type of information available for AI-driven sales insights.
 
 ## Success Criteria
 
-- The Storage Account is created successfully with the specified configuration.
-- Dataset uploaded to the Blob container.
-- Dataset structure reviewed and ready for AI processing.
+- Storage Account created successfully  
+- **datasets** container created  
+- Account intelligence documents uploaded  
+- Dataset prepared for Azure AI Search indexing  
 
 ## Additional Resources
 
 - [Quickstart: Upload data to Azure Blob Storage](https://learn.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal)
-- [Sample Manufacturing Data Generator (GitHub)](https://github.com/Azure-Samples)
+- [Designing AI-ready Business Data](https://learn.microsoft.com/azure/architecture/ai-ml/)
 
 Now, click **Next** to continue to **Challenge 02**.

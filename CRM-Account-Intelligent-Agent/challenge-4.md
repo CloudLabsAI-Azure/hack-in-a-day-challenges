@@ -1,67 +1,67 @@
-# Challenge 04: Analyze Data Using GenAI Prompts
+# Challenge 04: Generate Account Insights Using Foundry Playground
 
 ## Introduction
 
-With data available and LLM deployed, Contoso wants to generate natural-language insights from machine logs.  
-In this challenge, you’ll use Microsoft Foundry (LLM capabilities) to summarize and interpret manufacturing data.
+With account intelligence documents indexed and models deployed, you will now validate AI-driven account insights using Foundry Playground.
+
+In this challenge, you will connect Azure AI Search to Foundry Playground and test sales-focused prompts. The AI agent will retrieve account intelligence documents and generate contextual sales briefings using RAG.
 
 ## Challenge Objectives
 
-- Load the CSV data from Azure Blob Storage.  
-- Send structured chunks of data to the Foundry LLM via prompt.  
-- Generate natural-language summaries and recommendations.
+- Connect Azure AI Search to Foundry Playground  
+- Generate contextual B2B account insights  
+- Validate RAG-based responses for sales scenarios  
 
 ## Steps to Complete
 
-1. Open **Microsoft Foundry Studio** and open your project **mfg-proj-<inject key="DeploymentID"></inject>**.
+1. Open **Microsoft Foundry** from the Azure Portal.
 
-1. Choose the deployed LLM model **gpt-4.1-mini** within the Foundry project.
+1. Navigate to the project:
+   **crm-proj-<inject key="DeploymentID"></inject>**
 
-1. Click **Open in playground**. 
+1. Select the deployed model:
+   **gpt-4.1-mini**
 
-1. Select **Add a data source** under the **Add your data** section.
+1. Click **Open in Playground**.
 
-1. In the Select or add data source pane configure:
+1. Select **Add a data source** under **Add your data**.
 
-   - Select data source: **Azure AI Search**.
-   - Subscription: **Select the defualt Subscription**.  
-   - Azure AI Search service: **mfg-search-<inject key="DeploymentID"></inject>**.  
-   - Azure AI Search index: Select the default **index** that was created in the previous challenge.
-   - Click **Next**.
+1. Configure the data source:
 
-1. In the Data management pane configure:
+   - Data source type: **Azure AI Search**
+   - Subscription: **default Subscription**
+   - Azure AI Search service: **crm-search-<inject key="DeploymentID"></inject>**
+   - Azure AI Search index: Select the default index
+   - Click **Next**
 
-   - Search type: **Azure AI Search**.
-   - Semantic search configuration: **Select the exisitng**.  
-   - Click **Next**.
+1. In **Data management**:
+   - Search type: **Azure AI Search**
+   - Semantic configuration: **Use existing**
+   - Click **Next**
 
-1. In the Data connection pane configure:
-
-   - Azure resource authentication type: **API key**. 
-   - Click **Next**.
+1. In **Data connection**:
+   - Authentication type: **API key**
+   - Click **Next**
 
 1. Review and click **Save and close**.
 
-1. In the Playground test with prompts such as:  
+1. Test the following prompts in Playground:
 
-   ```
-   Temprature of MACHINE_001
-   ```
+   - `Summarize recent changes for this account`
 
-   ```
-   All Running MACHINE
-   ```
+   - `What risks and opportunities exist for this customer?`
 
-1. Observe the output summary.   
+1. Observe how the model produces concise, actionable sales insights.
 
 ## Success Criteria
 
-- Model produces coherent, context-aware summaries of data.  
-- Insights include metrics and recommendations based on patterns.
+- Azure AI Search connected successfully  
+- AI responses are grounded in indexed account data  
+- Insights are relevant and actionable for sales teams  
 
 ## Additional Resources
 
-- [Prompt Engineering Guidance](https://learn.microsoft.com/azure/ai-services/openai/concepts/prompt-engineering)
-- Microsoft Foundry documentation: https://learn.microsoft.com/azure/ai-foundry/
+- [Azure AI Foundry Playground](https://learn.microsoft.com/azure/ai-foundry/)
+- [RAG for Business Intelligence](https://learn.microsoft.com/azure/architecture/ai-ml/guide/rag)
 
 Now, click **Next** to continue to **Challenge 05**.

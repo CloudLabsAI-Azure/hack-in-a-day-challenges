@@ -1,51 +1,60 @@
-# Challenge 01: Create and Review the Sample Manufacturing Dataset
+# Challenge 01: Upload and Review Clinical Research Datasets
 
 ## Introduction
-Contoso Manufacturing operates a network of machines across multiple plants.  
-Each machine logs temperature, vibration, and downtime events. Before using Generative AI to analyze this data, you’ll first upload and familiarize yourself with a synthetic dataset.
 
-## Accessing the Datasets
+Clinical researchers rely on vast amounts of unstructured medical literature and patient case studies to evaluate treatment effectiveness and design trials.  
+Before enabling Generative AI–powered analysis, this data must first be securely stored and reviewed.
 
-Please copy the link below and paste it into a new browser tab inside your LabVM to download the required datasets and code files for the use case and extract them.
-
-```
-https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/c2-datasets.zip
-```
+In this challenge, you will upload synthetic clinical research documents into Azure Blob Storage, forming the foundational data layer for the Clinical Research Intelligence Assistant.
 
 ## Challenge Objectives
 
-- Access the sample manufacturing dataset provided in your lab environment.  
-- Upload the dataset to Azure Storage for easy access.  
-- Explore the data schema (columns such as timestamp, machine ID, temperature, status).
+- Create an Azure Storage Account for healthcare research data  
+- Upload synthetic medical literature and case study documents  
+- Review the dataset structure to ensure it is ready for AI indexing  
 
 ## Steps to Complete
 
-1. Inside the Azure Portal.
+1. Sign in to the **Azure Portal**.
 
-1. Create a **Storage Account** with below details: 
-    
-    - Subscription: Select the **defualt Subscription**.
-    - Resource group: Select **challenge-rg-<inject key="DeploymentID"></inject>**.
-    - Storage account name: Type **mfgdatagenai<inject key="DeploymentID"></inject>**.  
-    - Region: **<inject key="Region"></inject>**.
-    - Performance: **Standard**.
-    - Redundancy: **Locally-redundant storage (LRS)**
+1. Search for **Storage accounts** and select **Create**.
 
-1. Inside the Storage Account, under the **Data storage** section, create a **container** with the following details:
+1. Create a **Storage Account** with the following configuration:
 
-    - Name: **manufacturing-logs-<inject key="DeploymentID"></inject>**.
+   - Subscription: Select the **default Subscription**
+   - Resource group: **agentic-ai-<inject key="DeploymentID"></inject>**
+   - Storage account name: **storage<inject key="DeploymentID"></inject>**
+   - Region: **<inject key="Region"></inject>**
+   - Performance: **Standard**
+   - Redundancy: **Locally-redundant storage (LRS)**
 
-1. Upload the provided CSV files (previously extracted dataset) from the Downloads folder into the newly created **Container**.
+1. Click **Review + Create**, then select **Create**.
+
+1. Once deployment completes, open the Storage Account.
+
+1. Under **Data storage**, select **Containers** and click **+ Container**.
+
+1. Create a container with the following details:
+
+   - Name: **datasets**
+   - Public access level: **Private (no anonymous access)**
+
+1. Upload the synthetic healthcare research documents (PDF or text files) into the **datasets** container.
+
+   > These documents simulate medical literature, clinical trials, and patient case studies.
+
+1. Review a few uploaded files to understand their structure and content.
 
 ## Success Criteria
 
-- The Storage Account is created successfully with the specified configuration.
-- Dataset uploaded to the Blob container.
-- Dataset structure reviewed and ready for AI processing.
+- Storage Account created successfully  
+- **datasets** container created  
+- Clinical research documents uploaded and accessible  
+- Dataset ready for indexing in Azure AI Search  
 
 ## Additional Resources
 
 - [Quickstart: Upload data to Azure Blob Storage](https://learn.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal)
-- [Sample Manufacturing Data Generator (GitHub)](https://github.com/Azure-Samples)
+- [Azure Blob Storage Overview](https://learn.microsoft.com/azure/storage/blobs/)
 
 Now, click **Next** to continue to **Challenge 02**.

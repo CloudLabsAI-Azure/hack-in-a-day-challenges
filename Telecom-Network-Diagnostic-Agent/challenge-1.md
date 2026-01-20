@@ -1,51 +1,58 @@
-# Challenge 01: Create and Review the Sample Manufacturing Dataset
+# Challenge 01: Upload and Review Network Telemetry and Incident Data
 
 ## Introduction
-Contoso Manufacturing operates a network of machines across multiple plants.  
-Each machine logs temperature, vibration, and downtime events. Before using Generative AI to analyze this data, you’ll first upload and familiarize yourself with a synthetic dataset.
 
-## Accessing the Datasets
+Telecom networks generate continuous telemetry data and incident reports that are critical for monitoring performance and diagnosing issues.  
+Before applying Generative AI for network diagnostics, this data must be stored in a centralized and searchable location.
 
-Please copy the link below and paste it into a new browser tab inside your LabVM to download the required datasets and code files for the use case and extract them.
-
-```
-https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/c2-datasets.zip
-```
+In this challenge, you will upload synthetic network telemetry and incident documents into Azure Blob Storage, forming the foundation for the Network Diagnostics and Optimization Assistant.
 
 ## Challenge Objectives
 
-- Access the sample manufacturing dataset provided in your lab environment.  
-- Upload the dataset to Azure Storage for easy access.  
-- Explore the data schema (columns such as timestamp, machine ID, temperature, status).
+- Create an Azure Storage Account for telecom diagnostics data  
+- Upload synthetic network telemetry and incident reports  
+- Review the dataset to ensure it is suitable for AI-driven analysis  
 
 ## Steps to Complete
 
-1. Inside the Azure Portal.
+1. Sign in to the **Azure Portal**.
 
-1. Create a **Storage Account** with below details: 
-    
-    - Subscription: Select the **defualt Subscription**.
-    - Resource group: Select **challenge-rg-<inject key="DeploymentID"></inject>**.
-    - Storage account name: Type **mfgdatagenai<inject key="DeploymentID"></inject>**.  
-    - Region: **<inject key="Region"></inject>**.
-    - Performance: **Standard**.
-    - Redundancy: **Locally-redundant storage (LRS)**
+1. Search for **Storage accounts** and select **Create**.
 
-1. Inside the Storage Account, under the **Data storage** section, create a **container** with the following details:
+1. Create a **Storage Account** with the following settings:
 
-    - Name: **manufacturing-logs-<inject key="DeploymentID"></inject>**.
+   - Subscription: Select the **default Subscription**
+   - Resource group: **agentic-ai-<inject key="DeploymentID"></inject>**
+   - Storage account name: **storage<inject key="DeploymentID"></inject>**
+   - Region: **<inject key="Region"></inject>**
+   - Performance: **Standard**
+   - Redundancy: **Locally-redundant storage (LRS)**
 
-1. Upload the provided CSV files (previously extracted dataset) from the Downloads folder into the newly created **Container**.
+1. Click **Review + Create**, then select **Create**.
+
+1. Once deployment completes, open the Storage Account.
+
+1. Under **Data storage**, select **Containers** → **+ Container**.
+
+1. Create a container with:
+
+   - Name: **datasets**
+   - Public access level: **Private (no anonymous access)**
+
+1. Upload the synthetic telecom telemetry and incident analysis documents into the **datasets** container.
+
+1. Review the uploaded files to understand the structure of telemetry summaries, detected issues, and recommended actions.
 
 ## Success Criteria
 
-- The Storage Account is created successfully with the specified configuration.
-- Dataset uploaded to the Blob container.
-- Dataset structure reviewed and ready for AI processing.
+- Storage Account created successfully  
+- **datasets** container created  
+- Network telemetry and incident documents uploaded  
+- Dataset ready for indexing and AI diagnostics  
 
 ## Additional Resources
 
-- [Quickstart: Upload data to Azure Blob Storage](https://learn.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal)
-- [Sample Manufacturing Data Generator (GitHub)](https://github.com/Azure-Samples)
+- [Azure Blob Storage Overview](https://learn.microsoft.com/azure/storage/blobs/)
+- [AI for Telecom Networks](https://learn.microsoft.com/azure/architecture/industries/telecommunications/)
 
 Now, click **Next** to continue to **Challenge 02**.

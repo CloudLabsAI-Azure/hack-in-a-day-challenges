@@ -1,67 +1,67 @@
-# Challenge 04: Analyze Data Using GenAI Prompts
+# Challenge 04: Analyze Network Diagnostics Using Foundry Playground
 
 ## Introduction
 
-With data available and LLM deployed, Contoso wants to generate natural-language insights from machine logs.  
-In this challenge, you’ll use Microsoft Foundry (LLM capabilities) to summarize and interpret manufacturing data.
+With network telemetry and incident data indexed, the next step is to validate AI-powered diagnostics using Foundry Playground.
+
+In this challenge, you will connect Azure AI Search to Foundry Playground and test diagnostics-focused prompts. The AI agent will retrieve telemetry data and generate explanations and recommendations using RAG.
 
 ## Challenge Objectives
 
-- Load the CSV data from Azure Blob Storage.  
-- Send structured chunks of data to the Foundry LLM via prompt.  
-- Generate natural-language summaries and recommendations.
+- Connect Azure AI Search to Foundry Playground  
+- Analyze network issues using natural-language prompts  
+- Validate explainable AI-driven diagnostics  
 
 ## Steps to Complete
 
-1. Open **Microsoft Foundry Studio** and open your project **mfg-proj-<inject key="DeploymentID"></inject>**.
+1. Open **Microsoft Foundry** from the Azure Portal.
 
-1. Choose the deployed LLM model **gpt-4.1-mini** within the Foundry project.
+1. Navigate to the project:
+   **telecom-proj-<inject key="DeploymentID"></inject>**
 
-1. Click **Open in playground**. 
+1. Select the deployed model:
+   **gpt-4.1-mini**
 
-1. Select **Add a data source** under the **Add your data** section.
+1. Click **Open in Playground**.
 
-1. In the Select or add data source pane configure:
+1. Under **Add your data**, select **Add a data source**.
 
-   - Select data source: **Azure AI Search**.
-   - Subscription: **Select the defualt Subscription**.  
-   - Azure AI Search service: **mfg-search-<inject key="DeploymentID"></inject>**.  
-   - Azure AI Search index: Select the default **index** that was created in the previous challenge.
-   - Click **Next**.
+1. Configure the data source:
 
-1. In the Data management pane configure:
+   - Data source type: **Azure AI Search**
+   - Subscription: **default Subscription**
+   - Azure AI Search service: **telecom-search-<inject key="DeploymentID"></inject>**
+   - Azure AI Search index: Select the default index
+   - Click **Next**
 
-   - Search type: **Azure AI Search**.
-   - Semantic search configuration: **Select the exisitng**.  
-   - Click **Next**.
+1. In **Data management**:
+   - Search type: **Azure AI Search**
+   - Semantic configuration: **Use existing**
+   - Click **Next**
 
-1. In the Data connection pane configure:
-
-   - Azure resource authentication type: **API key**. 
-   - Click **Next**.
+1. In **Data connection**:
+   - Authentication type: **API key**
+   - Click **Next**
 
 1. Review and click **Save and close**.
 
-1. In the Playground test with prompts such as:  
+1. Test the following prompts:
 
-   ```
-   Temprature of MACHINE_001
-   ```
+   - `Why is network latency high in this region?`
 
-   ```
-   All Running MACHINE
-   ```
+   - `What remediation actions are recommended for congestion issues?`
 
-1. Observe the output summary.   
+1. Observe how the AI explains root causes and suggests optimizations.
 
 ## Success Criteria
 
-- Model produces coherent, context-aware summaries of data.  
-- Insights include metrics and recommendations based on patterns.
+- Azure AI Search successfully connected  
+- AI responses are grounded in telemetry data  
+- Diagnostics explanations are clear and actionable  
 
 ## Additional Resources
 
-- [Prompt Engineering Guidance](https://learn.microsoft.com/azure/ai-services/openai/concepts/prompt-engineering)
-- Microsoft Foundry documentation: https://learn.microsoft.com/azure/ai-foundry/
+- [Azure AI Foundry Playground](https://learn.microsoft.com/azure/ai-foundry/)
+- [AI for Network Operations](https://learn.microsoft.com/azure/architecture/industries/telecommunications/)
 
 Now, click **Next** to continue to **Challenge 05**.

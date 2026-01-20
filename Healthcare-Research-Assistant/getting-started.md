@@ -1,7 +1,5 @@
 ## Getting Started with Challenge
 
-Welcome to Hack in a Day: Data Analysis with GenAI challenge! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
-
 ### Accessing Your Challenge Environment
 
 Once you're ready to dive in, your virtual machine and challenge guide will be right at your fingertips within your web browser.

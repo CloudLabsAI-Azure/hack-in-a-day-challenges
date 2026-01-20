@@ -1,56 +1,61 @@
-# Challenge 02: Deploy Azure OpenAI Service
+# Challenge 02: Deploy Foundry Models for Clinical Research Analysis
 
 ## Introduction
-Contoso wants to use a Large Language Model (LLM) to summarize machine logs and generate human-readable insights.  
-Azure OpenAI Service provides API access to models like gpt-4.1-mini, which can analyze data and produce natural language reports.
+
+To analyze complex medical literature and generate evidence-based insights, the Clinical Research Intelligence Assistant requires access to Large Language Models (LLMs) and embedding models.
+
+In this challenge, you will deploy the required models using **Microsoft Foundry**, enabling natural-language understanding, semantic search, and Retrieval-Augmented Generation (RAG) for healthcare research scenarios.
 
 ## Challenge Objectives
 
-- Create an **Azure OpenAI** resource in your subscription.  
-- Deploy the **gpt-4.1-mini** model with 20 K TPM capacity.  
-- Record the endpoint and API key for later use.
+- Create a Microsoft Foundry resource  
+- Deploy an LLM for clinical research analysis  
+- Deploy an embedding model for semantic search and retrieval  
 
 ## Steps to Complete
 
-1. In the Azure Portal search for **Microsoft Foundry** and choose **Create a Foundry resource**.
+1. Sign in to the **Azure Portal**.
+
+1. Search for **Microsoft Foundry** and select **Create a Foundry resource**.
 
 1. Create the Foundry resource with the following details:
 
-   - Subscription: Select the **defualt Subscription**.
-   - Resource group: Select **challenge-rg-<inject key="DeploymentID"></inject>**.
-   - Name: **openai-mfg-<inject key="DeploymentID"></inject>**.
-   - Region: **<inject key="Region"></inject>**.
-   - Default Project Name: **mfg-proj-<inject key="DeploymentID"></inject>**.
+   - Subscription: Select the **default Subscription**
+   - Resource group: **agentic-ai-<inject key="DeploymentID"></inject>**
+   - Name: **foundry-health-<inject key="DeploymentID"></inject>**
+   - Region: **<inject key="Region"></inject>**
+   - Default project name: **health-proj-<inject key="DeploymentID"></inject>**
 
-   > **Note:** Keep clicking **Next** until you reach **Review + Create**, then select **Create**.
+   > Click **Next** through the configuration pages, then select **Review + Create** → **Create**.
 
-1. After deployment, open the Microsoft Foundry resource and navigate to the project **mfg-proj-<inject key="DeploymentID"></inject>**.
+1. Once deployment completes, open the Foundry resource.
 
-1. From the Foundry resource **Overview** page click **Go to Foundry portal** 
+1. Navigate to the project **health-proj-<inject key="DeploymentID"></inject>**.
 
-1. Deploy the following models in the **Models + Endpoints** section by selecting **Deploy base model** and once after choosing the mode, please edit their properties as provided:
+1. From the Foundry Overview page, click **Go to Foundry portal**.
 
-   - **gpt-4.1-mini**: **Global Standard** tierx` with **20K TPM** capacity.
-   - **text-embedding-ada-002**: *Global Standard* with **30K TPM** capacity (Requried for semantic search).
+1. In the **Models + Endpoints** section, select **Deploy base model** and deploy the following models:
 
-   > **Hint:** If a model doesn’t appear when you search for it, click **Go to model catalog** in the model selection screen and deploy it from there.
+   - **gpt-4.1-mini**
+     - Deployment type: **Global Standard**
+     - Capacity: **20K TPM**
 
-<validation step="0e3316a0-8749-494b-b375-e696faea24f2" />
- 
-> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
-> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+   - **text-embedding-ada-002**
+     - Deployment type: **Global Standard**
+     - Capacity: **30K TPM**
+
+   > If a model does not appear in search, select **Go to model catalog** and deploy it from there.
 
 ## Success Criteria
 
-- Microsoft Foundry resource deployed successfully.  
-- `gpt-4.1-mini` and `text-embedding-ada-002` model available for prompt testing.  
-- Endpoint and API key ready for subsequent use.
+- Microsoft Foundry resource created successfully  
+- `gpt-4.1-mini` deployed and available  
+- `text-embedding-ada-002` deployed for semantic search  
+- Models ready for clinical research analysis  
 
 ## Additional Resources
 
-- [Azure OpenAI Service Overview](https://learn.microsoft.com/azure/ai-services/openai/overview)
-- [Deploy a model in Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/how-to/create-resource)
+- [Azure AI Foundry Overview](https://learn.microsoft.com/azure/ai-foundry/)
+- [Azure OpenAI Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 
 Now, click **Next** to continue to **Challenge 03**.
