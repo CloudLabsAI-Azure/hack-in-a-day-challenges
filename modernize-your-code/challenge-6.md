@@ -1,42 +1,364 @@
-# Challenge 06: Build Streamlit App with Agent API Integration
+# Challenge 06: Run the Production Streamlit Application
 
 ## Introduction
 
-Your three-agent pipeline is operational! Now it's time to build a user-friendly web interface. You'll create a Streamlit application that allows users to input Oracle SQL, calls your Translation Agent API, receives results from all three connected agents, displays them in a clean three-phase format (Translation | Validation | Optimization), and saves the results to Cosmos DB for history tracking.
+Your three-agent pipeline is operational! All the code has been built for you. In this challenge, you'll configure and run a production-ready Streamlit web application that provides a beautiful interface for your SQL modernization system.
 
 ## Challenge Objectives
 
-- Set up Streamlit development environment
-- Create SQL input interface
-- Integrate with Translation Agent API endpoint
-- Parse responses from all three connected agents
-- Display three-phase results in organized tabs
-- Save results directly to Cosmos DB
-- Add query history from Cosmos DB
-- Deploy to Azure Container Apps for production access
+- Configure environment variables with your agent credentials
+- Install Python dependencies
+- Run the Streamlit application
+- Test the multi-agent pipeline through the web UI
+- Upload SQL files and process them
+- View translation history from Cosmos DB
 
 ## Steps to Complete
 
-### Part 1: Get Agent API Endpoint
+### Part 1: Get Your Agent Credentials
 
-1. Go to **Azure AI Foundry Studio** → **Agents**.
+You need three values to connect to your agents:
 
-2. Click on **SQL-Translation-Agent**.
+1. Go to **Azure AI Foundry Studio** → Your project.
 
-3. Click **Deploy** in the top menu.
+2. Click **Settings** in the left navigation.
 
-4. If not deployed, click **Deploy Agent**:
-   - **Deployment name**: `sql-translation-api`
-   - **Region**: **<inject key="Region"></inject>**
-   - **Instance type**: Select available option
+3. In the Overview section, find and copy the **OpenAI endpoint**:
+   - Format: `https://ai-project-XXXX.openai.azure.com/`
+   - ⚠️ Make sure it ends with `.openai.azure.com/` (not `.services.ai.azure.com/`)
 
-5. Wait for deployment (2-3 minutes).
+4. In Settings, click **Keys** tab and copy the **Primary Key**.
 
-6. Once deployed, you'll see:
-   - **API Endpoint**: `https://your-endpoint.azure.com/...`
-   - **API Key**: Click **Show** to reveal
+5. Navigate to **Agents** in the left menu.
 
-7. Copy and save both.
+6. Click on your **SQL-Translation-Agent**.
+
+7. In the Setup panel on the right, copy the **Agent ID** (starts with `asst_`).
+
+### Part 2: Configure the Application
+
+1. Navigate to the `codefiles` folder in your hackathon materials.
+
+2. Locate the `.env.example` file.
+
+3. **Rename** `.env.example` to `.env`
+
+4. Open `.env` and replace the placeholder values:
+
+```env
+AGENT_API_ENDPOINT=https://ai-project-2029713.openai.azure.com/
+AGENT_API_KEY=<paste-your-primary-key-from-step-4>
+AGENT_ID=<paste-your-agent-id-from-step-7>
+COSMOS_ENDPOINT=https://sql-modernization-cosmos-2029713.documents.azure.com:443/
+COSMOS_KEY=<paste-cosmos-key-from-challenge-1>
+DATABASE_NAME=SQLModernizationDB
+```
+
+5. Save the file.
+
+### Part 3: Review the Code (Optional but Recommended)
+
+Before running, take a moment to explore the application code:
+
+**app.py** - Main Streamlit application
+- **Lines 1-50**: Imports and configuration
+- **Lines 51-169**: Custom CSS styling for beautiful UI
+- **Lines 171-186**: Cosmos DB connection
+- **Lines 188-228**: Agent response parsing
+- **Lines 230-330**: Agent API calling with proper thread/run handling
+- **Lines 332-726**: Streamlit UI with 3 tabs (Modernize SQL, Results, History)
+
+**Key features to notice:**
+- File upload support (upload .sql files)
+- Sample query templates
+- Real-time progress tracking
+- Three-column results display
+- History from Cosmos DB
+- Error handling and validation
+- Production-ready styling
+
+### Part 4: Install Dependencies
+
+Open a terminal in the `codefiles` folder and run:
+
+```bash
+pip install -r requirements.txt
+```
+
+This installs:
+- `streamlit` - Web framework
+- `requests` - For Agent API calls
+- `azure-cosmos` - Cosmos DB SDK
+- `python-dotenv` - Environment variables
+- `pandas` - Data processing
+
+### Part 5: Run the Application
+
+Start the Streamlit app:
+
+```bash
+streamlit run app.py
+```
+
+The application will automatically open in your browser at `http://localhost:8501`
+
+### Part 6: Test the Multi-Agent Pipeline
+
+1. You'll see a stunning blue gradient header: **"SQL Modernization Assistant"**
+
+2. In the **sidebar**, verify all agents show green checkmarks:
+   - ✓ Translation Agent
+   - ✓ Validation Agent
+   - ✓ Optimization Agent
+
+3. **Option A: Use a Sample Query**
+   - On the right side, select a sample from the dropdown (e.g., "Hierarchical Query (CONNECT BY)")
+   - Click **"📋 Load Sample"**
+
+4. **Option B: Upload a SQL File**
+   - Click the file upload area
+   - Upload a .sql file with Oracle SQL code
+
+5. **Option C: Paste SQL Directly**
+   - Paste your Oracle SQL in the text area
+
+6. Click the **"🚀 Modernize SQL"** button
+
+7. Watch the progress:
+   - 🔄 Creating conversation thread...
+   - 📝 Sending Oracle SQL to Translation Agent...
+   - 🤖 Starting multi-agent pipeline...
+   - ⏳ Agent Status: RUNNING...
+   - ✅ Agent processing completed!
+
+8. Click the **"📋 Results"** tab
+
+9. View the **three-column output**:
+
+   **Column 1: Translation**
+   - Azure SQL T-SQL translation
+   - Copy button for easy use
+
+   **Column 2: Validation**
+   - ✅/❌ Validation status
+   - Syntax errors (if any)
+   - Semantic warnings
+   - Raw JSON data
+
+   **Column 3: Optimization**
+   - Optimization score (0-100)
+   - Performance recommendations
+   - Suggested indexes
+   - Raw JSON data
+
+10. Click the **"📚 History"** tab to see all past translations from Cosmos DB
+
+### Part 7: Test Complex Scenarios
+
+Try these test cases to verify everything works:
+
+**Test 1: Simple ROWNUM Query**
+```sql
+SELECT emp_id, emp_name, salary
+FROM employees
+WHERE ROWNUM <= 10
+ORDER BY salary DESC;
+```
+
+Expected: Should convert `ROWNUM <= 10` to `TOP 10`
+
+---
+
+**Test 2: NVL and Date Functions**
+```sql
+SELECT emp_name, NVL(commission, 0) as comm
+FROM employees
+WHERE hire_date > SYSDATE - 30;
+```
+
+Expected: Should convert `NVL` to `ISNULL`, `SYSDATE` to `GETDATE()`
+
+---
+
+**Test 3: Hierarchical Query** (Most Complex)
+```sql
+SELECT emp_id, emp_name, manager_id, LEVEL as emp_level
+FROM employees
+START WITH manager_id IS NULL
+CONNECT BY PRIOR emp_id = manager_id;
+```
+
+Expected:
+- Translation: Recursive CTE with `WITH` clause
+- Validation: Should flag if indexes missing
+- Optimization: Should suggest indexes on `manager_id` and `emp_id`
+
+---
+
+**Test 4: Invalid SQL** (Test Validation Agent)
+```sql
+SELECT emp_id, emp_name
+FROM employees
+WHERE dept_id = 10
+GROUP BY -- Missing column list
+```
+
+Expected:
+- Validation: Should show ❌ with syntax error
+- Details: Missing GROUP BY columns
+
+---
+
+**Test 5: File Upload**
+1. Create a file `test.sql` with any Oracle SQL
+2. Upload it using the file uploader
+3. Click "Modernize SQL"
+4. Verify it processes correctly
+
+## Success Criteria
+
+- [ ] `.env` file configured with correct credentials
+- [ ] All dependencies installed successfully
+- [ ] Streamlit app runs without errors
+- [ ] Browser opens to `http://localhost:8501`
+- [ ] Sidebar shows green checkmarks for all 3 agents
+- [ ] Can process sample queries successfully
+- [ ] Can upload and process .sql files
+- [ ] Results tab shows translation + validation + optimization
+- [ ] History tab shows previous translations
+- [ ] Cosmos DB saves results (verify in Azure Portal)
+- [ ] UI is responsive and visually appealing
+
+## Troubleshooting
+
+**Issue**: `ModuleNotFoundError: No module named 'streamlit'`
+
+**Solution**: Run `pip install -r requirements.txt` in the codefiles folder
+
+---
+
+**Issue**: `401 Unauthorized` error
+
+**Solution**: 
+- Verify `AGENT_API_KEY` is the Primary Key from AI Foundry project Settings → Keys
+- Ensure `AGENT_API_ENDPOINT` ends with `.openai.azure.com/` (not `.services.ai.azure.com/`)
+
+---
+
+**Issue**: Sidebar shows "🔴 Configuration missing"
+
+**Solution**: 
+- Check `.env` file exists (not `.env.example`)
+- Verify all values are filled in (no `<paste-your-key-here>` placeholders)
+- Restart the Streamlit app
+
+---
+
+**Issue**: "Thread timeout" or "Agent run timed out"
+
+**Solution**: 
+- Complex queries can take 1-2 minutes with 3 agents
+- Refresh the page and try again
+- If it persists, check Azure AI Foundry project quota
+
+---
+
+**Issue**: No validation or optimization results
+
+**Solution**:
+- Verify Connected agents are configured (from Challenges 3-4)
+- Check Translation Agent has `validation_agent` and `optimization_agent` in Connected agents
+- Ensure activation details are in Translation Agent instructions
+
+---
+
+**Issue**: Cosmos DB errors
+
+**Solution**:
+- Verify `COSMOS_ENDPOINT` and `COSMOS_KEY` are correct
+- Check Cosmos DB database `SQLModernizationDB` exists
+- Verify container `TranslationResults` exists
+- If missing, create them manually or re-run Challenge 1
+
+---
+
+**Issue**: App is slow or unresponsive
+
+**Solution**:
+- Check your internet connection
+- Verify Azure AI Foundry quota hasn't been exceeded
+- Try with a simpler SQL query first
+
+## Bonus Challenges
+
+1. **Custom Query Builder**: Modify app.py to add a query builder with dropdown menus for common Oracle patterns
+
+2. **Export Feature**: Add a "Download Report" button that exports results as PDF or Word document
+
+3. **Batch Processing**: Add functionality to upload multiple .sql files and process them all at once
+
+4. **Real-time Comparison**: Add a diff view showing Oracle vs Azure SQL side-by-side with syntax highlighting
+
+5. **Agent Metrics Dashboard**: Create a new tab showing statistics:
+   - Average optimization score
+   - Most common syntax errors
+   - Processing time trends
+   - Success rate over time
+
+## Next Steps
+
+Congratulations! You've successfully:
+- ✅ Built a 3-agent AI system in Azure AI Foundry
+- ✅ Connected agents in a pipeline (Translation → Validation, Optimization)
+- ✅ Deployed a production-ready Streamlit web application
+- ✅ Integrated with Cosmos DB for persistence
+- ✅ Created a complete SQL modernization platform
+
+**What you've learned:**
+- Azure AI Foundry Agents visual builder
+- Multi-agent orchestration and hand-offs
+- Azure OpenAI Assistants API integration
+- Streamlit for production web apps
+- Cosmos DB for NoSQL storage
+- End-to-end AI application development
+
+**Where to go from here:**
+1. Deploy to Azure Container Apps for production access
+2. Add more specialized agents (Security Analyzer, Performance Tester)
+3. Integrate with Azure DevOps for automated migration PRs
+4. Build a feedback loop for continuous agent improvement
+5. Extend to support other databases (MySQL, PostgreSQL, etc.)
+
+### Part 1: Get Agent API Credentials
+
+Agents in Azure AI Foundry are available via API immediately after creation - no separate deployment needed!
+
+1. Go to **Azure AI Foundry Studio** → Your project.
+
+2. Click **Settings** in the left navigation.
+
+3. In the Overview section, you'll see two endpoints:
+   - **Project endpoint**: `https://ai-project-XXXX.services.ai.azure.com/`
+   - **OpenAI endpoint**: `https://ai-project-XXXX.openai.azure.com/` ✓ Use this one
+
+4. Copy the **OpenAI endpoint** (ending in `.openai.azure.com/`) - this is your **AGENT_API_ENDPOINT**.
+
+5. In Settings, click **Keys** and copy the **Primary Key** - this is your **AGENT_API_KEY**.
+
+6. Navigate to **Agents** in the left menu.
+
+7. Click on your **SQL-Translation-Agent**.
+
+8. In the Setup panel on the right, copy the **Agent ID** (starts with `asst_`). 
+   
+   Example: `asst_4suaVDw2ZsziL9sShpoyeoDM`
+
+   > This is the Translation Agent ID - when you call this agent, it will automatically trigger the connected Validation and Optimization agents.
+
+9. You now have all three values needed:
+   - **AGENT_API_ENDPOINT**: `https://ai-project-XXXX.openai.azure.com/`
+   - **AGENT_API_KEY**: Your project primary key  
+   - **AGENT_ID**: `asst_XXXX...`
 
 ### Part 2: Set Up Local Development Environment
 
@@ -44,7 +366,9 @@ Your three-agent pipeline is operational! Now it's time to build a user-friendly
 
 2. Create a new folder: `sql-modernization-app`
 
-3. Inside, create a file: **requirements.txt**
+3. Copy the `app.py` file from the codefiles folder in your hackathon materials.
+
+4. Create a file: **requirements.txt**
 
 ```txt
 streamlit==1.29.0
@@ -54,86 +378,347 @@ azure-cosmos==4.5.1
 pandas==2.1.4
 ```
 
-4. Create **.env** file:
+5. Create **.env** file:
 
 ```env
-AZURE_AI_ENDPOINT=https://your-endpoint.azure.com/...
-AZURE_AI_KEY=your-api-key-here
-COSMOS_ENDPOINT=https://your-cosmos-account.documents.azure.com:443/
-COSMOS_KEY=your-cosmos-key-here
+AGENT_API_ENDPOINT=https://ai-project-2029713.openai.azure.com/
+AGENT_API_KEY=your-actual-api-key-from-step-5
+AGENT_ID=asst_4suaVDw2ZsziL9sShpoyeoDM
+COSMOS_ENDPOINT=https://sql-modernization-cosmos-2029713.documents.azure.com:443/
+COSMOS_KEY=your-actual-cosmos-key-from-challenge-1
 DATABASE_NAME=SQLModernizationDB
 ```
 
-5. Replace with your actual values from previous challenges.
+6. Replace the placeholder values:
+   - **AGENT_API_ENDPOINT**: Your OpenAI endpoint from step 4 (keep the format: `https://ai-project-XXXX.openai.azure.com/`)
+   - **AGENT_API_KEY**: Your Primary Key from step 5
+   - **AGENT_ID**: Your Translation Agent ID from step 8 (keep the format: `asst_XXXX`)
+   - **COSMOS_ENDPOINT**: From Challenge 1 Cosmos DB resource
+   - **COSMOS_KEY**: From Challenge 1 Cosmos DB Keys section
 
-### Part 3: Create Main Streamlit App
+### Part 3: Test the Application Locally
 
-Create **app.py**:
+1. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+2. Run the Streamlit app:
+
+```bash
+streamlit run app.py
+```
+
+3. The app will open in your browser at `http://localhost:8501`.
+
+4. Test with a sample Oracle query:
+
+```sql
+SELECT emp_id, emp_name, hire_date
+FROM employees  
+WHERE hire_date > SYSDATE - 30
+AND ROWNUM <= 10;
+```
+
+5. Click **Modernize SQL** and verify you see results from all 3 agents.
+
+### Part 4: Understanding the Agent API Call
+
+The app.py uses the Azure OpenAI Assistants API to interact with your Translation Agent. Here's the flow:
+
+**Step 1: Create a Thread**
+```python
+# Create a conversation thread
+thread_response = requests.post(
+    f"{endpoint}/openai/threads?api-version=2024-02-15-preview",
+    headers=headers,
+    json={}
+)
+thread_id = thread_response.json()["id"]
+```
+
+**Step 2: Add User Message**
+```python
+# Add the Oracle SQL as a message
+message_response = requests.post(
+    f"{endpoint}/openai/threads/{thread_id}/messages?api-version=2024-02-15-preview",
+    headers=headers,
+    json={
+        "role": "user",
+        "content": sql_input
+    }
+)
+```
+
+**Step 3: Run the Agent**
+```python
+# Start the Translation Agent
+run_response = requests.post(
+    f"{endpoint}/openai/threads/{thread_id}/runs?api-version=2024-02-15-preview",
+    headers=headers,
+    json={
+        "assistant_id": agent_id  # Your Translation Agent ID
+    }
+)
+run_id = run_response.json()["id"]
+```
+
+**Step 4: Poll for Completion**
+```python
+# Wait for agent to finish (including connected agents)
+import time
+while True:
+    status_response = requests.get(
+        f"{endpoint}/openai/threads/{thread_id}/runs/{run_id}?api-version=2024-02-15-preview",
+        headers=headers
+    )
+    status = status_response.json()["status"]
+    
+    if status == "completed":
+        break
+    elif status in ["failed", "cancelled", "expired"]:
+        raise Exception(f"Run {status}")
+    
+    time.sleep(2)
+```
+
+**Step 5: Get the Response**
+```python
+# Retrieve messages from the thread
+messages_response = requests.get(
+    f"{endpoint}/openai/threads/{thread_id}/messages?api-version=2024-02-15-preview",
+    headers=headers
+)
+messages = messages_response.json()["data"]
+
+# Get the assistant's response (includes all 3 agents' outputs)
+assistant_messages = [m for m in messages if m["role"] == "assistant"]
+response_text = assistant_messages[0]["content"][0]["text"]["value"]
+```
+
+> **Key Point**: When you call the Translation Agent, it automatically calls the connected Validation and Optimization agents. The response includes all three outputs in one message.
+
+### Part 5: Response Parsing
+
+The app uses regex to extract the three agent outputs:
 
 ```python
-import streamlit as st
-import requests
-import json
-import os
-from dotenv import load_dotenv
-from datetime import datetime
+def parse_agent_response(response_text):
+    result = {
+        'translation': '',
+        'validation': None,
+        'optimization': None
+    }
+    
+    # Extract SQL code block
+    sql_match = re.search(r'```sql\n(.*?)```', response_text, re.DOTALL)
+    if sql_match:
+        result['translation'] = sql_match.group(1).strip()
+    
+    # Extract JSON blocks for validation/optimization
+    json_matches = re.findall(r'```json\n(.*?)```', response_text, re.DOTALL)
+    for json_text in json_matches:
+        data = json.loads(json_text)
+        if 'valid' in data or 'syntax_errors' in data:
+            result['validation'] = data
+        elif 'optimization_score' in data:
+            result['optimization'] = data
+    
+    return result
+```
 
-load_dotenv()
+### Part 6: Deploy to Azure Container Apps
 
-st.set_page_config(
-    page_title="SQL Modernization Assistant",
-    page_icon="🔄",
-    layout="wide"
+Now that your app works locally, let's deploy it to Azure for production use.
+
+1. Create a **Dockerfile** in your project folder:
+
+```dockerfile
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY app.py .
+COPY .env .
+
+EXPOSE 8501
+
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+```
+
+2. Build and test Docker image locally:
+
+```bash
+docker build -t sql-modernization-app .
+docker run -p 8501:8501 sql-modernization-app
+```
+
+3. Visit `http://localhost:8501` to test the containerized app.
+
+4. Push to Azure Container Registry:
+
+```bash
+# Login to Azure
+az login
+
+# Create Azure Container Registry (if not exists)
+az acr create --resource-group challenge-rg-<inject key="DeploymentID"></inject> --name sqlmodernizationacr<inject key="DeploymentID"></inject> --sku Basic
+
+# Login to ACR
+az acr login --name sqlmodernizationacr<inject key="DeploymentID"></inject>
+
+# Tag and push image
+docker tag sql-modernization-app sqlmodernizationacr<inject key="DeploymentID"></inject>.azurecr.io/sql-modernization-app:v1
+docker push sqlmodernizationacr<inject key="DeploymentID"></inject>.azurecr.io/sql-modernization-app:v1
+```
+
+5. Create Azure Container App:
+
+```bash
+az containerapp create \
+  --name sql-modernization-app \
+  --resource-group challenge-rg-<inject key="DeploymentID"></inject> \
+  --environment sql-modernization-env \
+  --image sqlmodernizationacr<inject key="DeploymentID"></inject>.azurecr.io/sql-modernization-app:v1 \
+  --target-port 8501 \
+  --ingress external \
+  --registry-server sqlmodernizationacr<inject key="DeploymentID"></inject>.azurecr.io \
+  --env-vars \
+    AGENT_API_ENDPOINT="<your-endpoint>" \
+    AGENT_API_KEY="<your-api-key>" \
+    AGENT_ID="<your-agent-id>" \
+    COSMOS_ENDPOINT="<your-cosmos-endpoint>" \
+    COSMOS_KEY="<your-cosmos-key>" \
+    DATABASE_NAME="SQLModernizationDB"
+```
+
+6. Get the public URL:
+
+```bash
+az containerapp show --name sql-modernization-app --resource-group challenge-rg-<inject key="DeploymentID"></inject> --query properties.configuration.ingress.fqdn -o tsv
+```
+
+7. Visit the URL and test your deployed app!
+
+### Part 7: Verify Complete Pipeline
+
+Test with this complex Oracle query to verify all 3 agents work:
+
+```sql
+SELECT emp_id, emp_name, manager_id, LEVEL as emp_level
+FROM employees
+START WITH manager_id IS NULL
+CONNECT BY PRIOR emp_id = manager_id
+ORDER BY LEVEL, emp_name;
+```
+
+Expected results:
+
+**Translation Agent**: Should convert to recursive CTE with T-SQL syntax
+
+```sql
+WITH EmployeeHierarchy AS (
+    SELECT emp_id, emp_name, manager_id, 1 as emp_level
+    FROM employees
+    WHERE manager_id IS NULL
+    
+    UNION ALL
+    
+    SELECT e.emp_id, e.emp_name, e.manager_id, eh.emp_level + 1
+    FROM employees e
+    INNER JOIN EmployeeHierarchy eh ON e.manager_id = eh.emp_id
 )
+SELECT emp_id, emp_name, manager_id, emp_level
+FROM EmployeeHierarchy
+ORDER BY emp_level, emp_name;
+```
 
-st.title("Oracle to Azure SQL Modernization")
-st.markdown("Upload your Oracle SQL files and get instant translations, validation, and optimization recommendations.")
+**Validation Agent**: Should return JSON
 
-# Sidebar for agent info
-with st.sidebar:
-    st.header("Agent Pipeline")
-    st.info("1. Translation Agent\n2. Validation Agent\n3. Optimization Agent")
-    
-    st.header("Configuration")
-    endpoint = os.getenv("AZURE_AI_ENDPOINT")
-    if endpoint:
-        st.success("Connected to Azure AI Foundry")
-    else:
-        st.error("Missing API configuration")
+```json
+{
+  "valid": true,
+  "syntax_errors": [],
+  "semantic_warnings": ["Ensure employees table has necessary indexes on emp_id and manager_id"]
+}
+```
 
-# Main interface
-tab1, tab2, tab3 = st.tabs(["SQL Upload", "Translation Results", "History"])
+**Optimization Agent**: Should return JSON
 
-with tab1:
-    st.header("Upload Oracle SQL File")
-    
-    uploaded_file = st.file_uploader(
-        "Choose a .sql file",
-        type=["sql"],
-        help="Upload your Oracle SQL file for modernization"
-    )
-    
-    # Text area for manual input
-    st.markdown("**Or paste SQL code directly:**")
-    sql_input = st.text_area(
-        "Oracle SQL Code",
-        height=200,
-        placeholder="SELECT emp_id, emp_name FROM employees WHERE ROWNUM <= 10;"
-    )
-    
-    if st.button("Modernize SQL", type="primary"):
-        # Get SQL content
-        if uploaded_file:
-            sql_content = uploaded_file.read().decode("utf-8")
-        elif sql_input:
-            sql_content = sql_input
-        else:
-            st.error("Please upload a file or paste SQL code")
-            st.stop()
-        
-        with st.spinner("Processing through agent pipeline..."):
-            try:
-                # Call Translation Agent API
+```json
+{
+  "optimization_score": 78,
+  "recommendations": [
+    "Consider adding MAXRECURSION hint if hierarchy is deep",
+    "Add index on (manager_id, emp_id) for better CTE performance"
+  ],
+  "indexes": [
+    "CREATE INDEX IX_Employees_ManagerId ON employees(manager_id) INCLUDE (emp_id, emp_name);"
+  ]
+}
+```
+
+## Success Criteria
+
+- [ ] Retrieved agent API credentials from Azure AI Foundry project
+- [ ] Configured .env file with AGENT_API_ENDPOINT, AGENT_API_KEY, AGENT_ID
+- [ ] Streamlit app runs locally and calls Translation Agent
+- [ ] App displays results from all 3 connected agents (Translation, Validation, Optimization)
+- [ ] Results saved to Cosmos DB TranslationResults container
+- [ ] App deployed to Azure Container Apps with public URL
+- [ ] Can test production app with complex Oracle SQL and see 3-phase results
+
+## Troubleshooting
+
+**Issue**: `401 Unauthorized` error
+
+**Solution**: Verify your AGENT_API_KEY is the Primary Key from your AI Foundry project (not the model deployment key)
+
+---
+
+**Issue**: Response doesn't include validation/optimization
+
+**Solution**: 
+- Check Translation Agent has Connected agents configured (validation_agent and optimization_agent)
+- Verify activation details in Translation Agent instructions
+- Check that hand-off instructions are in the Translation Agent's Instructions field
+
+---
+
+**Issue**: Timeout waiting for agent response
+
+**Solution**: Increase `max_attempts` in app.py from 60 to 120 (complex queries with 3 agents can take 2-3 minutes)
+
+---
+
+**Issue**: Can't find Agent ID
+
+**Solution**: 
+1. Go to Azure AI Foundry portal
+2. Click on your Translation Agent
+3. Look in the Setup panel on the right
+4. Copy the value from "Agent ID:" field (starts with `asst_`)
+
+## Bonus Challenges
+
+1. **Batch Processing**: Add file upload to process multiple .sql files at once
+2. **Export Report**: Add "Download as PDF" button with translation comparison
+3. **Metrics Dashboard**: Query Cosmos DB to show statistics (success rate, most common errors, average optimization score)
+4. **Code Diff View**: Use `difflib` to show side-by-side Oracle vs T-SQL comparison
+5. **Chat Interface**: Add conversational UI where users can ask follow-up questions about the translation
+
+## Next Steps
+
+Congratulations! You've built a complete multi-agent SQL modernization platform. You can:
+
+1. Add more specialized agents (Security Analyzer, Cost Optimizer, Performance Tester)
+2. Create a feedback loop where validation failures trigger automatic retranslation
+3. Build an agent that generates test data and runs the T-SQL to verify correctness
+4. Integrate with Azure DevOps to auto-generate migration PRs
                 endpoint = os.getenv("AZURE_AI_ENDPOINT")
                 api_key = os.getenv("AZURE_AI_KEY")
                 
