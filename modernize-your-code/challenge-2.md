@@ -2,13 +2,13 @@
 
 ## Introduction
 
-In this challenge, you will create your first AI agent directly in the Azure AI Foundry UI. The Translation Agent is responsible for converting Oracle PL/SQL syntax to Azure SQL T-SQL syntax using the GPT-4 model you deployed in Challenge 1. You will configure the agent with specialized instructions, set up the deployment, and test it using the playground.
+In this challenge, you will create your first AI agent directly in the Azure AI Foundry UI. The Translation Agent is responsible for converting Oracle PL/SQL syntax to Azure SQL T-SQL syntax using the GPT-4.1 model you deployed in Challenge 1. You will configure the agent with specialized instructions, set up the deployment, and test it using the playground.
 
 ## Challenge Objectives
 
 - Navigate to the Agents section in Azure AI Foundry Studio
 - Create a new Translation Agent with a descriptive name
-- Configure the agent to use your GPT-4 deployment
+- Configure the agent to use your GPT-4.1 deployment
 - Write comprehensive instructions for Oracle to Azure SQL translation
 - Test the agent with sample Oracle SQL queries
 - Verify translation accuracy and adjust instructions if needed

@@ -2,14 +2,13 @@
 
 ## Introduction
 
-Before building the AI-powered SQL modernization pipeline, you need to provision the necessary Azure infrastructure. This challenge involves creating Azure AI Foundry project with GPT-4 model deployment, Cosmos DB for storing results and logs, Azure Storage for SQL file uploads, and an optional Azure SQL Database for validation testing.
+Before building the AI-powered SQL modernization pipeline, you need to provision the necessary Azure infrastructure. This challenge involves creating Azure AI Foundry project with GPT-4.1 model deployment, Cosmos DB for storing results and logs, and Azure Storage for SQL file uploads.
 
 ## Challenge Objectives
 
-- Set up an Azure AI Foundry project with GPT-4 model deployment
+- Set up an Azure AI Foundry project with GPT-4.1 model deployment
 - Provision Cosmos DB with appropriate database and containers
 - Create an Azure Storage Account for SQL file uploads
-- (Optional) Set up Azure SQL Database for real query validation
 - Verify all resources are properly configured and accessible
 
 ## Steps to Complete
@@ -33,7 +32,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 3. Configure the AI Foundry project:
    - **Project name**: **sql-modernization-ai-project**
    - **Resource Group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
-   - **Region**: **<inject key="Region"></inject>** (ensure GPT-4 is available in this region)
+   - **Region**: **<inject key="Region"></inject>** (ensure GPT-4.1 is available in this region)
 
 4. Click **Create**.
 
@@ -41,7 +40,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 6. Once created, click **Go to project** or navigate to **Azure AI Foundry Studio**.
 
-### Part 3: Deploy GPT-4 Model in AI Foundry
+### Part 3: Deploy GPT-4.1 Model in AI Foundry
 
 1. In **Azure AI Foundry Studio**, navigate to your project.
 
@@ -49,13 +48,15 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 3. Click **+ Deploy model** and select **Deploy base model**.
 
-4. Search for and select **gpt-4** from the model catalog.
+4. Search for and select **gpt-4.1** from the model catalog.
 
 5. Configure the deployment:
    - **Deployment name**: `gpt-4-sql-translator`
-   - **Model version**: Select the latest available version
+   - **Model version**: Select the latest GPT-4.1 version
    - **Deployment type**: **Standard**
-   - **Tokens per Minute Rate Limit**: **30K** (or maximum quota available)
+   - **Tokens per Minute Rate Limit**: **50K**
+
+   > **Important**: Do not increase the TPM limit beyond 50K to avoid exceeding quota limits and additional costs.
 
 6. Click **Deploy**.
 
@@ -196,51 +197,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
    - **Storage account name**
    - **Key1** (Connection string)
 
-### Part 8: (Optional) Create Azure SQL Database for Validation
-
-> **Note**: This step is optional but recommended for enabling real database validation in Challenge 3.
-
-1. In the **Azure Portal**, search for **SQL databases** and select it.
-
-2. Click **+ Create**.
-
-3. Configure the SQL database:
-   - **Subscription**: Your Azure subscription
-   - **Resource Group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
-   - **Database name**: `ValidationTestDB`
-   - **Server**: Click **Create new**
-     - **Server name**: **sql-validation-<inject key="DeploymentID"></inject>**
-     - **Location**: **<inject key="Region"></inject>**
-     - **Authentication method**: **Use SQL authentication**
-     - **Server admin login**: `sqladmin`
-     - **Password**: `P@ssw0rd123!` (or create a secure password)
-     - Click **OK**
-
-4. Configure compute and storage:
-   - **Workload environment**: **Development**
-   - Click **Configure database**
-   - Select **Basic** tier (5 DTUs, 2 GB storage)
-   - Click **Apply**
-
-5. Click **Review + Create**, then **Create**.
-
-6. Wait for deployment (3-5 minutes).
-
-7. Once created, navigate to the SQL server resource.
-
-8. Click on **Networking** in the left menu.
-
-9. Under **Firewall rules**, add:
-   - **Allow Azure services and resources to access this server**: Check this box
-   - Click **+ Add your client IPv4 address** to add your current IP
-   - Click **Save**
-
-10. Copy and save:
-    - **Server name** (e.g., sql-validation-xxxxx.database.windows.net)
-    - **Admin login**: `sqladmin`
-    - **Password**: Your chosen password
-
-### Part 9: Verify All Resources
+### Part 8: Verify All Resources
 
 1. Navigate back to your resource group: **challenge-rg-<inject key="DeploymentID"></inject>**
 
@@ -248,16 +205,15 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
    - Azure AI Foundry hub and project resources
    - Cosmos DB account
    - Storage account
-   - (Optional) SQL database server and database
 
 3. Ensure all resources show **Deployment succeeded** status.
 
-### Part 10: Gather Configuration Values
+### Part 9: Gather Configuration Values
 
 Create a text file or note with the following information (you'll need these in subsequent challenges):
 
 ```text
-Azure AI Foundry (with GPT-4 deployment):
+Azure AI Foundry (with GPT-4.1 deployment):
 - Endpoint: [your-ai-foundry-endpoint or target-uri]
 - API Key: [your-primary-key]
 - Deployment Name: gpt-4-sql-translator
@@ -272,21 +228,14 @@ Storage Account:
 - Account Name: sqlmodernizationxxxxx
 - Connection String: [your-connection-string]
 - Container: sql-uploads
-
-Azure SQL (Optional):
-- Server: sql-validation-xxxxx.database.windows.net
-- Database: ValidationTestDB
-- Admin Login: sqladmin
-- Password: [your-password]
 ```
 
 ## Success Criteria
 
-- Azure AI Foundry project created with GPT-4 model deployed successfully
+- Azure AI Foundry project created with GPT-4.1 model deployed successfully
 - Model tested in Chat Playground and working correctly
 - Cosmos DB account created with database and three containers (TranslationResults, ValidationLogs, OptimizationResults)
 - Azure Storage Account created with sql-uploads container
-- (Optional) Azure SQL Database created with firewall configured
 - All connection strings, keys, and endpoints documented for future use
 - All resources deployed in the same resource group and region
 
@@ -296,6 +245,5 @@ Azure SQL (Optional):
 - [Azure AI Foundry Overview](https://learn.microsoft.com/azure/ai-studio/)
 - [Azure Cosmos DB for NoSQL](https://learn.microsoft.com/azure/cosmos-db/nosql/)
 - [Azure Storage Accounts](https://learn.microsoft.com/azure/storage/common/storage-account-overview)
-- [Azure SQL Database](https://learn.microsoft.com/azure/azure-sql/database/sql-database-paas-overview)
 
 Now, click **Next** to continue to **Challenge 02**.
