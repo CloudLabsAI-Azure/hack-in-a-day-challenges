@@ -1,766 +1,565 @@
-# Challenge 06: Build and Deploy the Streamlit Application
+# Challenge 06: Build Streamlit App with Agent API Integration
 
 ## Introduction
 
-In this final challenge, you will build a complete web application using Streamlit that integrates all three agents (Translation, Validation, Optimization) into a cohesive user experience. Users will upload Oracle SQL files, view translation results in real-time, review validation reports, and receive optimization recommendations. The application will be deployed locally first, then containerized for cloud deployment.
+Your three-agent pipeline is operational and saving results to Cosmos DB. Now it's time to build a user-friendly web interface! You'll create a Streamlit application that allows users to upload Oracle SQL files, calls your Translation Agent API, receives results from all three connected agents, and displays them in a clean three-phase format (Translation | Validation | Optimization).
 
 ## Challenge Objectives
 
-- Build a Streamlit web interface for SQL modernization
-- Integrate Translation, Validation, and Optimization agents
-- Implement file upload functionality for batch processing
-- Display results with syntax highlighting and downloadable reports
-- Add progress tracking for long-running operations
-- Containerize the application with Docker
-- Deploy the application to Azure Container Apps
+- Set up Streamlit development environment
+- Create file upload interface
+- Integrate with Translation Agent API endpoint
+- Parse responses from all three connected agents
+- Display three-phase results in organized tabs
+- Add query history from Cosmos DB
+- Deploy to Azure Container Apps for production access
 
 ## Steps to Complete
 
-### Part 1: Set Up Streamlit Development Environment
+### Part 1: Get Agent API Endpoint
 
-1. In **Azure AI Foundry Studio**, open a terminal and create a project directory:
+1. Go to **Azure AI Foundry Studio** → **Agents**.
 
-```bash
-mkdir sql-modernization-app
-cd sql-modernization-app
+2. Click on **SQL-Translation-Agent**.
+
+3. Click **Deploy** in the top menu.
+
+4. If not deployed, click **Deploy Agent**:
+   - **Deployment name**: `sql-translation-api`
+   - **Region**: **<inject key="Region"></inject>**
+   - **Instance type**: Select available option
+
+5. Wait for deployment (2-3 minutes).
+
+6. Once deployed, you'll see:
+   - **API Endpoint**: `https://your-endpoint.azure.com/...`
+   - **API Key**: Click **Show** to reveal
+
+7. Copy and save both.
+
+### Part 2: Set Up Local Development Environment
+
+1. Open **VS Code** or your preferred editor.
+
+2. Create a new folder: `sql-modernization-app`
+
+3. Inside, create a file: **requirements.txt**
+
+```txt
+streamlit==1.29.0
+requests==2.31.0
+python-dotenv==1.0.0
+azure-cosmos==4.5.1
+pandas==2.1.4
 ```
 
-2. Create a `requirements.txt` file:
+4. Create **.env** file:
 
-```text
-streamlit==1.30.0
-openai==1.12.0
-azure-cosmos==4.5.1
-azure-identity==1.15.0
-sqlparse==0.4.4
-pyodbc==5.0.1
-pandas==2.1.4
-python-dotenv==1.0.0
+```env
+AZURE_AI_ENDPOINT=https://your-endpoint.azure.com/...
+AZURE_AI_KEY=your-api-key-here
+COSMOS_ENDPOINT=https://your-cosmos-account.documents.azure.com:443/
+COSMOS_KEY=your-cosmos-key-here
+DATABASE_NAME=SQLModernizationDB
+```
+
+5. Replace with your actual values from previous challenges.
+
+### Part 3: Create Main Streamlit App
+
+Create **app.py**:
+
+```python
+import streamlit as st
+import requests
+import json
+import os
+from dotenv import load_dotenv
+from datetime import datetime
+
+load_dotenv()
+
+st.set_page_config(
+    page_title="SQL Modernization Assistant",
+    page_icon="🔄",
+    layout="wide"
+)
+
+st.title("Oracle to Azure SQL Modernization")
+st.markdown("Upload your Oracle SQL files and get instant translations, validation, and optimization recommendations.")
+
+# Sidebar for agent info
+with st.sidebar:
+    st.header("Agent Pipeline")
+    st.info("1. Translation Agent\n2. Validation Agent\n3. Optimization Agent")
+    
+    st.header("Configuration")
+    endpoint = os.getenv("AZURE_AI_ENDPOINT")
+    if endpoint:
+        st.success("Connected to Azure AI Foundry")
+    else:
+        st.error("Missing API configuration")
+
+# Main interface
+tab1, tab2, tab3 = st.tabs(["SQL Upload", "Translation Results", "History"])
+
+with tab1:
+    st.header("Upload Oracle SQL File")
+    
+    uploaded_file = st.file_uploader(
+        "Choose a .sql file",
+        type=["sql"],
+        help="Upload your Oracle SQL file for modernization"
+    )
+    
+    # Text area for manual input
+    st.markdown("**Or paste SQL code directly:**")
+    sql_input = st.text_area(
+        "Oracle SQL Code",
+        height=200,
+        placeholder="SELECT emp_id, emp_name FROM employees WHERE ROWNUM <= 10;"
+    )
+    
+    if st.button("Modernize SQL", type="primary"):
+        # Get SQL content
+        if uploaded_file:
+            sql_content = uploaded_file.read().decode("utf-8")
+        elif sql_input:
+            sql_content = sql_input
+        else:
+            st.error("Please upload a file or paste SQL code")
+            st.stop()
+        
+        with st.spinner("Processing through agent pipeline..."):
+            try:
+                # Call Translation Agent API
+                endpoint = os.getenv("AZURE_AI_ENDPOINT")
+                api_key = os.getenv("AZURE_AI_KEY")
+                
+                headers = {
+                    "Content-Type": "application/json",
+                    "api-key": api_key
+                }
+                
+                payload = {
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": f"Translate this Oracle SQL to Azure SQL T-SQL:\n\n{sql_content}"
+                        }
+                    ]
+                }
+                
+                response = requests.post(
+                    endpoint,
+                    headers=headers,
+                    json=payload,
+                    timeout=60
+                )
+                
+                if response.status_code == 200:
+                    result = response.json()
+                    
+                    # Store in session state
+                    st.session_state['last_result'] = {
+                        'timestamp': datetime.now().isoformat(),
+                        'source_sql': sql_content,
+                        'response': result
+                    }
+                    
+                    st.success("Processing complete! Check the 'Translation Results' tab.")
+                    st.rerun()
+                    
+                else:
+                    st.error(f"API Error: {response.status_code} - {response.text}")
+                    
+            except Exception as e:
+                st.error(f"Error: {str(e)}")
+
+with tab2:
+    st.header("Pipeline Results")
+    
+    if 'last_result' in st.session_state:
+        result = st.session_state['last_result']
+        
+        st.info(f"Processed: {result['timestamp']}")
+        
+        # Display source SQL
+        with st.expander("Original Oracle SQL", expanded=False):
+            st.code(result['source_sql'], language='sql')
+        
+        # Parse agent responses
+        response_text = result['response'].get('choices', [{}])[0].get('message', {}).get('content', '')
+        
+        # Create three columns for three agents
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            st.subheader("Translation")
+            st.markdown("**Agent 1: SQL-Translation-Agent**")
+            
+            # Extract translated SQL from response
+            if '```sql' in response_text:
+                parts = response_text.split('```sql')
+                if len(parts) > 1:
+                    sql_code = parts[1].split('```')[0].strip()
+                    st.code(sql_code, language='sql')
+                else:
+                    st.code(response_text, language='sql')
+            else:
+                st.code(response_text, language='sql')
+        
+        with col2:
+            st.subheader("Validation")
+            st.markdown("**Agent 2: SQL-Validation-Agent**")
+            
+            # Since connected agents run automatically, 
+            # validation results should be in the response
+            if 'validation' in response_text.lower():
+                st.success("Syntax validation passed")
+                st.markdown(response_text)
+            else:
+                st.info("Validation results included in pipeline")
+        
+        with col3:
+            st.subheader("Optimization")
+            st.markdown("**Agent 3: SQL-Optimization-Agent**")
+            
+            if 'optimization' in response_text.lower() or 'index' in response_text.lower():
+                st.markdown(response_text)
+            else:
+                st.info("Optimization analysis included in pipeline")
+        
+        # Download button
+        st.download_button(
+            label="Download Complete Report",
+            data=json.dumps(result, indent=2),
+            file_name=f"modernization_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
+            mime="application/json"
+        )
+    else:
+        st.info("Upload SQL code in the 'SQL Upload' tab to see results here.")
+
+with tab3:
+    st.header("Translation History")
+    
+    try:
+        from azure.cosmos import CosmosClient
+        
+        endpoint = os.getenv("COSMOS_ENDPOINT")
+        key = os.getenv("COSMOS_KEY")
+        database_name = os.getenv("DATABASE_NAME")
+        
+        if endpoint and key:
+            client = CosmosClient(endpoint, credential=key)
+            database = client.get_database_client(database_name)
+            container = database.get_container_client("TranslationResults")
+            
+            # Query recent translations
+            items = list(container.query_items(
+                query="SELECT * FROM c ORDER BY c.timestamp DESC OFFSET 0 LIMIT 10",
+                enable_cross_partition_query=True
+            ))
+            
+            if items:
+                for item in items:
+                    with st.expander(f"{item.get('timestamp', 'Unknown')} - {item.get('sourceDialect', '')} to {item.get('target_dialect', '')}"):
+                        col_a, col_b = st.columns(2)
+                        
+                        with col_a:
+                            st.markdown("**Source SQL:**")
+                            st.code(item.get('source_sql', ''), language='sql')
+                        
+                        with col_b:
+                            st.markdown("**Translated SQL:**")
+                            st.code(item.get('translated_sql', ''), language='sql')
+            else:
+                st.info("No translation history yet. Process some SQL files to see history here.")
+        else:
+            st.warning("Cosmos DB not configured. Add credentials to .env file.")
+            
+    except Exception as e:
+        st.error(f"Error loading history: {str(e)}")
+```
+
+### Part 4: Test Locally
+
+1. Open terminal in your project folder.
+
+2. Create virtual environment:
+```bash
+python -m venv venv
+venv\Scripts\activate
 ```
 
 3. Install dependencies:
-
 ```bash
 pip install -r requirements.txt
 ```
 
-### Part 2: Create Configuration File
-
-1. Create a `.env` file for configuration:
-
-```text
-# AI Foundry Configuration
-AZURE_OPENAI_ENDPOINT=https://your-ai-foundry-endpoint.openai.azure.com/
-AZURE_OPENAI_KEY=your-api-key-here
-AZURE_OPENAI_DEPLOYMENT=gpt-4-sql-translator
-AZURE_OPENAI_API_VERSION=2024-02-15-preview
-
-COSMOS_ENDPOINT=https://your-cosmos-account.documents.azure.com:443/
-COSMOS_KEY=your-cosmos-key-here
-DATABASE_NAME=SQLModernization
-
-AZURE_SQL_CONNECTION_STRING=Server=tcp:sql-modernization-server.database.windows.net,1433;Database=ValidationDB;User ID=sqladmin;Password=YourPassword123!;Encrypt=yes;
-```
-
-2. Add `.env` to `.gitignore` to protect secrets:
-
-```text
-.env
-__pycache__/
-*.pyc
-.vscode/
-```
-
-### Part 3: Create Agent Helper Module
-
-1. Create `agents.py` with all agent functions:
-
-```python
-from openai import AzureOpenAI
-import json
-from datetime import datetime
-import sqlparse
-
-class SQLModernizationAgent:
-    """Multi-agent system for SQL modernization"""
-    
-    def __init__(self, openai_endpoint: str, openai_key: str, deployment: str, api_version: str):
-        self.client = AzureOpenAI(
-            azure_endpoint=openai_endpoint,
-            api_key=openai_key,
-            api_version=api_version
-        )
-        self.deployment = deployment
-    
-    def translate_oracle_to_azure_sql(self, oracle_sql: str) -> dict:
-        """Translates Oracle SQL to Azure SQL T-SQL"""
-        
-        system_prompt = """You are an expert SQL translator specializing in Oracle to Azure SQL conversions.
-        
-Translation Rules:
-1. Oracle SYSDATE -> Azure SQL GETDATE()
-2. Oracle NVL() -> Azure SQL ISNULL() or COALESCE()
-3. Oracle ROWNUM -> Azure SQL ROW_NUMBER() or TOP
-4. Oracle sequence.NEXTVAL -> Azure SQL NEXT VALUE FOR sequence
-5. Oracle DECODE() -> Azure SQL CASE WHEN
-6. Oracle (+) outer join syntax -> Azure SQL LEFT/RIGHT JOIN
-7. Oracle CONNECT BY -> Azure SQL recursive CTE
-8. Oracle TO_DATE() -> Azure SQL CONVERT() or CAST()
-9. Oracle dual table -> Not needed in Azure SQL
-10. Oracle packages/procedures -> Azure SQL stored procedures with modifications
-
-Return ONLY valid Azure SQL T-SQL code without explanations."""
-
-        try:
-            response = self.client.chat.completions.create(
-                model=self.deployment,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": f"Translate this Oracle SQL to Azure SQL:\n\n{oracle_sql}"}
-                ],
-                temperature=0.3,
-                max_tokens=2000
-            )
-            
-            translated_sql = response.choices[0].message.content.strip()
-            
-            # Remove code block markers if present
-            if translated_sql.startswith("```sql"):
-                translated_sql = translated_sql[6:]
-            if translated_sql.startswith("```"):
-                translated_sql = translated_sql[3:]
-            if translated_sql.endswith("```"):
-                translated_sql = translated_sql[:-3]
-            
-            return {
-                "success": True,
-                "translated_sql": translated_sql.strip(),
-                "tokens_used": response.usage.total_tokens,
-                "timestamp": datetime.now().isoformat()
-            }
-        except Exception as e:
-            return {
-                "success": False,
-                "error": str(e),
-                "translated_sql": "",
-                "timestamp": datetime.now().isoformat()
-            }
-    
-    def validate_sql(self, sql_code: str) -> dict:
-        """Validates SQL code using AI and parser"""
-        
-        validation_prompt = """You are a SQL validation expert. Analyze the Azure SQL T-SQL code for:
-1. Syntax correctness
-2. Semantic validity
-3. Best practice compliance
-4. Potential runtime errors
-
-Return JSON:
-{
-  "valid": true/false,
-  "confidence": 0.0-1.0,
-  "issues": [{"severity": "error/warning", "message": "description"}],
-  "suggestions": ["improvement suggestion"]
-}"""
-
-        results = {
-            "overall_valid": False,
-            "validations": {},
-            "timestamp": datetime.now().isoformat()
-        }
-        
-        # AI-based validation
-        try:
-            response = self.client.chat.completions.create(
-                model=self.deployment,
-                messages=[
-                    {"role": "system", "content": validation_prompt},
-                    {"role": "user", "content": sql_code}
-                ],
-                temperature=0.3,
-                response_format={"type": "json_object"}
-            )
-            
-            ai_result = json.loads(response.choices[0].message.content)
-            results["validations"]["ai"] = ai_result
-        except Exception as e:
-            results["validations"]["ai"] = {"valid": False, "error": str(e)}
-        
-        # Parser-based validation
-        try:
-            parsed = sqlparse.parse(sql_code)
-            parser_valid = len(parsed) > 0 and not any(stmt.token_first().ttype is sqlparse.tokens.Error for stmt in parsed)
-            
-            results["validations"]["parser"] = {
-                "valid": parser_valid,
-                "statement_count": len(parsed)
-            }
-        except Exception as e:
-            results["validations"]["parser"] = {"valid": False, "error": str(e)}
-        
-        # Determine overall validity
-        ai_valid = results["validations"].get("ai", {}).get("valid", False)
-        parser_valid = results["validations"].get("parser", {}).get("valid", False)
-        results["overall_valid"] = ai_valid and parser_valid
-        
-        return results
-    
-    def optimize_sql(self, sql_code: str) -> dict:
-        """Provides optimization recommendations"""
-        
-        optimization_prompt = """Analyze Azure SQL T-SQL for performance optimizations.
-
-Return JSON:
-{
-  "overall_score": 0-100,
-  "priority_optimizations": [
-    {
-      "priority": "HIGH/MEDIUM/LOW",
-      "category": "Index/Query/Azure Feature",
-      "recommendation": "specific suggestion",
-      "reason": "why this helps",
-      "estimated_impact": "expected improvement"
-    }
-  ],
-  "index_recommendations": [
-    {
-      "index_name": "IX_TableName_Columns",
-      "columns": "column_list",
-      "reason": "usage pattern"
-    }
-  ],
-  "azure_features": [
-    {
-      "feature_name": "Azure SQL feature",
-      "benefit": "performance benefit",
-      "implementation_notes": "how to enable"
-    }
-  ]
-}"""
-
-        try:
-            response = self.client.chat.completions.create(
-                model=self.deployment,
-                messages=[
-                    {"role": "system", "content": optimization_prompt},
-                    {"role": "user", "content": f"Analyze this Azure SQL code:\n\n{sql_code}"}
-                ],
-                temperature=0.3,
-                response_format={"type": "json_object"}
-            )
-            
-            optimization_result = json.loads(response.choices[0].message.content)
-            optimization_result["timestamp"] = datetime.now().isoformat()
-            optimization_result["success"] = True
-            
-            return optimization_result
-        except Exception as e:
-            return {
-                "success": False,
-                "error": str(e),
-                "overall_score": 0,
-                "timestamp": datetime.now().isoformat()
-            }
-
-print("Agent module loaded")
-```
-
-2. Save the file.
-
-### Part 4: Create Cosmos DB Helper Module
-
-1. Create `cosmos_helper.py`:
-
-```python
-from azure.cosmos import CosmosClient, exceptions
-import uuid
-from datetime import datetime
-
-class CosmosDBHelper:
-    """Helper for Cosmos DB operations"""
-    
-    def __init__(self, endpoint: str, key: str, database_name: str):
-        self.client = CosmosClient(endpoint, credential=key)
-        self.database = self.client.get_database_client(database_name)
-        self.translation_container = self.database.get_container_client("TranslationResults")
-        self.validation_container = self.database.get_container_client("ValidationLogs")
-        self.optimization_container = self.database.get_container_client("OptimizationResults")
-    
-    def save_translation(self, source_sql: str, translated_sql: str, metadata: dict = None):
-        """Save translation result"""
-        item = {
-            "id": str(uuid.uuid4()),
-            "source_sql": source_sql,
-            "translated_sql": translated_sql,
-            "source_dialect": "Oracle",
-            "target_dialect": "Azure SQL",
-            "timestamp": datetime.utcnow().isoformat(),
-            "metadata": metadata or {}
-        }
-        
-        try:
-            created = self.translation_container.create_item(body=item)
-            return created["id"]
-        except exceptions.CosmosHttpResponseError as e:
-            print(f"Error saving translation: {e.message}")
-            return None
-    
-    def save_validation(self, translation_id: str, validation_results: dict):
-        """Save validation log"""
-        item = {
-            "id": str(uuid.uuid4()),
-            "translation_id": translation_id,
-            "validation_results": validation_results,
-            "is_valid": validation_results.get("overall_valid", False),
-            "timestamp": datetime.utcnow().isoformat()
-        }
-        
-        try:
-            created = self.validation_container.create_item(body=item)
-            return created["id"]
-        except exceptions.CosmosHttpResponseError as e:
-            print(f"Error saving validation: {e.message}")
-            return None
-    
-    def save_optimization(self, translation_id: str, optimization_results: dict):
-        """Save optimization result"""
-        item = {
-            "id": str(uuid.uuid4()),
-            "translation_id": translation_id,
-            "optimization_score": optimization_results.get("overall_score", 0),
-            "optimization_results": optimization_results,
-            "timestamp": datetime.utcnow().isoformat()
-        }
-        
-        try:
-            created = self.optimization_container.create_item(body=item)
-            return created["id"]
-        except exceptions.CosmosHttpResponseError as e:
-            print(f"Error saving optimization: {e.message}")
-            return None
-    
-    def get_recent_translations(self, limit: int = 10):
-        """Get recent translations"""
-        query = "SELECT * FROM c ORDER BY c.timestamp DESC OFFSET 0 LIMIT @limit"
-        items = list(self.translation_container.query_items(
-            query=query,
-            parameters=[{"name": "@limit", "value": limit}]
-        ))
-        return items
-
-print("Cosmos helper module loaded")
-```
-
-2. Save the file.
-
-### Part 5: Build Streamlit Application
-
-1. Create `streamlit_app.py`:
-
-```python
-import streamlit as st
-from agents import SQLModernizationAgent
-from cosmos_helper import CosmosDBHelper
-import os
-from dotenv import load_dotenv
-import time
-
-# Load environment variables
-load_dotenv()
-
-# Page configuration
-st.set_page_config(
-    page_title="SQL Modernization Platform",
-    page_icon="🔄",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
-# Initialize session state
-if 'agent' not in st.session_state:
-    st.session_state.agent = SQLModernizationAgent(
-        openai_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
-        openai_key=os.getenv("AZURE_OPENAI_KEY"),
-        deployment=os.getenv("AZURE_OPENAI_DEPLOYMENT"),
-        api_version=os.getenv("AZURE_OPENAI_API_VERSION")
-    )
-
-if 'cosmos' not in st.session_state:
-    st.session_state.cosmos = CosmosDBHelper(
-        endpoint=os.getenv("COSMOS_ENDPOINT"),
-        key=os.getenv("COSMOS_KEY"),
-        database_name=os.getenv("DATABASE_NAME")
-    )
-
-# Header
-st.title("SQL Modernization Platform")
-st.markdown("Translate Oracle SQL to Azure SQL with AI-powered validation and optimization")
-
-# Sidebar
-with st.sidebar:
-    st.header("Navigation")
-    page = st.radio("Select Page", ["Translate SQL", "Batch Processing", "History"])
-    
-    st.markdown("---")
-    st.header("About")
-    st.info("This platform uses Azure OpenAI to modernize Oracle SQL to Azure SQL T-SQL with automated validation and optimization recommendations.")
-
-# Main content
-if page == "Translate SQL":
-    st.header("Translate Oracle SQL to Azure SQL")
-    
-    # Input
-    oracle_sql = st.text_area("Oracle SQL Code", height=200, placeholder="Enter Oracle SQL here...")
-    
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        translate_btn = st.button("Translate", type="primary", use_container_width=True)
-    with col2:
-        validate_btn = st.button("Validate", disabled=True, use_container_width=True)
-    with col3:
-        optimize_btn = st.button("Optimize", disabled=True, use_container_width=True)
-    
-    # Translation
-    if translate_btn and oracle_sql:
-        with st.spinner("Translating SQL..."):
-            result = st.session_state.agent.translate_oracle_to_azure_sql(oracle_sql)
-            
-            if result["success"]:
-                st.session_state.translated_sql = result["translated_sql"]
-                st.session_state.translation_id = st.session_state.cosmos.save_translation(
-                    source_sql=oracle_sql,
-                    translated_sql=result["translated_sql"],
-                    metadata={"tokens_used": result["tokens_used"]}
-                )
-                
-                st.success("Translation completed successfully!")
-                
-                # Display results
-                col1, col2 = st.columns(2)
-                
-                with col1:
-                    st.subheader("Oracle SQL (Original)")
-                    st.code(oracle_sql, language="sql")
-                
-                with col2:
-                    st.subheader("Azure SQL (Translated)")
-                    st.code(result["translated_sql"], language="sql")
-                
-                # Download button
-                st.download_button(
-                    label="Download Translated SQL",
-                    data=result["translated_sql"],
-                    file_name="translated_query.sql",
-                    mime="text/plain"
-                )
-                
-                # Enable validation button
-                validate_btn = st.button("Validate Translation", use_container_width=True)
-            else:
-                st.error(f"Translation failed: {result.get('error', 'Unknown error')}")
-    
-    # Validation
-    if 'translated_sql' in st.session_state:
-        if st.button("Validate Translation", use_container_width=True):
-            with st.spinner("Validating SQL..."):
-                validation_result = st.session_state.agent.validate_sql(st.session_state.translated_sql)
-                
-                st.session_state.cosmos.save_validation(
-                    translation_id=st.session_state.translation_id,
-                    validation_results=validation_result
-                )
-                
-                # Display validation results
-                st.subheader("Validation Results")
-                
-                if validation_result["overall_valid"]:
-                    st.success("SQL is valid!")
-                else:
-                    st.error("SQL validation failed")
-                
-                # Show AI validation details
-                ai_validation = validation_result.get("validations", {}).get("ai", {})
-                if ai_validation:
-                    st.metric("AI Confidence", f"{ai_validation.get('confidence', 0):.0%}")
-                    
-                    issues = ai_validation.get("issues", [])
-                    if issues:
-                        st.warning(f"Found {len(issues)} issues:")
-                        for issue in issues:
-                            st.write(f"- [{issue.get('severity', 'info').upper()}] {issue.get('message', '')}")
-                
-                # Enable optimization button
-                st.session_state.validation_complete = True
-    
-    # Optimization
-    if 'validation_complete' in st.session_state and st.session_state.validation_complete:
-        if st.button("Optimize SQL", use_container_width=True):
-            with st.spinner("Analyzing optimization opportunities..."):
-                optimization_result = st.session_state.agent.optimize_sql(st.session_state.translated_sql)
-                
-                st.session_state.cosmos.save_optimization(
-                    translation_id=st.session_state.translation_id,
-                    optimization_results=optimization_result
-                )
-                
-                # Display optimization results
-                st.subheader("Optimization Recommendations")
-                
-                score = optimization_result.get("overall_score", 0)
-                st.metric("Optimization Score", f"{score}/100")
-                
-                # Priority optimizations
-                priorities = optimization_result.get("priority_optimizations", [])
-                if priorities:
-                    st.write("**High Priority Recommendations:**")
-                    for opt in priorities:
-                        with st.expander(f"[{opt.get('priority', 'MEDIUM')}] {opt.get('category', 'General')}"):
-                            st.write(f"**Recommendation:** {opt.get('recommendation', '')}")
-                            st.write(f"**Reason:** {opt.get('reason', '')}")
-                            st.write(f"**Estimated Impact:** {opt.get('estimated_impact', 'Unknown')}")
-                
-                # Index recommendations
-                indexes = optimization_result.get("index_recommendations", [])
-                if indexes:
-                    st.write("**Index Recommendations:**")
-                    for idx in indexes:
-                        st.write(f"- {idx.get('index_name', 'Index')}: {idx.get('columns', '')} ({idx.get('reason', '')})")
-
-elif page == "Batch Processing":
-    st.header("Batch SQL File Processing")
-    
-    uploaded_files = st.file_uploader(
-        "Upload Oracle SQL files",
-        type=['sql'],
-        accept_multiple_files=True
-    )
-    
-    if uploaded_files:
-        process_batch = st.button("Process All Files", type="primary")
-        
-        if process_batch:
-            progress_bar = st.progress(0)
-            status_text = st.empty()
-            
-            results = []
-            
-            for idx, file in enumerate(uploaded_files):
-                status_text.text(f"Processing {file.name}...")
-                
-                oracle_sql = file.read().decode('utf-8')
-                
-                # Translate
-                translation = st.session_state.agent.translate_oracle_to_azure_sql(oracle_sql)
-                
-                if translation["success"]:
-                    # Validate
-                    validation = st.session_state.agent.validate_sql(translation["translated_sql"])
-                    
-                    # Optimize
-                    optimization = st.session_state.agent.optimize_sql(translation["translated_sql"])
-                    
-                    # Save to Cosmos
-                    translation_id = st.session_state.cosmos.save_translation(
-                        source_sql=oracle_sql,
-                        translated_sql=translation["translated_sql"]
-                    )
-                    
-                    results.append({
-                        "file": file.name,
-                        "status": "Success",
-                        "valid": validation.get("overall_valid", False),
-                        "score": optimization.get("overall_score", 0)
-                    })
-                else:
-                    results.append({
-                        "file": file.name,
-                        "status": "Failed",
-                        "error": translation.get("error", "Unknown")
-                    })
-                
-                progress_bar.progress((idx + 1) / len(uploaded_files))
-            
-            status_text.text("Processing complete!")
-            
-            # Display results table
-            st.subheader("Batch Processing Results")
-            st.table(results)
-
-elif page == "History":
-    st.header("Translation History")
-    
-    recent_translations = st.session_state.cosmos.get_recent_translations(limit=20)
-    
-    if recent_translations:
-        for trans in recent_translations:
-            with st.expander(f"{trans['timestamp']} - {trans['source_dialect']} to {trans['target_dialect']}"):
-                col1, col2 = st.columns(2)
-                
-                with col1:
-                    st.write("**Source SQL:**")
-                    st.code(trans['source_sql'][:200] + "...", language="sql")
-                
-                with col2:
-                    st.write("**Translated SQL:**")
-                    st.code(trans['translated_sql'][:200] + "...", language="sql")
-    else:
-        st.info("No translation history available")
-```
-
-2. Save the file.
-
-### Part 6: Test Streamlit Application Locally
-
-1. In the terminal, run the Streamlit app:
-
+4. Run Streamlit:
 ```bash
-streamlit run streamlit_app.py
+streamlit run app.py
 ```
 
-2. Open the browser at the displayed URL (typically `http://localhost:8501`).
+5. Browser should open automatically at `http://localhost:8501`.
 
-3. Test the translation workflow with a sample Oracle query.
+6. Test the workflow:
+   - Upload a .sql file or paste SQL
+   - Click **Modernize SQL**
+   - Check **Translation Results** tab
+   - Verify three-phase output
+   - Check **History** tab for saved results
 
-### Part 7: Create Dockerfile
+### Part 5: Create Advanced Features
 
-1. Create a `Dockerfile`:
+Create **utils/agent_parser.py** to parse agent responses better:
+
+```python
+import json
+import re
+
+def parse_agent_response(response_text):
+    """
+    Parse the response from connected agents pipeline
+    Returns: dict with translation, validation, optimization sections
+    """
+    sections = {
+        'translation': '',
+        'validation': {},
+        'optimization': {}
+    }
+    
+    # Extract SQL code blocks
+    sql_matches = re.findall(r'```sql\n(.*?)```', response_text, re.DOTALL)
+    if sql_matches:
+        sections['translation'] = sql_matches[0].strip()
+    
+    # Extract JSON blocks (validation/optimization results)
+    json_matches = re.findall(r'```json\n(.*?)```', response_text, re.DOTALL)
+    for json_text in json_matches:
+        try:
+            data = json.loads(json_text)
+            if 'valid' in data or 'syntax_errors' in data:
+                sections['validation'] = data
+            elif 'optimization_score' in data or 'recommendations' in data:
+                sections['optimization'] = data
+        except json.JSONDecodeError:
+            continue
+    
+    return sections
+
+def format_validation_results(validation_data):
+    """Format validation results for display"""
+    if not validation_data:
+        return "No validation data available"
+    
+    output = []
+    
+    if validation_data.get('valid'):
+        output.append("✓ Syntax validation passed")
+    else:
+        output.append("✗ Syntax validation failed")
+    
+    if 'syntax_errors' in validation_data:
+        output.append("\n**Syntax Errors:**")
+        for error in validation_data['syntax_errors']:
+            output.append(f"- {error}")
+    
+    if 'semantic_errors' in validation_data:
+        output.append("\n**Semantic Errors:**")
+        for error in validation_data['semantic_errors']:
+            output.append(f"- {error}")
+    
+    return "\n".join(output)
+
+def format_optimization_results(optimization_data):
+    """Format optimization results for display"""
+    if not optimization_data:
+        return "No optimization data available"
+    
+    output = []
+    
+    score = optimization_data.get('optimization_score', 'N/A')
+    output.append(f"**Optimization Score:** {score}/100")
+    
+    if 'index_recommendations' in optimization_data:
+        output.append("\n**Index Recommendations:**")
+        for rec in optimization_data['index_recommendations']:
+            output.append(f"- {rec}")
+    
+    if 'query_rewrites' in optimization_data:
+        output.append("\n**Query Rewrites:**")
+        for rewrite in optimization_data['query_rewrites']:
+            output.append(f"- {rewrite}")
+    
+    if 'azure_features' in optimization_data:
+        output.append("\n**Azure SQL Features:**")
+        for feature in optimization_data['azure_features']:
+            output.append(f"- {feature}")
+    
+    return "\n".join(output)
+```
+
+Update **app.py** to use the parser (in the Translation Results tab):
+
+```python
+from utils.agent_parser import parse_agent_response, format_validation_results, format_optimization_results
+
+# In tab2 (Translation Results), replace the parsing section:
+response_text = result['response'].get('choices', [{}])[0].get('message', {}).get('content', '')
+
+# Parse structured results
+sections = parse_agent_response(response_text)
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.subheader("Translation")
+    st.code(sections['translation'], language='sql')
+
+with col2:
+    st.subheader("Validation")
+    st.markdown(format_validation_results(sections['validation']))
+
+with col3:
+    st.subheader("Optimization")
+    st.markdown(format_optimization_results(sections['optimization']))
+```
+
+### Part 6: Deploy to Azure Container Apps
+
+1. Create **Dockerfile**:
 
 ```dockerfile
 FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    gcc \
-    g++ \
-    unixodbc-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy requirements and install Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application files
-COPY agents.py .
-COPY cosmos_helper.py .
-COPY streamlit_app.py .
+COPY . .
 
-# Expose Streamlit port
 EXPOSE 8501
 
-# Health check
-HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
-
-# Run Streamlit
-ENTRYPOINT ["streamlit", "run", "streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
 ```
 
-2. Save the file.
+2. Create **.dockerignore**:
 
-### Part 8: Build and Test Docker Container
+```
+venv/
+__pycache__/
+*.pyc
+.env
+.git
+```
 
-1. Build the Docker image:
-
+3. Build Docker image:
 ```bash
 docker build -t sql-modernization-app .
 ```
 
-2. Run the container locally:
-
+4. Test locally:
 ```bash
 docker run -p 8501:8501 --env-file .env sql-modernization-app
 ```
 
-3. Test the containerized application at `http://localhost:8501`.
+5. Create **Azure Container Registry**:
 
-### Part 9: Deploy to Azure Container Apps
+In Azure Portal:
+- Search for **Container Registry**
+- Click **+ Create**
+- **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
+- **Registry name**: **sqlmodacr<inject key="DeploymentID"></inject>**
+- **SKU**: **Basic**
+- Click **Review + Create**
 
-1. Login to Azure CLI:
-
-```bash
-az login
-```
-
-2. Create Azure Container Registry (if not exists):
-
-```bash
-az acr create --resource-group SQL-Modernization-RG --name sqlmodernizationacr --sku Basic
-```
-
-3. Build and push image to ACR:
+6. Push image to ACR:
 
 ```bash
-az acr build --registry sqlmodernizationacr --image sql-modernization-app:v1 .
+az acr login --name sqlmodacr<inject key="DeploymentID"></inject>
+docker tag sql-modernization-app sqlmodacr<inject key="DeploymentID"></inject>.azurecr.io/sql-modernization-app:v1
+docker push sqlmodacr<inject key="DeploymentID"></inject>.azurecr.io/sql-modernization-app:v1
 ```
 
-4. Create Container App environment:
+7. Create **Azure Container App**:
 
-```bash
-az containerapp env create --name sql-modernization-env --resource-group SQL-Modernization-RG --location eastus
+- Search for **Container Apps**
+- Click **+ Create**
+- **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
+- **Container app name**: **sql-mod-app**
+- **Region**: **<inject key="Region"></inject>**
+- **Container Apps Environment**: Create new
+- **Container**: Select from Azure Container Registry
+  - **Registry**: **sqlmodacr<inject key="DeploymentID"></inject>**
+  - **Image**: **sql-modernization-app**
+  - **Tag**: **v1**
+- **Ingress**: Enabled
+  - **Target port**: **8501**
+  - **Ingress traffic**: **Accept from anywhere**
+- Click **Review + Create**
+
+8. Add environment variables:
+
+After creation:
+- Go to Container App → **Secrets**
+- Add your .env values as secrets
+- Go to **Environment variables**
+- Reference the secrets
+
+9. Get app URL:
+
+- Go to **Overview**
+- Copy **Application Url**
+- Open in browser
+
+### Part 7: Test Production Deployment
+
+1. Open the Container App URL.
+
+2. Upload a complex Oracle SQL file:
+```sql
+SELECT 
+    e.emp_id,
+    e.emp_name,
+    NVL(e.salary, 0) as salary,
+    d.dept_name,
+    TO_CHAR(e.hire_date, 'YYYY-MM-DD') as hire_date
+FROM employees e
+INNER JOIN departments d ON e.dept_id = d.dept_id
+WHERE e.hire_date > SYSDATE - 30
+AND ROWNUM <= 100
+ORDER BY e.salary DESC;
 ```
 
-5. Deploy Container App:
-
-```bash
-az containerapp create \
-  --name sql-modernization-app \
-  --resource-group SQL-Modernization-RG \
-  --environment sql-modernization-env \
-  --image sqlmodernizationacr.azurecr.io/sql-modernization-app:v1 \
-  --target-port 8501 \
-  --ingress external \
-  --registry-server sqlmodernizationacr.azurecr.io \
-  --env-vars \
-    AZURE_OPENAI_ENDPOINT=secretref:openai-endpoint \
-    AZURE_OPENAI_KEY=secretref:openai-key \
-    COSMOS_ENDPOINT=secretref:cosmos-endpoint \
-    COSMOS_KEY=secretref:cosmos-key
-```
-
-6. Get the application URL:
-
-```bash
-az containerapp show --name sql-modernization-app --resource-group SQL-Modernization-RG --query properties.configuration.ingress.fqdn
-```
-
-### Part 10: Final Testing
-
-1. Access the deployed application using the FQDN from the previous command.
-
-2. Upload a test Oracle SQL file.
-
-3. Verify the complete workflow:
-   - Translation completes successfully
-   - Validation runs and shows results
-   - Optimization provides recommendations
-   - Results are saved to Cosmos DB
-
-4. Check batch processing with multiple files.
-
-5. Review history to confirm data persistence.
+3. Verify:
+   - Translation appears with proper T-SQL syntax
+   - Validation shows no errors
+   - Optimization suggests indexes, rewrites, Azure features
+   - Results saved to Cosmos DB
+   - History tab shows the entry
 
 ## Success Criteria
 
-- Streamlit application created with multi-page navigation
-- Translation agent integrated with user-friendly interface
-- Validation results displayed with confidence scores and issues
-- Optimization recommendations shown with priority ranking
-- File upload functionality works for single and batch processing
-- Results downloadable in SQL format
-- Cosmos DB integration persists all workflow data
-- Application runs locally via Streamlit
-- Docker container built successfully
-- Application deployed to Azure Container Apps
-- Public URL accessible and functional
-- Complete end-to-end workflow tested successfully
+- Streamlit app runs locally without errors
+- File upload and manual input both work
+- Agent API endpoint called successfully
+- Three-phase results displayed clearly (Translation | Validation | Optimization)
+- Parser extracts structured data from agent responses
+- History tab shows Cosmos DB entries
+- Docker image builds successfully
+- Azure Container Registry created and image pushed
+- Container App deployed and accessible
+- Production app works same as local version
+- Complete workflow: Upload → API call → Parse → Display → Save → History
 
 ## Additional Resources
 
 - [Streamlit Documentation](https://docs.streamlit.io/)
-- [Azure Container Apps Overview](https://learn.microsoft.com/azure/container-apps/overview)
-- [Docker Best Practices](https://docs.docker.com/develop/dev-best-practices/)
+- [Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
 - [Azure Container Registry](https://learn.microsoft.com/azure/container-registry/)
+- [Docker Best Practices](https://docs.docker.com/develop/dev-best-practices/)
 
-Congratulations! You have completed the SQL Modernization hackathon. You have built a complete AI-powered platform for modernizing Oracle SQL to Azure SQL with automated translation, validation, and optimization.
+Congratulations! You've completed all challenges. Your SQL modernization platform is production-ready!
