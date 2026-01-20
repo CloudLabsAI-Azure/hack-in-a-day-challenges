@@ -7,7 +7,7 @@ Now that you have a Translation Agent, you need a Validation Agent to check if t
 ## Challenge Objectives
 
 - Create a Validation Agent with SQL validation instructions
-- Configure the agent to use GPT-4 deployment
+- Configure the agent to use GPT-4.1 deployment
 - Test validation capabilities with correct and incorrect SQL
 - **Connect the Validation Agent to the Translation Agent** using "Connected agents"
 - Test the complete pipeline: Translation → Validation
