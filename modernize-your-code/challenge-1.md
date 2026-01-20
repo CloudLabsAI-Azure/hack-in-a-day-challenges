@@ -14,20 +14,15 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 ## Steps to Complete
 
-### Part 1: Create Resource Group
+### Part 1: Verify Pre-Deployed Resource Group
 
 1. In the **Azure Portal**, search for **Resource groups** in the top search bar and select it.
 
-2. Click **+ Create** to create a new resource group.
+2. You should see a pre-deployed resource group named **challenge-rg-<inject key="DeploymentID"></inject>**.
 
-3. Configure the resource group:
-   - **Subscription**: Select your Azure subscription
-   - **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
-   - **Region**: **<inject key="Region"></inject>**
+3. Click on **challenge-rg-<inject key="DeploymentID"></inject>** to open it.
 
-4. Click **Review + Create**, then **Create**.
-
-5. Wait for the resource group to be created (approximately 10 seconds).
+4. This resource group will be used for all resources you create in this hackathon.
 
 ### Part 2: Create Azure AI Foundry Project with Model Deployment
 
@@ -37,7 +32,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 3. Configure the AI Foundry project:
    - **Project name**: **sql-modernization-ai-project**
-   - **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
+   - **Resource Group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
    - **Region**: **<inject key="Region"></inject>** (ensure GPT-4 is available in this region)
 
 4. Click **Create**.
@@ -95,7 +90,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 3. Configure the AI Foundry project:
    - **Subscription**: Your Azure subscription
-   - **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
+   - **Resource Group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
    - **Project name**: **sql-modernization-ai-project**
    - **Region**: **<inject key="Region"></inject>**
 
@@ -116,7 +111,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 4. Configure Cosmos DB:
    - **Subscription**: Your Azure subscription
-   - **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
+   - **Resource Group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
    - **Account Name**: **sql-modernization-cosmos-<inject key="DeploymentID"></inject>**
    - **Location**: **<inject key="Region"></inject>**
    - **Capacity mode**: **Provisioned throughput** (400 RU/s minimum)
@@ -178,7 +173,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 3. Configure the storage account:
    - **Subscription**: Your Azure subscription
-   - **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
+   - **Resource Group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
    - **Storage account name**: **sqlmodernization<inject key="DeploymentID"></inject>** (lowercase, no hyphens)
    - **Region**: **<inject key="Region"></inject>**
    - **Performance**: **Standard**
@@ -211,7 +206,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 3. Configure the SQL database:
    - **Subscription**: Your Azure subscription
-   - **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
+   - **Resource Group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
    - **Database name**: `ValidationTestDB`
    - **Server**: Click **Create new**
      - **Server name**: **sql-validation-<inject key="DeploymentID"></inject>**
@@ -247,7 +242,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 ### Part 9: Verify All Resources
 
-1. Navigate back to your resource group: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
+1. Navigate back to your resource group: **challenge-rg-<inject key="DeploymentID"></inject>**
 
 2. Verify you see the following resources:
    - Azure AI Foundry hub and project resources

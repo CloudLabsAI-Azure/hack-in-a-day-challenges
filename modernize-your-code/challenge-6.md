@@ -471,7 +471,7 @@ docker run -p 8501:8501 --env-file .env sql-modernization-app
 In Azure Portal:
 - Search for **Container Registry**
 - Click **+ Create**
-- **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
+- **Resource Group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
 - **Registry name**: **sqlmodacr<inject key="DeploymentID"></inject>**
 - **SKU**: **Basic**
 - Click **Review + Create**
@@ -488,7 +488,7 @@ docker push sqlmodacr<inject key="DeploymentID"></inject>.azurecr.io/sql-moderni
 
 - Search for **Container Apps**
 - Click **+ Create**
-- **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
+- **Resource Group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
 - **Container app name**: **sql-mod-app**
 - **Region**: **<inject key="Region"></inject>**
 - **Container Apps Environment**: Create new

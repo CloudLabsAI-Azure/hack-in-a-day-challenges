@@ -49,7 +49,7 @@ Since AI Foundry Actions work best with HTTP endpoints, we'll create a simple Az
 2. Click **+ Create**.
 
 3. Configure:
-   - **Resource Group**: **sql-modernization-rg-<inject key="DeploymentID"></inject>**
+   - **Resource Group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
    - **Function App name**: **sql-mod-actions-<inject key="DeploymentID"></inject>**
    - **Runtime**: **Python**
    - **Version**: **3.11**
