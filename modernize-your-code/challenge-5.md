@@ -1,8 +1,10 @@
-# Challenge 05: Add Cosmos DB Actions for Persistence
+# Challenge 05: Add Cosmos DB Persistence (Optional)
 
 ## Introduction
 
-Your three-agent pipeline is working beautifully! Now you need to persist the results from each agent to Cosmos DB for audit trails, history tracking, and reporting. Azure AI Foundry Agents support "Actions" - custom functions that agents can call. You'll create Cosmos DB Actions that each agent will use to automatically save their results.
+> **Note**: This challenge is **optional**. Your three-agent pipeline is fully functional without it. You can skip directly to **Challenge 06** where the Streamlit app will handle Cosmos DB persistence directly (simpler approach).
+
+If you want to learn about Azure Functions and Agent Actions, this challenge shows how to create HTTP-triggered functions that agents can call to save results to Cosmos DB. Otherwise, proceed to Challenge 6.
 
 ## Challenge Objectives
 

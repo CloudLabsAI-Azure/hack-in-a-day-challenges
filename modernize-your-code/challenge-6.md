@@ -2,15 +2,16 @@
 
 ## Introduction
 
-Your three-agent pipeline is operational and saving results to Cosmos DB. Now it's time to build a user-friendly web interface! You'll create a Streamlit application that allows users to upload Oracle SQL files, calls your Translation Agent API, receives results from all three connected agents, and displays them in a clean three-phase format (Translation | Validation | Optimization).
+Your three-agent pipeline is operational! Now it's time to build a user-friendly web interface. You'll create a Streamlit application that allows users to input Oracle SQL, calls your Translation Agent API, receives results from all three connected agents, displays them in a clean three-phase format (Translation | Validation | Optimization), and saves the results to Cosmos DB for history tracking.
 
 ## Challenge Objectives
 
 - Set up Streamlit development environment
-- Create file upload interface
+- Create SQL input interface
 - Integrate with Translation Agent API endpoint
 - Parse responses from all three connected agents
 - Display three-phase results in organized tabs
+- Save results directly to Cosmos DB
 - Add query history from Cosmos DB
 - Deploy to Azure Container Apps for production access
 

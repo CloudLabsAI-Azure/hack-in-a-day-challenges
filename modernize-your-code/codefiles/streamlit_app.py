@@ -1,14 +1,16 @@
 """
 SQL Modernization Platform - Streamlit Application
-Complete web application for Oracle to Azure SQL migration with AI-powered translation, validation, and optimization.
+Complete web application for Oracle to Azure SQL migration with AI-powered agents.
 """
 
 import streamlit as st
-from agents import SQLModernizationAgent
-from cosmos_helper import CosmosDBHelper
+import requests
+import json
 import os
 from dotenv import load_dotenv
-import time
+from datetime import datetime
+from azure.cosmos import CosmosClient
+import uuid
 
 # Load environment variables
 load_dotenv()
@@ -60,44 +62,19 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Initialize session state
-if 'initialized' not in st.session_state:
-    st.session_state.initialized = False
-    st.session_state.agent = None
-    st.session_state.cosmos = None
-    st.session_state.translated_sql = None
-    st.session_state.translation_id = None
-    st.session_state.validation_complete = False
-    st.session_state.optimization_complete = False
-
-# Initialize connections
-def initialize_connections():
-    """Initialize Azure OpenAI and Cosmos DB connections"""
+# Initialize Cosmos DB connection
+@st.cache_resource
+def get_cosmos_client():
+    """Initialize Cosmos DB client"""
     try:
-        # Initialize agent
-        st.session_state.agent = SQLModernizationAgent(
-            openai_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
-            openai_key=os.getenv("AZURE_OPENAI_KEY"),
-            deployment=os.getenv("AZURE_OPENAI_DEPLOYMENT"),
-            api_version=os.getenv("AZURE_OPENAI_API_VERSION")
-        )
-        
-        # Initialize Cosmos DB
-        st.session_state.cosmos = CosmosDBHelper(
-            endpoint=os.getenv("COSMOS_ENDPOINT"),
-            key=os.getenv("COSMOS_KEY"),
-            database_name=os.getenv("DATABASE_NAME")
-        )
-        
-        st.session_state.initialized = True
-        return True
+        endpoint = os.getenv("COSMOS_ENDPOINT")
+        key = os.getenv("COSMOS_KEY")
+        if endpoint and key:
+            return CosmosClient(endpoint, credential=key)
+        return None
     except Exception as e:
-        st.error(f"Failed to initialize connections: {str(e)}")
-        st.error("Please check your .env file configuration.")
-        return False
-
-# Initialize on first run
-if not st.session_state.initialized:
+        st.error(f"Cosmos DB connection failed: {str(e)}")
+        return None
     with st.spinner("Initializing connections to Azure services..."):
         initialize_connections()
 

@@ -1,23 +1,21 @@
 # SQL Modernization Platform
 
-Complete Streamlit application for Oracle to Azure SQL migration with AI-powered translation, validation, and optimization.
+Streamlit web application for Oracle to Azure SQL migration using Azure AI Foundry Agents.
 
 ## Features
 
-- **Translation Agent**: Converts Oracle PL/SQL to Azure SQL T-SQL using GPT-4
-- **Validation Agent**: Validates translated SQL using AI and parser-based methods
-- **Optimization Agent**: Provides performance recommendations and index suggestions
-- **Cosmos DB Integration**: Persists all workflow data for audit and history
-- **Batch Processing**: Handle multiple SQL files at once
-- **History View**: Browse and download past translations
+- **3-Agent Pipeline**: Translation → Validation → Optimization using AI Foundry visual agents
+- **Real-time Processing**: Call agent API and get results from all connected agents
+- **Cosmos DB Integration**: Automatic persistence of translation history
+- **Sample Queries**: Pre-loaded Oracle SQL examples for testing
+- **Clean UI**: Three-column results display with validation and optimization insights
 
 ## Prerequisites
 
 - Python 3.11 or higher
 - Azure subscription with:
-  - Azure AI Foundry (with GPT-4 deployment)
+  - Azure AI Foundry with deployed agents (SQL-Translation-Agent, SQL-Validation-Agent, SQL-Optimization-Agent)
   - Azure Cosmos DB for NoSQL
-  - (Optional) Azure SQL Database for validation
 
 ## Quick Start
 
@@ -38,16 +36,48 @@ cp .env.example .env
 Edit `.env` file:
 
 ```env
-# AI Foundry Configuration
-AZURE_OPENAI_ENDPOINT=https://your-ai-foundry-endpoint.openai.azure.com/
-AZURE_OPENAI_KEY=your-ai-foundry-key-here
-AZURE_OPENAI_DEPLOYMENT=gpt-4-sql-translator
-AZURE_OPENAI_API_VERSION=2024-02-15-preview
+# Azure AI Foundry Agent API Configuration
+AGENT_API_ENDPOINT=https://your-agent-endpoint.azure.com/agents/...
+AGENT_API_KEY=your-agent-api-key-here
 
 # Cosmos DB Configuration
 COSMOS_ENDPOINT=https://your-cosmos-account.documents.azure.com:443/
 COSMOS_KEY=your-cosmos-key-here
 DATABASE_NAME=SQLModernizationDB
+```
+
+### 3. Run the Application
+
+```bash
+streamlit run app.py
+```
+
+The app will open in your browser at `http://localhost:8501`.
+
+## Usage
+
+1. **Enter SQL**: Paste Oracle SQL or load a sample query
+2. **Click Modernize**: The Translation Agent processes your query
+3. **View Results**: See translation, validation, and optimization in 3 columns
+4. **Check History**: View past translations from Cosmos DB
+
+## Deployment
+
+See Challenge 6 in the hackathon guide for deploying to Azure Container Apps.
+
+## Architecture
+
+```
+User Input (Oracle SQL)
+    ↓
+Translation Agent (GPT-4.1)
+    ↓
+Validation Agent (Connected)
+    ↓
+Optimization Agent (Connected)
+    ↓
+Streamlit UI + Cosmos DB
+```
 
 # Azure SQL Configuration (Optional)
 AZURE_SQL_SERVER=your-server.database.windows.net
