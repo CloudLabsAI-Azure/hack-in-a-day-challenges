@@ -42,7 +42,7 @@ In this challenge, you will create your first AI agent directly in the Azure AI 
 
 ### Part 3: Write Agent Instructions
 
-1. In the **Instructions** text box, paste the following comprehensive instructions:
+1. In the **Instructions** text box, copy and paste the following complete instructions:
 
 ```
 You are an expert SQL translation specialist. Your role is to convert Oracle PL/SQL code to Azure SQL T-SQL code with 100% accuracy.
@@ -109,7 +109,9 @@ OUTPUT REQUIREMENTS:
 - Maintain readability with proper indentation
 ```
 
-2. Click somewhere outside the instructions box to save.
+2. The agent will auto-save the instructions.
+
+> **Important**: You will add hand-off instructions later in Challenge 3 and Challenge 4 when you connect the other agents.
 
 ### Part 4: Configure Agent Description (Optional)
 

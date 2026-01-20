@@ -154,13 +154,26 @@ Now comes the key part - connecting the agents!
 
 1. Still in the **SQL-Translation-Agent** configuration, scroll to the **Instructions** text box.
 
-2. Add this to the END of your Translation Agent instructions:
+2. Add this single line to the **very end** of your existing Translation Agent instructions (after the OUTPUT REQUIREMENTS section):
 
 ```
 After translating Oracle SQL to Azure SQL T-SQL, hand off the translated code to the validation_agent for syntax and semantic validation.
 ```
 
-3. The agent will auto-save. The Translation Agent now knows to pass work to the Validation Agent.
+3. The complete end of your instructions should now look like:
+
+```
+OUTPUT REQUIREMENTS:
+- Return ONLY the translated Azure SQL T-SQL code
+- Do NOT include explanations, comments about the translation process, or markdown code blocks
+- Preserve the original query logic and structure
+- Ensure proper T-SQL syntax
+- Maintain readability with proper indentation
+
+After translating Oracle SQL to Azure SQL T-SQL, hand off the translated code to the validation_agent for syntax and semantic validation.
+```
+
+4. The agent will auto-save. The Translation Agent now knows to pass work to the Validation Agent.
 
 ### Part 7: Test the Connected Pipeline
 
