@@ -169,28 +169,35 @@ WHERE dept_id = 10;
 
 2. Click on **SQL-Validation-Agent** (the second agent).
 
-3. Scroll to **Connected agents** section.
+3. In the **Setup** panel on the right, scroll to **Connected agents** section.
 
 4. Click **+ Add**.
 
-5. Configure:
-   - **Agent**: **SQL-Optimization-Agent**
-   - **Description**: `Optimizes validated T-SQL for Azure SQL performance`
+5. In the **Adding a connected agent** dialog, configure:
+   - **Agent**: Select **SQL-Optimization-Agent** from dropdown
+   - **Unique name**: Enter `optimization_agent`
+   - **Tools**: (Shows agent tools if any - leave as is)
+   - **Detail the steps to activate the agent**: Enter:
+   ```
+   After validating the T-SQL code, if the validation result shows valid: true, automatically transfer the SQL to the SQL-Optimization-Agent for performance analysis. If validation fails (valid: false), do not activate the optimization agent.
+   ```
 
 6. Click **Add**.
 
-### Part 6: Update Validation Agent Hand-Off
+7. You should now see **SQL-Optimization-Agent** listed under Connected agents with the unique name `optimization_agent`.
 
-1. Still in SQL-Validation-Agent, update the **Instructions**.
+### Part 6: Update Validation Agent Hand-Off Instructions
 
-2. Add to the END:
+1. Still in **SQL-Validation-Agent**, scroll to the **Instructions** text box.
+
+2. Add to the END of the instructions:
 
 ```
-If the SQL is valid (valid: true), automatically hand off the code to the SQL-Optimization-Agent for performance analysis.
-If the SQL is invalid, do NOT hand off - just return the validation errors.
+If the SQL is valid (valid: true), hand off the code to the optimization_agent for performance analysis.
+If the SQL is invalid (valid: false), do NOT hand off - just return the validation errors.
 ```
 
-3. Save.
+3. The agent will auto-save. The Validation Agent now knows when to pass work to the Optimization Agent.
 
 ### Part 7: Test the Complete Three-Agent Pipeline
 

@@ -133,29 +133,34 @@ Now comes the key part - connecting the agents!
 
 2. Click on your **SQL-Translation-Agent** (the first agent you created).
 
-3. Scroll down to the **Connected agents** section.
+3. In the **Setup** panel on the right, scroll down to the **Connected agents** section.
 
 4. Click **+ Add**.
 
-5. In the dialog:
-   - **Agent**: Select **SQL-Validation-Agent**
-   - **Description**: `Validates translated T-SQL for correctness`
+5. In the **Adding a connected agent** dialog, configure:
+   - **Agent**: Select **SQL-Validation-Agent** from dropdown
+   - **Unique name**: Enter `validation_agent`
+   - **Tools**: (Shows agent tools if any - leave as is)
+   - **Detail the steps to activate the agent**: Enter:
+   ```
+   After completing the SQL translation from Oracle to Azure SQL T-SQL, automatically transfer the translated SQL to the SQL-Validation-Agent for syntax and semantic validation.
+   ```
 
 6. Click **Add**.
 
-7. You should now see SQL-Validation-Agent listed under Connected agents.
+7. You should now see **SQL-Validation-Agent** listed under Connected agents with the unique name `validation_agent`.
 
-### Part 6: Configure Hand-Off Behavior
+### Part 6: Update Translation Agent Instructions for Hand-Off
 
-1. Still in the Translation Agent configuration, update the **Instructions** to tell it when to hand off.
+1. Still in the **SQL-Translation-Agent** configuration, scroll to the **Instructions** text box.
 
 2. Add this to the END of your Translation Agent instructions:
 
 ```
-After translating Oracle SQL to Azure SQL T-SQL, automatically hand off the translated code to the SQL-Validation-Agent for validation.
+After translating Oracle SQL to Azure SQL T-SQL, hand off the translated code to the validation_agent for syntax and semantic validation.
 ```
 
-3. Save the updated instructions.
+3. The agent will auto-save. The Translation Agent now knows to pass work to the Validation Agent.
 
 ### Part 7: Test the Connected Pipeline
 
