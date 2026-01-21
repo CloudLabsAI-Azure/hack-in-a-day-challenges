@@ -1,7 +1,6 @@
 """
-Healthcare AI RAG Chatbot
-A clinical research assistant powered by Azure OpenAI and Azure AI Search.
-This application retrieves relevant medical literature and generates grounded clinical answers.
+Telecom Network Diagnostics AI Assistant
+A RAG-based chat application for analyzing telecom network telemetry and incidents.
 """
 
 import os
@@ -9,51 +8,84 @@ import streamlit as st
 from openai import AzureOpenAI
 import requests
 from dotenv import load_dotenv
+from typing import List, Dict, Any
 
-# Load environment variables from .env file
+# Load environment variables
 load_dotenv()
 
-# =============================================================================
-# Configuration: Load Azure credentials from environment variables
-# =============================================================================
+# Configuration
 AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
 AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
 AZURE_OPENAI_DEPLOYMENT_NAME = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
-AZURE_OPENAI_API_VERSION = os.getenv("AZURE_OPENAI_API_VERSION", "2024-02-01")
-
 AZURE_SEARCH_ENDPOINT = os.getenv("AZURE_SEARCH_ENDPOINT")
 AZURE_SEARCH_API_KEY = os.getenv("AZURE_SEARCH_API_KEY")
 AZURE_SEARCH_INDEX_NAME = os.getenv("AZURE_SEARCH_INDEX_NAME")
 
-# =============================================================================
-# Initialize Azure OpenAI Client (singleton pattern for connection reuse)
-# =============================================================================
-@st.cache_resource
-def get_openai_client():
-    """
-    Initialize and cache the Azure OpenAI client for reuse across requests.
-    This follows best practices by avoiding repeated client instantiation.
-    """
+
+def initialize_page():
+    """Configure Streamlit page settings."""
+    st.set_page_config(
+        page_title="Telecom Network Diagnostics AI",
+        page_icon="📡",
+        layout="wide"
+    )
+    
+    st.title("📡 Telecom Network Diagnostics AI Assistant")
+    st.markdown("""
+    Ask questions about network performance, incidents, and get AI-powered diagnostics.
+    
+    **Example queries:**
+    - Why is network latency high in this region?
+    - Which components are at risk of failure?
+    - What remediation actions are recommended for recent outages?
+    """)
+
+
+def validate_configuration() -> bool:
+    """Validate that all required environment variables are set."""
+    required_vars = [
+        "AZURE_OPENAI_ENDPOINT",
+        "AZURE_OPENAI_API_KEY",
+        "AZURE_OPENAI_DEPLOYMENT_NAME",
+        "AZURE_SEARCH_ENDPOINT",
+        "AZURE_SEARCH_API_KEY",
+        "AZURE_SEARCH_INDEX_NAME"
+    ]
+    
+    missing_vars = [var for var in required_vars if not os.getenv(var)]
+    
+    if missing_vars:
+        st.error(f"Missing required environment variables: {', '.join(missing_vars)}")
+        st.info("Please create a `.env` file with all required variables. See `.env.example` for reference.")
+        return False
+    
+    return True
+
+
+def initialize_openai_client() -> AzureOpenAI:
+    """Initialize Azure OpenAI client."""
     return AzureOpenAI(
         api_key=AZURE_OPENAI_API_KEY,
-        api_version=AZURE_OPENAI_API_VERSION,
+        api_version="2024-02-15-preview",
         azure_endpoint=AZURE_OPENAI_ENDPOINT
     )
 
-# =============================================================================
-# Azure AI Search: Retrieve relevant documents
-# =============================================================================
-def search_documents(query: str, top_k: int = 5) -> list[dict]:
+
+def search_telemetry_and_incidents(query: str, top_k: int = 5) -> List[Dict[str, Any]]:
     """
-    Query Azure AI Search to retrieve relevant medical documents.
+    Retrieve relevant telemetry and incident data from Azure AI Search.
     
     Args:
-        query: User's clinical research question
-        top_k: Number of top documents to retrieve
+        query: User's search query
+        top_k: Number of top results to retrieve
         
     Returns:
-        List of document dictionaries containing content and metadata
+        List of search results with content and metadata
     """
+    if not AZURE_SEARCH_ENDPOINT or not AZURE_SEARCH_API_KEY:
+        st.warning("Azure AI Search is not configured. Using mock data.")
+        return []
+    
     search_url = f"{AZURE_SEARCH_ENDPOINT}/indexes/{AZURE_SEARCH_INDEX_NAME}/docs/search?api-version=2023-11-01"
     
     headers = {
@@ -61,212 +93,222 @@ def search_documents(query: str, top_k: int = 5) -> list[dict]:
         "api-key": AZURE_SEARCH_API_KEY
     }
     
-    # Construct search payload with semantic ranking for better relevance
     payload = {
         "search": query,
         "top": top_k,
+        "select": "*",
         "queryType": "semantic",
         "semanticConfiguration": "default",
-        "select": "content,title,metadata",
-        "queryLanguage": "en-us"
+        "captions": "extractive",
+        "answers": "extractive|count-3"
     }
     
     try:
-        response = requests.post(search_url, headers=headers, json=payload, timeout=30)
+        response = requests.post(search_url, headers=headers, json=payload, timeout=10)
         response.raise_for_status()
-        
-        results = response.json()
-        documents = results.get("value", [])
-        
-        # Extract relevant fields from search results
-        retrieved_docs = []
-        for doc in documents:
-            retrieved_docs.append({
-                "content": doc.get("content", ""),
-                "title": doc.get("title", "Untitled"),
-                "score": doc.get("@search.score", 0.0)
-            })
-        
-        return retrieved_docs
-    
+        results = response.json().get("value", [])
+        return results
     except requests.exceptions.RequestException as e:
-        st.error(f"Error querying Azure AI Search: {str(e)}")
+        st.warning(f"Azure AI Search request failed: {str(e)}. Proceeding without retrieval.")
         return []
 
-# =============================================================================
-# Azure OpenAI: Generate grounded clinical answer
-# =============================================================================
-def generate_answer(user_question: str, context_documents: list[dict]) -> str:
+
+def format_search_results(results: List[Dict[str, Any]]) -> str:
     """
-    Generate a clinical research answer grounded in retrieved documents.
+    Format search results into context string for the LLM.
     
     Args:
-        user_question: The user's clinical question
-        context_documents: Retrieved documents from Azure AI Search
+        results: List of search results from Azure AI Search
         
     Returns:
-        Generated answer string from the LLM
+        Formatted context string
     """
-    # If no documents found, return early with clear message
-    if not context_documents:
-        return "I couldn't find relevant medical literature to answer your question. Please try rephrasing or ask about a different clinical topic."
+    if not results:
+        return "No relevant telemetry or incident data found."
     
-    # Build context string from retrieved documents
-    context = "\n\n---\n\n".join([
-        f"**{doc['title']}**\n{doc['content'][:1000]}"  # Limit each doc to 1000 chars
-        for doc in context_documents
-    ])
-    
-    # Construct RAG prompt with clear instructions
-    system_prompt = """You are a clinical research assistant. Your role is to provide accurate, evidence-based answers to medical and clinical research questions.
-
-Guidelines:
-- Base your answers ONLY on the provided medical literature context
-- Be factual, neutral, and research-oriented
-- Cite relevant information from the sources when possible
-- If the context doesn't contain sufficient information, clearly state that
-- Use clear, professional medical terminology
-- Do not provide medical advice or diagnoses
-- Focus on research findings, treatment options, and clinical evidence"""
-
-    user_prompt = f"""Based on the following medical literature, answer this clinical research question:
-
-**Question:** {user_question}
-
-**Medical Literature Context:**
-{context}
-
-**Answer:**"""
-
-    try:
-        client = get_openai_client()
+    context_parts = []
+    for idx, result in enumerate(results, 1):
+        # Extract relevant fields (adjust based on your index schema)
+        title = result.get("title", result.get("id", f"Document {idx}"))
+        content = result.get("content", result.get("description", "No content available"))
+        timestamp = result.get("timestamp", "")
+        severity = result.get("severity", "")
+        component = result.get("component", "")
         
-        # Call Azure OpenAI with chat completion API
+        context_part = f"### Document {idx}: {title}\n"
+        if timestamp:
+            context_part += f"**Timestamp:** {timestamp}\n"
+        if severity:
+            context_part += f"**Severity:** {severity}\n"
+        if component:
+            context_part += f"**Component:** {component}\n"
+        context_part += f"**Content:** {content}\n"
+        
+        context_parts.append(context_part)
+    
+    return "\n---\n".join(context_parts)
+
+
+def create_rag_prompt(user_query: str, retrieved_context: str) -> str:
+    """
+    Create a RAG-enhanced prompt for the LLM focused on telecom diagnostics.
+    
+    Args:
+        user_query: Original user question
+        retrieved_context: Context retrieved from Azure AI Search
+        
+    Returns:
+        Complete prompt for the LLM
+    """
+    system_message = """You are an expert telecom network diagnostics AI assistant. 
+Your role is to analyze network telemetry and incident data to provide:
+1. Root cause explanations
+2. Risk assessments
+3. Recommended remediation actions
+
+Base your responses on the retrieved telemetry and incident data provided.
+Be specific, technical, and actionable. Always explain your reasoning."""
+
+    prompt = f"""{system_message}
+
+## Retrieved Telemetry and Incident Data:
+{retrieved_context}
+
+## User Query:
+{user_query}
+
+## Your Response:
+Please provide a comprehensive analysis that includes:
+- **Root Cause Analysis:** What is causing the issue?
+- **Risk Assessment:** What are the potential impacts and risks?
+- **Recommended Actions:** What specific steps should be taken to remediate?
+
+Ensure your response is clear, actionable, and based on the data provided above."""
+
+    return prompt
+
+
+def get_ai_response(client: AzureOpenAI, prompt: str, chat_history: List[Dict[str, str]]) -> str:
+    """
+    Get response from Azure OpenAI with RAG-enhanced prompt.
+    
+    Args:
+        client: Azure OpenAI client
+        prompt: RAG-enhanced prompt
+        chat_history: Previous conversation history
+        
+    Returns:
+        AI-generated response
+    """
+    # Build messages with system context and history
+    messages = [
+        {"role": "system", "content": "You are a telecom network diagnostics expert assistant."}
+    ]
+    
+    # Add chat history (limit to last 10 messages for context window management)
+    messages.extend(chat_history[-10:])
+    
+    # Add current RAG-enhanced prompt
+    messages.append({"role": "user", "content": prompt})
+    
+    try:
         response = client.chat.completions.create(
             model=AZURE_OPENAI_DEPLOYMENT_NAME,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ],
-            temperature=0.3,  # Lower temperature for more factual responses
-            max_tokens=800,
+            messages=messages,
+            temperature=0.7,
+            max_tokens=1000,
             top_p=0.95
         )
         
-        answer = response.choices[0].message.content
-        return answer
+        return response.choices[0].message.content
     
     except Exception as e:
-        st.error(f"Error generating answer: {str(e)}")
-        return "An error occurred while generating the answer. Please try again."
+        st.error(f"Error calling Azure OpenAI: {str(e)}")
+        return "I apologize, but I encountered an error processing your request. Please try again."
 
-# =============================================================================
-# Streamlit UI: Chat Interface
-# =============================================================================
-def main():
-    """
-    Main Streamlit application entry point.
-    Renders the chat UI and handles user interactions.
-    """
-    # Page configuration
-    st.set_page_config(
-        page_title="Healthcare AI Research Assistant",
-        page_icon="🏥",
-        layout="wide"
-    )
-    
-    # Header
-    st.title("🏥 Healthcare AI Research Assistant")
-    st.markdown("""
-    Ask clinical research questions and get evidence-based answers grounded in medical literature.
-    Powered by Azure OpenAI and Azure AI Search.
-    """)
-    
-    # Sidebar with information and sample questions
-    with st.sidebar:
-        st.header("ℹ️ About")
-        st.info("""
-        This RAG chatbot retrieves relevant medical literature from Azure AI Search 
-        and generates grounded clinical research answers using Azure OpenAI.
-        """)
-        
-        st.header("💡 Sample Questions")
-        st.markdown("""
-        - What are the latest treatments for glioblastoma in patients over 60?
-        - Compare chemotherapy and immunotherapy outcomes
-        - Which treatments are FDA approved for melanoma?
-        - What are the side effects of checkpoint inhibitors?
-        """)
-        
-        # Configuration status
-        st.header("⚙️ Configuration")
-        config_ok = all([
-            AZURE_OPENAI_ENDPOINT,
-            AZURE_OPENAI_API_KEY,
-            AZURE_OPENAI_DEPLOYMENT_NAME,
-            AZURE_SEARCH_ENDPOINT,
-            AZURE_SEARCH_API_KEY,
-            AZURE_SEARCH_INDEX_NAME
-        ])
-        
-        if config_ok:
-            st.success("✅ All credentials configured")
-        else:
-            st.error("❌ Missing credentials. Check your .env file")
-    
-    # Initialize chat history in session state
+
+def initialize_session_state():
+    """Initialize Streamlit session state for chat history."""
     if "messages" not in st.session_state:
         st.session_state.messages = []
     
-    # Display existing chat messages
+    if "openai_client" not in st.session_state:
+        st.session_state.openai_client = initialize_openai_client()
+
+
+def display_chat_history():
+    """Display chat message history."""
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
+            
+            # Display sources if available
+            if message["role"] == "assistant" and "sources" in message:
+                with st.expander("📚 Retrieved Sources"):
+                    st.markdown(message["sources"])
+
+
+def main():
+    """Main application logic."""
+    initialize_page()
+    
+    # Validate configuration
+    if not validate_configuration():
+        st.stop()
+    
+    # Initialize session state
+    initialize_session_state()
+    
+    # Display chat history
+    display_chat_history()
     
     # Chat input
-    if prompt := st.chat_input("Ask a clinical research question..."):
-        # Validate configuration before processing
-        if not config_ok:
-            st.error("⚠️ Please configure your Azure credentials in the .env file")
-            return
-        
-        # Add user message to chat history
-        st.session_state.messages.append({"role": "user", "content": prompt})
+    if user_query := st.chat_input("Ask about network diagnostics, incidents, or telemetry..."):
+        # Display user message
         with st.chat_message("user"):
-            st.markdown(prompt)
+            st.markdown(user_query)
         
-        # Generate assistant response
+        # Add user message to history
+        st.session_state.messages.append({"role": "user", "content": user_query})
+        
+        # Show assistant thinking
         with st.chat_message("assistant"):
-            with st.spinner("🔍 Searching medical literature..."):
-                # Step 1: Retrieve relevant documents from Azure AI Search
-                documents = search_documents(prompt, top_k=5)
+            with st.spinner("Analyzing telemetry and incidents..."):
+                # Step 1: Retrieve relevant context from Azure AI Search
+                search_results = search_telemetry_and_incidents(user_query, top_k=5)
                 
-                if documents:
-                    st.caption(f"Found {len(documents)} relevant documents")
+                # Step 2: Format search results
+                retrieved_context = format_search_results(search_results)
                 
-                # Step 2: Generate answer using Azure OpenAI with retrieved context
-                with st.spinner("🤖 Generating evidence-based answer..."):
-                    answer = generate_answer(prompt, documents)
+                # Step 3: Create RAG-enhanced prompt
+                rag_prompt = create_rag_prompt(user_query, retrieved_context)
                 
-                # Display the answer
-                st.markdown(answer)
+                # Step 4: Get AI response
+                response = get_ai_response(
+                    st.session_state.openai_client,
+                    rag_prompt,
+                    st.session_state.messages[:-1]  # Exclude the just-added user message
+                )
                 
-                # Optionally show sources in an expander
-                if documents:
-                    with st.expander("📚 View Sources"):
-                        for i, doc in enumerate(documents, 1):
-                            st.markdown(f"**Source {i}: {doc['title']}**")
-                            st.caption(f"Relevance Score: {doc['score']:.2f}")
-                            st.text(doc['content'][:300] + "...")
-                            st.divider()
+                # Display response
+                st.markdown(response)
+                
+                # Display retrieved sources
+                if search_results:
+                    with st.expander("📚 Retrieved Sources"):
+                        st.markdown(retrieved_context)
         
-        # Add assistant response to chat history
-        st.session_state.messages.append({"role": "assistant", "content": answer})
-    
-    # Clear chat button
-    if st.sidebar.button("🗑️ Clear Chat History"):
-        st.session_state.messages = []
-        st.rerun()
+        # Add assistant response to history
+        assistant_message = {
+            "role": "assistant",
+            "content": response
+        }
+        
+        if search_results:
+            assistant_message["sources"] = retrieved_context
+        
+        st.session_state.messages.append(assistant_message)
+
 
 if __name__ == "__main__":
     main()
