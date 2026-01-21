@@ -17,79 +17,80 @@ Now that you have a Translation Agent, you need a Validation Agent to check if t
 
 ### Part 1: Create Validation Agent
 
-1. In **Azure AI Foundry Studio**, navigate to **Agents**.
+1. In **Microsoft Foundry Studio**, navigate to **Agents**.
 
 2. Click **+ New agent**.
 
 3. Configure the agent:
    - **Agent name**: `SQL-Validation-Agent`
-   - **Deployment**: Select **gpt-4-sql-translator**
+   - **Deployment**: Select **sql-translator**
 
 ### Part 2: Write Validation Instructions
 
 1. In the **Instructions** box, paste:
 
-```
-You are an Azure SQL T-SQL validation expert. Your role is to analyze T-SQL code and determine if it is syntactically and semantically correct.
+   ```
+   You are an Azure SQL T-SQL validation expert. Your role is to analyze T-SQL code and determine if it is syntactically and semantically correct.
 
-VALIDATION CHECKS:
+   VALIDATION CHECKS:
 
-1. Syntax Validation:
-   - Verify all SQL keywords are spelled correctly (SELECT, FROM, WHERE, JOIN, etc.)
-   - Check for proper statement termination (semicolons where needed)
-   - Validate parentheses, brackets, and quote matching
-   - Ensure proper use of commas in column lists
-   - Check for invalid SQL keywords or deprecated syntax
+   1. Syntax Validation:
+      - Verify all SQL keywords are spelled correctly (SELECT, FROM, WHERE, JOIN, etc.)
+      - Check for proper statement termination (semicolons where needed)
+      - Validate parentheses, brackets, and quote matching
+      - Ensure proper use of commas in column lists
+      - Check for invalid SQL keywords or deprecated syntax
 
-2. Semantic Validation:
-   - Verify JOIN conditions are present and logical
-   - Check that aggregate functions (SUM, COUNT, AVG) are used correctly with GROUP BY
-   - Validate WHERE clause conditions make sense
-   - Ensure data type compatibility in comparisons
-   - Check for potential NULL handling issues
+   2. Semantic Validation:
+      - Verify JOIN conditions are present and logical
+      - Check that aggregate functions (SUM, COUNT, AVG) are used correctly with GROUP BY
+      - Validate WHERE clause conditions make sense
+      - Ensure data type compatibility in comparisons
+      - Check for potential NULL handling issues
 
-3. Azure SQL Specific:
-   - Verify Azure SQL T-SQL functions are used correctly (GETDATE, DATEADD, ISNULL, etc.)
-   - Check that deprecated functions are not used
-   - Validate TOP N syntax is correct
-   - Ensure window functions (ROW_NUMBER, RANK) have proper OVER clauses
+   3. Azure SQL Specific:
+      - Verify Azure SQL T-SQL functions are used correctly (GETDATE, DATEADD, ISNULL, etc.)
+      - Check that deprecated functions are not used
+      - Validate TOP N syntax is correct
+      - Ensure window functions (ROW_NUMBER, RANK) have proper OVER clauses
 
-4. Best Practices:
-   - Flag SELECT * usage (recommend explicit column lists)
-   - Identify missing WHERE clauses on UPDATE/DELETE (could affect all rows)
-   - Detect potential SQL injection vulnerabilities (dynamic SQL without parameterization)
-   - Warn about NOLOCK hints (dirty reads)
+   4. Best Practices:
+      - Flag SELECT * usage (recommend explicit column lists)
+      - Identify missing WHERE clauses on UPDATE/DELETE (could affect all rows)
+      - Detect potential SQL injection vulnerabilities (dynamic SQL without parameterization)
+      - Warn about NOLOCK hints (dirty reads)
 
-OUTPUT FORMAT (JSON):
-Return your validation result as a JSON object with this structure:
-{
-  "valid": true or false,
-  "confidence": 0.0 to 1.0,
-  "syntax_errors": [
-    {"severity": "error", "message": "description", "line": line_number_if_known}
-  ],
-  "semantic_warnings": [
-    {"severity": "warning", "message": "description"}
-  ],
-  "best_practice_suggestions": [
-    "suggestion 1",
-    "suggestion 2"
-  ],
-  "summary": "Brief overall assessment"
-}
+   OUTPUT FORMAT (JSON):
+   Return your validation result as a JSON object with this structure:
+   {
+   "valid": true or false,
+   "confidence": 0.0 to 1.0,
+   "syntax_errors": [
+      {"severity": "error", "message": "description", "line": line_number_if_known}
+   ],
+   "semantic_warnings": [
+      {"severity": "warning", "message": "description"}
+   ],
+   "best_practice_suggestions": [
+      "suggestion 1",
+      "suggestion 2"
+   ],
+   "summary": "Brief overall assessment"
+   }
 
-If the SQL is valid, return valid: true with confidence near 1.0.
-If there are errors, return valid: false and list all issues found.
-```
+   If the SQL is valid, return valid: true with confidence near 1.0.
+   If there are errors, return valid: false and list all issues found.
+   ```
 
 2. Save the instructions.
 
 ### Part 3: Add Agent Description
 
 1. Expand **Agent Description** and add:
-```
-Validates Azure SQL T-SQL code for syntax correctness, semantic validity, and best practice compliance. Returns structured JSON with error details and suggestions.
-```
+
+   ```
+   Validates Azure SQL T-SQL code for syntax correctness, semantic validity, and best practice compliance. Returns structured JSON with error details and suggestions.
+   ```
 
 ### Part 4: Test Validation Agent Independently
 
@@ -97,31 +98,31 @@ Validates Azure SQL T-SQL code for syntax correctness, semantic validity, and be
 
 2. Test with VALID SQL:
 
-```sql
-SELECT emp_id, emp_name, hire_date
-FROM employees
-WHERE hire_date > DATEADD(DAY, -30, GETDATE());
-```
+   ```sql
+   SELECT emp_id, emp_name, hire_date
+   FROM employees
+   WHERE hire_date > DATEADD(DAY, -30, GETDATE());
+   ```
 
 3. Verify it returns `"valid": true` in JSON format.
 
 4. Test with INVALID SQL (syntax error):
 
-```sql
-SELECT emp_id emp_name hire_date
-FROM employees
-WHERE hire_date > GETDATE()
-```
+   ```sql
+   SELECT emp_id emp_name hire_date
+   FROM employees
+   WHERE hire_date > GETDATE()
+   ```
 
 5. Verify it returns `"valid": false` and identifies missing commas.
 
 6. Test with semantic issue:
 
-```sql
-SELECT emp_id, SUM(salary)
-FROM employees
-WHERE dept_id = 10;
-```
+   ```sql
+   SELECT emp_id, SUM(salary)
+   FROM employees
+   WHERE dept_id = 10;
+   ```
 
 7. Verify it flags the missing GROUP BY for the aggregate function.
 
@@ -142,9 +143,10 @@ Now comes the key part - connecting the agents!
    - **Unique name**: Enter `validation_agent`
    - **Tools**: (Shows agent tools if any - leave as is)
    - **Detail the steps to activate the agent**: Enter:
-   ```
-   After completing the SQL translation from Oracle to Azure SQL T-SQL, automatically transfer the translated SQL to the SQL-Validation-Agent for syntax and semantic validation.
-   ```
+
+      ```
+      After completing the SQL translation from Oracle to Azure SQL T-SQL, automatically transfer the translated SQL to the SQL-Validation-Agent for syntax and semantic validation.
+      ```
 
 6. Click **Add**.
 
@@ -156,22 +158,22 @@ Now comes the key part - connecting the agents!
 
 2. Add this single line to the **very end** of your existing Translation Agent instructions (after the OUTPUT REQUIREMENTS section):
 
-```
-After translating Oracle SQL to Azure SQL T-SQL, hand off the translated code to the validation_agent for syntax and semantic validation.
-```
+   ```
+   After translating Oracle SQL to Azure SQL T-SQL, hand off the translated code to the validation_agent for syntax and semantic validation.
+   ```
 
 3. The complete end of your instructions should now look like:
 
-```
-OUTPUT REQUIREMENTS:
-- Return ONLY the translated Azure SQL T-SQL code
-- Do NOT include explanations, comments about the translation process, or markdown code blocks
-- Preserve the original query logic and structure
-- Ensure proper T-SQL syntax
-- Maintain readability with proper indentation
+   ```
+   OUTPUT REQUIREMENTS:
+   - Return ONLY the translated Azure SQL T-SQL code
+   - Do NOT include explanations, comments about the translation process, or markdown code blocks
+   - Preserve the original query logic and structure
+   - Ensure proper T-SQL syntax
+   - Maintain readability with proper indentation
 
-After translating Oracle SQL to Azure SQL T-SQL, hand off the translated code to the validation_agent for syntax and semantic validation.
-```
+   After translating Oracle SQL to Azure SQL T-SQL, hand off the translated code to the validation_agent for syntax and semantic validation.
+   ```
 
 4. The agent will auto-save. The Translation Agent now knows to pass work to the Validation Agent.
 
@@ -183,11 +185,11 @@ After translating Oracle SQL to Azure SQL T-SQL, hand off the translated code to
 
 3. Send this Oracle query:
 
-```sql
-SELECT emp_id, emp_name, NVL(commission, 0) as comm
-FROM employees
-WHERE ROWNUM <= 5;
-```
+   ```sql
+   SELECT emp_id, emp_name, NVL(commission, 0) as comm
+   FROM employees
+   WHERE ROWNUM <= 5;
+   ```
 
 4. Observe what happens:
    - Translation Agent translates it to T-SQL
@@ -203,12 +205,12 @@ WHERE ROWNUM <= 5;
 
 1. In the same playground, test with hierarchical query:
 
-```sql
-SELECT emp_id, emp_name, manager_id, LEVEL
-FROM employees
-START WITH manager_id IS NULL
-CONNECT BY PRIOR emp_id = manager_id;
-```
+   ```sql
+   SELECT emp_id, emp_name, manager_id, LEVEL
+   FROM employees
+   START WITH manager_id IS NULL
+   CONNECT BY PRIOR emp_id = manager_id;
+   ```
 
 2. Verify:
    - Agent 1 translates to CTE
@@ -219,9 +221,9 @@ CONNECT BY PRIOR emp_id = manager_id;
 
 1. Intentionally send broken Oracle SQL:
 
-```sql
-SELECT emp_id emp_name FROM employees WHERE;
-```
+   ```sql
+   SELECT emp_id emp_name FROM employees WHERE;
+   ```
 
 2. Observe:
    - Translation Agent attempts translation
