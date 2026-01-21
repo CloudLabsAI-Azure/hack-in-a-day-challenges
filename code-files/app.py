@@ -1,288 +1,272 @@
 """
-B2B Account Intelligence AI Assistant
-A RAG-based chat application for sales teams using Azure AI Search and Azure OpenAI.
+Healthcare AI RAG Chatbot
+A clinical research assistant powered by Azure OpenAI and Azure AI Search.
+This application retrieves relevant medical literature and generates grounded clinical answers.
 """
 
 import os
 import streamlit as st
-from dotenv import load_dotenv
-import requests
-import json
 from openai import AzureOpenAI
+import requests
+from dotenv import load_dotenv
 
-# Load environment variables
+# Load environment variables from .env file
 load_dotenv()
 
-# Azure OpenAI Configuration
+# =============================================================================
+# Configuration: Load Azure credentials from environment variables
+# =============================================================================
 AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
 AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
 AZURE_OPENAI_DEPLOYMENT_NAME = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
+AZURE_OPENAI_API_VERSION = os.getenv("AZURE_OPENAI_API_VERSION", "2024-02-01")
 
-# Azure AI Search Configuration
 AZURE_SEARCH_ENDPOINT = os.getenv("AZURE_SEARCH_ENDPOINT")
 AZURE_SEARCH_API_KEY = os.getenv("AZURE_SEARCH_API_KEY")
 AZURE_SEARCH_INDEX_NAME = os.getenv("AZURE_SEARCH_INDEX_NAME")
 
-# Initialize Azure OpenAI client
-client = AzureOpenAI(
-    azure_endpoint=AZURE_OPENAI_ENDPOINT,
-    api_key=AZURE_OPENAI_API_KEY,
-    api_version="2024-02-01"
-)
-
-
-def search_account_intelligence(query: str, top_k: int = 5) -> list:
+# =============================================================================
+# Initialize Azure OpenAI Client (singleton pattern for connection reuse)
+# =============================================================================
+@st.cache_resource
+def get_openai_client():
     """
-    Retrieve relevant account intelligence from Azure AI Search.
+    Initialize and cache the Azure OpenAI client for reuse across requests.
+    This follows best practices by avoiding repeated client instantiation.
+    """
+    return AzureOpenAI(
+        api_key=AZURE_OPENAI_API_KEY,
+        api_version=AZURE_OPENAI_API_VERSION,
+        azure_endpoint=AZURE_OPENAI_ENDPOINT
+    )
+
+# =============================================================================
+# Azure AI Search: Retrieve relevant documents
+# =============================================================================
+def search_documents(query: str, top_k: int = 5) -> list[dict]:
+    """
+    Query Azure AI Search to retrieve relevant medical documents.
     
     Args:
-        query: User's search query
-        top_k: Number of top results to return
+        query: User's clinical research question
+        top_k: Number of top documents to retrieve
         
     Returns:
-        List of relevant documents with account intelligence
+        List of document dictionaries containing content and metadata
     """
+    search_url = f"{AZURE_SEARCH_ENDPOINT}/indexes/{AZURE_SEARCH_INDEX_NAME}/docs/search?api-version=2023-11-01"
+    
+    headers = {
+        "Content-Type": "application/json",
+        "api-key": AZURE_SEARCH_API_KEY
+    }
+    
+    # Construct search payload with semantic ranking for better relevance
+    payload = {
+        "search": query,
+        "top": top_k,
+        "queryType": "semantic",
+        "semanticConfiguration": "default",
+        "select": "content,title,metadata",
+        "queryLanguage": "en-us"
+    }
+    
     try:
-        # Azure AI Search REST API endpoint
-        search_url = f"{AZURE_SEARCH_ENDPOINT}/indexes/{AZURE_SEARCH_INDEX_NAME}/docs/search?api-version=2023-11-01"
-        
-        headers = {
-            "Content-Type": "application/json",
-            "api-key": AZURE_SEARCH_API_KEY
-        }
-        
-        # Search request body
-        search_body = {
-            "search": query,
-            "top": top_k,
-            "queryType": "semantic",
-            "select": "*",
-            "searchFields": "content,account_name,industry,description"
-        }
-        
-        # Execute search request
-        response = requests.post(search_url, headers=headers, json=search_body)
+        response = requests.post(search_url, headers=headers, json=payload, timeout=30)
         response.raise_for_status()
         
         results = response.json()
         documents = results.get("value", [])
         
-        if documents:
-            st.sidebar.success(f"✓ Retrieved {len(documents)} relevant documents")
-        else:
-            st.sidebar.warning("⚠ No documents found for this query")
+        # Extract relevant fields from search results
+        retrieved_docs = []
+        for doc in documents:
+            retrieved_docs.append({
+                "content": doc.get("content", ""),
+                "title": doc.get("title", "Untitled"),
+                "score": doc.get("@search.score", 0.0)
+            })
         
-        return documents
-        
-    except Exception as e:
-        st.sidebar.error(f"❌ Search error: {str(e)}")
+        return retrieved_docs
+    
+    except requests.exceptions.RequestException as e:
+        st.error(f"Error querying Azure AI Search: {str(e)}")
         return []
 
-
-def build_rag_prompt(user_query: str, context_documents: list) -> str:
+# =============================================================================
+# Azure OpenAI: Generate grounded clinical answer
+# =============================================================================
+def generate_answer(user_question: str, context_documents: list[dict]) -> str:
     """
-    Build a RAG prompt with retrieved context for the LLM.
+    Generate a clinical research answer grounded in retrieved documents.
     
     Args:
-        user_query: User's original question
+        user_question: The user's clinical question
         context_documents: Retrieved documents from Azure AI Search
         
     Returns:
-        Formatted prompt with context and query
+        Generated answer string from the LLM
     """
-    # Build context section from retrieved documents
-    context_text = ""
-    if context_documents:
-        context_text = "=== ACCOUNT INTELLIGENCE CONTEXT ===\n\n"
-        for idx, doc in enumerate(context_documents, 1):
-            context_text += f"Document {idx}:\n"
-            context_text += f"Account: {doc.get('account_name', 'N/A')}\n"
-            context_text += f"Industry: {doc.get('industry', 'N/A')}\n"
-            context_text += f"Content: {doc.get('content', doc.get('description', 'N/A'))}\n"
-            context_text += f"Score: {doc.get('@search.score', 'N/A')}\n"
-            context_text += "-" * 50 + "\n\n"
-    else:
-        context_text = "=== NO RELEVANT ACCOUNT DATA FOUND ===\n\n"
+    # If no documents found, return early with clear message
+    if not context_documents:
+        return "I couldn't find relevant medical literature to answer your question. Please try rephrasing or ask about a different clinical topic."
     
-    # Construct the full RAG prompt
-    rag_prompt = f"""You are an AI sales assistant providing account intelligence to B2B sales teams.
-
-{context_text}
-
-=== SALES USER QUESTION ===
-{user_query}
-
-=== INSTRUCTIONS ===
-Based on the account intelligence context above, provide a concise, actionable response that:
-1. Directly answers the sales user's question
-2. Highlights key risks, opportunities, or changes
-3. Suggests specific talking points or next actions
-4. Uses business-friendly language (avoid technical jargon)
-5. Structures information with bullet points or sections when appropriate
-
-If no relevant context was found, acknowledge this and provide general guidance based on best practices.
-
-Response:"""
+    # Build context string from retrieved documents
+    context = "\n\n---\n\n".join([
+        f"**{doc['title']}**\n{doc['content'][:1000]}"  # Limit each doc to 1000 chars
+        for doc in context_documents
+    ])
     
-    return rag_prompt
+    # Construct RAG prompt with clear instructions
+    system_prompt = """You are a clinical research assistant. Your role is to provide accurate, evidence-based answers to medical and clinical research questions.
 
+Guidelines:
+- Base your answers ONLY on the provided medical literature context
+- Be factual, neutral, and research-oriented
+- Cite relevant information from the sources when possible
+- If the context doesn't contain sufficient information, clearly state that
+- Use clear, professional medical terminology
+- Do not provide medical advice or diagnoses
+- Focus on research findings, treatment options, and clinical evidence"""
 
-def generate_llm_response(prompt: str) -> str:
-    """
-    Generate a response using Azure OpenAI.
-    
-    Args:
-        prompt: The complete RAG prompt with context
-        
-    Returns:
-        Generated response from the LLM
-    """
+    user_prompt = f"""Based on the following medical literature, answer this clinical research question:
+
+**Question:** {user_question}
+
+**Medical Literature Context:**
+{context}
+
+**Answer:**"""
+
     try:
+        client = get_openai_client()
+        
+        # Call Azure OpenAI with chat completion API
         response = client.chat.completions.create(
             model=AZURE_OPENAI_DEPLOYMENT_NAME,
             messages=[
-                {
-                    "role": "system",
-                    "content": "You are an expert B2B sales assistant specializing in account intelligence and strategic sales insights."
-                },
-                {
-                    "role": "user",
-                    "content": prompt
-                }
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
             ],
-            temperature=0.7,
+            temperature=0.3,  # Lower temperature for more factual responses
             max_tokens=800,
             top_p=0.95
         )
         
-        return response.choices[0].message.content
-        
+        answer = response.choices[0].message.content
+        return answer
+    
     except Exception as e:
-        return f"Error generating response: {str(e)}"
+        st.error(f"Error generating answer: {str(e)}")
+        return "An error occurred while generating the answer. Please try again."
 
-
-def validate_configuration() -> bool:
-    """
-    Validate that all required environment variables are set.
-    
-    Returns:
-        True if configuration is valid, False otherwise
-    """
-    required_vars = [
-        ("AZURE_OPENAI_ENDPOINT", AZURE_OPENAI_ENDPOINT),
-        ("AZURE_OPENAI_API_KEY", AZURE_OPENAI_API_KEY),
-        ("AZURE_OPENAI_DEPLOYMENT_NAME", AZURE_OPENAI_DEPLOYMENT_NAME),
-        ("AZURE_SEARCH_ENDPOINT", AZURE_SEARCH_ENDPOINT),
-        ("AZURE_SEARCH_API_KEY", AZURE_SEARCH_API_KEY),
-        ("AZURE_SEARCH_INDEX_NAME", AZURE_SEARCH_INDEX_NAME)
-    ]
-    
-    missing_vars = [name for name, value in required_vars if not value]
-    
-    if missing_vars:
-        st.error(f"❌ Missing required environment variables: {', '.join(missing_vars)}")
-        st.info("Please create a .env file with all required variables. See .env.example for reference.")
-        return False
-    
-    return True
-
-
+# =============================================================================
+# Streamlit UI: Chat Interface
+# =============================================================================
 def main():
     """
     Main Streamlit application entry point.
+    Renders the chat UI and handles user interactions.
     """
     # Page configuration
     st.set_page_config(
-        page_title="B2B Account Intelligence Assistant",
-        page_icon="💼",
+        page_title="Healthcare AI Research Assistant",
+        page_icon="🏥",
         layout="wide"
     )
     
     # Header
-    st.title("💼 B2B Account Intelligence Assistant")
-    st.markdown("**AI-powered sales insights using Azure OpenAI and Azure AI Search**")
-    st.divider()
+    st.title("🏥 Healthcare AI Research Assistant")
+    st.markdown("""
+    Ask clinical research questions and get evidence-based answers grounded in medical literature.
+    Powered by Azure OpenAI and Azure AI Search.
+    """)
     
-    # Validate configuration
-    if not validate_configuration():
-        st.stop()
-    
-    # Sidebar with information
+    # Sidebar with information and sample questions
     with st.sidebar:
         st.header("ℹ️ About")
-        st.markdown("""
-        This assistant helps sales teams with:
-        - Account summaries and updates
-        - Risk and opportunity analysis
-        - Meeting preparation and talking points
-        - Strategic account intelligence
+        st.info("""
+        This RAG chatbot retrieves relevant medical literature from Azure AI Search 
+        and generates grounded clinical research answers using Azure OpenAI.
         """)
         
-        st.divider()
+        st.header("💡 Sample Questions")
+        st.markdown("""
+        - What are the latest treatments for glioblastoma in patients over 60?
+        - Compare chemotherapy and immunotherapy outcomes
+        - Which treatments are FDA approved for melanoma?
+        - What are the side effects of checkpoint inhibitors?
+        """)
         
-        st.header("💡 Sample Queries")
-        sample_queries = [
-            "Summarize recent changes for this account",
-            "What risks and opportunities exist for this customer?",
-            "Give talking points for the next sales meeting",
-            "What are the key decision makers at this account?",
-            "How can we expand our footprint with this customer?"
-        ]
+        # Configuration status
+        st.header("⚙️ Configuration")
+        config_ok = all([
+            AZURE_OPENAI_ENDPOINT,
+            AZURE_OPENAI_API_KEY,
+            AZURE_OPENAI_DEPLOYMENT_NAME,
+            AZURE_SEARCH_ENDPOINT,
+            AZURE_SEARCH_API_KEY,
+            AZURE_SEARCH_INDEX_NAME
+        ])
         
-        for query in sample_queries:
-            if st.button(query, key=query, use_container_width=True):
-                st.session_state.sample_query = query
-        
-        st.divider()
-        st.caption("🔧 Powered by Azure OpenAI & Azure AI Search")
+        if config_ok:
+            st.success("✅ All credentials configured")
+        else:
+            st.error("❌ Missing credentials. Check your .env file")
     
     # Initialize chat history in session state
     if "messages" not in st.session_state:
         st.session_state.messages = []
     
-    # Display chat history
+    # Display existing chat messages
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
     
-    # Handle sample query from sidebar
-    user_input = None
-    if "sample_query" in st.session_state:
-        user_input = st.session_state.sample_query
-        del st.session_state.sample_query
-    
     # Chat input
-    if prompt := (user_input or st.chat_input("Ask about your accounts...")):
+    if prompt := st.chat_input("Ask a clinical research question..."):
+        # Validate configuration before processing
+        if not config_ok:
+            st.error("⚠️ Please configure your Azure credentials in the .env file")
+            return
+        
         # Add user message to chat history
         st.session_state.messages.append({"role": "user", "content": prompt})
-        
-        # Display user message
         with st.chat_message("user"):
             st.markdown(prompt)
         
         # Generate assistant response
         with st.chat_message("assistant"):
-            with st.spinner("🔍 Searching account intelligence..."):
+            with st.spinner("🔍 Searching medical literature..."):
                 # Step 1: Retrieve relevant documents from Azure AI Search
-                retrieved_docs = search_account_intelligence(prompt)
+                documents = search_documents(prompt, top_k=5)
                 
-            with st.spinner("🤖 Generating insights..."):
-                # Step 2: Build RAG prompt with context
-                rag_prompt = build_rag_prompt(prompt, retrieved_docs)
+                if documents:
+                    st.caption(f"Found {len(documents)} relevant documents")
                 
-                # Step 3: Generate response using Azure OpenAI
-                response = generate_llm_response(rag_prompt)
+                # Step 2: Generate answer using Azure OpenAI with retrieved context
+                with st.spinner("🤖 Generating evidence-based answer..."):
+                    answer = generate_answer(prompt, documents)
                 
-                # Display response
-                st.markdown(response)
+                # Display the answer
+                st.markdown(answer)
                 
-                # Add assistant response to chat history
-                st.session_state.messages.append({"role": "assistant", "content": response})
+                # Optionally show sources in an expander
+                if documents:
+                    with st.expander("📚 View Sources"):
+                        for i, doc in enumerate(documents, 1):
+                            st.markdown(f"**Source {i}: {doc['title']}**")
+                            st.caption(f"Relevance Score: {doc['score']:.2f}")
+                            st.text(doc['content'][:300] + "...")
+                            st.divider()
+        
+        # Add assistant response to chat history
+        st.session_state.messages.append({"role": "assistant", "content": answer})
     
-    # Footer
-    st.divider()
-    st.caption("⚡ B2B Account Intelligence AI Hackathon | RAG-powered Sales Assistant")
-
+    # Clear chat button
+    if st.sidebar.button("🗑️ Clear Chat History"):
+        st.session_state.messages = []
+        st.rerun()
 
 if __name__ == "__main__":
     main()
