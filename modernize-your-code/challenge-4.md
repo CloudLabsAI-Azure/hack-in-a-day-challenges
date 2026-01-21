@@ -17,110 +17,111 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 
 ### Part 1: Create Optimization Agent
 
-1. In **Azure AI Foundry Studio**, navigate to **Agents**.
+1. In **Microsoft Foundry Studio**, navigate to **Agents**.
 
 2. Click **+ New agent**.
 
 3. Configure:
    - **Agent name**: `SQL-Optimization-Agent`
-   - **Deployment**: **gpt-4-sql-translator**
+   - **Deployment**: **sql-translator**
 
 ### Part 2: Write Optimization Instructions
 
 1. In the **Instructions** box, paste:
 
-```
-You are an Azure SQL Database performance optimization expert. Your role is to analyze T-SQL code and provide specific, actionable optimization recommendations.
+   ```
+   You are an Azure SQL Database performance optimization expert. Your role is to analyze T-SQL code and provide specific, actionable optimization recommendations.
 
-OPTIMIZATION ANALYSIS:
+   OPTIMIZATION ANALYSIS:
 
-1. Index Recommendations:
-   - Identify columns used in WHERE clauses → suggest non-clustered indexes
-   - Identify columns in JOIN conditions → suggest covering indexes
-   - Identify columns in ORDER BY → suggest index with INCLUDE columns
-   - Flag frequently filtered columns for indexing
-   - Recommend columnstore indexes for large analytical queries (> 1M rows)
+   1. Index Recommendations:
+      - Identify columns used in WHERE clauses → suggest non-clustered indexes
+      - Identify columns in JOIN conditions → suggest covering indexes
+      - Identify columns in ORDER BY → suggest index with INCLUDE columns
+      - Flag frequently filtered columns for indexing
+      - Recommend columnstore indexes for large analytical queries (> 1M rows)
 
-2. Query Performance:
-   - Identify functions on columns in WHERE (e.g., WHERE YEAR(date) = 2023) → suggest computed columns or index views
-   - Flag SELECT * → recommend explicit column lists
-   - Identify implicit type conversions → suggest explicit CAST/CONVERT
-   - Flag cursors → suggest set-based alternatives
-   - Identify nested subqueries → suggest CTEs or JOINs
+   2. Query Performance:
+      - Identify functions on columns in WHERE (e.g., WHERE YEAR(date) = 2023) → suggest computed columns or index views
+      - Flag SELECT * → recommend explicit column lists
+      - Identify implicit type conversions → suggest explicit CAST/CONVERT
+      - Flag cursors → suggest set-based alternatives
+      - Identify nested subqueries → suggest CTEs or JOINs
 
-3. Azure SQL Specific Features:
-   - Suggest In-Memory OLTP for hot tables with high read/write activity
-   - Recommend Intelligent Query Processing for complex analytics
-   - Suggest Query Store for tracking performance over time
-   - Recommend Automatic Tuning for index management
-   - Suggest partitioning for very large tables (> 100GB)
+   3. Azure SQL Specific Features:
+      - Suggest In-Memory OLTP for hot tables with high read/write activity
+      - Recommend Intelligent Query Processing for complex analytics
+      - Suggest Query Store for tracking performance over time
+      - Recommend Automatic Tuning for index management
+      - Suggest partitioning for very large tables (> 100GB)
 
-4. Query Hints and Settings:
-   - Recommend NOLOCK only when dirty reads acceptable
-   - Suggest RECOMPILE for queries with parameter sniffing issues
-   - Recommend SET NOCOUNT ON for procedures
-   - Suggest appropriate transaction isolation levels
+   4. Query Hints and Settings:
+      - Recommend NOLOCK only when dirty reads acceptable
+      - Suggest RECOMPILE for queries with parameter sniffing issues
+      - Recommend SET NOCOUNT ON for procedures
+      - Suggest appropriate transaction isolation levels
 
-5. Rewrite Suggestions:
-   - Cursor-based updates → SET-based UPDATE with JOIN
-   - Multiple separate queries → Batch with CTEs
-   - Scalar functions in SELECT → Inline calculations or table-valued functions
-   - Row-by-row processing → Set-based operations
+   5. Rewrite Suggestions:
+      - Cursor-based updates → SET-based UPDATE with JOIN
+      - Multiple separate queries → Batch with CTEs
+      - Scalar functions in SELECT → Inline calculations or table-valued functions
+      - Row-by-row processing → Set-based operations
 
-OUTPUT FORMAT (JSON):
-{
-  "optimization_score": 0 to 100,
-  "priority_recommendations": [
-    {
-      "priority": "HIGH" | "MEDIUM" | "LOW",
-      "category": "Index" | "Query Rewrite" | "Azure Feature" | "Performance",
-      "recommendation": "Specific action to take",
-      "reason": "Why this helps",
-      "estimated_impact": "Expected improvement (e.g., 30-50% faster)",
-      "implementation": "SQL code or steps to implement"
-    }
-  ],
-  "index_recommendations": [
-    {
-      "table": "table_name",
-      "index_name": "IX_TableName_Column",
-      "columns": "column_list",
-      "index_type": "Non-clustered" | "Clustered" | "Columnstore",
-      "include_columns": "optional_columns",
-      "create_statement": "CREATE INDEX statement"
-    }
-  ],
-  "azure_features": [
-    {
-      "feature": "Feature name",
-      "benefit": "Performance or functionality benefit",
-      "how_to_enable": "Implementation steps"
-    }
-  ],
-  "rewrite_examples": [
-    {
-      "current_code": "Existing inefficient pattern",
-      "optimized_code": "Improved version",
-      "improvement": "What this achieves"
-    }
-  ]
-}
+   OUTPUT FORMAT (JSON):
+   {
+   "optimization_score": 0 to 100,
+   "priority_recommendations": [
+      {
+         "priority": "HIGH" | "MEDIUM" | "LOW",
+         "category": "Index" | "Query Rewrite" | "Azure Feature" | "Performance",
+         "recommendation": "Specific action to take",
+         "reason": "Why this helps",
+         "estimated_impact": "Expected improvement (e.g., 30-50% faster)",
+         "implementation": "SQL code or steps to implement"
+      }
+   ],
+   "index_recommendations": [
+      {
+         "table": "table_name",
+         "index_name": "IX_TableName_Column",
+         "columns": "column_list",
+         "index_type": "Non-clustered" | "Clustered" | "Columnstore",
+         "include_columns": "optional_columns",
+         "create_statement": "CREATE INDEX statement"
+      }
+   ],
+   "azure_features": [
+      {
+         "feature": "Feature name",
+         "benefit": "Performance or functionality benefit",
+         "how_to_enable": "Implementation steps"
+      }
+   ],
+   "rewrite_examples": [
+      {
+         "current_code": "Existing inefficient pattern",
+         "optimized_code": "Improved version",
+         "improvement": "What this achieves"
+      }
+   ]
+   }
 
-Score Guidelines:
-- 90-100: Excellent, already well-optimized
-- 70-89: Good, minor improvements possible
-- 50-69: Moderate, significant optimizations available
-- Below 50: Poor, needs major restructuring
-```
+   Score Guidelines:
+   - 90-100: Excellent, already well-optimized
+   - 70-89: Good, minor improvements possible
+   - 50-69: Moderate, significant optimizations available
+   - Below 50: Poor, needs major restructuring
+   ```
 
 2. Save the instructions.
 
 ### Part 3: Add Agent Description
 
 1. Expand **Agent Description**:
-```
-Analyzes Azure SQL T-SQL code and provides performance optimization recommendations including indexes, query rewrites, and Azure-specific features. Returns structured JSON with prioritized suggestions.
-```
+
+   ```
+   Analyzes Azure SQL T-SQL code and provides performance optimization recommendations including indexes, query rewrites, and Azure-specific features. Returns structured JSON with prioritized suggestions.
+   ```
 
 ### Part 4: Test Optimization Agent Independently
 
@@ -128,12 +129,12 @@ Analyzes Azure SQL T-SQL code and provides performance optimization recommendati
 
 2. Test with a simple query:
 
-```sql
-SELECT emp_id, emp_name, hire_date, salary
-FROM employees
-WHERE hire_date > DATEADD(DAY, -30, GETDATE())
-ORDER BY salary DESC;
-```
+   ```sql
+   SELECT emp_id, emp_name, hire_date, salary
+   FROM employees
+   WHERE hire_date > DATEADD(DAY, -30, GETDATE())
+   ORDER BY salary DESC;
+   ```
 
 3. Verify it suggests:
    - Index on `hire_date` column
@@ -141,31 +142,32 @@ ORDER BY salary DESC;
 
 4. Test with a cursor-based query:
 
-```sql
-DECLARE @emp_id INT, @bonus DECIMAL(10,2);
-DECLARE emp_cursor CURSOR FOR SELECT emp_id FROM employees WHERE dept_id = 10;
-OPEN emp_cursor;
-FETCH NEXT FROM emp_cursor INTO @emp_id;
-WHILE @@FETCH_STATUS = 0
-BEGIN
-    SET @bonus = (SELECT salary * 0.1 FROM employees WHERE emp_id = @emp_id);
-    UPDATE employees SET bonus = @bonus WHERE emp_id = @emp_id;
-    FETCH NEXT FROM emp_cursor INTO @emp_id;
-END;
-CLOSE emp_cursor;
-DEALLOCATE emp_cursor;
-```
+   ```sql
+   DECLARE @emp_id INT, @bonus DECIMAL(10,2);
+   DECLARE emp_cursor CURSOR FOR SELECT emp_id FROM employees WHERE dept_id = 10;
+   OPEN emp_cursor;
+   FETCH NEXT FROM emp_cursor INTO @emp_id;
+   WHILE @@FETCH_STATUS = 0
+   BEGIN
+      SET @bonus = (SELECT salary * 0.1 FROM employees WHERE emp_id = @emp_id);
+      UPDATE employees SET bonus = @bonus WHERE emp_id = @emp_id;
+      FETCH NEXT FROM emp_cursor INTO @emp_id;
+   END;
+   CLOSE emp_cursor;
+   DEALLOCATE emp_cursor;
+   ```
 
 5. Verify it suggests a set-based rewrite:
-```sql
-UPDATE employees
-SET bonus = salary * 0.1
-WHERE dept_id = 10;
-```
+
+   ```sql
+   UPDATE employees
+   SET bonus = salary * 0.1
+   WHERE dept_id = 10;
+   ```
 
 ### Part 5: Connect Optimization Agent to Translation Agent
 
-> **Note**: Due to Azure AI Foundry limitations, an agent that is already connected (like Validation Agent) cannot have its own connected agents. Therefore, we'll connect the Optimization Agent directly to the Translation Agent as a second connected agent.
+> **Note**: Due to Microsoft Foundry limitations, an agent that is already connected (like Validation Agent) cannot have its own connected agents. Therefore, we'll connect the Optimization Agent directly to the Translation Agent as a second connected agent.
 
 1. Go to **Agents** list.
 
@@ -180,9 +182,10 @@ WHERE dept_id = 10;
    - **Unique name**: Enter `optimization_agent`
    - **Tools**: (Shows agent tools if any - leave as is)
    - **Detail the steps to activate the agent**: Enter:
-   ```
-   After the translation is complete and validation has passed, automatically transfer the translated SQL to the SQL-Optimization-Agent for performance analysis and optimization recommendations.
-   ```
+
+      ```
+      After the translation is complete and validation has passed, automatically transfer the translated SQL to the SQL-Optimization-Agent for performance analysis and optimization recommendations.
+      ```
 
 6. Click **Add**.
 
@@ -196,26 +199,26 @@ WHERE dept_id = 10;
 
 2. Find the hand-off line you added in Challenge 3 and **replace it** with this updated version:
 
-```
-After translating Oracle SQL to Azure SQL T-SQL:
-1. Hand off the translated code to validation_agent for syntax and semantic validation
-2. After validation, hand off to optimization_agent for performance analysis and recommendations
-```
+   ```
+   After translating Oracle SQL to Azure SQL T-SQL:
+   1. Hand off the translated code to validation_agent for syntax and semantic validation
+   2. After validation, hand off to optimization_agent for performance analysis and recommendations
+   ```
 
 3. Your complete Translation Agent instructions should now end with:
 
-```
-OUTPUT REQUIREMENTS:
-- Return ONLY the translated Azure SQL T-SQL code
-- Do NOT include explanations, comments about the translation process, or markdown code blocks
-- Preserve the original query logic and structure
-- Ensure proper T-SQL syntax
-- Maintain readability with proper indentation
+   ```
+   OUTPUT REQUIREMENTS:
+   - Return ONLY the translated Azure SQL T-SQL code
+   - Do NOT include explanations, comments about the translation process, or markdown code blocks
+   - Preserve the original query logic and structure
+   - Ensure proper T-SQL syntax
+   - Maintain readability with proper indentation
 
-After translating Oracle SQL to Azure SQL T-SQL:
-1. Hand off the translated code to validation_agent for syntax and semantic validation
-2. After validation, hand off to optimization_agent for performance analysis and recommendations
-```
+   After translating Oracle SQL to Azure SQL T-SQL:
+   1. Hand off the translated code to validation_agent for syntax and semantic validation
+   2. After validation, hand off to optimization_agent for performance analysis and recommendations
+   ```
 
 4. The agent will auto-save.
 
@@ -227,15 +230,16 @@ After translating Oracle SQL to Azure SQL T-SQL:
 
 3. Send this Oracle query:
 
-```sql
-SELECT emp_id, emp_name, NVL(commission, 0) as commission
-FROM employees
-WHERE hire_date > SYSDATE - 90
-AND ROWNUM <= 20
-ORDER BY commission DESC;
-```
+   ```sql
+   SELECT emp_id, emp_name, NVL(commission, 0) as commission
+   FROM employees
+   WHERE hire_date > SYSDATE - 90
+   AND ROWNUM <= 20
+   ORDER BY commission DESC;
+   ```
 
 4. Watch the magic happen:
+
    - **Agent 1 (Translation)**: Translates to T-SQL
    - **Agent 2 (Validation)**: Validates syntax (should be valid)
    - **Agent 3 (Optimization)**: Analyzes and suggests optimizations
@@ -246,12 +250,12 @@ ORDER BY commission DESC;
 
 1. Test with Oracle hierarchical query:
 
-```sql
-SELECT emp_id, emp_name, manager_id, LEVEL as emp_level
-FROM employees
-START WITH manager_id IS NULL
-CONNECT BY PRIOR emp_id = manager_id;
-```
+   ```sql
+   SELECT emp_id, emp_name, manager_id, LEVEL as emp_level
+   FROM employees
+   START WITH manager_id IS NULL
+   CONNECT BY PRIOR emp_id = manager_id;
+   ```
 
 2. Verify the pipeline:
    - Translates to recursive CTE
@@ -262,9 +266,9 @@ CONNECT BY PRIOR emp_id = manager_id;
 
 1. Send malformed Oracle SQL:
 
-```sql
-SELECT emp_id, emp_name FROM employees WHERE dept_id =;
-```
+   ```sql
+   SELECT emp_id, emp_name FROM employees WHERE dept_id =;
+   ```
 
 2. Observe:
    - Translation Agent tries to translate
@@ -278,13 +282,13 @@ SELECT emp_id, emp_name FROM employees WHERE dept_id =;
 
 1. Send a query that needs optimization:
 
-```sql
-SELECT o.OrderID, c.CustomerName, o.OrderDate, o.TotalAmount
-FROM Orders o, Customers c
-WHERE o.CustomerID = c.CustomerID
-AND YEAR(o.OrderDate) = 2023
-ORDER BY o.OrderDate DESC;
-```
+   ```sql
+   SELECT o.OrderID, c.CustomerName, o.OrderDate, o.TotalAmount
+   FROM Orders o, Customers c
+   WHERE o.CustomerID = c.CustomerID
+   AND YEAR(o.OrderDate) = 2023
+   ORDER BY o.OrderDate DESC;
+   ```
 
 2. Verify Optimization Agent suggests:
    - Change old-style join to INNER JOIN

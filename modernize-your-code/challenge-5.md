@@ -88,7 +88,7 @@ The application uses Azure CLI authentication to connect to your agents.
 
 You need three values to connect to your agents:
 
-1. Go to **Azure AI Foundry Studio** → Your project.
+1. Go to **Microsoft Foundry Studio** → Your project.
 
 2. Click **Settings** in the left navigation.
 
@@ -117,8 +117,8 @@ You need three values to connect to your agents:
 4. Open `.env` and replace the placeholder values:
 
 ```env
-# Azure AI Foundry Agent API Configuration
-AGENT_API_ENDPOINT=https://ai-project-<DeploymentID>.services.ai.azure.com/api/projects/sql-modernization-<DeploymentID>
+# Microsoft Foundry Agent API Configuration
+AGENT_API_ENDPOINT=https://ai-project-<DeploymentID>.services.ai.azure.com/api/projects/sql-modernize-<DeploymentID>
 AGENT_ID=asst_<your-agent-id>
 
 # Cosmos DB Configuration
@@ -169,7 +169,7 @@ pip install -r requirements.txt
 
 This installs:
 - `streamlit` - Web framework
-- `azure-ai-projects` - Azure AI Foundry SDK
+- `azure-ai-projects` - Microsoft Foundry SDK
 - `azure-identity` - Azure authentication
 - `azure-cosmos` - Cosmos DB SDK
 - `python-dotenv` - Environment variables
@@ -350,7 +350,7 @@ Expected:
 - Verify `AGENT_API_ENDPOINT` uses the **Foundry services endpoint** (ends with `.services.ai.azure.com/api/projects/...`)
 - Do NOT use the OpenAI endpoint (`.openai.azure.com`)
 - Ensure endpoint includes full path: `/api/projects/sql-modernization-XXXX`
-- Verify `AGENT_ID` is copied correctly from Azure AI Foundry Studio
+- Verify `AGENT_ID` is copied correctly from Microsoft Foundry Studio
 
 ---
 
@@ -368,14 +368,14 @@ Expected:
 **Solution**: 
 - Complex queries can take 1-2 minutes with 3 agents
 - Refresh the page and try again
-- If it persists, check Azure AI Foundry project quota
+- If it persists, check Microsoft Foundry project quota
 
 ---
 
 **Issue**: No validation or optimization results
 
 **Solution**:
-- Verify Connected agents are configured in Azure AI Foundry (from Challenges 4-5)
+- Verify Connected agents are configured in Microsoft Foundry (from Challenges 4-5)
 - Check Translation Agent has `validation_agent` and `optimization_agent` in Connected agents
 - Ensure activation details are in Translation Agent instructions
 
@@ -395,7 +395,7 @@ Expected:
 
 **Solution**:
 - Check your internet connection
-- Verify Azure AI Foundry quota hasn't been exceeded
+- Verify Microsoft Foundry quota hasn't been exceeded
 - Try with a simpler SQL query first
 - Complex hierarchical queries can take 60-90 seconds with 3 agents
 
@@ -460,14 +460,14 @@ Key differences from OpenAI endpoint:
 ## Next Steps
 
 Congratulations! You've successfully:
-- Built a 3-agent AI system in Azure AI Foundry
+- Built a 3-agent AI system in Microsoft Foundry
 - Connected agents in a pipeline (Translation → Validation, Optimization)
 - Deployed a production-ready Streamlit web application
 - Integrated with Cosmos DB for persistence
 - Created a complete SQL modernization platform
 
 **What you've learned:**
-- Azure AI Foundry Agents visual builder
+- Microsoft Foundry Agents visual builder
 - Multi-agent orchestration and hand-offs
 - Azure OpenAI Assistants API integration
 - Streamlit for production web apps
@@ -483,9 +483,9 @@ Congratulations! You've successfully:
 
 ### Part 1: Get Agent API Credentials
 
-Agents in Azure AI Foundry are available via API immediately after creation - no separate deployment needed!
+Agents in Microsoft Foundry are available via API immediately after creation - no separate deployment needed!
 
-1. Go to **Azure AI Foundry Studio** → Your project.
+1. Go to **Microsoft Foundry Studio** → Your project.
 
 2. Click **Settings** in the left navigation.
 
@@ -816,7 +816,7 @@ ORDER BY emp_level, emp_name;
 
 ## Success Criteria
 
-- [ ] Retrieved agent API credentials from Azure AI Foundry project
+- [ ] Retrieved agent API credentials from Microsoft Foundry project
 - [ ] Configured .env file with AGENT_API_ENDPOINT, AGENT_API_KEY, AGENT_ID
 - [ ] Streamlit app runs locally and calls Translation Agent
 - [ ] App displays results from all 3 connected agents (Translation, Validation, Optimization)
@@ -850,7 +850,7 @@ ORDER BY emp_level, emp_name;
 **Issue**: Can't find Agent ID
 
 **Solution**: 
-1. Go to Azure AI Foundry portal
+1. Go to Microsoft Foundry portal
 2. Click on your Translation Agent
 3. Look in the Setup panel on the right
 4. Copy the value from "Agent ID:" field (starts with `asst_`)
