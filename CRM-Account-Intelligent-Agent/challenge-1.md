@@ -11,7 +11,17 @@ In this challenge, you will upload synthetic B2B account intelligence documents 
 
 - Create an Azure Storage Account for account intelligence data  
 - Upload synthetic CRM and market intelligence documents  
-- Review dataset structure to ensure readiness for AI search and retrieval  
+- Review dataset structure to ensure readiness for AI search and retrieval
+
+## Accessing the Datasets
+
+Please download and extract the synthetic datasets required for this challenge here:
+
+```
+https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/crm-dataset.zip
+```
+
+> Once the file is downloaded, please extract it in any desired path in the LabVM. You will be able to see `code-files` and `datasets` folders.
 
 ## Steps to Complete
 
