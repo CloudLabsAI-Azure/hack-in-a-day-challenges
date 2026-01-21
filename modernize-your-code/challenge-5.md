@@ -23,7 +23,32 @@ Your three-agent pipeline is operational! All the code has been built for you. I
 
 ## Steps to Complete
 
-### Part 1: Install and Authenticate with Azure CLI
+### Part 1: Download and Extract Code Files
+
+The application code is provided in a pre-built package.
+
+1. **Download the code package**:
+   
+   Visit this link in your browser:
+   ```
+   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/modernize-your-code.zip
+   ```
+
+2. **Extract the ZIP file**:
+   
+   - Right-click the downloaded `modernize-your-code.zip` file
+   - Select **Extract All...**
+   - Choose a location like `C:\LabFiles\` or your Desktop
+   - Click **Extract**
+
+3. **Navigate to the codefiles folder**:
+   
+   Open File Explorer and go to:
+   ```
+   [extraction-path]\hack-in-a-day-challenges-modernize-your-code\modernize-your-code\codefiles
+   ```
+
+### Part 2: Install and Authenticate with Azure CLI
 
 The application uses Azure CLI authentication to connect to your agents.
 
@@ -41,7 +66,25 @@ The application uses Azure CLI authentication to connect to your agents.
    
    This will open a browser for authentication. Sign in with your Azure credentials.
 
-### Part 2: Get Your Agent Credentials
+### Part 2: Install and Authenticate with Azure CLI
+
+The application uses Azure CLI authentication to connect to your agents.
+
+1. **Install Azure CLI** (if not already installed):
+   
+   For Windows:
+   ```powershell
+   winget install -e --id Microsoft.AzureCLI
+   ```
+
+2. **Login to Azure**:
+   ```bash
+   az login
+   ```
+   
+   This will open a browser for authentication. Sign in with your Azure credentials.
+
+### Part 3: Get Your Agent Credentials
 
 You need three values to connect to your agents:
 
@@ -51,7 +94,7 @@ You need three values to connect to your agents:
 
 3. In the Overview section, find and copy the **Foundry endpoint**:
    - Format: `https://ai-project-XXXX.services.ai.azure.com/api/projects/sql-modernization-XXXX`
-   - ⚠️ Use the **Foundry** endpoint (ends with `.services.ai.azure.com`), not the OpenAI endpoint
+   - **Important:** Use the **Foundry** endpoint (ends with `.services.ai.azure.com`), not the OpenAI endpoint
 
 4. Navigate to **Agents** in the left menu.
 
@@ -63,9 +106,9 @@ You need three values to connect to your agents:
    - Go to Azure Portal → Your Cosmos DB account
    - Click **Keys** → Copy **URI** and **Primary Key**
 
-### Part 3: Configure the Application
+### Part 4: Configure the Application
 
-1. Navigate to the `codefiles` folder in your hackathon materials.
+1. Navigate to the `codefiles` folder you extracted in Part 1.
 
 2. Locate the `.env.example` file.
 
@@ -92,7 +135,7 @@ DATABASE_NAME=SQLModernizationDB
 
 5. Save the file.
 
-### Part 4: Review the Code (Optional but Recommended)
+### Part 5: Review the Code (Optional but Recommended)
 
 Before running, take a moment to explore the application code:
 
@@ -116,7 +159,7 @@ Before running, take a moment to explore the application code:
 - Production-ready premium styling
 - Auto-switch to Results tab after completion
 
-### Part 5: Install Dependencies
+### Part 6: Install Dependencies
 
 Open a terminal in the `codefiles` folder and run:
 
@@ -132,7 +175,7 @@ This installs:
 - `python-dotenv` - Environment variables
 - `pandas` - Data processing
 
-### Part 6: Run the Application
+### Part 7: Run the Application
 
 Start the Streamlit app with Azure CLI in PATH:
 
@@ -149,18 +192,18 @@ streamlit run app.py
 
 The application will automatically open in your browser at `http://localhost:8501` or `http://localhost:8502`
 
-### Part 7: Test the Multi-Agent Pipeline
+### Part 8: Test the Multi-Agent Pipeline
 
 1. You'll see a premium blue gradient header: **"SQL Modernization Assistant"**
 
 2. In the **sidebar**, verify all agents show green checkmarks:
-   - ✓ Translation Agent
-   - ✓ Validation Agent
-   - ✓ Optimization Agent
+   - Translation Agent
+   - Validation Agent
+   - Optimization Agent
 
 3. **Option A: Use a Sample Query**
    - On the right side, select a sample from the dropdown (e.g., "Hierarchical Query (CONNECT BY)")
-   - Click **"📋 Load Sample"**
+   - Click **"Load Sample"**
 
 4. **Option B: Upload a SQL File**
    - Click the file upload area
@@ -169,16 +212,16 @@ The application will automatically open in your browser at `http://localhost:850
 5. **Option C: Paste SQL Directly**
    - Paste your Oracle SQL in the text area
 
-6. Click the **"🚀 Modernize SQL"** button
+6. Click the **"Modernize SQL"** button
 
 7. Watch the progress indicators as your query flows through all three agents:
-   - 🔄 Creating conversation thread...
-   - 📝 Sending Oracle SQL to Translation Agent...
-   - 🤖 Starting multi-agent pipeline...
-   - ⏳ Agent Status: RUNNING...
-   - ✅ Agent processing completed!
+   - Creating conversation thread...
+   - Sending Oracle SQL to Translation Agent...
+   - Starting multi-agent pipeline...
+   - Agent Status: RUNNING...
+   - Agent processing completed!
 
-8. After completion, you'll see a **professional gradient completion banner** and the app will automatically switch to the **"📋 Results"** tab.
+8. After completion, you'll see a **professional gradient completion banner** and the app will automatically switch to the **"Results"** tab.
 
 9. View the **three-column output**:
 
@@ -187,7 +230,7 @@ The application will automatically open in your browser at `http://localhost:850
    - Copy button for easy use
 
    **Column 2: Validation**
-   - ✅/❌ Validation status
+   - Validation status (Pass/Fail)
    - Syntax errors (if any)
    - Semantic warnings
    - Raw JSON data
@@ -198,9 +241,9 @@ The application will automatically open in your browser at `http://localhost:850
    - Suggested indexes
    - Raw JSON data
 
-10. Click the **"📚 History"** tab to see all past translations from Cosmos DB
+10. Click the **"History"** tab to see all past translations from Cosmos DB
 
-### Part 8: Test Complex Scenarios
+### Part 9: Test Complex Scenarios
 
 Try these test cases to verify everything works:
 
@@ -252,7 +295,7 @@ GROUP BY -- Missing column list
 ```
 
 Expected:
-- Validation: Should show ❌ with syntax error
+- Validation: Should show error with syntax error
 - Details: Missing GROUP BY columns
 
 ---
@@ -265,6 +308,7 @@ Expected:
 
 ## Success Criteria
 
+- [ ] Code package downloaded and extracted successfully
 - [ ] Azure CLI installed and authenticated (`az login` completed)
 - [ ] `.env` file configured with correct credentials
 - [ ] All dependencies installed successfully (`azure-ai-projects==1.0.0` included)
@@ -310,7 +354,7 @@ Expected:
 
 ---
 
-**Issue**: Sidebar shows "🔴 Configuration missing"
+**Issue**: Sidebar shows "Configuration missing"
 
 **Solution**: 
 - Check `.env` file exists (not `.env.example`)
@@ -416,11 +460,11 @@ Key differences from OpenAI endpoint:
 ## Next Steps
 
 Congratulations! You've successfully:
-- ✅ Built a 3-agent AI system in Azure AI Foundry
-- ✅ Connected agents in a pipeline (Translation → Validation, Optimization)
-- ✅ Deployed a production-ready Streamlit web application
-- ✅ Integrated with Cosmos DB for persistence
-- ✅ Created a complete SQL modernization platform
+- Built a 3-agent AI system in Azure AI Foundry
+- Connected agents in a pipeline (Translation → Validation, Optimization)
+- Deployed a production-ready Streamlit web application
+- Integrated with Cosmos DB for persistence
+- Created a complete SQL modernization platform
 
 **What you've learned:**
 - Azure AI Foundry Agents visual builder
@@ -447,7 +491,7 @@ Agents in Azure AI Foundry are available via API immediately after creation - no
 
 3. In the Overview section, you'll see two endpoints:
    - **Project endpoint**: `https://ai-project-XXXX.services.ai.azure.com/`
-   - **OpenAI endpoint**: `https://ai-project-XXXX.openai.azure.com/` ✓ Use this one
+   - **OpenAI endpoint**: `https://ai-project-XXXX.openai.azure.com/` (Use this one)
 
 4. Copy the **OpenAI endpoint** (ending in `.openai.azure.com/`) - this is your **AGENT_API_ENDPOINT**.
 
@@ -1051,9 +1095,9 @@ def format_validation_results(validation_data):
     output = []
     
     if validation_data.get('valid'):
-        output.append("✓ Syntax validation passed")
+        output.append("[PASS] Syntax validation passed")
     else:
-        output.append("✗ Syntax validation failed")
+        output.append("[FAIL] Syntax validation failed")
     
     if 'syntax_errors' in validation_data:
         output.append("\n**Syntax Errors:**")
