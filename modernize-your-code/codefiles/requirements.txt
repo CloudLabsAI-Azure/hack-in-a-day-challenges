@@ -1,8 +1,20 @@
+# Streamlit Web Framework
 streamlit==1.30.0
-openai==1.12.0
-azure-cosmos==4.5.1
-azure-identity==1.15.0
-sqlparse==0.4.4
-pyodbc==5.0.1
-pandas==2.1.4
+
+# Azure AI Agent SDK (Semantic Kernel)
+semantic-kernel[azure]==1.32.2
+
+# Azure Cosmos DB SDK
+azure-cosmos>=4.7
+
+# Environment Configuration
 python-dotenv==1.0.0
+
+# HTTP Requests
+requests==2.31.0
+
+# Semantic Kernel for Azure AI Agents
+semantic-kernel[azure]==1.32.2
+
+# Azure AI Projects SDK
+azure-ai-projects

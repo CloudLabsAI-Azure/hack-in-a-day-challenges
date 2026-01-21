@@ -31,15 +31,18 @@ In this challenge, you will create your first AI agent directly in the Azure AI 
 
 1. Click the **+ New agent** button.
 
-2. In the Setup panel on the right, configure:
+2. In the **Setup** panel on the right, configure:
    - **Agent name**: `SQL-Translation-Agent`
    - **Deployment**: Select **gpt-4-sql-translator** (the deployment from Challenge 1)
+   - Leave **Agent Description** empty (optional)
+   - **Temperature**: 1 (default)
+   - **Top P**: 1 (default)
 
-3. Leave other settings at default for now.
+3. The system will auto-generate an **Agent ID** (e.g., asst_xxxxx). Keep this for reference.
 
 ### Part 3: Write Agent Instructions
 
-1. In the **Instructions** text box, paste the following comprehensive instructions:
+1. In the **Instructions** text box, copy and paste the following complete instructions:
 
 ```
 You are an expert SQL translation specialist. Your role is to convert Oracle PL/SQL code to Azure SQL T-SQL code with 100% accuracy.
@@ -106,7 +109,9 @@ OUTPUT REQUIREMENTS:
 - Maintain readability with proper indentation
 ```
 
-2. Click somewhere outside the instructions box to save.
+2. The agent will auto-save the instructions.
+
+> **Important**: You will add hand-off instructions later in Challenge 3 and Challenge 4 when you connect the other agents.
 
 ### Part 4: Configure Agent Description (Optional)
 
@@ -186,15 +191,13 @@ END;
 
 ### Part 9: Save and Note Agent ID
 
-1. Once testing is successful, the agent is automatically saved.
+1. The agent auto-saves as you make changes.
 
-2. Go back to the **Agents** list page.
+2. In the **Setup** panel on the right, locate the **Agent ID** field.
 
-3. Find your **SQL-Translation-Agent**.
+3. Copy the **Agent ID** (e.g., `asst_4suaVDw2ZsziL9sShpoyeoDM`).
 
-4. Copy the **Agent ID** (looks like `asst_xxxxxxxxxxxxx`).
-
-5. Save this ID - you'll need it in Challenge 6 for the Streamlit app.
+4. Save this ID in a text file - you'll need it in Challenge 6 for the Streamlit app.
 
 ### Part 10: Test Sample SQL Files
 

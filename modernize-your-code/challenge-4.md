@@ -163,34 +163,61 @@ SET bonus = salary * 0.1
 WHERE dept_id = 10;
 ```
 
-### Part 5: Connect Optimization Agent to Validation Agent
+### Part 5: Connect Optimization Agent to Translation Agent
+
+> **Note**: Due to Azure AI Foundry limitations, an agent that is already connected (like Validation Agent) cannot have its own connected agents. Therefore, we'll connect the Optimization Agent directly to the Translation Agent as a second connected agent.
 
 1. Go to **Agents** list.
 
-2. Click on **SQL-Validation-Agent** (the second agent).
+2. Click on **SQL-Translation-Agent** (the first agent).
 
-3. Scroll to **Connected agents** section.
+3. In the **Setup** panel on the right, scroll to **Connected agents** section.
 
-4. Click **+ Add**.
+4. You should already see **validation_agent** listed. Click **+ Add** to add a second connected agent.
 
-5. Configure:
-   - **Agent**: **SQL-Optimization-Agent**
-   - **Description**: `Optimizes validated T-SQL for Azure SQL performance`
+5. In the **Adding a connected agent** dialog, configure:
+   - **Agent**: Select **SQL-Optimization-Agent** from dropdown
+   - **Unique name**: Enter `optimization_agent`
+   - **Tools**: (Shows agent tools if any - leave as is)
+   - **Detail the steps to activate the agent**: Enter:
+   ```
+   After the translation is complete and validation has passed, automatically transfer the translated SQL to the SQL-Optimization-Agent for performance analysis and optimization recommendations.
+   ```
 
 6. Click **Add**.
 
-### Part 6: Update Validation Agent Hand-Off
+7. You should now see both connected agents listed:
+   - validation_agent
+   - optimization_agent
 
-1. Still in SQL-Validation-Agent, update the **Instructions**.
+### Part 6: Update Translation Agent Instructions
 
-2. Add to the END:
+1. Still in **SQL-Translation-Agent**, scroll to the **Instructions** text box.
+
+2. Find the hand-off line you added in Challenge 3 and **replace it** with this updated version:
 
 ```
-If the SQL is valid (valid: true), automatically hand off the code to the SQL-Optimization-Agent for performance analysis.
-If the SQL is invalid, do NOT hand off - just return the validation errors.
+After translating Oracle SQL to Azure SQL T-SQL:
+1. Hand off the translated code to validation_agent for syntax and semantic validation
+2. After validation, hand off to optimization_agent for performance analysis and recommendations
 ```
 
-3. Save.
+3. Your complete Translation Agent instructions should now end with:
+
+```
+OUTPUT REQUIREMENTS:
+- Return ONLY the translated Azure SQL T-SQL code
+- Do NOT include explanations, comments about the translation process, or markdown code blocks
+- Preserve the original query logic and structure
+- Ensure proper T-SQL syntax
+- Maintain readability with proper indentation
+
+After translating Oracle SQL to Azure SQL T-SQL:
+1. Hand off the translated code to validation_agent for syntax and semantic validation
+2. After validation, hand off to optimization_agent for performance analysis and recommendations
+```
+
+4. The agent will auto-save.
 
 ### Part 7: Test the Complete Three-Agent Pipeline
 
