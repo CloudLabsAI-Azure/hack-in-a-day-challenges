@@ -2,13 +2,12 @@
 
 ## Introduction
 
-Before building the AI-powered SQL modernization pipeline, you need to provision the necessary Azure infrastructure. This challenge involves creating Azure AI Foundry project with GPT-4.1 model deployment, Cosmos DB for storing results and logs, and Azure Storage for SQL file uploads.
+Before building the AI-powered SQL modernization pipeline, you need to provision the necessary Azure infrastructure. This challenge involves creating Azure AI Foundry project with GPT-4.1 model deployment and Cosmos DB for storing translation results and history.
 
 ## Challenge Objectives
 
 - Set up an Azure AI Foundry project with GPT-4.1 model deployment
 - Provision Cosmos DB with appropriate database and containers
-- Create an Azure Storage Account for SQL file uploads
 - Verify all resources are properly configured and accessible
 
 ## Steps to Complete
@@ -166,56 +165,23 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
    Save these values for later use.
 
-### Part 7: Create Azure Storage Account
-
-1. In the **Azure Portal**, search for **Storage accounts** and select it.
-
-2. Click **+ Create**.
-
-3. Configure the storage account:
-   - **Subscription**: Your Azure subscription
-   - **Resource Group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
-   - **Storage account name**: **sqlmodernization<inject key="DeploymentID"></inject>** (lowercase, no hyphens)
-   - **Region**: **<inject key="Region"></inject>**
-   - **Performance**: **Standard**
-   - **Redundancy**: **Locally-redundant storage (LRS)**
-
-4. Click **Review**, then **Create**.
-
-5. Wait for deployment (1-2 minutes).
-
-6. Once created, go to the resource.
-
-7. In the storage account, navigate to **Containers** under **Data storage**.
-
-8. Click **+ Container** and create:
-   - **Name**: `sql-uploads`
-   - **Public access level**: **Private**
-   - Click **Create**
-
-9. Navigate to **Access keys** and copy:
-   - **Storage account name**
-   - **Key1** (Connection string)
-
-### Part 8: Verify All Resources
+### Part 7: Verify All Resources
 
 1. Navigate back to your resource group: **challenge-rg-<inject key="DeploymentID"></inject>**
 
 2. Verify you see the following resources:
    - Azure AI Foundry hub and project resources
    - Cosmos DB account
-   - Storage account
 
 3. Ensure all resources show **Deployment succeeded** status.
 
-### Part 9: Gather Configuration Values
+### Part 8: Gather Configuration Values
 
 Create a text file or note with the following information (you'll need these in subsequent challenges):
 
 ```text
 Azure AI Foundry (with GPT-4.1 deployment):
-- Endpoint: [your-ai-foundry-endpoint or target-uri]
-- API Key: [your-primary-key]
+- Foundry Endpoint: [your-foundry-services-endpoint with /api/projects/...]
 - Deployment Name: gpt-4-sql-translator
 
 Cosmos DB:
@@ -223,11 +189,6 @@ Cosmos DB:
 - Primary Key: [your-key]
 - Database Name: SQLModernizationDB
 - Containers: TranslationResults, ValidationLogs, OptimizationResults
-
-Storage Account:
-- Account Name: sqlmodernizationxxxxx
-- Connection String: [your-connection-string]
-- Container: sql-uploads
 ```
 
 ## Success Criteria
@@ -235,7 +196,6 @@ Storage Account:
 - Azure AI Foundry project created with GPT-4.1 model deployed successfully
 - Model tested in Chat Playground and working correctly
 - Cosmos DB account created with database and three containers (TranslationResults, ValidationLogs, OptimizationResults)
-- Azure Storage Account created with sql-uploads container
 - All connection strings, keys, and endpoints documented for future use
 - All resources deployed in the same resource group and region
 
@@ -244,6 +204,5 @@ Storage Account:
 - [Azure OpenAI in AI Foundry](https://learn.microsoft.com/azure/ai-services/openai/)
 - [Azure AI Foundry Overview](https://learn.microsoft.com/azure/ai-studio/)
 - [Azure Cosmos DB for NoSQL](https://learn.microsoft.com/azure/cosmos-db/nosql/)
-- [Azure Storage Accounts](https://learn.microsoft.com/azure/storage/common/storage-account-overview)
 
 Now, click **Next** to continue to **Challenge 02**.

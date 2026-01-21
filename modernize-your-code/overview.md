@@ -41,18 +41,18 @@ By participating in this Hack in a Day, you will learn how to:
 - Design multi-agent systems with connected pipeline orchestration
 - Implement prompt engineering techniques for accurate SQL dialect conversion
 - Configure agent hand-off for automated multi-phase processing
-- Use Cosmos DB Actions to persist agent results automatically
-- Create Azure Functions as agent Actions for database integration
-- Deploy agent APIs and consume them from web applications
+- Use Cosmos DB for persisting agent results automatically
+- Authenticate with Azure CLI using DefaultAzureCredential
+- Consume Azure AI Foundry Agent APIs from web applications
 - Build interactive web interfaces with Streamlit
-- Package and deploy containerized AI applications to Azure Container Apps
+- Work with Cosmos DB for storing agent results and history
 
 ## Hack in a Day Format: Challenge-Based
 
-This hands-on lab is structured into six progressive challenges:
+This hands-on lab is structured into five progressive challenges:
 
 **Challenge 1: Set Up Azure Infrastructure**  
-Create Azure AI Foundry project with GPT-4 deployment, Cosmos DB, Storage Account, and Azure SQL Database for validation testing.
+Create Azure AI Foundry project with GPT-4 deployment and Cosmos DB for storing translation history.
 
 **Challenge 2: Build the Translation Agent**  
 Create your first AI agent using the visual Agent builder in Azure AI Foundry. Configure comprehensive Oracle-to-T-SQL translation rules and test in the playground.
@@ -63,19 +63,16 @@ Create a second agent for validation and use the "Connected agents" feature to l
 **Challenge 4: Build the Optimization Agent and Complete Pipeline**  
 Create the final agent for SQL optimization and connect it to the Validation Agent, completing the three-agent pipeline with automatic orchestration.
 
-**Challenge 5: Add Cosmos DB Actions for Persistence**  
-Create Azure Functions that act as agent Actions, allowing each agent to automatically save results to Cosmos DB containers for audit trails and history.
-
-**Challenge 6: Build Streamlit App with Agent API Integration**  
-Deploy your agents as APIs and build a Streamlit web application that calls the Translation Agent, receives results from all three connected agents, and displays them in a user-friendly interface. Deploy to Azure Container Apps.
+**Challenge 5: Run the Production Streamlit Application**  
+Authenticate with Azure CLI and run a pre-built Streamlit web application that calls the Translation Agent, receives results from all three connected agents, and displays them in a premium user interface with history from Cosmos DB.
 
 Throughout each challenge, you will iteratively build, test, and enhance your SQL modernization pipeline using real Oracle SQL samples.
 
 ## Challenge Overview
 
-You will begin by provisioning Azure resources including AI Foundry with GPT-4 deployment, Cosmos DB, and Storage Account. Next, you will build three specialized AI agents using the visual Agent builder in Azure AI Foundry and connect them in a pipeline. Then, you will create Azure Functions as Actions to enable agents to save results to Cosmos DB. Finally, you will deploy the agents as APIs and build a Streamlit web application that integrates with the agent pipeline, creating a production-ready SQL modernization platform deployed to Azure Container Apps.
+You will begin by provisioning Azure resources including AI Foundry with GPT-4 deployment and Cosmos DB. Next, you will build three specialized AI agents using the visual Agent builder in Azure AI Foundry and connect them in a pipeline. Finally, you will authenticate with Azure CLI and run a pre-built Streamlit web application that integrates with the agent pipeline, creating a production-ready SQL modernization platform with a premium user interface.
 
-By the end of this Hack in a Day, you will have a fully functional Multi-Agent SQL Modernization System with connected agents, automatic persistence, and an intuitive web interface.
+By the end of this Hack in a Day, you will have a fully functional Multi-Agent SQL Modernization System with connected agents, automatic persistence via Cosmos DB, and an intuitive web interface.
 
 ## Support Contact
 

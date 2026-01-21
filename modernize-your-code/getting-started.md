@@ -65,7 +65,9 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
    - Pre-configured resource group for deployments
    - Access to Azure OpenAI Service and AI Foundry
    - Sample Oracle PL/SQL files for testing
-   - Code templates and starter files in the lab VM
+   - Pre-built Streamlit application code
+   - Python 3.11 and VS Code pre-installed
+   - Azure CLI for authentication
 
 Now, click on the **Next** from lower right corner to move on next page.
 
