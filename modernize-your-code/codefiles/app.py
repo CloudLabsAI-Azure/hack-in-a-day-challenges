@@ -4,7 +4,6 @@ Oracle to Azure SQL migration using Azure AI Foundry Multi-Agent System
 """
 
 import streamlit as st
-import requests
 import json
 import os
 from dotenv import load_dotenv
@@ -14,6 +13,9 @@ import uuid
 import re
 import time
 import pandas as pd
+from azure.ai.projects import AIProjectClient
+from azure.identity import DefaultAzureCredential
+from azure.ai.agents.models import ListSortOrder
 
 # Load environment variables
 load_dotenv()
@@ -282,121 +284,73 @@ def parse_agent_response(response_text):
     return result
 
 def call_agent_api(sql_input):
-    """Call Azure AI Foundry Agent API with proper error handling"""
+    """Call Azure AI Foundry Agent using Azure AI Projects SDK"""
     try:
-        endpoint = os.getenv("AGENT_API_ENDPOINT")
-        api_key = os.getenv("AGENT_API_KEY")
+        # Get configuration from environment
+        project_endpoint = os.getenv("AGENT_API_ENDPOINT")
         agent_id = os.getenv("AGENT_ID")
         
-        if not all([endpoint, api_key, agent_id]):
+        if not all([project_endpoint, agent_id]):
             st.error("❌ Missing configuration. Please check your .env file.")
             st.stop()
         
-        # Remove trailing slash from endpoint
-        endpoint = endpoint.rstrip('/')
+        # Initialize project client with Azure CLI credentials
+        with st.spinner("🔌 Connecting to Azure AI Foundry..."):
+            project = AIProjectClient(
+                credential=DefaultAzureCredential(),
+                endpoint=project_endpoint
+            )
         
-        headers = {
-            "Content-Type": "application/json",
-            "api-key": api_key
-        }
-        
-        # Step 1: Create a thread
+        # Step 1: Create thread
         with st.spinner("🔄 Creating conversation thread..."):
-            thread_response = requests.post(
-                f"{endpoint}/openai/threads?api-version=2024-02-15-preview",
-                headers=headers,
-                json={},
-                timeout=30
-            )
-            thread_response.raise_for_status()
-            thread_id = thread_response.json()["id"]
+            thread = project.agents.threads.create()
+            thread_id = thread.id
         
-        # Step 2: Add message to thread
+        # Step 2: Add message
         with st.spinner("📝 Sending Oracle SQL to Translation Agent..."):
-            message_response = requests.post(
-                f"{endpoint}/openai/threads/{thread_id}/messages?api-version=2024-02-15-preview",
-                headers=headers,
-                json={
-                    "role": "user",
-                    "content": sql_input
-                },
-                timeout=30
+            message = project.agents.messages.create(
+                thread_id=thread_id,
+                role="user",
+                content=sql_input
             )
-            message_response.raise_for_status()
         
-        # Step 3: Run the agent
-        with st.spinner("🤖 Starting multi-agent pipeline (Translation → Validation → Optimization)..."):
-            run_response = requests.post(
-                f"{endpoint}/openai/threads/{thread_id}/runs?api-version=2024-02-15-preview",
-                headers=headers,
-                json={
-                    "assistant_id": agent_id
-                },
-                timeout=30
+        # Step 3: Run agent
+        with st.spinner("🤖 Agent processing your SQL... This may take a minute..."):
+            run = project.agents.runs.create_and_process(
+                thread_id=thread_id,
+                agent_id=agent_id
             )
-            run_response.raise_for_status()
-            run_id = run_response.json()["id"]
         
-        # Step 4: Poll for completion with progress bar
-        max_attempts = 120
-        progress_bar = st.progress(0)
-        status_text = st.empty()
-        
-        for attempt in range(max_attempts):
-            status_response = requests.get(
-                f"{endpoint}/openai/threads/{thread_id}/runs/{run_id}?api-version=2024-02-15-preview",
-                headers=headers,
-                timeout=30
-            )
-            status_response.raise_for_status()
-            status_data = status_response.json()
-            status = status_data["status"]
-            
-            # Update progress
-            progress = min((attempt / max_attempts) * 100, 95)
-            progress_bar.progress(int(progress))
-            status_text.text(f"⏳ Agent Status: {status.upper()} ({attempt + 1}/{max_attempts})")
-            
-            if status == "completed":
-                progress_bar.progress(100)
-                status_text.text("✅ Agent processing completed!")
-                break
-            elif status in ["failed", "cancelled", "expired"]:
-                st.error(f"❌ Agent run {status}")
-                if "last_error" in status_data:
-                    st.error(f"Error details: {status_data['last_error']}")
-                st.stop()
-            
-            time.sleep(2)
-        
-        if status != "completed":
-            st.error("❌ Agent run timed out. Please try again with a simpler query.")
+        # Check run status
+        if run.status == "failed":
+            st.error(f"❌ Agent run failed: {run.last_error}")
             st.stop()
         
-        # Step 5: Get messages
-        messages_response = requests.get(
-            f"{endpoint}/openai/threads/{thread_id}/messages?api-version=2024-02-15-preview",
-            headers=headers,
-            timeout=30
-        )
-        messages_response.raise_for_status()
-        messages = messages_response.json()["data"]
+        st.success("✅ Agent processing completed!")
         
-        # Get the latest assistant message
-        assistant_messages = [m for m in messages if m["role"] == "assistant"]
-        if not assistant_messages:
+        # Step 4: Get messages
+        with st.spinner("📥 Retrieving results..."):
+            messages = project.agents.messages.list(thread_id=thread_id, order=ListSortOrder.ASCENDING)
+        
+        # Extract assistant response - get the agent's response
+        response_text = ""
+        from azure.ai.agents.models import MessageRole
+        for msg in messages:
+            if msg.role == MessageRole.AGENT and msg.text_messages:
+                # Concatenate all text messages from the agent
+                for text_msg in msg.text_messages:
+                    response_text += text_msg.text.value + "\n"
+        
+        if not response_text:
             st.error("❌ No response from agent")
             st.stop()
         
-        response_text = assistant_messages[0]["content"][0]["text"]["value"]
-        
         return response_text
         
-    except requests.exceptions.Timeout:
-        st.error("❌ Request timed out. Please try again.")
-        st.stop()
-    except requests.exceptions.RequestException as e:
-        st.error(f"❌ API Error: {str(e)}")
+    except Exception as e:
+        st.error(f"❌ Error calling agent: {str(e)}")
+        import traceback
+        st.error(f"Details: {traceback.format_exc()}")
         st.stop()
     except Exception as e:
         st.error(f"❌ Unexpected error: {str(e)}")
@@ -418,18 +372,17 @@ with st.sidebar:
     
     # Check configuration
     endpoint = os.getenv("AGENT_API_ENDPOINT")
-    api_key = os.getenv("AGENT_API_KEY")
     agent_id = os.getenv("AGENT_ID")
     cosmos_endpoint = os.getenv("COSMOS_ENDPOINT")
     
-    if all([endpoint, api_key, agent_id]):
+    if all([endpoint, agent_id]):
         st.markdown('<span class="agent-badge agent-active">✓ Translation Agent</span>', unsafe_allow_html=True)
         st.markdown('<span class="agent-badge agent-active">✓ Validation Agent</span>', unsafe_allow_html=True)
         st.markdown('<span class="agent-badge agent-active">✓ Optimization Agent</span>', unsafe_allow_html=True)
         st.success("🟢 All agents connected")
     else:
         st.error("🔴 Configuration missing")
-        st.warning("Please configure your .env file")
+        st.warning("Please configure your .env file with AGENT_API_ENDPOINT and AGENT_ID")
     
     if cosmos_endpoint:
         st.success("🟢 Cosmos DB connected")
@@ -442,15 +395,29 @@ with st.sidebar:
     history = get_history(limit=100)
     st.metric("Total Translations", len(history))
     if history:
-        recent = history[:10]
-        avg_valid = sum(1 for h in recent if h.get('validation', {}).get('valid', False)) / len(recent) * 100
-        st.metric("Success Rate", f"{avg_valid:.0f}%")
+        try:
+            # Filter out None values before processing
+            recent = [h for h in history[:10] if h is not None and isinstance(h, dict)]
+            if recent:
+                avg_valid = sum(1 for h in recent if h.get('validation', {}).get('valid', False)) / len(recent) * 100
+                st.metric("Success Rate", f"{avg_valid:.0f}%")
+        except Exception:
+            pass  # Skip stats if there's any issue with history data
     
     st.markdown("---")
     st.markdown("### ℹ️ About")
     st.info("This application uses Azure AI Foundry's multi-agent system to modernize Oracle SQL to Azure SQL with automatic validation and optimization.")
 
-# Main tabs
+# Main tabs with auto-switching support
+if 'active_tab' not in st.session_state:
+    st.session_state['active_tab'] = 'modernize'
+
+# Auto-switch to results tab if flag is set
+if st.session_state.get('active_tab') == 'results':
+    default_tab = 1
+else:
+    default_tab = 0
+
 tab1, tab2, tab3 = st.tabs(["🚀 Modernize SQL", "📋 Results", "📚 History"])
 
 with tab1:
@@ -598,8 +565,17 @@ WHERE ROWNUM <= 10;""",
                     if cosmos_id:
                         st.success(f"✅ Saved to Cosmos DB (ID: {cosmos_id[:8]}...)")
                     
-                    st.success("✅ Processing complete! Check the 'Results' tab.")
-                    st.balloons()
+                    # Professional completion message
+                    st.markdown("""
+                    <div style="padding: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                                border-radius: 8px; color: white; text-align: center; margin: 1rem 0;">
+                        <h3 style="margin: 0; color: white;">✓ Translation Complete</h3>
+                        <p style="margin: 0.5rem 0 0 0; opacity: 0.95;">Your SQL has been modernized and optimized</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+                    # Auto-switch to Results tab
+                    st.session_state['active_tab'] = 'results'
                     time.sleep(1)
                     st.rerun()
 
@@ -724,3 +700,4 @@ with tab3:
                     }
                     st.rerun()
     else:
+        st.info("No translation history yet. Process some SQL queries to see them here!")
