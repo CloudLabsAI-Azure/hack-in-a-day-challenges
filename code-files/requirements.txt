@@ -1,0 +1,14 @@
+# Streamlit UI Framework
+streamlit>=1.31.0
+
+# Azure OpenAI SDK
+openai>=1.12.0
+
+# HTTP Requests for Azure AI Search
+requests>=2.31.0
+
+# Environment Variable Management
+python-dotenv>=1.0.0
+
+# Additional utilities (optional but recommended)
+pandas>=2.0.0
