@@ -11,7 +11,17 @@ In this challenge, you will upload synthetic clinical research documents into Az
 
 - Create an Azure Storage Account for healthcare research data  
 - Upload synthetic medical literature and case study documents  
-- Review the dataset structure to ensure it is ready for AI indexing  
+- Review the dataset structure to ensure it is ready for AI indexing
+
+## Accessing the Datasets
+
+Please download and extract the synthetic datasets required for this challenge here:
+
+```
+https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/healthcare-labfiles.zip
+```
+
+> Once the file is downloaded, please extract it in any desired path in the LabVM. You will be able to see `code-files` and `datasets` folders.
 
 ## Steps to Complete
 

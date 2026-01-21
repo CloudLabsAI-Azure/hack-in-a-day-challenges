@@ -11,7 +11,17 @@ In this challenge, you will upload synthetic network telemetry and incident docu
 
 - Create an Azure Storage Account for telecom diagnostics data  
 - Upload synthetic network telemetry and incident reports  
-- Review the dataset to ensure it is suitable for AI-driven analysis  
+- Review the dataset to ensure it is suitable for AI-driven analysis
+
+## Accessing the Datasets
+
+Please download and extract the synthetic datasets required for this challenge here:
+
+```
+https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/telecom-labfiles.zip
+```
+
+> Once the file is downloaded, please extract it in any desired path in the LabVM. You will be able to see `code-files` and `datasets` folders.
 
 ## Steps to Complete
 
