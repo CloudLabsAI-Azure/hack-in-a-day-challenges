@@ -19,7 +19,7 @@ load_dotenv()
 AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
 AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
 AZURE_OPENAI_DEPLOYMENT_NAME = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
-AZURE_OPENAI_API_VERSION = os.getenv("AZURE_OPENAI_API_VERSION", "2024-02-01")
+AZURE_OPENAI_API_VERSION = os.getenv("AZURE_OPENAI_API_VERSION", "2025-01-01-preview")
 
 AZURE_SEARCH_ENDPOINT = os.getenv("AZURE_SEARCH_ENDPOINT")
 AZURE_SEARCH_API_KEY = os.getenv("AZURE_SEARCH_API_KEY")
@@ -34,11 +34,18 @@ def get_openai_client():
     Initialize and cache the Azure OpenAI client for reuse across requests.
     This follows best practices by avoiding repeated client instantiation.
     """
-    return AzureOpenAI(
-        api_key=AZURE_OPENAI_API_KEY,
-        api_version=AZURE_OPENAI_API_VERSION,
-        azure_endpoint=AZURE_OPENAI_ENDPOINT
-    )
+    try:
+        client = AzureOpenAI(
+            api_key=AZURE_OPENAI_API_KEY,
+            api_version=AZURE_OPENAI_API_VERSION,
+            azure_endpoint=AZURE_OPENAI_ENDPOINT,
+            timeout=30.0,
+            max_retries=2
+        )
+        return client
+    except Exception as e:
+        st.error(f"Failed to initialize Azure OpenAI client: {str(e)}")
+        raise
 
 # =============================================================================
 # Azure AI Search: Retrieve relevant documents
@@ -61,36 +68,76 @@ def search_documents(query: str, top_k: int = 5) -> list[dict]:
         "api-key": AZURE_SEARCH_API_KEY
     }
     
-    # Construct search payload with semantic ranking for better relevance
+    # Start with a simple search payload (compatible with all index types)
     payload = {
         "search": query,
         "top": top_k,
-        "queryType": "semantic",
-        "semanticConfiguration": "default",
-        "select": "content,title,metadata",
-        "queryLanguage": "en-us"
+        "queryType": "simple"
     }
     
     try:
-        response = requests.post(search_url, headers=headers, json=payload, timeout=30)
+        # Try semantic search first (if available)
+        semantic_payload = {
+            **payload,
+            "queryType": "semantic",
+            "semanticConfiguration": "default",
+            "queryLanguage": "en-us"
+        }
+        
+        response = requests.post(search_url, headers=headers, json=semantic_payload, timeout=30)
+        
+        # If semantic search fails (400), fall back to simple search
+        if response.status_code == 400:
+            response = requests.post(search_url, headers=headers, json=payload, timeout=30)
+        
         response.raise_for_status()
         
         results = response.json()
         documents = results.get("value", [])
         
-        # Extract relevant fields from search results
+        # Extract relevant fields from search results (handle different schemas)
         retrieved_docs = []
         for doc in documents:
+            # Try to extract content from common field names (prioritize 'chunk' for your index)
+            content = (
+                doc.get("chunk") or       # Your index uses 'chunk'
+                doc.get("content") or 
+                doc.get("text") or 
+                doc.get("document") or
+                doc.get("description") or
+                str(doc)
+            )
+            
+            # Try to extract title from common field names
+            title = (
+                doc.get("title") or 
+                doc.get("name") or 
+                doc.get("filename") or
+                "Untitled Document"
+            )
+            
             retrieved_docs.append({
-                "content": doc.get("content", ""),
-                "title": doc.get("title", "Untitled"),
-                "score": doc.get("@search.score", 0.0)
+                "content": str(content)[:2000],  # Limit content length
+                "title": str(title),
+                "score": doc.get("@search.score", 0.0),
+                "chunk_id": doc.get("chunk_id", ""),
+                "parent_id": doc.get("parent_id", "")
             })
         
         return retrieved_docs
     
+    except requests.exceptions.HTTPError as e:
+        error_detail = ""
+        try:
+            error_detail = e.response.json()
+        except:
+            error_detail = e.response.text
+        
+        st.error(f"❌ Azure AI Search Error ({e.response.status_code}): {error_detail}")
+        return []
+    
     except requests.exceptions.RequestException as e:
-        st.error(f"Error querying Azure AI Search: {str(e)}")
+        st.error(f"❌ Network error connecting to Azure AI Search: {str(e)}")
         return []
 
 # =============================================================================
@@ -156,9 +203,19 @@ Guidelines:
         answer = response.choices[0].message.content
         return answer
     
+    except AttributeError as e:
+        error_msg = f"Azure OpenAI API error: {str(e)}. Check your deployment name and API version."
+        st.error(f"❌ {error_msg}")
+        return f"Configuration error: {error_msg}"
+    
     except Exception as e:
-        st.error(f"Error generating answer: {str(e)}")
-        return "An error occurred while generating the answer. Please try again."
+        error_msg = str(e)
+        if "proxies" in error_msg.lower():
+            st.error("❌ OpenAI library version issue. Try: pip install --upgrade openai")
+            return "Library version error. Please upgrade the openai package."
+        else:
+            st.error(f"❌ Error generating answer: {error_msg}")
+            return "An error occurred while generating the answer. Please try again."
 
 # =============================================================================
 # Streamlit UI: Chat Interface
