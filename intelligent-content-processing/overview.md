@@ -3,7 +3,7 @@
 Welcome to the **Intelligent Content Processing Hack in a Day**!
 In this hands-on lab, you will explore how **AI can transform enterprise document workflows** by building an end-to-end, AI-powered content processing solution. You will work with real-world documents such as invoices, handwritten notes, claims, and forms, and use Azure AI services to extract, understand, validate, and store structured data at scale.
 
-Through this lab, you will design a production-style pipeline powered by **Azure Document Intelligence, Azure OpenAI (GPT-4o-mini), Azure Blob Storage, Azure Cosmos DB, Azure Queue Storage, Azure App Service, and Azure Key Vault**.
+Through this lab, you will design a production-style pipeline powered by **Azure Document Intelligence, Microsoft Foundry (GPT-4o-mini), Azure Blob Storage, Azure Cosmos DB, Azure Queue Storage, Azure App Service, and Azure Key Vault**.
 
 ## Scenario
 
@@ -17,7 +17,7 @@ To improve efficiency, accuracy, and scalability, Contoso decides to build an **
 
 Your mission is to build an **AI-powered Intelligent Content Processing solution** that automates document understanding across multiple document types and industries.
 
-Using **Azure AI Document Intelligence** and **Azure OpenAI (GPT-4o-mini)**, you will create a system that can:
+Using **Azure AI Document Intelligence** and **Microsoft Foundry (GPT-4o-mini)**, you will create a system that can:
 
 * Ingest documents from Azure Blob Storage
 * Extract raw text using OCR
@@ -35,7 +35,7 @@ This solution demonstrates how enterprises combine **AI + automation + human ove
 By participating in this Hack in a Day, you will learn how to:
 
 * Deploy Azure AI Document Intelligence for OCR-based content extraction
-* Use Azure OpenAI (GPT-4o-mini) for multi-modal document understanding
+* Use Microsoft Foundry (GPT-4o-mini) for multi-modal document understanding
 * Process both PDFs and image-based documents including handwritten content
 * Design a schema-based JSON mapping strategy for AI outputs
 * Implement confidence scoring for AI-extracted data
@@ -52,7 +52,7 @@ This lab is structured into **five progressive challenges**, each representing a
   Create Azure Blob Storage and Azure Document Intelligence resources and extract text from PDFs and images.
 
 * **Challenge 02: Multi-Modal Document Understanding**
-  Use Azure OpenAI (GPT-4o-mini) to interpret OCR text and images and extract structured information.
+  Use Microsoft Foundry (GPT-4o-mini) to interpret OCR text and images and extract structured information.
 
 * **Challenge 03: Schema-Based JSON Mapping & Confidence Scoring**
   Normalize AI output into a standard JSON schema and assign confidence scores.
