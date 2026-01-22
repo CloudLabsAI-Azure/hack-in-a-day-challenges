@@ -5,31 +5,31 @@
         "BaseURL": "https:/CRM-Account-Intelligent-Agent/github.com/CloudLabsAI-Azure/hack-in-a-day-challenges.git",
         "Files": [
             {
-                "RawFilePath": "https:/CRM-Account-Intelligent-Agent/raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/CRM-Account-Intelligent-Agent/overview.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/CRM-Account-Intelligent-Agent/overview.md",
                 "Order": 1
             },
             {
-                "RawFilePath": "https:/CRM-Account-Intelligent-Agent/raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/CRM-Account-Intelligent-Agent/getting-started.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/CRM-Account-Intelligent-Agent/getting-started.md",
                 "Order": 2
             },
             {
-                "RawFilePath": "https:/CRM-Account-Intelligent-Agent/raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/CRM-Account-Intelligent-Agent/challenge-1.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/CRM-Account-Intelligent-Agent/challenge-1.md",
                 "Order": 3
             },
             {
-                "RawFilePath": "https:/CRM-Account-Intelligent-Agent/raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/CRM-Account-Intelligent-Agent/challenge-2.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/CRM-Account-Intelligent-Agent/challenge-2.md",
                 "Order": 4
             },
             {
-                "RawFilePath": "https:/CRM-Account-Intelligent-Agent/raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/CRM-Account-Intelligent-Agent/challenge-3.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/CRM-Account-Intelligent-Agent/challenge-3.md",
                 "Order": 5
             },
                         {
-                "RawFilePath": "https:/CRM-Account-Intelligent-Agent/raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/CRM-Account-Intelligent-Agent/challenge-4.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/CRM-Account-Intelligent-Agent/challenge-4.md",
                 "Order": 6
             },
                         {
-                "RawFilePath": "https:/CRM-Account-Intelligent-Agent/raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/CRM-Account-Intelligent-Agent/challenge-5.md",
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/CRM-Account-Intelligent-Agent/challenge-5.md",
                 "Order": 7
             }
         ]
