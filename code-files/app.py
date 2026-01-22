@@ -23,12 +23,24 @@ AZURE_SEARCH_ENDPOINT = os.getenv("AZURE_SEARCH_ENDPOINT")
 AZURE_SEARCH_API_KEY = os.getenv("AZURE_SEARCH_API_KEY")
 AZURE_SEARCH_INDEX_NAME = os.getenv("AZURE_SEARCH_INDEX_NAME")
 
-# Initialize Azure OpenAI client
-client = AzureOpenAI(
-    azure_endpoint=AZURE_OPENAI_ENDPOINT,
-    api_key=AZURE_OPENAI_API_KEY,
-    api_version="2024-02-01"
-)
+# Initialize Azure OpenAI client (will be cached)
+def get_openai_client():
+    """Initialize and return Azure OpenAI client."""
+    try:
+        client = AzureOpenAI(
+            azure_endpoint=AZURE_OPENAI_ENDPOINT,
+            api_key=AZURE_OPENAI_API_KEY,
+            api_version="2025-01-01-preview",
+            timeout=30.0,
+            max_retries=2
+        )
+        return client
+    except Exception as e:
+        st.error(f"Failed to initialize Azure OpenAI client: {str(e)}")
+        raise
+
+# Initialize client once
+client = get_openai_client()
 
 
 def search_account_intelligence(query: str, top_k: int = 5) -> list:
@@ -51,17 +63,28 @@ def search_account_intelligence(query: str, top_k: int = 5) -> list:
             "api-key": AZURE_SEARCH_API_KEY
         }
         
-        # Search request body
-        search_body = {
+        # Search request body (start with simple search)
+        simple_search_body = {
             "search": query,
             "top": top_k,
-            "queryType": "semantic",
-            "select": "*",
-            "searchFields": "content,account_name,industry,description"
+            "queryType": "simple"
         }
         
-        # Execute search request
-        response = requests.post(search_url, headers=headers, json=search_body)
+        # Try semantic search first (if available)
+        semantic_search_body = {
+            **simple_search_body,
+            "queryType": "semantic",
+            "semanticConfiguration": "default",
+            "queryLanguage": "en-us"
+        }
+        
+        # Execute search request with fallback
+        response = requests.post(search_url, headers=headers, json=semantic_search_body, timeout=30)
+        
+        # If semantic search fails (400), fall back to simple search
+        if response.status_code == 400:
+            response = requests.post(search_url, headers=headers, json=simple_search_body, timeout=30)
+        
         response.raise_for_status()
         
         results = response.json()
@@ -73,6 +96,15 @@ def search_account_intelligence(query: str, top_k: int = 5) -> list:
             st.sidebar.warning("⚠ No documents found for this query")
         
         return documents
+        
+    except requests.exceptions.HTTPError as e:
+        error_detail = ""
+        try:
+            error_detail = e.response.json()
+        except:
+            error_detail = e.response.text
+        st.sidebar.error(f"❌ Search Error ({e.response.status_code}): {error_detail}")
+        return []
         
     except Exception as e:
         st.sidebar.error(f"❌ Search error: {str(e)}")
@@ -96,9 +128,17 @@ def build_rag_prompt(user_query: str, context_documents: list) -> str:
         context_text = "=== ACCOUNT INTELLIGENCE CONTEXT ===\n\n"
         for idx, doc in enumerate(context_documents, 1):
             context_text += f"Document {idx}:\n"
-            context_text += f"Account: {doc.get('account_name', 'N/A')}\n"
+            context_text += f"Account: {doc.get('account_name') or doc.get('title') or 'N/A'}\n"
             context_text += f"Industry: {doc.get('industry', 'N/A')}\n"
-            context_text += f"Content: {doc.get('content', doc.get('description', 'N/A'))}\n"
+            # Handle different content field names
+            content = (
+                doc.get('chunk') or
+                doc.get('content') or 
+                doc.get('text') or
+                doc.get('description') or 
+                'N/A'
+            )
+            context_text += f"Content: {str(content)[:2000]}\n"
             context_text += f"Score: {doc.get('@search.score', 'N/A')}\n"
             context_text += "-" * 50 + "\n\n"
     else:
@@ -156,9 +196,20 @@ def generate_llm_response(prompt: str) -> str:
         )
         
         return response.choices[0].message.content
-        
+    
+    except AttributeError as e:
+        error_msg = f"Azure OpenAI API error: {str(e)}. Check your deployment name and API version."
+        st.error(f"❌ {error_msg}")
+        return f"Configuration error: {error_msg}"
+    
     except Exception as e:
-        return f"Error generating response: {str(e)}"
+        error_msg = str(e)
+        if "proxies" in error_msg.lower():
+            st.error("❌ OpenAI library version issue. Try: pip install --upgrade openai")
+            return "Library version error. Please upgrade the openai package."
+        else:
+            st.error(f"❌ Error generating response: {error_msg}")
+            return f"Error generating response: {error_msg}"
 
 
 def validate_configuration() -> bool:

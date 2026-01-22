@@ -2,7 +2,7 @@
 streamlit>=1.31.0
 
 # Azure OpenAI SDK
-openai>=1.12.0
+openai>=1.30.0
 
 # HTTP Requests for Azure AI Search
 requests>=2.31.0
