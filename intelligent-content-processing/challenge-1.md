@@ -10,10 +10,10 @@ In this challenge, you’ll create the **Azure AI Document Intelligence** resour
 
 ## Accessing the Datasets
 
-Please download and extract the datasets required for this challenge here - [Datasets](https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/c1-datasets.zip)
+Please download and extract the datasets required for this challenge here - [Datasets](https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/blob/content-processing-files/co-lab-files.zip)
 
    ```
-   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/c1-datasets.zip/
+   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/blob/content-processing-files/co-lab-files.zip/
    ```
 
 ## Challenge Objectives
@@ -41,8 +41,8 @@ Please download and extract the datasets required for this challenge here - [Dat
 2. Under **Basics**, provide:
 
    * **Subscription:** Use the available subscription
-   * **Resource Group:** Select `challenge-rg-<inject key="DeploymentID" enableCopy="false"/>`
-   * **Storage account name:** `docstore-<inject key="DeploymentID" enableCopy="false"/>`
+   * **Resource Group:** Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   * **Storage account name:** **docstore-<inject key="DeploymentID" enableCopy="false"/>**
    * **Region:** Choose the same region for all resources
    * **Performance:** Standard
    * **Redundancy:** Locally-redundant storage (LRS)
@@ -55,7 +55,7 @@ Please download and extract the datasets required for this challenge here - [Dat
 
 5. In the storage account, go to **Containers**.
 
-6. Click **+ Container** and provide:
+6. Click **+ Add container** and provide:
 
    * **Name:** `documents`
    * **Public access level:** Private (no anonymous access)
@@ -79,11 +79,11 @@ Please download and extract the datasets required for this challenge here - [Dat
 
 12. Under **Basics**, provide:
 
-* **Subscription:** Use the available subscription
-* **Resource Group:** Select `challenge-rg-<inject key="DeploymentID" enableCopy="false"/>`
-* **Region:** Same region as storage
-* **Name:** `doc-intel-<inject key="DeploymentID" enableCopy="false"/>`
-* **Pricing Tier:** Free (F0) *(or Standard if F0 is unavailable)*
+   * **Subscription:** Use the available subscription
+   * **Resource Group:** Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   * **Region:** Same region as storage
+   * **Name:** **doc-intel-<inject key="DeploymentID" enableCopy="false"/>**
+   * **Pricing Tier:** Free (F0) *(or Standard if F0 is unavailable)*
 
 13. Click **Review + Create** → **Create**.
 
@@ -95,19 +95,26 @@ Please download and extract the datasets required for this challenge here - [Dat
 
 16. Select **Document analysis**.
 
-17. Choose the **Layout** (or **General Document**) model.
+17. On the **Welcome to Document Intelligence Studio**, select the following:
 
-18. Click **Upload file**, select `invoice.pdf`, and click **Analyze**.
+   * **Subscription:** Use the available subscription
+   * **Resource Group:** Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   * **Document Intelligence:** **doc-intel-<inject key="DeploymentID" enableCopy="false"/>**
+   * Select **Create** → **Finish**
 
-19. Repeat the same steps for `handwritten_note.jpg`.
+18. Choose the **Layout** (or **General Document**) model.
+
+19. Click **Upload file**, select `invoice.pdf`, and click **Analyze**.
+
+20. Repeat the same steps for `handwritten_note.jpg`.
 
 ### Validate OCR Output
 
-20. Confirm that:
+21. Confirm that:
 
-* Text is extracted from both documents
-* Tables are detected in the invoice
-* Handwritten text is partially recognized
+   * Text is extracted from both documents
+   * Tables are detected in the invoice
+   * Handwritten text is partially recognized
 
 
 ### Success Criteria
