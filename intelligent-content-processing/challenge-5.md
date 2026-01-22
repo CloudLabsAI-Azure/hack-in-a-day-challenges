@@ -10,7 +10,7 @@ In this challenge, participants will persist validated document data into **Azur
 * Create an **Azure Cosmos DB (NoSQL)** database and container.
 * Store final, validated document JSON in Cosmos DB.
 * Configure **Azure App Service** to orchestrate the workflow.
-* Secure secrets using **Azure Key Vault**.
+* Secure secrets using **Environment variables**.
 * Expose REST APIs to submit and retrieve processed documents.
 * Perform a full end-to-end test of the solution.
 
@@ -108,71 +108,37 @@ After deployment succeeds, open the **App Service**.
 
 18. Click **Save** and select **Yes**.
 
-### Create Azure Key Vault
+### Add Environment Variables in App Service
 
-19. In the Azure Portal, search for **Key Vaults** and click **Create**.
+19. Go to **Settings** → Open your **Environment Variables**.
 
-20. Under Basics, provide:
+20. Under **App settings**, add each one individually:
 
-   * **Subscription**: Use the available subscription
+      | Name                        | Value                         |
+      | --------------------------- | ----------------------------- |
+      | `OPENAI_API_KEY`            | `<your OpenAI key>`           |
+      | `OPENAI_ENDPOINT`           | `<your OpenAI endpoint>`      |
+      | `DOC_INTELLIGENCE_KEY`      | `<doc intelligence key>`      |
+      | `DOC_INTELLIGENCE_ENDPOINT` | `<doc intelligence endpoint>` |
+      | `COSMOS_CONNECTION_STRING`  | `<cosmos connection string>`  |
+      | `STORAGE_CONNECTION_STRING` | `<storage connection string>` |
 
-   * **Resource Group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+21. Leave **Deployment slot setting** unchecked.
 
-   * **Key vault name**: **kv-doc-<inject key="DeploymentID" enableCopy="false"/>**
-
-   * **Region**: Same region as other resources
-
-   * **Pricing tier**: Standard
-
-   * Click **Review + Create** → **Create**.
-
-After deployment succeeds, open the Key Vault.
-
-### Add Secrets to Key Vault
-
-21. In the **Key Vault**, go to **Secrets** → **Generate/Import**.
-
-22. Add the following secrets (values can be placeholders for the lab):
-
-   - `COSMOS-CONNECTION-STRING`
-
-   - `STORAGE-CONNECTION-STRING`
-
-   - `OPENAI-ENDPOINT`
-
-   - `OPENAI-API-KEY`
-
-   - `DOC-INTELLIGENCE-ENDPOINT`
-
-   - `DOC-INTELLIGENCE-KEY`
-
-Click Create after adding each secret.
-
-### Expose APIs via App Service (Conceptual)
-
-23. In your App Service, create REST endpoints:
-
-* `POST /process-document`
-* `GET /document/{id}`
-
-    > For the hackathon, implementation can be:
-    >
-    > * Minimal code
-    > * Or mocked responses
-    > * Or simple sample controller returning Cosmos DB data
+22. Click **OK** for each. Click **Save**. Restart the App Service when prompted.
 
 ### Test End-to-End Flow
 
-24. Upload a document to Blob Storage.
+23. Upload a document to Blob Storage.
 
-25. Run through:
+24. Run through:
 
    * OCR (Challenge 01)
    * GPT extraction (Challenge 02)
    * Schema mapping (Challenge 03)
    * HITL approval (Challenge 04)
 
-26. Verify:
+25. Verify:
 
 * Final document exists in Cosmos DB
 * Status is `APPROVED`
@@ -184,14 +150,7 @@ You have successfully completed the Challenge 5:
 
 * Cosmos DB stores structured document JSON
 * App Service is configured and secured
-* Secrets are managed via Key Vault
+* Secrets are managed via Environment variables
 * End-to-end flow completes successfully
-
-### Additional Resources
-
-- [Streamlit Documentation](https://docs.streamlit.io/)
-- [Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
-- [Azure Container Registry](https://learn.microsoft.com/azure/container-registry/)
-- [Docker Best Practices](https://docs.docker.com/develop/dev-best-practices/)
 
 Congratulations! You've completed all challenges.
