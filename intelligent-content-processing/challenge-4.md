@@ -56,14 +56,14 @@ In this challenge, participants will implement a **Human-in-the-Loop (HITL)** wo
 
 9. Open the `human-review-queue`.
 
-10. Click **Add message**.
+10. Click **+ Add message**.
 
 11. Paste the following JSON (update values if needed):
 
     ```json
     {
     "documentId": "doc-002",
-    "documentType": "HandwrittenNote",
+    "documentType": "Patient Note",
     "confidence": 0.78,
     "reason": "Low confidence extraction"
     }

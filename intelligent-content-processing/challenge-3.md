@@ -46,6 +46,9 @@ In this challenge, participants will **standardize AI output into a fixed JSON s
    * `totalAmount` → `amount`
    * Set `confidence` to a value between `0.0 – 1.0`
    * Set `status` to `PENDING`
+   * `document_type` to `documentType`
+   * `currency` to `currency`
+   * Set `id` to `doc-001`
 
 6. Example mapped output:
 
@@ -63,7 +66,7 @@ In this challenge, participants will **standardize AI output into a fixed JSON s
 
 ### Map Handwritten Note AI Output to the Schema
 
-7. Take the JSON output generated in **Challenge 02** for `handwritten_note.jpg`.
+7. Take the JSON output generated in **Challenge 02** for `handwritten_note.jpg`, and add it in the same `json`file.
 
 8. Map the fields as follows:
 
@@ -77,7 +80,7 @@ In this challenge, participants will **standardize AI output into a fixed JSON s
     ```json
     {
     "id": "doc-002",
-    "documentType": "HandwrittenNote",
+    "documentType": "Patient Note",
     "referenceId": "John Doe",
     "amount": 0,
     "currency": "",
@@ -86,14 +89,16 @@ In this challenge, participants will **standardize AI output into a fixed JSON s
     }
     ```
 
+10. Save the `json` file.
+
 ### Add Confidence Scoring Logic
 
-10. Apply the following simple rule:
+11. Apply the following simple rule:
 
 * Confidence ≥ `0.85` → Eligible for auto-approval
 * Confidence < `0.85` → Requires human review
 
-11. Keep all documents in `PENDING` state for now (approval happens in the next challenge).
+12. Keep all documents in `PENDING` state for now (approval happens in the next challenge).
 
 ### Success Criteria
 

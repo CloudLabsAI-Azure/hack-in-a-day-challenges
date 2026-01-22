@@ -18,15 +18,16 @@ In this challenge, participants will persist validated document data into **Azur
 
 ### Create Azure Cosmos DB (NoSQL)
 
-1. In the **Azure Portal**, search for **Azure Cosmos DB** and click **Create**.
+1. In the **Azure Portal**, search for **Azure Cosmos DB** and click **Create** > **Create**.
 
 2. Select **Azure Cosmos DB for NoSQL**.
 
 3. Under **Basics**, provide:
 
+   * **Workload Type:** Development/Testing
    * **Subscription:** Use the available subscription
-   * **Resource Group:** Select `challenge-rg-<inject key="DeploymentID" enableCopy="false"/>`
-   * **Account Name:** `cosmos-docs-<inject key="DeploymentID" enableCopy="false"/>`
+   * **Resource Group:** Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   * **Account Name:** **cosmos-docs-<inject key="DeploymentID" enableCopy="false"/>**
    * **Location:** Same region as other resources
    * **Capacity mode:** Provisioned throughput
 
@@ -38,12 +39,14 @@ In this challenge, participants will persist validated document data into **Azur
 
 6. In Cosmos DB, go to **Data Explorer**.
 
-7. Click **New Database** and provide:
+7. Click **+ New Container** drop-down and then select **+ New Databases**, provide:
 
    * **Database ID:** `documents-db`
+   * Click **OK**
 
 8. Click **New Container** and provide:
 
+   * **Database ID:** `Use existing`
    * **Container ID:** `processed-documents`
    * **Partition key:** `/documentType`
 
@@ -58,7 +61,7 @@ In this challenge, participants will persist validated document data into **Azur
     ```json
     {
     "id": "doc-002",
-    "documentType": "HandwrittenNote",
+    "documentType": "Patient Note",
     "referenceId": "John Doe",
     "amount": 0,
     "currency": "",
@@ -71,42 +74,83 @@ In this challenge, participants will persist validated document data into **Azur
 
 13. Repeat for the invoice document if time permits.
 
-### Configure Azure App Service
+### Create Azure App Service
 
-14. In the **Azure Portal**, open your existing **App Service**.
+14. In the Azure Portal, search for **App Services** and click **Create** > **+ Web App**.
 
-15. Enable **System Assigned Managed Identity**:
+15. Under Basics, provide:
 
-* Go to **Identity**
-* Turn **Status** to **On**
-* Click **Save**
+   * **Subscription**: Use the available subscription
 
-### Configure Azure Key Vault Access
+   * **Resource Group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
 
-16. Open **Azure Key Vault**.
+   * **Name**: **app-doc-processing-<inject key="DeploymentID" enableCopy="false"/>**
 
-17. Go to **Access policies** (or **IAM**, depending on vault type).
+   * **Publish**: Code
 
-18. Grant the App Service managed identity access to:
+   * **Runtime stack**: Any (Python / Node.js / .NET)
 
-* **Get**
-* **List**
-  secrets.
+   * **Operating System**: Windows
 
-### Store Secrets in Key Vault
+   * **Region**: Same region as other resources
 
-19. In Key Vault, add secrets:
+   * **Pricing Plan**: Free F1
 
-* `COSMOS_CONNECTION_STRING`
-* `STORAGE_CONNECTION_STRING`
-* `OPENAI_ENDPOINT`
-* `OPENAI_API_KEY`
-* `DOC_INTELLIGENCE_ENDPOINT`
-* `DOC_INTELLIGENCE_KEY`
+   * Click **Review + Create** → **Create**.
+
+After deployment succeeds, open the **App Service**.
+
+### Enable Managed Identity for App Service
+
+16. In the App Service, go to **Settings > Identity**.
+
+17. Under **System assigned**, set **Status** to **On**.
+
+18. Click **Save** and select **Yes**.
+
+### Create Azure Key Vault
+
+19. In the Azure Portal, search for **Key Vaults** and click **Create**.
+
+20. Under Basics, provide:
+
+   * **Subscription**: Use the available subscription
+
+   * **Resource Group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+
+   * **Key vault name**: **kv-doc-<inject key="DeploymentID" enableCopy="false"/>**
+
+   * **Region**: Same region as other resources
+
+   * **Pricing tier**: Standard
+
+   * Click **Review + Create** → **Create**.
+
+After deployment succeeds, open the Key Vault.
+
+### Add Secrets to Key Vault
+
+21. In the **Key Vault**, go to **Secrets** → **Generate/Import**.
+
+22. Add the following secrets (values can be placeholders for the lab):
+
+   - `COSMOS-CONNECTION-STRING`
+
+   - `STORAGE-CONNECTION-STRING`
+
+   - `OPENAI-ENDPOINT`
+
+   - `OPENAI-API-KEY`
+
+   - `DOC-INTELLIGENCE-ENDPOINT`
+
+   - `DOC-INTELLIGENCE-KEY`
+
+Click Create after adding each secret.
 
 ### Expose APIs via App Service (Conceptual)
 
-20. In your App Service, create REST endpoints:
+23. In your App Service, create REST endpoints:
 
 * `POST /process-document`
 * `GET /document/{id}`
@@ -119,16 +163,16 @@ In this challenge, participants will persist validated document data into **Azur
 
 ### Test End-to-End Flow
 
-21. Upload a document to Blob Storage.
+24. Upload a document to Blob Storage.
 
-22. Run through:
+25. Run through:
 
-* OCR (Challenge 01)
-* GPT extraction (Challenge 02)
-* Schema mapping (Challenge 03)
-* HITL approval (Challenge 04)
+   * OCR (Challenge 01)
+   * GPT extraction (Challenge 02)
+   * Schema mapping (Challenge 03)
+   * HITL approval (Challenge 04)
 
-23. Verify:
+26. Verify:
 
 * Final document exists in Cosmos DB
 * Status is `APPROVED`
