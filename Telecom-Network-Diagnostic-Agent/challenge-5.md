@@ -26,11 +26,12 @@ In this challenge, you will launch a Streamlit application that allows telecom e
 
 1. Rename **.env.example** to **.env**.
 
-1. Edit the **.env** file and add:
-   - Foundry endpoint and API key  
-   - Azure AI Search endpoint  
-   - Azure AI Search admin key  
-   - Azure AI Search index name  
+1. Open the **.env** file and update it with the following values:
+   - Foundry endpoint
+   - Foundry API key
+   - Azure AI Search endpoint
+   - Azure AI Search query key
+   - Azure AI Search index name
 
 1. Save the file.
 

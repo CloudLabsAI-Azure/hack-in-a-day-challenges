@@ -15,7 +15,7 @@ In this challenge, you will upload synthetic B2B account intelligence documents 
 
 ## Accessing the Datasets
 
-Please download and extract the synthetic datasets required for this challenge here:
+Please download and extract the synthetic datasets and code files required for this challenge by using this below labfiles link in your LabVM browser tab:
 
 ```
 https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/crm-dataset.zip
@@ -32,8 +32,8 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 1. Create a **Storage Account** using the following details:
 
    - Subscription: Select the **default Subscription**
-   - Resource group: **agentic-ai-<inject key="DeploymentID"></inject>**
-   - Storage account name: **storage<inject key="DeploymentID"></inject>**
+   - Resource group: **agentic-ai-<inject key="DeploymentID" enableCopy="false"/>**
+   - Storage account name: **storage<inject key="DeploymentID" enableCopy="false"/>**
    - Region: **<inject key="Region"></inject>**
    - Performance: **Standard**
    - Redundancy: **Locally-redundant storage (LRS)**
@@ -48,6 +48,8 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
    - Name: **datasets**
    - Public access level: **Private (no anonymous access)**
+
+1. In the extracted labfiles folder, which you have performed earlier in this challenge, you will find a datasets folder, inside which you will be able to find the documents.
 
 1. Upload the synthetic account intelligence documents (company briefs, CRM summaries, news reports) into the **datasets** container.
 

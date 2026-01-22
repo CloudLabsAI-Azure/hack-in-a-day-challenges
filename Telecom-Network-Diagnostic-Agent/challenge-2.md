@@ -42,6 +42,8 @@ In this challenge, you will deploy the required models using **Microsoft Foundry
      - Deployment type: **Global Standard**
      - Capacity: **30K TPM**
 
+1. Once done, from the portal, please copy the **OpenAI Endpoint** and **API Key**. Note this in a notepad, as you will be using this in further challenges.
+
 ## Success Criteria
 
 - Foundry resource deployed successfully  

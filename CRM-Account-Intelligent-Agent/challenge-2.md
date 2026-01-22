@@ -21,14 +21,14 @@ In this challenge, you will deploy the required models using **Microsoft Foundry
 1. Create the Foundry resource with the following details:
 
    - Subscription: Select the **default Subscription**
-   - Resource group: **agentic-ai-<inject key="DeploymentID"></inject>**
-   - Name: **foundry-crm-<inject key="DeploymentID"></inject>**
+   - Resource group: **agentic-ai-<inject key="DeploymentID" enableCopy="false"/>**
+   - Name: **foundry-crm-<inject key="DeploymentID" enableCopy="false"/>**
    - Region: **<inject key="Region"></inject>**
-   - Default project name: **crm-proj-<inject key="DeploymentID"></inject>**
+   - Default project name: **crm-proj-<inject key="DeploymentID" enableCopy="false"/>**
 
 1. Click **Review + Create**, then select **Create**.
 
-1. After deployment, open the Foundry resource and navigate to **crm-proj-<inject key="DeploymentID"></inject>**.
+1. After deployment, open the Foundry resource and navigate to **crm-proj-<inject key="DeploymentID" enableCopy="false"/>**.
 
 1. Click **Go to Foundry portal** from the Overview page.
 
@@ -41,6 +41,8 @@ In this challenge, you will deploy the required models using **Microsoft Foundry
    - **text-embedding-ada-002**
      - Tier: **Global Standard**
      - Capacity: **30K TPM**
+
+1. Once done, from the portal, please copy the **OpenAI Endpoint** and **API Key**. Note this in a notepad, as you will be using this in further challenges.
 
 ## Success Criteria
 

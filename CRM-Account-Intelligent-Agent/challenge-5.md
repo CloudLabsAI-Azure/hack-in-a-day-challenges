@@ -26,11 +26,12 @@ The application allows sales teams to query account intelligence conversationall
 
 1. Rename **.env.example** to **.env**.
 
-1. Open the **.env** file and populate:
-   - Foundry endpoint and API key  
-   - Azure AI Search endpoint  
-   - Azure AI Search admin key  
-   - Azure AI Search index name  
+1. Open the **.env** file and update it with the following values:
+   - Foundry endpoint
+   - Foundry API key
+   - Azure AI Search endpoint
+   - Azure AI Search query key
+   - Azure AI Search index name
 
 1. Save the file.
 

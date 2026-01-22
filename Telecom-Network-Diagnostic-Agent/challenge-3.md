@@ -28,11 +28,16 @@ In this challenge, you will create an **Azure AI Search** service and index synt
 
 1. Open the Azure AI Search resource after deployment.
 
-1. From **Keys and Endpoints**, copy:
-   - **Endpoint**
-   - **Admin key**
+1. From **Keys and Endpoints**, copy and note:
+   - **Search service endpoint** from the overview page.
+   - **Query key** from **Keys** under settings pane.
+   - **Index Name** from **Indexes** under Search Management pane.
 
 1. Select **Import data (new)**.
+
+1. Select Data Source as **Azure Blob Storage**.
+
+1. When prompted for scenario, select **RAG (Retrieval-Augmented Generation)**.
 
 1. Configure the data source:
    - Data source: **Azure Blob Storage**

@@ -17,12 +17,12 @@ In this challenge, you will connect Azure AI Search to Foundry Playground and te
 1. Open **Microsoft Foundry** from the Azure Portal.
 
 1. Navigate to the project:
-   **crm-proj-<inject key="DeploymentID"></inject>**
+   **crm-proj-<inject key="DeploymentID" enableCopy="false"/>**
 
 1. Select the deployed model:
    **gpt-4.1-mini**
 
-1. Click **Open in Playground**.
+1. Select **Playground** and click on **Open Chat Playground**.
 
 1. Select **Add a data source** under **Add your data**.
 
@@ -30,7 +30,7 @@ In this challenge, you will connect Azure AI Search to Foundry Playground and te
 
    - Data source type: **Azure AI Search**
    - Subscription: **default Subscription**
-   - Azure AI Search service: **crm-search-<inject key="DeploymentID"></inject>**
+   - Azure AI Search service: **crm-search-<inject key="DeploymentID" enableCopy="false"/>**
    - Azure AI Search index: Select the default index
    - Click **Next**
 

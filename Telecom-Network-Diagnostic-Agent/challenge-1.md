@@ -15,7 +15,7 @@ In this challenge, you will upload synthetic network telemetry and incident docu
 
 ## Accessing the Datasets
 
-Please download and extract the synthetic datasets required for this challenge here:
+Please download and extract the synthetic datasets and code files required for this challenge by using this below labfiles link in your LabVM browser tab:
 
 ```
 https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/telecom-labfiles.zip
@@ -48,6 +48,8 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
    - Name: **datasets**
    - Public access level: **Private (no anonymous access)**
+
+1. In the extracted labfiles folder, which you have performed earlier in this challenge, you will find a datasets folder, inside which you will be able to find the documents.
 
 1. Upload the synthetic telecom telemetry and incident analysis documents into the **datasets** container.
 

@@ -22,7 +22,7 @@ In this challenge, you will connect Azure AI Search to Foundry Playground and te
 1. Select the deployed model:
    **gpt-4.1-mini**
 
-1. Click **Open in Playground**.
+1. Select **Playground** and click on **Open Chat Playground**.
 
 1. Under **Add your data**, select **Add a data source**.
 

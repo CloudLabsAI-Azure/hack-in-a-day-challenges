@@ -17,12 +17,9 @@ In this challenge, you will connect Azure AI Search as a data source in **Micros
 1. Open **Microsoft Foundry** from the Azure Portal.
 
 1. Navigate to the project:
-   **health-proj-<inject key="DeploymentID"></inject>**
+   **health-proj-<inject key="DeploymentID" enableCopy="false"/>**
 
-1. Select the deployed model:
-   **gpt-4.1-mini**
-
-1. Click **Open in Playground**.
+1. Select **Playground** and click on **Open Chat Playground**.
 
 1. In the Playground, select **Add a data source** under **Add your data**.
 
@@ -30,12 +27,12 @@ In this challenge, you will connect Azure AI Search as a data source in **Micros
 
    - Data source type: **Azure AI Search**
    - Subscription: **default Subscription**
-   - Azure AI Search service: **health-search-<inject key="DeploymentID"></inject>**
+   - Azure AI Search service: **health-search-<inject key="DeploymentID" enableCopy="false"/>**
    - Azure AI Search index: Select the default index created in Challenge 03
    - Click **Next**
 
 1. In **Data management**:
-   - Search type: **Azure AI Search**
+   - Search type: **Semantic**
    - Semantic configuration: **Use existing**
    - Click **Next**
 

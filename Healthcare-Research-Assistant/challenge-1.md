@@ -15,7 +15,7 @@ In this challenge, you will upload synthetic clinical research documents into Az
 
 ## Accessing the Datasets
 
-Please download and extract the synthetic datasets required for this challenge here:
+Please download and extract the synthetic datasets and code files required for this challenge by using this below labfiles link in your LabVM browser tab:
 
 ```
 https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/healthcare-labfiles.zip
@@ -32,8 +32,8 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 1. Create a **Storage Account** with the following configuration:
 
    - Subscription: Select the **default Subscription**
-   - Resource group: **agentic-ai-<inject key="DeploymentID"></inject>**
-   - Storage account name: **storage<inject key="DeploymentID"></inject>**
+   - Resource group: **agentic-ai-<inject key="DeploymentID" enableCopy="false"/>**
+   - Storage account name: **storage<inject key="DeploymentID" enableCopy="false"/>**
    - Region: **<inject key="Region"></inject>**
    - Performance: **Standard**
    - Redundancy: **Locally-redundant storage (LRS)**
@@ -42,12 +42,14 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
 1. Once deployment completes, open the Storage Account.
 
-1. Under **Data storage**, select **Containers** and click **+ Container**.
+1. Under **Data storage**, select **Containers** and click **+ Add Container**.
 
 1. Create a container with the following details:
 
    - Name: **datasets**
-   - Public access level: **Private (no anonymous access)**
+   - Public access level: **Private (no anonymous access)**\
+
+1. In the extracted labfiles folder, which you have performed earlier in this challenge, you will find a datasets folder, inside which you will be able to find the documents.
 
 1. Upload the synthetic healthcare research documents (PDF or text files) into the **datasets** container.
 

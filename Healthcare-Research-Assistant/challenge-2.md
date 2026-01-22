@@ -21,10 +21,10 @@ In this challenge, you will deploy the required models using **Microsoft Foundry
 1. Create the Foundry resource with the following details:
 
    - Subscription: Select the **default Subscription**
-   - Resource group: **agentic-ai-<inject key="DeploymentID"></inject>**
-   - Name: **foundry-health-<inject key="DeploymentID"></inject>**
+   - Resource group: **agentic-ai-<inject key="DeploymentID" enableCopy="false"/>**
+   - Name: **health-foundry-<inject key="DeploymentID" enableCopy="false"/>**
    - Region: **<inject key="Region"></inject>**
-   - Default project name: **health-proj-<inject key="DeploymentID"></inject>**
+   - Default project name: **health-proj-<inject key="DeploymentID" enableCopy="false"/>**
 
    > Click **Next** through the configuration pages, then select **Review + Create** → **Create**.
 
@@ -43,6 +43,8 @@ In this challenge, you will deploy the required models using **Microsoft Foundry
    - **text-embedding-ada-002**
      - Deployment type: **Global Standard**
      - Capacity: **30K TPM**
+
+1. Once done, from the portal, please copy the **OpenAI Endpoint** and **API Key**. Note this in a notepad, as you will be using this in further challenges.
 
    > If a model does not appear in search, select **Go to model catalog** and deploy it from there.
 

@@ -17,7 +17,7 @@ In this challenge, you will configure environment variables, install required de
 
 1. Open **Visual Studio Code**.
 
-1. From VS Code, select **File → Open Folder** and open the extracted **Codefiles** folder.
+1. From VS Code, select **File → Open Folder** and open the **code-files** folder from the extracted labfiles folder.
 
 1. Ensure the folder contains the following files:
    - `app.py`
@@ -30,7 +30,7 @@ In this challenge, you will configure environment variables, install required de
    - Foundry endpoint
    - Foundry API key
    - Azure AI Search endpoint
-   - Azure AI Search admin key
+   - Azure AI Search query key
    - Azure AI Search index name
 
 1. Save the file.
