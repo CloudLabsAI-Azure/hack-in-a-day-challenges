@@ -295,19 +295,19 @@ def call_agent_api(sql_input):
             st.stop()
         
         # Initialize project client with Azure CLI credentials
-        with st.spinner("🔌 Connecting to Azure AI Foundry..."):
+        with st.spinner("Connecting to Microsoft Foundry..."):
             project = AIProjectClient(
                 credential=DefaultAzureCredential(),
                 endpoint=project_endpoint
             )
         
         # Step 1: Create thread
-        with st.spinner("🔄 Creating conversation thread..."):
+        with st.spinner("Creating conversation thread..."):
             thread = project.agents.threads.create()
             thread_id = thread.id
         
         # Step 2: Add message
-        with st.spinner("📝 Sending Oracle SQL to Translation Agent..."):
+        with st.spinner("Sending Oracle SQL to Translation Agent..."):
             message = project.agents.messages.create(
                 thread_id=thread_id,
                 role="user",
@@ -315,7 +315,7 @@ def call_agent_api(sql_input):
             )
         
         # Step 3: Run agent
-        with st.spinner("🤖 Agent processing your SQL... This may take a minute..."):
+        with st.spinner("Agent processing your SQL... This may take a minute..."):
             run = project.agents.runs.create_and_process(
                 thread_id=thread_id,
                 agent_id=agent_id
@@ -323,26 +323,29 @@ def call_agent_api(sql_input):
         
         # Check run status
         if run.status == "failed":
-            st.error(f"❌ Agent run failed: {run.last_error}")
+            st.error(f"Agent run failed: {run.last_error}")
             st.stop()
         
-        st.success("✅ Agent processing completed!")
+        st.success("Agent processing completed!")
         
         # Step 4: Get messages
-        with st.spinner("📥 Retrieving results..."):
-            messages = project.agents.messages.list(thread_id=thread_id, order=ListSortOrder.ASCENDING)
+        with st.spinner("Retrieving results..."):
+            messages = project.agents.messages.list(thread_id=thread_id)
+            messages_list = list(messages)
         
         # Extract assistant response - get the agent's response
         response_text = ""
         from azure.ai.agents.models import MessageRole
-        for msg in messages:
-            if msg.role == MessageRole.AGENT and msg.text_messages:
-                # Concatenate all text messages from the agent
-                for text_msg in msg.text_messages:
-                    response_text += text_msg.text.value + "\n"
+        for msg in messages_list:
+            if msg.role == MessageRole.AGENT:
+                # Get text content from the message
+                for content_item in msg.content:
+                    if hasattr(content_item, 'type') and content_item.type == 'text':
+                        if hasattr(content_item, 'text') and hasattr(content_item.text, 'value'):
+                            response_text += content_item.text.value + "\n"
         
         if not response_text:
-            st.error("❌ No response from agent")
+            st.error("No response from agent")
             st.stop()
         
         return response_text
