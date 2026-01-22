@@ -123,6 +123,8 @@ After deployment succeeds, open the **App Service**.
       | `COSMOS_CONNECTION_STRING`  | `<cosmos connection string>`  |
       | `STORAGE_CONNECTION_STRING` | `<storage connection string>` |
 
+      >**Note:** Fetch all the details from the respective resources.
+
 21. Leave **Deployment slot setting** unchecked.
 
 22. Click **OK** for each. Click **Save**. Restart the App Service when prompted.
