@@ -47,7 +47,7 @@ In this challenge, you will connect Azure AI Search to Foundry Playground and te
 
 1. Test the following prompts:
 
-   - `Why is network latency high in this region?`
+   - `Why is network latency high in this Downtown LA Sports Bar District?`
 
    - `What remediation actions are recommended for congestion issues?`
 

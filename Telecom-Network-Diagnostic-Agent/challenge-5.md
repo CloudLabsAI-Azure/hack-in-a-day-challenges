@@ -52,7 +52,7 @@ In this challenge, you will launch a Streamlit application that allows telecom e
 1. When the browser opens, test the assistant with prompts such as:
 
    ```
-   Why is network latency high in this region?
+   Why is network latency high in Beverly hills?
    ```
 
    ```
