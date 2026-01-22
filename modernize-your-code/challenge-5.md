@@ -1,14 +1,14 @@
-# Challenge 05: Run the Production Streamlit Application
+# Challenge 05: Run the Streamlit Application Locally
 
 ## Introduction
 
-Your three-agent pipeline is operational! All the code has been built for you. In this challenge, you'll configure and run a production-ready Streamlit web application that provides a beautiful interface for your SQL modernization system.
+Your three-agent pipeline is operational! All the code has been built for you. In this challenge, you'll configure and run a Streamlit web application locally that provides a beautiful interface for your SQL modernization system.
 
 ## Prerequisites
 
-- Completed Challenge 5 (all three agents created and connected)
+- Completed Challenge 4 (all three agents created and connected)
 - Visual Studio Code installed
-- Python 3.11 installed
+- Python 3.11+ installed
 - Azure CLI installed and authenticated (`az login`)
 
 ## Challenge Objectives
@@ -16,7 +16,7 @@ Your three-agent pipeline is operational! All the code has been built for you. I
 - Configure environment variables with your agent credentials
 - Authenticate with Azure CLI
 - Install Python dependencies
-- Run the Streamlit application
+- Run the Streamlit application locally
 - Test the multi-agent pipeline through the web UI
 - Upload SQL files and process them
 - View translation history from Cosmos DB
@@ -92,9 +92,10 @@ You need three values to connect to your agents:
 
 2. Click **Settings** in the left navigation.
 
-3. In the Overview section, find and copy the **Foundry endpoint**:
-   - Format: `https://ai-project-XXXX.services.ai.azure.com/api/projects/sql-modernization-XXXX`
-   - **Important:** Use the **Foundry** endpoint (ends with `.services.ai.azure.com`), not the OpenAI endpoint
+3. In the Overview section, find the **Microsoft Foundry project endpoint**:
+   - Example format: `https://sql-modernize-2034545.services.ai.azure.com/api/projects/proj-default`
+   - **CRITICAL:** The project name at the end is always `proj-default` (not sql-modernize-XXXX)
+   - Make sure it ends with `/api/projects/proj-default`
 
 4. Navigate to **Agents** in the left menu.
 
@@ -118,7 +119,8 @@ You need three values to connect to your agents:
 
 ```env
 # Microsoft Foundry Agent API Configuration
-AGENT_API_ENDPOINT=https://ai-project-<DeploymentID>.services.ai.azure.com/api/projects/sql-modernize-<DeploymentID>
+# IMPORTANT: Use proj-default as the project name (not sql-modernize-XXXX)
+AGENT_API_ENDPOINT=https://sql-modernize-<DeploymentID>.services.ai.azure.com/api/projects/proj-default
 AGENT_ID=asst_<your-agent-id>
 
 # Cosmos DB Configuration
@@ -128,10 +130,11 @@ DATABASE_NAME=SQLModernizationDB
 ```
 
 **Important Notes:**
-- Replace `<DeploymentID>` with your actual deployment ID
-- Replace `<your-agent-id>` with your Translation Agent ID (from step 6)
-- Replace `<your-cosmos-primary-key>` with your Cosmos DB key
-- The app uses Azure CLI authentication, so no API key is needed for agents
+- Replace `<DeploymentID>` with your actual deployment ID (e.g., 2034545)
+- **CRITICAL:** Endpoint must end with `/api/projects/proj-default` (the project name is always `proj-default`)
+- Replace `<your-agent-id>` with your Translation Agent ID from step 6 (starts with `asst_`)
+- Replace `<your-cosmos-primary-key>` with your Cosmos DB Primary Key
+- The app uses Azure CLI authentication (`az login`), so no API key is needed for agents
 
 5. Save the file.
 
@@ -344,13 +347,13 @@ Expected:
 
 ---
 
-**Issue**: `404 Resource not found` or `Agent ID not found`
+**Issue**: `404 Resource not found` or `The project does not exist`
 
 **Solution**: 
-- Verify `AGENT_API_ENDPOINT` uses the **Foundry services endpoint** (ends with `.services.ai.azure.com/api/projects/...`)
-- Do NOT use the OpenAI endpoint (`.openai.azure.com`)
-- Ensure endpoint includes full path: `/api/projects/sql-modernization-XXXX`
-- Verify `AGENT_ID` is copied correctly from Microsoft Foundry Studio
+- **CRITICAL:** Verify endpoint ends with `/api/projects/proj-default` (the project name is always `proj-default`)
+- Do NOT use `sql-modernize-XXXX` as the project name in the endpoint
+- Example correct endpoint: `https://sql-modernize-2034545.services.ai.azure.com/api/projects/proj-default`
+- Verify `AGENT_ID` is copied correctly from Microsoft Foundry Studio (starts with `asst_`)
 
 ---
 
@@ -462,142 +465,24 @@ Key differences from OpenAI endpoint:
 Congratulations! You've successfully:
 - Built a 3-agent AI system in Microsoft Foundry
 - Connected agents in a pipeline (Translation → Validation, Optimization)
-- Deployed a production-ready Streamlit web application
+- Run a Streamlit web application locally
 - Integrated with Cosmos DB for persistence
 - Created a complete SQL modernization platform
 
 **What you've learned:**
 - Microsoft Foundry Agents visual builder
 - Multi-agent orchestration and hand-offs
-- Azure OpenAI Assistants API integration
-- Streamlit for production web apps
+- Azure AI Projects SDK integration with Entra ID authentication
+- Streamlit for web applications
 - Cosmos DB for NoSQL storage
 - End-to-end AI application development
 
 **Where to go from here:**
-1. Deploy to Azure Container Apps for production access
-2. Add more specialized agents (Security Analyzer, Performance Tester)
-3. Integrate with Azure DevOps for automated migration PRs
-4. Build a feedback loop for continuous agent improvement
-5. Extend to support other databases (MySQL, PostgreSQL, etc.)
-
-### Part 1: Get Agent API Credentials
-
-Agents in Microsoft Foundry are available via API immediately after creation - no separate deployment needed!
-
-1. Go to **Microsoft Foundry Studio** → Your project.
-
-2. Click **Settings** in the left navigation.
-
-3. In the Overview section, you'll see two endpoints:
-   - **Project endpoint**: `https://ai-project-XXXX.services.ai.azure.com/`
-   - **OpenAI endpoint**: `https://ai-project-XXXX.openai.azure.com/` (Use this one)
-
-4. Copy the **OpenAI endpoint** (ending in `.openai.azure.com/`) - this is your **AGENT_API_ENDPOINT**.
-
-5. In Settings, click **Keys** and copy the **Primary Key** - this is your **AGENT_API_KEY**.
-
-6. Navigate to **Agents** in the left menu.
-
-7. Click on your **SQL-Translation-Agent**.
-
-8. In the Setup panel on the right, copy the **Agent ID** (starts with `asst_`). 
-   
-   Example: `asst_4suaVDw2ZsziL9sShpoyeoDM`
-
-   > This is the Translation Agent ID - when you call this agent, it will automatically trigger the connected Validation and Optimization agents.
-
-9. You now have all three values needed:
-   - **AGENT_API_ENDPOINT**: `https://ai-project-XXXX.openai.azure.com/`
-   - **AGENT_API_KEY**: Your project primary key  
-   - **AGENT_ID**: `asst_XXXX...`
-
-### Part 2: Set Up Local Development Environment
-
-1. Open **VS Code** or your preferred editor.
-
-2. Create a new folder: `sql-modernization-app`
-
-3. Copy the `app.py` file from the codefiles folder in your hackathon materials.
-
-4. Create a file: **requirements.txt**
-
-```txt
-streamlit==1.29.0
-requests==2.31.0
-python-dotenv==1.0.0
-azure-cosmos==4.5.1
-pandas==2.1.4
-```
-
-5. Create **.env** file:
-
-```env
-AGENT_API_ENDPOINT=https://ai-project-2029713.openai.azure.com/
-AGENT_API_KEY=your-actual-api-key-from-step-5
-AGENT_ID=asst_4suaVDw2ZsziL9sShpoyeoDM
-COSMOS_ENDPOINT=https://sql-modernization-cosmos-2029713.documents.azure.com:443/
-COSMOS_KEY=your-actual-cosmos-key-from-challenge-1
-DATABASE_NAME=SQLModernizationDB
-```
-
-6. Replace the placeholder values:
-   - **AGENT_API_ENDPOINT**: Your OpenAI endpoint from step 4 (keep the format: `https://ai-project-XXXX.openai.azure.com/`)
-   - **AGENT_API_KEY**: Your Primary Key from step 5
-   - **AGENT_ID**: Your Translation Agent ID from step 8 (keep the format: `asst_XXXX`)
-   - **COSMOS_ENDPOINT**: From Challenge 1 Cosmos DB resource
-   - **COSMOS_KEY**: From Challenge 1 Cosmos DB Keys section
-
-### Part 3: Test the Application Locally
-
-1. Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-2. Run the Streamlit app:
-
-```bash
-streamlit run app.py
-```
-
-3. The app will open in your browser at `http://localhost:8501`.
-
-4. Test with a sample Oracle query:
-
-```sql
-SELECT emp_id, emp_name, hire_date
-FROM employees  
-WHERE hire_date > SYSDATE - 30
-AND ROWNUM <= 10;
-```
-
-5. Click **Modernize SQL** and verify you see results from all 3 agents.
-
-### Part 4: Understanding the Agent API Call
-
-The app.py uses the Azure OpenAI Assistants API to interact with your Translation Agent. Here's the flow:
-
-**Step 1: Create a Thread**
-```python
-# Create a conversation thread
-thread_response = requests.post(
-    f"{endpoint}/openai/threads?api-version=2024-02-15-preview",
-    headers=headers,
-    json={}
-)
-thread_id = thread_response.json()["id"]
-```
-
-**Step 2: Add User Message**
-```python
-# Add the Oracle SQL as a message
-message_response = requests.post(
-    f"{endpoint}/openai/threads/{thread_id}/messages?api-version=2024-02-15-preview",
-    headers=headers,
-    json={
-        "role": "user",
+1. Add more specialized agents (Security Analyzer, Performance Tester)
+2. Integrate with Azure DevOps for automated migration PRs
+3. Build a feedback loop for continuous agent improvement
+4. Extend to support other databases (MySQL, PostgreSQL, etc.)
+5. Deploy to Azure Container Apps for production access (optional)
         "content": sql_input
     }
 )
