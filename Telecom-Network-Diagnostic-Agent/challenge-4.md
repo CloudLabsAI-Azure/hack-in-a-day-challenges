@@ -35,7 +35,7 @@ In this challenge, you will connect Azure AI Search to Foundry Playground and te
    - Click **Next**
 
 1. In **Data management**:
-   - Search type: **Azure AI Search**
+   - Search type: **semantic**
    - Semantic configuration: **Use existing**
    - Click **Next**
 

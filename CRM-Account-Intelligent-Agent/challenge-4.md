@@ -35,7 +35,7 @@ In this challenge, you will connect Azure AI Search to Foundry Playground and te
    - Click **Next**
 
 1. In **Data management**:
-   - Search type: **Azure AI Search**
+   - Search type: **Semantic**
    - Semantic configuration: **Use existing**
    - Click **Next**
 
@@ -47,9 +47,9 @@ In this challenge, you will connect Azure AI Search to Foundry Playground and te
 
 1. Test the following prompts in Playground:
 
-   - `Summarize recent changes for this account`
+   - `Summarize recent changes for ConnectWave account`
 
-   - `What risks and opportunities exist for this customer?`
+   - `What risks and opportunities exist for VitalHealth customer?`
 
 1. Observe how the model produces concise, actionable sales insights.
 

@@ -40,14 +40,12 @@ In this challenge, you will create an **Azure AI Search** service and index synt
 1. When prompted for scenario, select **RAG (Retrieval-Augmented Generation)**.
 
 1. Configure the data source:
-   - Data source: **Azure Blob Storage**
    - Storage account: **storage<inject key="DeploymentID" enableCopy="false"/>**
    - Container: **datasets**
    - Parsing mode: **Default**
    - Click **Next**
 
 1. Configure vectorization:
-   - Column to vectorize: **content**
    - Kind: **Azure AI Foundry**
    - Foundry project: **crm-proj-<inject key="DeploymentID" enableCopy="false"/>**
    - Model deployment: **text-embedding-ada-002**

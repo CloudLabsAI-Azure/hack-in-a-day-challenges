@@ -52,11 +52,11 @@ The application allows sales teams to query account intelligence conversationall
 1. In the browser, test prompts such as:
 
    ```
-   Summarize recent changes for < > account
+   What risks exist for Horizon Bank?
    ```
 
    ```
-   What risks and opportunities exist for this customer?
+   Any recent changes at GlobalRetail Group?
    ```
 
 1. Review the generated account insights.

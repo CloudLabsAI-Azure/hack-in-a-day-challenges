@@ -41,7 +41,6 @@ In this challenge, you will create an **Azure AI Search** service and index the 
 1. When prompted for scenario, select **RAG (Retrieval-Augmented Generation)**.
 
 1. Configure the data source:
-   - Data source: **Azure Blob Storage**
    - Subscription: **default Subscription**
    - Storage account: **storage<inject key="DeploymentID" enableCopy="false"/>**
    - Blob container: **datasets**
@@ -49,7 +48,6 @@ In this challenge, you will create an **Azure AI Search** service and index the 
    - Click **Next**
 
 1. Configure vectorization:
-   - Column to vectorize: **content**
    - Kind: **Azure AI Foundry**
    - Foundry project: **health-proj-<inject key="DeploymentID" enableCopy="false"/>**
    - Model deployment: **text-embedding-ada-002**
@@ -60,7 +58,7 @@ In this challenge, you will create an **Azure AI Search** service and index the 
 
 1. Review the configuration and click **Create**.
 
-1. After indexing completes, open **Search Explorer** and run a test query:
+1. After indexing completes, click on  **start searching** and run a test query:
 
    ```
    glioblastoma
