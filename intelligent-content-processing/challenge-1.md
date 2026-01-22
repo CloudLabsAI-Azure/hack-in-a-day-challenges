@@ -41,8 +41,8 @@ Please download and extract the datasets required for this challenge here - [Dat
 2. Under **Basics**, provide:
 
    * **Subscription:** Use the available subscription
-   * **Resource Group:** Select `challenge-rg`
-   * **Storage account name:** `docstore<inject key="DeploymentID" enableCopy="false"/>`
+   * **Resource Group:** Select `challenge-rg-<inject key="DeploymentID" enableCopy="false"/>`
+   * **Storage account name:** `docstore-<inject key="DeploymentID" enableCopy="false"/>`
    * **Region:** Choose the same region for all resources
    * **Performance:** Standard
    * **Redundancy:** Locally-redundant storage (LRS)
@@ -80,7 +80,7 @@ Please download and extract the datasets required for this challenge here - [Dat
 12. Under **Basics**, provide:
 
 * **Subscription:** Use the available subscription
-* **Resource Group:** Select `challenge-rg`
+* **Resource Group:** Select `challenge-rg-<inject key="DeploymentID" enableCopy="false"/>`
 * **Region:** Same region as storage
 * **Name:** `doc-intel-<inject key="DeploymentID" enableCopy="false"/>`
 * **Pricing Tier:** Free (F0) *(or Standard if F0 is unavailable)*
@@ -110,15 +110,15 @@ Please download and extract the datasets required for this challenge here - [Dat
 * Handwritten text is partially recognized
 
 
-## Success Criteria
+### Success Criteria
 
-You have successfully completed Challenge 1:
+You have successfully completed the Challenge 1:
 
 * Documents are uploaded to Blob Storage
 * OCR runs successfully on PDF and image files
 * Extracted text is visible in Document Intelligence Studio 
 
-## Additional Resources
+### Additional Resources
 
 - [Azure AI Document Intelligence Overview](https://learn.microsoft.com/azure/ai-services/document-intelligence/overview)  
 - [Quickstart: Create Document Intelligence Resource](https://learn.microsoft.com/azure/ai-services/document-intelligence/quickstarts/create-resource)
