@@ -64,11 +64,18 @@ def validate_configuration() -> bool:
 
 def initialize_openai_client() -> AzureOpenAI:
     """Initialize Azure OpenAI client."""
-    return AzureOpenAI(
-        api_key=AZURE_OPENAI_API_KEY,
-        api_version="2024-02-15-preview",
-        azure_endpoint=AZURE_OPENAI_ENDPOINT
-    )
+    try:
+        client = AzureOpenAI(
+            api_key=AZURE_OPENAI_API_KEY,
+            api_version="2025-01-01-preview",
+            azure_endpoint=AZURE_OPENAI_ENDPOINT,
+            timeout=30.0,
+            max_retries=2
+        )
+        return client
+    except Exception as e:
+        st.error(f"Failed to initialize Azure OpenAI client: {str(e)}")
+        raise
 
 
 def search_telemetry_and_incidents(query: str, top_k: int = 5) -> List[Dict[str, Any]]:
@@ -93,23 +100,43 @@ def search_telemetry_and_incidents(query: str, top_k: int = 5) -> List[Dict[str,
         "api-key": AZURE_SEARCH_API_KEY
     }
     
-    payload = {
+    # Start with simple search payload (compatible with all index types)
+    simple_payload = {
         "search": query,
         "top": top_k,
-        "select": "*",
-        "queryType": "semantic",
-        "semanticConfiguration": "default",
-        "captions": "extractive",
-        "answers": "extractive|count-3"
+        "queryType": "simple"
     }
     
     try:
-        response = requests.post(search_url, headers=headers, json=payload, timeout=10)
+        # Try semantic search first (if available)
+        semantic_payload = {
+            **simple_payload,
+            "queryType": "semantic",
+            "semanticConfiguration": "default",
+            "queryLanguage": "en-us"
+        }
+        
+        response = requests.post(search_url, headers=headers, json=semantic_payload, timeout=30)
+        
+        # If semantic search fails (400), fall back to simple search
+        if response.status_code == 400:
+            response = requests.post(search_url, headers=headers, json=simple_payload, timeout=30)
+        
         response.raise_for_status()
         results = response.json().get("value", [])
         return results
+        
+    except requests.exceptions.HTTPError as e:
+        error_detail = ""
+        try:
+            error_detail = e.response.json()
+        except:
+            error_detail = e.response.text
+        st.warning(f"Azure AI Search Error ({e.response.status_code}): {error_detail}")
+        return []
+        
     except requests.exceptions.RequestException as e:
-        st.warning(f"Azure AI Search request failed: {str(e)}. Proceeding without retrieval.")
+        st.warning(f"Network error connecting to Azure AI Search: {str(e)}")
         return []
 
 
@@ -128,9 +155,15 @@ def format_search_results(results: List[Dict[str, Any]]) -> str:
     
     context_parts = []
     for idx, result in enumerate(results, 1):
-        # Extract relevant fields (adjust based on your index schema)
-        title = result.get("title", result.get("id", f"Document {idx}"))
-        content = result.get("content", result.get("description", "No content available"))
+        # Extract relevant fields with flexible field name handling
+        title = result.get("title") or result.get("name") or result.get("id", f"Document {idx}")
+        content = (
+            result.get("chunk") or 
+            result.get("content") or 
+            result.get("text") or
+            result.get("description") or 
+            "No content available"
+        )
         timestamp = result.get("timestamp", "")
         severity = result.get("severity", "")
         component = result.get("component", "")
@@ -142,7 +175,7 @@ def format_search_results(results: List[Dict[str, Any]]) -> str:
             context_part += f"**Severity:** {severity}\n"
         if component:
             context_part += f"**Component:** {component}\n"
-        context_part += f"**Content:** {content}\n"
+        context_part += f"**Content:** {str(content)[:2000]}\n"
         
         context_parts.append(context_part)
     
@@ -222,9 +255,19 @@ def get_ai_response(client: AzureOpenAI, prompt: str, chat_history: List[Dict[st
         
         return response.choices[0].message.content
     
+    except AttributeError as e:
+        error_msg = f"Azure OpenAI API error: {str(e)}. Check your deployment name and API version."
+        st.error(f"❌ {error_msg}")
+        return f"Configuration error: {error_msg}"
+    
     except Exception as e:
-        st.error(f"Error calling Azure OpenAI: {str(e)}")
-        return "I apologize, but I encountered an error processing your request. Please try again."
+        error_msg = str(e)
+        if "proxies" in error_msg.lower():
+            st.error("❌ OpenAI library version issue. Try: pip install --upgrade openai")
+            return "Library version error. Please upgrade the openai package."
+        else:
+            st.error(f"❌ Error calling Azure OpenAI: {error_msg}")
+            return "I apologize, but I encountered an error processing your request. Please try again."
 
 
 def initialize_session_state():
