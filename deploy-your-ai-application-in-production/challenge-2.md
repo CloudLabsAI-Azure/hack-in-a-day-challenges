@@ -8,16 +8,14 @@ This is where enterprises fail most often - deploying services with default sett
 
 ## Prerequisites
 
-- Completed Challenge 1 (Infrastructure deployed via AZD)
+- Completed Challenge 1 (Infrastructure deployed via Azure Portal)
 - Resource group `challenge-rg-<inject key="DeploymentID"></inject>` contains:
   - Virtual Network with subnets
-  - AI Foundry Hub
-  - Azure OpenAI
+  - Azure AI Foundry (includes OpenAI)
   - Storage Account
   - Key Vault
-  - Private endpoints
-- Connected to VM via Azure Bastion
-- VS Code terminal open
+- Azure Bastion connectivity (pre-deployed)
+- Azure Cloud Shell or VM with Azure CLI
 
 ## Challenge Objectives
 
@@ -69,16 +67,16 @@ First, understand what was deployed.
 
 1. **In Azure Portal**, navigate to your resource group: `challenge-rg-<inject key="DeploymentID"></inject>`
 
-2. **Find the Virtual Network** (name: `ai-vnet-<DeploymentID>` or similar)
+2. **Find the Virtual Network** (name: `vnet-secureai-<inject key="DeploymentID"></inject>`)
 
 3. Click on it, then click **Subnets** in the left menu
 
 4. **Note the subnets created**:
-   - `ai-services` - For AI Foundry and OpenAI private endpoints
-   - `storage-services` - For Storage and Key Vault private endpoints
-   - `application` - For your application/VM
+   - `snet-ai-services` - For AI Foundry and OpenAI private endpoints
+   - `snet-storage-services` - For Storage and Key Vault private endpoints
+   - `snet-application` - For your application/VM
 
-5. Click on **ai-services** subnet
+5. Click on **snet-ai-services** subnet
 
 6. **Check if an NSG is attached**:
    - Look for "Network security group" field
@@ -89,7 +87,9 @@ First, understand what was deployed.
 
 Let's create an NSG with restrictive rules.
 
-1. **In your VM terminal**, create an NSG:
+1. **In Azure Cloud Shell or your VM terminal**, create an NSG:
+
+> **Critical**: The NSG must be created in the **exact same region** as your Virtual Network from Challenge 1. If you get an error about resource not found, check that both resources are in the same region.
 
 ```powershell
 az network nsg create `
@@ -167,7 +167,7 @@ Then attach the NSG:
 az network vnet subnet update `
   --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
   --vnet-name $vnetName `
-  --name "ai-services" `
+  --name "snet-ai-services" `
   --network-security-group "nsg-ai-services"
 ```
 
@@ -175,26 +175,31 @@ az network vnet subnet update `
 
 Now ensure no service accepts connections from the internet.
 
-1. **Disable public access on Azure OpenAI**:
+1. **Restrict network access on Azure AI Foundry**:
 
-First, find your OpenAI resource name:
+   > **Note**: The Azure CLI doesn't yet support network configuration for AI Foundry. Use the Azure Portal instead.
 
-```powershell
-$openaiName = az cognitiveservices account list `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --query "[?kind=='OpenAI'].name" -o tsv
+   **In Azure Portal**:
+   - Navigate to your **openai-secureai-<inject key="DeploymentID"></inject>** resource
+   - Click **Networking** in the left menu
+   - Under **Firewalls and virtual networks**, select **Selected Networks and Private Endpoints**
+   - Click **+ Add existing virtual network**
+   
+   **In the "Add networks" dialog**:
+   - **Subscription**: Should already be selected (your current subscription)
+   - **Virtual networks**: Check the box next to **vnet-secureai-<inject key="DeploymentID"></inject>**
+   - **Subnets**: Select all three subnets:
+     - ✅ **snet-ai-services**
+     - ✅ **snet-storage-services**
+     - ✅ **snet-application**
+   - Click **Add** at the bottom of the dialog
+   
+   **Back on the Networking page**:
+   - Verify your VNet and subnets are listed under "Virtual networks"
+   - Click **Save** at the top
+   - Wait 1-2 minutes for the change to propagate
 
-Write-Host "OpenAI Resource: $openaiName"
-```
-
-Disable public network access:
-
-```powershell
-az cognitiveservices account update `
-  --name $openaiName `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --public-network-access Disabled
-```
+   > **What this does**: Restricts AI Foundry to only accept connections from your Virtual Network subnets, blocking all public internet access.
 
 2. **Disable public access on Storage Account**:
 
