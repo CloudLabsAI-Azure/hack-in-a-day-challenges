@@ -99,12 +99,14 @@ Write-Host "Managed Identity ID: $identityId"
 
 Grant your VM's managed identity permission to use Azure OpenAI.
 
-1. **Get your OpenAI resource ID**:
+1. **Get your Azure AI Foundry/OpenAI resource ID**:
 
 ```powershell
 $openaiName = az cognitiveservices account list `
   --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --query "[?kind=='OpenAI'].name" -o tsv
+  --query "[?contains(name, 'openai')].name" -o tsv
+
+Write-Host "OpenAI Resource: $openaiName"
 
 $openaiId = az cognitiveservices account show `
   --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
