@@ -49,25 +49,60 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
    - **Virtual network name**: **vnet-secureai-<inject key="DeploymentID"></inject>**
    - **Region**: **<inject key="Region"></inject>**
 
-1. Click **Next: IP Addresses**.
+1. Click **Next: Security**.
 
-   **IP Addresses tab**:
-   - **IPv4 address space**: Delete the default and enter **10.0.0.0/16**
+   - Leave everything **turned off (default)**, then click **Next**.
+
+1. On **IP Addresses**.
+
+   - You'll see a **default** subnet created automatically
+   - **Delete the default subnet** by clicking the delete icon next to it
    
 1. Click **+ Add subnet** to add the first subnet:
-   - **Subnet name**: **snet-ai-services**
-   - **Subnet address range**: **10.0.1.0/24**
+   - **Subnet purpose**: **Default**
+   - **Name**: **snet-ai-services**
+   
+   **IPv4 section**:
+   - **Include an IPv4 address space**: Checked (leave as is)
+   - **Starting address**: **10.0.1.0**
+   - **Size**: Select **/24 (256 addresses)**
+   
+   **IPv6 section**:
+   - **Include an IPv6 address space**: Leave unchecked
+   
+   **Private subnet section**:
+   - **Enable private subnet (no default outbound access)**: Leave unchecked
+   
+   **Security section**:
+   - **NAT gateway**: **None**
+   - **Network security group**: **None** (we'll add this later in Challenge 2)
+   - **Route table**: **None**
+   
+   **Service Endpoints**: Leave as default (no endpoints selected)
+   
+   **Subnet Delegation**: **None**
+   
+   **Network Policy for Private Endpoints**:
+   - **Private endpoint network policy**: **Disabled**
+   
    - Click **Add**
 
 1. Click **+ Add subnet** to add the second subnet:
-   - **Subnet name**: **snet-storage-services**
-   - **Subnet address range**: **10.0.2.0/24**
+   - **Subnet purpose**: **Default**
+   - **Name**: **snet-storage-services**
+   - **Starting address**: **10.0.2.0**
+   - **Size**: **/24 (256 addresses)**
+   - Leave all other settings same as first subnet (defaults)
    - Click **Add**
 
 1. Click **+ Add subnet** to add the third subnet:
-   - **Subnet name**: **snet-application**
-   - **Subnet address range**: **10.0.3.0/24**
+   - **Subnet purpose**: **Default**
+   - **Name**: **snet-application**
+   - **Starting address**: **10.0.3.0**
+   - **Size**: **/24 (256 addresses)**
+   - Leave all other settings same as first subnet (defaults)
    - Click **Add**
+
 
 1. Click **Review + Create**.
 
