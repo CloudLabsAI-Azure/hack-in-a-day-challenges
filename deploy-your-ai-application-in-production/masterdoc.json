@@ -1,42 +1,45 @@
-{
-  "Name": "deploy-your-ai-application-in-production",
-  "Language": "English",
-  "Files": [
+[
     {
-      "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/main/deploy-your-ai-application-in-production/overview.md",
-      "Order": 1
-    },
-    {
-      "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/main/deploy-your-ai-application-in-production/getting-started.md",
-      "Order": 2
-    },
-    {
-      "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/main/deploy-your-ai-application-in-production/challenge-1.md",
-      "Order": 3
-    },
-    {
-      "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/main/deploy-your-ai-application-in-production/challenge-2.md",
-      "Order": 4
-    },
-    {
-      "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/main/deploy-your-ai-application-in-production/challenge-3.md",
-      "Order": 5
-    },
-    {
-      "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/main/deploy-your-ai-application-in-production/challenge-4.md",
-      "Order": 6
-    },
-    {
-      "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/main/deploy-your-ai-application-in-production/challenge-5.md",
-      "Order": 7
-    },
-    {
-      "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/main/deploy-your-ai-application-in-production/challenge-6.md",
-      "Order": 8
-    },
-    {
-      "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/main/deploy-your-ai-application-in-production/challenge-7.md",
-      "Order": 9
+        "Name": "deploy-your-ai-application-in-production",
+        "Language": "English",
+        "BaseURL": "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges",
+        "Files": [
+             {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/overview.md",
+                "Order": 1
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/getting-started.md",
+                "Order": 2
+            },    
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/challenge-1.md",
+                "Order": 3
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/challenge-2.md",
+                "Order": 4
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/challenge-3.md",
+                "Order": 5
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/challenge-4.md",
+                "Order": 6
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/challenge-5.md",
+                "Order": 7
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/challenge-6.md",
+                "Order": 8
+            },
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/challenge-7.md",
+                "Order": 7
+            }
+        ]
     }
-  ]
-}
+]
