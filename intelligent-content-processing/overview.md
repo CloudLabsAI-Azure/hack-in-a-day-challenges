@@ -3,7 +3,7 @@
 Welcome to the **Intelligent Content Processing Hack in a Day**!
 In this hands-on lab, you will explore how **AI can transform enterprise document workflows** by building an end-to-end, AI-powered content processing solution. You will work with real-world documents such as invoices, handwritten notes, claims, and forms, and use Azure AI services to extract, understand, validate, and store structured data at scale.
 
-Through this lab, you will design a production-style pipeline powered by **Azure Document Intelligence, Microsoft Foundry (GPT-4o-mini), Azure Blob Storage, Azure Cosmos DB, Azure Queue Storage, Azure App Service, and Azure Key Vault**.
+Through this lab, you will design a production-style pipeline powered by **Azure Document Intelligence, Microsoft Foundry (GPT-4o-mini), Azure Blob Storage, Azure Cosmos DB, Azure Queue Storage, Azure App Service**.
 
 ## Scenario
 
@@ -41,7 +41,7 @@ By participating in this Hack in a Day, you will learn how to:
 * Implement confidence scoring for AI-extracted data
 * Build a Human-in-the-Loop (HITL) workflow using Azure Queue Storage
 * Store structured, validated content in Azure Cosmos DB
-* Secure secrets using Azure Key Vault
+* Secure secrets using Azure Environment Variables
 * Expose document processing results through REST APIs using Azure App Service
 
 ## Hack in a Day Format: Challenge-Based
