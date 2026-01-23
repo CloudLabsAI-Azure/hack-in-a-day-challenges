@@ -85,7 +85,6 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
    - Leave everything else as default
    - Click **Add**
 
-
 1. Click **Review + Create**.
 
 1. Click **Create**.
@@ -94,27 +93,35 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
 1. Once complete, click **Go to resource** to verify all three subnets were created.
 
-### Part 3: Create Azure OpenAI Resource
+### Part 3: Create Azure AI Foundry Project
 
 1. In the **Azure Portal**, click **+ Create a resource**.
 
-1. Search for **Azure OpenAI** and select it.
+1. Search for **Azure AI Foundry** and select it.
 
 1. Click **Create**.
 
-1. Configure Azure OpenAI:
+1. Configure Azure AI Foundry:
 
    **Basics tab**:
    - **Subscription**: Select your available Azure subscription
    - **Resource group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
-   - **Region**: **<inject key="Region"></inject>**
    - **Name**: **openai-secureai-<inject key="DeploymentID"></inject>**
-   - **Pricing tier**: **Standard S0**
+   - **Region**: **<inject key="Region"></inject>**
+   - **Default project name**: Keep as **proj-default**
+
+   > **Note**: This creates both an AI Foundry Hub (resource) and a default project inside it.
+
+1. Click **Next: Storage** (leave defaults).
 
 1. Click **Next: Network**.
 
    **Network tab**:
-   - **Type**: Select **All networks, including the internet, can access this resource** (we'll restrict this in Challenge 2)
+   - **Type**: Select **Public** (we'll add private endpoints in Challenge 2)
+
+1. Click **Next: Identity** (leave defaults).
+
+1. Click **Next: Encryption** (leave defaults).
 
 1. Click **Next: Tags** (skip tags).
 
@@ -122,40 +129,40 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
 1. Click **Create**.
 
-1. Wait for deployment (2-3 minutes).
+1. Wait for deployment (3-5 minutes - this creates multiple resources).
 
 1. Once complete, click **Go to resource**.
 
-### Part 4: Deploy GPT-4 Model in Azure OpenAI
+### Part 4: Deploy GPT-4 Model in Azure AI Foundry
 
 1. In your **openai-secureai-<inject key="DeploymentID"></inject>** resource.
 
-1. In the left navigation, under **Resource Management**, click **Keys and Endpoint**.
+1. Click on **Launch Foundry portal** (top button).
 
-1. Copy the **Endpoint** value and save it in Notepad for later use.
+1. In Azure AI Foundry portal, select your project: **proj-default**.
 
-1. Click on **Go to Azure OpenAI Studio** (top button).
+1. In the left navigation, click **Models + Endpoints**.
 
-1. In Azure OpenAI Studio, click **Deployments** in the left navigation.
+1. Click **+ Deploy model** → **Deploy base model**.
 
-1. Click **+ Create new deployment**.
+1. Search for and select **gpt-4** from the model catalog.
+
+1. Click **Confirm**.
 
 1. Configure the deployment:
-   - **Select a model**: Choose **gpt-4**
-   - **Model version**: Select the latest available (e.g., **turbo-2024-04-09**)
    - **Deployment name**: **gpt-4-chat**
-   - **Deployment type**: **Standard**
-   - **Tokens per Minute Rate Limit (thousands)**: **20**
+   - **Deployment type**: **Global Standard**
+   - **Tokens per Minute Rate Limit (thousands)**: **20K**
 
    > **Important**: Do not increase TPM beyond 20K to avoid quota issues.
 
-1. Click **Create**.
+1. Click **Deploy**.
 
-1. Wait for deployment to complete (30 seconds).
+1. Wait for deployment to complete (30-60 seconds).
 
 ### Part 5: Test the Model Deployment
 
-1. In the **Deployments** page, click on your **gpt-4-chat** deployment.
+1. In the **Models + Endpoints** page, find your **gpt-4-chat** deployment.
 
 1. Click **Open in playground**.
 
