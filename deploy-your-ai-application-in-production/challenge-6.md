@@ -1,4 +1,4 @@
-# Challenge 06: Test Secure Connectivity via Azure Bastion
+﻿# Challenge 06: Test Secure Connectivity via Azure Bastion
 
 ## Introduction
 

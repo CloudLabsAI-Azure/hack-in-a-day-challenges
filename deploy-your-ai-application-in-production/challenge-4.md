@@ -1,4 +1,4 @@
-# Challenge 04: Secure Azure OpenAI Deployment
+﻿# Challenge 04: Secure Azure OpenAI Deployment
 
 ## Introduction
 

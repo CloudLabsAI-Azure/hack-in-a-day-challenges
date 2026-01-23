@@ -1,4 +1,4 @@
-# Challenge 05: Deploy Secure Chat Application
+﻿# Challenge 05: Deploy Secure Chat Application
 
 ## Introduction
 

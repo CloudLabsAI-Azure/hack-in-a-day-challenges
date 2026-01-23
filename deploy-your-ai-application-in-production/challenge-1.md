@@ -1,4 +1,4 @@
-# Challenge 01: Deploy Core Azure Infrastructure
+﻿# Challenge 01: Deploy Core Azure Infrastructure
 
 ## Introduction
 

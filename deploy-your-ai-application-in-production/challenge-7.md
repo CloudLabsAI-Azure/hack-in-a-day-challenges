@@ -1,4 +1,4 @@
-# Challenge 07: Well-Architected Framework Validation & Production Readiness
+﻿# Challenge 07: Well-Architected Framework Validation & Production Readiness
 
 ## Introduction
 

@@ -1,4 +1,4 @@
-# Challenge 03: Identity & Access Management with Entra ID
+﻿# Challenge 03: Identity & Access Management with Entra ID
 
 ## Introduction
 
@@ -200,7 +200,18 @@ $openaiEndpoint = az cognitiveservices account show `
 Write-Host "OpenAI Endpoint: $openaiEndpoint"
 ```
 
-2. **Store the endpoint in Key Vault as a secret**:
+2. **Temporarily enable Key Vault public access** (needed to add secrets from Cloud Shell):
+
+> **Important**: You're using Azure Cloud Shell which is outside your VNet. Since you disabled public access in Challenge 2, you need to temporarily enable it to add secrets. In production, your VM would be inside the VNet and wouldn't need this.
+
+```powershell
+az keyvault update `
+  --name $kvName `
+  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+  --public-network-access Enabled
+```
+
+3. **Store the endpoint in Key Vault as a secret**:
 
 ```powershell
 az keyvault secret set `
@@ -209,7 +220,16 @@ az keyvault secret set `
   --value $openaiEndpoint
 ```
 
-3. **Store the resource name** (needed for some SDK operations):
+4. **Store the deployment name**:
+
+```powershell
+az keyvault secret set `
+  --vault-name $kvName `
+  --name "OpenAIDeployment" `
+  --value "secure-chat"
+```
+
+5. **Store the resource name** (needed for some SDK operations):
 
 ```powershell
 az keyvault secret set `
@@ -217,6 +237,109 @@ az keyvault secret set `
   --name "OpenAIResourceName" `
   --value $openaiName
 ```
+
+6. **Disable public access again** (restore security):
+
+```powershell
+az keyvault update `
+  --name $kvName `
+  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+  --public-network-access Disabled
+```
+
+### Part 5: Configure Storage Account Access for Managed Identity
+
+Grant your VM's managed identity permission to read/write blobs.
+
+1. **Get Storage Account resource ID**:
+
+```powershell
+$storageName = az storage account list `
+  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+  --query "[?contains(name, 'st')].name" -o tsv
+
+Write-Host "Storage Account: $storageName"
+
+$storageId = az storage account show `
+  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+  --name $storageName `
+  --query id -o tsv
+
+Write-Host "Storage Account ID: $storageId"
+```
+
+2. **Assign "Storage Blob Data Contributor" role**:
+
+```powershell
+az role assignment create `
+  --assignee $identityId `
+  --role "Storage Blob Data Contributor" `
+  --scope $storageId
+
+Write-Host "✅ Storage Blob Data Contributor role assigned"
+```
+
+3. **Store Storage Account name in Key Vault** (for later use):
+
+```powershell
+# Enable public access temporarily
+az keyvault update `
+  --name $kvName `
+  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+  --public-network-access Enabled
+
+# Store the secret
+az keyvault secret set `
+  --vault-name $kvName `
+  --name "StorageAccountName" `
+  --value $storageName
+
+# Disable public access again
+az keyvault update `
+  --name $kvName `
+  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+  --public-network-access Disabled
+```
+
+4. **Verify all secrets** are stored:
+
+```powershell
+# Enable public access temporarily
+az keyvault update `
+  --name $kvName `
+  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+  --public-network-access Enabled
+
+# List all secrets
+az keyvault secret list --vault-name $kvName --query "[].name" -o table
+
+# Disable public access again
+az keyvault update `
+  --name $kvName `
+  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+  --public-network-access Disabled
+```
+
+You should see:
+- `OpenAIEndpoint`
+- `OpenAIDeployment`
+- `OpenAIResourceName`
+- `StorageAccountName`
+
+### Part 6: Summary of RBAC Assignments
+
+Verify all role assignments are in place:
+
+1. **List all role assignments for your VM's managed identity**:
+
+```powershell
+az role assignment list --assignee $identityId --output table
+```
+
+You should see:
+- ✅ **Cognitive Services OpenAI User** on openai-secureai-xxx
+- ✅ **Key Vault Secrets User** on kv-secureai-xxx
+- ✅ **Storage Blob Data Contributor** on stsecureaixxx
 
 4. **Store the AI Foundry project endpoint** (for future challenges):
 

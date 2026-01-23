@@ -1,4 +1,4 @@
-# Getting Started
+﻿# Getting Started
 
 ## Welcome to the Secure AI Deployment Hackathon!
 
