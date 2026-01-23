@@ -110,26 +110,13 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
    - **Region**: **<inject key="Region"></inject>**
    - **Default project name**: Keep as **proj-default**
 
-   > **Note**: This creates both an AI Foundry Hub (resource) and a default project inside it.
-
-1. Click **Next: Storage** (leave defaults).
-
-1. Click **Next: Network**.
-
-   **Network tab**:
-   - **Type**: Select **Public** (we'll add private endpoints in Challenge 2)
-
-1. Click **Next: Identity** (leave defaults).
-
-1. Click **Next: Encryption** (leave defaults).
-
-1. Click **Next: Tags** (skip tags).
+      > **Note**: This creates both an AI Foundry Hub (resource) and a default project inside it.
 
 1. Click **Review + Create**.
 
 1. Click **Create**.
 
-1. Wait for deployment (3-5 minutes - this creates multiple resources).
+1. Wait for deployment (**3-5 minutes** this creates multiple resources).
 
 1. Once complete, click **Go to resource**.
 
@@ -137,22 +124,22 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
 1. In your **openai-secureai-<inject key="DeploymentID"></inject>** resource.
 
-1. Click on **Launch Foundry portal** (top button).
+1. Click on **Go to Foundry portal**.
 
-1. In Azure AI Foundry portal, select your project: **proj-default**.
+1. In Azure AI Foundry portal, verify your project is: **proj-default**.
 
 1. In the left navigation, click **Models + Endpoints**.
 
 1. Click **+ Deploy model** → **Deploy base model**.
 
-1. Search for and select **gpt-4** from the model catalog.
+1. Search for and select **gpt-4.1** from the model catalog.
 
 1. Click **Confirm**.
 
 1. Configure the deployment:
-   - **Deployment name**: **gpt-4-chat**
+   - **Deployment name**: **secure-chat**
    - **Deployment type**: **Global Standard**
-   - **Tokens per Minute Rate Limit (thousands)**: **20K**
+   - **Tokens per Minute Rate Limit (thousands)**: **40K**
 
    > **Important**: Do not increase TPM beyond 20K to avoid quota issues.
 
@@ -162,7 +149,7 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
 ### Part 5: Test the Model Deployment
 
-1. In the **Models + Endpoints** page, find your **gpt-4-chat** deployment.
+1. In the **Models + Endpoints** page, find your **secure-chat** deployment.
 
 1. Click **Open in playground**.
 
@@ -337,7 +324,7 @@ AZURE OPENAI:
 -------------
 Resource Name: openai-secureai-<inject key="DeploymentID"></inject>
 Endpoint: [paste the endpoint you copied earlier]
-Model Deployment: gpt-4-chat
+Model Deployment: secure-chat
 
 KEY VAULT:
 ----------
@@ -376,7 +363,7 @@ Verify you completed all tasks:
   - [ ] snet-storage-services (10.0.2.0/24)
   - [ ] snet-application (10.0.3.0/24)
 - [ ] Azure OpenAI resource deployed
-- [ ] GPT-4 model deployed as "gpt-4-chat"
+- [ ] GPT-4 model deployed as "secure-chat"
 - [ ] Model tested successfully in playground
 - [ ] Azure Key Vault created with RBAC authorization
 - [ ] Key Vault Administrator role assigned to yourself
