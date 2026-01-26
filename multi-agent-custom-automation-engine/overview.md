@@ -1,69 +1,94 @@
-# Visual Assistant with Generative AI (GenAI)
+# Multi-Agent Custom Automation Engine
 
-Welcome to the Visual Assistant Hack in a Day! Today, you’ll explore how AI can transform quality inspection by building an intelligent assistant that detects surface defects from manufacturing images and generates natural-language inspection commentary. Through this hands-on lab, you will create a Visual Inspection Assistant capable of identifying manufacturing defects, classifying severity, and producing engineer-ready insights, powered by Azure AI Custom Vision, Azure AI Foundry, and GPT-4.1-Mini.
+## Overview
+
+Welcome to the **Multi-Agent Custom Automation Engine – Hack in a Day**.
+In this hands-on lab, you will design and build an **AI-driven automation engine** where multiple specialized agents collaborate to execute complex enterprise workflows autonomously.
+
+Modern enterprises rely on multi-step processes across HR, finance, marketing, and operations. These workflows often involve manual coordination, email handoffs, spreadsheets, and disconnected tools—leading to delays, inconsistent outcomes, and limited auditability. Traditional automation systems struggle with contextual decision-making and dynamic task routing.
+
+This lab demonstrates how **AI agents**, powered by large language models and orchestrated through a central control layer, can collaborate intelligently, share context, validate outcomes, and produce reliable, traceable automation results.
 
 ## Scenario
 
-A manufacturing company is receiving thousands of product images every week from its production line. Quality engineers manually inspect images for surface defects such as crazing, patches, and scratches, but high workload and fatigue cause delays and oversight. To improve efficiency and accuracy, the company decides to build a Visual Assistant that can analyze images, detect defects using Custom Vision, and generate inspection commentary using a generative AI model. This allows engineers to review defects instantly, make faster decisions, and maintain consistent product quality across every batch.
+Contoso Enterprises operates across multiple departments and manages workflows such as employee onboarding, compliance reporting, internal communications, and operational updates. These workflows require extracting information, validating data, drafting communications, and producing summaries—often across different systems and teams.
+
+Manual execution of these steps introduces delays and errors, while rule-based automation tools lack the flexibility to adapt to changing inputs and context.
+
+To modernize its operations, Contoso decides to build a **Multi-Agent Automation Engine** where:
+
+* Each AI agent specializes in a specific task
+* Agents collaborate using shared context and memory
+* A central orchestrator coordinates execution and decision-making
+* Workflow state and audit history are persisted for transparency
+
+Your mission is to build this automation engine end-to-end.
 
 ## Introduction
 
-Your mission is to build an AI-powered **Visual Inspection Assistant** that supports quality and production teams by detecting defects and generating human-readable inspection reports. Using Azure AI Custom Vision, Azure AI Foundry, and a Python application, you will design an end-to-end solution that can:
+In this lab, you will build a **Multi-Agent Custom Automation Engine** using AI orchestration patterns commonly adopted in modern enterprise systems. Instead of relying on a single monolithic AI model, you will design **multiple specialized agents**, each responsible for a distinct role:
 
-- Classify surface defects in images using a trained Custom Vision model
-- Predict the defect category with probability-based confidence scoring
-- Generate professional commentary and suggestions using the GPT-4.1-Mini model
-- Display predictions and insights in a user-friendly application interface
+* Extracting structured information
+* Validating data quality and correctness
+* Generating communications
+* Producing summaries and reports
 
-This solution reduces manual inspection time, increases defect detection accuracy, and allows quality engineers to focus on decision-making rather than repetitive visual checks.
+A **central orchestrator** coordinates these agents, routes tasks, manages workflow state, and ensures outputs are traceable and reliable. Shared memory is implemented using a cloud database, enabling agents to collaborate across steps and maintain execution context.
+
+The lab focuses on **core AI orchestration principles**, not infrastructure complexity, ensuring that all participants can complete the solution within the allocated time.
 
 ## Learning Objectives
 
-By participating in this Hack in a Day, you will learn how to:
+By completing this hackathon, you will learn how to:
 
-- Create Azure AI Custom Vision resources for training and prediction
-- Build a Custom Vision project for surface defect detection
-- Upload, tag, and train datasets for supervised learning
-- Publish and test a production-ready surface defect classification model
-- Deploy the GPT-4.1-Mini model in Azure AI Foundry for commentary generation
-- Configure and run the Streamlit-based Visual Assistant using environment variables
+* Design multi-agent AI systems using orchestration patterns
+* Create specialized AI agents for extraction, validation, communication, and reporting
+* Coordinate agents using a central orchestrator
+* Share context and state across agents using a persistent memory layer
+* Execute autonomous, multi-step workflows driven by natural language input
+* Build explainable and auditable AI-driven automation solutions
 
 ## Hack in a Day Format: Challenge-Based
 
-This hands-on lab is structured into six progressive challenges that model the lifecycle of building a real-world AI visual inspection application:
+This lab is structured into **five progressive challenges**, each building on the previous one to model a real-world enterprise automation lifecycle:
 
-- **Challenge 01: Create Azure AI Custom Vision Resources**  
-  Provision Custom Vision training and prediction resources in Azure.
+* **Challenge 01: Environment & AI Foundation Setup**
+  Set up the development environment and configure access to AI services.
 
-- **Challenge 02: Create Custom Vision Project for Surface Defect Detection**  
-  Create a classification project to analyze surface defects.
+* **Challenge 02: Build the First AI Agent (Extraction)**
+  Create a specialized agent that extracts structured data from natural language input.
 
-- **Challenge 03: Upload and Tag Images for Surface Defect Training**  
-  Upload dataset images and tag them for crazing, patches, and scratches.
+* **Challenge 03: Shared Memory with Cosmos DB**
+  Persist workflow state and agent outputs using a shared data store.
 
-- **Challenge 04: Publish and Test the Surface Defect Detection Model**  
-  Train and publish the model, then test predictions with uploaded images.
+* **Challenge 04: Central Orchestrator & Agent Collaboration**
+  Implement the orchestrator that coordinates multiple agents and manages workflow execution.
 
-- **Challenge 05: Deploy Foundry Resource and GPT-4.1-Mini Model**  
-  Set up Azure AI Foundry and deploy GPT-4.1-Mini for inspection commentary.
+* **Challenge 05: End-to-End Execution & Validation**
+  Run the complete multi-agent workflow, validate outputs, and review execution history.
 
-- **Challenge 06: Configure the Application and Run the Visual Inspection Assistant**  
-  Provide environment variables, run the Streamlit app, and validate end-to-end predictions and commentary.
+Each challenge is designed to be **independently verifiable**, ensuring steady progress and clear milestones throughout the hackathon.
 
-Throughout each challenge, you will iteratively design, build, and test your Visual Assistant, from dataset preparation to model deployment and application integration.
+## Challenge Outcome
 
-## Challenge Overview
+By the end of this lab, you will have built:
 
-You will begin by provisioning Custom Vision and creating a surface defect detection project. Next, you will upload and tag image datasets and train a model capable of identifying crazing, patches, and scratches. You will then publish the model and perform live defect predictions. After that, you will deploy the GPT-4.1-Mini model in Azure AI Foundry to generate natural-language inspection reports. Finally, you will configure and run a Streamlit application to test the complete visual inspection workflow, from image upload to AI-generated inspection summary.
+* A fully functional **multi-agent automation engine**
+* Specialized AI agents collaborating intelligently
+* A centralized orchestration layer managing execution flow
+* A shared memory system enabling transparency and auditability
+* A production-style AI automation pattern suitable for enterprise use cases
 
-By the end of this Hack in a Day, you will have a fully functional **Visual Assistant** that can automatically detect surface defects, generate professional commentary, and support faster decision-making on the production line.
+## Final Note
+
+> In production environments, this automation engine can be deployed using container-based platforms or managed app services.
+> For this hackathon, execution is intentionally simplified to focus on **AI orchestration, agent collaboration, and workflow correctness**.
 
 ## Support Contact
 
-The CloudLabs support team is available 24/7, 365 days a year via email and live chat to ensure seamless assistance throughout the lab. Dedicated support channels are available for both learners and instructors.
+The CloudLabs support team is available 24/7 to assist you throughout the lab.
 
-**Learner Support Contacts**  
-- Email: cloudlabs-support@spektrasystems.com  
-- Live Chat: https://cloudlabs.ai/labs-support
+* Email: [cloudlabs-support@spektrasystems.com](mailto:cloudlabs-support@spektrasystems.com)
+* Live Chat: [https://cloudlabs.ai/labs-support](https://cloudlabs.ai/labs-support)
 
-Click **Next** from the bottom-right corner to continue.
+> Click **Next** to begin **Challenge 01: Environment & AI Foundation Setup**.

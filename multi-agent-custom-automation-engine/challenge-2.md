@@ -1,202 +1,232 @@
-## Challenge 2: Build Core Agents Using Microsoft Agent Framework
+# Challenge 02: Build Specialized AI Agents (Using Semantic Kernel)
 
-## Overview
+## Introduction
 
-In this challenge, you will build **multiple specialized AI agents** using the **Microsoft Agent Framework SDK**. Each agent performs a single responsibility and exposes a REST endpoint that can be invoked by an orchestrator in later challenges.
+In this challenge, you will implement your **first set of AI agents** using **Semantic Kernel**.
+Each agent will have **one clear responsibility** and will be implemented as a **self-contained skill**.
+At this stage, agents will run **locally** (not containerized yet).
 
-You will create each agent as a **separate Python file** inside Visual Studio Code. The actual implementation code will be provided separately and added into these files.
+## Challenge Objectives
 
-At the end of this challenge, all agents will run locally and be ready for containerization.
+* Create multiple AI agents using Semantic Kernel
+* Assign one responsibility per agent
+* Implement prompt-based skills for each agent
+* Validate agent outputs independently
+* Ensure agents return structured JSON
 
-## Agent Design Guidelines
+## Steps to Complete
 
-Follow these rules for all agents:
+## Step 1: Create Agent Folder Structure
 
-- Each agent handles **only one responsibility**
-- Agents are **stateless**
-- No agent controls workflow sequencing
-- All agents expose a `POST /process` endpoint
-- All inputs and outputs use JSON
+Inside your existing project, update the structure as follows:
 
-## Agent 1 — Extraction Agent
+  ```
+  multi-agent-engine/
+  │
+  ├── app/
+  │   ├── main.py
+  │   ├── agents/
+  │   │   ├── extraction_agent.py
+  │   │   ├── validation_agent.py
+  │   │   ├── communication_agent.py
+  │   │   └── reporting_agent.py
+  │
+  ├── .env
+  ├── requirements.txt
+  └── README.md
+  ```
 
-### Purpose
-
-The Extraction Agent is responsible for extracting structured information from unstructured text input.
-
-### Example Input
-
-```json
-{
-  "text": "John Doe is joining the company on 1st August as a Software Engineer in Bangalore."
-}
-```
-
-### Example Output
-
-```json
-{
-  "name": "John Doe",
-  "role": "Software Engineer",
-  "start_date": "1st August",
-  "location": "Bangalore"
-}
-```
-
-### Implementation Steps
-
-1. Open **Visual Studio Code**
-2. Inside your project folder, create a new file named:
-
-```
-extraction_agent.py
-```
-
-3. Open the newly created file
-4. Add the provided Extraction Agent code into this file  
-   *(Code will be provided separately)*
-5. Save the file
-
-## Agent 2 — Validation Agent
+## Step 2: Create the Extraction Agent
 
 ### Purpose
 
-The Validation Agent validates structured data using simple business rules and determines whether the data is acceptable for further processing.
+Extract structured data from raw text input.
 
-### Example Input
+### Step 2.1: Create `extraction_agent.py`
 
-```json
-{
-  "name": "John Doe",
-  "role": "Software Engineer",
-  "start_date": "1st August",
-  "location": "Bangalore"
-}
-```
+Paste the following code:
 
-### Example Output (Valid)
+  ```python
+  from semantic_kernel import Kernel
+  from semantic_kernel.functions import KernelArguments
 
-```json
-{
-  "status": "Valid",
-  "message": "All required fields are present"
-}
-```
+  async def run_extraction(kernel: Kernel, input_text: str):
+    prompt = """
+  You are an extraction agent.
 
-### Example Output (Invalid)
+  Extract structured data from the text below.
+  Return ONLY valid JSON.
 
-```json
-{
-  "status": "Invalid",
-  "message": "Start date is missing"
-}
-```
+  Text:
+  {{$inputText}}
+  """
 
-### Implementation Steps
+    arguments = KernelArguments(
+        inputText=input_text
+    )
 
-1. In **Visual Studio Code**, create a new file named:
+    result = await kernel.invoke_prompt(
+        prompt,
+        arguments=arguments
+    )
 
-```
-validation_agent.py
-```
+    return result
 
-2. Open the file
-3. Paste the provided Validation Agent code into this file  
-   *(Code will be provided separately)*
-4. Save the file
+  ```
 
-## Agent 3 — Communication Agent
+## Step 3: Create the Validation Agent
 
 ### Purpose
 
-The Communication Agent generates human-readable messages such as emails or notifications based on structured input data.
+Validate extracted data for completeness and correctness.
 
-### Example Input
+### Step 3.1: Create `validation_agent.py`
 
-```json
-{
-  "name": "John Doe",
-  "role": "Software Engineer",
-  "start_date": "1st August"
-}
-```
+  ```python
+  from semantic_kernel import Kernel
 
-### Example Output
+  async def run_validation(kernel: Kernel, extracted_json: str):
+      prompt = """
+      You are a validation agent.
 
-```json
-{
-  "message": "Welcome John Doe! We are excited to have you join as a Software Engineer starting on 1st August."
-}
-```
+      Validate the extracted data.
+      Check for missing or inconsistent fields.
+      Return valid JSON only.
 
-### Implementation Steps
+      INPUT:
+      {{input}}
+      """
 
-1. In **Visual Studio Code**, create a new file named:
+      result = await kernel.invoke_prompt(
+          prompt,
+          input=extracted_json
+      )
 
-```
-communication_agent.py
-```
+      return result
+  ```
 
-2. Open the file
-3. Paste the provided Communication Agent code into this file  
-   *(Code will be provided separately)*
-4. Save the file
-
-## Agent 4 — Reporting Agent
+## Step 4: Create the Communication Agent
 
 ### Purpose
 
-The Reporting Agent generates a concise summary of the completed workflow.
+Generate email or notification content based on validated data.
 
-### Example Input
+### Step 4.1: Create `communication_agent.py`
 
-```json
-{
-  "name": "John Doe",
-  "role": "Software Engineer",
-  "status": "Validated"
-}
-```
+  ```python
+  from semantic_kernel import Kernel
 
-### Example Output
+  async def run_communication(kernel: Kernel, validated_json: str):
+      prompt = """
+      You are a communication agent.
 
-```json
-{
-  "summary": "John Doe has been successfully onboarded as a Software Engineer."
-}
-```
+      Draft a professional email message based on the validated data.
+      Return valid JSON only with subject and body.
 
-### Implementation Steps
+      INPUT:
+      {{input}}
+      """
 
-1. In **Visual Studio Code**, create a new file named:
+      result = await kernel.invoke_prompt(
+          prompt,
+          input=validated_json
+      )
 
-```
-reporting_agent.py
-```
+      return result
+  ```
 
-2. Open the file
-3. Paste the provided Reporting Agent code into this file  
-   *(Code will be provided separately)*
-4. Save the file
+## Step 5: Create the Reporting Agent
 
-## Validation Checklist
+### Purpose
 
-Ensure the following before proceeding:
+Generate a human-readable summary of the workflow.
 
-- All four agent files are created
-- Provided code is added to each file
-- Files are saved successfully
-- No orchestration logic is added yet
+### Step 5.1: Create `reporting_agent.py`
 
-## Deliverables
+  ```python
+  from semantic_kernel import Kernel
 
-By the end of this challenge, you should have:
+  async def run_reporting(kernel: Kernel, workflow_data: str):
+      prompt = """
+      You are a reporting agent.
 
-- Four agent source files created
-- Clear separation of responsibilities across agents
-- Agents ready to be executed locally
-- Agents prepared for containerization in the next challenge
+      Summarize the workflow outcome in a concise manner.
+      Return valid JSON only.
 
----
+      INPUT:
+      {{input}}
+      """
 
-### Proceed to Challenge 3 to containerize and deploy the agents using Azure Container Apps.
+      result = await kernel.invoke_prompt(
+          prompt,
+          input=workflow_data
+      )
+
+      return result
+  ```
+
+## Step 6: Test Agents Individually
+
+Update `app/main.py` temporarily to test **only the Extraction Agent**.
+
+  ```python
+  import os
+  import asyncio
+  from dotenv import load_dotenv
+  from semantic_kernel import Kernel
+  from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
+  from agents.extraction_agent import run_extraction
+
+  load_dotenv()
+
+  async def main():
+      kernel = Kernel()
+
+      kernel.add_service(
+          AzureChatCompletion(
+              service_id="chat",
+              deployment_name=os.environ["AZURE_DEPLOYMENT_NAME"],
+              endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+              api_key=os.environ["MICROSOFT_FOUNDRY_API_KEY"]
+          )
+      )
+
+      sample_input = "Employee Jane Doe joins Engineering on Feb 1, 2026."
+
+      result = await run_extraction(kernel, sample_input)
+      print(result)
+
+  if __name__ == "__main__":
+      asyncio.run(main())
+  ```
+
+- Run:
+
+  ```powershell
+  py app/main.py
+  ```
+
+## Step 7: Verify Agent Output
+
+Expected output (example):
+
+  ```json
+  {
+    "employeeName": "Jane Doe",
+    "department": "Engineering",
+    "startDate": "2026-02-01"
+  }
+  ```
+
+Minor variations are acceptable.
+
+## Completion Criteria
+
+You have successfully completed Challenge 02:
+
+* All four agents are created
+* Each agent has one clear responsibility
+* Agents return structured JSON
+* At least one agent runs successfully
+
+Now, click **Next** to continue to **Challenge 03**.
