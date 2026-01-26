@@ -1,123 +1,128 @@
-## Challenge 1: Understand Multi-Agent Patterns & Architecture
+# Challenge 01: Environment Setup & Agent Foundations
 
-## Overview
+## Introduction
 
-In this challenge, participants are introduced to **multi-agent systems** and understand why single-agent solutions are insufficient for complex enterprise workflows. You will explore how **specialized AI agents** collaborate, how responsibilities are separated, and how a central **orchestrator** coordinates execution.
+In this challenge, you will prepare the **core infrastructure** required to build a multi-agent automation engine. You will provision Azure services, set up the development environment, and define the responsibilities of each AI agent. This foundation will be used throughout the hackathon to enable agent collaboration and orchestration.
 
-This challenge is **conceptual and architectural**. No coding is required yet. By the end of this challenge, you will clearly understand **what you are building**, **why multiple agents are required**, and **how they interact** in a production-ready system.
+## Challenge Objectives
 
-## Business Context
+* Create the Azure resources required for a multi-agent system
+* Set up Azure OpenAI for agent intelligence
+* Create shared state storage using Azure Cosmos DB
+* Create Azure Container Registry (ACR) for agent containers
+* Initialize a Semantic Kernel project
+* Define agent roles and responsibilities
 
-Enterprises rarely solve problems with a single step. Real-world workflows such as HR onboarding, finance reporting, or marketing automation involve:
+## Steps to Complete
 
-- Data extraction
-- Validation and rule checks
-- Decision-making
-- Communication and reporting
+### Step 1: Create a Resource Group
 
-A single AI model handling everything becomes:
-- Hard to maintain
-- Difficult to validate
-- Risky to scale
-- Non-transparent for audits
+1. In the **Azure Portal**, search for **Resource groups**.
+2. Click **Create**.
+3. Provide:
 
-Multi-agent architectures solve this by assigning **clear responsibilities** to **specialized agents** that collaborate intelligently.
+   * **Subscription:** Use the available subscription
+   * **Resource group name:** `agent-hack-rg-<yourname>`
+   * **Region:** Choose a region that supports Azure OpenAI
+4. Click **Review + Create** → **Create**.
 
-## Overview
+### Step 2: Create Azure OpenAI Resource
 
-In this challenge, participants are introduced to the **core concepts behind AI agents and multi-agent systems**. Before building any automation, it is important to understand **what an agent is**, **why multiple agents are needed**, and **how Microsoft Agent Framework helps structure these systems** in a reliable and scalable way.
+1. In the **Azure Portal**, search for **Azure OpenAI** and click **Create**.
+2. Under **Basics**, provide:
 
-This challenge is **read-only and conceptual**. No configuration or coding is required.
+   * **Subscription:** Use the available subscription
+   * **Resource Group:** `agent-hack-rg-<yourname>`
+   * **Region:** Supported Azure OpenAI region
+   * **Name:** `agent-openai-<unique>`
+   * **Pricing Tier:** Standard
+3. Click **Review + Create** → **Create**.
+4. After deployment succeeds, open the **Azure OpenAI** resource.
 
+### Step 3: Deploy the Model
 
-## What Is an AI Agent?
+1. In the Azure OpenAI resource, click **Go to Azure OpenAI Studio**.
+2. Navigate to **Deployments** → **Create deployment**.
+3. Provide:
 
-An **AI agent** is a software component that:
+   * **Model:** `gpt-4o-mini`
+   * **Deployment name:** `agent-gpt-4o-mini`
+   * **Version:** Latest
+4. Click **Create** and wait for deployment.
 
-- Receives an input or goal  
-- Uses an AI model to reason or decide  
-- Performs a specific task  
-- Produces an output  
+### Step 4: Create Azure Cosmos DB (Shared Agent Memory)
 
-Unlike a simple script or function, an agent can:
-- Interpret natural language
-- Make decisions based on context
-- Call tools or APIs when needed
-- Return structured results
+1. In the **Azure Portal**, search for **Azure Cosmos DB** and click **Create**.
+2. Select **Azure Cosmos DB for NoSQL**.
+3. Under **Basics**, provide:
 
-In enterprise systems, agents are designed to be **focused and specialized**, not general-purpose.
+   * **Subscription:** Use the available subscription
+   * **Resource Group:** `agent-hack-rg-<yourname>`
+   * **Account Name:** `agent-cosmos-<unique>`
+   * **Location:** Same region as other resources
+   * **Capacity mode:** Provisioned throughput
+4. Click **Review + Create** → **Create**.
 
-## Why Single-Agent Systems Are Not Enough
+### Step 5: Create Database and Container
 
-A single AI agent handling an entire workflow quickly becomes:
+1. Open the Cosmos DB account.
+2. Go to **Data Explorer**.
+3. Click **New Database**:
 
-- Difficult to maintain
-- Hard to validate and debug
-- Risky when business rules change
-- Non-transparent for audits
+   * **Database ID:** `agent-memory-db`
+4. Click **New Container**:
 
-Real enterprise workflows involve **multiple steps**, such as:
-- Extracting information
-- Validating rules
-- Communicating results
-- Generating reports
+   * **Container ID:** `agent-state`
+   * **Partition key:** `/workflowId`
+5. Click **OK**.
 
-Trying to handle all of this in one agent leads to **complex prompts** and unreliable outcomes.
+### Step 6: Create Azure Container Registry (ACR)
 
-## What Is a Multi-Agent System?
+1. In the **Azure Portal**, search for **Container Registries** and click **Create**.
+2. Under **Basics**, provide:
 
-A **multi-agent system** divides a complex workflow into **multiple specialized agents**, where each agent:
+   * **Subscription:** Use the available subscription
+   * **Resource Group:** `agent-hack-rg-<yourname>`
+   * **Registry name:** `agentacr<unique>`
+   * **Location:** Same region
+   * **SKU:** Basic
+3. Click **Review + Create** → **Create**.
 
-- Has a clear responsibility
-- Solves one part of the problem
-- Collaborates with other agents
+### Step 7: Initialize Local Project (Agent Codebase)
 
-For example:
-- One agent extracts data
-- Another validates it
-- Another generates communication
-- Another produces a summary
+1. Create a new local project folder.
+2. Initialize a Python or Node.js project.
+3. Install **Semantic Kernel**.
+4. Verify you can run a simple Semantic Kernel script.
 
-This approach improves:
-- Reliability
-- Transparency
-- Reusability
-- Maintainability
+*(No agent logic yet — just setup)*
 
-## Role of the Orchestrator
+### Step 8: Define Agent Roles (Conceptual)
 
-In a multi-agent system, an **orchestrator** controls the flow:
+Document the following agent roles (no code required yet):
 
-- Decides which agent runs first
-- Passes outputs between agents
-- Handles validation failures
-- Ensures the workflow completes correctly
+* **Extraction Agent**
+  Extracts structured data from raw input.
 
-Agents do **not** decide the workflow themselves.  
-The orchestrator ensures consistency and correctness.
+* **Validation Agent**
+  Validates extracted data for correctness and completeness.
 
-## How Microsoft Agent Framework Helps
+* **Communication Agent**
+  Drafts emails or messages based on processed data.
 
-Microsoft Agent Framework provides a **structured foundation** for building agent-based systems:
+* **Reporting Agent**
+  Generates summaries or reports.
 
-- Defines agents with clear boundaries
-- Separates reasoning from execution
-- Supports tools, skills, and planning
-- Makes agent behavior predictable and testable
+* **Orchestrator Agent**
+  Coordinates task execution across agents.
 
-Instead of writing ad-hoc prompt logic, the framework helps teams:
-- Build agents in a standardized way
-- Scale from prototypes to production
-- Maintain clarity across multiple agents
+## Completion Criteria
 
-This framework is especially useful for **enterprise-grade automation** where structure and control matter.
+You have successfully completed Challenge 01 if:
 
-## Key Takeaways
-
-- An agent is a goal-driven AI component that performs a specific task  
-- Multi-agent systems break complex workflows into manageable parts  
-- Specialized agents are more reliable than one large agent  
-- The orchestrator controls execution and decision flow  
-- Microsoft Agent Framework provides structure for building and managing agents  
-
-### Proceed to Challenge 2 !
+* All Azure resources are created
+* Azure OpenAI model deployment is ready
+* Cosmos DB database and container exist
+* ACR is created
+* Semantic Kernel project is initialized
+* Agent roles are clearly defined
