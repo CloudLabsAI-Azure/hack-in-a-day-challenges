@@ -61,6 +61,14 @@ The application allows sales teams to query account intelligence conversationall
 
 1. Review the generated account insights.
 
+<validation step="1150cf48-cc24-45fd-81e3-263abb8126cc" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. When it asks for AppURL, please provide the localhost url where your webapp is running.
+> - If succeeded, you have successfully completed the challenges!
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ## Success Criteria
 
 - Streamlit app launches successfully  
