@@ -1,22 +1,22 @@
 # Secure AI Chatbot - Testing App
 
-## 🔒 Security Features
+## Security Features
 - **No API keys stored** - Uses Azure Managed Identity
 - **Passwordless authentication** - Entra ID tokens only
 - **Secrets in Key Vault** - No hardcoded configuration
 - **Private network** - Connects via VNet (once private endpoints configured)
 
-## 📋 Prerequisites
+## Prerequisites
 1. VM with managed identity enabled
 2. Managed identity has these roles:
-   - **Cognitive Services OpenAI User** (on OpenAI resource)
-   - **Key Vault Secrets User** (on Key Vault)
+ - **Cognitive Services OpenAI User** (on OpenAI resource)
+ - **Key Vault Secrets User** (on Key Vault)
 3. Key Vault contains:
-   - `OpenAIEndpoint`
-   - `OpenAIDeployment`
-   - `OpenAIApiVersion`
+ - `OpenAIEndpoint`
+ - `OpenAIDeployment`
+ - `OpenAIApiVersion`
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Install dependencies
 ```bash
@@ -26,7 +26,7 @@ pip install -r requirements.txt
 ### 2. Update Key Vault name
 Edit `secure-chatbot.py` line 20:
 ```python
-kv_name = "kv-secureai-2036950"  # Your Key Vault name
+kv_name = "kv-secureai-2036950" # Your Key Vault name
 ```
 
 ### 3. Run the chatbot
@@ -43,10 +43,10 @@ You: Tell me a fun fact about AI
 AI: ...
 
 You: exit
-👋 Goodbye!
+ Goodbye!
 ```
 
-## 🧪 Testing Commands
+## Testing Commands
 
 Test from Cloud Shell (if you need to verify):
 ```powershell
@@ -56,16 +56,16 @@ $openaiName = "openai-secureai-2036950"
 
 # Check managed identity
 az vm identity show `
-  --resource-group "challenge-rg-2036950" `
-  --name "labvm-2036950" `
-  --query principalId -o tsv
+ --resource-group "challenge-rg-2036950" `
+ --name "labvm-2036950" `
+ --query principalId -o tsv
 
 # Check role assignments
 $identityId = "74383812-fd6a-44e6-8f4b-69f95122e16b"
 az role assignment list --assignee $identityId --output table
 ```
 
-## 🛠️ Troubleshooting
+## ️ Troubleshooting
 
 ### Error: "DefaultAzureCredential failed to retrieve a token"
 - Make sure you're running on the VM with managed identity
@@ -84,7 +84,7 @@ az role assignment list --assignee $identityId --output table
 - Verify deployment name matches Key Vault secret "OpenAIDeployment"
 - Check deployment exists: `az cognitiveservices account deployment list`
 
-## 📝 Notes
+## Notes
 - This app uses **managed identity only** - no API keys!
 - All configuration comes from **Key Vault**
 - Conversation history is maintained in memory only

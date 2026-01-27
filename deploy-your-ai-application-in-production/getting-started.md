@@ -13,10 +13,10 @@ Your lab environment is already set up with:
 - **Azure Subscription**: Pre-provisioned with credits
 - **Resource Group**: `challenge-rg-<inject key="DeploymentID"></inject>`
 - **Virtual Machine**: Windows Server with pre-installed tools
-  - Visual Studio Code
-  - Python 3.11
-  - Azure CLI
-  - Git
+ - Visual Studio Code
+ - Python 3.11
+ - Azure CLI
+ - Git
 - **Azure Bastion**: For secure VM access (no public RDP)
 - **Network Access**: Connectivity to deploy Azure resources
 
@@ -38,8 +38,8 @@ All tools are pre-installed on your VM:
 1. Open your browser and navigate to: [https://portal.azure.com](https://portal.azure.com)
 
 2. Sign in with your lab credentials:
-   - **Username**: <inject key="AzureAdUserEmail"></inject>
-   - **Password**: <inject key="AzureAdUserPassword"></inject>
+ - **Username**: <inject key="AzureAdUserEmail"></inject>
+ - **Password**: <inject key="AzureAdUserPassword"></inject>
 
 3. If prompted for MFA, follow the on-screen instructions
 
@@ -50,11 +50,11 @@ All tools are pre-installed on your VM:
 2. Find your resource group: `challenge-rg-<inject key="DeploymentID"></inject>`
 
 3. Click on it to view pre-deployed resources:
-   - Virtual Machine
-   - Virtual Network (for VM)
-   - Network Security Group
-   - Azure Bastion
-   - Storage Account (for VM diagnostics)
+ - Virtual Machine
+ - Virtual Network (for VM)
+ - Network Security Group
+ - Azure Bastion
+ - Storage Account (for VM diagnostics)
 
 ### Step 3: Connect to Your Virtual Machine
 
@@ -67,8 +67,8 @@ You'll use Azure Bastion for secure access (no public IPs!):
 3. Click **Connect** → **Connect via Bastion**
 
 4. Enter credentials:
-   - **Username**: `labuser`
-   - **Password**: <inject key="VMAdminPassword"></inject>
+ - **Username**: `labuser`
+ - **Password**: <inject key="VMAdminPassword"></inject>
 
 5. Click **Connect**
 
@@ -83,8 +83,8 @@ You'll use Azure Bastion for secure access (no public IPs!):
 3. Open VS Code
 
 4. Open a new **PowerShell Terminal** in VS Code:
-   - Press `` Ctrl + ` `` (backtick)
-   - Or click **Terminal** → **New Terminal**
+ - Press `` Ctrl + ` `` (backtick)
+ - Or click **Terminal** → **New Terminal**
 
 ### Step 5: Verify Azure CLI Login
 
@@ -145,7 +145,7 @@ Each challenge follows this pattern:
 
 ## Tips for Success
 
-### Do's ✅
+### Do's
 
 - **Read instructions carefully** before executing commands
 - **Verify each step** before moving to the next
@@ -154,7 +154,7 @@ Each challenge follows this pattern:
 - **Ask for help** if stuck - that's what hackathons are for!
 - **Take screenshots** of your successful deployments
 
-### Don'ts ❌
+### Don'ts
 
 - **Don't skip challenges** - they build on each other
 - **Don't hardcode values** - use inject keys for dynamic values
@@ -228,13 +228,13 @@ Keep these links handy:
 
 Once you've completed all the steps above and verified:
 
-- ✅ You can access the Azure Portal
-- ✅ You can connect to the VM via Bastion
-- ✅ VS Code is open with a terminal
-- ✅ Azure CLI login is successful
-- ✅ Python 3.11 is verified
+- You can access the Azure Portal
+- You can connect to the VM via Bastion
+- VS Code is open with a terminal
+- Azure CLI login is successful
+- Python 3.11 is verified
 
-**You're ready to begin Challenge 1!** 🚀
+**You're ready to begin Challenge 1!**
 
 Head to **challenge-1.md** to deploy your secure AI infrastructure.
 

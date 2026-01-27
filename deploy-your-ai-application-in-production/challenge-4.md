@@ -32,24 +32,24 @@ By the end, you'll have a fully operational, secure OpenAI service ready for you
 
 ```powershell
 $openaiName = az cognitiveservices account list `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --query "[?kind=='OpenAI'].name" -o tsv
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --query "[?kind=='OpenAI'].name" -o tsv
 
 Write-Host "OpenAI Resource: $openaiName"
 
 # Get endpoint
 $endpoint = az cognitiveservices account show `
-  --name $openaiName `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --query properties.endpoint -o tsv
+ --name $openaiName `
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --query properties.endpoint -o tsv
 
 Write-Host "Endpoint: $endpoint"
 
 # Check public access status
 $publicAccess = az cognitiveservices account show `
-  --name $openaiName `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --query properties.publicNetworkAccess -o tsv
+ --name $openaiName `
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --query properties.publicNetworkAccess -o tsv
 
 Write-Host "Public Network Access: $publicAccess"
 ```
@@ -60,10 +60,10 @@ Should show: `Public Network Access: Disabled`
 
 ```powershell
 az cognitiveservices account show `
-  --name $openaiName `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --query properties.privateEndpointConnections `
-  --output table
+ --name $openaiName `
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --query properties.privateEndpointConnections `
+ --output table
 ```
 
 Status should be: `Approved`
@@ -76,20 +76,20 @@ Before deploying, verify which models are available.
 
 ```powershell
 az cognitiveservices account list-models `
-  --name $openaiName `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --query "[?model.lifecycleStatus=='GenerallyAvailable'].{Name:model.name, Version:model.version, Format:model.format}" `
-  --output table
+ --name $openaiName `
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --query "[?model.lifecycleStatus=='GenerallyAvailable'].{Name:model.name, Version:model.version, Format:model.format}" `
+ --output table
 ```
 
 2. **Check GPT-4 availability**:
 
 ```powershell
 az cognitiveservices account list-models `
-  --name $openaiName `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --query "[?contains(model.name, 'gpt-4')]" `
-  --output table
+ --name $openaiName `
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --query "[?contains(model.name, 'gpt-4')]" `
+ --output table
 ```
 
 If GPT-4 is not available, you'll use GPT-3.5-Turbo (which is fine for this lab!).
@@ -102,28 +102,28 @@ Deploy your primary chat model.
 
 ```powershell
 az cognitiveservices account deployment create `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --name $openaiName `
-  --deployment-name "gpt-4-chat" `
-  --model-name "gpt-4" `
-  --model-version "turbo-2024-04-09" `
-  --model-format "OpenAI" `
-  --sku-name "Standard" `
-  --sku-capacity 20
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --name $openaiName `
+ --deployment-name "gpt-4-chat" `
+ --model-name "gpt-4" `
+ --model-version "turbo-2024-04-09" `
+ --model-format "OpenAI" `
+ --sku-name "Standard" `
+ --sku-capacity 20
 ```
 
 **OR**, if GPT-4 quota is unavailable, deploy GPT-3.5-Turbo:
 
 ```powershell
 az cognitiveservices account deployment create `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --name $openaiName `
-  --deployment-name "gpt-35-turbo-chat" `
-  --model-name "gpt-35-turbo" `
-  --model-version "0613" `
-  --model-format "OpenAI" `
-  --sku-name "Standard" `
-  --sku-capacity 50
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --name $openaiName `
+ --deployment-name "gpt-35-turbo-chat" `
+ --model-name "gpt-35-turbo" `
+ --model-version "0613" `
+ --model-format "OpenAI" `
+ --sku-name "Standard" `
+ --sku-capacity 50
 ```
 
 2. **Wait for deployment to complete** (takes 2-3 minutes):
@@ -137,10 +137,10 @@ Start-Sleep -Seconds 120
 
 ```powershell
 az cognitiveservices account deployment list `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --name $openaiName `
-  --query "[].{Name:name, Model:properties.model.name, Status:properties.provisioningState}" `
-  --output table
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --name $openaiName `
+ --query "[].{Name:name, Model:properties.model.name, Status:properties.provisioningState}" `
+ --output table
 ```
 
 Status should be: `Succeeded`
@@ -153,23 +153,23 @@ Embeddings enable semantic search and RAG patterns.
 
 ```powershell
 az cognitiveservices account deployment create `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --name $openaiName `
-  --deployment-name "text-embedding-ada-002" `
-  --model-name "text-embedding-ada-002" `
-  --model-version "2" `
-  --model-format "OpenAI" `
-  --sku-name "Standard" `
-  --sku-capacity 50
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --name $openaiName `
+ --deployment-name "text-embedding-ada-002" `
+ --model-name "text-embedding-ada-002" `
+ --model-version "2" `
+ --model-format "OpenAI" `
+ --sku-name "Standard" `
+ --sku-capacity 50
 ```
 
 2. **Verify both deployments**:
 
 ```powershell
 az cognitiveservices account deployment list `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --name $openaiName `
-  --output table
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --name $openaiName `
+ --output table
 ```
 
 ### Part 5: Configure Content Filtering
@@ -189,10 +189,10 @@ In the portal:
 - Click **+ Create content filter**
 - Name: `strict-filter`
 - Configure filters:
-  - **Hate**: Severity High - Block
-  - **Sexual**: Severity Medium - Block
-  - **Violence**: Severity High - Block
-  - **Self-harm**: Severity Medium - Block
+ - **Hate**: Severity High - Block
+ - **Sexual**: Severity Medium - Block
+ - **Violence**: Severity High - Block
+ - **Self-harm**: Severity Medium - Block
 - Click **Create**
 
 3. **Apply filter to your deployment**:
@@ -211,8 +211,8 @@ Store deployment names securely for your app to retrieve.
 
 ```powershell
 $kvName = az keyvault list `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --query "[?contains(name, 'kv')].name" -o tsv
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --query "[?contains(name, 'kv')].name" -o tsv
 ```
 
 2. **Store chat model deployment name**:
@@ -220,9 +220,9 @@ $kvName = az keyvault list `
 ```powershell
 # If you deployed GPT-4:
 az keyvault secret set `
-  --vault-name $kvName `
-  --name "ChatModelDeployment" `
-  --value "gpt-4-chat"
+ --vault-name $kvName `
+ --name "ChatModelDeployment" `
+ --value "gpt-4-chat"
 
 # OR if you deployed GPT-3.5-Turbo:
 # az keyvault secret set --vault-name $kvName --name "ChatModelDeployment" --value "gpt-35-turbo-chat"
@@ -232,18 +232,18 @@ az keyvault secret set `
 
 ```powershell
 az keyvault secret set `
-  --vault-name $kvName `
-  --name "EmbeddingModelDeployment" `
-  --value "text-embedding-ada-002"
+ --vault-name $kvName `
+ --name "EmbeddingModelDeployment" `
+ --value "text-embedding-ada-002"
 ```
 
 4. **Store API version** (so app doesn't break when Azure updates):
 
 ```powershell
 az keyvault secret set `
-  --vault-name $kvName `
-  --name "OpenAIApiVersion" `
-  --value "2024-02-15-preview"
+ --vault-name $kvName `
+ --name "OpenAIApiVersion" `
+ --value "2024-02-15-preview"
 ```
 
 ### Part 7: Test Chat Completions with Managed Identity
@@ -264,38 +264,38 @@ from openai import AzureOpenAI
 import json
 
 print("=" * 60)
-print("🔒 SECURE AZURE OPENAI TEST")
+print("SECURE AZURE OPENAI TEST")
 print("=" * 60)
 
 # Initialize managed identity
 credential = DefaultAzureCredential()
-print("\n✅ Managed Identity authenticated")
+print("\nManaged Identity authenticated")
 
 # Connect to Key Vault
 kv_name = "$kvName"
 kv_url = f"https://{kv_name}.vault.azure.net"
 secret_client = SecretClient(vault_url=kv_url, credential=credential)
-print(f"✅ Connected to Key Vault: {kv_name}")
+print(f"Connected to Key Vault: {kv_name}")
 
 # Retrieve configuration from Key Vault (zero hardcoded values!)
 openai_endpoint = secret_client.get_secret("OpenAIEndpoint").value
 chat_deployment = secret_client.get_secret("ChatModelDeployment").value
 api_version = secret_client.get_secret("OpenAIApiVersion").value
 
-print(f"\n📡 OpenAI Endpoint: {openai_endpoint}")
-print(f"🤖 Chat Deployment: {chat_deployment}")
-print(f"📌 API Version: {api_version}")
+print(f"\nOpenAI Endpoint: {openai_endpoint}")
+print(f"Chat Deployment: {chat_deployment}")
+print(f"API Version: {api_version}")
 
 # Create OpenAI client with managed identity
-print("\n🔐 Creating OpenAI client with managed identity token...")
+print("\nCreating OpenAI client with managed identity token...")
 client = AzureOpenAI(
-    azure_endpoint=openai_endpoint,
-    api_version=api_version,
-    azure_ad_token_provider=lambda: credential.get_token(
-        "https://cognitiveservices.azure.com/.default"
-    ).token
+ azure_endpoint=openai_endpoint,
+ api_version=api_version,
+ azure_ad_token_provider=lambda: credential.get_token(
+ "https://cognitiveservices.azure.com/.default"
+ ).token
 )
-print("✅ OpenAI client initialized (no API key used!)")
+print("OpenAI client initialized (no API key used!)")
 
 # Test 1: Simple chat completion
 print("\n" + "=" * 60)
@@ -303,22 +303,22 @@ print("TEST 1: Simple Chat Completion")
 print("=" * 60)
 
 messages = [
-    {"role": "system", "content": "You are a helpful AI assistant specializing in cloud security."},
-    {"role": "user", "content": "Explain the principle of least privilege in 2 sentences."}
+ {"role": "system", "content": "You are a helpful AI assistant specializing in cloud security."},
+ {"role": "user", "content": "Explain the principle of least privilege in 2 sentences."}
 ]
 
-print("\n💬 Sending chat request...")
+print("\n Sending chat request...")
 response = client.chat.completions.create(
-    model=chat_deployment,
-    messages=messages,
-    max_tokens=150,
-    temperature=0.7
+ model=chat_deployment,
+ messages=messages,
+ max_tokens=150,
+ temperature=0.7
 )
 
-print(f"\n🤖 AI Response:")
+print(f"\n AI Response:")
 print(f"{response.choices[0].message.content}\n")
-print(f"📊 Tokens used: {response.usage.total_tokens}")
-print(f"⚡ Finish reason: {response.choices[0].finish_reason}")
+print(f" Tokens used: {response.usage.total_tokens}")
+print(f" Finish reason: {response.choices[0].finish_reason}")
 
 # Test 2: Multi-turn conversation
 print("\n" + "=" * 60)
@@ -326,66 +326,66 @@ print("TEST 2: Multi-Turn Conversation")
 print("=" * 60)
 
 conversation = [
-    {"role": "system", "content": "You are a security expert."},
-    {"role": "user", "content": "What is a managed identity?"},
+ {"role": "system", "content": "You are a security expert."},
+ {"role": "user", "content": "What is a managed identity?"},
 ]
 
-print("\n💬 Turn 1: What is a managed identity?")
+print("\n Turn 1: What is a managed identity?")
 response = client.chat.completions.create(
-    model=chat_deployment,
-    messages=conversation,
-    max_tokens=100
+ model=chat_deployment,
+ messages=conversation,
+ max_tokens=100
 )
 assistant_reply = response.choices[0].message.content
-print(f"🤖 {assistant_reply}")
+print(f" {assistant_reply}")
 
 # Add to conversation
 conversation.append({"role": "assistant", "content": assistant_reply})
 conversation.append({"role": "user", "content": "How is it different from a service principal?"})
 
-print("\n💬 Turn 2: How is it different from a service principal?")
+print("\n Turn 2: How is it different from a service principal?")
 response = client.chat.completions.create(
-    model=chat_deployment,
-    messages=conversation,
-    max_tokens=150
+ model=chat_deployment,
+ messages=conversation,
+ max_tokens=150
 )
-print(f"🤖 {response.choices[0].message.content}")
+print(f" {response.choices[0].message.content}")
 
 # Test 3: Streaming response
 print("\n" + "=" * 60)
 print("TEST 3: Streaming Response")
 print("=" * 60)
 
-print("\n💬 Question: Write a haiku about cloud security")
-print("🤖 Streaming response:\n")
+print("\n Question: Write a haiku about cloud security")
+print(" Streaming response:\n")
 
 stream = client.chat.completions.create(
-    model=chat_deployment,
-    messages=[
-        {"role": "system", "content": "You are a creative poet."},
-        {"role": "user", "content": "Write a haiku about cloud security."}
-    ],
-    max_tokens=100,
-    stream=True
+ model=chat_deployment,
+ messages=[
+ {"role": "system", "content": "You are a creative poet."},
+ {"role": "user", "content": "Write a haiku about cloud security."}
+ ],
+ max_tokens=100,
+ stream=True
 )
 
 for chunk in stream:
-    if chunk.choices[0].delta.content:
-        print(chunk.choices[0].delta.content, end='', flush=True)
+ if chunk.choices[0].delta.content:
+ print(chunk.choices[0].delta.content, end='', flush=True)
 
 print("\n")
 
 # Final summary
 print("\n" + "=" * 60)
-print("✅ ALL TESTS PASSED!")
+print("ALL TESTS PASSED!")
 print("=" * 60)
-print("\n🎉 Azure OpenAI is fully operational with:")
-print("   • Private endpoint connectivity")
-print("   • Managed identity authentication (zero API keys)")
-print("   • Secrets stored in Key Vault")
-print("   • Chat completions working")
-print("   • Streaming responses working")
-print("\n🔒 100% secure, production-ready configuration!")
+print("\nAzure OpenAI is fully operational with:")
+print(" • Private endpoint connectivity")
+print(" • Managed identity authentication (zero API keys)")
+print(" • Secrets stored in Key Vault")
+print(" • Chat completions working")
+print(" • Streaming responses working")
+print("\n100% secure, production-ready configuration!")
 print("=" * 60)
 
 '@ -replace '\$kvName', $kvName | Out-File -FilePath "C:\LabFiles\test_openai_complete.py" -Encoding UTF8
@@ -393,7 +393,7 @@ print("=" * 60)
 python "C:\LabFiles\test_openai_complete.py"
 ```
 
-2. **Expected output** - All tests should pass! 🎉
+2. **Expected output** - All tests should pass! 
 
 ### Part 8: Test Embeddings (If Deployed)
 
@@ -415,31 +415,31 @@ embedding_deployment = secret_client.get_secret("EmbeddingModelDeployment").valu
 api_version = secret_client.get_secret("OpenAIApiVersion").value
 
 client = AzureOpenAI(
-    azure_endpoint=openai_endpoint,
-    api_version=api_version,
-    azure_ad_token_provider=lambda: credential.get_token("https://cognitiveservices.azure.com/.default").token
+ azure_endpoint=openai_endpoint,
+ api_version=api_version,
+ azure_ad_token_provider=lambda: credential.get_token("https://cognitiveservices.azure.com/.default").token
 )
 
-print("🔢 Testing Embeddings...\n")
+print(" Testing Embeddings...\n")
 
 # Generate embeddings
 texts = [
-    "Azure OpenAI provides enterprise-ready AI models",
-    "Managed identity eliminates the need for API keys",
-    "What is the weather today?"
+ "Azure OpenAI provides enterprise-ready AI models",
+ "Managed identity eliminates the need for API keys",
+ "What is the weather today?"
 ]
 
 for text in texts:
-    response = client.embeddings.create(
-        model=embedding_deployment,
-        input=text
-    )
-    embedding = response.data[0].embedding
-    print(f"Text: {text}")
-    print(f"Embedding dimension: {len(embedding)}")
-    print(f"First 5 values: {embedding[:5]}\n")
+ response = client.embeddings.create(
+ model=embedding_deployment,
+ input=text
+ )
+ embedding = response.data[0].embedding
+ print(f"Text: {text}")
+ print(f"Embedding dimension: {len(embedding)}")
+ print(f"First 5 values: {embedding[:5]}\n")
 
-print("✅ Embeddings working! Dimension: 1536 (text-embedding-ada-002)")
+print("Embeddings working! Dimension: 1536 (text-embedding-ada-002)")
 
 '@ -replace '\$kvName', $kvName | Out-File -FilePath "C:\LabFiles\test_embeddings.py" -Encoding UTF8
 
@@ -455,17 +455,17 @@ Check usage and performance.
 2. Click **Metrics** (left menu under Monitoring)
 
 3. **Add metrics to track**:
-   - **Total Calls**: Shows request volume
-   - **Processed Inference Tokens**: Token consumption
-   - **Time to Response**: Latency
+ - **Total Calls**: Shows request volume
+ - **Processed Inference Tokens**: Token consumption
+ - **Time to Response**: Latency
 
 4. **Set time range** to "Last hour" to see your test requests
 
 5. **Create an alert** (optional):
-   - Click **New alert rule**
-   - Condition: `Total Calls > 1000` (or your threshold)
-   - Action: Email notification
-   - This helps monitor unexpected usage spikes
+ - Click **New alert rule**
+ - Condition: `Total Calls > 1000` (or your threshold)
+ - Action: Email notification
+ - This helps monitor unexpected usage spikes
 
 ### Part 10: Document Your OpenAI Configuration
 
@@ -482,13 +482,13 @@ Resource Details:
 
 Model Deployments:
 1. Chat Model: $(try { az keyvault secret show --vault-name $kvName --name "ChatModelDeployment" --query value -o tsv } catch { "gpt-4-chat or gpt-35-turbo-chat" })
-   - Use: Chat completions
-   - Capacity: 20-50 tokens/min
-   
+ - Use: Chat completions
+ - Capacity: 20-50 tokens/min
+ 
 2. Embedding Model: text-embedding-ada-002
-   - Use: Semantic search, RAG
-   - Dimension: 1536
-   - Capacity: 50 tokens/min
+ - Use: Semantic search, RAG
+ - Dimension: 1536
+ - Capacity: 50 tokens/min
 
 Content Filtering:
 - Default: Azure content safety filters
@@ -504,7 +504,7 @@ Key Vault Secrets:
 Authentication:
 - Method: Managed Identity (Entra ID)
 - Role: Cognitive Services OpenAI User
-- API Keys: NEVER USED ✅
+- API Keys: NEVER USED
 
 Network Security:
 - Public Access: DISABLED
@@ -516,7 +516,7 @@ Performance Benchmarks:
 - Token throughput: Monitor in Metrics
 - Success rate: Should be >99%
 
-Ready for Production: ✅
+Ready for Production: YES
 "@ | Out-File -FilePath "C:\LabFiles\openai-config.txt"
 
 notepad C:\LabFiles\openai-config.txt
@@ -565,9 +565,9 @@ Validate your OpenAI setup:
 
 **Solution**:
 - Verify managed identity has "Cognitive Services OpenAI User" role:
-  ```powershell
-  az role assignment list --assignee $identityId --scope $openaiId -o table
-  ```
+ ```powershell
+ az role assignment list --assignee $identityId --scope $openaiId -o table
+ ```
 - Wait 2-3 minutes for RBAC to propagate
 - Ensure you're running the script ON THE VM (managed identity only works there)
 
@@ -577,9 +577,9 @@ Validate your OpenAI setup:
 
 **Solution**:
 - List all deployments to check the exact name:
-  ```powershell
-  az cognitiveservices account deployment list -n $openaiName -g "challenge-rg-<inject key="DeploymentID"></inject>" -o table
-  ```
+ ```powershell
+ az cognitiveservices account deployment list -n $openaiName -g "challenge-rg-<inject key="DeploymentID"></inject>" -o table
+ ```
 - Update the deployment name in Key Vault to match exactly
 
 ---
@@ -588,64 +588,64 @@ Validate your OpenAI setup:
 
 **Solution**:
 - Verify private DNS zone exists and is linked:
-  ```powershell
-  az network private-dns link vnet list -g "challenge-rg-<inject key="DeploymentID"></inject>" --zone-name "privatelink.openai.azure.com" -o table
-  ```
+ ```powershell
+ az network private-dns link vnet list -g "challenge-rg-<inject key="DeploymentID"></inject>" --zone-name "privatelink.openai.azure.com" -o table
+ ```
 - Flush DNS cache:
-  ```powershell
-  Clear-DnsClientCache
-  ```
+ ```powershell
+ Clear-DnsClientCache
+ ```
 - Test resolution:
-  ```powershell
-  nslookup "$openaiName.openai.azure.com"
-  ```
-  Should return 10.0.x.x (private IP)
+ ```powershell
+ nslookup "$openaiName.openai.azure.com"
+ ```
+ Should return 10.0.x.x (private IP)
 
 ## Bonus Challenges
 
 1. **Deploy GPT-4 Vision** (if available):
-   ```powershell
-   az cognitiveservices account deployment create ... --model-name "gpt-4-vision-preview"
-   ```
-   Test with image analysis
+ ```powershell
+ az cognitiveservices account deployment create ... --model-name "gpt-4-vision-preview"
+ ```
+ Test with image analysis
 
 2. **Implement Token Usage Monitoring**:
-   - Create a script that tracks token usage per request
-   - Calculate cost estimates based on pricing
-   - Set up budget alerts
+ - Create a script that tracks token usage per request
+ - Calculate cost estimates based on pricing
+ - Set up budget alerts
 
 3. **Test Content Filtering**:
-   - Try to submit prompts with harmful content
-   - Verify they're blocked by the content filter
-   - Review filter logs
+ - Try to submit prompts with harmful content
+ - Verify they're blocked by the content filter
+ - Review filter logs
 
 4. **Benchmark Different Models**:
-   - Deploy both GPT-4 and GPT-3.5-Turbo
-   - Compare latency, quality, cost
-   - Document trade-offs
+ - Deploy both GPT-4 and GPT-3.5-Turbo
+ - Compare latency, quality, cost
+ - Document trade-offs
 
 ## What You Learned
 
 In this challenge, you:
 
-✅ Deployed GPT models for chat completions  
-✅ Configured embedding models for semantic search  
-✅ Implemented responsible AI content filtering  
-✅ Stored configuration securely in Key Vault  
-✅ Tested completions via private endpoint with managed identity  
-✅ Validated streaming and multi-turn conversations  
-✅ Set up monitoring and alerts  
-✅ Achieved 100% passwordless, private network AI access  
+Deployed GPT models for chat completions 
+Configured embedding models for semantic search 
+Implemented responsible AI content filtering 
+Stored configuration securely in Key Vault 
+Tested completions via private endpoint with managed identity 
+Validated streaming and multi-turn conversations 
+Set up monitoring and alerts 
+Achieved 100% passwordless, private network AI access 
 
 Your Azure OpenAI service is now production-ready and fully secure!
 
 ## Next Steps
 
-Azure OpenAI: ✅ Configured and tested!
+Azure OpenAI: Configured and tested!
 
 In **Challenge 5**, you'll download and configure the pre-built secure chat application that uses everything you've set up: private endpoints, managed identity, Key Vault secrets, and your OpenAI models.
 
-Head to **challenge-5.md** to deploy the app! 💬
+Head to **challenge-5.md** to deploy the app!
 
 ---
 
