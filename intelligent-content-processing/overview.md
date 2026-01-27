@@ -3,7 +3,7 @@
 Welcome to the **Intelligent Content Processing Hack in a Day**!
 In this hands-on lab, you will explore how **AI can transform enterprise document workflows** by building an end-to-end, AI-powered content processing solution. You will work with real-world documents such as invoices, handwritten notes, claims, and forms, and use Azure AI services to extract, understand, validate, and store structured data at scale.
 
-Through this lab, you will design a production-style pipeline powered by **Azure Document Intelligence, Microsoft Foundry (GPT-4o-mini), Azure Blob Storage, Azure Cosmos DB, Azure Queue Storage, Azure App Service**.
+Through this lab, you will design a production-style pipeline powered by **Azure Document Intelligence, Microsoft Foundry (GPT-4o-mini), Azure Blob Storage, Azure Cosmos DB,  and Azure Queue Storage**.
 
 ## Scenario
 
@@ -26,7 +26,6 @@ Using **Azure AI Document Intelligence** and **Microsoft Foundry (GPT-4o-mini)**
 * Assign confidence scores to AI outputs
 * Route low-confidence documents for human validation
 * Store validated results in Azure Cosmos DB
-* Expose results through APIs hosted on Azure App Service
 
 This solution demonstrates how enterprises combine **AI + automation + human oversight** to process documents reliably at scale.
 
@@ -42,7 +41,6 @@ By participating in this Hack in a Day, you will learn how to:
 * Build a Human-in-the-Loop (HITL) workflow using Azure Queue Storage
 * Store structured, validated content in Azure Cosmos DB
 * Secure secrets using Azure Environment Variables
-* Expose document processing results through REST APIs using Azure App Service
 
 ## Hack in a Day Format: Challenge-Based
 
@@ -61,7 +59,7 @@ This lab is structured into **five progressive challenges**, each representing a
   Route low-confidence documents to Azure Queue Storage for human review and approval.
 
 * **Challenge 05: Persist Results & Expose APIs**
-  Store validated data in Azure Cosmos DB and expose results through APIs hosted on Azure App Service.
+  Store validated data in Azure Cosmos DB.
 
 Each challenge builds on the previous one, allowing you to incrementally design, test, and validate your solution.
 
