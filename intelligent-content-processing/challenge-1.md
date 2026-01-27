@@ -42,7 +42,7 @@ Please download and extract the datasets required for this challenge here - [Dat
 
    * **Subscription:** Use the available subscription
    * **Resource Group:** Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   * **Storage account name:** **docstore-<inject key="DeploymentID" enableCopy="false"/>**
+   * **Storage account name:** **docstore<inject key="DeploymentID" enableCopy="false"/>**
    * **Region:** Choose the same region for all resources
    * **Performance:** Standard
    * **Redundancy:** Locally-redundant storage (LRS)
@@ -112,9 +112,9 @@ Please download and extract the datasets required for this challenge here - [Dat
 
 21. Confirm that:
 
-   * Text is extracted from both documents
-   * Tables are detected in the invoice
-   * Handwritten text is partially recognized
+* Text is extracted from both documents
+* Tables are detected in the invoice
+* Handwritten text is partially recognized
 
 <validation step="67fcae6d-e490-4215-8b86-e1cdc1722cc2" />
  

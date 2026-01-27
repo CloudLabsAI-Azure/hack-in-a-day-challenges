@@ -19,7 +19,7 @@ Using **Microsoft Foundry (gpt-4o-mini)**, participants will convert unstructure
 
 ### Create Microsoft Foundry Resource
 
-1. In the **Azure Portal**, search for **Microsoft Foundry** and click **Create**.
+1. In the **Azure Portal**, search for **Microsoft Foundry**, from the left under **Use with Foundry**, select **Foundry** and click **Create**.
 
 2. Under **Basics**, provide:
 
