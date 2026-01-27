@@ -89,7 +89,7 @@ This challenge focuses on **data persistence**, **validation**, and **traceabili
 
 * Final document exists in Cosmos DB
 * Status is `APPROVED`
-* Data can be retrieved via API or Data Explorer
+* Data can be retrieved via Data Explorer
 
 <validation step="b168305b-cf36-4d19-92dc-0496001a08b0" />
  
@@ -104,5 +104,6 @@ You have successfully completed the Challenge 5:
 
 * Cosmos DB stores structured document JSON
 * End-to-end flow completes successfully
+
 
 Congratulations! You've completed all challenges.
