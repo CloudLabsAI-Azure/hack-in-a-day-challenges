@@ -11,8 +11,9 @@ Network isolation alone isn't enough. Even with private endpoints, you need stro
 - Completed Challenge 2 (Network security configured)
 - All services have public access disabled
 - Private endpoints deployed and approved
-- Connected to VM via Azure Bastion
-- VS Code terminal open
+- Connected to **vm-<inject key="DeploymentID"></inject>** via Azure Bastion
+- VS Code open with PowerShell terminal
+- Azure CLI logged in (`az login` completed)
 
 ## Challenge Objectives
 
@@ -58,29 +59,30 @@ Network isolation alone isn't enough. Even with private endpoints, you need stro
 
 ### Part 1: Enable System-Assigned Managed Identity on Your VM
 
-Your VM needs an identity to authenticate to Azure services.
+Your VM needs an identity to authenticate to Azure services. We'll configure this using the Azure Portal.
 
-1. **Get your VM name**:
+1. **In Azure Portal**, navigate to **Resource groups** and select **challenge-rg-<inject key="DeploymentID"></inject>**.
+
+1. Find and click on your Virtual Machine resource: **vm-<inject key="DeploymentID"></inject>**.
+
+1. In the left menu, under **Security**, click **Identity**.
+
+1. Under the **System assigned** tab:
+ - Set **Status** to **On**
+ - Click **Save**
+ - Click **Yes** to confirm
+
+1. Wait for the operation to complete (30 seconds).
+
+1. Once enabled, you'll see an **Object (principal) ID** displayed - this is your managed identity's unique identifier. **Copy this ID** to Notepad for later use.
+
+1. **Verify the identity in VS Code** (optional):
+
+ Open VS Code PowerShell terminal and run:
 
 ```powershell
-$vmName = az vm list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
- --query "[?contains(name, 'vm') || contains(name, 'labvm')].name" -o tsv
+$vmName = "vm-<inject key="DeploymentID"></inject>"
 
-Write-Host "VM Name: $vmName"
-```
-
-2. **Enable system-assigned managed identity**:
-
-```powershell
-az vm identity assign `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
- --name $vmName
-```
-
-Output will show the `principalId` - this is your managed identity's object ID. Save it:
-
-```powershell
 $identityId = az vm identity show `
  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
  --name $vmName `
@@ -89,199 +91,198 @@ $identityId = az vm identity show `
 Write-Host "Managed Identity ID: $identityId"
 ```
 
-3. **Verify in Azure Portal**:
- - Go to your VM resource
- - Click **Identity** in the left menu
- - Under **System assigned**, Status should be **On**
- - Note the **Object (principal) ID** - same as `$identityId`
-
 ### Part 2: Assign RBAC Roles for Azure OpenAI Access
 
-Grant your VM's managed identity permission to use Azure OpenAI.
+Grant your VM's managed identity permission to use Azure OpenAI using the Azure Portal.
 
-1. **Get your Azure AI Foundry/OpenAI resource ID**:
+1. **In Azure Portal**, navigate to your **openai-secureai-<inject key="DeploymentID"></inject>** resource.
 
-```powershell
-$openaiName = az cognitiveservices account list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
- --query "[?contains(name, 'openai')].name" -o tsv
+1. In the left menu, click **Access control (IAM)**.
 
-Write-Host "OpenAI Resource: $openaiName"
+1. Click **+ Add** → **Add role assignment**.
 
-$openaiId = az cognitiveservices account show `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
- --name $openaiName `
- --query id -o tsv
+1. On the **Role** tab:
+ - Search for **Cognitive Services OpenAI User**
+ - Select **Cognitive Services OpenAI User**
+ - Click **Next**
 
-Write-Host "OpenAI Resource ID: $openaiId"
-```
+ > **Note**: This role allows reading models and making inference calls (but not managing the resource).
 
-2. **Assign "Cognitive Services OpenAI User" role**:
+1. On the **Members** tab:
+ - **Assign access to**: Select **Managed identity**
+ - Click **+ Select members**
+ - **Managed identity**: Select **Virtual machine**
+ - Select your VM from the list
+ - Click **Select**
 
-This role allows reading models and making inference calls (but not managing the resource).
+1. Click **Review + assign**.
 
-```powershell
-az role assignment create `
- --assignee $identityId `
- --role "Cognitive Services OpenAI User" `
- --scope $openaiId
-```
+1. Click **Review + assign** again to confirm.
 
-3. **Verify the role assignment**:
-
-```powershell
-az role assignment list `
- --assignee $identityId `
- --scope $openaiId `
- --output table
-```
-
-You should see the role assignment listed.
+ > **Note**: RBAC can take 2-3 minutes to propagate. Wait before testing.
 
 ### Part 3: Configure Key Vault Access for Managed Identity
 
-Key Vault will store connection strings and configuration. Grant access to your managed identity.
+Key Vault will store connection strings and configuration. Grant access to your managed identity using the Azure Portal.
 
-1. **Get Key Vault name**:
+1. **In Azure Portal**, navigate to your **kv-secureai-<inject key="DeploymentID"></inject>** Key Vault.
+
+1. In the left menu, click **Access control (IAM)**.
+
+1. **Assign Key Vault Secrets User role to your VM's managed identity**:
+
+ - Click **+ Add** → **Add role assignment**
+ - On the **Role** tab:
+   - Search for **Key Vault Secrets User**
+   - Select it and click **Next**
+ - On the **Members** tab:
+   - **Assign access to**: Select **Managed identity**
+   - Click **+ Select members**
+   - **Managed identity**: Select **Virtual machine**
+   - Select your VM from the list
+   - Click **Select**
+ - Click **Review + assign** twice
+
+1. **Assign Key Vault Secrets Officer role to yourself** (so you can create secrets):
+
+ - Click **+ Add** → **Add role assignment** again
+ - On the **Role** tab:
+   - Search for **Key Vault Secrets Officer**
+   - Select it and click **Next**
+ - On the **Members** tab:
+   - **Assign access to**: Select **User, group, or service principal**
+   - Click **+ Select members**
+   - Search for your email: **<inject key="AzureAdUserEmail"></inject>**
+   - Select yourself and click **Select**
+ - Click **Review + assign** twice
+
+1. **Wait 2-3 minutes** for RBAC propagation.
+
+ > **Important**: Azure AD RBAC takes time to propagate. Wait before proceeding to the next step.
+
+### Part 4: Store OpenAI Configuration in Key Vault (Using VS Code)
+
+Instead of storing endpoints and keys in files, store them securely in Key Vault. Since Key Vault has public access disabled, we'll temporarily enable it to add secrets from your VM.
+
+> **Note**: Open VS Code on your JumpVM and use the PowerShell terminal. Ensure you're logged in to Azure CLI (`az login`).
+
+1. **Get resource names and enable Key Vault public access temporarily**:
 
 ```powershell
+# Get resource names
 $kvName = az keyvault list `
  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
  --query "[?contains(name, 'kv')].name" -o tsv
 
-Write-Host "Key Vault: $kvName"
-```
-
-2. **Assign "Key Vault Secrets User" role** (modern RBAC approach):
-
-```powershell
-$kvId = az keyvault show `
- --name $kvName `
+$openaiName = az cognitiveservices account list `
  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
- --query id -o tsv
+ --query "[?kind=='OpenAI'].name" -o tsv
 
-az role assignment create `
- --assignee $identityId `
- --role "Key Vault Secrets User" `
- --scope $kvId
-```
+Write-Host "Key Vault: $kvName"
+Write-Host "OpenAI Resource: $openaiName"
 
-3. **Also add yourself as Key Vault Secrets Officer** (so you can create secrets):
-
-```powershell
-$currentUserId = az ad signed-in-user show --query id -o tsv
-
-az role assignment create `
- --assignee $currentUserId `
- --role "Key Vault Secrets Officer" `
- --scope $kvId
-```
-
-4. **Wait 2-3 minutes** for RBAC propagation (Azure AD replication takes time)
-
-```powershell
-Write-Host "Waiting for RBAC to propagate..."
-Start-Sleep -Seconds 120
-Write-Host "RBAC should be ready now!"
-```
-
-### Part 4: Store OpenAI Configuration in Key Vault
-
-Instead of storing endpoints and keys in files, store them securely in Key Vault.
-
-1. **Get OpenAI endpoint**:
-
-```powershell
+# Get OpenAI endpoint
 $openaiEndpoint = az cognitiveservices account show `
  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
  --name $openaiName `
  --query properties.endpoint -o tsv
 
 Write-Host "OpenAI Endpoint: $openaiEndpoint"
-```
 
-2. **Temporarily enable Key Vault public access** (needed to add secrets from Cloud Shell):
+# Verify the endpoint format (should be custom domain)
+if ($openaiEndpoint -notlike "*$openaiName*") {
+    Write-Warning "WARNING: Endpoint should contain custom domain!"
+    Write-Warning "Expected format: https://<resource-name>.openai.azure.com/"
+    Write-Warning "If you see a generic endpoint, go back to Challenge 1 Part 5 and configure custom domain."
+    Write-Warning "Current endpoint: $openaiEndpoint"
+}
 
-> **Important**: You're using Azure Cloud Shell which is outside your VNet. Since you disabled public access in Challenge 2, you need to temporarily enable it to add secrets. In production, your VM would be inside the VNet and wouldn't need this.
-
-```powershell
+# Temporarily enable Key Vault public access
 az keyvault update `
  --name $kvName `
  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
  --public-network-access Enabled
+
+Write-Host "Key Vault public access enabled temporarily"
 ```
 
-3. **Store the endpoint in Key Vault as a secret**:
+2. **Store the OpenAI configuration secrets**:
 
 ```powershell
+# Store OpenAI endpoint
 az keyvault secret set `
  --vault-name $kvName `
  --name "OpenAIEndpoint" `
  --value $openaiEndpoint
-```
 
-4. **Store the deployment name**:
+Write-Host "Stored OpenAI Endpoint"
 
-```powershell
+# Store deployment name
 az keyvault secret set `
  --vault-name $kvName `
  --name "OpenAIDeployment" `
  --value "secure-chat"
-```
 
-5. **Store the resource name** (needed for some SDK operations):
+Write-Host "Stored OpenAI Deployment name"
 
-```powershell
+# Store resource name
 az keyvault secret set `
  --vault-name $kvName `
  --name "OpenAIResourceName" `
  --value $openaiName
+
+Write-Host "Stored OpenAI Resource name"
 ```
 
-6. **Disable public access again** (restore security):
+3. **Disable public access again** (restore security):
 
 ```powershell
 az keyvault update `
  --name $kvName `
  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
  --public-network-access Disabled
+
+Write-Host "Key Vault secured - public access disabled"
 ```
 
 ### Part 5: Configure Storage Account Access for Managed Identity
 
-Grant your VM's managed identity permission to read/write blobs.
+Grant your VM's managed identity permission to read/write blobs using Azure Portal.
 
-1. **Get Storage Account resource ID**:
+1. **In Azure Portal**, navigate to your **stsecureai<inject key="DeploymentID"></inject>** Storage Account.
+
+1. In the left menu, click **Access control (IAM)**.
+
+1. Click **+ Add** → **Add role assignment**.
+
+1. On the **Role** tab:
+ - Search for **Storage Blob Data Contributor**
+ - Select it and click **Next**
+
+1. On the **Members** tab:
+ - **Assign access to**: Select **Managed identity**
+ - Click **+ Select members**
+ - **Managed identity**: Select **Virtual machine**
+ - Select your VM from the list
+ - Click **Select**
+
+1. Click **Review + assign** twice.
+
+1. **Store Storage Account name in Key Vault** (using VS Code PowerShell terminal):
 
 ```powershell
+# Get storage name
 $storageName = az storage account list `
  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
  --query "[?contains(name, 'st')].name" -o tsv
 
 Write-Host "Storage Account: $storageName"
 
-$storageId = az storage account show `
+# Get Key Vault name
+$kvName = az keyvault list `
  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
- --name $storageName `
- --query id -o tsv
+ --query "[?contains(name, 'kv')].name" -o tsv
 
-Write-Host "Storage Account ID: $storageId"
-```
-
-2. **Assign "Storage Blob Data Contributor" role**:
-
-```powershell
-az role assignment create `
- --assignee $identityId `
- --role "Storage Blob Data Contributor" `
- --scope $storageId
-
-Write-Host "Storage Blob Data Contributor role assigned"
-```
-
-3. **Store Storage Account name in Key Vault** (for later use):
-
-```powershell
 # Enable public access temporarily
 az keyvault update `
  --name $kvName `
@@ -294,17 +295,21 @@ az keyvault secret set `
  --name "StorageAccountName" `
  --value $storageName
 
+Write-Host "Stored Storage Account name"
+
 # Disable public access again
 az keyvault update `
  --name $kvName `
  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
  --public-network-access Disabled
+
+Write-Host "Key Vault secured"
 ```
 
-4. **Verify all secrets** are stored:
+1. **Verify all secrets are stored** (optional):
 
 ```powershell
-# Enable public access temporarily
+# Enable public access temporarily to list secrets
 az keyvault update `
  --name $kvName `
  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
@@ -315,6 +320,16 @@ az keyvault secret list --vault-name $kvName --query "[].name" -o table
 
 # Disable public access again
 az keyvault update `
+ --name $kvName `
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --public-network-access Disabled
+```
+
+Expected secrets:
+- OpenAIEndpoint
+- OpenAIDeployment
+- OpenAIResourceName
+- StorageAccountName
  --name $kvName `
  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
  --public-network-access Disabled

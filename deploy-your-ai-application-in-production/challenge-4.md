@@ -13,6 +13,8 @@ By the end, you'll have a fully operational, secure OpenAI service ready for you
 - Managed identity has "Cognitive Services OpenAI User" role
 - Key Vault configured with OpenAI endpoint secret
 - Connected to VM via Azure Bastion
+- VS Code open with PowerShell terminal
+- Azure CLI logged in (`az login` completed)
 
 ## Challenge Objectives
 
@@ -28,7 +30,15 @@ By the end, you'll have a fully operational, secure OpenAI service ready for you
 
 ### Part 1: Review OpenAI Resource Configuration
 
-1. **Get your OpenAI resource details**:
+1. **In Azure Portal**, navigate to your **openai-secureai-<inject key="DeploymentID"></inject>** resource.
+
+1. Verify the resource is deployed:
+ - Note the **Location/Region**
+ - Click **Networking** in the left menu
+ - Verify **Public network access** is restricted or disabled
+ - Check that **Private endpoint connections** show as **Approved**
+
+1. **Optional - Verify using VS Code PowerShell** (to get resource details):
 
 ```powershell
 $openaiName = az cognitiveservices account list `
@@ -54,37 +64,33 @@ $publicAccess = az cognitiveservices account show `
 Write-Host "Public Network Access: $publicAccess"
 ```
 
-Should show: `Public Network Access: Disabled`
-
-2. **View private endpoint connection**:
-
-```powershell
-az cognitiveservices account show `
- --name $openaiName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
- --query properties.privateEndpointConnections `
- --output table
-```
-
-Status should be: `Approved`
+Should show: `Public Network Access: Disabled` or `Enabled` (depending on your Challenge 2 configuration)
 
 ### Part 2: Check Available Models in Your Region
 
-Before deploying, verify which models are available.
+Before deploying, verify which models are available using Azure AI Foundry portal.
 
-1. **List available models**:
+1. **In Azure Portal**, go to your **openai-secureai-<inject key="DeploymentID"></inject>** resource.
+
+1. Click **Go to Azure AI Foundry portal** (or **Go to Foundry portal**).
+
+1. In Azure AI Foundry:
+ - Click **Models + endpoints** in the left navigation
+ - Click **Model catalog** tab
+ - Search for **gpt-4** to see if it's available in your region
+ - Also search for **gpt-35-turbo** as a backup option
+
+1. **Optional - Check via VS Code PowerShell**:
 
 ```powershell
+# List available models
 az cognitiveservices account list-models `
  --name $openaiName `
  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
  --query "[?model.lifecycleStatus=='GenerallyAvailable'].{Name:model.name, Version:model.version, Format:model.format}" `
  --output table
-```
 
-2. **Check GPT-4 availability**:
-
-```powershell
+# Check GPT-4 availability
 az cognitiveservices account list-models `
  --name $openaiName `
  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
@@ -94,83 +100,38 @@ az cognitiveservices account list-models `
 
 If GPT-4 is not available, you'll use GPT-3.5-Turbo (which is fine for this lab!).
 
-### Part 3: Deploy GPT Model for Chat
+### Part 3: Deploy GPT Model for Chat (Using Azure Portal)
 
-Deploy your primary chat model.
+Deploy your primary chat model using Azure AI Foundry portal.
 
-1. **Deploy GPT-4** (if available in your region):
+> **Note**: Model deployment is easier and more intuitive through the Azure Portal for hackathons!
 
-```powershell
-az cognitiveservices account deployment create `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
- --name $openaiName `
- --deployment-name "gpt-4-chat" `
- --model-name "gpt-4" `
- --model-version "turbo-2024-04-09" `
- --model-format "OpenAI" `
- --sku-name "Standard" `
- --sku-capacity 20
-```
+1. **In Azure AI Foundry portal**, click **Models + endpoints** in the left navigation.
 
-**OR**, if GPT-4 quota is unavailable, deploy GPT-3.5-Turbo:
+1. Click **+ Deploy model** → **Deploy base model**.
 
-```powershell
-az cognitiveservices account deployment create `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
- --name $openaiName `
- --deployment-name "gpt-35-turbo-chat" `
- --model-name "gpt-35-turbo" `
- --model-version "0613" `
- --model-format "OpenAI" `
- --sku-name "Standard" `
- --sku-capacity 50
-```
+1. Search for and select **gpt-4.1** (or **gpt-4**) in the model catalog.
 
-2. **Wait for deployment to complete** (takes 2-3 minutes):
+1. Click **Confirm**.
 
-```powershell
-Write-Host "Waiting for model deployment..."
-Start-Sleep -Seconds 120
-```
+1. Configure:
+ - **Deployment name**: **gpt-4-chat**
+ - **Deployment type**: **Global Standard**
+ - **TPM**: **20K**
 
-3. **Verify deployment**:
+1. Click **Deploy** and wait (30-60 seconds).
 
-```powershell
-az cognitiveservices account deployment list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
- --name $openaiName `
- --query "[].{Name:name, Model:properties.model.name, Status:properties.provisioningState}" `
- --output table
-```
+**If GPT-4 unavailable**: Use **gpt-35-turbo-chat** instead (TPM: 50K).
 
-Status should be: `Succeeded`
+### Part 4: Deploy Embedding Model (Using Azure Portal - Optional)
 
-### Part 4: Deploy Embedding Model (Optional but Recommended)
+1. **In Azure AI Foundry**, click **+ Deploy model** → **Deploy base model**.
 
-Embeddings enable semantic search and RAG patterns.
+1. Search for **text-embedding-ada-002** and deploy it:
+ - **Deployment name**: **text-embedding-ada-002**
+ - **TPM**: **50K**
 
-1. **Deploy text-embedding-ada-002**:
-
-```powershell
-az cognitiveservices account deployment create `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
- --name $openaiName `
- --deployment-name "text-embedding-ada-002" `
- --model-name "text-embedding-ada-002" `
- --model-version "2" `
- --model-format "OpenAI" `
- --sku-name "Standard" `
- --sku-capacity 50
-```
-
-2. **Verify both deployments**:
-
-```powershell
-az cognitiveservices account deployment list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
- --name $openaiName `
- --output table
-```
+1. Verify both models are deployed in Models + endpoints list.
 
 ### Part 5: Configure Content Filtering
 

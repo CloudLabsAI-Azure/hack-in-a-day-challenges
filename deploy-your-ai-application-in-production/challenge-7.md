@@ -17,7 +17,8 @@ This challenge is your **production readiness checklist** - covering Security, R
 
 - Completed all previous challenges (1-6)
 - All services deployed and tested
-- Access to Azure Portal and VM via Bastion
+- Access to Azure Portal
+- Access to **vm-<inject key="DeploymentID"></inject>** via Azure Bastion
 
 ## Challenge Objectives
 

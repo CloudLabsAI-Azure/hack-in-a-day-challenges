@@ -6,6 +6,7 @@ Before deploying your secure AI application, you need to create the foundational
 
 You'll provision:
 - Virtual Network with segmented subnets
+- Windows VM for application hosting
 - Azure OpenAI resource with GPT-4 model
 - Azure Key Vault for secrets management
 - Azure Storage Account for data persistence
@@ -15,6 +16,7 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 ## Challenge Objectives
 
 - Create a Virtual Network with three subnets
+- Deploy Windows VM in application subnet
 - Deploy Azure OpenAI resource
 - Deploy GPT-4 model for chat completions
 - Create Azure Key Vault with RBAC authorization
@@ -93,7 +95,232 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
 1. Once complete, click **Go to resource** to verify all three subnets were created.
 
-### Part 3: Create Azure AI Foundry Project
+### Part 3: Create Application Virtual Machine
+
+Now you'll deploy a Windows VM in the application subnet where you'll host the secure chat application.
+
+1. In the **Azure Portal**, click **+ Create a resource**.
+
+1. Search for **Virtual Machine** and select it.
+
+1. Click **Create**.
+
+1. Configure the Virtual Machine:
+
+   **Basics tab**:
+   - **Subscription**: Select your available Azure subscription
+   - **Resource group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
+   - **Virtual machine name**: **vm-<inject key="DeploymentID"></inject>**
+   - **Region**: **<inject key="Region"></inject>**
+   - **Availability options**: **No infrastructure redundancy required**
+   - **Security type**: **Standard**
+   - **Image**: **Windows Server 2022 Datacenter: Azure Edition - x64 Gen2**
+   - **Size**: Click **See all sizes**, search for **Standard_B2s**, select it, and click **Select**
+   
+   > **Note**: We're using Standard_B2s (2 vCPU, 4GB RAM) which is cost-effective for testing while providing adequate performance for this lab.
+   
+   **Administrator account**:
+   - **Username**: **azureuser**
+   - **Password**: **SecureAI@2026**
+   - **Confirm password**: **SecureAI@2026**
+   
+   **Inbound port rules**:
+   - **Public inbound ports**: **None** (we'll use Azure Bastion)
+   
+1. Click **Next: Disks**.
+
+   **Disks tab**:
+   - **OS disk type**: **Standard SSD (locally-redundant storage)**
+   - Leave everything else as default
+   - Click **Next: Networking**
+
+1. **Networking tab**:
+   - **Virtual network**: Select **vnet-secureai-<inject key="DeploymentID"></inject>**
+   - **Subnet**: Select **snet-application (10.0.3.0/24)**
+   - **Public IP**: Select **None**
+   - **NIC network security group**: **Basic**
+   - **Public inbound ports**: **None**
+   - Click **Next: Management**
+
+1. **Management tab**:
+   - **System assigned managed identity**: **Off** (we'll enable this in Challenge 3)
+   - **Enable auto-shutdown**: **Off**
+   - Leave everything else as default
+   - Click **Next: Monitoring**
+
+1. **Monitoring tab**:
+   - **Boot diagnostics**: **Enable with managed storage account (recommended)**
+   - Leave everything else as default
+   - Click **Next: Advanced**
+
+1. **Advanced tab**:
+   - Leave all settings as default
+   - **Do not add Custom Script Extension** (we'll install software manually after connecting via Bastion)
+   - Click **Review + create**
+
+1. Click **Review + create**.
+
+1. Review the configuration and click **Create**.
+
+1. Wait for deployment (**3-5 minutes**).
+
+1. Once complete, click **Go to resource**.
+
+### Part 4: Create Azure Bastion Subnet
+
+Before we can connect to the VM, we need to create a dedicated subnet for Azure Bastion.
+
+1. In the **Azure Portal**, navigate to your **vnet-secureai-<inject key="DeploymentID"></inject>** virtual network.
+
+1. In the left navigation, click **Subnets**.
+
+1. Click **+ Subnet**.
+
+1. Configure the Bastion subnet:
+   - **Name**: **AzureBastionSubnet** (must be exactly this name)
+   - **Subnet purpose**: **Azure Bastion**
+   - **Starting address**: **10.0.4.0**
+   - **Subnet size**: **/26 (64 addresses)**
+   
+   > **Important**: Azure Bastion requires a dedicated subnet named exactly "AzureBastionSubnet" with at least /26 CIDR.
+
+1. Click **Save**.
+
+1. Wait for the subnet creation to complete (30 seconds).
+
+### Part 5: Configure Custom Domain for Azure OpenAI (Critical for Private Endpoints)
+
+Before creating private endpoints in the next challenge, you must configure a custom subdomain for your Azure OpenAI resource. This is a requirement for token-based authentication with managed identities.
+
+> **Why this is required**: When using private endpoints with managed identity authentication, Azure OpenAI needs a custom subdomain to properly route token-based authentication requests. Without this, you'll get errors like "Please provide a custom subdomain for token authentication".
+
+**Using VS Code on your local machine**:
+
+1. **Open VS Code** on your local machine.
+
+1. **Open a PowerShell terminal** (Ctrl + `).
+
+1. **Login to Azure**:
+   ```powershell
+   az login
+   ```
+
+1. **Set the correct subscription**:
+   ```powershell
+   az account set --subscription bd7d97d5-b639-4718-9bb5-bfd7675e214f
+   ```
+
+1. **Configure custom domain** for your OpenAI resource:
+   ```powershell
+   az cognitiveservices account update `
+     --name openai-secureai-<inject key="DeploymentID"></inject> `
+     --resource-group challenge-rg-<inject key="DeploymentID"></inject> `
+     --custom-domain openai-secureai-<inject key="DeploymentID"></inject>
+   ```
+
+1. **Verify the custom domain** was set:
+   ```powershell
+   az cognitiveservices account show `
+     --name openai-secureai-<inject key="DeploymentID"></inject> `
+     --resource-group challenge-rg-<inject key="DeploymentID"></inject> `
+     --query "properties.endpoint" -o tsv
+   ```
+   
+   Should return:
+   ```
+   https://openai-secureai-<inject key="DeploymentID"></inject>.openai.azure.com/
+   ```
+
+> **Important**: Complete this step before proceeding to Challenge 2. Without the custom domain, private endpoint creation will succeed but authentication will fail.
+
+### Part 6: Test VM Connection via Bastion
+
+Now let's install Azure Bastion and connect to the VM.
+
+1. In the **Azure Portal**, navigate to your **vm-<inject key="DeploymentID"></inject>** Virtual Machine resource.
+
+1. In the left navigation, click **Connect** → **Connect via Bastion**.
+
+1. On the Bastion connection page, click **Deploy Bastion**.
+
+1. Configure Bastion:
+   - **Name**: **bastion-<inject key="DeploymentID"></inject>**
+   - **Tier**: **Developer** (cost-effective for testing)
+   - **Virtual network**: **vnet-secureai-<inject key="DeploymentID"></inject>** (should be pre-selected)
+   - **Subnet**: **AzureBastionSubnet (10.0.4.0/26)** (should be pre-selected)
+   - **Public IP address**: Click **Create new**
+     - **Name**: **bastion-ip-<inject key="DeploymentID"></inject>**
+     - Click **OK**
+
+1. Click **Deploy Bastion**.
+
+1. Wait for deployment (**8-12 minutes**). This is a good time for a coffee break!
+
+1. Once complete, the Bastion connection dialog will appear automatically.
+
+1. Configure Bastion connection:
+   - **Username**: **azureuser**
+   - **Authentication Type**: **Password**
+   - **Password**: **SecureAI@2026**
+
+1. Click **Connect**.
+
+1. A new browser tab will open with a remote desktop session.
+
+1. Wait for Windows to finish setup (may take 1-2 minutes on first connection).
+
+### Part 7: Install Required Software on VM
+
+Now that you're connected to the VM, let's install the required software manually.
+
+1. Once connected to **vm-<inject key="DeploymentID"></inject>**, open **PowerShell as Administrator** (search in Start menu, right-click, "Run as administrator").
+
+1. **Install Chocolatey** (package manager for Windows):
+   ```powershell
+   Set-ExecutionPolicy Bypass -Scope Process -Force
+   [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+   iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+   ```
+
+1. **Close and reopen PowerShell as Administrator** to refresh environment variables.
+
+1. **Install Python 3.11**:
+   ```powershell
+   choco install python311 -y
+   ```
+
+1. **Install VS Code**:
+   ```powershell
+   choco install vscode -y
+   ```
+
+1. **Install Azure CLI**:
+   ```powershell
+   choco install azure-cli -y
+   ```
+
+1. **Install Git** (optional but useful):
+   ```powershell
+   choco install git -y
+   ```
+
+1. **Close and reopen PowerShell** to refresh environment variables.
+
+1. **Verify installations**:
+   ```powershell
+   python --version    # Should show: Python 3.11.x
+   code --version      # Should show VS Code version
+   az --version        # Should show Azure CLI version
+   ```
+
+1. **Create working directory**:
+   ```powershell
+   New-Item -Path "C:\LabFiles\SecureAI" -ItemType Directory -Force
+   ```
+
+> **Note**: Keep this Bastion session open - you'll use it throughout the hackathon. Username: **azureuser**, Password: **SecureAI@2026**
+
+### Part 8: Create Azure AI Foundry Project
 
 1. In the **Azure Portal**, click **+ Create a resource**.
 
@@ -120,7 +347,7 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
 1. Once complete, click **Go to resource**.
 
-### Part 4: Deploy GPT-4 Model in Azure AI Foundry
+### Part 9: Deploy GPT-4 Model in Azure AI Foundry
 
 1. In your **openai-secureai-<inject key="DeploymentID"></inject>** resource.
 
@@ -141,13 +368,13 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
  - **Deployment type**: **Global Standard**
  - **Tokens per Minute Rate Limit (thousands)**: **40K**
 
- > **Important**: Do not increase TPM beyond 20K to avoid quota issues.
+ > **Important**: Do not increase TPM beyond 40K to avoid quota issues. We're using 40K to allow sufficient capacity for testing.
 
 1. Click **Deploy**.
 
 1. Wait for deployment to complete (30-60 seconds).
 
-### Part 5: Test the Model Deployment
+### Part 10: Test the Model Deployment
 
 1. In the **Models + Endpoints** page, find your **secure-chat** deployment.
 
@@ -164,11 +391,15 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
 1. Select the **Python** tab.
 
-1. Copy the endpoint URL - you'll need this later.
+1. **Note the endpoint format** - it should look like:
+   ```
+   https://openai-secureai-<DID>.openai.azure.com/
+   ```
+   This is the custom domain you configured earlier. You'll store this in Key Vault in the next challenge.
 
 1. Close the playground.
 
-### Part 6: Create Azure Key Vault
+### Part 11: Create Azure Key Vault
 
 1. In the **Azure Portal**, click **+ Create a resource**.
 
@@ -200,7 +431,7 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
 1. Once complete, click **Go to resource**.
 
-### Part 7: Assign Key Vault Permissions
+### Part 12: Assign Key Vault Permissions
 
 1. In your **kv-secureai-<inject key="DeploymentID"></inject>** Key Vault.
 
@@ -226,7 +457,7 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
  > **Note**: RBAC can take 2-3 minutes to propagate. Wait before testing.
 
-### Part 8: Create Azure Storage Account
+### Part 13: Create Azure Storage Account
 
 1. In the **Azure Portal**, click **+ Create a resource**.
 
@@ -264,7 +495,7 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
 1. Once complete, click **Go to resource**.
 
-### Part 9: Create Blob Container
+### Part 14: Create Blob Container
 
 1. In your **stsecureai<inject key="DeploymentID"></inject>** Storage Account.
 
@@ -286,12 +517,7 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
 1. Verify you see the following resources:
  - **vnet-secureai-<inject key="DeploymentID"></inject>** (Virtual network)
- - **openai-secureai-<inject key="DeploymentID"></inject>** (Azure OpenAI)
- - **kv-secureai-<inject key="DeploymentID"></inject>** (Key vault)
- - **stsecureai<inject key="DeploymentID"></inject>** (Storage account)
-
-1. Click on the **Virtual network** resource.
-
+   - **vm-<inject key="DeploymentID"></inject>** (Virtual machine)
 1. In the left navigation, click **Subnets**.
 
 1. Verify all three subnets exist:
@@ -302,6 +528,11 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 ### Part 11: Save Configuration Details
 
 Open Notepad on your VM and document the following:
+
+```
+==============================================
+SECURE AI INFRASTRUCTURE - DEPLOYMENT SUMMARY
+Connect to **vm-<inject key="DeploymentID"></inject>** via Bastion, open Notepad and document the following:
 
 ```
 ==============================================
@@ -319,6 +550,16 @@ Subnets:
  - snet-ai-services: 10.0.1.0/24
  - snet-storage-services: 10.0.2.0/24
  - snet-application: 10.0.3.0/24
+
+APPLICATION VM:
+---------------
+Name: vm-<inject key="DeploymentID"></inject>
+Subnet: snet-application (10.0.3.0/24)
+Username: azureuser
+Password: SecureAI@2026
+Python: 3.11.8
+VS Code: Installed
+Azure CLI: Installed
 
 AZURE OPENAI:
 -------------
@@ -351,13 +592,9 @@ Challenge 7: Production Readiness Validation
 ==============================================
 ```
 
-Save this file as: **C:\LabFiles\deployment-summary.txt**
-
-## Success Criteria
-
-Verify you completed all tasks:
-
-- [ ] Virtual Network created with 10.0.0.0/16 address space
+Save this file as: **C:\LabFiles\Secu- [ ] Application VM deployed (vm-<inject key="DeploymentID"></inject>)
+- [ ] VM accessible via Azure Bastion
+- [ ] Python 3.11, VS Code, and Azure CLI verified on VM- [ ] Virtual Network created with 10.0.0.0/16 address space
 - [ ] Three subnets created:
  - [ ] snet-ai-services (10.0.1.0/24)
  - [ ] snet-storage-services (10.0.2.0/24)

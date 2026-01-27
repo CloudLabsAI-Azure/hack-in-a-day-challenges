@@ -17,8 +17,9 @@ Let's build a secure ChatGPT-like experience!
 
 - Completed Challenge 4 (OpenAI models deployed and tested)
 - All Key Vault secrets created (OpenAIEndpoint, ChatModelDeployment, etc.)
-- Managed identity with proper RBAC roles
-- Python 3.11 and VS Code installed on VM
+- Managed identity configured on **vm-<inject key="DeploymentID"></inject>** with proper RBAC roles
+- Python 3.11 and VS Code installed on **vm-<inject key="DeploymentID"></inject>**
+- Connected to **vm-<inject key="DeploymentID"></inject>** via Azure Bastion
 
 ## Challenge Objectives
 
@@ -41,7 +42,7 @@ Let's build a secure ChatGPT-like experience!
  ├─────> Streamlit Web UI
  │
 ┌────────────────────────────▼────────────────────────────────┐
-│ VM (Application Subnet) │
+│ vm-<DID> (Application Subnet) │
 │ │
 │ ┌──────────────────────────────────────────────────────┐ │
 │ │ Secure Chat Application (app.py) │ │
@@ -67,6 +68,10 @@ All connections via private endpoints - ZERO public internet traffic!
 ## Steps to Complete
 
 ### Part 1: Create Application Directory Structure
+
+1. **Connect to vm-<inject key="DeploymentID"></inject>** via Azure Bastion if not already connected.
+
+1. **Open VS Code** on the VM and open a PowerShell terminal (Ctrl + `).
 
 1. **Create the app directory**:
 
@@ -296,7 +301,7 @@ Write-Host "Created app.py"
 ```powershell
 @'
 streamlit==1.31.0
-openai==1.12.0
+openai==2.15.0
 azure-identity==1.15.0
 azure-keyvault-secrets==4.7.0
 azure-storage-blob==12.19.0
@@ -305,6 +310,8 @@ python-dotenv==1.0.0
 
 Write-Host "Created requirements.txt"
 ```
+
+> **Critical**: We're using `openai==2.15.0` (or later). Versions earlier than 2.x will fail with errors like "Client.__init__() got an unexpected keyword argument 'proxies'". This is due to breaking changes in the OpenAI Python SDK and its compatibility with Azure SDK components.
 
 3. **Create README**:
 
@@ -609,9 +616,89 @@ Expected:
 - Timestamps
 - Full conversation history
 
-### Part 8: Security Validation
+### Part 8: Test External Access (Security Validation)
 
-Let's verify the security configuration!
+Let's prove that your security architecture actually works by testing from outside Azure!
+
+**This test should FAIL - and that's a good thing!** If it fails, it proves your application is properly secured and can only be accessed from within your Azure VNET.
+
+1. **On your local machine** (not the VM), open PowerShell or a terminal.
+
+2. **Clone or create the simple test script**:
+
+Create a file called `test-security.py` on your local machine:
+
+```python
+import os
+from openai import AzureOpenAI
+from azure.identity import DefaultAzureCredential
+from azure.keyvault.secrets import SecretClient
+
+# This will attempt to connect using your local credentials
+credential = DefaultAzureCredential()
+
+kv_url = "https://kv-secureai-<DID>.vault.azure.net"
+secret_client = SecretClient(vault_url=kv_url, credential=credential)
+
+try:
+    openai_endpoint = secret_client.get_secret("OpenAIEndpoint").value
+    print(f"✅ Key Vault accessible: {openai_endpoint}")
+except Exception as e:
+    print(f"❌ Key Vault access denied (GOOD!): {e}")
+
+# Try to connect to OpenAI
+try:
+    openai_client = AzureOpenAI(
+        azure_endpoint="https://openai-secureai-<DID>.openai.azure.com/",
+        api_version="2024-08-01-preview",
+        azure_ad_token_provider=lambda: credential.get_token(
+            "https://cognitiveservices.azure.com/.default"
+        ).token
+    )
+    response = openai_client.chat.completions.create(
+        model="secure-chat",
+        messages=[{"role": "user", "content": "test"}]
+    )
+    print("✅ OpenAI accessible (BAD! Security issue!)")
+except Exception as e:
+    print(f"❌ OpenAI access denied (GOOD!): {e}")
+```
+
+3. **Run the test**:
+
+```powershell
+python test-security.py
+```
+
+**Expected output (all should FAIL):**
+```
+❌ Key Vault access denied (GOOD!): (Forbidden) Public network access is disabled...
+❌ OpenAI access denied (GOOD!): ManagedIdentityCredential authentication unavailable, no response from the IMDS endpoint
+```
+
+**What this proves:**
+- ✅ Key Vault blocks all external access (public network disabled)
+- ✅ OpenAI blocks all external access (private endpoint only)
+- ✅ Managed Identity only works on Azure VMs (not your local machine)
+- ✅ Your application is truly secure!
+
+> **Important**: If you CAN access these services from your local machine, that means your security configuration has issues. Go back and verify:
+> - Public network access is disabled on Key Vault and OpenAI
+> - Private endpoints are configured correctly
+> - NSG rules are restrictive
+
+4. **Now run the same code on the VM** (via Bastion):
+
+Connect to your VM, create the same test script, and run it. This time it should succeed because:
+- The VM has managed identity
+- The VM can access private endpoints through the VNET
+- All security checks pass
+
+This validates your zero-trust architecture is working correctly!
+
+### Part 9: Security Validation Checklist
+
+Let's verify the security configuration on the VM!
 
 1. **Check for API keys in code** (should be NONE!):
 
@@ -777,6 +864,97 @@ Validate your app deployment:
  ```
 - Should have: `KEY_VAULT_NAME=your-kv-name`
 - Restart the app after editing
+
+---
+
+### Issue: "Client.__init__() got an unexpected keyword argument 'proxies'"
+
+**Root Cause**: You're using an older version of the OpenAI Python library (< 2.0) that's incompatible with the current Azure SDK.
+
+**Solution**:
+1. Verify your openai library version:
+   ```powershell
+   pip show openai
+   ```
+2. If it shows version 1.x.x, upgrade to 2.15.0 or later:
+   ```powershell
+   pip install --upgrade openai==2.15.0
+   ```
+3. Restart the Streamlit app:
+   ```powershell
+   streamlit run app.py
+   ```
+
+> **Note**: The OpenAI Python SDK made breaking changes in version 2.0. Always use openai>=2.15.0 for Azure OpenAI integration with managed identity.
+
+---
+
+### Issue: "Please provide a custom subdomain for token authentication"
+
+**Root Cause**: Your OpenAI resource doesn't have a custom domain configured, or the endpoint stored in Key Vault is the generic regional endpoint (e.g., `https://westus.api.cognitive.microsoft.com/`).
+
+**Solution**:
+1. Verify the custom domain was configured in Challenge 1 Part 5:
+   ```powershell
+   az cognitiveservices account show `
+     --name openai-secureai-<inject key="DeploymentID"></inject> `
+     --resource-group challenge-rg-<inject key="DeploymentID"></inject> `
+     --query "properties.endpoint" -o tsv
+   ```
+   
+   Should return:
+   ```
+   https://openai-secureai-<DID>.openai.azure.com/
+   ```
+
+2. If it shows a generic endpoint, configure the custom domain:
+   ```powershell
+   az cognitiveservices account update `
+     --name openai-secureai-<inject key="DeploymentID"></inject> `
+     --resource-group challenge-rg-<inject key="DeploymentID"></inject> `
+     --custom-domain openai-secureai-<inject key="DeploymentID"></inject>
+   ```
+
+3. Update the Key Vault secret with the correct endpoint:
+   ```powershell
+   $kvName = "kv-secureai-<inject key="DeploymentID"></inject>"
+   $correctEndpoint = "https://openai-secureai-<inject key="DeploymentID"></inject>.openai.azure.com/"
+   
+   az keyvault secret set `
+     --vault-name $kvName `
+     --name "OpenAIEndpoint" `
+     --value $correctEndpoint
+   ```
+
+4. Restart the app.
+
+> **Critical**: Custom subdomains are required for token-based authentication (managed identity) when using private endpoints. The generic regional endpoints don't support this authentication method.
+
+---
+
+### Issue: "Connection error" or "Failed to connect to OpenAI"
+
+**Root Cause**: Either no private endpoint exists for OpenAI, or Private DNS is not configured.
+
+**Solution**:
+1. Verify private endpoint exists:
+   ```powershell
+   az network private-endpoint list `
+     --resource-group challenge-rg-<inject key="DeploymentID"></inject> `
+     --query "[?contains(name, 'openai')]" -o table
+   ```
+
+2. Check DNS resolution from the VM:
+   ```powershell
+   nslookup openai-secureai-<inject key="DeploymentID"></inject>.openai.azure.com
+   ```
+   Should return a private IP (10.0.1.x), not a public IP.
+
+3. If DNS returns a public IP or fails:
+   - Go back to Challenge 2 Part 5 and create the OpenAI private endpoint
+   - Verify Private DNS zone `privatelink.openai.azure.com` is linked to your VNET
+
+4. Wait 2-3 minutes for DNS propagation, then retry.
 
 ---
 

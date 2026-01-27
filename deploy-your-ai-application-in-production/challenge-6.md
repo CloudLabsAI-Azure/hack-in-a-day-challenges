@@ -10,10 +10,12 @@ This proves your entire architecture works through private networking only!
 
 ## Prerequisites
 
-- Completed Challenge 5 (Chat application deployed and tested locally)
-- Azure Bastion deployed (should be from AZD template)
-- Chat application running on VM
+- Completed Challenge 5 (Chat application deployed and tested on **vm-<inject key="DeploymentID"></inject>**)
+- Azure Bastion deployed (from pre-configured environment)
+- Chat application running on **vm-<inject key="DeploymentID"></inject>**
 - All services using private endpoints
+- VS Code open with PowerShell terminal on **vm-<inject key="DeploymentID"></inject>**
+- Azure CLI logged in
 
 ## Challenge Objectives
 

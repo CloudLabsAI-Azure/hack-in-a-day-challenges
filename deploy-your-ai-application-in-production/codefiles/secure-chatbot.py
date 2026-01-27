@@ -18,7 +18,7 @@ def main():
     credential = DefaultAzureCredential()
     
     # Connect to Key Vault
-    kv_name = "kv-secureai-2036950"  # Replace with your Key Vault name
+    kv_name = "kv-secureai-2041411"  # Your Key Vault name
     kv_url = f"https://{kv_name}.vault.azure.net"
     
     print(f"🔑 Retrieving secrets from Key Vault: {kv_name}")
