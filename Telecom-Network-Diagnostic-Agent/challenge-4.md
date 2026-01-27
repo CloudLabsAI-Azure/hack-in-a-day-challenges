@@ -53,6 +53,13 @@ In this challenge, you will connect Azure AI Search to Foundry Playground and te
 
 1. Observe how the AI explains root causes and suggests optimizations.
 
+<validation step="12aec772-cfd1-49ae-8ffe-647381482d05" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ## Success Criteria
 
 - Azure AI Search successfully connected  

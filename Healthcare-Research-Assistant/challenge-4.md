@@ -50,6 +50,13 @@ In this challenge, you will connect Azure AI Search as a data source in **Micros
 
 1. Observe how the model retrieves information from indexed documents and generates grounded responses.
 
+<validation step="7f21dea7-cad6-427f-a596-1cdc1511e2cd" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ## Success Criteria
 
 - Azure AI Search connected successfully to Foundry Playground  

@@ -61,6 +61,14 @@ In this challenge, you will configure environment variables, install required de
 
 1. Review the AI-generated, grounded responses.
 
+<validation step="731e41b8-0b50-4a09-937f-a5dc292dcc94" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. When it asks for AppURL, please provide the localhost url where your webapp is running.
+> - If succeeded, you have successfully completed the challenges!
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ## Success Criteria
 
 - Streamlit application runs successfully  

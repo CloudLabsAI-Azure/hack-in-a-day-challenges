@@ -1,123 +1,292 @@
-## Challenge 1: Understand Multi-Agent Patterns & Architecture
+# Challenge 01: Environment Setup & Agent Foundations
 
-## Overview
+## Introduction
 
-In this challenge, participants are introduced to **multi-agent systems** and understand why single-agent solutions are insufficient for complex enterprise workflows. You will explore how **specialized AI agents** collaborate, how responsibilities are separated, and how a central **orchestrator** coordinates execution.
+In this challenge, you will prepare the **core infrastructure** required to build a multi-agent automation engine. You will provision Azure services, set up the development environment, and define the responsibilities of each AI agent. This foundation will be used throughout the hackathon to enable agent collaboration and orchestration.
 
-This challenge is **conceptual and architectural**. No coding is required yet. By the end of this challenge, you will clearly understand **what you are building**, **why multiple agents are required**, and **how they interact** in a production-ready system.
+## Challenge Objectives
 
-## Business Context
+* Set up Microsoft Foundry for agent intelligence
+* Create shared state storage using Azure Cosmos DB
+* Create Azure Container Registry (ACR) for agent containers
+* Initialize a Semantic Kernel project
+* Define agent roles and responsibilities
 
-Enterprises rarely solve problems with a single step. Real-world workflows such as HR onboarding, finance reporting, or marketing automation involve:
+## Steps to Complete
 
-- Data extraction
-- Validation and rule checks
-- Decision-making
-- Communication and reporting
+### Step 1: Create Microsoft Foundry Resource
 
-A single AI model handling everything becomes:
-- Hard to maintain
-- Difficult to validate
-- Risky to scale
-- Non-transparent for audits
+1. In the **Azure Portal**, search for **Microsoft Foundry** and click **+ Create > Foundry**.
+2. Under **Basics**, provide:
 
-Multi-agent architectures solve this by assigning **clear responsibilities** to **specialized agents** that collaborate intelligently.
+   * **Subscription:** Use the available subscription
+   * **Resource Group:** **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   * **Region:** Supported Microsoft Foundry region
+   * **Name:** **agent-foundry-<inject key="DeploymentID" enableCopy="false"/>**
 
-## Overview
+3. Click **Review + Create** → **Create**.
+4. After deployment succeeds, open the **Microsoft Foundry** resource.
 
-In this challenge, participants are introduced to the **core concepts behind AI agents and multi-agent systems**. Before building any automation, it is important to understand **what an agent is**, **why multiple agents are needed**, and **how Microsoft Agent Framework helps structure these systems** in a reliable and scalable way.
+### Step 2: Deploy the Model
 
-This challenge is **read-only and conceptual**. No configuration or coding is required.
+1. In the Microsoft Foundry resource, click **Go to Microsoft Foundry portal**.
+2. Navigate to **Models + endpoints** → **+ Deploy model > Deploy base model**.
+3. Provide:
+
+   * **Model:** `gpt-4o-mini`
+   * **Deployment name:** `agent-gpt-4o-mini`
+   * **Deployment type:** Standard
+
+4. Click **Deploy** and wait for deployment.
+
+### Step 3: Create Azure Cosmos DB (Shared Agent Memory)
+
+1. In the **Azure Portal**, search for **Azure Cosmos DB** and click **Create**.
+2. Select **Azure Cosmos DB for NoSQL**.
+3. Under **Basics**, provide:
+
+   * **Workload Type:** Development/ Testing
+   * **Subscription:** Use the available subscription
+   * **Resource Group:** **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   * **Account Name:** **agent-cosmos-<inject key="DeploymentID" enableCopy="false"/>**
+   * **Location:** Same region as other resources
+   * **Capacity mode:** Provisioned throughput
+4. Click **Review + Create** → **Create**.
+
+### Step 4: Create Database and Container
+
+1. Open the Cosmos DB account.
+2. Go to **Data Explorer**.
+3. Click **+ New Container > + New Database**:
+
+   * **Database ID:** `agent-memory-db`
+   * Select **OK**
+
+4. Click **New Container** >:
+
+   * Select **Use existing**
+   * **Container ID:** `agent-state`
+   * **Partition key:** `/workflowId`
+
+5. Click **OK**.
+
+### Step 5: Create Azure Container Registry (ACR)
+
+1. In the **Azure Portal**, search for **Container Registries** and click **Create**.
+
+2. Under **Basics**, provide:
+
+   * **Subscription:** Use the available subscription
+   * **Resource Group:** **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   * **Registry name:** **agentacr<inject key="DeploymentID" enableCopy="false"/>**
+   * **Location:** Same region
+   * **Pricing plan:** Basic
+
+3. Click **Review + Create** → **Create**.
+
+### Step 6: Initialize Local Project (Agent Codebase)
+
+#### Step 6.1: Create Project Folder Structure
+
+1. Create a new folder named:
+
+   ```
+   multi-agent-engine
+   ```
+
+2. Inside the folder, create the following structure:
+
+   ```
+   multi-agent-engine/
+   │
+   ├── app/
+   │   └── main.py
+   │
+   ├── .env
+   ├── requirements.txt
+   └── README.md
+   ```
+
+#### Step 6.2: Create and Activate Virtual Environment (Windows)
+
+1. Open **VS Code** and open the `multi-agent-engine` folder.
+
+2. Open the **Terminal** in VS Code.
+
+3. Create a virtual environment using the Python launcher:
+
+   ```powershell
+   py -m venv .venv
+   ```
+
+4. Activate the virtual environment:
+
+   ```powershell
+   .venv\Scripts\activate
+   ```
+
+You should see `(.venv)` in the terminal prompt.
+
+#### Step 6.3: Install Required Packages
+
+1. Add the following to `requirements.txt`:
+
+   ```txt
+   semantic-kernel
+   python-dotenv
+   ```
+
+2. Install the dependencies:
+
+   ```powershell
+   pip install -r requirements.txt
+   ```
+
+#### Step 6.4: Configure Environment Variables
+
+1. Open the `.env` file in the project root.
+
+2. Add the following values (replace placeholders):
+
+   ```env
+   AZURE_OPENAI_ENDPOINT=https://<your-openai-resource-name>.openai.azure.com/
+   MICROSOFT_FOUNDRY_API_KEY=<your-foundry-key>
+   AZURE_DEPLOYMENT_NAME=agent-gpt-4o-mini
+   ```
+
+> **Note:** The deployment name must exactly match the deployment created in Microsoft Foundry Portal.
+
+#### Step 6.5: Verify Semantic Kernel Setup
+
+1. Open `app/main.py` and add the following code:
+
+   ```python
+   import os
+   import asyncio
+   from dotenv import load_dotenv
+   from semantic_kernel import Kernel
+   from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
+
+   load_dotenv()
+
+   async def main():
+      kernel = Kernel()
+
+      kernel.add_service(
+         AzureChatCompletion(
+               service_id="chat",
+               deployment_name=os.environ.get("AZURE_DEPLOYMENT_NAME"),
+               endpoint=os.environ.get("AZURE_OPENAI_ENDPOINT"),
+               api_key=os.environ.get("MICROSOFT_FOUNDRY_API_KEY")
+         )
+      )
+
+      result = await kernel.invoke_prompt(
+         "Say hello from a multi-agent automation engine."
+      )
+
+      print(result)
+
+   if __name__ == "__main__":
+      asyncio.run(main())
+   ```
+
+2. Run the script:
+
+   ```powershell
+   py app/main.py
+   ```
+
+3. Verify you see a greeting message from the model.
 
 
-## What Is an AI Agent?
+### Step 7: Define Agent Roles (Conceptual)
 
-An **AI agent** is a software component that:
+#### Step 7.1: Why Agent Roles Matter
 
-- Receives an input or goal  
-- Uses an AI model to reason or decide  
-- Performs a specific task  
-- Produces an output  
+Multi-agent systems work best when:
 
-Unlike a simple script or function, an agent can:
-- Interpret natural language
-- Make decisions based on context
-- Call tools or APIs when needed
-- Return structured results
+* Each agent has a **single responsibility**
+* Agents do not overlap tasks
+* Coordination is handled centrally
 
-In enterprise systems, agents are designed to be **focused and specialized**, not general-purpose.
+#### Step 7.2: Define Agent Responsibilities
 
-## Why Single-Agent Systems Are Not Enough
+Document the following agent roles in `README.md`:
 
-A single AI agent handling an entire workflow quickly becomes:
+#### Extraction Agent
 
-- Difficult to maintain
-- Hard to validate and debug
-- Risky when business rules change
-- Non-transparent for audits
+**Purpose:**
+Extract structured data from raw or unstructured input.
 
-Real enterprise workflows involve **multiple steps**, such as:
-- Extracting information
-- Validating rules
-- Communicating results
-- Generating reports
+**Example Output:**
 
-Trying to handle all of this in one agent leads to **complex prompts** and unreliable outcomes.
+   ```json
+   {
+   "keyData": "value"
+   }
+   ```
 
-## What Is a Multi-Agent System?
+#### Validation Agent
 
-A **multi-agent system** divides a complex workflow into **multiple specialized agents**, where each agent:
+**Purpose:**
+Validate extracted data for completeness, accuracy, and consistency.
 
-- Has a clear responsibility
-- Solves one part of the problem
-- Collaborates with other agents
+**Example Output:**
 
-For example:
-- One agent extracts data
-- Another validates it
-- Another generates communication
-- Another produces a summary
+```json
+{
+  "isValid": true,
+  "errors": []
+}
+```
 
-This approach improves:
-- Reliability
-- Transparency
-- Reusability
-- Maintainability
+#### Communication Agent
 
-## Role of the Orchestrator
+**Purpose:**
+Generate emails, notifications, or messages based on validated data.
 
-In a multi-agent system, an **orchestrator** controls the flow:
+**Example Output:**
 
-- Decides which agent runs first
-- Passes outputs between agents
-- Handles validation failures
-- Ensures the workflow completes correctly
+   ```json
+   {
+   "subject": "Action Required",
+   "message": "The workflow has been completed successfully."
+   }
+   ```
 
-Agents do **not** decide the workflow themselves.  
-The orchestrator ensures consistency and correctness.
+#### Reporting Agent
 
-## How Microsoft Agent Framework Helps
+**Purpose:**
+Generate summaries or reports describing the workflow outcome.
 
-Microsoft Agent Framework provides a **structured foundation** for building agent-based systems:
+**Example Output:**
 
-- Defines agents with clear boundaries
-- Separates reasoning from execution
-- Supports tools, skills, and planning
-- Makes agent behavior predictable and testable
+   ```json
+   {
+   "summary": "All workflow steps executed successfully."
+   }
+   ```
 
-Instead of writing ad-hoc prompt logic, the framework helps teams:
-- Build agents in a standardized way
-- Scale from prototypes to production
-- Maintain clarity across multiple agents
+#### Orchestrator Agent
 
-This framework is especially useful for **enterprise-grade automation** where structure and control matter.
+**Purpose:**
+Coordinate execution across all agents, manage task order, handle retries, and maintain workflow state.
 
-## Key Takeaways
+**Example Flow:**
 
-- An agent is a goal-driven AI component that performs a specific task  
-- Multi-agent systems break complex workflows into manageable parts  
-- Specialized agents are more reliable than one large agent  
-- The orchestrator controls execution and decision flow  
-- Microsoft Agent Framework provides structure for building and managing agents  
+   ```
+   Extraction → Validation → Communication → Reporting
+   ```
 
-### Proceed to Challenge 2 !
+## Completion Criteria
+
+You have successfully completed Challenge 01:
+
+* Microsoft Foundry model deployment is ready
+* Cosmos DB database and container exist
+* ACR is created
+* Semantic Kernel project is initialized
+* Agent roles are clearly defined
+
+Now, click **Next** to continue to **Challenge 02**.

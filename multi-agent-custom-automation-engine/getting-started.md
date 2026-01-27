@@ -1,6 +1,6 @@
 ## Getting Started with Challenge
 
-Welcome to Hack in a Day: Visual Assistant with GenAI challenge! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
+Welcome to Hack in a Day: Multi-Agent Custom Automation Engine challenge! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
 
 ### Accessing Your Challenge Environment
 
@@ -53,8 +53,6 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 1. If you see the pop-up **Stay Signed in?**, click No.
 
    ![](./media/gs-4.png)
-
-1. Welcome to **Microsoft Fabric**! You're now ready to start building your real-time intelligence solution using Eventhouse, Eventstream, Lakehouse, and Data Activator.
 
 Now, click on the **Next** from lower right corner to move on next page.
 

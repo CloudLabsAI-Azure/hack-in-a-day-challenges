@@ -44,6 +44,13 @@ In this challenge, you will deploy the required models using **Microsoft Foundry
 
 1. Once done, from the portal, please copy the **OpenAI Endpoint** and **API Key**. Note this in a notepad, as you will be using this in further challenges.
 
+<validation step="fe53c52f-4038-480b-bb63-c28d9178e5fd" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ## Success Criteria
 
 - Foundry resource deployed successfully  
