@@ -83,5 +83,3 @@ The application allows sales teams to query account intelligence conversationall
 ## Congratulations!
 
 You have successfully built an **AI-powered B2B Account Intelligence Assistant** that enhances sales preparation and customer engagement.
-
-Click **Finish** to complete the lab.
