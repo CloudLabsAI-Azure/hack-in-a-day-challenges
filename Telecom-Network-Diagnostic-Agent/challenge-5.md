@@ -83,5 +83,3 @@ In this challenge, you will launch a Streamlit application that allows telecom e
 ## Congratulations!
 
 You have successfully built an **AI-powered Network Diagnostics & Optimization Assistant** that transforms reactive telecom operations into a proactive model.
-
-Click **Finish** to complete the lab.
