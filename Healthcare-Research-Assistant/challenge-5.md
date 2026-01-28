@@ -84,7 +84,5 @@ In this challenge, you will configure environment variables, install required de
 
 You have successfully built an **AI-powered Clinical Research Intelligence Assistant** that accelerates literature review and supports evidence-based healthcare research.
 
-Click **Finish** to complete the lab.
-
 
 
