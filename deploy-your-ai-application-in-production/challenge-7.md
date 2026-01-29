@@ -1,13 +1,13 @@
-# Challenge 07: Well-Architected Framework Validation & Production Readiness
+﻿# Challenge 07: Well-Architected Framework Validation & Production Readiness
 
 ## Introduction
 
 Congratulations! You've built a complete secure AI infrastructure:
-- ✅ Private endpoints everywhere
-- ✅ Managed identity authentication
-- ✅ Secrets in Key Vault
-- ✅ Chat application working
-- ✅ Secure Bastion access
+- Private endpoints everywhere
+- Managed identity authentication
+- Secrets in Key Vault
+- Chat application working
+- Secure Bastion access
 
 Now for the **final step**: Validate your solution against the **Azure Well-Architected Framework (WAF)** to ensure it's truly production-ready.
 
@@ -17,7 +17,8 @@ This challenge is your **production readiness checklist** - covering Security, R
 
 - Completed all previous challenges (1-6)
 - All services deployed and tested
-- Access to Azure Portal and VM via Bastion
+- Access to Azure Portal
+- Access to **vm-<inject key="DeploymentID"></inject>** via Azure Bastion
 
 ## Challenge Objectives
 
@@ -33,19 +34,19 @@ This challenge is your **production readiness checklist** - covering Security, R
 
 ```
 ┌───────────────────────────────────────────────────────────────┐
-│         Azure Well-Architected Framework (WAF)                │
+│ Azure Well-Architected Framework (WAF) │
 ├───────────────────────────────────────────────────────────────┤
-│                                                               │
-│  🔒 SECURITY          🔄 RELIABILITY      💰 COST             │
-│  - Zero Trust         - High Availability - Right-sizing     │
-│  - Defense-in-Depth   - Disaster Recovery - Reserved pricing │
-│  - Least Privilege    - Backup & Recovery - Monitoring costs │
-│                                                               │
-│  ⚙️ OPERATIONAL       ⚡ PERFORMANCE                         │
-│  - Monitoring         - Scalability                          │
-│  - Automation         - Caching                              │
-│  - DevOps/IaC         - Optimization                         │
-│                                                               │
+│ │
+│ SECURITY RELIABILITY COST │
+│ - Zero Trust - High Availability - Right-sizing │
+│ - Defense-in-Depth - Disaster Recovery - Reserved pricing │
+│ - Least Privilege - Backup & Recovery - Monitoring costs │
+│ │
+│ OPERATIONAL PERFORMANCE │
+│ - Monitoring - Scalability │
+│ - Automation - Caching │
+│ - DevOps/IaC - Optimization │
+│ │
 └───────────────────────────────────────────────────────────────┘
 ```
 
@@ -59,32 +60,32 @@ Let's validate all security controls!
 
 ```powershell
 @'
-# 🔒 SECURITY PILLAR CHECKLIST
+# SECURITY PILLAR CHECKLIST
 
 ## Identity & Access Management
-- [✅] Managed Identity enabled on VM (no API keys)
-- [✅] RBAC roles assigned with least privilege
-  - Cognitive Services OpenAI User
-  - Key Vault Secrets User
-  - Storage Blob Data Contributor
-- [✅] No hardcoded credentials in code
-- [✅] No API keys in .env file
-- [✅] All secrets stored in Key Vault
+- [] Managed Identity enabled on VM (no API keys)
+- [] RBAC roles assigned with least privilege
+ - Cognitive Services OpenAI User
+ - Key Vault Secrets User
+ - Storage Blob Data Contributor
+- [] No hardcoded credentials in code
+- [] No API keys in .env file
+- [] All secrets stored in Key Vault
 - [ ] MFA enabled for Azure Portal access (verify your account)
 - [ ] Conditional Access policies configured (optional)
 
 ## Network Security
-- [✅] Virtual Network with segmented subnets
-- [✅] Network Security Groups with restrictive rules
-- [✅] All services have private endpoints
-- [✅] Public access DISABLED on:
-  - Azure OpenAI
-  - Key Vault
-  - Storage Account
-  - AI Foundry Hub/Project
-- [✅] Private DNS zones configured
-- [✅] No public IPs on VMs
-- [✅] Azure Bastion for secure access
+- [] Virtual Network with segmented subnets
+- [] Network Security Groups with restrictive rules
+- [] All services have private endpoints
+- [] Public access DISABLED on:
+ - Azure OpenAI
+ - Key Vault
+ - Storage Account
+ - AI Foundry Hub/Project
+- [] Private DNS zones configured
+- [] No public IPs on VMs
+- [] Azure Bastion for secure access
 
 ## Data Protection
 - [ ] Encryption at rest (verify - should be default)
@@ -94,7 +95,7 @@ Let's validate all security controls!
 - [ ] Soft delete enabled on Storage Account
 
 ## Application Security
-- [✅] Content filtering on Azure OpenAI
+- [] Content filtering on Azure OpenAI
 - [ ] Input validation in application
 - [ ] Output sanitization
 - [ ] Rate limiting (optional)
@@ -128,16 +129,16 @@ az keyvault show -n $kvName -g "challenge-rg-<inject key="DeploymentID"></inject
 ```powershell
 # Enable soft delete (90-day retention)
 az keyvault update `
-  --name $kvName `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --enable-soft-delete true `
-  --retention-days 90
+ --name $kvName `
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --enable-soft-delete true `
+ --retention-days 90
 
 # Enable purge protection (prevents permanent deletion)
 az keyvault update `
-  --name $kvName `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --enable-purge-protection true
+ --name $kvName `
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --enable-purge-protection true
 ```
 
 4. **Enable Storage soft delete**:
@@ -145,16 +146,16 @@ az keyvault update `
 ```powershell
 # Enable blob soft delete (7 days)
 az storage blob service-properties delete-policy update `
-  --account-name $storageName `
-  --enable true `
-  --days-retained 7
+ --account-name $storageName `
+ --enable true `
+ --days-retained 7
 
 # Enable container soft delete
 az storage account blob-service-properties update `
-  --account-name $storageName `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --enable-container-delete-retention true `
-  --container-delete-retention-days 7
+ --account-name $storageName `
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --enable-container-delete-retention true `
+ --container-delete-retention-days 7
 ```
 
 ### Part 2: Reliability Pillar Assessment
@@ -165,7 +166,7 @@ Ensure your solution is resilient!
 
 ```powershell
 @"
-# 🔄 RELIABILITY ASSESSMENT
+# RELIABILITY ASSESSMENT
 
 ## Service Level Agreements (SLAs)
 - Azure OpenAI: 99.9% uptime
@@ -178,9 +179,9 @@ Composite SLA: ~99.7% (calculated as product of all)
 Expected downtime/month: ~2.2 hours
 
 ## Implemented Reliability Features
-- [✅] Virtual Network with redundant subnets
-- [✅] Private endpoints (eliminate internet dependency)
-- [✅] Managed services (Azure handles patching/updates)
+- Virtual Network with redundant subnets
+- Private endpoints (eliminate internet dependency)
+- Managed services (Azure handles patching/updates)
 - [ ] Geo-redundant storage (upgrade from LRS to GRS)
 - [ ] Multi-region deployment (advanced)
 - [ ] Backup and recovery procedures documented
@@ -201,9 +202,9 @@ notepad C:\LabFiles\reliability-assessment.txt
 ```powershell
 # Check current redundancy
 az storage account show `
-  --name $storageName `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --query "sku.name" -o tsv
+ --name $storageName `
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --query "sku.name" -o tsv
 
 # Upgrade to GRS (if currently LRS)
 # az storage account update --name $storageName -g "challenge-rg-<inject key="DeploymentID"></inject>" --sku Standard_GRS
@@ -274,17 +275,17 @@ Common recommendations:
 ```powershell
 # Get cost for resource group (last 30 days)
 az consumption usage list `
-  --start-date (Get-Date).AddDays(-30).ToString("yyyy-MM-dd") `
-  --end-date (Get-Date).ToString("yyyy-MM-dd") `
-  --query "[?contains(instanceName, 'challenge-rg-<inject key="DeploymentID"></inject>')].{Resource:instanceName, Cost:pretaxCost, Currency:currency}" `
-  --output table
+ --start-date (Get-Date).AddDays(-30).ToString("yyyy-MM-dd") `
+ --end-date (Get-Date).ToString("yyyy-MM-dd") `
+ --query "[?contains(instanceName, 'challenge-rg-<inject key="DeploymentID"></inject>')].{Resource:instanceName, Cost:pretaxCost, Currency:currency}" `
+ --output table
 ```
 
 3. **Create a cost optimization plan**:
 
 ```powershell
 @"
-# 💰 COST OPTIMIZATION PLAN
+# COST OPTIMIZATION PLAN
 
 ## Current Monthly Costs (Estimated)
 Based on East US pricing (actual costs vary by region):
@@ -304,10 +305,10 @@ Based on East US pricing (actual costs vary by region):
 ## Cost Optimization Opportunities
 
 ### Immediate (No Impact)
-1. ✅ Delete unused resources after lab
-2. ✅ Stop VM when not in use ($70/month savings)
-3. ✅ Use GPT-3.5-Turbo instead of GPT-4 ($50/month savings)
-4. ✅ Remove Bastion after testing ($140/month savings)
+1. Delete unused resources after lab
+2. Stop VM when not in use ($70/month savings)
+3. Use GPT-3.5-Turbo instead of GPT-4 ($50/month savings)
+4. Remove Bastion after testing ($140/month savings)
 
 ### Short-term (Minimal Impact)
 1. Reserved VM instances (1-year): Save 30-40%
@@ -343,7 +344,7 @@ notepad C:\LabFiles\cost-optimization.txt
 # This is typically done in Azure Portal:
 # Cost Management + Billing → Budgets → Add
 
-Write-Host "⚠️ Set up budget alert in Azure Portal:"
+Write-Host "Set up budget alert in Azure Portal:"
 Write-Host "1. Go to Cost Management + Billing"
 Write-Host "2. Click 'Budgets'"
 Write-Host "3. Create new budget for resource group: challenge-rg-<inject key="DeploymentID"></inject>"
@@ -362,24 +363,24 @@ Implement monitoring and automation!
 $workspaceName = "law-ai-monitoring-<inject key="DeploymentID"></inject>"
 
 az monitor log-analytics workspace create `
-  --workspace-name $workspaceName `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --location "<inject key="Region"></inject>"
+ --workspace-name $workspaceName `
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --location "<inject key="Region"></inject>"
 
 # Enable diagnostics on OpenAI
 $workspaceId = az monitor log-analytics workspace show `
-  --workspace-name $workspaceName `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --query id -o tsv
+ --workspace-name $workspaceName `
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --query id -o tsv
 
 az monitor diagnostic-settings create `
-  --name "openai-diagnostics" `
-  --resource $openaiName `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --resource-type "Microsoft.CognitiveServices/accounts" `
-  --workspace $workspaceId `
-  --logs '[{"category":"Audit","enabled":true},{"category":"RequestResponse","enabled":true}]' `
-  --metrics '[{"category":"AllMetrics","enabled":true}]'
+ --name "openai-diagnostics" `
+ --resource $openaiName `
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-type "Microsoft.CognitiveServices/accounts" `
+ --workspace $workspaceId `
+ --logs '[{"category":"Audit","enabled":true},{"category":"RequestResponse","enabled":true}]' `
+ --metrics '[{"category":"AllMetrics","enabled":true}]'
 ```
 
 2. **Create monitoring dashboard**:
@@ -388,10 +389,10 @@ In Azure Portal:
 - Go to **Azure OpenAI resource**
 - Click **Metrics**
 - Add these metrics to a dashboard:
-  - Total Calls
-  - Processed Inference Tokens
-  - Time to Response
-  - Errors
+ - Total Calls
+ - Processed Inference Tokens
+ - Time to Response
+ - Errors
 
 Pin to a new dashboard named: "AI App Monitoring"
 
@@ -400,32 +401,32 @@ Pin to a new dashboard named: "AI App Monitoring"
 ```powershell
 # Alert: High error rate
 az monitor metrics alert create `
-  --name "openai-high-error-rate" `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --scopes "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID"></inject>/providers/Microsoft.CognitiveServices/accounts/$openaiName" `
-  --condition "count >= 10" `
-  --window-size 5m `
-  --evaluation-frequency 1m `
-  --severity 2 `
-  --description "Alert when OpenAI error count exceeds 10 in 5 minutes"
+ --name "openai-high-error-rate" `
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --scopes "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID"></inject>/providers/Microsoft.CognitiveServices/accounts/$openaiName" `
+ --condition "count >= 10" `
+ --window-size 5m `
+ --evaluation-frequency 1m `
+ --severity 2 `
+ --description "Alert when OpenAI error count exceeds 10 in 5 minutes"
 
 # Alert: High latency
 az monitor metrics alert create `
-  --name "openai-high-latency" `
-  --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
-  --scopes "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID"></inject>/providers/Microsoft.CognitiveServices/accounts/$openaiName" `
-  --condition "avg TimeToResponse > 5000" `
-  --window-size 5m `
-  --evaluation-frequency 1m `
-  --severity 3 `
-  --description "Alert when average response time exceeds 5 seconds"
+ --name "openai-high-latency" `
+ --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --scopes "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID"></inject>/providers/Microsoft.CognitiveServices/accounts/$openaiName" `
+ --condition "avg TimeToResponse > 5000" `
+ --window-size 5m `
+ --evaluation-frequency 1m `
+ --severity 3 `
+ --description "Alert when average response time exceeds 5 seconds"
 ```
 
 4. **Create operational runbooks**:
 
 ```powershell
 @'
-# ⚙️ OPERATIONAL RUNBOOKS
+# OPERATIONAL RUNBOOKS
 
 ## Incident Response
 
@@ -528,77 +529,77 @@ chat_deployment = secret_client.get_secret("ChatModelDeployment").value
 api_version = secret_client.get_secret("OpenAIApiVersion").value
 
 client = AzureOpenAI(
-    azure_endpoint=openai_endpoint,
-    api_version=api_version,
-    azure_ad_token_provider=lambda: credential.get_token("https://cognitiveservices.azure.com/.default").token
+ azure_endpoint=openai_endpoint,
+ api_version=api_version,
+ azure_ad_token_provider=lambda: credential.get_token("https://cognitiveservices.azure.com/.default").token
 )
 
 def send_request(i):
-    """Send a single chat completion request"""
-    start = time.time()
-    try:
-        response = client.chat.completions.create(
-            model=chat_deployment,
-            messages=[{"role": "user", "content": f"Count to {i}"}],
-            max_tokens=50
-        )
-        latency = (time.time() - start) * 1000
-        tokens = response.usage.total_tokens
-        return {"success": True, "latency": latency, "tokens": tokens}
-    except Exception as e:
-        return {"success": False, "error": str(e)}
+ """Send a single chat completion request"""
+ start = time.time()
+ try:
+ response = client.chat.completions.create(
+ model=chat_deployment,
+ messages=[{"role": "user", "content": f"Count to {i}"}],
+ max_tokens=50
+ )
+ latency = (time.time() - start) * 1000
+ tokens = response.usage.total_tokens
+ return {"success": True, "latency": latency, "tokens": tokens}
+ except Exception as e:
+ return {"success": False, "error": str(e)}
 
 print("=" * 60)
-print("⚡ PERFORMANCE BENCHMARK")
+print(" PERFORMANCE BENCHMARK")
 print("=" * 60)
 
 # Test 1: Sequential requests
-print("\n📊 Test 1: Sequential Requests (10x)")
+print("\n Test 1: Sequential Requests (10x)")
 seq_latencies = []
 seq_tokens = []
 
 for i in range(10):
-    result = send_request(i)
-    if result["success"]:
-        seq_latencies.append(result["latency"])
-        seq_tokens.append(result["tokens"])
-        print(f"  Request {i+1}: {result['latency']:.0f}ms, {result['tokens']} tokens")
+ result = send_request(i)
+ if result["success"]:
+ seq_latencies.append(result["latency"])
+ seq_tokens.append(result["tokens"])
+ print(f" Request {i+1}: {result['latency']:.0f}ms, {result['tokens']} tokens")
 
-print(f"\n  Avg Latency: {sum(seq_latencies)/len(seq_latencies):.0f}ms")
-print(f"  Avg Tokens: {sum(seq_tokens)/len(seq_tokens):.0f}")
+print(f"\n Avg Latency: {sum(seq_latencies)/len(seq_latencies):.0f}ms")
+print(f" Avg Tokens: {sum(seq_tokens)/len(seq_tokens):.0f}")
 
 # Test 2: Concurrent requests
-print("\n📊 Test 2: Concurrent Requests (5x parallel)")
+print("\n Test 2: Concurrent Requests (5x parallel)")
 start = time.time()
 
 with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
-    futures = [executor.submit(send_request, i) for i in range(5)]
-    results = [f.result() for f in concurrent.futures.as_completed(futures)]
+ futures = [executor.submit(send_request, i) for i in range(5)]
+ results = [f.result() for f in concurrent.futures.as_completed(futures)]
 
 concurrent_time = time.time() - start
 successes = sum(1 for r in results if r["success"])
-print(f"  Total time: {concurrent_time*1000:.0f}ms")
-print(f"  Successes: {successes}/5")
-print(f"  Throughput: {successes/concurrent_time:.1f} req/sec")
+print(f" Total time: {concurrent_time*1000:.0f}ms")
+print(f" Successes: {successes}/5")
+print(f" Throughput: {successes/concurrent_time:.1f} req/sec")
 
 # Test 3: Token consumption
-print("\n📊 Test 3: Token Efficiency")
+print("\n Test 3: Token Efficiency")
 prompts = [
-    ("Short", "Say OK"),
-    ("Medium", "Explain AI in 2 sentences"),
-    ("Long", "Write a detailed explanation of machine learning")
+ ("Short", "Say OK"),
+ ("Medium", "Explain AI in 2 sentences"),
+ ("Long", "Write a detailed explanation of machine learning")
 ]
 
 for label, prompt in prompts:
-    response = client.chat.completions.create(
-        model=chat_deployment,
-        messages=[{"role": "user", "content": prompt}],
-        max_tokens=200
-    )
-    print(f"  {label}: {response.usage.total_tokens} tokens")
+ response = client.chat.completions.create(
+ model=chat_deployment,
+ messages=[{"role": "user", "content": prompt}],
+ max_tokens=200
+ )
+ print(f" {label}: {response.usage.total_tokens} tokens")
 
 print("\n" + "=" * 60)
-print("✅ BENCHMARK COMPLETE")
+print("BENCHMARK COMPLETE")
 print("=" * 60)
 
 '@ -replace '\$kvName', $kvName | Out-File -FilePath "C:\LabFiles\performance-benchmark.py" -Encoding UTF8
@@ -610,7 +611,7 @@ python C:\LabFiles\performance-benchmark.py
 
 ```powershell
 @"
-# ⚡ PERFORMANCE ASSESSMENT
+# PERFORMANCE ASSESSMENT
 
 ## Benchmarks (Run: $(Get-Date))
 
@@ -683,8 +684,8 @@ In Azure Portal:
 ```powershell
 # Get all advisor recommendations
 az advisor recommendation list `
-  --query "[?contains(resourceGroup, 'challenge-rg-<inject key="DeploymentID"></inject>')].{Category:category, Impact:impact, Problem:shortDescription.problem, Solution:shortDescription.solution}" `
-  --output table > C:\LabFiles\advisor-recommendations.txt
+ --query "[?contains(resourceGroup, 'challenge-rg-<inject key="DeploymentID"></inject>')].{Category:category, Impact:impact, Problem:shortDescription.problem, Solution:shortDescription.solution}" `
+ --output table > C:\LabFiles\advisor-recommendations.txt
 
 notepad C:\LabFiles\advisor-recommendations.txt
 ```
@@ -695,7 +696,7 @@ Document how to take this to production!
 
 ```powershell
 @'
-# 🚀 PRODUCTION DEPLOYMENT PLAN
+# PRODUCTION DEPLOYMENT PLAN
 
 ## Architecture Changes for Production
 
@@ -789,66 +790,66 @@ Complete the ultimate production readiness check!
 
 ```powershell
 @'
-# ✅ PRODUCTION READINESS CHECKLIST
+# PRODUCTION READINESS CHECKLIST
 
-## 🔒 Security (WAF Pillar)
-- [✅] Zero Trust architecture implemented
-- [✅] All services use private endpoints
-- [✅] Managed identity for all authentication
-- [✅] No API keys in code or config
-- [✅] Secrets in Key Vault only
-- [✅] RBAC with least privilege
-- [✅] NSGs with restrictive rules
-- [✅] Public access disabled
-- [✅] Soft delete enabled (Key Vault, Storage)
-- [✅] Content filtering on AI models
+## Security (WAF Pillar)
+- [] Zero Trust architecture implemented
+- [] All services use private endpoints
+- [] Managed identity for all authentication
+- [] No API keys in code or config
+- [] Secrets in Key Vault only
+- [] RBAC with least privilege
+- [] NSGs with restrictive rules
+- [] Public access disabled
+- [] Soft delete enabled (Key Vault, Storage)
+- [] Content filtering on AI models
 - [ ] MFA enabled for all admins
 - [ ] Conditional Access configured
 
-**Score: 10/12 (83%) - GOOD** ✅
+**Score: 10/12 (83%) - GOOD**
 
-## 🔄 Reliability (WAF Pillar)
-- [✅] Managed services (Azure handles availability)
-- [✅] Private endpoints (no internet dependency)
-- [✅] Soft delete for recovery
+## Reliability (WAF Pillar)
+- [] Managed services (Azure handles availability)
+- [] Private endpoints (no internet dependency)
+- [] Soft delete for recovery
 - [ ] Geo-redundant storage
 - [ ] Multi-region deployment
 - [ ] Automated backups configured
 - [ ] DR plan tested
 
-**Score: 3/7 (43%) - NEEDS IMPROVEMENT** ⚠️
+**Score: 3/7 (43%) - NEEDS IMPROVEMENT**
 
-## 💰 Cost Optimization (WAF Pillar)
-- [✅] Right-sized resources for lab
-- [✅] Using Standard tier (not Premium where unnecessary)
+## Cost Optimization (WAF Pillar)
+- [] Right-sized resources for lab
+- [] Using Standard tier (not Premium where unnecessary)
 - [ ] Budget alerts configured
 - [ ] Unused resources identified and removed
 - [ ] Reserved instances (for production)
 - [ ] Autoscaling to match demand
 
-**Score: 2/6 (33%) - ACCEPTABLE FOR LAB** ⚠️
+**Score: 2/6 (33%) - ACCEPTABLE FOR LAB**
 
-## ⚙️ Operational Excellence (WAF Pillar)
-- [✅] Infrastructure as Code (AZD/Bicep)
-- [✅] Monitoring enabled
+## Operational Excellence (WAF Pillar)
+- [] Infrastructure as Code (AZD/Bicep)
+- [] Monitoring enabled
 - [ ] Alerts configured
 - [ ] Log Analytics workspace
 - [ ] Dashboards created
 - [ ] Runbooks documented
 - [ ] CI/CD pipeline (for production)
 
-**Score: 2/7 (29%) - BASIC** ⚠️
+**Score: 2/7 (29%) - BASIC**
 
-## ⚡ Performance Efficiency (WAF Pillar)
-- [✅] Private endpoints for low latency
-- [✅] Regional deployment (single region)
-- [✅] Right-sized VM
+## Performance Efficiency (WAF Pillar)
+- [] Private endpoints for low latency
+- [] Regional deployment (single region)
+- [] Right-sized VM
 - [ ] Caching implemented
 - [ ] CDN for static assets
 - [ ] Autoscaling configured
 - [ ] Performance tested and benchmarked
 
-**Score: 3/7 (43%) - ACCEPTABLE** ⚠️
+**Score: 3/7 (43%) - ACCEPTABLE**
 
 ---
 
@@ -857,20 +858,20 @@ Complete the ultimate production readiness check!
 **Total Score: 20/39 (51%)**
 
 ### Strengths
-✅ Security architecture is EXCELLENT
-✅ Identity and access management is PERFECT
-✅ Network isolation is COMPLETE
-✅ Infrastructure as Code is IMPLEMENTED
+Security architecture is EXCELLENT
+Identity and access management is PERFECT
+Network isolation is COMPLETE
+Infrastructure as Code is IMPLEMENTED
 
 ### Areas for Improvement
-⚠️ Reliability: Add geo-redundancy and DR
-⚠️ Monitoring: Complete alert configuration
-⚠️ Operations: Create full runbooks and automation
-⚠️ Performance: Implement caching and optimization
+Reliability: Add geo-redundancy and DR
+Monitoring: Complete alert configuration
+Operations: Create full runbooks and automation
+Performance: Implement caching and optimization
 
 ### Recommendation
-**LAB: PRODUCTION-READY FOR LEARNING ✅**
-**ENTERPRISE: NEEDS ADDITIONAL WORK ⚠️**
+**LAB: PRODUCTION-READY FOR LEARNING**
+**ENTERPRISE: NEEDS ADDITIONAL WORK**
 
 For a true enterprise production deployment:
 1. Add multi-region deployment
@@ -881,16 +882,16 @@ For a true enterprise production deployment:
 
 ---
 
-## CONGRATULATIONS! 🎉
+## CONGRATULATIONS!
 
 You've built a secure, functional AI application with enterprise-grade security!
 
 While there are opportunities for improvement (as always), your architecture demonstrates:
-- ✅ Zero Trust security principles
-- ✅ Defense-in-depth layering
-- ✅ Modern cloud-native patterns
-- ✅ Passwordless authentication
-- ✅ Complete network isolation
+- Zero Trust security principles
+- Defense-in-depth layering
+- Modern cloud-native patterns
+- Passwordless authentication
+- Complete network isolation
 
 This is a SOLID foundation for production deployment!
 
@@ -947,55 +948,55 @@ Validate production readiness:
 ## Bonus Challenges
 
 1. **Implement Azure Sentinel** (SIEM):
-   - Deploy Sentinel
-   - Connect Log Analytics workspace
-   - Create security analytics rules
-   - Build threat hunting queries
+ - Deploy Sentinel
+ - Connect Log Analytics workspace
+ - Create security analytics rules
+ - Build threat hunting queries
 
 2. **Add Application Insights**:
-   - Instrument the Streamlit app
-   - Track custom events and metrics
-   - Create availability tests
-   - Build performance dashboards
+ - Instrument the Streamlit app
+ - Track custom events and metrics
+ - Create availability tests
+ - Build performance dashboards
 
 3. **Implement Chaos Engineering**:
-   - Use Azure Chaos Studio
-   - Test VM failure scenarios
-   - Simulate network latency
-   - Validate recovery procedures
+ - Use Azure Chaos Studio
+ - Test VM failure scenarios
+ - Simulate network latency
+ - Validate recovery procedures
 
 4. **Create Infrastructure as Code Tests**:
-   - Use Pester (PowerShell testing)
-   - Validate resource deployment
-   - Check security configurations
-   - Automate compliance checks
+ - Use Pester (PowerShell testing)
+ - Validate resource deployment
+ - Check security configurations
+ - Automate compliance checks
 
 ## What You Learned
 
 In this final challenge, you:
 
-✅ Evaluated architecture against Azure Well-Architected Framework  
-✅ Implemented security best practices (soft delete, encryption)  
-✅ Created cost optimization strategies  
-✅ Configured monitoring and alerting  
-✅ Documented operational procedures  
-✅ Benchmarked performance  
-✅ Assessed production readiness  
-✅ Achieved enterprise-grade architecture understanding!  
+ Evaluated architecture against Azure Well-Architected Framework 
+ Implemented security best practices (soft delete, encryption) 
+ Created cost optimization strategies 
+ Configured monitoring and alerting 
+ Documented operational procedures 
+ Benchmarked performance 
+ Assessed production readiness 
+ Achieved enterprise-grade architecture understanding! 
 
-## Congratulations! 🎉
+## Congratulations!
 
 You've completed the **Deploy Your AI Application in Production** hackathon!
 
 ### What You Built
 
 A complete secure AI infrastructure with:
-- 🔒 100% private network architecture (zero public IPs)
-- 🔑 Passwordless authentication (managed identities everywhere)
-- 🏰 Defense-in-depth security (VNET → NSG → Private Endpoint → RBAC)
-- 💬 Working chat application (Streamlit + Azure OpenAI)
-- 📊 Production-ready monitoring
-- 📋 Comprehensive documentation
+- 100% private network architecture (zero public IPs)
+- Passwordless authentication (managed identities everywhere)
+- Defense-in-depth security (VNET → NSG → Private Endpoint → RBAC)
+- Working chat application (Streamlit + Azure OpenAI)
+- Production-ready monitoring
+- Comprehensive documentation
 
 ### Your Achievement
 
@@ -1016,7 +1017,7 @@ You can now confidently:
 
 ---
 
-**You've proven that secure AI is not only possible, but practical!** 🚀
+**You've proven that secure AI is not only possible, but practical!** 
 
 Thank you for completing this hackathon. You're now ready to deploy production AI applications with confidence!
 
