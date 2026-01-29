@@ -1,18 +1,18 @@
-# Challenge 05: Persist Structured Data & Expose APIs (Cosmos DB + App Service)
+# Challenge 05: Persist Structured Data & Validate End-to-End Automation
 
 ## Introduction
 
-In enterprise systems, AI-extracted data must be **stored securely**, **queried easily**, and **accessible through APIs**.
-In this challenge, participants will persist validated document data into **Azure Cosmos DB** and expose it through **REST APIs hosted on Azure App Service**, completing the end-to-end automation pipeline.
+In enterprise document automation systems, AI-extracted data must be **stored securely**, **queried reliably**, and **auditable for downstream processes**. In this challenge, participants will persist the final, validated document data into **Azure Cosmos DB**, completing the end-to-end Intelligent Content Processing pipeline.
+
+This challenge focuses on **data persistence**, **validation**, and **traceability**, ensuring that AI-generated outputs are production-ready—without introducing additional infrastructure complexity.
 
 ## Challenge Objectives
 
-* Create an **Azure Cosmos DB (NoSQL)** database and container.
-* Store final, validated document JSON in Cosmos DB.
-* Configure **Azure App Service** to orchestrate the workflow.
-* Secure secrets using **Environment variables**.
-* Expose REST APIs to submit and retrieve processed documents.
-* Perform a full end-to-end test of the solution.
+* Create an Azure Cosmos DB (NoSQL) database and container
+* Store final, validated document JSON in Cosmos DB
+* Understand how AI-extracted data is persisted for enterprise use
+* Verify document status, confidence, and approval outcomes
+* Complete a full end-to-end test of the content processing pipeline
 
 ## Steps to Complete
 
@@ -74,77 +74,22 @@ In this challenge, participants will persist validated document data into **Azur
 
 13. Repeat for the invoice document if time permits.
 
-### Create Azure App Service
-
-14. In the Azure Portal, search for **App Services** and click **Create** > **+ Web App**.
-
-15. Under Basics, provide:
-
-   * **Subscription**: Use the available subscription
-
-   * **Resource Group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-
-   * **Name**: **app-doc-processing-<inject key="DeploymentID" enableCopy="false"/>**
-
-   * **Publish**: Code
-
-   * **Runtime stack**: Any (Python / Node.js / .NET)
-
-   * **Operating System**: Windows
-
-   * **Region**: Same region as other resources
-
-   * **Pricing Plan**: Free F1
-
-   * Click **Review + Create** → **Create**.
-
-After deployment succeeds, open the **App Service**.
-
-### Enable Managed Identity for App Service
-
-16. In the App Service, go to **Settings > Identity**.
-
-17. Under **System assigned**, set **Status** to **On**.
-
-18. Click **Save** and select **Yes**.
-
-### Add Environment Variables in App Service
-
-19. Go to **Settings** → Open your **Environment Variables**.
-
-20. Under **App settings**, add each one individually:
-
-      | Name                        | Value                         |
-      | --------------------------- | ----------------------------- |
-      | `OPENAI_API_KEY`            | `<your OpenAI key>`           |
-      | `OPENAI_ENDPOINT`           | `<your OpenAI endpoint>`      |
-      | `DOC_INTELLIGENCE_KEY`      | `<doc intelligence key>`      |
-      | `DOC_INTELLIGENCE_ENDPOINT` | `<doc intelligence endpoint>` |
-      | `COSMOS_CONNECTION_STRING`  | `<cosmos connection string>`  |
-      | `STORAGE_CONNECTION_STRING` | `<storage connection string>` |
-
-      >**Note:** Fetch all the details from the respective resources.
-
-21. Leave **Deployment slot setting** unchecked.
-
-22. Click **OK** for each. Click **Save**. Restart the App Service when prompted.
-
 ### Test End-to-End Flow
 
-23. Upload a document to Blob Storage.
+14. Upload a document to Blob Storage.
 
-24. Run through:
+15. Run through:
 
    * OCR (Challenge 01)
    * GPT extraction (Challenge 02)
    * Schema mapping (Challenge 03)
    * HITL approval (Challenge 04)
 
-25. Verify:
+16. Verify:
 
 * Final document exists in Cosmos DB
 * Status is `APPROVED`
-* Data can be retrieved via API or Data Explorer
+* Data can be retrieved via Data Explorer
 
 <validation step="b168305b-cf36-4d19-92dc-0496001a08b0" />
  
@@ -158,8 +103,7 @@ After deployment succeeds, open the **App Service**.
 You have successfully completed the Challenge 5:
 
 * Cosmos DB stores structured document JSON
-* App Service is configured and secured
-* Secrets are managed via Environment variables
 * End-to-end flow completes successfully
+
 
 Congratulations! You've completed all challenges.
