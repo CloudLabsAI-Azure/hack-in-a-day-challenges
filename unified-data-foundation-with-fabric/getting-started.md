@@ -6,7 +6,7 @@ Welcome to Hack in a Day: Unified Data Foundation with Fabric challenge! We've p
 
 Once you're ready to dive in, your virtual machine and challenge guide will be right at your fingertips within your web browser.
 
-![](./media/gs1.png)
+![](./media/unified-kynd-ggs-g1.png)
 
 ### Exploring Your Challenge Resources
 
@@ -32,7 +32,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 1. In the JumpVM, click on **Microsoft Edge** browser shortcut which is created on desktop.
 
-   ![](./media/gs-up1.png)
+   ![](./media/unified-kynd-ggs-g2.png)
 
 1. Navigate to the **Microsoft Fabric portal**:
 
@@ -57,6 +57,34 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 1. If you see the pop-up **Stay Signed in?**, click No.
 
    ![](./media/gs-4.png)
+
+1. On the **Enter your email** page, verify the **Email (1)** field is populated, and then select **Submit (2)**.
+
+   ![](./media/fab-kynd-ex1-g3.png)
+
+1. On the **Welcome to the Fabric view** dialog box, select **Start tour** to proceed.
+
+   ![](./media/fab-kynd-ex1-g4.png)
+
+1. Select the **Profile (1)** icon, and then choose **Free trial (2)**.
+
+   ![](./media/fab-kynd-ex1-g5.png)
+
+1. On the **Activate your 60-day free Fabric trial capacity** dialog box, review the **Trial capacity region**, and then select **Activate**.
+
+   ![](./media/fab-kynd-ex1-g6.png)
+
+1. On the **Successfully upgraded to Microsoft Fabric** dialog box, select **OK**.
+
+   ![](./media/fab-kynd-ex1-g7.png)
+
+1. On the **Invite teammates to try Fabric to extend your trial** dialog box, select the **Close (X)** icon to dismiss the prompt.
+
+   ![](./media/fab-kynd-ex1-g8.png)
+
+1. Select the **Profile (1)** icon, and verify that the **Fabric and Power BI trial status (2)** shows the trial is active.
+
+   ![](./media/fab-kynd-ex1-g9.png)
 
 1. Welcome to **Microsoft Fabric**! You're now ready to start building your data lakehouse solution using Microsoft Fabric, OneLake, and the Medallion architecture for data engineering with flight loyalty and transaction data.
 
