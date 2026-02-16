@@ -88,11 +88,21 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 1. Welcome to **Microsoft Fabric**! You're now ready to start building your data lakehouse solution using Microsoft Fabric, OneLake, and the Medallion architecture for data engineering with flight loyalty and transaction data.
 
-1. The lab environment includes:
-   - Dataset files in **C:\LabFiles\fabric-kyndr-uc1\dataset\**
-   - Access to create Lakehouses, Notebooks, and Data Science experiments
+1. If you are unable to access the free trial, follow the steps below:
 
-   > **Important:** Before starting the challenges, you will deploy a Microsoft Fabric capacity (F2 SKU) from the Azure Portal as part of Challenge 1. Detailed step-by-step instructions are provided in Challenge 1.
+   1. Open a new browser tab, and navigate to the **Azure portal**.
+
+   ```
+   https://portal.azure.com/
+   ```
+
+   1. In the search bar, enter **Microsoft Fabric (1)**, and then select **Microsoft Fabric (2)** from the results.
+
+      ![](./media/fab-kynd-ex1-g1.png)
+   
+   1. On the **Microsoft Fabric** page, select **Create**.
+
+      ![](./media/fab-kynd-ex1-g2.png)
 
 Now, click on the **Next** from lower right corner to move on next page.
 
