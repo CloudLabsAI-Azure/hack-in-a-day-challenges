@@ -20,13 +20,89 @@ from azure.ai.agents.models import ListSortOrder
 # Load environment variables
 load_dotenv()
 
-# Page configuration
+# Page configuration - MUST be first Streamlit command
 st.set_page_config(
     page_title="SQL Modernization Assistant",
     page_icon="🔄",
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+def validate_configuration():
+    """Validate required environment variables and show setup guide if missing."""
+    required_vars = {
+        'AGENT_API_ENDPOINT': os.getenv('AGENT_API_ENDPOINT'),
+        'AGENT_ID': os.getenv('AGENT_ID'),
+    }
+    optional_vars = {
+        'COSMOS_ENDPOINT': os.getenv('COSMOS_ENDPOINT'),
+        'COSMOS_KEY': os.getenv('COSMOS_KEY'),
+        'DATABASE_NAME': os.getenv('DATABASE_NAME', 'SQLModernizationDB'),
+    }
+    
+    missing_required = [k for k, v in required_vars.items() if not v or v.strip() == '']
+    missing_optional = [k for k, v in optional_vars.items() if not v or v.strip() == '']
+    
+    return missing_required, missing_optional
+
+def show_setup_guide(missing_required, missing_optional):
+    """Display a helpful setup guide for missing configuration."""
+    st.error("⚙️ **Configuration Required**")
+    
+    st.markdown("""
+    ### Quick Setup Guide
+    
+    This application needs to be configured before use. Please follow these steps:
+    
+    #### Step 1: Configure Environment Variables
+    
+    Edit the `.env` file in the codefiles folder with your credentials:
+    """)
+    
+    if missing_required:
+        st.warning(f"**Missing Required Variables:** {', '.join(missing_required)}")
+        
+        st.markdown("""
+        **Get Agent API Endpoint:**
+        1. Go to [Azure AI Foundry Portal](https://ai.azure.com)
+        2. Open your project → **Settings** → **Overview**
+        3. Copy the **Microsoft Foundry project endpoint**
+        4. The endpoint format: `https://your-project.services.ai.azure.com/api/projects/proj-default`
+        
+        **Get Agent ID:**
+        1. In Azure AI Foundry Portal, go to **Agents**
+        2. Select your SQL Translation Agent
+        3. Copy the **Agent ID** from the Setup panel (starts with `asst_`)
+        """)
+    
+    if missing_optional:
+        st.info(f"**Optional Variables (for history feature):** {', '.join(missing_optional)}")
+        st.markdown("""
+        **Get Cosmos DB credentials (optional but recommended):**
+        1. Go to [Azure Portal](https://portal.azure.com)
+        2. Navigate to your Cosmos DB account → **Keys**
+        3. Copy the **URI** and **Primary Key**
+        """)
+    
+    st.markdown("""
+    #### Step 2: Authenticate with Azure CLI
+    
+    Open a terminal and run:
+    ```bash
+    az login
+    ```
+    
+    #### Step 3: Restart the Application
+    
+    After configuring, restart this application.
+    """)
+    
+    st.stop()
+
+# Validate configuration at startup
+missing_required, missing_optional = validate_configuration()
+if missing_required:
+    show_setup_guide(missing_required, missing_optional)
 
 # Custom CSS for stunning UI
 st.markdown("""
@@ -292,7 +368,8 @@ def call_agent_api(sql_input):
         
         if not all([project_endpoint, agent_id]):
             st.error("❌ Missing configuration. Please check your .env file.")
-            st.stop()
+            st.info("💡 Make sure AGENT_API_ENDPOINT and AGENT_ID are set in your .env file")
+            return None
         
         # Initialize project client with Azure CLI credentials
         with st.spinner("Connecting to Microsoft Foundry..."):
@@ -324,7 +401,7 @@ def call_agent_api(sql_input):
         # Check run status
         if run.status == "failed":
             st.error(f"Agent run failed: {run.last_error}")
-            st.stop()
+            return None
         
         st.success("Agent processing completed!")
         
@@ -346,18 +423,16 @@ def call_agent_api(sql_input):
         
         if not response_text:
             st.error("No response from agent")
-            st.stop()
+            return None
         
         return response_text
         
     except Exception as e:
         st.error(f"❌ Error calling agent: {str(e)}")
         import traceback
-        st.error(f"Details: {traceback.format_exc()}")
-        st.stop()
-    except Exception as e:
-        st.error(f"❌ Unexpected error: {str(e)}")
-        st.stop()
+        with st.expander("🔍 Error Details"):
+            st.code(traceback.format_exc())
+        return None
 
 # Header
 st.markdown("""
@@ -544,43 +619,47 @@ WHERE ROWNUM <= 10;""",
                 with st.container():
                     response_text = call_agent_api(sql_to_process)
                     
-                    # Parse the response
-                    parsed = parse_agent_response(response_text)
+                    # Check if API call was successful
+                    if response_text is None:
+                        st.warning("⚠️ Could not process SQL. Please check the error above and try again.")
+                    else:
+                        # Parse the response
+                        parsed = parse_agent_response(response_text)
                     
-                    # Save to session state
-                    st.session_state['last_result'] = {
-                        'timestamp': datetime.now().isoformat(),
-                        'source_sql': sql_to_process,
-                        'translation': parsed['translation'],
-                        'validation': parsed['validation'],
-                        'optimization': parsed['optimization'],
-                        'raw_response': response_text
-                    }
-                    
-                    # Save to Cosmos DB
-                    cosmos_id = save_to_cosmos(
-                        sql_to_process, 
-                        parsed['translation'], 
-                        parsed['validation'], 
-                        parsed['optimization']
-                    )
-                    
-                    if cosmos_id:
-                        st.success(f"✅ Saved to Cosmos DB (ID: {cosmos_id[:8]}...)")
-                    
-                    # Professional completion message
-                    st.markdown("""
-                    <div style="padding: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-                                border-radius: 8px; color: white; text-align: center; margin: 1rem 0;">
-                        <h3 style="margin: 0; color: white;">✓ Translation Complete</h3>
-                        <p style="margin: 0.5rem 0 0 0; opacity: 0.95;">Your SQL has been modernized and optimized</p>
-                    </div>
-                    """, unsafe_allow_html=True)
-                    
-                    # Auto-switch to Results tab
-                    st.session_state['active_tab'] = 'results'
-                    time.sleep(1)
-                    st.rerun()
+                        # Save to session state
+                        st.session_state['last_result'] = {
+                            'timestamp': datetime.now().isoformat(),
+                            'source_sql': sql_to_process,
+                            'translation': parsed['translation'],
+                            'validation': parsed['validation'],
+                            'optimization': parsed['optimization'],
+                            'raw_response': response_text
+                        }
+                        
+                        # Save to Cosmos DB
+                        cosmos_id = save_to_cosmos(
+                            sql_to_process, 
+                            parsed['translation'], 
+                            parsed['validation'], 
+                            parsed['optimization']
+                        )
+                        
+                        if cosmos_id:
+                            st.success(f"✅ Saved to Cosmos DB (ID: {cosmos_id[:8]}...)")
+                        
+                        # Professional completion message
+                        st.markdown("""
+                        <div style="padding: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                                    border-radius: 8px; color: white; text-align: center; margin: 1rem 0;">
+                            <h3 style="margin: 0; color: white;">✓ Translation Complete</h3>
+                            <p style="margin: 0.5rem 0 0 0; opacity: 0.95;">Your SQL has been modernized and optimized</p>
+                        </div>
+                        """, unsafe_allow_html=True)
+                        
+                        # Auto-switch to Results tab
+                        st.session_state['active_tab'] = 'results'
+                        time.sleep(1)
+                        st.rerun()
 
 with tab2:
     st.markdown("### 📊 Translation Results")
@@ -598,8 +677,14 @@ with tab2:
             st.markdown("#### 🔄 Translation")
             if result['translation']:
                 st.code(result['translation'], language="sql")
-                if st.button("📋 Copy T-SQL", key="copy_translation"):
-                    st.toast("Copied to clipboard!")
+                # Copy button with actual clipboard functionality
+                st.download_button(
+                    label="📥 Download T-SQL",
+                    data=result['translation'],
+                    file_name="translated_query.sql",
+                    mime="text/plain",
+                    key="download_translation"
+                )
             else:
                 st.warning("No translation found in response")
         
