@@ -35,7 +35,7 @@ By the end, you'll have a fully operational, secure OpenAI service ready for you
 ```powershell
 $openaiName = az cognitiveservices account list `
  --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --query "[?kind=='OpenAI'].name" -o tsv
+ --query "[?kind=='AIServices'].name" -o tsv
 
 Write-Host "OpenAI Resource: $openaiName"
 

@@ -80,7 +80,7 @@ az storage account show -n $storageName -g "challenge-rg-<inject key="Deployment
  --query "encryption.services.blob.enabled" -o tsv
 
 # Check OpenAI encryption
-$openaiName = az cognitiveservices account list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[?kind=='OpenAI'].name" -o tsv
+$openaiName = az cognitiveservices account list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[?kind=='AIServices'].name" -o tsv
 az cognitiveservices account show -n $openaiName -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "properties.encryption" -o json
 ```

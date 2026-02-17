@@ -60,7 +60,7 @@ Grant your VM's managed identity the necessary permissions via CLI.
 # Get OpenAI resource ID
 $openaiName = az cognitiveservices account list `
  --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --query "[?kind=='OpenAI'].name" -o tsv
+ --query "[?kind=='AIServices'].name" -o tsv
 
 $openaiId = az cognitiveservices account show `
  --name $openaiName `
@@ -126,7 +126,7 @@ $kvName = az keyvault list `
 
 $openaiName = az cognitiveservices account list `
  --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --query "[?kind=='OpenAI'].name" -o tsv
+ --query "[?kind=='AIServices'].name" -o tsv
 
 Write-Host "Key Vault: $kvName"
 Write-Host "OpenAI Resource: $openaiName"

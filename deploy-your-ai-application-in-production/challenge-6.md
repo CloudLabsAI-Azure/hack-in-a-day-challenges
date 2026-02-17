@@ -71,7 +71,7 @@ Confirm all services resolve to private IPs from within the VNET:
 ```powershell
 # Get resource names
 $kvName = az keyvault list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[0].name" -o tsv
-$openaiName = az cognitiveservices account list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[?kind=='OpenAI'].name" -o tsv
+$openaiName = az cognitiveservices account list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[?kind=='AIServices'].name" -o tsv
 $storageName = az storage account list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[0].name" -o tsv
 
 # Test DNS resolution - all should return 10.0.x.x private IPs
