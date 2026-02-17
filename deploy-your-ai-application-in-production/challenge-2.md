@@ -95,9 +95,9 @@ Let's create an NSG with restrictive rules using the Azure Portal.
 
    Click **+ Add** again to add the second rule:
    
-   **Allow Azure Services Rule**:
+   **Allow VNet Services Rule**:
    - **Source**: **Service Tag**
-   - **Source service tag**: **AzureCloud**
+   - **Source service tag**: **VirtualNetwork**
    - **Source port ranges**: *****
    - **Destination**: **Any**
    - **Service**: **HTTPS**
@@ -105,8 +105,8 @@ Let's create an NSG with restrictive rules using the Azure Portal.
    - **Protocol**: **TCP**
    - **Action**: **Allow**
    - **Priority**: **110**
-   - **Name**: **AllowAzureServices**
-   - **Description**: **Allow Azure backend services**
+   - **Name**: **AllowVNetServices**
+   - **Description**: **Allow HTTPS from virtual network**
    - Click **Add**
 
    Click **+ Add** again to add the deny rule:
