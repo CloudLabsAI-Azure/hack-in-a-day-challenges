@@ -325,10 +325,10 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
    az cognitiveservices account show `
      --name openai-secureai-<inject key="DeploymentID" enableCopy="false"/> `
      --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> `
-     --query "properties.endpoints.\"OpenAI Language Model Instance API\"" -o tsv
+     --query "properties.endpoints" -o json | Select-String "openai.azure.com"
    ```
    
-   Should return:
+   You should see a line containing:
    ```
    https://openai-secureai-<inject key="DeploymentID" enableCopy="false"/>.openai.azure.com/
    ```
