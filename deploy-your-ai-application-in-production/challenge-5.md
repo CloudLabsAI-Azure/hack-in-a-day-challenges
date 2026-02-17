@@ -35,31 +35,31 @@ Let's build a secure ChatGPT-like experience!
 
 ```
 +-------------------------------------------------------------+
-¦ User's Browser ¦
-¦ http://localhost:8501 ¦
+ï¿½ User's Browser ï¿½
+ï¿½ http://localhost:8501 ï¿½
 +-------------------------------------------------------------+
- ¦
+ ï¿½
  +-----> Streamlit Web UI
- ¦
+ ï¿½
 +----------------------------?--------------------------------+
-¦ vm-<DID> (Application Subnet) ¦
-¦ ¦
-¦ +------------------------------------------------------+ ¦
-¦ ¦ Secure Chat Application (app.py) ¦ ¦
-¦ ¦ - Streamlit UI ¦ ¦
-¦ ¦ - Managed Identity auth ¦ ¦
-¦ ¦ - Key Vault integration ¦ ¦
-¦ ¦ - Session management ¦ ¦
-¦ +------------------------------------------------------+ ¦
-¦ ¦ ¦ ¦ ¦
+ï¿½ vm-<DID> (Application Subnet) ï¿½
+ï¿½ ï¿½
+ï¿½ +------------------------------------------------------+ ï¿½
+ï¿½ ï¿½ Secure Chat Application (app.py) ï¿½ ï¿½
+ï¿½ ï¿½ - Streamlit UI ï¿½ ï¿½
+ï¿½ ï¿½ - Managed Identity auth ï¿½ ï¿½
+ï¿½ ï¿½ - Key Vault integration ï¿½ ï¿½
+ï¿½ ï¿½ - Session management ï¿½ ï¿½
+ï¿½ +------------------------------------------------------+ ï¿½
+ï¿½ ï¿½ ï¿½ ï¿½ ï¿½
 +----------+--------------+----------------+-----------------+
- ¦ ¦ ¦
- Private Endpoint ¦ ¦
- ¦ ¦ ¦
+ ï¿½ ï¿½ ï¿½
+ Private Endpoint ï¿½ ï¿½
+ ï¿½ ï¿½ ï¿½
 +----------?--------+ +---?----------+ +--?----------------+
-¦ Azure Key Vault ¦ ¦ Azure OpenAI ¦ ¦ Storage Account ¦
-¦ (Secrets) ¦ ¦ (Chat Model) ¦ ¦ (Session History) ¦
-¦ 10.0.2.x ¦ ¦ 10.0.1.x ¦ ¦ 10.0.2.x ¦
+ï¿½ Azure Key Vault ï¿½ ï¿½ Azure OpenAI ï¿½ ï¿½ Storage Account ï¿½
+ï¿½ (Secrets) ï¿½ ï¿½ (Chat Model) ï¿½ ï¿½ (Session History) ï¿½
+ï¿½ 10.0.2.x ï¿½ ï¿½ 10.0.1.x ï¿½ ï¿½ 10.0.2.x ï¿½
 +-------------------+ +--------------+ +-------------------+
 
 All connections via private endpoints - ZERO public internet traffic!
@@ -244,7 +244,7 @@ if prompt := st.chat_input("Ask me anything about cloud security..."):
  for chunk in response:
  if chunk.choices[0].delta.content:
  full_response += chunk.choices[0].delta.content
- response_placeholder.markdown(full_response + "¦")
+ response_placeholder.markdown(full_response + "ï¿½")
  
  response_placeholder.markdown(full_response)
  
@@ -528,16 +528,16 @@ streamlit run app.py
 ```
 
 3. **Open browser**:
- - The browser should open automatically
- - If not, manually navigate to: `http://localhost:8501`
+   - The browser should open automatically
+   - If not, manually navigate to: `http://localhost:8501`
 
 4. **You should see**:
- - Title: " Secure Enterprise Chat"
- - Sidebar showing: " Authenticated"
- - Model name displayed
- - "Auth: Managed Identity"
- - "Network: Private Only"
- - Chat input box ready
+   - Title: " Secure Enterprise Chat"
+   - Sidebar showing: " Authenticated"
+   - Model name displayed
+   - "Auth: Managed Identity"
+   - "Network: Private Only"
+   - Chat input box ready
 
 ### Part 7: Test the Chat Application
 
@@ -551,9 +551,10 @@ What is the principle of least privilege?
 ```
 
 Expected:
- - Response appears (streaming effect!)
- - No errors
- - Professional security advice
+   - Response appears (streaming effect!)
+   - No errors
+   - Professional security advice
+
 2. **Test 2: Multi-turn conversation**
 
 Continue the conversation:
@@ -789,13 +790,13 @@ Key Vault Secrets Retrieved:
 
 Azure Services Used:
 1. Azure OpenAI (private endpoint)
- - Chat completions via managed identity
+   - Chat completions via managed identity
  
 2. Azure Key Vault (private endpoint)
- - All configuration stored as secrets
+   - All configuration stored as secrets
  
 3. Azure Storage (private endpoint)
- - Session history in 'chat-sessions' container
+   - Session history in 'chat-sessions' container
  
 Features Working:
 - Chat completions
@@ -1024,26 +1025,26 @@ Validate your app deployment:
 ## Bonus Challenges
 
 1. **Add User Authentication**:
- - Integrate Entra ID login
- - Show username in sidebar
- - Filter session history by user
+   - Integrate Entra ID login
+   - Show username in sidebar
+   - Filter session history by user
 
 2. **Implement RAG (Retrieval Augmented Generation)**:
- - Upload documents to Blob Storage
- - Generate embeddings with text-embedding-ada-002
- - Store in Azure AI Search
- - Enhance chat with document context
+   - Upload documents to Blob Storage
+   - Generate embeddings with text-embedding-ada-002
+   - Store in Azure AI Search
+   - Enhance chat with document context
 
 3. **Add Conversation Export**:
- - Button to download chat history as PDF or JSON
- - Include timestamp and metadata
- - Store exports in Blob Storage
+   - Button to download chat history as PDF or JSON
+   - Include timestamp and metadata
+   - Store exports in Blob Storage
 
 4. **Deploy to Azure App Service**:
- - Create App Service with VNET integration
- - Configure managed identity for App Service
- - Deploy via Azure CLI or GitHub Actions
- - Access via private endpoint only
+   - Create App Service with VNET integration
+   - Configure managed identity for App Service
+   - Deploy via Azure CLI or GitHub Actions
+   - Access via private endpoint only
 
 ## What You Learned
 

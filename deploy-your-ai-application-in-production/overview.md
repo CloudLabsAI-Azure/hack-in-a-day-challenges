@@ -29,40 +29,6 @@ A fully secure AI chat application with:
 7. **Managed Identity** for passwordless authentication
 8. **Pre-built Chat Application** with Streamlit UI (just configure & run)
 
-## Architecture
-
-```
-+-------------------------------------------------------------+
-¦ Azure Subscription ¦
-¦ +-------------------------------------------------------+ ¦
-¦ ¦ Virtual Network (VNET) ¦ ¦
-¦ ¦ +--------------+ +--------------+ +-------------+ ¦ ¦
-¦ ¦ ¦ AI Subnet ¦ ¦ App Subnet ¦ ¦ Mgmt Subnet ¦ ¦ ¦
-¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦
-¦ ¦ ¦ +--------+ ¦ ¦ +--------+ ¦ ¦ +-------+ ¦ ¦ ¦
-¦ ¦ ¦ ¦AI Foundry¦ ¦ ¦ ¦Chat App¦ ¦ ¦ ¦Bastion¦ ¦ ¦ ¦
-¦ ¦ ¦ ¦(Private) ¦?-+--+--¦ VM ¦?-+--+--¦ ¦ ¦ ¦ ¦
-¦ ¦ ¦ +--------+ ¦ ¦ +--------+ ¦ ¦ +-------+ ¦ ¦ ¦
-¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦
-¦ ¦ ¦ +--------+ ¦ ¦ ¦ ¦ ¦ ¦ ¦
-¦ ¦ ¦ ¦OpenAI ¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦
-¦ ¦ ¦ ¦(Private)¦ ¦ ¦ ¦ ¦ ¦ ¦ ¦
-¦ ¦ ¦ +--------+ ¦ ¦ ¦ ¦ ¦ ¦ ¦
-¦ ¦ +--------------+ +--------------+ +-------------+ ¦ ¦
-¦ ¦ ¦ ¦
-¦ ¦ Private Endpoints: ¦ ¦
-¦ ¦ • AI Foundry • Storage • Key Vault • OpenAI ¦ ¦
-¦ +-------------------------------------------------------+ ¦
-¦ ¦
-¦ +--------------+ +-------------+ +----------------+ ¦
-¦ ¦ Key Vault ¦ ¦ Storage ¦ ¦ Entra ID RBAC ¦ ¦
-¦ ¦ (Private) ¦ ¦ (Private) ¦ ¦ (Managed ID) ¦ ¦
-¦ +--------------+ +-------------+ +----------------+ ¦
-+-------------------------------------------------------------+
-
-All traffic flows through private endpoints. Zero public internet exposure.
-```
-
 ## Technologies Used
 
 - **Azure AI Foundry**: Enterprise AI platform with built-in security

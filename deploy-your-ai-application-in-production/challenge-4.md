@@ -33,10 +33,10 @@ By the end, you'll have a fully operational, secure OpenAI service ready for you
 1. **In Azure Portal**, navigate to your **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>** resource.
 
 1. Verify the resource is deployed:
- - Note the **Location/Region**
- - Click **Networking** in the left menu
- - Verify **Public network access** is restricted or disabled
- - Check that **Private endpoint connections** show as **Approved**
+   - Note the **Location/Region**
+   - Click **Networking** in the left menu
+   - Verify **Public network access** is restricted or disabled
+   - Check that **Private endpoint connections** show as **Approved**
 
 1. **Optional - Verify using VS Code PowerShell** (to get resource details):
 
@@ -75,10 +75,10 @@ Before deploying, verify which models are available using Azure AI Foundry porta
 1. Click **Go to Azure AI Foundry portal** (or **Go to Foundry portal**).
 
 1. In Azure AI Foundry:
- - Click **Models + endpoints** in the left navigation
- - Click **Model catalog** tab
- - Search for **gpt-4** to see if it's available in your region
- - Also search for **gpt-35-turbo** as a backup option
+   - Click **Models + endpoints** in the left navigation
+   - Click **Model catalog** tab
+   - Search for **gpt-4** to see if it's available in your region
+   - Also search for **gpt-35-turbo** as a backup option
 
 1. **Optional - Check via VS Code PowerShell**:
 
@@ -115,9 +115,9 @@ Deploy your primary chat model using Azure AI Foundry portal.
 1. Click **Confirm**.
 
 1. Configure:
- - **Deployment name**: **gpt-4-chat**
- - **Deployment type**: **Global Standard**
- - **TPM**: **20K**
+   - **Deployment name**: **gpt-4-chat**
+   - **Deployment type**: **Global Standard**
+   - **TPM**: **20K**
 
 1. Click **Deploy** and wait (30-60 seconds).
 
@@ -128,8 +128,8 @@ Deploy your primary chat model using Azure AI Foundry portal.
 1. **In Azure AI Foundry**, click **+ Deploy model** ? **Deploy base model**.
 
 1. Search for **text-embedding-ada-002** and deploy it:
- - **Deployment name**: **text-embedding-ada-002**
- - **TPM**: **50K**
+   - **Deployment name**: **text-embedding-ada-002**
+   - **TPM**: **50K**
 
 1. Verify both models are deployed in Models + endpoints list.
 
@@ -139,30 +139,26 @@ Azure OpenAI includes responsible AI content filtering. Let's review and configu
 
 1. **View current content filter**:
 
-In the Azure Portal:
-- Navigate to your Azure OpenAI resource
-- Click **Content filters** (left menu under Management)
-- You'll see the default filter policy
+   In the Azure Portal:
+   - Navigate to your Azure OpenAI resource
+   - Click **Content filters** (left menu under Management)
+   - You'll see the default filter policy
 
 2. **Create a custom content filter** (optional, for learning):
 
-In the portal:
-- Click **+ Create content filter**
-- Name: `strict-filter`
-- Configure filters:
- - **Hate**: Severity High - Block
- - **Sexual**: Severity Medium - Block
- - **Violence**: Severity High - Block
- - **Self-harm**: Severity Medium - Block
-- Click **Create**
+   In the portal:
+   - Click **+ Create content filter**
+   - Name: `strict-filter`
+   - Configure filters: **Hate**: Severity High - Block, **Sexual**: Severity Medium - Block, **Violence**: Severity High - Block, **Self-harm**: Severity Medium - Block
+   - Click **Create**
 
 3. **Apply filter to your deployment**:
 
-- Go back to **Deployments**
-- Click on your GPT deployment
-- Click **Edit**
-- Under **Content filter**, select `strict-filter`
-- Click **Save**
+   - Go back to **Deployments**
+   - Click on your GPT deployment
+   - Click **Edit**
+   - Under **Content filter**, select `strict-filter`
+   - Click **Save**
 
 ### Part 6: Store Model Configuration in Key Vault
 
@@ -341,11 +337,11 @@ print("\n" + "=" * 60)
 print("ALL TESTS PASSED!")
 print("=" * 60)
 print("\nAzure OpenAI is fully operational with:")
-print(" • Private endpoint connectivity")
-print(" • Managed identity authentication (zero API keys)")
-print(" • Secrets stored in Key Vault")
-print(" • Chat completions working")
-print(" • Streaming responses working")
+print(" ï¿½ Private endpoint connectivity")
+print(" ï¿½ Managed identity authentication (zero API keys)")
+print(" ï¿½ Secrets stored in Key Vault")
+print(" ï¿½ Chat completions working")
+print(" ï¿½ Streaming responses working")
 print("\n100% secure, production-ready configuration!")
 print("=" * 60)
 
@@ -416,17 +412,17 @@ Check usage and performance.
 2. Click **Metrics** (left menu under Monitoring)
 
 3. **Add metrics to track**:
- - **Total Calls**: Shows request volume
- - **Processed Inference Tokens**: Token consumption
- - **Time to Response**: Latency
+   - **Total Calls**: Shows request volume
+   - **Processed Inference Tokens**: Token consumption
+   - **Time to Response**: Latency
 
 4. **Set time range** to "Last hour" to see your test requests
 
 5. **Create an alert** (optional):
- - Click **New alert rule**
- - Condition: `Total Calls > 1000` (or your threshold)
- - Action: Email notification
- - This helps monitor unexpected usage spikes
+   - Click **New alert rule**
+   - Condition: `Total Calls > 1000` (or your threshold)
+   - Action: Email notification
+   - This helps monitor unexpected usage spikes
 
 ### Part 10: Document Your OpenAI Configuration
 
@@ -571,19 +567,19 @@ Validate your OpenAI setup:
  Test with image analysis
 
 2. **Implement Token Usage Monitoring**:
- - Create a script that tracks token usage per request
- - Calculate cost estimates based on pricing
- - Set up budget alerts
+   - Create a script that tracks token usage per request
+   - Calculate cost estimates based on pricing
+   - Set up budget alerts
 
 3. **Test Content Filtering**:
- - Try to submit prompts with harmful content
- - Verify they're blocked by the content filter
- - Review filter logs
+   - Try to submit prompts with harmful content
+   - Verify they're blocked by the content filter
+   - Review filter logs
 
 4. **Benchmark Different Models**:
- - Deploy both GPT-4 and GPT-3.5-Turbo
- - Compare latency, quality, cost
- - Document trade-offs
+   - Deploy both GPT-4 and GPT-3.5-Turbo
+   - Compare latency, quality, cost
+   - Document trade-offs
 
 ## What You Learned
 
