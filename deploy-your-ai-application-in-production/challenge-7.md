@@ -91,9 +91,12 @@ Both should show encryption is enabled.
 
 Set up centralized monitoring for your OpenAI resource.
 
-1. **Create Log Analytics workspace and enable diagnostics**:
+1. **Get resource names and create Log Analytics workspace**:
 
 ```powershell
+# Get resource names (needed for this part)
+$openaiName = az cognitiveservices account list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[?kind=='AIServices'].name" -o tsv
+
 $workspaceName = "law-ai-monitoring-<inject key="DeploymentID" enableCopy="false"/>"
 
 az monitor log-analytics workspace create `
@@ -149,7 +152,11 @@ az advisor recommendation list `
 Verify your complete architecture against WAF pillars:
 
 ```powershell
-# Quick verification of all security controls
+# Initialize variables for final check
+$kvName = az keyvault list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[0].name" -o tsv
+$openaiName = az cognitiveservices account list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[?kind=='AIServices'].name" -o tsv
+$openaiId = az cognitiveservices account show -n $openaiName -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query id -o tsv
+
 Write-Host "=== PRODUCTION READINESS CHECK ===" -ForegroundColor Cyan
 
 # 1. Managed Identity

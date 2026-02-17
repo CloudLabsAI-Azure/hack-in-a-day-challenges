@@ -80,6 +80,7 @@ Secure Azure OpenAI Chat Application
 """
 import streamlit as st
 import os
+from dotenv import load_dotenv
 from openai import AzureOpenAI
 from azure.identity import DefaultAzureCredential
 from azure.keyvault.secrets import SecretClient
@@ -87,6 +88,9 @@ from azure.storage.blob import BlobServiceClient
 import json
 from datetime import datetime
 import uuid
+
+# Load .env file
+load_dotenv()
 
 # Page config
 st.set_page_config(
@@ -266,18 +270,18 @@ Write-Host "Created app.py"
 
 ```powershell
 @'
-streamlit==1.31.0
-openai==2.15.0
-azure-identity==1.15.0
-azure-keyvault-secrets==4.7.0
-azure-storage-blob==12.19.0
-python-dotenv==1.0.0
+streamlit>=1.31.0
+openai>=1.12.0
+azure-identity>=1.15.0
+azure-keyvault-secrets>=4.7.0
+azure-storage-blob>=12.19.0
+python-dotenv>=1.0.0
 '@ | Out-File -FilePath "requirements.txt" -Encoding UTF8
 
 Write-Host "Created requirements.txt"
 ```
 
-> **Critical**: We're using `openai==2.15.0` (or later). Versions earlier than 2.x will fail with errors like "Client.__init__() got an unexpected keyword argument 'proxies'". This is due to breaking changes in the OpenAI Python SDK and its compatibility with Azure SDK components.
+> **Critical**: We need `openai>=1.12.0` (v2 recommended). Versions earlier than 1.x will fail with errors like "Client.__init__() got an unexpected keyword argument 'proxies'". This is due to breaking changes in the OpenAI Python SDK and its compatibility with Azure SDK components.
 
 3. **Create README**:
 
@@ -396,7 +400,7 @@ pip install -r requirements.txt
 
 This will take 2-3 minutes. You should see:
 ```
-Successfully installed streamlit-1.31.0 openai-1.12.0 azure-identity-1.15.0 ...
+Successfully installed streamlit-x.x.x openai-x.x.x azure-identity-x.x.x ...
 ```
 
 ### Part 5: Verify Storage Account Access

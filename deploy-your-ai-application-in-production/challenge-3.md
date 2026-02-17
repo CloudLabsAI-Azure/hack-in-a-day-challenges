@@ -139,10 +139,10 @@ $openaiEndpoint = az cognitiveservices account show `
 
 Write-Host "OpenAI Endpoint: $openaiEndpoint"
 
-# Verify the endpoint format (should be custom domain)
+# Verify the endpoint format (should contain your resource name)
 if ($openaiEndpoint -notlike "*$openaiName*") {
-    Write-Warning "WARNING: Endpoint should contain custom domain!"
-    Write-Warning "Expected format: https://<resource-name>.openai.azure.com/"
+    Write-Warning "WARNING: Endpoint should contain your resource name!"
+    Write-Warning "Expected format: https://<resource-name>.cognitiveservices.azure.com/"
     Write-Warning "If you see a generic endpoint, go back to Challenge 1 Part 5 and configure custom domain."
     Write-Warning "Current endpoint: $openaiEndpoint"
 }

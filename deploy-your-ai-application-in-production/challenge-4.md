@@ -57,7 +57,7 @@ az cognitiveservices account deployment list `
 
    You should see the **secure-chat** deployment from Challenge 1. This will be your primary chat model.
 
-### Part 3: Store Model Configuration in Key Vault
+### Part 2: Store Model Configuration in Key Vault
 
 Store the deployment name and API version so your app can retrieve them securely.
 
@@ -82,7 +82,7 @@ az keyvault secret set `
 az keyvault secret set `
  --vault-name $kvName `
  --name "OpenAIApiVersion" `
- --value "2024-02-15-preview"
+ --value "2024-12-01-preview"
 
 Write-Host "Stored ChatModelDeployment and OpenAIApiVersion in Key Vault"
 
@@ -95,9 +95,9 @@ az keyvault update `
 Write-Host "Key Vault secured"
 ```
 
-   > **Note**: If you deployed a different model in Part 2, replace `"secure-chat"` with your deployment name (e.g., `"gpt-4-chat"`).
+   > **Note**: If you deployed a different model, replace `"secure-chat"` with your deployment name.
 
-### Part 4: Test Chat Completions with Managed Identity
+### Part 3: Test Chat Completions with Managed Identity
 
 Validate that Azure OpenAI works end-to-end with managed identity authentication.
 
@@ -162,7 +162,7 @@ python "C:\Code\test_openai_quick.py"
 
 If you get an error, wait 2-3 minutes for RBAC to propagate and retry.
 
-### Part 5: Configure Content Filtering (Optional)
+### Part 4: Configure Content Filtering (Optional)
 
 Azure OpenAI includes responsible AI content filtering by default. You can optionally create a custom filter.
 

@@ -76,7 +76,9 @@ $storageName = az storage account list -g "challenge-rg-<inject key="DeploymentI
 
 # Test DNS resolution - all should return 10.0.x.x private IPs
 Write-Host "`n--- OpenAI DNS ---"
-Resolve-DnsName "$openaiName.openai.azure.com" | Select-Object Name, IPAddress
+$openaiEndpoint = az cognitiveservices account show -n $openaiName -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query properties.endpoint -o tsv
+$openaiHost = ([System.Uri]$openaiEndpoint).Host
+Resolve-DnsName $openaiHost | Select-Object Name, IPAddress
 
 Write-Host "`n--- Key Vault DNS ---"
 Resolve-DnsName "$kvName.vault.azure.net" | Select-Object Name, IPAddress
