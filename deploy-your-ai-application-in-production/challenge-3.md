@@ -1,4 +1,4 @@
-﻿# Challenge 03: Identity & Access Management with Entra ID
+# Challenge 03: Identity & Access Management with Entra ID
 
 ## Introduction
 
@@ -11,7 +11,7 @@ Network isolation alone isn't enough. Even with private endpoints, you need stro
 - Completed Challenge 2 (Network security configured)
 - All services have public access disabled
 - Private endpoints deployed and approved
-- Connected to **vm-<inject key="DeploymentID"></inject>** via Azure Bastion
+- Connected to **vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion
 - VS Code open with PowerShell terminal
 - Azure CLI logged in (`az login` completed)
 
@@ -28,31 +28,31 @@ Network isolation alone isn't enough. Even with private endpoints, you need stro
 ## Understanding Managed Identity
 
 ```
-┌────────────────────────────────────────────────────────────┐
-│ Traditional Authentication (INSECURE) │
-│ │
-│ Application → Hardcoded API Key → Azure OpenAI │
-│ │
-│ Problems: │
-│ API keys stored in code/config files │
-│ Keys can be leaked to GitHub/logs │
-│ Manual key rotation required │
-│ No audit trail of who used the key │
-└────────────────────────────────────────────────────────────┘
++------------------------------------------------------------+
+� Traditional Authentication (INSECURE) �
+� �
+� Application ? Hardcoded API Key ? Azure OpenAI �
+� �
+� Problems: �
+� API keys stored in code/config files �
+� Keys can be leaked to GitHub/logs �
+� Manual key rotation required �
+� No audit trail of who used the key �
++------------------------------------------------------------+
 
-┌────────────────────────────────────────────────────────────┐
-│ Managed Identity Authentication (SECURE) │
-│ │
-│ Application → Entra ID Token → Azure OpenAI │
-│ (VM Identity) (Automatic) (RBAC Check) │
-│ │
-│ Benefits: │
-│ Zero secrets in code │
-│ Automatic credential rotation by Azure │
-│ Full audit trail in Entra ID logs │
-│ Granular RBAC permissions │
-│ Works seamlessly with private endpoints │
-└────────────────────────────────────────────────────────────┘
++------------------------------------------------------------+
+� Managed Identity Authentication (SECURE) �
+� �
+� Application ? Entra ID Token ? Azure OpenAI �
+� (VM Identity) (Automatic) (RBAC Check) �
+� �
+� Benefits: �
+� Zero secrets in code �
+� Automatic credential rotation by Azure �
+� Full audit trail in Entra ID logs �
+� Granular RBAC permissions �
+� Works seamlessly with private endpoints �
++------------------------------------------------------------+
 ```
 
 ## Steps to Complete
@@ -61,9 +61,9 @@ Network isolation alone isn't enough. Even with private endpoints, you need stro
 
 Your VM needs an identity to authenticate to Azure services. We'll configure this using the Azure Portal.
 
-1. **In Azure Portal**, navigate to **Resource groups** and select **challenge-rg-<inject key="DeploymentID"></inject>**.
+1. **In Azure Portal**, navigate to **Resource groups** and select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**.
 
-1. Find and click on your Virtual Machine resource: **vm-<inject key="DeploymentID"></inject>**.
+1. Find and click on your Virtual Machine resource: **vm-<inject key="DeploymentID" enableCopy="false"/>**.
 
 1. In the left menu, under **Security**, click **Identity**.
 
@@ -81,10 +81,10 @@ Your VM needs an identity to authenticate to Azure services. We'll configure thi
  Open VS Code PowerShell terminal and run:
 
 ```powershell
-$vmName = "vm-<inject key="DeploymentID"></inject>"
+$vmName = "vm-<inject key="DeploymentID" enableCopy="false"/>"
 
 $identityId = az vm identity show `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --name $vmName `
  --query principalId -o tsv
 
@@ -95,11 +95,11 @@ Write-Host "Managed Identity ID: $identityId"
 
 Grant your VM's managed identity permission to use Azure OpenAI using the Azure Portal.
 
-1. **In Azure Portal**, navigate to your **openai-secureai-<inject key="DeploymentID"></inject>** resource.
+1. **In Azure Portal**, navigate to your **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>** resource.
 
 1. In the left menu, click **Access control (IAM)**.
 
-1. Click **+ Add** → **Add role assignment**.
+1. Click **+ Add** ? **Add role assignment**.
 
 1. On the **Role** tab:
  - Search for **Cognitive Services OpenAI User**
@@ -125,13 +125,13 @@ Grant your VM's managed identity permission to use Azure OpenAI using the Azure 
 
 Key Vault will store connection strings and configuration. Grant access to your managed identity using the Azure Portal.
 
-1. **In Azure Portal**, navigate to your **kv-secureai-<inject key="DeploymentID"></inject>** Key Vault.
+1. **In Azure Portal**, navigate to your **kv-secureai-<inject key="DeploymentID" enableCopy="false"/>** Key Vault.
 
 1. In the left menu, click **Access control (IAM)**.
 
 1. **Assign Key Vault Secrets User role to your VM's managed identity**:
 
- - Click **+ Add** → **Add role assignment**
+ - Click **+ Add** ? **Add role assignment**
  - On the **Role** tab:
    - Search for **Key Vault Secrets User**
    - Select it and click **Next**
@@ -145,7 +145,7 @@ Key Vault will store connection strings and configuration. Grant access to your 
 
 1. **Assign Key Vault Secrets Officer role to yourself** (so you can create secrets):
 
- - Click **+ Add** → **Add role assignment** again
+ - Click **+ Add** ? **Add role assignment** again
  - On the **Role** tab:
    - Search for **Key Vault Secrets Officer**
    - Select it and click **Next**
@@ -171,11 +171,11 @@ Instead of storing endpoints and keys in files, store them securely in Key Vault
 ```powershell
 # Get resource names
 $kvName = az keyvault list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[?contains(name, 'kv')].name" -o tsv
 
 $openaiName = az cognitiveservices account list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[?kind=='OpenAI'].name" -o tsv
 
 Write-Host "Key Vault: $kvName"
@@ -183,7 +183,7 @@ Write-Host "OpenAI Resource: $openaiName"
 
 # Get OpenAI endpoint
 $openaiEndpoint = az cognitiveservices account show `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --name $openaiName `
  --query properties.endpoint -o tsv
 
@@ -200,7 +200,7 @@ if ($openaiEndpoint -notlike "*$openaiName*") {
 # Temporarily enable Key Vault public access
 az keyvault update `
  --name $kvName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --public-network-access Enabled
 
 Write-Host "Key Vault public access enabled temporarily"
@@ -239,7 +239,7 @@ Write-Host "Stored OpenAI Resource name"
 ```powershell
 az keyvault update `
  --name $kvName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --public-network-access Disabled
 
 Write-Host "Key Vault secured - public access disabled"
@@ -249,11 +249,11 @@ Write-Host "Key Vault secured - public access disabled"
 
 Grant your VM's managed identity permission to read/write blobs using Azure Portal.
 
-1. **In Azure Portal**, navigate to your **stsecureai<inject key="DeploymentID"></inject>** Storage Account.
+1. **In Azure Portal**, navigate to your **stsecureai<inject key="DeploymentID" enableCopy="false"/>** Storage Account.
 
 1. In the left menu, click **Access control (IAM)**.
 
-1. Click **+ Add** → **Add role assignment**.
+1. Click **+ Add** ? **Add role assignment**.
 
 1. On the **Role** tab:
  - Search for **Storage Blob Data Contributor**
@@ -273,20 +273,20 @@ Grant your VM's managed identity permission to read/write blobs using Azure Port
 ```powershell
 # Get storage name
 $storageName = az storage account list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[?contains(name, 'st')].name" -o tsv
 
 Write-Host "Storage Account: $storageName"
 
 # Get Key Vault name
 $kvName = az keyvault list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[?contains(name, 'kv')].name" -o tsv
 
 # Enable public access temporarily
 az keyvault update `
  --name $kvName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --public-network-access Enabled
 
 # Store the secret
@@ -300,7 +300,7 @@ Write-Host "Stored Storage Account name"
 # Disable public access again
 az keyvault update `
  --name $kvName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --public-network-access Disabled
 
 Write-Host "Key Vault secured"
@@ -312,7 +312,7 @@ Write-Host "Key Vault secured"
 # Enable public access temporarily to list secrets
 az keyvault update `
  --name $kvName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --public-network-access Enabled
 
 # List all secrets
@@ -321,7 +321,7 @@ az keyvault secret list --vault-name $kvName --query "[].name" -o table
 # Disable public access again
 az keyvault update `
  --name $kvName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --public-network-access Disabled
 ```
 
@@ -331,7 +331,7 @@ Expected secrets:
 - OpenAIResourceName
 - StorageAccountName
  --name $kvName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --public-network-access Disabled
 ```
 
@@ -448,7 +448,7 @@ Now test that you can call OpenAI using managed identity (no API keys!).
 
 ```powershell
 az cognitiveservices account deployment create `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --name $openaiName `
  --deployment-name "gpt-4" `
  --model-name "gpt-4" `
@@ -462,7 +462,7 @@ az cognitiveservices account deployment create `
 
 ```powershell
 az cognitiveservices account deployment create `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --name $openaiName `
  --deployment-name "gpt-35-turbo" `
  --model-name "gpt-35-turbo" `
@@ -544,12 +544,12 @@ Your chat app will need to access storage for session history.
 
 ```powershell
 $storageName = az storage account list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[?contains(name, 'st')].name" -o tsv
 
 $storageId = az storage account show `
  --name $storageName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query id -o tsv
 ```
 
@@ -577,15 +577,15 @@ Managed Identity:
 - Attached to: $vmName
 
 RBAC Role Assignments:
-1. Cognitive Services OpenAI User → $openaiName
+1. Cognitive Services OpenAI User ? $openaiName
  - Scope: OpenAI resource
  - Permissions: Read models, make inference calls
 
-2. Key Vault Secrets User → $kvName
+2. Key Vault Secrets User ? $kvName
  - Scope: Key Vault resource
  - Permissions: Read secrets (no write/delete)
 
-3. Storage Blob Data Contributor → $storageName
+3. Storage Blob Data Contributor ? $storageName
  - Scope: Storage Account
  - Permissions: Read/write blobs
 
@@ -639,7 +639,7 @@ Verify your identity setup is complete:
  az role assignment list --assignee $identityId --scope $kvId -o table
  ```
 - Check if Key Vault uses access policies instead of RBAC:
- - Portal → Key Vault → Access configuration
+ - Portal ? Key Vault ? Access configuration
  - Should be "Azure role-based access control"
 
 ---
@@ -651,7 +651,7 @@ Verify your identity setup is complete:
 - Managed identity only works from within the VM
 - Verify identity is enabled:
  ```powershell
- az vm identity show -g "challenge-rg-<inject key="DeploymentID"></inject>" -n $vmName
+ az vm identity show -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" -n $vmName
  ```
 
 ---

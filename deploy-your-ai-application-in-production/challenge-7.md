@@ -1,4 +1,4 @@
-﻿# Challenge 07: Well-Architected Framework Validation & Production Readiness
+# Challenge 07: Well-Architected Framework Validation & Production Readiness
 
 ## Introduction
 
@@ -18,7 +18,7 @@ This challenge is your **production readiness checklist** - covering Security, R
 - Completed all previous challenges (1-6)
 - All services deployed and tested
 - Access to Azure Portal
-- Access to **vm-<inject key="DeploymentID"></inject>** via Azure Bastion
+- Access to **vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion
 
 ## Challenge Objectives
 
@@ -33,21 +33,21 @@ This challenge is your **production readiness checklist** - covering Security, R
 ## Well-Architected Framework Overview
 
 ```
-┌───────────────────────────────────────────────────────────────┐
-│ Azure Well-Architected Framework (WAF) │
-├───────────────────────────────────────────────────────────────┤
-│ │
-│ SECURITY RELIABILITY COST │
-│ - Zero Trust - High Availability - Right-sizing │
-│ - Defense-in-Depth - Disaster Recovery - Reserved pricing │
-│ - Least Privilege - Backup & Recovery - Monitoring costs │
-│ │
-│ OPERATIONAL PERFORMANCE │
-│ - Monitoring - Scalability │
-│ - Automation - Caching │
-│ - DevOps/IaC - Optimization │
-│ │
-└───────────────────────────────────────────────────────────────┘
++---------------------------------------------------------------+
+� Azure Well-Architected Framework (WAF) �
++---------------------------------------------------------------�
+� �
+� SECURITY RELIABILITY COST �
+� - Zero Trust - High Availability - Right-sizing �
+� - Defense-in-Depth - Disaster Recovery - Reserved pricing �
+� - Least Privilege - Backup & Recovery - Monitoring costs �
+� �
+� OPERATIONAL PERFORMANCE �
+� - Monitoring - Scalability �
+� - Automation - Caching �
+� - DevOps/IaC - Optimization �
+� �
++---------------------------------------------------------------+
 ```
 
 ## Steps to Complete
@@ -112,16 +112,16 @@ Let's validate all security controls!
 
 ```powershell
 # Check OpenAI encryption
-$openaiName = az cognitiveservices account list -g "challenge-rg-<inject key="DeploymentID"></inject>" --query "[?kind=='OpenAI'].name" -o tsv
-az cognitiveservices account show -n $openaiName -g "challenge-rg-<inject key="DeploymentID"></inject>" --query "properties.encryption" -o json
+$openaiName = az cognitiveservices account list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[?kind=='OpenAI'].name" -o tsv
+az cognitiveservices account show -n $openaiName -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "properties.encryption" -o json
 
 # Check Storage encryption
-$storageName = az storage account list -g "challenge-rg-<inject key="DeploymentID"></inject>" --query "[0].name" -o tsv
-az storage account show -n $storageName -g "challenge-rg-<inject key="DeploymentID"></inject>" --query "encryption" -o json
+$storageName = az storage account list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[0].name" -o tsv
+az storage account show -n $storageName -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "encryption" -o json
 
 # Check Key Vault soft delete
-$kvName = az keyvault list -g "challenge-rg-<inject key="DeploymentID"></inject>" --query "[0].name" -o tsv
-az keyvault show -n $kvName -g "challenge-rg-<inject key="DeploymentID"></inject>" --query "properties.{SoftDelete:enableSoftDelete,PurgeProtection:enablePurgeProtection}" -o json
+$kvName = az keyvault list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[0].name" -o tsv
+az keyvault show -n $kvName -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "properties.{SoftDelete:enableSoftDelete,PurgeProtection:enablePurgeProtection}" -o json
 ```
 
 3. **Enable Key Vault soft delete and purge protection** (if not already):
@@ -130,14 +130,14 @@ az keyvault show -n $kvName -g "challenge-rg-<inject key="DeploymentID"></inject
 # Enable soft delete (90-day retention)
 az keyvault update `
  --name $kvName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --enable-soft-delete true `
  --retention-days 90
 
 # Enable purge protection (prevents permanent deletion)
 az keyvault update `
  --name $kvName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --enable-purge-protection true
 ```
 
@@ -153,7 +153,7 @@ az storage blob service-properties delete-policy update `
 # Enable container soft delete
 az storage account blob-service-properties update `
  --account-name $storageName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --enable-container-delete-retention true `
  --container-delete-retention-days 7
 ```
@@ -203,11 +203,11 @@ notepad C:\LabFiles\reliability-assessment.txt
 # Check current redundancy
 az storage account show `
  --name $storageName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "sku.name" -o tsv
 
 # Upgrade to GRS (if currently LRS)
-# az storage account update --name $storageName -g "challenge-rg-<inject key="DeploymentID"></inject>" --sku Standard_GRS
+# az storage account update --name $storageName -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --sku Standard_GRS
 # Note: This may incur additional costs
 ```
 
@@ -227,16 +227,16 @@ Save all critical configuration:
 
 ```powershell
 # Backup OpenAI deployments
-az cognitiveservices account deployment list -n $openaiName -g "challenge-rg-<inject key="DeploymentID"></inject>" -o json > C:\LabFiles\backups\openai-deployments.json
+az cognitiveservices account deployment list -n $openaiName -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" -o json > C:\LabFiles\backups\openai-deployments.json
 
 # Backup Key Vault secrets (names only, not values!)
 az keyvault secret list --vault-name $kvName --query "[].id" -o json > C:\LabFiles\backups\kv-secrets.json
 
 # Backup RBAC assignments
-az role assignment list --scope "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID"></inject>" -o json > C:\LabFiles\backups\rbac-assignments.json
+az role assignment list --scope "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" -o json > C:\LabFiles\backups\rbac-assignments.json
 
 # Backup NSG rules
-az network nsg list -g "challenge-rg-<inject key="DeploymentID"></inject>" -o json > C:\LabFiles\backups\nsg-rules.json
+az network nsg list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" -o json > C:\LabFiles\backups\nsg-rules.json
 ```
 
 ## Recovery Time Objective (RTO)
@@ -277,7 +277,7 @@ Common recommendations:
 az consumption usage list `
  --start-date (Get-Date).AddDays(-30).ToString("yyyy-MM-dd") `
  --end-date (Get-Date).ToString("yyyy-MM-dd") `
- --query "[?contains(instanceName, 'challenge-rg-<inject key="DeploymentID"></inject>')].{Resource:instanceName, Cost:pretaxCost, Currency:currency}" `
+ --query "[?contains(instanceName, 'challenge-rg-<inject key="DeploymentID" enableCopy="false"/>')].{Resource:instanceName, Cost:pretaxCost, Currency:currency}" `
  --output table
 ```
 
@@ -296,7 +296,7 @@ Based on East US pricing (actual costs vary by region):
 - Key Vault (secrets): ~$0.03/secret/month
 - Storage Account (100GB, LRS): ~$2/month
 - Virtual Network: Free
-- Private Endpoints: $7.50/endpoint/month × 4 = $30
+- Private Endpoints: $7.50/endpoint/month � 4 = $30
 - Azure Bastion (Basic SKU): ~$140/month
 - VM (Standard_D2s_v3): ~$70-100/month
 
@@ -342,12 +342,12 @@ notepad C:\LabFiles\cost-optimization.txt
 ```powershell
 # Create budget (requires Billing permissions)
 # This is typically done in Azure Portal:
-# Cost Management + Billing → Budgets → Add
+# Cost Management + Billing ? Budgets ? Add
 
 Write-Host "Set up budget alert in Azure Portal:"
 Write-Host "1. Go to Cost Management + Billing"
 Write-Host "2. Click 'Budgets'"
-Write-Host "3. Create new budget for resource group: challenge-rg-<inject key="DeploymentID"></inject>"
+Write-Host "3. Create new budget for resource group: challenge-rg-<inject key="DeploymentID" enableCopy="false"/>"
 Write-Host "4. Set amount: $250/month"
 Write-Host "5. Add email alerts at 50%, 80%, 100%"
 ```
@@ -360,23 +360,23 @@ Implement monitoring and automation!
 
 ```powershell
 # Create Log Analytics workspace (if not exists)
-$workspaceName = "law-ai-monitoring-<inject key="DeploymentID"></inject>"
+$workspaceName = "law-ai-monitoring-<inject key="DeploymentID" enableCopy="false"/>"
 
 az monitor log-analytics workspace create `
  --workspace-name $workspaceName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --location "<inject key="Region"></inject>"
 
 # Enable diagnostics on OpenAI
 $workspaceId = az monitor log-analytics workspace show `
  --workspace-name $workspaceName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query id -o tsv
 
 az monitor diagnostic-settings create `
  --name "openai-diagnostics" `
  --resource $openaiName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --resource-type "Microsoft.CognitiveServices/accounts" `
  --workspace $workspaceId `
  --logs '[{"category":"Audit","enabled":true},{"category":"RequestResponse","enabled":true}]' `
@@ -402,8 +402,8 @@ Pin to a new dashboard named: "AI App Monitoring"
 # Alert: High error rate
 az monitor metrics alert create `
  --name "openai-high-error-rate" `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
- --scopes "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID"></inject>/providers/Microsoft.CognitiveServices/accounts/$openaiName" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+ --scopes "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID" enableCopy="false"/>/providers/Microsoft.CognitiveServices/accounts/$openaiName" `
  --condition "count >= 10" `
  --window-size 5m `
  --evaluation-frequency 1m `
@@ -413,8 +413,8 @@ az monitor metrics alert create `
 # Alert: High latency
 az monitor metrics alert create `
  --name "openai-high-latency" `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
- --scopes "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID"></inject>/providers/Microsoft.CognitiveServices/accounts/$openaiName" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+ --scopes "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID" enableCopy="false"/>/providers/Microsoft.CognitiveServices/accounts/$openaiName" `
  --condition "avg TimeToResponse > 5000" `
  --window-size 5m `
  --evaluation-frequency 1m `
@@ -676,7 +676,7 @@ Get comprehensive recommendations!
 In Azure Portal:
 - Go to **Azure Advisor**
 - Select your subscription
-- Filter by resource group: `challenge-rg-<inject key="DeploymentID"></inject>`
+- Filter by resource group: `challenge-rg-<inject key="DeploymentID" enableCopy="false"/>`
 - Review tabs: **Security**, **Cost**, **Reliability**, **Performance**, **Operational Excellence**
 
 2. **Export recommendations**:
@@ -684,7 +684,7 @@ In Azure Portal:
 ```powershell
 # Get all advisor recommendations
 az advisor recommendation list `
- --query "[?contains(resourceGroup, 'challenge-rg-<inject key="DeploymentID"></inject>')].{Category:category, Impact:impact, Problem:shortDescription.problem, Solution:shortDescription.solution}" `
+ --query "[?contains(resourceGroup, 'challenge-rg-<inject key="DeploymentID" enableCopy="false"/>')].{Category:category, Impact:impact, Problem:shortDescription.problem, Solution:shortDescription.solution}" `
  --output table > C:\LabFiles\advisor-recommendations.txt
 
 notepad C:\LabFiles\advisor-recommendations.txt
@@ -993,7 +993,7 @@ You've completed the **Deploy Your AI Application in Production** hackathon!
 A complete secure AI infrastructure with:
 - 100% private network architecture (zero public IPs)
 - Passwordless authentication (managed identities everywhere)
-- Defense-in-depth security (VNET → NSG → Private Endpoint → RBAC)
+- Defense-in-depth security (VNET ? NSG ? Private Endpoint ? RBAC)
 - Working chat application (Streamlit + Azure OpenAI)
 - Production-ready monitoring
 - Comprehensive documentation

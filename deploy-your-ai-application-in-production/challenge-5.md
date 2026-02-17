@@ -1,4 +1,4 @@
-﻿# Challenge 05: Deploy Secure Chat Application
+# Challenge 05: Deploy Secure Chat Application
 
 ## Introduction
 
@@ -17,9 +17,9 @@ Let's build a secure ChatGPT-like experience!
 
 - Completed Challenge 4 (OpenAI models deployed and tested)
 - All Key Vault secrets created (OpenAIEndpoint, ChatModelDeployment, etc.)
-- Managed identity configured on **vm-<inject key="DeploymentID"></inject>** with proper RBAC roles
-- Python 3.11 and VS Code installed on **vm-<inject key="DeploymentID"></inject>**
-- Connected to **vm-<inject key="DeploymentID"></inject>** via Azure Bastion
+- Managed identity configured on **vm-<inject key="DeploymentID" enableCopy="false"/>** with proper RBAC roles
+- Python 3.11 and VS Code installed on **vm-<inject key="DeploymentID" enableCopy="false"/>**
+- Connected to **vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion
 
 ## Challenge Objectives
 
@@ -34,33 +34,33 @@ Let's build a secure ChatGPT-like experience!
 ## Application Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│ User's Browser │
-│ http://localhost:8501 │
-└────────────────────────────┬────────────────────────────────┘
- │
- ├─────> Streamlit Web UI
- │
-┌────────────────────────────▼────────────────────────────────┐
-│ vm-<DID> (Application Subnet) │
-│ │
-│ ┌──────────────────────────────────────────────────────┐ │
-│ │ Secure Chat Application (app.py) │ │
-│ │ - Streamlit UI │ │
-│ │ - Managed Identity auth │ │
-│ │ - Key Vault integration │ │
-│ │ - Session management │ │
-│ └───────┬──────────────┬────────────────┬──────────────┘ │
-│ │ │ │ │
-└──────────┼──────────────┼────────────────┼─────────────────┘
- │ │ │
- Private Endpoint │ │
- │ │ │
-┌──────────▼────────┐ ┌───▼──────────┐ ┌──▼────────────────┐
-│ Azure Key Vault │ │ Azure OpenAI │ │ Storage Account │
-│ (Secrets) │ │ (Chat Model) │ │ (Session History) │
-│ 10.0.2.x │ │ 10.0.1.x │ │ 10.0.2.x │
-└───────────────────┘ └──────────────┘ └───────────────────┘
++-------------------------------------------------------------+
+� User's Browser �
+� http://localhost:8501 �
++-------------------------------------------------------------+
+ �
+ +-----> Streamlit Web UI
+ �
++----------------------------?--------------------------------+
+� vm-<DID> (Application Subnet) �
+� �
+� +------------------------------------------------------+ �
+� � Secure Chat Application (app.py) � �
+� � - Streamlit UI � �
+� � - Managed Identity auth � �
+� � - Key Vault integration � �
+� � - Session management � �
+� +------------------------------------------------------+ �
+� � � � �
++----------+--------------+----------------+-----------------+
+ � � �
+ Private Endpoint � �
+ � � �
++----------?--------+ +---?----------+ +--?----------------+
+� Azure Key Vault � � Azure OpenAI � � Storage Account �
+� (Secrets) � � (Chat Model) � � (Session History) �
+� 10.0.2.x � � 10.0.1.x � � 10.0.2.x �
++-------------------+ +--------------+ +-------------------+
 
 All connections via private endpoints - ZERO public internet traffic!
 ```
@@ -69,7 +69,7 @@ All connections via private endpoints - ZERO public internet traffic!
 
 ### Part 1: Create Application Directory Structure
 
-1. **Connect to vm-<inject key="DeploymentID"></inject>** via Azure Bastion if not already connected.
+1. **Connect to vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion if not already connected.
 
 1. **Open VS Code** on the VM and open a PowerShell terminal (Ctrl + `).
 
@@ -93,8 +93,8 @@ Get-ChildItem -Path "C:\LabFiles\SecureAI\chat-app" -Recurse
 Should show:
 ```
 chat-app/
-├── pages/
-└── utils/
++-- pages/
++-- utils/
 ```
 
 ### Part 2: Download Application Files
@@ -244,7 +244,7 @@ if prompt := st.chat_input("Ask me anything about cloud security..."):
  for chunk in response:
  if chunk.choices[0].delta.content:
  full_response += chunk.choices[0].delta.content
- response_placeholder.markdown(full_response + "▌")
+ response_placeholder.markdown(full_response + "�")
  
  response_placeholder.markdown(full_response)
  
@@ -361,7 +361,7 @@ Write-Host "Created README.md"
 
 ```powershell
 $kvName = az keyvault list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[0].name" -o tsv
 
 Write-Host "Key Vault Name: $kvName"
@@ -371,7 +371,7 @@ Write-Host "Key Vault Name: $kvName"
 
 ```powershell
 $storageName = az storage account list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[0].name" -o tsv
 
 Write-Host "Storage Account Name: $storageName"
@@ -479,8 +479,8 @@ The app saves session history to Blob Storage. Let's ensure managed identity can
 
 ```powershell
 $identityId = az vm show `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
- --name "vm-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+ --name "vm-<inject key="DeploymentID" enableCopy="false"/>" `
  --query identity.principalId -o tsv
 ```
 
@@ -489,7 +489,7 @@ $identityId = az vm show `
 ```powershell
 $storageId = az storage account show `
  --name $storageName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query id -o tsv
 
 az role assignment list `
@@ -642,9 +642,9 @@ secret_client = SecretClient(vault_url=kv_url, credential=credential)
 
 try:
     openai_endpoint = secret_client.get_secret("OpenAIEndpoint").value
-    print(f"✅ Key Vault accessible: {openai_endpoint}")
+    print(f"? Key Vault accessible: {openai_endpoint}")
 except Exception as e:
-    print(f"❌ Key Vault access denied (GOOD!): {e}")
+    print(f"? Key Vault access denied (GOOD!): {e}")
 
 # Try to connect to OpenAI
 try:
@@ -659,9 +659,9 @@ try:
         model="secure-chat",
         messages=[{"role": "user", "content": "test"}]
     )
-    print("✅ OpenAI accessible (BAD! Security issue!)")
+    print("? OpenAI accessible (BAD! Security issue!)")
 except Exception as e:
-    print(f"❌ OpenAI access denied (GOOD!): {e}")
+    print(f"? OpenAI access denied (GOOD!): {e}")
 ```
 
 3. **Run the test**:
@@ -672,15 +672,15 @@ python test-security.py
 
 **Expected output (all should FAIL):**
 ```
-❌ Key Vault access denied (GOOD!): (Forbidden) Public network access is disabled...
-❌ OpenAI access denied (GOOD!): ManagedIdentityCredential authentication unavailable, no response from the IMDS endpoint
+? Key Vault access denied (GOOD!): (Forbidden) Public network access is disabled...
+? OpenAI access denied (GOOD!): ManagedIdentityCredential authentication unavailable, no response from the IMDS endpoint
 ```
 
 **What this proves:**
-- ✅ Key Vault blocks all external access (public network disabled)
-- ✅ OpenAI blocks all external access (private endpoint only)
-- ✅ Managed Identity only works on Azure VMs (not your local machine)
-- ✅ Your application is truly secure!
+- ? Key Vault blocks all external access (public network disabled)
+- ? OpenAI blocks all external access (private endpoint only)
+- ? Managed Identity only works on Azure VMs (not your local machine)
+- ? Your application is truly secure!
 
 > **Important**: If you CAN access these services from your local machine, that means your security configuration has issues. Go back and verify:
 > - Public network access is disabled on Key Vault and OpenAI
@@ -897,8 +897,8 @@ Validate your app deployment:
 1. Verify the custom domain was configured in Challenge 1 Part 5:
    ```powershell
    az cognitiveservices account show `
-     --name openai-secureai-<inject key="DeploymentID"></inject> `
-     --resource-group challenge-rg-<inject key="DeploymentID"></inject> `
+     --name openai-secureai-<inject key="DeploymentID" enableCopy="false"/> `
+     --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> `
      --query "properties.endpoint" -o tsv
    ```
    
@@ -910,15 +910,15 @@ Validate your app deployment:
 2. If it shows a generic endpoint, configure the custom domain:
    ```powershell
    az cognitiveservices account update `
-     --name openai-secureai-<inject key="DeploymentID"></inject> `
-     --resource-group challenge-rg-<inject key="DeploymentID"></inject> `
-     --custom-domain openai-secureai-<inject key="DeploymentID"></inject>
+     --name openai-secureai-<inject key="DeploymentID" enableCopy="false"/> `
+     --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> `
+     --custom-domain openai-secureai-<inject key="DeploymentID" enableCopy="false"/>
    ```
 
 3. Update the Key Vault secret with the correct endpoint:
    ```powershell
-   $kvName = "kv-secureai-<inject key="DeploymentID"></inject>"
-   $correctEndpoint = "https://openai-secureai-<inject key="DeploymentID"></inject>.openai.azure.com/"
+   $kvName = "kv-secureai-<inject key="DeploymentID" enableCopy="false"/>"
+   $correctEndpoint = "https://openai-secureai-<inject key="DeploymentID" enableCopy="false"/>.openai.azure.com/"
    
    az keyvault secret set `
      --vault-name $kvName `
@@ -940,13 +940,13 @@ Validate your app deployment:
 1. Verify private endpoint exists:
    ```powershell
    az network private-endpoint list `
-     --resource-group challenge-rg-<inject key="DeploymentID"></inject> `
+     --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> `
      --query "[?contains(name, 'openai')]" -o table
    ```
 
 2. Check DNS resolution from the VM:
    ```powershell
-   nslookup openai-secureai-<inject key="DeploymentID"></inject>.openai.azure.com
+   nslookup openai-secureai-<inject key="DeploymentID" enableCopy="false"/>.openai.azure.com
    ```
    Should return a private IP (10.0.1.x), not a public IP.
 
@@ -964,7 +964,7 @@ Validate your app deployment:
 - Ensure you're running the app ON THE VM (managed identity only works there)
 - Verify managed identity is enabled:
  ```powershell
- az vm show -n "vm-<inject key="DeploymentID"></inject>" -g "challenge-rg-<inject key="DeploymentID"></inject>" --query identity
+ az vm show -n "vm-<inject key="DeploymentID" enableCopy="false"/>" -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query identity
  ```
 - Wait 2-3 minutes after enabling managed identity
 - Restart VS Code and try again

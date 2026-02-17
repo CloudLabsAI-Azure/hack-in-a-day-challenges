@@ -603,14 +603,14 @@ docker run -p 8501:8501 sql-modernization-app
 az login
 
 # Create Azure Container Registry (if not exists)
-az acr create --resource-group challenge-rg-<inject key="DeploymentID"></inject> --name sqlmodernizationacr<inject key="DeploymentID"></inject> --sku Basic
+az acr create --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> --name sqlmodernizationacr<inject key="DeploymentID" enableCopy="false"/> --sku Basic
 
 # Login to ACR
-az acr login --name sqlmodernizationacr<inject key="DeploymentID"></inject>
+az acr login --name sqlmodernizationacr<inject key="DeploymentID" enableCopy="false"/>
 
 # Tag and push image
-docker tag sql-modernization-app sqlmodernizationacr<inject key="DeploymentID"></inject>.azurecr.io/sql-modernization-app:v1
-docker push sqlmodernizationacr<inject key="DeploymentID"></inject>.azurecr.io/sql-modernization-app:v1
+docker tag sql-modernization-app sqlmodernizationacr<inject key="DeploymentID" enableCopy="false"/>.azurecr.io/sql-modernization-app:v1
+docker push sqlmodernizationacr<inject key="DeploymentID" enableCopy="false"/>.azurecr.io/sql-modernization-app:v1
 ```
 
 5. Create Azure Container App:
@@ -618,12 +618,12 @@ docker push sqlmodernizationacr<inject key="DeploymentID"></inject>.azurecr.io/s
 ```bash
 az containerapp create \
   --name sql-modernization-app \
-  --resource-group challenge-rg-<inject key="DeploymentID"></inject> \
+  --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> \
   --environment sql-modernization-env \
-  --image sqlmodernizationacr<inject key="DeploymentID"></inject>.azurecr.io/sql-modernization-app:v1 \
+  --image sqlmodernizationacr<inject key="DeploymentID" enableCopy="false"/>.azurecr.io/sql-modernization-app:v1 \
   --target-port 8501 \
   --ingress external \
-  --registry-server sqlmodernizationacr<inject key="DeploymentID"></inject>.azurecr.io \
+  --registry-server sqlmodernizationacr<inject key="DeploymentID" enableCopy="false"/>.azurecr.io \
   --env-vars \
     AGENT_API_ENDPOINT="<your-endpoint>" \
     AGENT_API_KEY="<your-api-key>" \
@@ -636,7 +636,7 @@ az containerapp create \
 6. Get the public URL:
 
 ```bash
-az containerapp show --name sql-modernization-app --resource-group challenge-rg-<inject key="DeploymentID"></inject> --query properties.configuration.ingress.fqdn -o tsv
+az containerapp show --name sql-modernization-app --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> --query properties.configuration.ingress.fqdn -o tsv
 ```
 
 7. Visit the URL and test your deployed app!
@@ -1094,29 +1094,29 @@ docker run -p 8501:8501 --env-file .env sql-modernization-app
 In Azure Portal:
 - Search for **Container Registry**
 - Click **+ Create**
-- **Resource Group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
-- **Registry name**: **sqlmodacr<inject key="DeploymentID"></inject>**
+- **Resource Group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+- **Registry name**: **sqlmodacr<inject key="DeploymentID" enableCopy="false"/>**
 - **SKU**: **Basic**
 - Click **Review + Create**
 
 6. Push image to ACR:
 
 ```bash
-az acr login --name sqlmodacr<inject key="DeploymentID"></inject>
-docker tag sql-modernization-app sqlmodacr<inject key="DeploymentID"></inject>.azurecr.io/sql-modernization-app:v1
-docker push sqlmodacr<inject key="DeploymentID"></inject>.azurecr.io/sql-modernization-app:v1
+az acr login --name sqlmodacr<inject key="DeploymentID" enableCopy="false"/>
+docker tag sql-modernization-app sqlmodacr<inject key="DeploymentID" enableCopy="false"/>.azurecr.io/sql-modernization-app:v1
+docker push sqlmodacr<inject key="DeploymentID" enableCopy="false"/>.azurecr.io/sql-modernization-app:v1
 ```
 
 7. Create **Azure Container App**:
 
 - Search for **Container Apps**
 - Click **+ Create**
-- **Resource Group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
+- **Resource Group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
 - **Container app name**: **sql-mod-app**
 - **Region**: **<inject key="Region"></inject>**
 - **Container Apps Environment**: Create new
 - **Container**: Select from Azure Container Registry
-  - **Registry**: **sqlmodacr<inject key="DeploymentID"></inject>**
+  - **Registry**: **sqlmodacr<inject key="DeploymentID" enableCopy="false"/>**
   - **Image**: **sql-modernization-app**
   - **Tag**: **v1**
 - **Ingress**: Enabled

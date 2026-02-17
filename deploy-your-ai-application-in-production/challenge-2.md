@@ -1,4 +1,4 @@
-﻿# Challenge 02: Configure Network Security & Isolation
+# Challenge 02: Configure Network Security & Isolation
 
 ## Introduction
 
@@ -9,13 +9,13 @@ This is where enterprises fail most often - deploying services with default sett
 ## Prerequisites
 
 - Completed Challenge 1 (Infrastructure deployed via Azure Portal)
-- Resource group `challenge-rg-<inject key="DeploymentID"></inject>` contains:
+- Resource group `challenge-rg-<inject key="DeploymentID" enableCopy="false"/>` contains:
  - Virtual Network with subnets
-  - Application VM (vm-<inject key="DeploymentID"></inject>)
+  - Application VM (vm-<inject key="DeploymentID" enableCopy="false"/>)
   - Azure AI Foundry (includes OpenAI)
   - Storage Account
   - Key Vault
-- Connected to **vm-<inject key="DeploymentID"></inject>** via Azure Bastion
+- Connected to **vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion
 - Configure Network Security Group (NSG) rules for AI services subnet
 - Disable public network access on all AI services
 - Configure subnet delegation for private endpoints
@@ -28,32 +28,32 @@ This is where enterprises fail most often - deploying services with default sett
 Your security architecture has multiple layers:
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│ Layer 1: Network Perimeter (VNET boundary) │
-│ - Only Azure Bastion allows inbound traffic │
-│ - No public IPs on any AI services │
-└─────────────────────────────────────────────────────────┘
- ↓
-┌─────────────────────────────────────────────────────────┐
-│ Layer 2: Subnet Isolation (NSG rules) │
-│ - ai-services subnet: AI Foundry, OpenAI │
-│ - storage-services subnet: Storage, Key Vault │
-│ - application subnet: Application VM (vm-DID) │
-│ - Each subnet has restrictive NSG rules │
-└─────────────────────────────────────────────────────────┘
- ↓
-┌─────────────────────────────────────────────────────────┐
-│ Layer 3: Service-Level Security │
-│ - Public network access: DISABLED │
-│ - Only private endpoint connections allowed │
-│ - Firewall rules block all public IPs │
-└─────────────────────────────────────────────────────────┘
- ↓
-┌─────────────────────────────────────────────────────────┐
-│ Layer 4: Identity & Access (Next Challenge) │
-│ - Managed identity authentication │
-│ - RBAC for least-privilege access │
-└─────────────────────────────────────────────────────────┘
++---------------------------------------------------------+
+� Layer 1: Network Perimeter (VNET boundary) �
+� - Only Azure Bastion allows inbound traffic �
+� - No public IPs on any AI services �
++---------------------------------------------------------+
+ ?
++---------------------------------------------------------+
+� Layer 2: Subnet Isolation (NSG rules) �
+� - ai-services subnet: AI Foundry, OpenAI �
+� - storage-services subnet: Storage, Key Vault �
+� - application subnet: Application VM (vm-DID) �
+� - Each subnet has restrictive NSG rules �
++---------------------------------------------------------+
+ ?
++---------------------------------------------------------+
+� Layer 3: Service-Level Security �
+� - Public network access: DISABLED �
+� - Only private endpoint connections allowed �
+� - Firewall rules block all public IPs �
++---------------------------------------------------------+
+ ?
++---------------------------------------------------------+
+� Layer 4: Identity & Access (Next Challenge) �
+� - Managed identity authentication �
+� - RBAC for least-privilege access �
++---------------------------------------------------------+
 ```
 
 ## Steps to Complete
@@ -62,9 +62,9 @@ Your security architecture has multiple layers:
 
 First, understand what was deployed.
 
-1. **In Azure Portal**, navigate to your resource group: `challenge-rg-<inject key="DeploymentID"></inject>`
+1. **In Azure Portal**, navigate to your resource group: `challenge-rg-<inject key="DeploymentID" enableCopy="false"/>`
 
-2. **Find the Virtual Network** (name: `vnet-secureai-<inject key="DeploymentID"></inject>`)
+2. **Find the Virtual Network** (name: `vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>`)
 
 3. Click on it, then click **Subnets** in the left menu
 
@@ -94,7 +94,7 @@ Let's create an NSG with restrictive rules using the Azure Portal.
 
  **Basics tab**:
  - **Subscription**: Select your available Azure subscription
- - **Resource group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
+ - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
  - **Name**: **nsg-ai-services**
  - **Region**: **<inject key="Region"></inject>**
 
@@ -160,7 +160,7 @@ Let's create an NSG with restrictive rules using the Azure Portal.
 
  - Click **Subnets** in the left menu (under Settings)
  - Click **+ Associate**
- - **Virtual network**: Select **vnet-secureai-<inject key="DeploymentID"></inject>**
+ - **Virtual network**: Select **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
  - **Subnet**: Select **snet-ai-services**
  - Click **OK**
 
@@ -171,14 +171,14 @@ Now ensure no service accepts connections from the internet using the Azure Port
 1. **Restrict network access on Azure AI Foundry**:
 
  **In Azure Portal**:
- - Navigate to your **openai-secureai-<inject key="DeploymentID"></inject>** resource
+ - Navigate to your **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>** resource
  - Click **Networking** in the left menu
  - Under **Firewalls and virtual networks**, select **Selected Networks and Private Endpoints**
  - Click **+ Add existing virtual network**
  
  **In the "Add networks" dialog**:
  - **Subscription**: Should already be selected (your current subscription)
- - **Virtual networks**: Check the box next to **vnet-secureai-<inject key="DeploymentID"></inject>**
+ - **Virtual networks**: Check the box next to **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
  - **Subnets**: Select all three subnets:
  - **snet-ai-services**
  - **snet-storage-services**
@@ -195,7 +195,7 @@ Now ensure no service accepts connections from the internet using the Azure Port
 2. **Disable public access on Storage Account**:
 
  **In Azure Portal**:
- - Navigate to your **stsecureai<inject key="DeploymentID"></inject>** Storage Account
+ - Navigate to your **stsecureai<inject key="DeploymentID" enableCopy="false"/>** Storage Account
  - Click **Networking** in the left menu under Settings
  - Under **Public network access**, select **Disabled**
  - Click **Save**
@@ -204,7 +204,7 @@ Now ensure no service accepts connections from the internet using the Azure Port
 3. **Disable public access on Key Vault**:
 
  **In Azure Portal**:
- - Navigate to your **kv-secureai-<inject key="DeploymentID"></inject>** Key Vault
+ - Navigate to your **kv-secureai-<inject key="DeploymentID" enableCopy="false"/>** Key Vault
  - Click **Networking** in the left menu under Settings
  - Under **Firewalls and virtual networks**, select **Disable public access**
  - Click **Apply**
@@ -214,9 +214,9 @@ Now ensure no service accepts connections from the internet using the Azure Port
 
 Now that public access is disabled, create a private endpoint to enable secure connectivity from your VNET.
 
-1. **In Azure Portal**, navigate to your **kv-secureai-<inject key="DeploymentID"></inject>** Key Vault.
+1. **In Azure Portal**, navigate to your **kv-secureai-<inject key="DeploymentID" enableCopy="false"/>** Key Vault.
 
-1. In the left navigation, click **Networking** → **Private endpoint connections** tab.
+1. In the left navigation, click **Networking** ? **Private endpoint connections** tab.
 
 1. Click **+ Create**.
 
@@ -224,9 +224,9 @@ Now that public access is disabled, create a private endpoint to enable secure c
 
  **Basics tab**:
  - **Subscription**: Select your available Azure subscription
- - **Resource group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
- - **Name**: **pe-keyvault-<inject key="DeploymentID"></inject>**
- - **Network Interface Name**: **nic-pe-keyvault-<inject key="DeploymentID"></inject>**
+ - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+ - **Name**: **pe-keyvault-<inject key="DeploymentID" enableCopy="false"/>**
+ - **Network Interface Name**: **nic-pe-keyvault-<inject key="DeploymentID" enableCopy="false"/>**
  - **Region**: **<inject key="Region"></inject>**
  - Click **Next: Resource**
 
@@ -234,12 +234,12 @@ Now that public access is disabled, create a private endpoint to enable secure c
  - **Connection method**: **Connect to an Azure resource in my directory**
  - **Subscription**: Should be pre-selected
  - **Resource type**: **Microsoft.KeyVault/vaults**
- - **Resource**: Select **kv-secureai-<inject key="DeploymentID"></inject>**
+ - **Resource**: Select **kv-secureai-<inject key="DeploymentID" enableCopy="false"/>**
  - **Target sub-resource**: **vault** (should be selected automatically)
  - Click **Next: Virtual Network**
 
  **Virtual Network tab**:
- - **Virtual network**: Select **vnet-secureai-<inject key="DeploymentID"></inject>**
+ - **Virtual network**: Select **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
  - **Subnet**: Select **snet-storage-services (10.0.2.0/24)**
  - **Private IP configuration**: **Dynamically allocate IP address**
  - **Application security group**: Leave blank
@@ -248,7 +248,7 @@ Now that public access is disabled, create a private endpoint to enable secure c
  **DNS tab**:
  - **Integrate with private DNS zone**: **Yes**
  - **Subscription**: Should be pre-selected
- - **Resource group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
+ - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
  - **Private DNS zones**: Should show **privatelink.vaultcore.azure.net** (will be created if it doesn't exist)
  - Click **Next: Tags**
 
@@ -268,9 +268,9 @@ Now that public access is disabled, create a private endpoint to enable secure c
 
 Create a private endpoint for your OpenAI service to ensure all AI traffic stays within your VNET.
 
-1. **In Azure Portal**, navigate to your **openai-secureai-<inject key="DeploymentID"></inject>** Azure AI Foundry resource.
+1. **In Azure Portal**, navigate to your **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>** Azure AI Foundry resource.
 
-1. In the left navigation, click **Networking** → **Private endpoint connections** tab.
+1. In the left navigation, click **Networking** ? **Private endpoint connections** tab.
 
 1. Click **+ Private endpoint**.
 
@@ -278,9 +278,9 @@ Create a private endpoint for your OpenAI service to ensure all AI traffic stays
 
  **Basics tab**:
  - **Subscription**: Select your available Azure subscription
- - **Resource group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
- - **Name**: **pe-openai-<inject key="DeploymentID"></inject>**
- - **Network Interface Name**: **nic-pe-openai-<inject key="DeploymentID"></inject>**
+ - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+ - **Name**: **pe-openai-<inject key="DeploymentID" enableCopy="false"/>**
+ - **Network Interface Name**: **nic-pe-openai-<inject key="DeploymentID" enableCopy="false"/>**
  - **Region**: **<inject key="Region"></inject>**
  - Click **Next: Resource**
 
@@ -288,12 +288,12 @@ Create a private endpoint for your OpenAI service to ensure all AI traffic stays
  - **Connection method**: **Connect to an Azure resource in my directory**
  - **Subscription**: Should be pre-selected
  - **Resource type**: **Microsoft.CognitiveServices/accounts**
- - **Resource**: Select **openai-secureai-<inject key="DeploymentID"></inject>**
+ - **Resource**: Select **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>**
  - **Target sub-resource**: **account** (should be selected automatically)
  - Click **Next: Virtual Network**
 
  **Virtual Network tab**:
- - **Virtual network**: Select **vnet-secureai-<inject key="DeploymentID"></inject>**
+ - **Virtual network**: Select **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
  - **Subnet**: Select **snet-ai-services (10.0.1.0/24)**
  - **Private IP configuration**: **Dynamically allocate IP address**
  - **Application security group**: Leave blank
@@ -302,7 +302,7 @@ Create a private endpoint for your OpenAI service to ensure all AI traffic stays
  **DNS tab**:
  - **Integrate with private DNS zone**: **Yes**
  - **Subscription**: Should be pre-selected
- - **Resource group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
+ - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
  - **Private DNS zones**: Should show **privatelink.openai.azure.com** (will be created if it doesn't exist)
  - Click **Next: Tags**
 
@@ -322,7 +322,7 @@ Create a private endpoint for your OpenAI service to ensure all AI traffic stays
 
 After creating private endpoints, verify that the Private DNS zones were created and linked to your VNET.
 
-1. **In Azure Portal**, navigate to your resource group **challenge-rg-<inject key="DeploymentID"></inject>**.
+1. **In Azure Portal**, navigate to your resource group **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**.
 
 1. Look for Private DNS zone resources (filter by type "Private DNS zone"):
    - **privatelink.vaultcore.azure.net**
@@ -332,7 +332,7 @@ After creating private endpoints, verify that the Private DNS zones were created
 
 1. In the left navigation, click **Virtual network links**.
 
-1. Verify that **vnet-secureai-<inject key="DeploymentID"></inject>** is listed with **Link status: Completed**.
+1. Verify that **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>** is listed with **Link status: Completed**.
 
 1. Click **Overview** in the left navigation.
 
@@ -344,9 +344,9 @@ After creating private endpoints, verify that the Private DNS zones were created
 
 ### Part 7: Validate Private Endpoint Connectivity (Using VS Code)
 
-Ensure all services are reachable via private endpoints only. For this validation, we'll use VS Code on **vm-<inject key="DeploymentID"></inject>**.
+Ensure all services are reachable via private endpoints only. For this validation, we'll use VS Code on **vm-<inject key="DeploymentID" enableCopy="false"/>**.
 
-> **Note**: Connect to **vm-<inject key="DeploymentID"></inject>** via Bastion, open VS Code, open a PowerShell terminal (Ctrl + `), and ensure you're logged in to Azure CLI (`az login`).
+> **Note**: Connect to **vm-<inject key="DeploymentID" enableCopy="false"/>** via Bastion, open VS Code, open a PowerShell terminal (Ctrl + `), and ensure you're logged in to Azure CLI (`az login`).
 
 1. **List all private endpoints**:
 
@@ -354,7 +354,7 @@ Ensure all services are reachable via private endpoints only. For this validatio
 
 ```powershell
 az network private-endpoint list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[].{Name:name, Subnet:subnet.id, State:privateLinkServiceConnections[0].privateLinkServiceConnectionState.status}" `
  --output table
 ```
@@ -365,7 +365,7 @@ All should show `State: Approved`
 
 ```powershell
 az network private-dns zone list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[].name" `
  --output table
 ```
@@ -380,7 +380,7 @@ You should see zones like:
 $dnsZone = "privatelink.openai.azure.com"
 
 az network private-dns link vnet list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --zone-name $dnsZone `
  --query "[].{Name:name, VNet:virtualNetwork.id, Status:registrationEnabled}" `
  --output table
@@ -395,7 +395,7 @@ Verify that service names resolve to private IP addresses (not public). Continue
 1. **Test OpenAI endpoint DNS resolution**:
 
 ```powershell
-nslookup openai-secureai-<inject key="DeploymentID"></inject>.openai.azure.com
+nslookup openai-secureai-<inject key="DeploymentID" enableCopy="false"/>.openai.azure.com
 ```
 
 The returned IP should be in the `10.0.1.x` range (private), NOT a public IP!
@@ -413,7 +413,7 @@ Address:  10.0.1.4
 2. **Test Key Vault endpoint**:
 
 ```powershell
-nslookup kv-secureai-<inject key="DeploymentID"></inject>.vault.azure.net
+nslookup kv-secureai-<inject key="DeploymentID" enableCopy="false"/>.vault.azure.net
 ```
 
 Expected private IP in `10.0.2.x` range.
@@ -422,7 +422,7 @@ Expected private IP in `10.0.2.x` range.
 
 ```powershell
 # Try to list secrets (you should get an access denied, but connection should work)
-az keyvault secret list --vault-name kv-secureai-<inject key="DeploymentID"></inject>
+az keyvault secret list --vault-name kv-secureai-<inject key="DeploymentID" enableCopy="false"/>
 ```
 
 If you see a permission error (not a network error), private endpoint is working!
@@ -438,7 +438,7 @@ Validate that trying to access services from the internet fails (security valida
 1. **Try to access Key Vault** from your local machine:
 
 ```powershell
-az keyvault secret list --vault-name kv-secureai-<inject key="DeploymentID"></inject>
+az keyvault secret list --vault-name kv-secureai-<inject key="DeploymentID" enableCopy="false"/>
 ```
 
 **Expected result**: Should fail with error:
@@ -446,7 +446,7 @@ az keyvault secret list --vault-name kv-secureai-<inject key="DeploymentID"></in
 (Forbidden) Public network access is disabled and request is not from a trusted service nor via an approved private link.
 ```
 
-✅ **This is the desired behavior!** It proves your Key Vault is completely isolated from the internet.
+? **This is the desired behavior!** It proves your Key Vault is completely isolated from the internet.
 
 3. **Test Storage Account**:
 
@@ -518,7 +518,7 @@ Repeat NSG creation for the storage subnet using Azure Portal.
 
  **Basics tab**:
  - **Subscription**: Select your available Azure subscription
- - **Resource group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
+ - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
  - **Name**: **nsg-storage-services**
  - **Region**: **<inject key="Region"></inject>**
 
@@ -548,7 +548,7 @@ Repeat NSG creation for the storage subnet using Azure Portal.
 
  - Click **Subnets** in the left menu
  - Click **+ Associate**
- - **Virtual network**: Select **vnet-secureai-<inject key="DeploymentID"></inject>**
+ - **Virtual network**: Select **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
  - **Subnet**: Select **snet-storage-services**
  - Click **OK**
 
@@ -561,7 +561,7 @@ Save your network topology for reference using VS Code PowerShell terminal.
 ```powershell
 # Get VNET name
 $vnetName = az network vnet list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[?contains(name, 'vnet')].name" -o tsv
 
 # Create documentation
@@ -625,7 +625,7 @@ Verify your network is fully secured:
 - Ensure you're using the correct resource group name
 - Verify the location matches your VNET region
 - Check if an NSG with the same name already exists in the portal
-- Navigate to Resource Groups → Network security groups to verify
+- Navigate to Resource Groups ? Network security groups to verify
 
 ---
 
