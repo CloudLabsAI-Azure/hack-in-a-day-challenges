@@ -45,7 +45,7 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
    - **Fabric capacity**: Keep the default  
    - **Semantic model storage format**: Keep **Small semantic model storage format**
 
-   > **Note:** If you are unable to use the **Fabric Trial** and have deployed a Fabric capacity from the Azure portal, select **Fabric** as the **Workspace type**, and then choose the Fabric capacity that you deployed in Azure. Make sure the workspace is assigned to an active Fabric capacity, or it will not function properly.
+      > **Note:** If you are unable to use the **Fabric Trial** and have deployed a Fabric capacity from the Azure portal, select **Fabric** as the **Workspace type**, and then choose the Fabric capacity that you deployed in Azure. Make sure the workspace is assigned to an active Fabric capacity, or it will not function properly.
 
 1. Click **Apply**
 
