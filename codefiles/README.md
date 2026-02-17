@@ -1,22 +1,30 @@
-# SQL Modernization Platform - Streamlit Application
+# SQL Modernization Platform
 
 Production-ready web application for Oracle to Azure SQL migration using Azure AI Foundry multi-agent system.
 
-## ✨ Features
+## Features
 
-- **Beautiful UI** - Modern gradient design with responsive layout
-- **3-Agent Pipeline** - Translation → Validation → Optimization
-- **File Upload** - Support for .sql and .txt files
+- **AI-Powered Translation** - Convert Oracle SQL to Azure SQL T-SQL automatically
+- **Multi-Agent Pipeline** - Translation → Validation → Optimization
+- **File Upload Support** - Process `.sql` and `.txt` files
 - **Real-time Progress** - Visual feedback during processing
-- **Cosmos DB Integration** - Automatic history tracking
-- **Sample Queries** - Pre-built Oracle SQL examples
-- **Production Ready** - Error handling, validation, and logging
+- **History Tracking** - Save and review past translations (requires Cosmos DB)
+- **Sample Queries** - Pre-built Oracle SQL examples to get started
+- **Modern UI** - Clean, responsive design with gradient styling
+- **Setup Wizard** - Guided configuration if env vars are missing
 
-## 🚀 Quick Start
+## Quick Start
 
-### 1. Configure Environment
+### Prerequisites
 
-Rename `.env.example` to `.env` and fill in your credentials:
+- Python 3.11 or higher
+- Azure CLI installed and authenticated
+- Azure AI Foundry project with agents configured
+- (Optional) Azure Cosmos DB for history persistence
+
+### Step 1: Configure Environment
+
+Copy the example environment file and edit with your credentials:
 
 ```bash
 cp .env.example .env
@@ -24,74 +32,92 @@ cp .env.example .env
 
 Edit `.env`:
 ```env
-# Azure AI Foundry Agent API - Use Foundry services endpoint
-AGENT_API_ENDPOINT=https://ai-project-XXXX.services.ai.azure.com/api/projects/sql-modernization-XXXX
-AGENT_ID=asst_YourAgentID
-PROJECT_NAME=
+# Required - Azure AI Foundry
+AGENT_API_ENDPOINT=https://your-resource.services.ai.azure.com/api/projects/proj-default
+AGENT_ID=asst_your_agent_id
 
-# Cosmos DB Configuration
+# Optional - Cosmos DB (for history feature)
 COSMOS_ENDPOINT=https://your-cosmos.documents.azure.com:443/
-COSMOS_KEY=your-cosmos-key-here
+COSMOS_KEY=your-cosmos-primary-key
 DATABASE_NAME=SQLModernizationDB
 ```
 
-**Note:** Authentication uses Azure CLI (`az login`), not API keys.
+> **Note:** Authentication uses Azure CLI (`az login`), not API keys.
 
-### 2. Install Dependencies
+### Step 2: Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Authenticate with Azure CLI
+### Step 3: Authenticate with Azure
 
 ```bash
 az login
 ```
 
-### 4. Run the App
+### Step 4: Run the Application
 
 ```bash
 streamlit run app.py
 ```
 
-The app will open at `http://localhost:8501`
+The app opens at `http://localhost:8501`
 
-## 📖 Usage
+## Usage
 
-1. **Select Input Method:**
-   - Upload a .sql file
-   - Paste SQL code directly
-   - Load a sample query
+### Translating SQL
 
-2. **Click "Modernize SQL"**
+1. **Upload a file**: Click the file upload area and select a `.sql` file
+2. **Or paste directly**: Enter Oracle SQL in the text area
+3. **Or use samples**: Select a sample query from the dropdown
+4. Click **"Modernize SQL"**
 
-3. **View Results in 3 columns:**
-   - **Translation**: Azure SQL T-SQL code
-   - **Validation**: Syntax errors and warnings
-   - **Optimization**: Performance recommendations with score
+### Viewing Results
 
-4. **Review History:**
-   - All translations saved to Cosmos DB
-   - Reload previous queries
+After processing, you'll see three columns:
 
-## 📁 File Structure
+| Column | Description |
+|--------|-------------|
+| **Translation** | The converted Azure SQL T-SQL code |
+| **Validation** | Syntax check results and warnings |
+| **Optimization** | Performance score and recommendations |
+
+### History
+
+Previous translations are saved to Cosmos DB (if configured) and viewable in the History tab.
+
+## Project Structure
 
 ```
 codefiles/
-├── app.py              # Main Streamlit application (704 lines)
-├── agents.py           # Agent helper classes (optional legacy file)
+├── app.py              # Main Streamlit application
+├── agents.py           # Agent helper classes (legacy/optional)
 ├── cosmos_helper.py    # Cosmos DB helper functions
-├── streamlit_app.py    # Alternative app version (optional)
 ├── requirements.txt    # Python dependencies
-├── .env.example       # Environment template
-├── .gitignore         # Git ignore rules
-├── Dockerfile         # Container configuration
-├── README.md          # This file
-└── sample_queries/    # Sample SQL files (optional reference)
+├── .env.example        # Environment template (copy to .env)
+├── .gitignore          # Git ignore rules
+├── Dockerfile          # Container configuration
+├── README.md           # This file
+└── sample_queries/     # Sample Oracle SQL files
+    ├── simple_select.sql
+    ├── nvl_decode.sql
+    ├── hierarchical.sql
+    ├── cursor_loop.sql
+    └── complex_procedure.sql
 ```
 
-## 🏗 Architecture
+## Configuration Reference
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `AGENT_API_ENDPOINT` | Yes | Azure AI Foundry project endpoint |
+| `AGENT_ID` | Yes | Your Translation Agent ID (starts with `asst_`) |
+| `COSMOS_ENDPOINT` | No | Cosmos DB URI for history feature |
+| `COSMOS_KEY` | No | Cosmos DB primary key |
+| `DATABASE_NAME` | No | Cosmos DB database name (default: `SQLModernizationDB`) |
+
+## Architecture
 
 ```
 User Input (Oracle SQL)
@@ -107,91 +133,58 @@ Parse Results (Translation + Validation JSON + Optimization JSON)
 Save to Cosmos DB + Display in UI
 ```
 
-## 📦 Dependencies
+## Docker Deployment
 
-- **streamlit 1.30.0** - Web framework
-- **azure-ai-projects 1.0.0** - Azure AI Foundry SDK
-- **azure-identity** - Azure CLI authentication
-- **azure-cosmos 4.7+** - Cosmos DB SDK
-- **python-dotenv 1.0.0** - Environment configuration
-- **pandas** - Data processing
+Build and run with Docker:
 
-## 🔧 Key Components
+```bash
+# Build the image
+docker build -t sql-modernization-app .
 
-### app.py Structure
-
-- **Lines 1-50**: Imports and configuration
-- **Lines 51-169**: Custom CSS styling
-- **Lines 171-230**: Cosmos DB connection and history retrieval
-- **Lines 232-350**: Agent API integration using azure-ai-projects SDK
-- **Lines 352-704**: Streamlit UI (3 tabs: Modernize, Results, History)
-
-### Agent API Flow
-
-1. **Create thread** - Initialize conversation with agent
-2. **Add message** - Send Oracle SQL to Translation Agent
-3. **Run agent** - Execute with connected agents (Validation + Optimization)
-4. **Poll status** - Wait for all agents to complete
-5. **Get response** - Parse results from all 3 agents
-6. **Save to Cosmos** - Store results for history
-
-## 🎨 Customization
-
-### Add Sample Queries
-
-Edit `samples` dictionary in app.py (line 485):
-
-```python
-samples = {
-    "Your Query": """SELECT * FROM your_table;"""
-}
+# Run the container (with Azure CLI mounted for auth)
+docker run -p 8501:8501 \
+  -v ~/.azure:/root/.azure \
+  -e AGENT_API_ENDPOINT="your-endpoint" \
+  -e AGENT_ID="your-agent-id" \
+  sql-modernization-app
 ```
 
-### Modify UI Colors
-
-Edit CSS variables (lines 51-60):
-
-```css
-:root {
-    --primary-color: #0078D4;
-    --secondary-color: #50E6FF;
-}
-```
-
-### Adjust Timeout
-
-Change `max_attempts` (line 291):
-
-```python
-max_attempts = 120  # 120 × 2s = 4 minutes max
-```
-
-## 🐛 Troubleshooting
+## Troubleshooting
 
 | Issue | Solution |
 |-------|----------|
-| ModuleNotFoundError | Run `pip install -r requirements.txt` |
-| DefaultAzureCredential failed | Run `az login` to authenticate |
-| 404 Resource not found | Verify endpoint is Foundry services (`.services.ai.azure.com`) not OpenAI |
+| "Configuration Required" | Edit `.env` file with valid credentials |
+| `ModuleNotFoundError` | Run `pip install -r requirements.txt` |
+| `DefaultAzureCredential failed` | Run `az login` to authenticate |
+| `404 Resource not found` | Verify endpoint ends with `/api/projects/proj-default` |
 | Config missing | Ensure `.env` exists (not `.env.example`) |
-| Timeout | Complex queries need 1-2 min for 3 agents |
-| No validation/optimization | Check Connected agents in Azure AI Foundry Studio |
+| Timeout errors | Complex queries need 1-2 min for 3 agents |
+| No validation/optimization | Check Connected agents in Azure AI Foundry |
 | Azure CLI not found | Install Azure CLI, restart terminal |
 
-## 🚀 Portability
+## Portability
 
-This codefiles folder is fully portable! To use on any VM:
+This folder is fully portable! To use on any machine:
 
-1. **Copy entire `codefiles` folder**
-2. **Update `.env` file** with your Azure credentials
-3. **Run `pip install -r requirements.txt`**
-4. **Run `az login`** for authentication
-5. **Run `streamlit run app.py`**
+1. Copy entire `codefiles` folder
+2. Edit `.env` file with your Azure credentials
+3. Run `pip install -r requirements.txt`
+4. Run `az login` for authentication  
+5. Run `streamlit run app.py`
 
 **No hardcoded paths or credentials!** All configuration is in `.env` file.
 
-## 📚 Learn More
+## Dependencies
 
-- [Azure AI Foundry Documentation](https://learn.microsoft.com/azure/ai-foundry/)
+- **streamlit** - Web framework
+- **azure-ai-projects** - Azure AI Foundry SDK
+- **azure-identity** - Azure CLI authentication
+- **azure-cosmos** - Cosmos DB SDK
+- **python-dotenv** - Environment configuration
+- **pandas** - Data processing
+
+## Learn More
+
+- [Azure AI Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/)
 - [Streamlit Documentation](https://docs.streamlit.io/)
 - [Azure Cosmos DB Documentation](https://learn.microsoft.com/azure/cosmos-db/)
