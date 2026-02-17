@@ -227,23 +227,37 @@ Now let's install Azure Bastion and connect to the VM.
 
 1. Wait for Windows to finish setup (may take 1-2 minutes on first connection).
 
-### Part 6: Verify Pre-Installed Software and Set Up VM
+### Part 6: Install Required Software and Set Up VM
 
-The VM comes with **Python 3.11**, **VS Code**, and **Azure CLI** pre-installed. Let's verify everything is ready and install Git.
+The VM is a fresh Windows Server 2022 instance. You'll install Chocolatey (package manager), then use it to install Python 3.11, VS Code, Azure CLI, and Git.
 
-1. Once connected to **vm-<inject key="DeploymentID" enableCopy="false"/>**, open **PowerShell** (search in Start menu).
+1. Once connected to **vm-<inject key="DeploymentID" enableCopy="false"/>**, open **PowerShell as Administrator** (right-click Start → Windows PowerShell (Admin)).
 
-1. **Verify pre-installed tools**:
+1. **Install Chocolatey** (Windows package manager):
+   ```powershell
+   Set-ExecutionPolicy Bypass -Scope Process -Force
+   [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+   Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+   ```
+
+1. **Close and reopen PowerShell as Administrator** to refresh the PATH.
+
+1. **Install Python 3.11, VS Code, Azure CLI, and Git**:
+   ```powershell
+   choco install python311 vscode azure-cli git -y
+   ```
+
+1. **Close and reopen PowerShell as Administrator** again to refresh the PATH after installation.
+
+1. **Verify all tools are installed**:
    ```powershell
    python --version    # Should show: Python 3.11.x
    code --version      # Should show VS Code version
    az --version        # Should show Azure CLI version
+   git --version       # Should show Git version
    ```
 
-1. **Install Git** (optional but useful):
-   ```powershell
-   choco install git -y
-   ```
+   > **Note**: If `python` is not recognized, try `python3 --version` or run `refreshenv` to reload environment variables.
 
 1. **Create working directory**:
    ```powershell
