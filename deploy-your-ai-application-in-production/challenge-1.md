@@ -301,8 +301,11 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
    az cognitiveservices account update `
      --name openai-secureai-<inject key="DeploymentID" enableCopy="false"/> `
      --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> `
-     --custom-domain openai-secureai-<inject key="DeploymentID" enableCopy="false"/>
+     --custom-domain openai-secureai-<inject key="DeploymentID" enableCopy="false"/> `
+     --output none
    ```
+   
+   > **Note**: The `--output none` flag suppresses the verbose JSON output. If the command completes without errors, the custom domain was set successfully.
 
 1. **Verify the custom domain** was set:
    ```powershell
