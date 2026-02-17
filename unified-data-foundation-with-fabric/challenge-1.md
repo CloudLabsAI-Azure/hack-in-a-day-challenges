@@ -44,9 +44,7 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
    - **Capacity name**: **fabriccapacity<inject key="DeploymentID"></inject>**
    - **Region**: **<inject key="Region"></inject>**
    - **Size**: Select **F2** (2 vCores, 4 GB RAM)
-   - **Fabric capacity administrator**: Select **odl_user_<inject key="DeploymentID"></inject>@...**
-
-1. Click **Review + create**
+   - Click **Review + create**
 
 1. Review the configuration and click **Create**
 

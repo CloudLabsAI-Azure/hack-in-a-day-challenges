@@ -88,21 +88,37 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 1. Welcome to **Microsoft Fabric**! You're now ready to start building your data lakehouse solution using Microsoft Fabric, OneLake, and the Medallion architecture for data engineering with flight loyalty and transaction data.
 
-1. If you are unable to access the free trial, follow the steps below:
+   **Note:** If you are unable to access the free trial, follow the steps below:
 
-   1. Open a new browser tab, and navigate to the **Azure portal**.
+      1. Open a new browser tab, and navigate to the **Azure portal**.
 
-   ```
-   https://portal.azure.com/
-   ```
+         ```
+         https://portal.azure.com/
+         ```
 
-   1. In the search bar, enter **Microsoft Fabric (1)**, and then select **Microsoft Fabric (2)** from the results.
+      1. In the search bar, enter **Microsoft Fabric (1)**, and then select **Microsoft Fabric (2)** from the results.
 
-      ![](./media/fab-kynd-ex1-g1.png)
-   
-   1. On the **Microsoft Fabric** page, select **Create**.
+         ![](./media/fab-kynd-ex1-g1.png)
+      
+      1. On the **Microsoft Fabric** page, select **Create**.
 
-      ![](./media/fab-kynd-ex1-g2.png)
+         ![](./media/fab-kynd-ex1-g2.png)
+
+      1. In the **Create Fabric capacity** page, configure the following settings:
+
+         - **Subscription (1)**: Select the default subscription  
+         - **Resource group (2)**: **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**  
+         - **Capacity name (3)**: **fabriccapacity<inject key="DeploymentID" enableCopy="false"/>**  
+         - **Region (4)**: Keep the ** default Region** 
+         - **Size (5)**: Select **F2**  
+         - Select **Review + create (6)**
+
+            ![](./media/fab-kynd-ex1-g3.png)
+
+      1. On the **Microsoft Fabric** page, select **Create**.
+
+         ![](./media/unified-kynd-ggs-g4.png)
+
 
 Now, click on the **Next** from lower right corner to move on next page.
 
