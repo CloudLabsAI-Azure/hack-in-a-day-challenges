@@ -41,8 +41,11 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
    - **Description**: **Contoso unified analytics workspace**
 
 1. In the **Advanced settings** section:
-   - **License mode**: Select **Fabric capacity**
-   - **Fabric capacity**: Select the F2 capacity you deployed from Azure (**fabric-capacity-<inject key="DeploymentID"></inject>**)
+   - **Workspace type**: Select **Fabric Trial**  
+   - **Fabric capacity**: Keep the default  
+   - **Semantic model storage format**: Keep **Small semantic model storage format**
+
+   > **Note:** If you are unable to use the **Fabric Trial** and have deployed a Fabric capacity from the Azure portal, select **Fabric** as the **Workspace type**, and then choose the Fabric capacity that you deployed in Azure.
 
 1. Click **Apply**
 
