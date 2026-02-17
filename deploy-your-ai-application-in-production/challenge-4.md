@@ -57,37 +57,6 @@ az cognitiveservices account deployment list `
 
    You should see the **secure-chat** deployment from Challenge 1. This will be your primary chat model.
 
-### Part 2: Deploy Additional Model (Optional)
-
-If you need a different model (e.g., GPT-4.1 or embeddings), deploy it via CLI. If the **secure-chat** deployment from Challenge 1 is sufficient, you can skip this part.
-
-1. **Check available models in your region**:
-
-```powershell
-az cognitiveservices account list-models `
- --name $openaiName `
- --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --query "[?contains(model.name, 'gpt')].{Name:model.name, Version:model.version}" `
- --output table
-```
-
-2. **Deploy an additional model** (optional):
-
-```powershell
-# Example: Deploy GPT-4.1 (if available in your region)
-az cognitiveservices account deployment create `
- --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --name $openaiName `
- --deployment-name "gpt-4-chat" `
- --model-name "gpt-4.1" `
- --model-version "2025-04-14" `
- --model-format "OpenAI" `
- --sku-name "GlobalStandard" `
- --sku-capacity 20
-```
-
-   > **Note**: If GPT-4.1 is unavailable, you can use the existing **secure-chat** deployment for all remaining challenges.
-
 ### Part 3: Store Model Configuration in Key Vault
 
 Store the deployment name and API version so your app can retrieve them securely.
