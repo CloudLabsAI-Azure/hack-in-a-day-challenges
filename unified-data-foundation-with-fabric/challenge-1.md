@@ -37,7 +37,7 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
 1. Click **+ New workspace** to create a workspace:
 
-   - **Workspace Name**: **fabric-workspace-<inject key="DeploymentID"></inject>**
+   - **Workspace Name**: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
    - **Description**: **Contoso unified analytics workspace**
 
 1. In the **Advanced settings** section:
@@ -45,11 +45,9 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
    - **Fabric capacity**: Keep the default  
    - **Semantic model storage format**: Keep **Small semantic model storage format**
 
-   > **Note:** If you are unable to use the **Fabric Trial** and have deployed a Fabric capacity from the Azure portal, select **Fabric** as the **Workspace type**, and then choose the Fabric capacity that you deployed in Azure.
+   > **Note:** If you are unable to use the **Fabric Trial** and have deployed a Fabric capacity from the Azure portal, select **Fabric** as the **Workspace type**, and then choose the Fabric capacity that you deployed in Azure. Make sure the workspace is assigned to an active Fabric capacity, or it will not function properly.
 
 1. Click **Apply**
-
-   > **Important:** Make sure to select the Fabric capacity you created from Azure. The workspace will not function properly without an active Fabric capacity assigned.
 
 1. Once the workspace is created, explore the **Home** page to familiarize yourself with Fabric components:
 
@@ -74,7 +72,7 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 1. Create your first **Lakehouse** that will hold all three layers:
 
    - In the Fabric workspace, select **+ New** → **Lakehouse**
-   - Name: **contoso_lakehouse_<inject key="DeploymentID"></inject>**
+   - Name: **contoso_lakehouse_<inject key="DeploymentID" enableCopy="false"/>**
    - Click **Create**
 
 1. Once created, explore the Lakehouse structure:

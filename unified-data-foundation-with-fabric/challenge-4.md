@@ -387,7 +387,7 @@ kpi_customer_value.show(10, truncate=False)
 
 1. In the "Save as new notebook" dialog:
    - **Name**: **04_Gold_Layer_Dimensional_Modeling**
-   - **Select location**: **fabric-workspace-<inject key="DeploymentID"></inject>**
+   - **Select location**: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
    - Click **Save**
 
 ## Success Criteria

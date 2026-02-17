@@ -55,15 +55,15 @@ Establish the foundational Microsoft Fabric infrastructure including capacity de
 1. **Deploy Microsoft Fabric Capacity from Azure Portal:**
    - Navigate to Azure Portal and search for **Microsoft Fabric (preview)**
    - Create new Fabric capacity with F2 SKU (2 vCores, 4 GB RAM)
-   - Configure resource group: **challenge-rg-<inject key="DeploymentID"></inject>**
-   - Set capacity name: **fabriccapacity<inject key="DeploymentID"></inject>**
+   - Configure resource group: **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   - Set capacity name: **fabriccapacity<inject key="DeploymentID" enableCopy="false"/>**
    - Select region: **<inject key="Region"></inject>**
-   - Assign capacity administrator: **odl_user_<inject key="DeploymentID"></inject>**
+   - Assign capacity administrator: **odl_user_<inject key="DeploymentID" enableCopy="false"/>**
    - Wait for deployment to complete (approximately 2-3 minutes)
 
 2. **Create Microsoft Fabric Workspace:**
    - Navigate to Microsoft Fabric portal: `https://app.fabric.microsoft.com/`
-   - Create new workspace: **fabric-workspace-<inject key="DeploymentID"></inject>**
+   - Create new workspace: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
    - Configure Advanced settings to use **Fabric capacity** license mode
    - Assign the F2 capacity deployed from Azure
    - Explore Fabric workload components (Data Engineering, Data Science, Data Warehouse, Real-Time Analytics, Power BI)
@@ -78,7 +78,7 @@ Establish the foundational Microsoft Fabric infrastructure including capacity de
      - **Gold Layer (Curated Zone):** Business-level aggregates, star schemas, and analytics-ready models
 
 4. **Create OneLake Lakehouse with Medallion Structure:**
-   - In Fabric workspace, create new **Lakehouse**: **contoso_lakehouse_<inject key="DeploymentID"></inject>**
+   - In Fabric workspace, create new **Lakehouse**: **contoso_lakehouse_<inject key="DeploymentID" enableCopy="false"/>**
    - Understand Lakehouse components:
      - **Files:** For storing raw files (Bronze layer)
      - **Tables:** For Delta Lake tables (Silver and Gold layers)
@@ -172,7 +172,7 @@ Create PySpark transformations in Fabric Notebooks to cleanse, validate, and sta
 #### Tasks
 1. **Create Fabric Notebook for Data Transformation:**
    - In Fabric workspace, create new **Notebook**
-   - Attach notebook to Lakehouse: **contoso_lakehouse_<inject key="DeploymentID"></inject>**
+   - Attach notebook to Lakehouse: **contoso_lakehouse_<inject key="DeploymentID" enableCopy="false"/>**
    - Understand Fabric Notebooks:
      - Native PySpark and SQL support
      - Integrated with OneLake Lakehouse
@@ -268,7 +268,7 @@ Create star schema dimensional models from Silver layer data to build analytics-
 #### Tasks
 1. **Create Gold Layer Modeling Notebook:**
    - Create new Notebook in Fabric workspace
-   - Attach to **contoso_lakehouse_<inject key="DeploymentID"></inject>**
+   - Attach to **contoso_lakehouse_<inject key="DeploymentID" enableCopy="false"/>**
    - Load Silver layer tables: **silver_flights**, **silver_transactions**
    - Verify record counts and preview data schemas
 
@@ -380,7 +380,7 @@ Use Microsoft Fabric's integrated Data Science workload to perform ML-based cust
 #### Tasks
 1. **Create Data Science Notebook:**
    - In Fabric workspace, create new Notebook
-   - Attach to Lakehouse: **contoso_lakehouse_<inject key="DeploymentID"></inject>**
+   - Attach to Lakehouse: **contoso_lakehouse_<inject key="DeploymentID" enableCopy="false"/>**
    - Understand Fabric Data Science capabilities:
      - Native Python ML libraries (scikit-learn, pandas, numpy)
      - MLflow integration for experiment tracking
@@ -520,8 +520,8 @@ Create comprehensive, interactive Power BI dashboards that connect directly to F
 #### Tasks
 1. **Connect Power BI to Fabric Lakehouse:**
    - Navigate to Microsoft Fabric portal
-   - Open workspace: **fabric-workspace-<inject key="DeploymentID"></inject>**
-   - Open Lakehouse: **contoso_lakehouse_<inject key="DeploymentID"></inject>**
+   - Open workspace: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
+   - Open Lakehouse: **contoso_lakehouse_<inject key="DeploymentID" enableCopy="false"/>**
    - Switch to **SQL analytics endpoint** view (top-right corner)
    - Create new **semantic model** (formerly Dataset):
      - Name: **Contoso-Flight-Analytics-Model**
@@ -682,7 +682,7 @@ Create comprehensive, interactive Power BI dashboards that connect directly to F
 9. **Publish Dashboard to Power BI Service:**
    - Save report: **Contoso-Flight-Loyalty-Dashboard**
    - Click **Publish** in Home ribbon
-   - Select destination: **fabric-workspace-<inject key="DeploymentID"></inject>**
+   - Select destination: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
    - Wait for publishing to complete
    - Click link to open dashboard in Power BI Service
 

@@ -22,9 +22,9 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
    https://app.fabric.microsoft.com/
    ```
 
-1. Navigate to your workspace: **fabric-workspace-<inject key="DeploymentID"></inject>**
+1. Navigate to your workspace: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
 
-1. Open your Lakehouse: **contoso-lakehouse-<inject key="DeploymentID"></inject>**
+1. Open your Lakehouse: **contoso-lakehouse-<inject key="DeploymentID" enableCopy="false"/>**
 
 1. From the Lakehouse, click on **SQL analytics endpoint** in the top-right corner.
 
@@ -309,7 +309,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 1. Click **Publish** in the Home ribbon
 
-1. Select destination workspace: **fabric-workspace-<inject key="DeploymentID"></inject>**
+1. Select destination workspace: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
 
    > **Note:** Your workspace is using the Fabric capacity (F2 SKU) you deployed from Azure, which supports all publishing features.
 

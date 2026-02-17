@@ -45,9 +45,9 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
    https://app.fabric.microsoft.com/
    ```
 
-1. Navigate to your **Microsoft Fabric workspace**: **fabric-workspace-<inject key="DeploymentID"></inject>**
+1. Navigate to your **Microsoft Fabric workspace**: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
 
-1. Open your Lakehouse: **contoso-lakehouse-<inject key="DeploymentID"></inject>**
+1. Open your Lakehouse: **contoso-lakehouse-<inject key="DeploymentID" enableCopy="false"/>**
 
 1. In the Lakehouse Explorer, navigate to **Files** → **bronze** folder.
 
@@ -106,7 +106,7 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
 ### Part 4: Validate Bronze Layer Ingestion
 
-1. Navigate to your **Lakehouse**: **contoso-lakehouse-<inject key="DeploymentID"></inject>** (if not already open)
+1. Navigate to your **Lakehouse**: **contoso-lakehouse-<inject key="DeploymentID" enableCopy="false"/>** (if not already open)
 
 1. In the **Files** section, verify the bronze folder contains:
    - `flight.csv` (~63K records)
