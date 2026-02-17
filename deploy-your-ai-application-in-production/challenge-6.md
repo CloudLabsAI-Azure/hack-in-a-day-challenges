@@ -98,11 +98,14 @@ Expected:
 2. **Using Azure CLI** (Alternative):
 
 ```powershell
+# Get your subscription ID
+$subscriptionId = az account show --query id -o tsv
+
 # Note: This opens a tunnel, then you RDP through localhost
 az network bastion tunnel `
  --name $bastionName `
  --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --target-resource-id "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID" enableCopy="false"/>/providers/Microsoft.Compute/virtualMachines/vm-<inject key="DeploymentID" enableCopy="false"/>" `
+ --target-resource-id "/subscriptions/$subscriptionId/resourceGroups/challenge-rg-<inject key="DeploymentID" enableCopy="false"/>/providers/Microsoft.Compute/virtualMachines/vm-<inject key="DeploymentID" enableCopy="false"/>" `
  --resource-port 3389 `
  --port 55000
 ```
@@ -302,10 +305,13 @@ $openaiIP = az network private-endpoint show `
 
 Write-Host "OpenAI Private IP: $openaiIP"
 
+# Get subscription ID
+$subscriptionId = az account show --query id -o tsv
+
 # Test connectivity (this will take 2-3 minutes)
 az network watcher test-connectivity `
  --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --source-resource "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID" enableCopy="false"/>/providers/Microsoft.Compute/virtualMachines/vm-<inject key="DeploymentID" enableCopy="false"/>" `
+ --source-resource "/subscriptions/$subscriptionId/resourceGroups/challenge-rg-<inject key="DeploymentID" enableCopy="false"/>/providers/Microsoft.Compute/virtualMachines/vm-<inject key="DeploymentID" enableCopy="false"/>" `
  --dest-address $openaiIP `
  --dest-port 443 `
  --output table
@@ -321,9 +327,12 @@ Expected:
 $kvPE = az network private-endpoint list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[?contains(name, 'kv')].name" -o tsv
 $kvIP = az network private-endpoint show --name $kvPE -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "customDnsConfigs[0].ipAddresses[0]" -o tsv
 
+# Get subscription ID if not already set
+$subscriptionId = az account show --query id -o tsv
+
 az network watcher test-connectivity `
  --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --source-resource "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID" enableCopy="false"/>/providers/Microsoft.Compute/virtualMachines/vm-<inject key="DeploymentID" enableCopy="false"/>" `
+ --source-resource "/subscriptions/$subscriptionId/resourceGroups/challenge-rg-<inject key="DeploymentID" enableCopy="false"/>/providers/Microsoft.Compute/virtualMachines/vm-<inject key="DeploymentID" enableCopy="false"/>" `
  --dest-address $kvIP `
  --dest-port 443 `
  --output table

@@ -409,18 +409,18 @@ If you encounter issues:
 
 Test from Cloud Shell (if you need to verify):
 ```powershell
-# Get variables
-$kvName = "kv-secureai-2036950"
-$openaiName = "openai-secureai-2036950"
+# Get your deployment ID and set variables
+$deploymentId = "<your-deployment-id>"
+$kvName = "kv-secureai-$deploymentId"
+$openaiName = "openai-secureai-$deploymentId"
 
 # Check managed identity
-az vm identity show `
- --resource-group "challenge-rg-2036950" `
- --name "labvm-2036950" `
+$identityId = az vm identity show `
+ --resource-group "challenge-rg-$deploymentId" `
+ --name "vm-$deploymentId" `
  --query principalId -o tsv
 
 # Check role assignments
-$identityId = "74383812-fd6a-44e6-8f4b-69f95122e16b"
 az role assignment list --assignee $identityId --output table
 ```
 
