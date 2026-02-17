@@ -167,13 +167,21 @@ az keyvault secret set `
 
 Write-Host "Stored OpenAI Endpoint"
 
-# Store deployment name
+# Store chat model deployment name
 az keyvault secret set `
  --vault-name $kvName `
- --name "OpenAIDeployment" `
+ --name "ChatModelDeployment" `
  --value "secure-chat"
 
-Write-Host "Stored OpenAI Deployment name"
+Write-Host "Stored ChatModelDeployment"
+
+# Store API version
+az keyvault secret set `
+ --vault-name $kvName `
+ --name "OpenAIApiVersion" `
+ --value "2024-12-01-preview"
+
+Write-Host "Stored OpenAIApiVersion"
 
 # Store resource name
 az keyvault secret set `
