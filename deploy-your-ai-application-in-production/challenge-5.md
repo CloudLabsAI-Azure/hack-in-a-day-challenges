@@ -42,8 +42,8 @@ Let's build a secure ChatGPT-like experience!
 1. **Create the app directory**:
 
 ```powershell
-New-Item -Path "C:\LabFiles\SecureAI\chat-app" -ItemType Directory -Force
-Set-Location "C:\LabFiles\SecureAI\chat-app"
+New-Item -Path "C:\Code\SecureAI\chat-app" -ItemType Directory -Force
+Set-Location "C:\Code\SecureAI\chat-app"
 
 # Create subdirectories
 New-Item -Path ".\pages" -ItemType Directory -Force
@@ -53,7 +53,7 @@ New-Item -Path ".\utils" -ItemType Directory -Force
 2. **Verify directory structure**:
 
 ```powershell
-Get-ChildItem -Path "C:\LabFiles\SecureAI\chat-app" -Recurse
+Get-ChildItem -Path "C:\Code\SecureAI\chat-app" -Recurse
 ```
 
 Should show:
@@ -490,7 +490,7 @@ How does that apply to Azure managed identities?
    Open a **new** PowerShell terminal (keep app running) and run:
 
 ```powershell
-Select-String -Path "C:\LabFiles\SecureAI\chat-app\app.py" -Pattern "api[_-]?key"
+Select-String -Path "C:\Code\SecureAI\chat-app\app.py" -Pattern "api[_-]?key"
 # Should return NO MATCHES
 ```
 

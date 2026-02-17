@@ -150,7 +150,7 @@ A production-grade, enterprise-ready chat application built with Azure OpenAI, f
 ### 1. Clone/Download the Project
 
 ```bash
-cd C:\LabFiles\SecureAI
+cd C:\Code\SecureAI
 # Project files should be in chat-app directory
 ```
 

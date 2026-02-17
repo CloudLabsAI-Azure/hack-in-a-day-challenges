@@ -101,6 +101,15 @@ Write-Host "Key Vault secured"
 
 Validate that Azure OpenAI works end-to-end with managed identity authentication.
 
+1. **Install required Python packages** (if not already installed):
+
+```powershell
+New-Item -Path "C:\Code" -ItemType Directory -Force
+pip install azure-identity azure-keyvault-secrets openai
+```
+
+2. **Create and run the test script**:
+
 ```powershell
 @'
 """
@@ -146,9 +155,9 @@ response = client.chat.completions.create(
 print(f"\nAI Response: {response.choices[0].message.content}")
 print(f"Tokens used: {response.usage.total_tokens}")
 print("\nSUCCESS: Managed identity auth to Azure OpenAI is working!")
-'@ -replace '\$kvName', $kvName | Out-File -FilePath "C:\LabFiles\test_openai_quick.py" -Encoding UTF8
+'@ -replace '\$kvName', $kvName | Out-File -FilePath "C:\Code\test_openai_quick.py" -Encoding UTF8
 
-python "C:\LabFiles\test_openai_quick.py"
+python "C:\Code\test_openai_quick.py"
 ```
 
 If you get an error, wait 2-3 minutes for RBAC to propagate and retry.

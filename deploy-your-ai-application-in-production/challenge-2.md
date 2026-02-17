@@ -591,10 +591,10 @@ DNS Configuration:
 - Services resolve to private IPs only
 
 Security Posture: LOCKED DOWN
-"@ | Out-File -FilePath "C:\LabFiles\network-config.txt"
+"@ | Out-File -FilePath "C:\Code\network-config.txt"
 
-Write-Host "Network configuration documented at C:\LabFiles\network-config.txt"
-notepad C:\LabFiles\network-config.txt
+Write-Host "Network configuration documented at C:\Code\network-config.txt"
+notepad C:\Code\network-config.txt
 ```
 
 ## Success Criteria

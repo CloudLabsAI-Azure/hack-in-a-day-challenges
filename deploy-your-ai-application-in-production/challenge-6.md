@@ -52,7 +52,7 @@ ipconfig | Select-String "IPv4"
 1. **Start the chat app** (if not already running):
 
 ```powershell
-cd C:\LabFiles\SecureAI\chat-app
+cd C:\Code\SecureAI\chat-app
 .\venv\Scripts\Activate.ps1
 streamlit run app.py
 ```
