@@ -9,7 +9,7 @@ This is where enterprises fail most often - deploying services with default sett
 ## Prerequisites
 
 - Completed Challenge 1 (Infrastructure deployed via Azure Portal)
-- Resource group `challenge-rg-<inject key="DeploymentID" enableCopy="false"/>` contains:
+- Resource group **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>** contains:
    - Virtual Network with subnets
    - Application VM (vm-<inject key="DeploymentID" enableCopy="false"/>)
    - Azure AI Foundry (includes OpenAI)
@@ -29,9 +29,9 @@ This is where enterprises fail most often - deploying services with default sett
 
 First, understand what was deployed.
 
-1. **In Azure Portal**, navigate to your resource group: `challenge-rg-<inject key="DeploymentID" enableCopy="false"/>`
+1. **In Azure Portal**, navigate to your resource group: **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
 
-2. **Find the Virtual Network** (name: `vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>`)
+2. **Find the Virtual Network** (name: **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**)
 
 3. Click on it, then click **Subnets** in the left menu
 
