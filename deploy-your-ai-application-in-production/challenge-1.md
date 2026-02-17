@@ -1,4 +1,4 @@
-﻿# Challenge 01: Deploy Core Azure Infrastructure
+# Challenge 01: Deploy Core Azure Infrastructure
 
 ## Introduction
 
@@ -29,9 +29,9 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
 1. In the **Azure Portal**, search for **Resource groups** in the top search bar and select it.
 
-1. You should see a pre-deployed resource group named **challenge-rg-<inject key="DeploymentID"></inject>**.
+1. You should see a pre-deployed resource group named **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**.
 
-1. Click on **challenge-rg-<inject key="DeploymentID"></inject>** to open it.
+1. Click on **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>** to open it.
 
 1. This resource group will be used for all resources you create in this hackathon.
 
@@ -47,8 +47,8 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
  **Basics tab**:
  - **Subscription**: Select your available Azure subscription
- - **Resource group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
- - **Virtual network name**: **vnet-secureai-<inject key="DeploymentID"></inject>**
+ - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+ - **Virtual network name**: **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
  - **Region**: **<inject key="Region"></inject>**
 
 1. Click **Next: Security**.
@@ -109,8 +109,8 @@ Now you'll deploy a Windows VM in the application subnet where you'll host the s
 
    **Basics tab**:
    - **Subscription**: Select your available Azure subscription
-   - **Resource group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
-   - **Virtual machine name**: **vm-<inject key="DeploymentID"></inject>**
+   - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Virtual machine name**: **vm-<inject key="DeploymentID" enableCopy="false"/>**
    - **Region**: **<inject key="Region"></inject>**
    - **Availability options**: **No infrastructure redundancy required**
    - **Security type**: **Standard**
@@ -135,7 +135,7 @@ Now you'll deploy a Windows VM in the application subnet where you'll host the s
    - Click **Next: Networking**
 
 1. **Networking tab**:
-   - **Virtual network**: Select **vnet-secureai-<inject key="DeploymentID"></inject>**
+   - **Virtual network**: Select **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
    - **Subnet**: Select **snet-application (10.0.3.0/24)**
    - **Public IP**: Select **None**
    - **NIC network security group**: **Basic**
@@ -170,7 +170,7 @@ Now you'll deploy a Windows VM in the application subnet where you'll host the s
 
 Before we can connect to the VM, we need to create a dedicated subnet for Azure Bastion.
 
-1. In the **Azure Portal**, navigate to your **vnet-secureai-<inject key="DeploymentID"></inject>** virtual network.
+1. In the **Azure Portal**, navigate to your **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>** virtual network.
 
 1. In the left navigation, click **Subnets**.
 
@@ -213,22 +213,22 @@ Before creating private endpoints in the next challenge, you must configure a cu
 1. **Configure custom domain** for your OpenAI resource:
    ```powershell
    az cognitiveservices account update `
-     --name openai-secureai-<inject key="DeploymentID"></inject> `
-     --resource-group challenge-rg-<inject key="DeploymentID"></inject> `
-     --custom-domain openai-secureai-<inject key="DeploymentID"></inject>
+     --name openai-secureai-<inject key="DeploymentID" enableCopy="false"/> `
+     --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> `
+     --custom-domain openai-secureai-<inject key="DeploymentID" enableCopy="false"/>
    ```
 
 1. **Verify the custom domain** was set:
    ```powershell
    az cognitiveservices account show `
-     --name openai-secureai-<inject key="DeploymentID"></inject> `
-     --resource-group challenge-rg-<inject key="DeploymentID"></inject> `
+     --name openai-secureai-<inject key="DeploymentID" enableCopy="false"/> `
+     --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> `
      --query "properties.endpoint" -o tsv
    ```
    
    Should return:
    ```
-   https://openai-secureai-<inject key="DeploymentID"></inject>.openai.azure.com/
+   https://openai-secureai-<inject key="DeploymentID" enableCopy="false"/>.openai.azure.com/
    ```
 
 > **Important**: Complete this step before proceeding to Challenge 2. Without the custom domain, private endpoint creation will succeed but authentication will fail.
@@ -237,19 +237,19 @@ Before creating private endpoints in the next challenge, you must configure a cu
 
 Now let's install Azure Bastion and connect to the VM.
 
-1. In the **Azure Portal**, navigate to your **vm-<inject key="DeploymentID"></inject>** Virtual Machine resource.
+1. In the **Azure Portal**, navigate to your **vm-<inject key="DeploymentID" enableCopy="false"/>** Virtual Machine resource.
 
-1. In the left navigation, click **Connect** → **Connect via Bastion**.
+1. In the left navigation, click **Connect** ? **Connect via Bastion**.
 
 1. On the Bastion connection page, click **Deploy Bastion**.
 
 1. Configure Bastion:
-   - **Name**: **bastion-<inject key="DeploymentID"></inject>**
+   - **Name**: **bastion-<inject key="DeploymentID" enableCopy="false"/>**
    - **Tier**: **Developer** (cost-effective for testing)
-   - **Virtual network**: **vnet-secureai-<inject key="DeploymentID"></inject>** (should be pre-selected)
+   - **Virtual network**: **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>** (should be pre-selected)
    - **Subnet**: **AzureBastionSubnet (10.0.4.0/26)** (should be pre-selected)
    - **Public IP address**: Click **Create new**
-     - **Name**: **bastion-ip-<inject key="DeploymentID"></inject>**
+     - **Name**: **bastion-ip-<inject key="DeploymentID" enableCopy="false"/>**
      - Click **OK**
 
 1. Click **Deploy Bastion**.
@@ -273,7 +273,7 @@ Now let's install Azure Bastion and connect to the VM.
 
 Now that you're connected to the VM, let's install the required software manually.
 
-1. Once connected to **vm-<inject key="DeploymentID"></inject>**, open **PowerShell as Administrator** (search in Start menu, right-click, "Run as administrator").
+1. Once connected to **vm-<inject key="DeploymentID" enableCopy="false"/>**, open **PowerShell as Administrator** (search in Start menu, right-click, "Run as administrator").
 
 1. **Install Chocolatey** (package manager for Windows):
    ```powershell
@@ -332,8 +332,8 @@ Now that you're connected to the VM, let's install the required software manuall
 
  **Basics tab**:
  - **Subscription**: Select your available Azure subscription
- - **Resource group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
- - **Name**: **openai-secureai-<inject key="DeploymentID"></inject>**
+ - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+ - **Name**: **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>**
  - **Region**: **<inject key="Region"></inject>**
  - **Default project name**: Keep as **proj-default**
 
@@ -349,7 +349,7 @@ Now that you're connected to the VM, let's install the required software manuall
 
 ### Part 9: Deploy GPT-4 Model in Azure AI Foundry
 
-1. In your **openai-secureai-<inject key="DeploymentID"></inject>** resource.
+1. In your **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>** resource.
 
 1. Click on **Go to Foundry portal**.
 
@@ -357,7 +357,7 @@ Now that you're connected to the VM, let's install the required software manuall
 
 1. In the left navigation, click **Models + Endpoints**.
 
-1. Click **+ Deploy model** → **Deploy base model**.
+1. Click **+ Deploy model** ? **Deploy base model**.
 
 1. Search for and select **gpt-4.1** from the model catalog.
 
@@ -411,8 +411,8 @@ Now that you're connected to the VM, let's install the required software manuall
 
  **Basics tab**:
  - **Subscription**: Select your available Azure subscription
- - **Resource group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
- - **Key vault name**: **kv-secureai-<inject key="DeploymentID"></inject>**
+ - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+ - **Key vault name**: **kv-secureai-<inject key="DeploymentID" enableCopy="false"/>**
  - **Region**: **<inject key="Region"></inject>**
  - **Pricing tier**: **Standard**
 
@@ -433,11 +433,11 @@ Now that you're connected to the VM, let's install the required software manuall
 
 ### Part 12: Assign Key Vault Permissions
 
-1. In your **kv-secureai-<inject key="DeploymentID"></inject>** Key Vault.
+1. In your **kv-secureai-<inject key="DeploymentID" enableCopy="false"/>** Key Vault.
 
 1. In the left navigation, click **Access control (IAM)**.
 
-1. Click **+ Add** → **Add role assignment**.
+1. Click **+ Add** ? **Add role assignment**.
 
 1. In the **Role** tab:
  - Search for **Key Vault Administrator**
@@ -469,8 +469,8 @@ Now that you're connected to the VM, let's install the required software manuall
 
  **Basics tab**:
  - **Subscription**: Select your available Azure subscription
- - **Resource group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
- - **Storage account name**: **stsecureai<inject key="DeploymentID"></inject>** (lowercase, no hyphens)
+ - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+ - **Storage account name**: **stsecureai<inject key="DeploymentID" enableCopy="false"/>** (lowercase, no hyphens)
  - **Region**: **<inject key="Region"></inject>**
  - **Performance**: **Standard**
  - **Redundancy**: **Locally-redundant storage (LRS)**
@@ -497,7 +497,7 @@ Now that you're connected to the VM, let's install the required software manuall
 
 ### Part 14: Create Blob Container
 
-1. In your **stsecureai<inject key="DeploymentID"></inject>** Storage Account.
+1. In your **stsecureai<inject key="DeploymentID" enableCopy="false"/>** Storage Account.
 
 1. In the left navigation, under **Data storage**, click **Containers**.
 
@@ -513,11 +513,11 @@ Now that you're connected to the VM, let's install the required software manuall
 
 ### Part 10: Verify All Resources
 
-1. Navigate back to your resource group: **challenge-rg-<inject key="DeploymentID"></inject>**.
+1. Navigate back to your resource group: **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**.
 
 1. Verify you see the following resources:
- - **vnet-secureai-<inject key="DeploymentID"></inject>** (Virtual network)
-   - **vm-<inject key="DeploymentID"></inject>** (Virtual machine)
+ - **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>** (Virtual network)
+   - **vm-<inject key="DeploymentID" enableCopy="false"/>** (Virtual machine)
 1. In the left navigation, click **Subnets**.
 
 1. Verify all three subnets exist:
@@ -532,18 +532,18 @@ Open Notepad on your VM and document the following:
 ```
 ==============================================
 SECURE AI INFRASTRUCTURE - DEPLOYMENT SUMMARY
-Connect to **vm-<inject key="DeploymentID"></inject>** via Bastion, open Notepad and document the following:
+Connect to **vm-<inject key="DeploymentID" enableCopy="false"/>** via Bastion, open Notepad and document the following:
 
 ```
 ==============================================
 SECURE AI INFRASTRUCTURE - DEPLOYMENT SUMMARY
 ==============================================
-Deployment ID: <inject key="DeploymentID"></inject>
+Deployment ID: <inject key="DeploymentID" enableCopy="false"/>
 Region: <inject key="Region"></inject>
 
 NETWORKING:
 -----------
-Virtual Network: vnet-secureai-<inject key="DeploymentID"></inject>
+Virtual Network: vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>
  Address Space: 10.0.0.0/16
  
 Subnets:
@@ -553,7 +553,7 @@ Subnets:
 
 APPLICATION VM:
 ---------------
-Name: vm-<inject key="DeploymentID"></inject>
+Name: vm-<inject key="DeploymentID" enableCopy="false"/>
 Subnet: snet-application (10.0.3.0/24)
 Username: azureuser
 Password: SecureAI@2026
@@ -563,19 +563,19 @@ Azure CLI: Installed
 
 AZURE OPENAI:
 -------------
-Resource Name: openai-secureai-<inject key="DeploymentID"></inject>
+Resource Name: openai-secureai-<inject key="DeploymentID" enableCopy="false"/>
 Endpoint: [paste the endpoint you copied earlier]
 Model Deployment: secure-chat
 
 KEY VAULT:
 ----------
-Name: kv-secureai-<inject key="DeploymentID"></inject>
-Vault URI: https://kv-secureai-<inject key="DeploymentID"></inject>.vault.azure.net/
+Name: kv-secureai-<inject key="DeploymentID" enableCopy="false"/>
+Vault URI: https://kv-secureai-<inject key="DeploymentID" enableCopy="false"/>.vault.azure.net/
 Authorization: RBAC (Key Vault Administrator assigned)
 
 STORAGE ACCOUNT:
 ----------------
-Name: stsecureai<inject key="DeploymentID"></inject>
+Name: stsecureai<inject key="DeploymentID" enableCopy="false"/>
 Container: chat-sessions
 Public Access: Disabled
 HTTPS Only: Enabled
@@ -592,7 +592,7 @@ Challenge 7: Production Readiness Validation
 ==============================================
 ```
 
-Save this file as: **C:\LabFiles\Secu- [ ] Application VM deployed (vm-<inject key="DeploymentID"></inject>)
+Save this file as: **C:\LabFiles\Secu- [ ] Application VM deployed (vm-<inject key="DeploymentID" enableCopy="false"/>)
 - [ ] VM accessible via Azure Bastion
 - [ ] Python 3.11, VS Code, and Azure CLI verified on VM- [ ] Virtual Network created with 10.0.0.0/16 address space
 - [ ] Three subnets created:
@@ -638,7 +638,7 @@ Save this file as: **C:\LabFiles\Secu- [ ] Application VM deployed (vm-<inject k
 **Solution**:
 - Key Vault names are globally unique
 - If you deleted a Key Vault, it's soft-deleted for 90 days
-- Change the name slightly (e.g., add "v2": kv-secureai-<inject key="DeploymentID"></inject>v2)
+- Change the name slightly (e.g., add "v2": kv-secureai-<inject key="DeploymentID" enableCopy="false"/>v2)
 - Or purge the deleted vault:
  1. Go to Key Vaults in the portal
  2. Click **Manage deleted vaults**
@@ -654,7 +654,7 @@ Save this file as: **C:\LabFiles\Secu- [ ] Application VM deployed (vm-<inject k
 - No hyphens or special characters
 - 3-24 characters
 - Globally unique
-- Use exactly: **stsecureai<inject key="DeploymentID"></inject>**
+- Use exactly: **stsecureai<inject key="DeploymentID" enableCopy="false"/>**
 
 ---
 
@@ -676,7 +676,7 @@ Save this file as: **C:\LabFiles\Secu- [ ] Application VM deployed (vm-<inject k
  - Model: gpt-35-turbo
  - Deployment name: gpt-35-turbo-chat
  - TPM: 50K
-- Check quota in Azure OpenAI Studio → Quotas
+- Check quota in Azure OpenAI Studio ? Quotas
 
 ## Bonus Challenges
 
@@ -686,7 +686,7 @@ Save this file as: **C:\LabFiles\Secu- [ ] Application VM deployed (vm-<inject k
  - Use for semantic search in future challenges
 
 2. **Enable Soft Delete on Key Vault**:
- - Go to Key Vault → Properties
+ - Go to Key Vault ? Properties
  - Enable **Soft delete** with 90-day retention
  - Enable **Purge protection** (prevents permanent deletion)
 

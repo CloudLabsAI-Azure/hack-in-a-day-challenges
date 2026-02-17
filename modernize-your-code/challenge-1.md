@@ -16,9 +16,9 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. In the **Azure Portal**, search for **Resource groups** in the top search bar and select it.
 
-1. You should see a pre-deployed resource group named **challenge-rg-<inject key="DeploymentID"></inject>**.
+1. You should see a pre-deployed resource group named **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**.
 
-1. Click on **challenge-rg-<inject key="DeploymentID"></inject>** to open it.
+1. Click on **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>** to open it.
 
 1. This resource group will be used for all resources you create in this hackathon.
 
@@ -33,8 +33,8 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 1. Configure the AI Foundry project:
 
    - **Subscription**: Select the avialble **Azure subscription**.
-   - **Resource Group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**
-   - **Project name**: **sql-modernize-<inject key="DeploymentID"></inject>**
+   - **Resource Group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Project name**: **sql-modernize-<inject key="DeploymentID" enableCopy="false"/>**
    - **Region**: **<inject key="Region"></inject>**.
    - **Default project name**: Keep the name **Default**.
    - Click **Review + Create**.
@@ -91,8 +91,8 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
    - **Workload Type**: Select **Learning**.
    - **Subscription**: Select the avialble **Azure subscription**.
-   - **Resource Group**: Select **challenge-rg-<inject key="DeploymentID"></inject>**.
-   - **Account Name**: **sql-modernization-cosmos-<inject key="DeploymentID"></inject>**.
+   - **Resource Group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**.
+   - **Account Name**: **sql-modernization-cosmos-<inject key="DeploymentID" enableCopy="false"/>**.
    - **Availability Zones**: Select **Disable**.
    - **Location**: Keep it **Defualt**.
    - **Capacity mode**: Select **Provisioned throughput**.
@@ -156,7 +156,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 ### Part 7: Verify All Resources
 
-1. Navigate back to your resource group: **challenge-rg-<inject key="DeploymentID"></inject>**
+1. Navigate back to your resource group: **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
 
 1. Verify you see the following resources:
    - Microsoft Foundry hub and project resources

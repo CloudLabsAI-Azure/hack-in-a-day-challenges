@@ -1,4 +1,4 @@
-﻿# Challenge 04: Secure Azure OpenAI Deployment
+# Challenge 04: Secure Azure OpenAI Deployment
 
 ## Introduction
 
@@ -30,7 +30,7 @@ By the end, you'll have a fully operational, secure OpenAI service ready for you
 
 ### Part 1: Review OpenAI Resource Configuration
 
-1. **In Azure Portal**, navigate to your **openai-secureai-<inject key="DeploymentID"></inject>** resource.
+1. **In Azure Portal**, navigate to your **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>** resource.
 
 1. Verify the resource is deployed:
  - Note the **Location/Region**
@@ -42,7 +42,7 @@ By the end, you'll have a fully operational, secure OpenAI service ready for you
 
 ```powershell
 $openaiName = az cognitiveservices account list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[?kind=='OpenAI'].name" -o tsv
 
 Write-Host "OpenAI Resource: $openaiName"
@@ -50,7 +50,7 @@ Write-Host "OpenAI Resource: $openaiName"
 # Get endpoint
 $endpoint = az cognitiveservices account show `
  --name $openaiName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query properties.endpoint -o tsv
 
 Write-Host "Endpoint: $endpoint"
@@ -58,7 +58,7 @@ Write-Host "Endpoint: $endpoint"
 # Check public access status
 $publicAccess = az cognitiveservices account show `
  --name $openaiName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query properties.publicNetworkAccess -o tsv
 
 Write-Host "Public Network Access: $publicAccess"
@@ -70,7 +70,7 @@ Should show: `Public Network Access: Disabled` or `Enabled` (depending on your C
 
 Before deploying, verify which models are available using Azure AI Foundry portal.
 
-1. **In Azure Portal**, go to your **openai-secureai-<inject key="DeploymentID"></inject>** resource.
+1. **In Azure Portal**, go to your **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>** resource.
 
 1. Click **Go to Azure AI Foundry portal** (or **Go to Foundry portal**).
 
@@ -86,14 +86,14 @@ Before deploying, verify which models are available using Azure AI Foundry porta
 # List available models
 az cognitiveservices account list-models `
  --name $openaiName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[?model.lifecycleStatus=='GenerallyAvailable'].{Name:model.name, Version:model.version, Format:model.format}" `
  --output table
 
 # Check GPT-4 availability
 az cognitiveservices account list-models `
  --name $openaiName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[?contains(model.name, 'gpt-4')]" `
  --output table
 ```
@@ -108,7 +108,7 @@ Deploy your primary chat model using Azure AI Foundry portal.
 
 1. **In Azure AI Foundry portal**, click **Models + endpoints** in the left navigation.
 
-1. Click **+ Deploy model** → **Deploy base model**.
+1. Click **+ Deploy model** ? **Deploy base model**.
 
 1. Search for and select **gpt-4.1** (or **gpt-4**) in the model catalog.
 
@@ -125,7 +125,7 @@ Deploy your primary chat model using Azure AI Foundry portal.
 
 ### Part 4: Deploy Embedding Model (Using Azure Portal - Optional)
 
-1. **In Azure AI Foundry**, click **+ Deploy model** → **Deploy base model**.
+1. **In Azure AI Foundry**, click **+ Deploy model** ? **Deploy base model**.
 
 1. Search for **text-embedding-ada-002** and deploy it:
  - **Deployment name**: **text-embedding-ada-002**
@@ -172,7 +172,7 @@ Store deployment names securely for your app to retrieve.
 
 ```powershell
 $kvName = az keyvault list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[?contains(name, 'kv')].name" -o tsv
 ```
 
@@ -341,11 +341,11 @@ print("\n" + "=" * 60)
 print("ALL TESTS PASSED!")
 print("=" * 60)
 print("\nAzure OpenAI is fully operational with:")
-print(" • Private endpoint connectivity")
-print(" • Managed identity authentication (zero API keys)")
-print(" • Secrets stored in Key Vault")
-print(" • Chat completions working")
-print(" • Streaming responses working")
+print(" � Private endpoint connectivity")
+print(" � Managed identity authentication (zero API keys)")
+print(" � Secrets stored in Key Vault")
+print(" � Chat completions working")
+print(" � Streaming responses working")
 print("\n100% secure, production-ready configuration!")
 print("=" * 60)
 
@@ -473,7 +473,7 @@ Network Security:
 - DNS Resolution: Private IP (10.0.x.x)
 
 Performance Benchmarks:
-- Latency: Check Azure Portal → Metrics
+- Latency: Check Azure Portal ? Metrics
 - Token throughput: Monitor in Metrics
 - Success rate: Should be >99%
 
@@ -506,10 +506,10 @@ Validate your OpenAI setup:
 ### Issue: Model deployment fails with "Insufficient quota"
 
 **Solution**:
-- Check quota in Azure Portal: OpenAI resource → Quotas
+- Check quota in Azure Portal: OpenAI resource ? Quotas
 - Use GPT-3.5-Turbo instead of GPT-4
 - Reduce capacity (e.g., 10 instead of 20)
-- Request quota increase: Portal → Quotas → Request increase
+- Request quota increase: Portal ? Quotas ? Request increase
 
 ---
 
@@ -539,7 +539,7 @@ Validate your OpenAI setup:
 **Solution**:
 - List all deployments to check the exact name:
  ```powershell
- az cognitiveservices account deployment list -n $openaiName -g "challenge-rg-<inject key="DeploymentID"></inject>" -o table
+ az cognitiveservices account deployment list -n $openaiName -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" -o table
  ```
 - Update the deployment name in Key Vault to match exactly
 
@@ -550,7 +550,7 @@ Validate your OpenAI setup:
 **Solution**:
 - Verify private DNS zone exists and is linked:
  ```powershell
- az network private-dns link vnet list -g "challenge-rg-<inject key="DeploymentID"></inject>" --zone-name "privatelink.openai.azure.com" -o table
+ az network private-dns link vnet list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --zone-name "privatelink.openai.azure.com" -o table
  ```
 - Flush DNS cache:
  ```powershell

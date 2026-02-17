@@ -1,4 +1,4 @@
-﻿# Challenge 06: Test Secure Connectivity via Azure Bastion
+# Challenge 06: Test Secure Connectivity via Azure Bastion
 
 ## Introduction
 
@@ -10,11 +10,11 @@ This proves your entire architecture works through private networking only!
 
 ## Prerequisites
 
-- Completed Challenge 5 (Chat application deployed and tested on **vm-<inject key="DeploymentID"></inject>**)
+- Completed Challenge 5 (Chat application deployed and tested on **vm-<inject key="DeploymentID" enableCopy="false"/>**)
 - Azure Bastion deployed (from pre-configured environment)
-- Chat application running on **vm-<inject key="DeploymentID"></inject>**
+- Chat application running on **vm-<inject key="DeploymentID" enableCopy="false"/>**
 - All services using private endpoints
-- VS Code open with PowerShell terminal on **vm-<inject key="DeploymentID"></inject>**
+- VS Code open with PowerShell terminal on **vm-<inject key="DeploymentID" enableCopy="false"/>**
 - Azure CLI logged in
 
 ## Challenge Objectives
@@ -29,43 +29,43 @@ This proves your entire architecture works through private networking only!
 ## Azure Bastion Architecture
 
 ```
-┌────────────────────────────────────────────────────────────┐
-│ Internet (Public) │
-└─────────────────────────┬──────────────────────────────────┘
- │
- │ HTTPS (443) - SSL/TLS Encrypted
- │
-┌─────────────────────────▼──────────────────────────────────┐
-│ Azure Bastion (PaaS Service) │
-│ bastion-<DeploymentID>.bastion.azure.net │
-│ - No public IP on VM needed │
-│ - MFA-enabled access │
-│ - Fully managed by Azure │
-└─────────────────────────┬──────────────────────────────────┘
- │
- │ RDP (3389) / SSH (22) over TLS
- │ Within VNet ONLY
- │
-┌─────────────────────────▼──────────────────────────────────┐
-│ Virtual Network (10.0.0.0/16) │
-│ │
-│ ┌────────────────────────────────────────────────┐ │
-│ │ Application Subnet (10.0.3.0/24) │ │
-│ │ │ │
-│ │ ┌──────────────────────────────────────────┐ │ │
-│ │ │ VM (10.0.3.x) - NO PUBLIC IP! │ │ │
-│ │ │ - Chat App (localhost:8501) │ │ │
-│ │ │ - Managed Identity │ │ │
-│ │ │ - Access to all private endpoints │ │ │
-│ │ └──────────────────────────────────────────┘ │ │
-│ └────────────────────────────────────────────────┘ │
-│ │
-│ Private Endpoints (10.0.1.x, 10.0.2.x): │
-│ - Azure OpenAI │
-│ - Key Vault │
-│ - Storage Account │
-│ - AI Foundry Hub/Project │
-└────────────────────────────────────────────────────────────┘
++------------------------------------------------------------+
+� Internet (Public) �
++------------------------------------------------------------+
+ �
+ � HTTPS (443) - SSL/TLS Encrypted
+ �
++-------------------------?----------------------------------+
+� Azure Bastion (PaaS Service) �
+� bastion-<DeploymentID>.bastion.azure.net �
+� - No public IP on VM needed �
+� - MFA-enabled access �
+� - Fully managed by Azure �
++------------------------------------------------------------+
+ �
+ � RDP (3389) / SSH (22) over TLS
+ � Within VNet ONLY
+ �
++-------------------------?----------------------------------+
+� Virtual Network (10.0.0.0/16) �
+� �
+� +------------------------------------------------+ �
+� � Application Subnet (10.0.3.0/24) � �
+� � � �
+� � +------------------------------------------+ � �
+� � � VM (10.0.3.x) - NO PUBLIC IP! � � �
+� � � - Chat App (localhost:8501) � � �
+� � � - Managed Identity � � �
+� � � - Access to all private endpoints � � �
+� � +------------------------------------------+ � �
+� +------------------------------------------------+ �
+� �
+� Private Endpoints (10.0.1.x, 10.0.2.x): �
+� - Azure OpenAI �
+� - Key Vault �
+� - Storage Account �
+� - AI Foundry Hub/Project �
++------------------------------------------------------------+
 
 Security: Zero public IPs on any resource! All access via Bastion.
 ```
@@ -78,7 +78,7 @@ Security: Zero public IPs on any resource! All access via Bastion.
 
 ```powershell
 az network bastion list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[].{Name:name, Location:location, Sku:sku.name, State:provisioningState}" `
  --output table
 ```
@@ -92,7 +92,7 @@ Expected:
 
 ```powershell
 $bastionName = az network bastion list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[0].name" -o tsv
 
 Write-Host "Bastion Name: $bastionName"
@@ -100,7 +100,7 @@ Write-Host "Bastion Name: $bastionName"
 # Get full details
 az network bastion show `
  --name $bastionName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --output json
 ```
 
@@ -108,8 +108,8 @@ az network bastion show `
 
 ```powershell
 az network vnet subnet show `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
- --vnet-name "vnet-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+ --vnet-name "vnet-<inject key="DeploymentID" enableCopy="false"/>" `
  --name "AzureBastionSubnet" `
  --query "{Name:name, AddressPrefix:addressPrefix, Provisioning:provisioningState}" `
  --output table
@@ -125,8 +125,8 @@ Expected:
 1. **Using Azure Portal** (Recommended for first-time):
 
  - Open [Azure Portal](https://portal.azure.com)
- - Navigate to: Resource Groups → `challenge-rg-<inject key="DeploymentID"></inject>`
- - Click on your VM: `vm-<inject key="DeploymentID"></inject>`
+ - Navigate to: Resource Groups ? `challenge-rg-<inject key="DeploymentID" enableCopy="false"/>`
+ - Click on your VM: `vm-<inject key="DeploymentID" enableCopy="false"/>`
  - Click **Connect** (top menu)
  - Select **Bastion**
  - Enter credentials:
@@ -145,8 +145,8 @@ Expected:
 # Note: This opens a tunnel, then you RDP through localhost
 az network bastion tunnel `
  --name $bastionName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
- --target-resource-id "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID"></inject>/providers/Microsoft.Compute/virtualMachines/vm-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+ --target-resource-id "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID" enableCopy="false"/>/providers/Microsoft.Compute/virtualMachines/vm-<inject key="DeploymentID" enableCopy="false"/>" `
  --resource-port 3389 `
  --port 55000
 ```
@@ -210,7 +210,7 @@ Let's prove all connections go through private endpoints!
 
 ```powershell
 # Get OpenAI endpoint from Key Vault
-$kvName = az keyvault list -g "challenge-rg-<inject key="DeploymentID"></inject>" --query "[0].name" -o tsv
+$kvName = az keyvault list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[0].name" -o tsv
 $openaiEndpoint = az keyvault secret show --vault-name $kvName --name "OpenAIEndpoint" --query value -o tsv
 $openaiHost = ($openaiEndpoint -replace "https://","") -replace "/",""
 
@@ -243,7 +243,7 @@ Address: 10.0.2.x <-- PRIVATE IP!
 3. **Test Storage DNS**:
 
 ```powershell
-$storageName = az storage account list -g "challenge-rg-<inject key="DeploymentID"></inject>" --query "[0].name" -o tsv
+$storageName = az storage account list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[0].name" -o tsv
 $storageHost = "$storageName.blob.core.windows.net"
 nslookup $storageHost
 ```
@@ -258,7 +258,7 @@ Address: 10.0.2.x <-- PRIVATE IP!
 ```powershell
 # List all private endpoints
 az network private-endpoint list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[].{Name:name, Connection:privateLinkServiceConnections[0].provisioningState}" `
  --output table
 ```
@@ -304,13 +304,13 @@ try {
 ```powershell
 # Get NSG associated with application subnet
 $nsgName = az network nsg list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[?contains(name, 'app')].name" -o tsv
 
 if ($nsgName) {
  az network nsg rule list `
  --nsg-name $nsgName `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[].{Name:name, Priority:priority, Access:access, Direction:direction, Protocol:protocol, Source:sourceAddressPrefix, Destination:destinationAddressPrefix}" `
  --output table
 } else {
@@ -336,20 +336,20 @@ az network watcher configure `
 ```powershell
 # Get OpenAI private IP
 $openaiPE = az network private-endpoint list `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[?contains(name, 'openai')].name" -o tsv
 
 $openaiIP = az network private-endpoint show `
  --name $openaiPE `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "customDnsConfigs[0].ipAddresses[0]" -o tsv
 
 Write-Host "OpenAI Private IP: $openaiIP"
 
 # Test connectivity (this will take 2-3 minutes)
 az network watcher test-connectivity `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
- --source-resource "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID"></inject>/providers/Microsoft.Compute/virtualMachines/vm-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+ --source-resource "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID" enableCopy="false"/>/providers/Microsoft.Compute/virtualMachines/vm-<inject key="DeploymentID" enableCopy="false"/>" `
  --dest-address $openaiIP `
  --dest-port 443 `
  --output table
@@ -362,12 +362,12 @@ Expected:
 3. **Test connectivity to Key Vault**:
 
 ```powershell
-$kvPE = az network private-endpoint list -g "challenge-rg-<inject key="DeploymentID"></inject>" --query "[?contains(name, 'kv')].name" -o tsv
-$kvIP = az network private-endpoint show --name $kvPE -g "challenge-rg-<inject key="DeploymentID"></inject>" --query "customDnsConfigs[0].ipAddresses[0]" -o tsv
+$kvPE = az network private-endpoint list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[?contains(name, 'kv')].name" -o tsv
+$kvIP = az network private-endpoint show --name $kvPE -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "customDnsConfigs[0].ipAddresses[0]" -o tsv
 
 az network watcher test-connectivity `
- --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" `
- --source-resource "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID"></inject>/providers/Microsoft.Compute/virtualMachines/vm-<inject key="DeploymentID"></inject>" `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+ --source-resource "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID" enableCopy="false"/>/providers/Microsoft.Compute/virtualMachines/vm-<inject key="DeploymentID" enableCopy="false"/>" `
  --dest-address $kvIP `
  --dest-port 443 `
  --output table
@@ -523,10 +523,10 @@ Network Watcher Results:
 - OpenAI Private Endpoint: Reachable
 - Key Vault Private Endpoint: Reachable
 - Storage Private Endpoint: Reachable
-- Path: VM → VNET → Private Endpoint
+- Path: VM ? VNET ? Private Endpoint
 
 Chat Application Testing:
-- Access Method: Bastion → VM → localhost:8501
+- Access Method: Bastion ? VM ? localhost:8501
 - Authentication: Managed Identity
 - All API calls: Via private endpoints
 - Session Persistence: Working
@@ -595,11 +595,11 @@ Validate your secure connectivity:
 **Solution**:
 - Verify private DNS zones exist:
  ```powershell
- az network private-dns zone list -g "challenge-rg-<inject key="DeploymentID"></inject>" -o table
+ az network private-dns zone list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" -o table
  ```
 - Check VNET links:
  ```powershell
- az network private-dns link vnet list -g "challenge-rg-<inject key="DeploymentID"></inject>" --zone-name "privatelink.openai.azure.com" -o table
+ az network private-dns link vnet list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --zone-name "privatelink.openai.azure.com" -o table
  ```
 - Flush DNS cache:
  ```powershell
@@ -615,12 +615,12 @@ Validate your secure connectivity:
 **Solution**:
 - Verify public access was disabled in Challenge 2:
  ```powershell
- az cognitiveservices account show -n $openaiName -g "challenge-rg-<inject key="DeploymentID"></inject>" --query properties.publicNetworkAccess -o tsv
+ az cognitiveservices account show -n $openaiName -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query properties.publicNetworkAccess -o tsv
  ```
  Should return: `Disabled`
 - If not, disable it:
  ```powershell
- az cognitiveservices account update -n $openaiName -g "challenge-rg-<inject key="DeploymentID"></inject>" --set properties.publicNetworkAccess=Disabled
+ az cognitiveservices account update -n $openaiName -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --set properties.publicNetworkAccess=Disabled
  ```
 - Repeat for Key Vault and Storage
 
@@ -631,11 +631,11 @@ Validate your secure connectivity:
 **Solution**:
 - Ensure Network Watcher extension is installed on VM:
  ```powershell
- az vm extension list -g "challenge-rg-<inject key="DeploymentID"></inject>" --vm-name "vm-<inject key="DeploymentID"></inject>" -o table
+ az vm extension list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --vm-name "vm-<inject key="DeploymentID" enableCopy="false"/>" -o table
  ```
 - Install if missing:
  ```powershell
- az vm extension set --resource-group "challenge-rg-<inject key="DeploymentID"></inject>" --vm-name "vm-<inject key="DeploymentID"></inject>" --name NetworkWatcherAgentWindows --publisher Microsoft.Azure.NetworkWatcher
+ az vm extension set --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --vm-name "vm-<inject key="DeploymentID" enableCopy="false"/>" --name NetworkWatcherAgentWindows --publisher Microsoft.Azure.NetworkWatcher
  ```
 - Retry test after 2-3 minutes
 
