@@ -113,7 +113,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
          - **Size (5)**: Select **F2**  
          - Select **Review + create (6)**
 
-            ![](./media/fab-kynd-ex1-g3.png)
+            ![](./media/unified-kynd-ggs-g3.png)
 
       1. On the **Microsoft Fabric** page, select **Create**.
 
