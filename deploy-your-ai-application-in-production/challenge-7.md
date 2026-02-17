@@ -34,19 +34,19 @@ This challenge is your **production readiness checklist** - covering Security, R
 
 ```
 +---------------------------------------------------------------+
-¦ Azure Well-Architected Framework (WAF) ¦
-+---------------------------------------------------------------¦
-¦ ¦
-¦ SECURITY RELIABILITY COST ¦
-¦ - Zero Trust - High Availability - Right-sizing ¦
-¦ - Defense-in-Depth - Disaster Recovery - Reserved pricing ¦
-¦ - Least Privilege - Backup & Recovery - Monitoring costs ¦
-¦ ¦
-¦ OPERATIONAL PERFORMANCE ¦
-¦ - Monitoring - Scalability ¦
-¦ - Automation - Caching ¦
-¦ - DevOps/IaC - Optimization ¦
-¦ ¦
+ï¿½ Azure Well-Architected Framework (WAF) ï¿½
++---------------------------------------------------------------ï¿½
+ï¿½ ï¿½
+ï¿½ SECURITY RELIABILITY COST ï¿½
+ï¿½ - Zero Trust - High Availability - Right-sizing ï¿½
+ï¿½ - Defense-in-Depth - Disaster Recovery - Reserved pricing ï¿½
+ï¿½ - Least Privilege - Backup & Recovery - Monitoring costs ï¿½
+ï¿½ ï¿½
+ï¿½ OPERATIONAL PERFORMANCE ï¿½
+ï¿½ - Monitoring - Scalability ï¿½
+ï¿½ - Automation - Caching ï¿½
+ï¿½ - DevOps/IaC - Optimization ï¿½
+ï¿½ ï¿½
 +---------------------------------------------------------------+
 ```
 
@@ -259,16 +259,16 @@ Let's analyze and optimize costs!
 
 1. **Run Azure Advisor Cost Recommendations**:
 
-In Azure Portal:
-- Navigate to **Azure Advisor**
-- Click **Cost** tab
-- Review recommendations for your resource group
+   In Azure Portal:
+   - Navigate to **Azure Advisor**
+   - Click **Cost** tab
+   - Review recommendations for your resource group
 
-Common recommendations:
-- Right-size VMs
-- Delete unused resources
-- Use reserved instances
-- Optimize storage tiers
+   Common recommendations:
+   - Right-size VMs
+   - Delete unused resources
+   - Use reserved instances
+   - Optimize storage tiers
 
 2. **Analyze current costs**:
 
@@ -296,7 +296,7 @@ Based on East US pricing (actual costs vary by region):
 - Key Vault (secrets): ~$0.03/secret/month
 - Storage Account (100GB, LRS): ~$2/month
 - Virtual Network: Free
-- Private Endpoints: $7.50/endpoint/month × 4 = $30
+- Private Endpoints: $7.50/endpoint/month ï¿½ 4 = $30
 - Azure Bastion (Basic SKU): ~$140/month
 - VM (Standard_D2s_v3): ~$70-100/month
 
@@ -385,16 +385,16 @@ az monitor diagnostic-settings create `
 
 2. **Create monitoring dashboard**:
 
-In Azure Portal:
-- Go to **Azure OpenAI resource**
-- Click **Metrics**
-- Add these metrics to a dashboard:
- - Total Calls
- - Processed Inference Tokens
- - Time to Response
- - Errors
+   In Azure Portal:
+   - Go to **Azure OpenAI resource**
+   - Click **Metrics**
+   - Add these metrics to a dashboard:
+   - Total Calls
+   - Processed Inference Tokens
+   - Time to Response
+   - Errors
 
-Pin to a new dashboard named: "AI App Monitoring"
+   Pin to a new dashboard named: "AI App Monitoring"
 
 3. **Set up critical alerts**:
 
@@ -673,11 +673,11 @@ Get comprehensive recommendations!
 
 1. **Generate Advisor recommendations**:
 
-In Azure Portal:
-- Go to **Azure Advisor**
-- Select your subscription
-- Filter by resource group: `challenge-rg-<inject key="DeploymentID" enableCopy="false"/>`
-- Review tabs: **Security**, **Cost**, **Reliability**, **Performance**, **Operational Excellence**
+   In Azure Portal:
+   - Go to **Azure Advisor**
+   - Select your subscription
+   - Filter by resource group: `challenge-rg-<inject key="DeploymentID" enableCopy="false"/>`
+   - Review tabs: **Security**, **Cost**, **Reliability**, **Performance**, **Operational Excellence**
 
 2. **Export recommendations**:
 
@@ -948,28 +948,28 @@ Validate production readiness:
 ## Bonus Challenges
 
 1. **Implement Azure Sentinel** (SIEM):
- - Deploy Sentinel
- - Connect Log Analytics workspace
- - Create security analytics rules
- - Build threat hunting queries
+   - Deploy Sentinel
+   - Connect Log Analytics workspace
+   - Create security analytics rules
+   - Build threat hunting queries
 
 2. **Add Application Insights**:
- - Instrument the Streamlit app
- - Track custom events and metrics
- - Create availability tests
- - Build performance dashboards
+   - Instrument the Streamlit app
+   - Track custom events and metrics
+   - Create availability tests
+   - Build performance dashboards
 
 3. **Implement Chaos Engineering**:
- - Use Azure Chaos Studio
- - Test VM failure scenarios
- - Simulate network latency
- - Validate recovery procedures
+   - Use Azure Chaos Studio
+   - Test VM failure scenarios
+   - Simulate network latency
+   - Validate recovery procedures
 
 4. **Create Infrastructure as Code Tests**:
- - Use Pester (PowerShell testing)
- - Validate resource deployment
- - Check security configurations
- - Automate compliance checks
+   - Use Pester (PowerShell testing)
+   - Validate resource deployment
+   - Check security configurations
+   - Automate compliance checks
 
 ## What You Learned
 

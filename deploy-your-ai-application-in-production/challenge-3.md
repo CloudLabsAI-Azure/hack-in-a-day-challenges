@@ -29,29 +29,29 @@ Network isolation alone isn't enough. Even with private endpoints, you need stro
 
 ```
 +------------------------------------------------------------+
-¦ Traditional Authentication (INSECURE) ¦
-¦ ¦
-¦ Application ? Hardcoded API Key ? Azure OpenAI ¦
-¦ ¦
-¦ Problems: ¦
-¦ API keys stored in code/config files ¦
-¦ Keys can be leaked to GitHub/logs ¦
-¦ Manual key rotation required ¦
-¦ No audit trail of who used the key ¦
+ï¿½ Traditional Authentication (INSECURE) ï¿½
+ï¿½ ï¿½
+ï¿½ Application ? Hardcoded API Key ? Azure OpenAI ï¿½
+ï¿½ ï¿½
+ï¿½ Problems: ï¿½
+ï¿½ API keys stored in code/config files ï¿½
+ï¿½ Keys can be leaked to GitHub/logs ï¿½
+ï¿½ Manual key rotation required ï¿½
+ï¿½ No audit trail of who used the key ï¿½
 +------------------------------------------------------------+
 
 +------------------------------------------------------------+
-¦ Managed Identity Authentication (SECURE) ¦
-¦ ¦
-¦ Application ? Entra ID Token ? Azure OpenAI ¦
-¦ (VM Identity) (Automatic) (RBAC Check) ¦
-¦ ¦
-¦ Benefits: ¦
-¦ Zero secrets in code ¦
-¦ Automatic credential rotation by Azure ¦
-¦ Full audit trail in Entra ID logs ¦
-¦ Granular RBAC permissions ¦
-¦ Works seamlessly with private endpoints ¦
+ï¿½ Managed Identity Authentication (SECURE) ï¿½
+ï¿½ ï¿½
+ï¿½ Application ? Entra ID Token ? Azure OpenAI ï¿½
+ï¿½ (VM Identity) (Automatic) (RBAC Check) ï¿½
+ï¿½ ï¿½
+ï¿½ Benefits: ï¿½
+ï¿½ Zero secrets in code ï¿½
+ï¿½ Automatic credential rotation by Azure ï¿½
+ï¿½ Full audit trail in Entra ID logs ï¿½
+ï¿½ Granular RBAC permissions ï¿½
+ï¿½ Works seamlessly with private endpoints ï¿½
 +------------------------------------------------------------+
 ```
 
@@ -68,9 +68,9 @@ Your VM needs an identity to authenticate to Azure services. We'll configure thi
 1. In the left menu, under **Security**, click **Identity**.
 
 1. Under the **System assigned** tab:
- - Set **Status** to **On**
- - Click **Save**
- - Click **Yes** to confirm
+   - Set **Status** to **On**
+   - Click **Save**
+   - Click **Yes** to confirm
 
 1. Wait for the operation to complete (30 seconds).
 
@@ -102,24 +102,24 @@ Grant your VM's managed identity permission to use Azure OpenAI using the Azure 
 1. Click **+ Add** ? **Add role assignment**.
 
 1. On the **Role** tab:
- - Search for **Cognitive Services OpenAI User**
- - Select **Cognitive Services OpenAI User**
- - Click **Next**
+   - Search for **Cognitive Services OpenAI User**
+   - Select **Cognitive Services OpenAI User**
+   - Click **Next**
 
- > **Note**: This role allows reading models and making inference calls (but not managing the resource).
+   > **Note**: This role allows reading models and making inference calls (but not managing the resource).
 
 1. On the **Members** tab:
- - **Assign access to**: Select **Managed identity**
- - Click **+ Select members**
- - **Managed identity**: Select **Virtual machine**
- - Select your VM from the list
- - Click **Select**
+   - **Assign access to**: Select **Managed identity**
+   - Click **+ Select members**
+   - **Managed identity**: Select **Virtual machine**
+   - Select your VM from the list
+   - Click **Select**
 
 1. Click **Review + assign**.
 
 1. Click **Review + assign** again to confirm.
 
- > **Note**: RBAC can take 2-3 minutes to propagate. Wait before testing.
+   > **Note**: RBAC can take 2-3 minutes to propagate. Wait before testing.
 
 ### Part 3: Configure Key Vault Access for Managed Identity
 
@@ -131,34 +131,23 @@ Key Vault will store connection strings and configuration. Grant access to your 
 
 1. **Assign Key Vault Secrets User role to your VM's managed identity**:
 
- - Click **+ Add** ? **Add role assignment**
- - On the **Role** tab:
-   - Search for **Key Vault Secrets User**
-   - Select it and click **Next**
- - On the **Members** tab:
-   - **Assign access to**: Select **Managed identity**
-   - Click **+ Select members**
-   - **Managed identity**: Select **Virtual machine**
-   - Select your VM from the list
-   - Click **Select**
- - Click **Review + assign** twice
+   - Click **+ Add** ? **Add role assignment**
+   - On the **Role** tab, search for **Key Vault Secrets User**, select it and click **Next**
+   - On the **Members** tab, select **Managed identity** for **Assign access to**
+   - Click **+ Select members**, select **Virtual machine**, select your VM from the list, and click **Select**
+   - Click **Review + assign** twice
 
 1. **Assign Key Vault Secrets Officer role to yourself** (so you can create secrets):
 
- - Click **+ Add** ? **Add role assignment** again
- - On the **Role** tab:
-   - Search for **Key Vault Secrets Officer**
-   - Select it and click **Next**
- - On the **Members** tab:
-   - **Assign access to**: Select **User, group, or service principal**
-   - Click **+ Select members**
-   - Search for your email: **<inject key="AzureAdUserEmail"></inject>**
-   - Select yourself and click **Select**
- - Click **Review + assign** twice
+   - Click **+ Add** ? **Add role assignment** again
+   - On the **Role** tab, search for **Key Vault Secrets Officer**, select it and click **Next**
+   - On the **Members** tab, select **User, group, or service principal** for **Assign access to**
+   - Click **+ Select members**, search for your email: **<inject key="AzureAdUserEmail"></inject>**, select yourself and click **Select**
+   - Click **Review + assign** twice
 
 1. **Wait 2-3 minutes** for RBAC propagation.
 
- > **Important**: Azure AD RBAC takes time to propagate. Wait before proceeding to the next step.
+   > **Important**: Azure AD RBAC takes time to propagate. Wait before proceeding to the next step.
 
 ### Part 4: Store OpenAI Configuration in Key Vault (Using VS Code)
 
@@ -256,15 +245,15 @@ Grant your VM's managed identity permission to read/write blobs using Azure Port
 1. Click **+ Add** ? **Add role assignment**.
 
 1. On the **Role** tab:
- - Search for **Storage Blob Data Contributor**
- - Select it and click **Next**
+   - Search for **Storage Blob Data Contributor**
+   - Select it and click **Next**
 
 1. On the **Members** tab:
- - **Assign access to**: Select **Managed identity**
- - Click **+ Select members**
- - **Managed identity**: Select **Virtual machine**
- - Select your VM from the list
- - Click **Select**
+   - **Assign access to**: Select **Managed identity**
+   - Click **+ Select members**
+   - **Managed identity**: Select **Virtual machine**
+   - Select your VM from the list
+   - Click **Select**
 
 1. Click **Review + assign** twice.
 
@@ -638,9 +627,7 @@ Verify your identity setup is complete:
  ```powershell
  az role assignment list --assignee $identityId --scope $kvId -o table
  ```
-- Check if Key Vault uses access policies instead of RBAC:
- - Portal ? Key Vault ? Access configuration
- - Should be "Azure role-based access control"
+- Check if Key Vault uses access policies instead of RBAC: Go to Portal ? Key Vault ? Access configuration and verify it is set to "Azure role-based access control"
 
 ---
 
@@ -689,25 +676,25 @@ Verify your identity setup is complete:
 ## Bonus Challenges
 
 1. **Implement User-Assigned Managed Identity**:
- - Create a separate user-assigned managed identity
- - Attach it to the VM alongside system-assigned
- - Assign different roles to each identity
- - Test which identity is used by default
+   - Create a separate user-assigned managed identity
+   - Attach it to the VM alongside system-assigned
+   - Assign different roles to each identity
+   - Test which identity is used by default
 
 2. **Configure Conditional Access**:
- - Create a conditional access policy in Entra ID
- - Require MFA for accessing AI services
- - Apply policy to the managed identity
+   - Create a conditional access policy in Entra ID
+   - Require MFA for accessing AI services
+   - Apply policy to the managed identity
 
 3. **Enable Diagnostic Logging**:
- - Turn on diagnostic logs for Key Vault
- - Monitor who accesses which secrets
- - Set up alerts for unauthorized access attempts
+   - Turn on diagnostic logs for Key Vault
+   - Monitor who accesses which secrets
+   - Set up alerts for unauthorized access attempts
 
 4. **Test Least Privilege**:
- - Try to delete a secret (should fail - you only have "Secrets User")
- - Try to create a new OpenAI deployment (should fail - not an admin)
- - Verify you can only perform allowed operations
+   - Try to delete a secret (should fail - you only have "Secrets User")
+   - Try to create a new OpenAI deployment (should fail - not an admin)
+   - Verify you can only perform allowed operations
 
 ## What You Learned
 

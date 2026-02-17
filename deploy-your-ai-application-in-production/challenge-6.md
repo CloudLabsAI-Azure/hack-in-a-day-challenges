@@ -30,41 +30,41 @@ This proves your entire architecture works through private networking only!
 
 ```
 +------------------------------------------------------------+
-¦ Internet (Public) ¦
+ï¿½ Internet (Public) ï¿½
 +------------------------------------------------------------+
- ¦
- ¦ HTTPS (443) - SSL/TLS Encrypted
- ¦
+ ï¿½
+ ï¿½ HTTPS (443) - SSL/TLS Encrypted
+ ï¿½
 +-------------------------?----------------------------------+
-¦ Azure Bastion (PaaS Service) ¦
-¦ bastion-<DeploymentID>.bastion.azure.net ¦
-¦ - No public IP on VM needed ¦
-¦ - MFA-enabled access ¦
-¦ - Fully managed by Azure ¦
+ï¿½ Azure Bastion (PaaS Service) ï¿½
+ï¿½ bastion-<DeploymentID>.bastion.azure.net ï¿½
+ï¿½ - No public IP on VM needed ï¿½
+ï¿½ - MFA-enabled access ï¿½
+ï¿½ - Fully managed by Azure ï¿½
 +------------------------------------------------------------+
- ¦
- ¦ RDP (3389) / SSH (22) over TLS
- ¦ Within VNet ONLY
- ¦
+ ï¿½
+ ï¿½ RDP (3389) / SSH (22) over TLS
+ ï¿½ Within VNet ONLY
+ ï¿½
 +-------------------------?----------------------------------+
-¦ Virtual Network (10.0.0.0/16) ¦
-¦ ¦
-¦ +------------------------------------------------+ ¦
-¦ ¦ Application Subnet (10.0.3.0/24) ¦ ¦
-¦ ¦ ¦ ¦
-¦ ¦ +------------------------------------------+ ¦ ¦
-¦ ¦ ¦ VM (10.0.3.x) - NO PUBLIC IP! ¦ ¦ ¦
-¦ ¦ ¦ - Chat App (localhost:8501) ¦ ¦ ¦
-¦ ¦ ¦ - Managed Identity ¦ ¦ ¦
-¦ ¦ ¦ - Access to all private endpoints ¦ ¦ ¦
-¦ ¦ +------------------------------------------+ ¦ ¦
-¦ +------------------------------------------------+ ¦
-¦ ¦
-¦ Private Endpoints (10.0.1.x, 10.0.2.x): ¦
-¦ - Azure OpenAI ¦
-¦ - Key Vault ¦
-¦ - Storage Account ¦
-¦ - AI Foundry Hub/Project ¦
+ï¿½ Virtual Network (10.0.0.0/16) ï¿½
+ï¿½ ï¿½
+ï¿½ +------------------------------------------------+ ï¿½
+ï¿½ ï¿½ Application Subnet (10.0.3.0/24) ï¿½ ï¿½
+ï¿½ ï¿½ ï¿½ ï¿½
+ï¿½ ï¿½ +------------------------------------------+ ï¿½ ï¿½
+ï¿½ ï¿½ ï¿½ VM (10.0.3.x) - NO PUBLIC IP! ï¿½ ï¿½ ï¿½
+ï¿½ ï¿½ ï¿½ - Chat App (localhost:8501) ï¿½ ï¿½ ï¿½
+ï¿½ ï¿½ ï¿½ - Managed Identity ï¿½ ï¿½ ï¿½
+ï¿½ ï¿½ ï¿½ - Access to all private endpoints ï¿½ ï¿½ ï¿½
+ï¿½ ï¿½ +------------------------------------------+ ï¿½ ï¿½
+ï¿½ +------------------------------------------------+ ï¿½
+ï¿½ ï¿½
+ï¿½ Private Endpoints (10.0.1.x, 10.0.2.x): ï¿½
+ï¿½ - Azure OpenAI ï¿½
+ï¿½ - Key Vault ï¿½
+ï¿½ - Storage Account ï¿½
+ï¿½ - AI Foundry Hub/Project ï¿½
 +------------------------------------------------------------+
 
 Security: Zero public IPs on any resource! All access via Bastion.
@@ -124,20 +124,20 @@ Expected:
 
 1. **Using Azure Portal** (Recommended for first-time):
 
- - Open [Azure Portal](https://portal.azure.com)
- - Navigate to: Resource Groups ? `challenge-rg-<inject key="DeploymentID" enableCopy="false"/>`
- - Click on your VM: `vm-<inject key="DeploymentID" enableCopy="false"/>`
- - Click **Connect** (top menu)
- - Select **Bastion**
- - Enter credentials:
- - **Username**: `azureuser` or the admin username you configured
- - **Password**: `<inject key="VMAdminPassword"></inject>`
- - Click **Connect**
+   - Open [Azure Portal](https://portal.azure.com)
+   - Navigate to: Resource Groups ? `challenge-rg-<inject key="DeploymentID" enableCopy="false"/>`
+   - Click on your VM: `vm-<inject key="DeploymentID" enableCopy="false"/>`
+   - Click **Connect** (top menu)
+   - Select **Bastion**
+   - Enter credentials:
+   - **Username**: `azureuser` or the admin username you configured
+   - **Password**: `<inject key="VMAdminPassword"></inject>`
+   - Click **Connect**
 
- Expected:
- - New browser tab opens with remote desktop session
- - Connected to VM desktop
- - No public IP used!
+   Expected:
+   - New browser tab opens with remote desktop session
+   - Connected to VM desktop
+   - No public IP used!
 
 2. **Using Azure CLI** (Alternative):
 
@@ -186,21 +186,21 @@ streamlit run app.py
 
 2. **Browser should open automatically** to `http://localhost:8501`
 
- If not, manually open browser and go to: `http://localhost:8501`
+   If not, manually open browser and go to: `http://localhost:8501`
 
 3. **Test the application**:
 
- - Chat interface loads
- - Sidebar shows "Authenticated"
- - Send a test message: `What is Azure Bastion?`
- - Receive AI response explaining Bastion!
+   - Chat interface loads
+   - Sidebar shows "Authenticated"
+   - Send a test message: `What is Azure Bastion?`
+   - Receive AI response explaining Bastion!
 
 4. **Verify security indicators**:
 
- - Sidebar should show:
- - Auth: Managed Identity
- - Network: Private Only
- - Storage: Enabled
+   - Sidebar should show:
+   - Auth: Managed Identity
+   - Network: Private Only
+   - Storage: Enabled
 
 ### Part 4: Validate Private Endpoint Connectivity
 
@@ -379,17 +379,17 @@ Let's verify session history persists!
 
 1. **Start a chat session** (if not already running):
 
- - In Bastion session, ensure chat app is running
- - Send 3-4 messages to build conversation history
- - Note the Session ID in the sidebar (first 8 characters)
+   - In Bastion session, ensure chat app is running
+   - Send 3-4 messages to build conversation history
+   - Note the Session ID in the sidebar (first 8 characters)
 
 2. **Disconnect from Bastion**:
- - Close the Bastion browser tab
- - This simulates connection loss
+   - Close the Bastion browser tab
+   - This simulates connection loss
 
 3. **Reconnect via Bastion**:
- - Go back to Azure Portal
- - Connect to VM via Bastion again
+   - Go back to Azure Portal
+   - Connect to VM via Bastion again
 
 4. **Restart the chat app**:
 
@@ -652,24 +652,24 @@ Validate your secure connectivity:
 ## Bonus Challenges
 
 1. **Set up NSG Flow Logs**:
- - Enable flow logs for application subnet NSG
- - Send logs to Storage Account
- - Analyze traffic patterns with Traffic Analytics
+   - Enable flow logs for application subnet NSG
+   - Send logs to Storage Account
+   - Analyze traffic patterns with Traffic Analytics
 
 2. **Configure Just-In-Time (JIT) Access**:
- - Enable JIT VM access in Defender for Cloud
- - Require approval for Bastion connections
- - Set time-limited access windows
+   - Enable JIT VM access in Defender for Cloud
+   - Require approval for Bastion connections
+   - Set time-limited access windows
 
 3. **Implement Azure Monitor Alerts**:
- - Alert on failed Bastion connections
- - Alert on high latency to private endpoints
- - Alert on unusual traffic patterns
+   - Alert on failed Bastion connections
+   - Alert on high latency to private endpoints
+   - Alert on unusual traffic patterns
 
 4. **Test Disaster Recovery**:
- - Simulate VM failure
- - Restore from backup
- - Validate chat app works immediately (all config in Key Vault!)
+   - Simulate VM failure
+   - Restore from backup
+   - Validate chat app works immediately (all config in Key Vault!)
 
 ## What You Learned
 

@@ -45,47 +45,50 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
 1. Configure the Virtual Network:
 
- **Basics tab**:
- - **Subscription**: Select your available Azure subscription
- - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
- - **Virtual network name**: **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
- - **Region**: **<inject key="Region"></inject>**
+   **Basics tab**:
+   - **Subscription**: Select your available Azure subscription
+   - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Virtual network name**: **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Region**: **<inject key="Region"></inject>**
 
 1. Click **Next: Security**.
 
- - Leave everything **turned off (default)**, then click **Next**.
+   - Leave everything **turned off (default)**, then click **Next**.
 
 1. On **IP Addresses**.
 
- - You'll see a **default** subnet created automatically
- - **Delete the default subnet** by clicking the delete icon next to it
+   - You'll see a **default** subnet created automatically
+   - **Delete the default subnet** by clicking the delete icon next to it
  
 1. Click **+ Add subnet** to add the first subnet. Configure the following:
- - **Subnet purpose**: **Default**
- - **Name**: **snet-ai-services**
- - **Starting address**: **10.0.1.0**
- - **Size**: **/24 (256 addresses)**
- - Verify **Include an IPv4 address space** is checked
- - Verify **NAT gateway**, **Network security group**, and **Route table** are set to **None**
- - Verify **Private endpoint network policy** is **Disabled**
- - Leave everything else as default
- - Click **Add**
+
+   - **Subnet purpose**: **Default**
+   - **Name**: **snet-ai-services**
+   - **Starting address**: **10.0.1.0**
+   - **Size**: **/24 (256 addresses)**
+   - Verify **Include an IPv4 address space** is checked
+   - Verify **NAT gateway**, **Network security group**, and **Route table** are set to **None**
+   - Verify **Private endpoint network policy** is **Disabled**
+   - Leave everything else as default
+   - Click **Add**
 
 1. Click **+ Add subnet** to add the second subnet. Configure the following:
- - **Subnet purpose**: **Default**
- - **Name**: **snet-storage-services**
- - **Starting address**: **10.0.2.0**
- - **Size**: **/24 (256 addresses)**
- - Leave everything else as default
- - Click **Add**
+
+   - **Subnet purpose**: **Default**
+   - **Name**: **snet-storage-services**
+   - **Starting address**: **10.0.2.0**
+   - **Size**: **/24 (256 addresses)**
+   - Leave everything else as default
+   - Click **Add**
 
 1. Click **+ Add subnet** to add the third subnet. Configure the following:
- - **Subnet purpose**: **Default**
- - **Name**: **snet-application**
- - **Starting address**: **10.0.3.0**
- - **Size**: **/24 (256 addresses)**
- - Leave everything else as default
- - Click **Add**
+
+   - **Subnet purpose**: **Default**
+   - **Name**: **snet-application**
+   - **Starting address**: **10.0.3.0**
+   - **Size**: **/24 (256 addresses)**
+   - Leave everything else as default
+   - Click **Add**
 
 1. Click **Review + Create**.
 
@@ -330,14 +333,14 @@ Now that you're connected to the VM, let's install the required software manuall
 
 1. Configure Azure AI Foundry:
 
- **Basics tab**:
- - **Subscription**: Select your available Azure subscription
- - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
- - **Name**: **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>**
- - **Region**: **<inject key="Region"></inject>**
- - **Default project name**: Keep as **proj-default**
+   **Basics tab**:
+   - **Subscription**: Select your available Azure subscription
+   - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Name**: **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Region**: **<inject key="Region"></inject>**
+   - **Default project name**: Keep as **proj-default**
 
- > **Note**: This creates both an AI Foundry Hub (resource) and a default project inside it.
+   > **Note**: This creates both an AI Foundry Hub (resource) and a default project inside it.
 
 1. Click **Review + Create**.
 
@@ -364,11 +367,12 @@ Now that you're connected to the VM, let's install the required software manuall
 1. Click **Confirm**.
 
 1. Configure the deployment:
- - **Deployment name**: **secure-chat**
- - **Deployment type**: **Global Standard**
- - **Tokens per Minute Rate Limit (thousands)**: **40K**
 
- > **Important**: Do not increase TPM beyond 40K to avoid quota issues. We're using 40K to allow sufficient capacity for testing.
+   - **Deployment name**: **secure-chat**
+   - **Deployment type**: **Global Standard**
+   - **Tokens per Minute Rate Limit (thousands)**: **40K**
+
+   > **Important**: Do not increase TPM beyond 40K to avoid quota issues. We're using 40K to allow sufficient capacity for testing.
 
 1. Click **Deploy**.
 
@@ -381,9 +385,10 @@ Now that you're connected to the VM, let's install the required software manuall
 1. Click **Open in playground**.
 
 1. In the **Chat session** section, test with this prompt:
- ```
- Explain the principle of least privilege in cloud security.
- ```
+
+   ```
+   Explain the principle of least privilege in cloud security.
+   ```
 
 1. Verify you get a response from GPT-4.
 
@@ -409,19 +414,19 @@ Now that you're connected to the VM, let's install the required software manuall
 
 1. Configure Key Vault:
 
- **Basics tab**:
- - **Subscription**: Select your available Azure subscription
- - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
- - **Key vault name**: **kv-secureai-<inject key="DeploymentID" enableCopy="false"/>**
- - **Region**: **<inject key="Region"></inject>**
- - **Pricing tier**: **Standard**
+   **Basics tab**:
+   - **Subscription**: Select your available Azure subscription
+   - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Key vault name**: **kv-secureai-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Region**: **<inject key="Region"></inject>**
+   - **Pricing tier**: **Standard**
 
 1. Click **Next: Access configuration**.
 
- **Access configuration tab**:
- - **Permission model**: Select **Azure role-based access control (RBAC)**
- 
- > This is more secure than the legacy access policies model.
+   **Access configuration tab**:
+   - **Permission model**: Select **Azure role-based access control (RBAC)**
+   
+   > This is more secure than the legacy access policies model.
 
 1. Click **Review + Create**.
 
@@ -440,22 +445,24 @@ Now that you're connected to the VM, let's install the required software manuall
 1. Click **+ Add** ? **Add role assignment**.
 
 1. In the **Role** tab:
- - Search for **Key Vault Administrator**
- - Select **Key Vault Administrator**
- - Click **Next**
+
+   - Search for **Key Vault Administrator**
+   - Select **Key Vault Administrator**
+   - Click **Next**
 
 1. In the **Members** tab:
- - **Assign access to**: Select **User, group, or service principal**
- - Click **+ Select members**
- - Search for your email: **<inject key="AzureAdUserEmail"></inject>**
- - Select yourself
- - Click **Select**
+
+   - **Assign access to**: Select **User, group, or service principal**
+   - Click **+ Select members**
+   - Search for your email: **<inject key="AzureAdUserEmail"></inject>**
+   - Select yourself
+   - Click **Select**
 
 1. Click **Review + assign**.
 
 1. Click **Review + assign** again.
 
- > **Note**: RBAC can take 2-3 minutes to propagate. Wait before testing.
+   > **Note**: RBAC can take 2-3 minutes to propagate. Wait before testing.
 
 ### Part 13: Create Azure Storage Account
 
@@ -467,25 +474,25 @@ Now that you're connected to the VM, let's install the required software manuall
 
 1. Configure Storage Account:
 
- **Basics tab**:
- - **Subscription**: Select your available Azure subscription
- - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
- - **Storage account name**: **stsecureai<inject key="DeploymentID" enableCopy="false"/>** (lowercase, no hyphens)
- - **Region**: **<inject key="Region"></inject>**
- - **Performance**: **Standard**
- - **Redundancy**: **Locally-redundant storage (LRS)**
+   **Basics tab**:
+   - **Subscription**: Select your available Azure subscription
+   - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Storage account name**: **stsecureai<inject key="DeploymentID" enableCopy="false"/>** (lowercase, no hyphens)
+   - **Region**: **<inject key="Region"></inject>**
+   - **Performance**: **Standard**
+   - **Redundancy**: **Locally-redundant storage (LRS)**
 
 1. Click **Next: Advanced**.
 
- **Advanced tab**:
- - **Require secure transfer for REST API operations**: **Enabled** (should be checked)
- - **Allow enabling public access on containers**: **Disabled** (uncheck this!)
- - **Minimum TLS version**: **Version 1.2**
+   **Advanced tab**:
+   - **Require secure transfer for REST API operations**: **Enabled** (should be checked)
+   - **Allow enabling public access on containers**: **Disabled** (uncheck this!)
+   - **Minimum TLS version**: **Version 1.2**
 
 1. Click **Next: Networking**.
 
- **Networking tab**:
- - **Network access**: Select **Enable public access from all networks** (we'll restrict in Challenge 2)
+   **Networking tab**:
+   - **Network access**: Select **Enable public access from all networks** (we'll restrict in Challenge 2)
 
 1. Click **Review + Create**.
 
@@ -504,8 +511,9 @@ Now that you're connected to the VM, let's install the required software manuall
 1. Click **+ Container** (top button).
 
 1. Configure the container:
- - **Name**: **chat-sessions**
- - **Public access level**: **Private (no anonymous access)**
+
+   - **Name**: **chat-sessions**
+   - **Public access level**: **Private (no anonymous access)**
 
 1. Click **Create**.
 
@@ -516,14 +524,17 @@ Now that you're connected to the VM, let's install the required software manuall
 1. Navigate back to your resource group: **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**.
 
 1. Verify you see the following resources:
- - **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>** (Virtual network)
+
+   - **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>** (Virtual network)
    - **vm-<inject key="DeploymentID" enableCopy="false"/>** (Virtual machine)
+
 1. In the left navigation, click **Subnets**.
 
 1. Verify all three subnets exist:
- - snet-ai-services (10.0.1.0/24)
- - snet-storage-services (10.0.2.0/24)
- - snet-application (10.0.3.0/24)
+
+   - snet-ai-services (10.0.1.0/24)
+   - snet-storage-services (10.0.2.0/24)
+   - snet-application (10.0.3.0/24)
 
 ### Part 11: Save Configuration Details
 
@@ -596,9 +607,9 @@ Save this file as: **C:\LabFiles\Secu- [ ] Application VM deployed (vm-<inject k
 - [ ] VM accessible via Azure Bastion
 - [ ] Python 3.11, VS Code, and Azure CLI verified on VM- [ ] Virtual Network created with 10.0.0.0/16 address space
 - [ ] Three subnets created:
- - [ ] snet-ai-services (10.0.1.0/24)
- - [ ] snet-storage-services (10.0.2.0/24)
- - [ ] snet-application (10.0.3.0/24)
+   - [ ] snet-ai-services (10.0.1.0/24)
+   - [ ] snet-storage-services (10.0.2.0/24)
+   - [ ] snet-application (10.0.3.0/24)
 - [ ] Azure OpenAI resource deployed
 - [ ] GPT-4 model deployed as "secure-chat"
 - [ ] Model tested successfully in playground
@@ -625,10 +636,10 @@ Save this file as: **C:\LabFiles\Secu- [ ] Application VM deployed (vm-<inject k
 **Solution**:
 - Some regions have limited OpenAI availability
 - Try these alternative regions:
- - East US
- - East US 2
- - Sweden Central
- - Switzerland North
+   - East US
+   - East US 2
+   - Sweden Central
+   - Switzerland North
 - In the Azure Portal, go to **Quotas** and request an increase if needed
 
 ---
@@ -640,10 +651,10 @@ Save this file as: **C:\LabFiles\Secu- [ ] Application VM deployed (vm-<inject k
 - If you deleted a Key Vault, it's soft-deleted for 90 days
 - Change the name slightly (e.g., add "v2": kv-secureai-<inject key="DeploymentID" enableCopy="false"/>v2)
 - Or purge the deleted vault:
- 1. Go to Key Vaults in the portal
- 2. Click **Manage deleted vaults**
- 3. Select your region
- 4. Find the deleted vault and click **Purge**
+   1. Go to Key Vaults in the portal
+   2. Click **Manage deleted vaults**
+   3. Select your region
+   4. Find the deleted vault and click **Purge**
 
 ---
 
@@ -673,33 +684,33 @@ Save this file as: **C:\LabFiles\Secu- [ ] Application VM deployed (vm-<inject k
 **Solution**:
 - Reduce TPM to 10K instead of 20K
 - Or deploy **gpt-35-turbo** instead:
- - Model: gpt-35-turbo
- - Deployment name: gpt-35-turbo-chat
- - TPM: 50K
+   - Model: gpt-35-turbo
+   - Deployment name: gpt-35-turbo-chat
+   - TPM: 50K
 - Check quota in Azure OpenAI Studio ? Quotas
 
 ## Bonus Challenges
 
 1. **Deploy a Second Model**:
- - In Azure OpenAI Studio, deploy **text-embedding-ada-002**
- - Deployment name: **text-embedding**
- - Use for semantic search in future challenges
+   - In Azure OpenAI Studio, deploy **text-embedding-ada-002**
+   - Deployment name: **text-embedding**
+   - Use for semantic search in future challenges
 
 2. **Enable Soft Delete on Key Vault**:
- - Go to Key Vault ? Properties
- - Enable **Soft delete** with 90-day retention
- - Enable **Purge protection** (prevents permanent deletion)
+   - Go to Key Vault → Properties
+   - Enable **Soft delete** with 90-day retention
+   - Enable **Purge protection** (prevents permanent deletion)
 
 3. **Create a Network Security Group**:
- - Create NSG named **nsg-application**
- - Associate it with **snet-application** subnet
- - We'll add rules in Challenge 2
+   - Create NSG named **nsg-application**
+   - Associate it with **snet-application** subnet
+   - We'll add rules in Challenge 2
 
 4. **Add Resource Tags**:
- - Tag all resources with:
- - Project: SecureAI
- - Environment: Production
- - Owner: [Your Name]
+   - Tag all resources with:
+   - Project: SecureAI
+   - Environment: Production
+   - Owner: [Your Name]
 
 ## What You Learned
 
