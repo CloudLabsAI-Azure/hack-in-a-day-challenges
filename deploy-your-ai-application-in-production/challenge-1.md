@@ -191,47 +191,7 @@ Before we can connect to the VM, we need to create a dedicated subnet for Azure 
 
 1. Wait for the subnet creation to complete (30 seconds).
 
-### Part 5: Configure Custom Domain for Azure OpenAI (Critical for Private Endpoints)
-
-Before creating private endpoints in the next challenge, you must configure a custom subdomain for your Azure OpenAI resource. This is a requirement for token-based authentication with managed identities.
-
-> **Why this is required**: When using private endpoints with managed identity authentication, Azure OpenAI needs a custom subdomain to properly route token-based authentication requests. Without this, you'll get errors like "Please provide a custom subdomain for token authentication".
-
-**Using VS Code on your local machine**:
-
-1. **Open VS Code** on your local machine.
-
-1. **Open a PowerShell terminal** (Ctrl + `).
-
-1. **Login to Azure**:
-   ```powershell
-   az login
-   ```
-
-1. **Configure custom domain** for your OpenAI resource:
-   ```powershell
-   az cognitiveservices account update `
-     --name openai-secureai-<inject key="DeploymentID" enableCopy="false"/> `
-     --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> `
-     --custom-domain openai-secureai-<inject key="DeploymentID" enableCopy="false"/>
-   ```
-
-1. **Verify the custom domain** was set:
-   ```powershell
-   az cognitiveservices account show `
-     --name openai-secureai-<inject key="DeploymentID" enableCopy="false"/> `
-     --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> `
-     --query "properties.endpoint" -o tsv
-   ```
-   
-   Should return:
-   ```
-   https://openai-secureai-<inject key="DeploymentID" enableCopy="false"/>.openai.azure.com/
-   ```
-
-> **Important**: Complete this step before proceeding to Challenge 2. Without the custom domain, private endpoint creation will succeed but authentication will fail.
-
-### Part 6: Test VM Connection via Bastion
+### Part 5: Test VM Connection via Bastion
 
 Now let's install Azure Bastion and connect to the VM.
 
@@ -267,7 +227,7 @@ Now let's install Azure Bastion and connect to the VM.
 
 1. Wait for Windows to finish setup (may take 1-2 minutes on first connection).
 
-### Part 7: Install Required Software on VM
+### Part 6: Install Required Software on VM
 
 Now that you're connected to the VM, let's install the required software manually.
 
@@ -318,7 +278,7 @@ Now that you're connected to the VM, let's install the required software manuall
 
 > **Note**: Keep this Bastion session open - you'll use it throughout the hackathon. Username: **azureuser**, Password: **SecureAI@2026**
 
-### Part 8: Create Azure AI Foundry Project
+### Part 7: Create Azure AI Foundry Project
 
 1. In the **Azure Portal**, click **+ Create a resource**.
 
@@ -344,6 +304,46 @@ Now that you're connected to the VM, let's install the required software manuall
 1. Wait for deployment (**3-5 minutes** this creates multiple resources).
 
 1. Once complete, click **Go to resource**.
+
+### Part 8: Configure Custom Domain for Azure OpenAI (Critical for Private Endpoints)
+
+Now that the Azure AI Foundry resource is created, you must configure a custom subdomain for it. This is a requirement for token-based authentication with managed identities and private endpoints.
+
+> **Why this is required**: When using private endpoints with managed identity authentication, Azure OpenAI needs a custom subdomain to properly route token-based authentication requests. Without this, you'll get errors like "Please provide a custom subdomain for token authentication".
+
+**Using VS Code on vm-<inject key="DeploymentID" enableCopy="false"/>**:
+
+1. **Open VS Code** on your VM (connected via Bastion).
+
+1. **Open a PowerShell terminal** (Ctrl + `).
+
+1. **Login to Azure**:
+   ```powershell
+   az login
+   ```
+
+1. **Configure custom domain** for your OpenAI resource:
+   ```powershell
+   az cognitiveservices account update `
+     --name openai-secureai-<inject key="DeploymentID" enableCopy="false"/> `
+     --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> `
+     --custom-domain openai-secureai-<inject key="DeploymentID" enableCopy="false"/>
+   ```
+
+1. **Verify the custom domain** was set:
+   ```powershell
+   az cognitiveservices account show `
+     --name openai-secureai-<inject key="DeploymentID" enableCopy="false"/> `
+     --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> `
+     --query "properties.endpoint" -o tsv
+   ```
+   
+   Should return:
+   ```
+   https://openai-secureai-<inject key="DeploymentID" enableCopy="false"/>.openai.azure.com/
+   ```
+
+> **Important**: Complete this step before proceeding to Challenge 2. Without the custom domain, private endpoint creation will succeed but authentication will fail.
 
 ### Part 9: Deploy GPT-4 Model in Azure AI Foundry
 
@@ -395,7 +395,7 @@ Now that you're connected to the VM, let's install the required software manuall
    ```
    https://openai-secureai-<DID>.openai.azure.com/
    ```
-   This is the custom domain you configured earlier. You'll store this in Key Vault in the next challenge.
+   This is the custom domain you configured in Part 8. You'll store this in Key Vault in the next challenge.
 
 1. Close the playground.
 
@@ -514,7 +514,7 @@ Now that you're connected to the VM, let's install the required software manuall
 
 1. Verify the **chat-sessions** container appears in the list.
 
-### Part 10: Verify All Resources
+### Part 15: Verify All Resources
 
 1. Navigate back to your resource group: **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**.
 
@@ -531,7 +531,7 @@ Now that you're connected to the VM, let's install the required software manuall
    - snet-storage-services (10.0.2.0/24)
    - snet-application (10.0.3.0/24)
 
-### Part 11: Save Configuration Details
+### Part 16: Save Configuration Details
 
 Open Notepad on your VM and document the following:
 
@@ -546,16 +546,23 @@ Region: <inject key="Region"></inject>
 
 ## Success Criteria
 
-- Microsoft Foundry project created with GPT-4.1 model deployed successfully
+- Virtual Network created with three subnets (snet-ai-services, snet-storage-services, snet-application) and AzureBastionSubnet
+- Windows VM deployed in the application subnet with no public IP
+- Azure Bastion deployed and VM accessible via Bastion
+- Required software installed on VM (Python 3.11, VS Code, Azure CLI)
+- Azure AI Foundry project created with GPT-4.1 model deployed successfully
+- Custom domain configured on the Azure OpenAI resource
 - Model tested in Chat Playground and working correctly
-- Cosmos DB account created with database and three containers (TranslationResults, ValidationLogs, OptimizationResults)
-- All connection strings, keys, and endpoints documented for future use
+- Azure Key Vault created with RBAC authorization and Key Vault Administrator role assigned
+- Azure Storage Account created with blob container (chat-sessions)
 - All resources deployed in the same resource group and region
 
 ## Additional Resources
 
 - [Azure OpenAI in AI Foundry](https://learn.microsoft.com/azure/ai-services/openai/)
 - [Microsoft Foundry Overview](https://learn.microsoft.com/azure/ai-studio/)
-- [Azure Cosmos DB for NoSQL](https://learn.microsoft.com/azure/cosmos-db/nosql/)
+- [Azure Virtual Network](https://learn.microsoft.com/azure/virtual-network/virtual-networks-overview)
+- [Azure Bastion](https://learn.microsoft.com/azure/bastion/bastion-overview)
+- [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
 
 Now, click **Next** to continue to **Challenge 02**.
