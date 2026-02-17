@@ -6,7 +6,7 @@ Welcome to Hack in a Day: Unified Data Foundation with Fabric challenge! We've p
 
 Once you're ready to dive in, your virtual machine and challenge guide will be right at your fingertips within your web browser.
 
-![](./media/gs1.png)
+![](./media/unified-kynd-ggs-g1.png)
 
 ### Exploring Your Challenge Resources
 
@@ -32,7 +32,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 1. In the JumpVM, click on **Microsoft Edge** browser shortcut which is created on desktop.
 
-   ![](./media/gs-up1.png)
+   ![](./media/unified-kynd-ggs-g2.png)
 
 1. Navigate to the **Microsoft Fabric portal**:
 
@@ -58,13 +58,67 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/gs-4.png)
 
+1. On the **Enter your email** page, verify the **Email (1)** field is populated, and then select **Submit (2)**.
+
+   ![](./media/fab-kynd-ex1-g3.png)
+
+1. On the **Welcome to the Fabric view** dialog box, select **Start tour** to proceed.
+
+   ![](./media/fab-kynd-ex1-g4.png)
+
+1. Select the **Profile (1)** icon, and then choose **Free trial (2)**.
+
+   ![](./media/fab-kynd-ex1-g5.png)
+
+1. On the **Activate your 60-day free Fabric trial capacity** dialog box, review the **Trial capacity region**, and then select **Activate**.
+
+   ![](./media/fab-kynd-ex1-g6.png)
+
+1. On the **Successfully upgraded to Microsoft Fabric** dialog box, select **OK**.
+
+   ![](./media/fab-kynd-ex1-g7.png)
+
+1. On the **Invite teammates to try Fabric to extend your trial** dialog box, select the **Close (X)** icon to dismiss the prompt.
+
+   ![](./media/fab-kynd-ex1-g8.png)
+
+1. Select the **Profile (1)** icon, and verify that the **Fabric and Power BI trial status (2)** shows the trial is active.
+
+   ![](./media/fab-kynd-ex1-g9.png)
+
 1. Welcome to **Microsoft Fabric**! You're now ready to start building your data lakehouse solution using Microsoft Fabric, OneLake, and the Medallion architecture for data engineering with flight loyalty and transaction data.
 
-1. The lab environment includes:
-   - Dataset files in **C:\LabFiles\fabric-kyndr-uc1\dataset\**
-   - Access to create Lakehouses, Notebooks, and Data Science experiments
+   **Note:** If you are unable to access the free trial, follow the steps below:
 
-   > **Important:** Before starting the challenges, you will deploy a Microsoft Fabric capacity (F2 SKU) from the Azure Portal as part of Challenge 1. Detailed step-by-step instructions are provided in Challenge 1.
+      1. Open a new browser tab, and navigate to the **Azure portal**.
+
+         ```
+         https://portal.azure.com/
+         ```
+
+      1. In the search bar, enter **Microsoft Fabric (1)**, and then select **Microsoft Fabric (2)** from the results.
+
+         ![](./media/fab-kynd-ex1-g1.png)
+      
+      1. On the **Microsoft Fabric** page, select **Create**.
+
+         ![](./media/fab-kynd-ex1-g2.png)
+
+      1. In the **Create Fabric capacity** page, configure the following settings:
+
+         - **Subscription (1)**: Select the default subscription  
+         - **Resource group (2)**: **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**  
+         - **Capacity name (3)**: **fabriccapacity<inject key="DeploymentID" enableCopy="false"/>**  
+         - **Region (4)**: Keep the ** default Region** 
+         - **Size (5)**: Select **F2**  
+         - Select **Review + create (6)**
+
+            ![](./media/unified-kynd-ggs-g3.png)
+
+      1. On the **Microsoft Fabric** page, select **Create**.
+
+         ![](./media/unified-kynd-ggs-g4.png)
+
 
 Now, click on the **Next** from lower right corner to move on next page.
 

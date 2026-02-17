@@ -23,38 +23,7 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
 ## Steps to Complete
 
-### Part 1: Deploy Fabric Capacity from Azure Portal
-
-1. In the **Edge browser**, navigate to the **Azure Portal**:
-
-   ```
-   https://portal.azure.com
-   ```
-
-   > **Note:** If prompted, sign in with the provided credentials: <inject key="AzureAdUserEmail"></inject>
-
-1. In the Azure Portal search bar at the top, type **Microsoft Fabric** and select **Microsoft Fabric (preview)** from the results.
-
-1. Click **+ Create** to create a new Fabric capacity.
-
-1. In the **Create Fabric capacity** page, configure the following settings:
-
-   - **Subscription**: Select the default subscription
-   - **Resource group**: **challenge-rg-<inject key="DeploymentID"></inject>**
-   - **Capacity name**: **fabriccapacity<inject key="DeploymentID"></inject>**
-   - **Region**: **<inject key="Region"></inject>**
-   - **Size**: Select **F2** (2 vCores, 4 GB RAM)
-   - **Fabric capacity administrator**: Select **odl_user_<inject key="DeploymentID"></inject>@...**
-
-1. Click **Review + create**
-
-1. Review the configuration and click **Create**
-
-1. Wait for the deployment to complete (approximately 2-3 minutes). You'll see a notification when the deployment is successful.
-
-   > **Important:** This Fabric capacity is required for creating workspaces and running all Fabric workloads. Do not proceed until the deployment is complete.
-
-### Part 2: Create Fabric Workspace
+### Task 1: Create Fabric Workspace
 
 1. In the **Edge browser**, navigate to the **Microsoft Fabric** portal.
 
@@ -68,16 +37,17 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
 1. Click **+ New workspace** to create a workspace:
 
-   - **Workspace Name**: **fabric-workspace-<inject key="DeploymentID"></inject>**
+   - **Workspace Name**: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
    - **Description**: **Contoso unified analytics workspace**
 
 1. In the **Advanced settings** section:
-   - **License mode**: Select **Fabric capacity**
-   - **Fabric capacity**: Select the F2 capacity you deployed from Azure (**fabric-capacity-<inject key="DeploymentID"></inject>**)
+   - **Workspace type**: Select **Fabric Trial**  
+   - **Fabric capacity**: Keep the default  
+   - **Semantic model storage format**: Keep **Small semantic model storage format**
+
+   > **Note:** If you are unable to use the **Fabric Trial** and have deployed a Fabric capacity from the Azure portal, select **Fabric** as the **Workspace type**, and then choose the Fabric capacity that you deployed in Azure. Make sure the workspace is assigned to an active Fabric capacity, or it will not function properly.
 
 1. Click **Apply**
-
-   > **Important:** Make sure to select the Fabric capacity you created from Azure. The workspace will not function properly without an active Fabric capacity assigned.
 
 1. Once the workspace is created, explore the **Home** page to familiarize yourself with Fabric components:
 
@@ -102,7 +72,7 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 1. Create your first **Lakehouse** that will hold all three layers:
 
    - In the Fabric workspace, select **+ New** → **Lakehouse**
-   - Name: **contoso_lakehouse_<inject key="DeploymentID"></inject>**
+   - Name: **contoso_lakehouse_<inject key="DeploymentID" enableCopy="false"/>**
    - Click **Create**
 
 1. Once created, explore the Lakehouse structure:

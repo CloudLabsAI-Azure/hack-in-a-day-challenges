@@ -23,7 +23,7 @@ The Bronze layer contains raw, unprocessed data with significant quality issuesâ
    https://app.fabric.microsoft.com/
    ```
 
-1. Navigate to your **Microsoft Fabric workspace**: **fabric-workspace-<inject key="DeploymentID"></inject>**
+1. Navigate to your **Microsoft Fabric workspace**: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
 
 1. Select **+ New** â†’ **Notebook**
 
@@ -31,7 +31,7 @@ The Bronze layer contains raw, unprocessed data with significant quality issuesâ
 
    - Click **Add** (next to Lakehouses in the left pane)
    - Select **Existing Lakehouse**
-   - Choose: **contoso-lakehouse-<inject key="DeploymentID"></inject>**
+   - Choose: **contoso-lakehouse-<inject key="DeploymentID" enableCopy="false"/>**
 
 1. In the first cell, load Bronze data from CSV and JSON files:
 
@@ -325,7 +325,7 @@ The Bronze layer contains raw, unprocessed data with significant quality issuesâ
 
 1. In the "Save as new notebook" dialog:
    - **Name**: **Bronze-to-Silver-Transformation**
-   - **Select location**: **fabric-workspace-<inject key="DeploymentID"></inject>**
+   - **Select location**: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
    - Click **Save**
 
 ## Success Criteria

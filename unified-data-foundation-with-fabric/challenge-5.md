@@ -24,7 +24,7 @@ By the end of this challenge, you will:
 
 ## Part 1: Create a Data Science Notebook
 
-1. **Navigate to your Fabric workspace**: **fabric-workspace-<inject key="DeploymentID"></inject>**
+1. **Navigate to your Fabric workspace**: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
 
 1. Create a new notebook:
 
@@ -34,7 +34,7 @@ By the end of this challenge, you will:
 
    - Click **Add** (next to Lakehouses in the left pane)
    - Select **Existing Lakehouse**
-   - Choose: **contoso-lakehouse-<inject key="DeploymentID"></inject>**
+   - Choose: **contoso-lakehouse-<inject key="DeploymentID" enableCopy="false"/>**
 
 ## Part 2: Load Gold Layer Data
 
@@ -412,7 +412,7 @@ display(ml_segments.select("customer_key", "age", "gender", "loyalty_tier",
 
 1. In the "Save as new notebook" dialog:
    - **Name**: **ML_Customer_Segmentation**
-   - **Select location**: **fabric-workspace-<inject key="DeploymentID"></inject>**
+   - **Select location**: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
    - Click **Save**
 
 ## Success Criteria
