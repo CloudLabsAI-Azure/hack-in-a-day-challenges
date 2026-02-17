@@ -120,7 +120,7 @@ Now you'll deploy a Windows VM in the application subnet where you'll host the s
    - **Image**: **Windows Server 2022 Datacenter: Azure Edition - x64 Gen2**
    - **Size**: Click **See all sizes**, search for **Standard_B2s**, select it, and click **Select**
    
-   > **Note**: We're using Standard_B2s (2 vCPU, 4GB RAM) which is cost-effective for testing while providing adequate performance for this lab.
+      > **Note**: We're using Standard_B2s (2 vCPU, 4GB RAM) which is cost-effective for testing while providing adequate performance for this lab.
    
    **Administrator account**:
    - **Username**: **azureuser**
@@ -541,202 +541,26 @@ Now that you're connected to the VM, let's install the required software manuall
 Open Notepad on your VM and document the following:
 
 ```
-==============================================
 SECURE AI INFRASTRUCTURE - DEPLOYMENT SUMMARY
 Connect to **vm-<inject key="DeploymentID" enableCopy="false"/>** via Bastion, open Notepad and document the following:
 
 ```
-==============================================
-SECURE AI INFRASTRUCTURE - DEPLOYMENT SUMMARY
-==============================================
+
 Deployment ID: <inject key="DeploymentID" enableCopy="false"/>
 Region: <inject key="Region"></inject>
 
-NETWORKING:
------------
-Virtual Network: vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>
- Address Space: 10.0.0.0/16
- 
-Subnets:
- - snet-ai-services: 10.0.1.0/24
- - snet-storage-services: 10.0.2.0/24
- - snet-application: 10.0.3.0/24
+## Success Criteria
 
-APPLICATION VM:
----------------
-Name: vm-<inject key="DeploymentID" enableCopy="false"/>
-Subnet: snet-application (10.0.3.0/24)
-Username: azureuser
-Password: SecureAI@2026
-Python: 3.11.8
-VS Code: Installed
-Azure CLI: Installed
+- Microsoft Foundry project created with GPT-4.1 model deployed successfully
+- Model tested in Chat Playground and working correctly
+- Cosmos DB account created with database and three containers (TranslationResults, ValidationLogs, OptimizationResults)
+- All connection strings, keys, and endpoints documented for future use
+- All resources deployed in the same resource group and region
 
-AZURE OPENAI:
--------------
-Resource Name: openai-secureai-<inject key="DeploymentID" enableCopy="false"/>
-Endpoint: [paste the endpoint you copied earlier]
-Model Deployment: secure-chat
+## Additional Resources
 
-KEY VAULT:
-----------
-Name: kv-secureai-<inject key="DeploymentID" enableCopy="false"/>
-Vault URI: https://kv-secureai-<inject key="DeploymentID" enableCopy="false"/>.vault.azure.net/
-Authorization: RBAC (Key Vault Administrator assigned)
+- [Azure OpenAI in AI Foundry](https://learn.microsoft.com/azure/ai-services/openai/)
+- [Microsoft Foundry Overview](https://learn.microsoft.com/azure/ai-studio/)
+- [Azure Cosmos DB for NoSQL](https://learn.microsoft.com/azure/cosmos-db/nosql/)
 
-STORAGE ACCOUNT:
-----------------
-Name: stsecureai<inject key="DeploymentID" enableCopy="false"/>
-Container: chat-sessions
-Public Access: Disabled
-HTTPS Only: Enabled
-
-NEXT STEPS:
------------
-Challenge 1: COMPLETE!
-Challenge 2: Configure Network Security & Private Endpoints
-Challenge 3: Setup Identity & Access Management
-Challenge 4: Deploy Additional AI Models
-Challenge 5: Deploy Chat Application
-Challenge 6: Test Secure Connectivity
-Challenge 7: Production Readiness Validation
-==============================================
-```
-
-Save this file as: **C:\LabFiles\Secu- [ ] Application VM deployed (vm-<inject key="DeploymentID" enableCopy="false"/>)
-- [ ] VM accessible via Azure Bastion
-- [ ] Python 3.11, VS Code, and Azure CLI verified on VM- [ ] Virtual Network created with 10.0.0.0/16 address space
-- [ ] Three subnets created:
-   - [ ] snet-ai-services (10.0.1.0/24)
-   - [ ] snet-storage-services (10.0.2.0/24)
-   - [ ] snet-application (10.0.3.0/24)
-- [ ] Azure OpenAI resource deployed
-- [ ] GPT-4 model deployed as "secure-chat"
-- [ ] Model tested successfully in playground
-- [ ] Azure Key Vault created with RBAC authorization
-- [ ] Key Vault Administrator role assigned to yourself
-- [ ] Azure Storage Account created with public access disabled
-- [ ] Blob container "chat-sessions" created
-- [ ] All resources visible in resource group
-- [ ] Configuration details saved to deployment-summary.txt
-
-## Troubleshooting
-
-### Issue: Virtual Network creation fails
-
-**Solution**:
-- Verify you selected the correct resource group
-- Ensure the region matches your resource group's region
-- Check that address space is 10.0.0.0/16 (not overlapping with existing networks)
-
----
-
-### Issue: Azure OpenAI quota exceeded
-
-**Solution**:
-- Some regions have limited OpenAI availability
-- Try these alternative regions:
-   - East US
-   - East US 2
-   - Sweden Central
-   - Switzerland North
-- In the Azure Portal, go to **Quotas** and request an increase if needed
-
----
-
-### Issue: Key Vault name already exists
-
-**Solution**:
-- Key Vault names are globally unique
-- If you deleted a Key Vault, it's soft-deleted for 90 days
-- Change the name slightly (e.g., add "v2": kv-secureai-<inject key="DeploymentID" enableCopy="false"/>v2)
-- Or purge the deleted vault:
-   1. Go to Key Vaults in the portal
-   2. Click **Manage deleted vaults**
-   3. Select your region
-   4. Find the deleted vault and click **Purge**
-
----
-
-### Issue: Storage account name is invalid
-
-**Solution**:
-- Must be **lowercase only**
-- No hyphens or special characters
-- 3-24 characters
-- Globally unique
-- Use exactly: **stsecureai<inject key="DeploymentID" enableCopy="false"/>**
-
----
-
-### Issue: Cannot create blob container
-
-**Solution**:
-- Wait 2-3 minutes after storage account creation
-- Refresh the page
-- Verify storage account deployment completed successfully
-- Ensure you have Contributor permissions on the resource group
-
----
-
-### Issue: GPT-4 model deployment fails
-
-**Solution**:
-- Reduce TPM to 10K instead of 20K
-- Or deploy **gpt-35-turbo** instead:
-   - Model: gpt-35-turbo
-   - Deployment name: gpt-35-turbo-chat
-   - TPM: 50K
-- Check quota in Azure OpenAI Studio ? Quotas
-
-## Bonus Challenges
-
-1. **Deploy a Second Model**:
-   - In Azure OpenAI Studio, deploy **text-embedding-ada-002**
-   - Deployment name: **text-embedding**
-   - Use for semantic search in future challenges
-
-2. **Enable Soft Delete on Key Vault**:
-   - Go to Key Vault → Properties
-   - Enable **Soft delete** with 90-day retention
-   - Enable **Purge protection** (prevents permanent deletion)
-
-3. **Create a Network Security Group**:
-   - Create NSG named **nsg-application**
-   - Associate it with **snet-application** subnet
-   - We'll add rules in Challenge 2
-
-4. **Add Resource Tags**:
-   - Tag all resources with:
-   - Project: SecureAI
-   - Environment: Production
-   - Owner: [Your Name]
-
-## What You Learned
-
-In this challenge, you:
-
-Created a segmented Virtual Network for network isolation 
-Deployed Azure OpenAI and configured GPT-4 model 
-Set up Azure Key Vault with modern RBAC authorization 
-Deployed Azure Storage with security best practices 
-Learned Azure resource naming conventions 
-Understood foundational cloud security concepts 
-
-Your infrastructure is deployed, but **not yet secure** - all services still allow public access from the internet!
-
-## Next Steps
-
-Infrastructure deployed: COMPLETE
-
-In **Challenge 2**, you'll secure this infrastructure by:
-- Creating private endpoints for all services
-- Disabling public network access
-- Configuring private DNS zones
-- Implementing complete network isolation
-
-Head to **challenge-2.md** to lock down your environment!
-
----
-
-**Important Note**: Save your deployment-summary.txt file! You'll need the resource names and endpoints throughout the remaining challenges.
+Now, click **Next** to continue to **Challenge 02**.
