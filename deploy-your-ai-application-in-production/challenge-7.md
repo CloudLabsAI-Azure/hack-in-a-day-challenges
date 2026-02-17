@@ -22,13 +22,10 @@ This challenge is your **production readiness checklist** - covering Security, R
 
 ## Challenge Objectives
 
-- Evaluate architecture against WAF pillars
-- Run Azure Advisor recommendations
-- Configure monitoring and alerts
-- Implement cost optimization
-- Document operational procedures
-- Create a production deployment plan
-- Achieve production-ready certification!
+- Enable data protection features (soft delete, purge protection)
+- Configure monitoring with Log Analytics and diagnostics
+- Review Azure Advisor recommendations
+- Complete a final production readiness checklist
 
 ## Steps to Complete
 
