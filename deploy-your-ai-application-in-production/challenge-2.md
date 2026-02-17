@@ -23,39 +23,6 @@ This is where enterprises fail most often - deploying services with default sett
 - Test that public access is completely blocked
 - Verify DNS resolution for private endpoints
 
-## Understanding Network Security Layers
-
-Your security architecture has multiple layers:
-
-```
-+---------------------------------------------------------+
-� Layer 1: Network Perimeter (VNET boundary) �
-� - Only Azure Bastion allows inbound traffic �
-� - No public IPs on any AI services �
-+---------------------------------------------------------+
- ?
-+---------------------------------------------------------+
-� Layer 2: Subnet Isolation (NSG rules) �
-� - ai-services subnet: AI Foundry, OpenAI �
-� - storage-services subnet: Storage, Key Vault �
-� - application subnet: Application VM (vm-DID) �
-� - Each subnet has restrictive NSG rules �
-+---------------------------------------------------------+
- ?
-+---------------------------------------------------------+
-� Layer 3: Service-Level Security �
-� - Public network access: DISABLED �
-� - Only private endpoint connections allowed �
-� - Firewall rules block all public IPs �
-+---------------------------------------------------------+
- ?
-+---------------------------------------------------------+
-� Layer 4: Identity & Access (Next Challenge) �
-� - Managed identity authentication �
-� - RBAC for least-privilege access �
-+---------------------------------------------------------+
-```
-
 ## Steps to Complete
 
 ### Part 1: Review Current Network Configuration
@@ -619,111 +586,18 @@ Verify your network is fully secured:
 - [ ] Accessing services from public internet is BLOCKED (403/timeout errors)
 - [ ] Network configuration documented in `network-config.txt`
 
-## Troubleshooting
+## Success Criteria
 
-### Issue: NSG creation fails
+- Microsoft Foundry project created with GPT-4.1 model deployed successfully
+- Model tested in Chat Playground and working correctly
+- Cosmos DB account created with database and three containers (TranslationResults, ValidationLogs, OptimizationResults)
+- All connection strings, keys, and endpoints documented for future use
+- All resources deployed in the same resource group and region
 
-**Solution**:
-- Ensure you're using the correct resource group name
-- Verify the location matches your VNET region
-- Check if an NSG with the same name already exists in the portal
-- Navigate to Resource Groups ? Network security groups to verify
+## Additional Resources
 
----
+- [Azure OpenAI in AI Foundry](https://learn.microsoft.com/azure/ai-services/openai/)
+- [Microsoft Foundry Overview](https://learn.microsoft.com/azure/ai-studio/)
+- [Azure Cosmos DB for NoSQL](https://learn.microsoft.com/azure/cosmos-db/nosql/)
 
-### Issue: DNS still resolves to public IPs
-
-**Solution**:
-- Check VM's DNS settings. It should use Azure DNS (168.63.129.16)
-- In Azure Portal, verify private DNS zones are linked to your VNET:
- - Go to Private DNS zones
- - Select each zone
- - Check Virtual network links
-- Flush DNS cache on the VM using VS Code PowerShell terminal:
- ```powershell
- Clear-DnsClientCache
- ipconfig /flushdns
- ```
-
----
-
-### Issue: Can't disable public access on a service
-
-**Solution**:
-- Ensure private endpoint is successfully created first
-- Check the service supports disabling public access
-- Try using Azure Portal Networking settings
-- Wait 2-3 minutes and try again
-
----
-
-### Issue: Private endpoint shows "Pending" status
-
-**Solution**:
-- Private endpoint approval is automatic for same-subscription deployments
-- If stuck, delete and recreate using Azure Portal:
- - Go to Private endpoints
- - Delete the pending endpoint
- - Recreate from the service's Networking blade
-
----
-
-### Issue: Services unreachable even from VM
-
-**Solution**:
-- Verify NSG rules allow traffic on port 443 in Azure Portal
-- Check private endpoint is in "Approved" state
-- Ensure VM is in the correct subnet (snet-application)
-- Test connectivity using VS Code PowerShell terminal:
- ```powershell
- Test-NetConnection -ComputerName "$openaiName.openai.azure.com" -Port 443
- ```
-
-## Bonus Challenges
-
-1. **Create NSG Flow Logs**:
- - Enable NSG flow logs to monitor traffic patterns
- - Store logs in your storage account
- - Analyze allowed/denied traffic
-
-2. **Implement Service Tags**:
- - Replace IP-based rules with Azure service tags
- - Use `AzureAI`, `AzureMonitor` tags for more granular control
-
-3. **Configure Application Security Groups**:
- - Create ASGs for logical grouping (AI services, storage services)
- - Use ASGs in NSG rules instead of IP addresses
-
-4. **Test Port Scanning**:
- - From your VM, scan the private endpoint IPs
- - Verify only port 443 is open
- ```powershell
- Test-NetConnection -ComputerName "10.0.1.4" -Port 443
- Test-NetConnection -ComputerName "10.0.1.4" -Port 80 # Should fail
- ```
-
-## What You Learned
-
-In this challenge, you:
-
-Created and configured Network Security Groups with restrictive rules 
-Disabled public network access on all AI services 
-Validated private endpoint connectivity and approval 
-Configured private DNS zones for name resolution 
-Tested and verified complete internet isolation 
-Implemented defense-in-depth network security 
-Documented your network topology 
-
-Your AI environment is now completely isolated from the internet with multiple security layers!
-
-## Next Steps
-
-Network security: COMPLETE!
-
-In **Challenge 3**, you'll configure identity and access management using Entra ID, managed identities, and RBAC to ensure only authorized identities can access your services.
-
-Head to **challenge-3.md** to continue!
-
----
-
-**Security Reminder**: In production, regularly audit NSG rules, review flow logs, and test private connectivity to ensure the network remains secure over time.
+Now, click **Next** to continue to **Challenge 02**.
