@@ -208,11 +208,6 @@ Before creating private endpoints in the next challenge, you must configure a cu
    az login
    ```
 
-1. **Set the correct subscription**:
-   ```powershell
-   az account set --subscription bd7d97d5-b639-4718-9bb5-bfd7675e214f
-   ```
-
 1. **Configure custom domain** for your OpenAI resource:
    ```powershell
    az cognitiveservices account update `

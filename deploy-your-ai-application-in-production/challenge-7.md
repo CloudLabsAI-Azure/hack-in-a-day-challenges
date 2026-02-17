@@ -212,8 +212,11 @@ az cognitiveservices account deployment list -n $openaiName -g "challenge-rg-<in
 # Backup Key Vault secrets (names only, not values!)
 az keyvault secret list --vault-name $kvName --query "[].id" -o json > C:\LabFiles\backups\kv-secrets.json
 
+# Get subscription ID
+$subscriptionId = az account show --query id -o tsv
+
 # Backup RBAC assignments
-az role assignment list --scope "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" -o json > C:\LabFiles\backups\rbac-assignments.json
+az role assignment list --scope "/subscriptions/$subscriptionId/resourceGroups/challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" -o json > C:\LabFiles\backups\rbac-assignments.json
 
 # Backup NSG rules
 az network nsg list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" -o json > C:\LabFiles\backups\nsg-rules.json
@@ -379,11 +382,14 @@ az monitor diagnostic-settings create `
 3. **Set up critical alerts**:
 
 ```powershell
+# Get subscription ID
+$subscriptionId = az account show --query id -o tsv
+
 # Alert: High error rate
 az monitor metrics alert create `
  --name "openai-high-error-rate" `
  --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --scopes "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID" enableCopy="false"/>/providers/Microsoft.CognitiveServices/accounts/$openaiName" `
+ --scopes "/subscriptions/$subscriptionId/resourceGroups/challenge-rg-<inject key="DeploymentID" enableCopy="false"/>/providers/Microsoft.CognitiveServices/accounts/$openaiName" `
  --condition "count >= 10" `
  --window-size 5m `
  --evaluation-frequency 1m `
@@ -394,7 +400,7 @@ az monitor metrics alert create `
 az monitor metrics alert create `
  --name "openai-high-latency" `
  --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --scopes "/subscriptions/<inject key="SubscriptionId"></inject>/resourceGroups/challenge-rg-<inject key="DeploymentID" enableCopy="false"/>/providers/Microsoft.CognitiveServices/accounts/$openaiName" `
+ --scopes "/subscriptions/$subscriptionId/resourceGroups/challenge-rg-<inject key="DeploymentID" enableCopy="false"/>/providers/Microsoft.CognitiveServices/accounts/$openaiName" `
  --condition "avg TimeToResponse > 5000" `
  --window-size 5m `
  --evaluation-frequency 1m `
