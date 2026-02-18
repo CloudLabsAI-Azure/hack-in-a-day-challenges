@@ -9,7 +9,7 @@ All the infrastructure is ready! Now comes the fun part - deploying a secure, pr
 - Key Vault secrets (zero hardcoded credentials)
 - Azure OpenAI (chat models ready)
 
-You'll download a pre-built Streamlit chat app, configure it using **only environment variables** (no code changes!), and run it on your VM.
+The application code is already pre-built for you. You'll download it, configure the `.env` file with your Key Vault name, install dependencies, and run it. **No code changes required!**
 
 Let's build a secure ChatGPT-like experience!
 
@@ -24,331 +24,128 @@ Let's build a secure ChatGPT-like experience!
 ## Challenge Objectives
 
 - Download the pre-built secure chat application
-- Create `.env` file with Key Vault-based configuration
+- Configure `.env` file with Key Vault name
 - Install Python dependencies
-- Run the chat app locally
+- Run the chat app locally on the VM
 - Test chat functionality with managed identity
 - Validate security (no API keys, private endpoints only)
 - Test session history with Storage Account
 
 ## Steps to Complete
 
-### Part 1: Create Application Directory Structure
+### Part 1: Download and Extract Application Code
+
+The application code is provided in a pre-built package. You'll download it directly to your VM.
 
 1. **Connect to Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion if not already connected.
 
 1. **Open VS Code** on the VM and open a PowerShell terminal (Ctrl + `).
 
-1. **Create the app directory**:
+1. **Download the code package**:
 
 ```powershell
+# Create working directory
+New-Item -Path "C:\Code\SecureAI" -ItemType Directory -Force
+
+# Download the application code
+Invoke-WebRequest -Uri "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/deploy-your-ai-application-in-production.zip" -OutFile "C:\Code\SecureAI\app-code.zip"
+
+Write-Host "Download complete!"
+```
+
+4. **Extract the ZIP file**:
+
+```powershell
+# Extract the archive
+Expand-Archive -Path "C:\Code\SecureAI\app-code.zip" -DestinationPath "C:\Code\SecureAI\" -Force
+
+# Copy codefiles to a clean working directory
 New-Item -Path "C:\Code\SecureAI\chat-app" -ItemType Directory -Force
+Copy-Item -Path "C:\Code\SecureAI\hack-in-a-day-challenges-deploy-your-ai-application-in-production\deploy-your-ai-application-in-production\codefiles\*" -Destination "C:\Code\SecureAI\chat-app" -Recurse -Force
+
+# Navigate to the app directory
 Set-Location "C:\Code\SecureAI\chat-app"
 
-# Create subdirectories
-New-Item -Path ".\pages" -ItemType Directory -Force
-New-Item -Path ".\utils" -ItemType Directory -Force
+Write-Host "Extraction complete!"
 ```
 
-2. **Verify directory structure**:
+5. **Verify the project structure**:
 
 ```powershell
-Get-ChildItem -Path "C:\Code\SecureAI\chat-app" -Recurse
+Get-ChildItem -Path "C:\Code\SecureAI\chat-app" -Recurse -Name
 ```
 
-Should show:
-```
-chat-app/
-+-- pages/
-+-- utils/
-```
+   You should see:
+   ```
+   .env.example
+   .gitignore
+   app.py
+   README.md
+   requirements.txt
+   config\
+   config\__init__.py
+   config\settings.py
+   services\
+   services\__init__.py
+   services\azure_auth.py
+   services\keyvault_service.py
+   services\openai_service.py
+   services\storage_service.py
+   utils\
+   utils\__init__.py
+   utils\logger.py
+   utils\validators.py
+   ```
 
-### Part 2: Download Application Files
+   > **Note**: This is a fully built, production-grade Streamlit application with modular services for authentication, Key Vault, OpenAI, and storage. You don't need to modify any code files — just configure the `.env` file!
 
-We'll create the application files directly (simulating a download from your secure repository).
+### Part 2: Configure the Application
 
-1. **Create the main application file** (`app.py`):
+1. **Copy `.env.example` to create your `.env` file**:
 
 ```powershell
-@'
-"""
-Secure Azure OpenAI Chat Application
-- Uses Managed Identity (no API keys!)
-- Retrieves config from Key Vault
-- All connections via private endpoints
-- Session history stored in Azure Storage
-"""
-import streamlit as st
-import os
-from dotenv import load_dotenv
-from openai import AzureOpenAI
-from azure.identity import DefaultAzureCredential
-from azure.keyvault.secrets import SecretClient
-from azure.storage.blob import BlobServiceClient
-import json
-from datetime import datetime
-import uuid
-
-# Load .env file
-load_dotenv()
-
-# Page config
-st.set_page_config(
- page_title="Secure Azure OpenAI Chat",
- page_icon="\N{lock}",
- layout="wide"
-)
-
-# Initialize session state
-if "messages" not in st.session_state:
- st.session_state.messages = []
-if "session_id" not in st.session_state:
- st.session_state.session_id = str(uuid.uuid4())
-
-# Title and security badge
-st.title("Secure Enterprise Chat")
-st.caption("100% Private | Managed Identity | No API Keys | Enterprise-Grade Security")
-
-# Sidebar for config info
-with st.sidebar:
- st.header("Security Status")
- 
- # Initialize services with managed identity
- try:
- with st.spinner("Authenticating with Managed Identity..."):
- credential = DefaultAzureCredential()
- 
- # Get Key Vault name from environment
- kv_name = os.getenv("KEY_VAULT_NAME")
- if not kv_name:
- st.error("KEY_VAULT_NAME not set in .env file")
- st.stop()
- 
- kv_url = f"https://{kv_name}.vault.azure.net"
- secret_client = SecretClient(vault_url=kv_url, credential=credential)
- 
- # Retrieve all configuration from Key Vault
- openai_endpoint = secret_client.get_secret("OpenAIEndpoint").value
- chat_deployment = secret_client.get_secret("ChatModelDeployment").value
- api_version = secret_client.get_secret("OpenAIApiVersion").value
- 
- # Storage account for session history (optional)
- try:
- storage_account = secret_client.get_secret("StorageAccountName").value
- storage_url = f"https://{storage_account}.blob.core.windows.net"
- blob_client = BlobServiceClient(account_url=storage_url, credential=credential)
- storage_enabled = True
- except:
- storage_enabled = False
- 
- # Initialize OpenAI client
- openai_client = AzureOpenAI(
- azure_endpoint=openai_endpoint,
- api_version=api_version,
- azure_ad_token_provider=lambda: credential.get_token(
- "https://cognitiveservices.azure.com/.default"
- ).token
- )
- 
- st.success("Authenticated")
- st.info(f"Model: {chat_deployment}")
- st.info(f"Auth: Managed Identity")
- st.info(f"Network: Private Only")
- if storage_enabled:
- st.info(f"Storage: Enabled")
- 
- except Exception as e:
- st.error(f"Authentication failed: {str(e)}")
- st.error("Please check:")
- st.error("1. Managed Identity is enabled on VM")
- st.error("2. RBAC roles assigned correctly")
- st.error("3. KEY_VAULT_NAME in .env file")
- st.stop()
- 
- # Session info
- st.divider()
- st.caption(f"Session ID: {st.session_state.session_id[:8]}...")
- st.caption(f"Messages: {len(st.session_state.messages)}")
- 
- # Clear chat button
- if st.button("Clear Chat"):
- st.session_state.messages = []
- st.session_state.session_id = str(uuid.uuid4())
- st.rerun()
-
-# Display chat history
-for message in st.session_state.messages:
- with st.chat_message(message["role"]):
- st.markdown(message["content"])
-
-# Chat input
-if prompt := st.chat_input("Ask me anything about cloud security..."):
- # Add user message
- st.session_state.messages.append({"role": "user", "content": prompt})
- with st.chat_message("user"):
- st.markdown(prompt)
- 
- # Generate AI response
- with st.chat_message("assistant"):
- with st.spinner("Thinking..."):
- try:
- # Prepare messages for API
- api_messages = [
- {"role": "system", "content": "You are a helpful AI assistant specializing in cloud security, Azure, and enterprise architecture. Provide clear, accurate, and secure guidance."}
- ]
- api_messages.extend(st.session_state.messages)
- 
- # Call Azure OpenAI via private endpoint with managed identity
- response = openai_client.chat.completions.create(
- model=chat_deployment,
- messages=api_messages,
- max_tokens=1000,
- temperature=0.7,
- stream=True # Streaming for better UX
- )
- 
- # Stream response
- response_placeholder = st.empty()
- full_response = ""
- 
- for chunk in response:
- if chunk.choices[0].delta.content:
- full_response += chunk.choices[0].delta.content
- response_placeholder.markdown(full_response + "�")
- 
- response_placeholder.markdown(full_response)
- 
- # Save assistant message
- st.session_state.messages.append({"role": "assistant", "content": full_response})
- 
- # Save to storage (optional)
- if storage_enabled:
- try:
- container_name = "chat-sessions"
- blob_name = f"{st.session_state.session_id}.json"
- 
- # Get or create container
- try:
- container_client = blob_client.get_container_client(container_name)
- if not container_client.exists():
- container_client.create_container()
- except:
- pass
- 
- # Save session
- session_data = {
- "session_id": st.session_state.session_id,
- "timestamp": datetime.now().isoformat(),
- "messages": st.session_state.messages
- }
- 
- blob_client.get_blob_client(
- container=container_name,
- blob=blob_name
- ).upload_blob(
- json.dumps(session_data, indent=2),
- overwrite=True
- )
- 
- except Exception as e:
- # Don't fail the app if storage fails
- st.sidebar.warning(f"Could not save session: {str(e)[:50]}")
- 
- except Exception as e:
- st.error(f"Error: {str(e)}")
- st.error("Check that OpenAI model is deployed and accessible via private endpoint.")
-
-# Footer
-st.divider()
-st.caption("Enterprise Security: All connections encrypted and routed through private endpoints. Zero public internet exposure. Managed identity authentication only.")
-'@ | Out-File -FilePath "app.py" -Encoding UTF8
-
-Write-Host "Created app.py"
+Copy-Item -Path ".env.example" -Destination ".env"
+Write-Host "Created .env file from template"
 ```
 
-2. **Create requirements.txt**:
-
-```powershell
-@'
-streamlit>=1.31.0
-openai>=1.12.0
-azure-identity>=1.15.0
-azure-keyvault-secrets>=4.7.0
-azure-storage-blob>=12.19.0
-python-dotenv>=1.0.0
-'@ | Out-File -FilePath "requirements.txt" -Encoding UTF8
-
-Write-Host "Created requirements.txt"
-```
-
-> **Critical**: We need `openai>=1.12.0` (v2 recommended). Versions earlier than 1.x will fail with errors like "Client.__init__() got an unexpected keyword argument 'proxies'". This is due to breaking changes in the OpenAI Python SDK and its compatibility with Azure SDK components.
-
-3. **Create README**:
-
-```powershell
-@'
-# Secure Azure OpenAI Chat Application
-
-## Security Features
-- Managed Identity authentication (zero API keys)
-- Key Vault for all secrets
-- Private endpoints only (no public internet)
-- Session history in secure storage
-- Content filtering enabled
-- Enterprise-grade encryption
-
-## Configuration
-All configuration via environment variables in `.env` file.
-NO hardcoded credentials ANYWHERE!
-
-## Running the App
-```
-streamlit run app.py
-```
-
-## Architecture
-- **Frontend**: Streamlit web UI
-- **Backend**: Azure OpenAI (private endpoint)
-- **Auth**: Managed Identity (Entra ID)
-- **Secrets**: Azure Key Vault
-- **Storage**: Azure Blob Storage (session history)
-- **Network**: 100% private, zero public access
-
-## Security Validation
-1. No API keys in code
-2. No credentials in .env
-3. All secrets in Key Vault
-4. Private endpoints only
-5. Managed identity auth
-'@ | Out-File -FilePath "README.md" -Encoding UTF8
-
-Write-Host "Created README.md"
-```
-
-### Part 3: Create Environment Configuration
-
-1. **Get your Key Vault name and create `.env` file**:
+2. **Get your Key Vault name**:
 
 ```powershell
 $kvName = az keyvault list `
  --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[0].name" -o tsv
 
-Write-Host "Key Vault Name: $kvName"
-
-# Create .env file (ONLY Key Vault name - all other config from KV!)
-@"
-# Secure Chat Application Configuration
-# Only the Key Vault name is needed - everything else retrieved from Key Vault!
-KEY_VAULT_NAME=$kvName
-"@ | Out-File -FilePath ".env" -Encoding UTF8
-
-Write-Host "Created .env file"
+Write-Host "Your Key Vault name: $kvName"
 ```
 
-2. **Store Storage Account name in Key Vault** (if not already done in Challenge 3):
+3. **Update the `.env` file with your Key Vault name**:
 
 ```powershell
+# Replace the placeholder with your actual Key Vault name
+(Get-Content ".env") -replace 'kv-secureai-XXXXXXX', $kvName | Set-Content ".env"
+
+Write-Host "Updated .env with Key Vault name: $kvName"
+```
+
+4. **Verify the `.env` file**:
+
+```powershell
+Get-Content ".env"
+```
+
+   You should see `KEY_VAULT_NAME=kv-secureai-<inject key="DeploymentID" enableCopy="false"/>` (with your actual deployment ID).
+
+   > **Important**: The `.env` file contains **only non-sensitive configuration**. All secrets (OpenAI endpoint, deployment name, API version, storage account name) are retrieved from Azure Key Vault at runtime using Managed Identity. No API keys anywhere!
+
+### Part 3: Store Storage Account Name in Key Vault
+
+The app saves chat session history to Blob Storage. Store the storage account name in Key Vault so the app can retrieve it securely.
+
+```powershell
+$kvName = az keyvault list `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+ --query "[0].name" -o tsv
+
 $storageName = az storage account list `
  --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[0].name" -o tsv
@@ -375,6 +172,8 @@ az keyvault update `
 Write-Host "Key Vault secured"
 ```
 
+   > **Note**: If you already stored `StorageAccountName` in Challenge 3, this step will simply update the existing secret with the same value.
+
 ### Part 4: Install Dependencies
 
 1. **Create a virtual environment** (best practice):
@@ -398,14 +197,16 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-This will take 2-3 minutes. You should see:
-```
-Successfully installed streamlit-x.x.x openai-x.x.x azure-identity-x.x.x ...
-```
+   This will take 2-3 minutes. You should see:
+   ```
+   Successfully installed streamlit-x.x.x openai-x.x.x azure-identity-x.x.x ...
+   ```
+
+   > **Note**: The `requirements.txt` pins `openai>=1.12.0,<2.0.0`. Versions earlier than 1.x will fail with errors like "Client.__init__() got an unexpected keyword argument 'proxies'" due to breaking changes in the OpenAI Python SDK.
 
 ### Part 5: Verify Storage Account Access
 
-The app saves session history to Blob Storage. Verify managed identity has access (should be assigned from Challenge 3).
+Verify managed identity has access to Blob Storage for session history (should be assigned from Challenge 3).
 
 ```powershell
 $identityId = az vm show `
@@ -441,15 +242,22 @@ if (-not $existing) {
 
 ### Part 6: Run the Chat Application
 
- Moment of truth!
+Moment of truth!
 
-1. **Start the app**:
+1. **Make sure you're in the app directory with the virtual environment activated**:
+
+```powershell
+Set-Location "C:\Code\SecureAI\chat-app"
+.\venv\Scripts\Activate.ps1
+```
+
+2. **Start the app**:
 
 ```powershell
 streamlit run app.py
 ```
 
-2. **Expected output**:
+3. **Expected output**:
 
 ```
  You can now view your Streamlit app in your browser.
@@ -458,16 +266,15 @@ streamlit run app.py
  Network URL: http://10.0.3.4:8501
 ```
 
-3. **Open browser**:
+4. **Open browser**:
    - The browser should open automatically
    - If not, manually navigate to: `http://localhost:8501`
 
-4. **You should see**:
-   - Title: " Secure Enterprise Chat"
-   - Sidebar showing: " Authenticated"
+5. **You should see**:
+   - The **Secure Enterprise Chat** application with a professional enterprise UI
+   - Sidebar showing: **Authenticated** with Managed Identity
    - Model name displayed
-   - "Auth: Managed Identity"
-   - "Network: Private Only"
+   - "Auth: Managed Identity" and "Network: Private Only"
    - Chat input box ready
 
 ### Part 7: Test the Chat Application
@@ -491,19 +298,19 @@ How does that apply to Azure managed identities?
 
 3. **Verify no API keys in code** (quick security check):
 
-   Open a **new** PowerShell terminal (keep app running) and run:
+   Open a **new** PowerShell terminal (keep the app running) and run:
 
 ```powershell
-Select-String -Path "C:\Code\SecureAI\chat-app\app.py" -Pattern "api[_-]?key"
-# Should return NO MATCHES
+Select-String -Path "C:\Code\SecureAI\chat-app\app.py" -Pattern "api[_-]?key" -CaseSensitive:$false
+# Should return NO MATCHES - all auth goes through Managed Identity!
 ```
 
 ## Success Criteria
 
 Validate your app deployment:
 
-- [ ] Application files created (`app.py`, `requirements.txt`)
-- [ ] `.env` file created with ONLY Key Vault name (no secrets!)
+- [ ] Application code downloaded and extracted to `C:\Code\SecureAI\chat-app`
+- [ ] `.env` file configured with your Key Vault name (no secrets in the file!)
 - [ ] Virtual environment created and dependencies installed
 - [ ] App starts without errors (`streamlit run app.py`)
 - [ ] Sidebar shows "Authenticated" with Managed Identity

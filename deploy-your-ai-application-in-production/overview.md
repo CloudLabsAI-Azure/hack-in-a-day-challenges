@@ -14,7 +14,6 @@ Deploy a secure AI chat application that meets enterprise security requirements:
 - **Identity Security**: Entra ID managed identities, RBAC, zero API keys in code
 - **Data Protection**: Azure Key Vault for secrets, encrypted storage, private connectivity
 - **Compliance**: WAF alignment, security posture validation, audit readiness
-- **Automation**: Azure Developer CLI (AZD) for repeatable, infrastructure-as-code deployment
 
 ## What You'll Build
 
@@ -28,6 +27,7 @@ A fully secure AI chat application with:
 6. **Network Security Groups (NSGs)** with restrictive rules
 7. **Managed Identity** for passwordless authentication
 8. **Pre-built Chat Application** with Streamlit UI (just configure & run)
+9. **Azure App Service** deployment with VNet integration
 
 ## Technologies Used
 
@@ -40,7 +40,7 @@ A fully secure AI chat application with:
 - **Entra ID**: Identity and access management with RBAC
 - **Managed Identity**: Passwordless authentication
 - **Azure Bastion**: Secure RDP/SSH without public IPs
-- **Azure Developer CLI (AZD)**: Infrastructure-as-code deployment
+- **Azure App Service**: PaaS hosting with VNet integration
 - **Network Security Groups**: Layer 4 firewall rules
 - **Streamlit**: Python-based chat UI framework
 
@@ -67,10 +67,10 @@ By completing this hackathon, you will:
 - Understand DNS resolution for private endpoints
 
 ### Infrastructure Automation
-- Use Azure Developer CLI (AZD) for repeatable deployments
-- Work with Azure Verified Modules (AVM) templates
-- Implement infrastructure-as-code best practices
-- Understand bicep/ARM template structures
+- Deploy and configure Azure resources via Portal and CLI
+- Work with az CLI for resource management
+- Implement repeatable configuration patterns
+- Understand Azure resource relationships
 
 ### Production Readiness
 - Validate security posture against enterprise standards
@@ -82,8 +82,8 @@ By completing this hackathon, you will:
 
 This hackathon consists of **7 progressive challenges**:
 
-### Challenge 1: Deploy Secure AI Infrastructure with AZD
-Install Azure Developer CLI and deploy the complete secure infrastructure stack using infrastructure-as-code. Deploy VNET, AI Foundry, OpenAI, Storage, Key Vault with private endpoints in one command.
+### Challenge 1: Deploy Core Azure Infrastructure
+Manually create the foundational Azure resources via the Portal: Virtual Network with subnets, Windows VM, Azure AI Foundry with GPT-4.1, Key Vault, Storage Account, and Azure Bastion.
 
 ### Challenge 2: Configure Network Security & Isolation
 Configure Network Security Groups, disable all public access, and validate private endpoint connectivity. Ensure zero internet exposure for AI services.
@@ -100,8 +100,8 @@ Download the pre-built secure chat application, configure environment variables 
 ### Challenge 6: Test Secure Connectivity via Azure Bastion
 Connect to the VM using Azure Bastion (no public IP needed), validate the chat application works, and verify all traffic flows through private network.
 
-### Challenge 7: Validate Production Readiness & WAF Compliance
-Complete security posture assessment, validate against WAF principles, configure monitoring, and verify compliance readiness.
+### Challenge 7: Deploy Application to Azure App Service
+Deploy the chat application to Azure App Service with VNet integration, managed identity, and private endpoint connectivity. Verify the production deployment works end-to-end.
 
 ## Prerequisites
 
@@ -129,8 +129,8 @@ Your deployment is production-ready when:
 - NSG rules follow least-privilege principle
 - Chat application works perfectly inside the isolated network
 - Azure Bastion provides secure access (no RDP/SSH over internet)
-- WAF compliance checklist is 100% validated
-- Infrastructure is deployed via AZD (repeatable, version-controlled)
+- Application deployed to Azure App Service with VNet integration
+- App Service uses managed identity and private endpoints
 
 ## Estimated Time
 
@@ -141,7 +141,7 @@ Your deployment is production-ready when:
 - **Challenge 4**: 30 minutes (OpenAI configuration)
 - **Challenge 5**: 45 minutes (App deployment)
 - **Challenge 6**: 30 minutes (Connectivity testing)
-- **Challenge 7**: 45 minutes (Compliance validation)
+- **Challenge 7**: 45 minutes (App Service deployment)
 
 ## Real-World Applications
 
@@ -156,10 +156,10 @@ This architecture pattern applies to:
 
 ## Resources
 
+- [Azure App Service Documentation](https://learn.microsoft.com/azure/app-service/)
 - [Azure AI Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure Private Link Documentation](https://learn.microsoft.com/azure/private-link/)
-- [Azure Developer CLI (AZD)](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Managed Identity Best Practices](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
 
 ---
