@@ -60,31 +60,47 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/gs-travel-g1.png)
 
-1. You have now successfully logged in to the Power Apps portal. Keep the portal open, as you will be using it later in the lab.
+1. You have now successfully logged in to the Power Apps portal. Keep the portal open.
 
    ![](./media/gs-5.png)
 
-1. Inside the **Power Apps** portal, select **Tables (1)** from the left navigation menu and click **Create with Excel or .CSV file (2)** to begin importing the lab dataset.
+   > **Note:** We are signing in to the Power Apps portal because it automatically assigns a Developer license, which is required to create and use a Developer environment in the next steps.
 
-   ![](./media/ex1-travel-g1.png)
+1. Open a new browser tab, and then navigate to the Power Platform admin center.
+
+   ```
+   https://admin.powerplatform.microsoft.com
+   ```
+
+1. In the **Power Platform admin center**, select **Manage** from the left navigation pane.
+
+   ![](./media/nd-d2-cor-g-1.png)
+
+1. In the Power Platform admin center, select **Environments (1)** from the left navigation pane, and then choose **New (2)** to create a new environment.
+
+   ![](./media/d2-coor-gs-g2.png)
+
+   > **Note:** If the **New** environment page does not load, refresh the browser and try again.
+
+1. In the **New environment** pane, configure the environment with the following settings, and then select **Next (4)**:
+
+   - Enter **ODL_User <inject key="DeploymentID" enableCopy="false"></inject>'s Environment** in the **Name (1)** field.
+   - Set **Get new features early (2)** to **Yes**.
+   - Select **Developer (3)** from the **Type** dropdown.
+
+      ![](./media/d2-coor-gs-g3.png)
+
+1. In the **Add Dataverse** pane, leave all settings as default, and then select **Save**.
+
+   ![](./media/d2-coor-gs-g4.png)
 
    > **Environment Foundation:** This step creates the foundational environment that will support your agents with company-specific data and knowledge sources.
 
-1. In the **Create in new environment?** dialog, click **Create** to provision a environment.
+   > **Note:** Environment provisioning may take 10–15 minutes to complete. Wait until the status shows as ready before proceeding.
 
-   ![](./media/ex1-travel-g2.png)
+   > **Note:** If you see an error stating that the environment list cannot be displayed, this is expected while the environment is being created in the background. After 10–15 minutes, refresh the browser and the environment should appear.
 
-1. When the upload screen appears, click **Cancel**.
-
-   ![](./media/zgr-gt3.png)
-
-1. Once done, please navigate to power platform admin center by using the below URL:
-
-   ```
-   https://admin.powerplatform.microsoft.com/
-   ```
-
-1. Once you are in the power **platform admin center**, select **Manage** from left menu and click on the environmnet with the name, ODL_User <inject key="Deployment ID" enableCopy="false"></inject>'s Environment.
+1. In the power **platform admin center**, select **Manage** from left menu and click on the environmnet with the name, ODL_User <inject key="Deployment ID" enableCopy="false"></inject>'s Environment.
 
    ![](./media/uppowadminimg1.png)
 
@@ -146,27 +162,31 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/ex1-travel-g6.png)
 
-1. If you are not able to see the environment under **Supported environments**, follow the below steps.
+   > If you are not able to see the environment under **Supported environments**, follow the below steps.
 
    ![](./media/cor2-gs-g4.png)
 
-1. Go back to the **Power Apps** portal, on your **ODL_User <inject key="Deployment ID" enableCopy="false"></inject>’s Environment** copy the **Environment ID** from the browser URL as highlighted.
+   1. In the **Power Platform admin center**, select **Environments** from the left navigation pane, and then verify that **ODL_User <inject key="DeploymentID" enableCopy="false"></inject>'s Environment** is listed.
 
-   ![](./media/cor2-gs-g5.png)
+      ![](./media/nd-d2-cor-g-4.png)
    
-1. Open a **new browser tab**, and paste the copied **Environment ID** at the end of the following URL to verify access:
+   1. On the **ODL_User 22<inject key="DeploymentID" enableCopy="false"></inject>'s Environment** details page, copy the **Environment ID**.
 
-   ```
-   https://copilotstudio.microsoft.com/environments/(Environment ID)
-   ```
+      ![](./media/nd-d2-cor-g-5.png)
+      
+   1. Open a **new browser tab**, and paste the copied **Environment ID** at the end of the following URL to verify access:
 
-   ![](./media/cor2-gs-g6.png)
+      ```
+      https://copilotstudio.microsoft.com/environments/(Environment ID)
+      ```
 
-   > **Note:** Replace **(Environment ID)** with the ID you copied in the previous step.
-   
-1. You will be navigated to the **Copilot Studio** portal. Verify that **ODL_User <inject key="Deployment ID" enableCopy="false"></inject>’s Environment** is visible and selected under **Supported environments**.
+      ![](./media/cor2-gs-g6.png)
 
-   ![](./media/cor2-gs-g7.png)
+      > **Note:** Replace **(Environment ID)** with the ID you copied in the previous step.
+      
+   1. You will be navigated to the **Copilot Studio** portal. Verify that **ODL_User <inject key="Deployment ID" enableCopy="false"></inject>’s Environment** is visible and selected under **Supported environments**.
+
+      ![](./media/cor2-gs-g7.png)
 
 1. You are now ready to start building your **Customer Care Copilot** using Microsoft Copilot Studio! This copilot will help customers with order tracking, product returns, delivery delays, and service complaints, and will integrate with Freshdesk for automated ticket creation.
 
