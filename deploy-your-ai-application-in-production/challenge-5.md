@@ -61,7 +61,7 @@ Expand-Archive -Path "C:\Code\SecureAI\app-code.zip" -DestinationPath "C:\Code\S
 
 # Copy codefiles to a clean working directory
 New-Item -Path "C:\Code\SecureAI\chat-app" -ItemType Directory -Force
-Copy-Item -Path "C:\Code\SecureAI\hack-in-a-day-challenges-deploy-your-ai-application\deploy-your-ai-application-in-production\codefiles\*" -Destination "C:\Code\SecureAI\chat-app" -Recurse -Force
+Copy-Item -Path "C:\Code\SecureAI\hack-in-a-day-challenges-deploy-your-ai-application\*" -Destination "C:\Code\SecureAI\chat-app" -Recurse -Force
 
 # Navigate to the app directory
 Set-Location "C:\Code\SecureAI\chat-app"
