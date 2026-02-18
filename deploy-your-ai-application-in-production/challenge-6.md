@@ -10,11 +10,11 @@ This proves your entire architecture works through private networking only!
 
 ## Prerequisites
 
-- Completed Challenge 5 (Chat application deployed and tested on **vm-<inject key="DeploymentID" enableCopy="false"/>**)
+- Completed Challenge 5 (Chat application deployed and tested on **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**)
 - Azure Bastion deployed (from pre-configured environment)
-- Chat application running on **vm-<inject key="DeploymentID" enableCopy="false"/>**
+- Chat application running on **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**
 - All services using private endpoints
-- VS Code open with PowerShell terminal on **vm-<inject key="DeploymentID" enableCopy="false"/>**
+- VS Code open with PowerShell terminal on **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**
 - Azure CLI logged in
 
 ## Challenge Objectives
@@ -32,7 +32,7 @@ This proves your entire architecture works through private networking only!
 
 You should already be connected to your VM via Bastion from previous challenges. If not:
 
-1. **In Azure Portal**, navigate to **vm-<inject key="DeploymentID" enableCopy="false"/>**.
+1. **In Azure Portal**, navigate to **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**.
 1. Click **Connect** → **Bastion**.
 1. Enter credentials:
    - **Username**: `azureuser`

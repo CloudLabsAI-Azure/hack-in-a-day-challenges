@@ -195,7 +195,7 @@ Before we can connect to the VM, we need to create a dedicated subnet for Azure 
 
 Now let's install Azure Bastion and connect to the VM.
 
-1. In the **Azure Portal**, navigate to your **vm-<inject key="DeploymentID" enableCopy="false"/>** Virtual Machine resource.
+1. In the **Azure Portal**, navigate to your **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** Virtual Machine resource.
 
 1. In the left navigation, click **Connect** ? **Connect via Bastion**.
 
@@ -231,7 +231,7 @@ Now let's install Azure Bastion and connect to the VM.
 
 The VM is a fresh Windows Server 2022 instance. You'll install Chocolatey (package manager), then use it to install Python 3.11, VS Code, Azure CLI, and Git.
 
-1. Once connected to **vm-<inject key="DeploymentID" enableCopy="false"/>**, open **PowerShell as Administrator** (right-click Start → Windows PowerShell (Admin)).
+1. Once connected to **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**, open **PowerShell as Administrator** (right-click Start → Windows PowerShell (Admin)).
 
 1. **Install Chocolatey** (Windows package manager):
    ```powershell
@@ -299,7 +299,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 > **Why this is required**: When using private endpoints with managed identity authentication, Azure OpenAI needs a custom subdomain to properly route token-based authentication requests. Without this, you'll get errors like "Please provide a custom subdomain for token authentication".
 
-**Using VS Code on vm-<inject key="DeploymentID" enableCopy="false"/>**:
+**Using VS Code on Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**:
 
 1. **Open VS Code** on your VM (connected via Bastion).
 
@@ -527,7 +527,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 1. Verify you see the following resources:
 
    - **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>** (Virtual network)
-   - **vm-<inject key="DeploymentID" enableCopy="false"/>** (Virtual machine)
+   - **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** (Virtual machine)
 
 1. In the left navigation, click **Subnets**.
 
@@ -543,7 +543,7 @@ Open Notepad on your VM and document the following:
 
 ```
 SECURE AI INFRASTRUCTURE - DEPLOYMENT SUMMARY
-Connect to **vm-<inject key="DeploymentID" enableCopy="false"/>** via Bastion, open Notepad and document the following:
+Connect to **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** via Bastion, open Notepad and document the following:
 
 ```
 

@@ -18,7 +18,7 @@ This challenge is your **production readiness checklist** - covering Security, R
 - Completed all previous challenges (1-6)
 - All services deployed and tested
 - Access to Azure Portal
-- Access to **vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion
+- Access to **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion
 
 ## Challenge Objectives
 
@@ -160,7 +160,7 @@ $openaiId = az cognitiveservices account show -n $openaiName -g "challenge-rg-<i
 Write-Host "=== PRODUCTION READINESS CHECK ===" -ForegroundColor Cyan
 
 # 1. Managed Identity
-$mi = az vm identity show -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" -n "vm-<inject key="DeploymentID" enableCopy="false"/>" --query principalId -o tsv
+$mi = az vm identity show -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" -n "Hack-vm-<inject key="DeploymentID" enableCopy="false"/>" --query principalId -o tsv
 if ($mi) { Write-Host "[PASS] Managed Identity enabled" -ForegroundColor Green } else { Write-Host "[FAIL] Managed Identity" -ForegroundColor Red }
 
 # 2. Private Endpoints

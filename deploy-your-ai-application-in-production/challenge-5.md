@@ -17,9 +17,9 @@ Let's build a secure ChatGPT-like experience!
 
 - Completed Challenge 4 (OpenAI models deployed and tested)
 - All Key Vault secrets created (OpenAIEndpoint, ChatModelDeployment, etc.)
-- Managed identity configured on **vm-<inject key="DeploymentID" enableCopy="false"/>** with proper RBAC roles
-- Python 3.11 and VS Code installed on **vm-<inject key="DeploymentID" enableCopy="false"/>**
-- Connected to **vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion
+- Managed identity configured on **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** with proper RBAC roles
+- Python 3.11 and VS Code installed on **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**
+- Connected to **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion
 
 ## Challenge Objectives
 
@@ -35,7 +35,7 @@ Let's build a secure ChatGPT-like experience!
 
 ### Part 1: Create Application Directory Structure
 
-1. **Connect to vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion if not already connected.
+1. **Connect to Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion if not already connected.
 
 1. **Open VS Code** on the VM and open a PowerShell terminal (Ctrl + `).
 
@@ -410,7 +410,7 @@ The app saves session history to Blob Storage. Verify managed identity has acces
 ```powershell
 $identityId = az vm show `
  --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --name "vm-<inject key="DeploymentID" enableCopy="false"/>" `
+ --name "Hack-vm-<inject key="DeploymentID" enableCopy="false"/>" `
  --query identity.principalId -o tsv
 
 $storageName = az storage account list `
