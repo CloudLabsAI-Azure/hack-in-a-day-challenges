@@ -25,6 +25,13 @@ Now that you have a Translation Agent, you need a Validation Agent to check if t
    - **Agent name**: `SQL-Validation-Agent`
    - **Deployment**: Select **sql-translator**
 
+<validation step="b266eefd-5e13-4347-9dc8-cd3d694b2e9a" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ### Part 2: Write Validation Instructions
 
 1. In the **Instructions** box, paste:

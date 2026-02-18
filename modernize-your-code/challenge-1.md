@@ -45,6 +45,13 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. Once created, click **Go to Foundry Project** in the overview section.
 
+<validation step="616b2c9f-85e8-44de-932a-418e889351a1" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ### Part 3: Deploy GPT-4.1 Model in AI Foundry
 
 1. In **Microsoft Foundry Studio**.
@@ -79,6 +86,13 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. Verify you get a response with Azure SQL translation.
 
+<validation step="0561d3a2-e34a-4731-925b-4e0b02decc29" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ### Part 5: Create Azure Cosmos DB
 
 1. In the **Azure Portal**, search for **Azure Cosmos DB** and select it.
@@ -102,6 +116,13 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 1. Click **Review + Create**, then **Create**.
 
 1. Wait for deployment (10-15 minutes).
+
+<validation step="c9460cd7-b2b8-4294-8143-516ccadd3f20" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
 ### Part 6: Create Cosmos DB Database and Containers
 
@@ -153,6 +174,13 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
    - **PRIMARY KEY**
 
    Save these values for later use.
+
+<validation step="47428908-2f8d-456b-84a5-df4c148f8c67" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
 ### Part 7: Verify All Resources
 
