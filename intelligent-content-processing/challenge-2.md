@@ -21,7 +21,7 @@ Using **Microsoft Foundry (gpt-4o-mini)**, participants will convert unstructure
 
 1. In the **Azure Portal**, search for **Microsoft Foundry**, from the left under **Use with Foundry**, select **Foundry** and click **Create**.
 
-2. Under **Basics**, provide:
+1. Under **Basics**, provide:
 
    * **Subscription:** Use the available subscription
    * **Resource Group:** Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
@@ -29,30 +29,30 @@ Using **Microsoft Foundry (gpt-4o-mini)**, participants will convert unstructure
    * **Name:** **openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>**
    * **Pricing Tier:** Standard
 
-3. Click **Review + Create** → **Create**.
+1. Click **Review + Create** → **Create**.
 
-4. After deployment succeeds, open the **Microsoft Foundry** resource.
+1. After deployment succeeds, open the **Microsoft Foundry** resource.
 
 ### Deploy the GPT Model
 
-5. In the Microsoft Foundry resource, click **Go to Microsoft Foundry Studio**.
+1. In the Microsoft Foundry resource, click **Go to Microsoft Foundry Studio**.
 
-6. Navigate to **Deployments** → **Create deployment**.
+1. Navigate to **Deployments** → **Create deployment**.
 
-7. Provide:
+1. Provide:
 
    * **Model:** `gpt-4o-mini`
    * **Deployment name:** `gpt-4o-mini`
    * **Deployment type:** `Standard`
    * **Version:** Default / Latest
 
-8. Click **Deploy** and wait for deployment to complete.
+1. Click **Deploy** and wait for deployment to complete.
 
 ### Extract Structured Data from OCR Text (PDF Flow)
 
-9. In **Microsoft Foundry Studio**, go to **Chat playground**.
+1. In **Microsoft Foundry Studio**, go to **Chat playground**.
 
-10. Select the deployment:
+1. Select the deployment:
 
     * **Model:** `gpt-4o-mini`
     * **Give the model instructions and context:** 
@@ -71,12 +71,11 @@ Using **Microsoft Foundry (gpt-4o-mini)**, participants will convert unstructure
       - Do not include explanations, markdown, or extra text
       ```
 
-11. Select **Apply changes** → **Continue**
+1. Select **Apply changes** → **Continue**
 
+2. Paste the **OCR text** extracted in Challenge 01 from `invoice.pdf`.
 
-12. Paste the **OCR text** extracted in Challenge 01 from `invoice.pdf`.
-
-13. Use the following prompt:
+1. Use the following prompt:
 
     ```
     You are an AI assistant that extracts structured information from documents.
@@ -95,13 +94,13 @@ Using **Microsoft Foundry (gpt-4o-mini)**, participants will convert unstructure
     <Paste OCR text here>
     ```
 
-14. Click **Submit**.
+1. Click **Submit**.
 
 ### Extract Structured Data from Image (Handwritten Note Flow)
 
-14. In the **Chat playground**, click **Add image**.
+1. In the **Chat playground**, click **Add image**.
 
-15. Update the **Give the model instructions and context:** 
+1. Update the **Give the model instructions and context:** 
 
     ```
     You are an AI assistant specialized in enterprise document processing.
@@ -118,11 +117,11 @@ Using **Microsoft Foundry (gpt-4o-mini)**, participants will convert unstructure
     - Do not include explanations, markdown, or extra text
     ```
 
-16. Select **Apply changes** → **Continue**
+1. Select **Apply changes** → **Continue**
 
-17. Upload `handwritten_note.jpg`.
+1. Upload `handwritten_note.jpg`.
 
-18. Use the following prompt:
+1. Use the following prompt:
 
     ```
     You are an AI assistant that understands handwritten documents.
@@ -136,7 +135,7 @@ Using **Microsoft Foundry (gpt-4o-mini)**, participants will convert unstructure
     Return VALID JSON only.
     ```
 
-19. Click **Submit**.
+1. Click **Submit**.
 
 ## Expected Outputs
 
