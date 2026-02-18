@@ -197,27 +197,31 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 
 1. Still in **SQL-Translation-Agent**, scroll to the **Instructions** text box.
 
-2. Find the hand-off line you added in Challenge 3 and **replace it** with this updated version:
+2. Find the `PIPELINE INSTRUCTIONS` section you added in Challenge 3 and **replace it** with this updated version:
 
    ```
-   After translating Oracle SQL to Azure SQL T-SQL:
-   1. Hand off the translated code to validation_agent for syntax and semantic validation
-   2. After validation, hand off to optimization_agent for performance analysis and recommendations
+   PIPELINE INSTRUCTIONS (MANDATORY):
+   After translating the Oracle SQL to Azure SQL T-SQL, you MUST execute these steps in order:
+   1. Hand off the translated T-SQL code to validation_agent for syntax and semantic validation
+   2. After validation completes, hand off the translated T-SQL code to optimization_agent for performance analysis and optimization recommendations
+   3. Include the results from all three stages (translation, validation, optimization) in your final response
    ```
 
 3. Your complete Translation Agent instructions should now end with:
 
    ```
    OUTPUT REQUIREMENTS:
-   - Return ONLY the translated Azure SQL T-SQL code
-   - Do NOT include explanations, comments about the translation process, or markdown code blocks
+   - Return the translated Azure SQL T-SQL code inside a ```sql code block
+   - Do NOT include explanations or commentary about the translation process
    - Preserve the original query logic and structure
    - Ensure proper T-SQL syntax
    - Maintain readability with proper indentation
 
-   After translating Oracle SQL to Azure SQL T-SQL:
-   1. Hand off the translated code to validation_agent for syntax and semantic validation
-   2. After validation, hand off to optimization_agent for performance analysis and recommendations
+   PIPELINE INSTRUCTIONS (MANDATORY):
+   After translating the Oracle SQL to Azure SQL T-SQL, you MUST execute these steps in order:
+   1. Hand off the translated T-SQL code to validation_agent for syntax and semantic validation
+   2. After validation completes, hand off the translated T-SQL code to optimization_agent for performance analysis and optimization recommendations
+   3. Include the results from all three stages (translation, validation, optimization) in your final response
    ```
 
 4. The agent will auto-save.
