@@ -7,7 +7,7 @@ Through this lab, you will design a production-style pipeline powered by **Azure
 
 ## Scenario
 
-Contoso Enterprises operates across multiple industries including finance, healthcare, insurance, and operations. Every day, thousands of documents—such as invoices, claims forms, handwritten notes, IDs, and clinical reports—arrive in different formats including PDFs, scanned images, and mobile phone photos.
+Contoso Enterprises operates across multiple industries including finance, healthcare, insurance, and operations. Every day, thousands of documents, such as invoices, claims forms, handwritten notes, IDs, and clinical reports, arrive in different formats including PDFs, scanned images, and mobile phone photos.
 
 Manual processing of these documents is slow, error-prone, and difficult to audit. Traditional OCR systems can extract text but fail to understand context, intent, or document structure. As a result, employees spend hours validating data, correcting mistakes, and routing documents for review.
 

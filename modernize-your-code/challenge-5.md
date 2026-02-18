@@ -52,37 +52,26 @@ The application code is provided in a pre-built package.
 
 The application uses Azure CLI authentication to connect to your agents.
 
-1. **Install Azure CLI** (if not already installed):
-   
-   For Windows:
-   ```powershell
-   winget install -e --id Microsoft.AzureCLI
-   ```
-
-2. **Login to Azure**:
-   ```bash
-   az login
-   ```
-   
-   This will open a browser for authentication. Sign in with your Azure credentials.
-
-### Part 2: Install and Authenticate with Azure CLI
-
-The application uses Azure CLI authentication to connect to your agents.
+1. Open the **Windows Powershell** as an admin.
 
 1. **Install Azure CLI** (if not already installed):
    
    For Windows:
    ```powershell
-   winget install -e --id Microsoft.AzureCLI
+   Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi
+   Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi'
    ```
 
-2. **Login to Azure**:
+1. Accept the terms and license agreement and select **Install**. Once done select **Finish**.
+
+1. **Login to Azure**:
    ```bash
    az login
    ```
    
-   This will open a browser for authentication. Sign in with your Azure credentials.
+1. This will open a pop-up for authentication. Sign in with your Azure credentials.
+
+1. Don't change the subscription or tenant, hit enter.
 
 ### Part 3: Get Your Agent Credentials
 
@@ -90,20 +79,19 @@ You need three values to connect to your agents:
 
 1. Go to **Microsoft Foundry Studio** → Your project.
 
-2. Click **Settings** in the left navigation.
+1. In the Overview section, find the **Microsoft Foundry project endpoint**:
 
-3. In the Overview section, find the **Microsoft Foundry project endpoint**:
    - Example format: `https://sql-modernize-2034545.services.ai.azure.com/api/projects/proj-default`
    - **CRITICAL:** The project name at the end is always `proj-default` (not sql-modernize-XXXX)
    - Make sure it ends with `/api/projects/proj-default`
 
-4. Navigate to **Agents** in the left menu.
+1. Navigate to **Agents** in the left menu.
 
-5. Click on your **SQL-Translation-Agent**.
+1. Click on your **SQL-Translation-Agent**.
 
-6. In the Setup panel on the right, copy the **Agent ID** (starts with `asst_`).
+1. In the Setup panel on the right, copy the **Agent ID** (starts with `asst_`).
 
-7. From Challenge 1, get your **Cosmos DB** connection details:
+1. From Challenge 1, get your **Cosmos DB** connection details:
    - Go to Azure Portal → Your Cosmos DB account
    - Click **Keys** → Copy **URI** and **Primary Key**
 
@@ -117,17 +105,17 @@ You need three values to connect to your agents:
 
 4. Open `.env` and replace the placeholder values:
 
-```env
-# Microsoft Foundry Agent API Configuration
-# IMPORTANT: Use proj-default as the project name (not sql-modernize-XXXX)
-AGENT_API_ENDPOINT=https://sql-modernize-<DeploymentID>.services.ai.azure.com/api/projects/proj-default
-AGENT_ID=asst_<your-agent-id>
+    ```env
+    # Microsoft Foundry Agent API Configuration
+    # IMPORTANT: Use proj-default as the project name (not sql-modernize-XXXX)
+    AGENT_API_ENDPOINT=https://sql-modernize-<DeploymentID>.services.ai.azure.com/api/projects/proj-default
+    AGENT_ID=asst_<your-agent-id>
 
-# Cosmos DB Configuration
-COSMOS_ENDPOINT=https://sql-modernization-cosmos-<DeploymentID>.documents.azure.com:443/
-COSMOS_KEY=<your-cosmos-primary-key>
-DATABASE_NAME=SQLModernizationDB
-```
+    # Cosmos DB Configuration
+    COSMOS_ENDPOINT=https://sql-modernization-cosmos-<DeploymentID>.documents.azure.com:443/
+    COSMOS_KEY=<your-cosmos-primary-key>
+    DATABASE_NAME=SQLModernizationDB
+    ```
 
 **Important Notes:**
 - Replace `<DeploymentID>` with your actual deployment ID (e.g., 2034545)
@@ -181,13 +169,19 @@ This installs:
 
 ### Part 7: Run the Application
 
-Start the Streamlit app with Azure CLI in PATH:
+1. Start the Streamlit app with Azure CLI in PATH:
 
-**Windows PowerShell:**
-```powershell
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-streamlit run app.py
-```
+    **Windows PowerShell:**
+
+    ```powershell
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+
+    streamlit run app.py
+    ```
+
+1. Enter the email as **<inject key="AzureAdUserEmail"></inject>** and hit enter.
+
+
 
 **macOS/Linux:**
 ```bash

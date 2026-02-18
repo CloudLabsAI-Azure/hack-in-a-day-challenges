@@ -4,7 +4,7 @@
 
 In enterprise document automation systems, AI-extracted data must be **stored securely**, **queried reliably**, and **auditable for downstream processes**. In this challenge, participants will persist the final, validated document data into **Azure Cosmos DB**, completing the end-to-end Intelligent Content Processing pipeline.
 
-This challenge focuses on **data persistence**, **validation**, and **traceability**, ensuring that AI-generated outputs are production-ready—without introducing additional infrastructure complexity.
+This challenge focuses on **data persistence**, **validation**, and **traceability**, ensuring that AI-generated outputs are production-ready, without introducing additional infrastructure complexity.
 
 ## Challenge Objectives
 

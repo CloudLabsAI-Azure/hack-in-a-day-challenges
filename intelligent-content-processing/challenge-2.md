@@ -21,40 +21,42 @@ Using **Microsoft Foundry (gpt-4o-mini)**, participants will convert unstructure
 
 1. In the **Azure Portal**, search for **Microsoft Foundry**, from the left under **Use with Foundry**, select **Foundry** and click **Create**.
 
-2. Under **Basics**, provide:
+1. Under **Basics**, provide:
 
    * **Subscription:** Use the available subscription
    * **Resource Group:** Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   * **Region:** Choose a supported Microsoft Foundry region
+   * **Region**: **<inject key="Region"></inject>**
    * **Name:** **openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>**
-   * **Pricing Tier:** Standard
 
-3. Click **Review + Create** → **Create**.
+1. Click **Review + Create** → **Create**.
 
-4. After deployment succeeds, open the **Microsoft Foundry** resource.
+1. After deployment succeeds, open the **Microsoft Foundry** resource.
 
 ### Deploy the GPT Model
 
-5. In the Microsoft Foundry resource, click **Go to Microsoft Foundry Studio**.
+1. In the Microsoft Foundry resource, click **Go to Foundry portal** in the **Overview** section.
 
-6. Navigate to **Deployments** → **Create deployment**.
+1. Navigate to **Model + endpoints** under the **My assets** section in the left pane.
 
-7. Provide:
+1. Select **+Deploy model** → **Deploy base model**.
 
-   * **Model:** `gpt-4o-mini`
+1. Search **gpt-4o-mini** and click **Confirm**.
+
+1. Provide:
+
    * **Deployment name:** `gpt-4o-mini`
    * **Deployment type:** `Standard`
-   * **Version:** Default / Latest
+   * Click on **Cusotmize** to expand Deployment details.
+   * **Tokens per Minute Rate Limit:** `50K`
 
-8. Click **Deploy** and wait for deployment to complete.
+1. Click **Deploy** and wait for deployment to complete.
 
 ### Extract Structured Data from OCR Text (PDF Flow)
 
-9. In **Microsoft Foundry Studio**, go to **Chat playground**.
+1. In **Microsoft Foundry Studio**, go to **Open in playground**.
 
-10. Select the deployment:
+1. Select the deployment:
 
-    * **Model:** `gpt-4o-mini`
     * **Give the model instructions and context:** 
     
       ```
@@ -71,12 +73,9 @@ Using **Microsoft Foundry (gpt-4o-mini)**, participants will convert unstructure
       - Do not include explanations, markdown, or extra text
       ```
 
-11. Select **Apply changes** → **Continue**
+1. Select **Apply changes** → **Continue**
 
-
-12. Paste the **OCR text** extracted in Challenge 01 from `invoice.pdf`.
-
-13. Use the following prompt:
+1. Use the following prompt:
 
     ```
     You are an AI assistant that extracts structured information from documents.
@@ -95,74 +94,74 @@ Using **Microsoft Foundry (gpt-4o-mini)**, participants will convert unstructure
     <Paste OCR text here>
     ```
 
-14. Click **Submit**.
+  1. Replace **OCR TEXT: <Paste OCR text here>** in the prompt by pasting the JSON output copied earlier from the **Result** tab of `invoice.pdf` in Challenge 01, and then click **Submit**.
 
 ### Extract Structured Data from Image (Handwritten Note Flow)
 
-14. In the **Chat playground**, click **Add image**.
+  1. In the **Chat playground**, click **Add image**.
 
-15. Update the **Give the model instructions and context:** 
+  1. Update the **Give the model instructions and context:** 
 
-    ```
-    You are an AI assistant specialized in enterprise document processing.
+      ```
+      You are an AI assistant specialized in enterprise document processing.
 
-    You can understand scanned and handwritten documents from images.
-    Your role is to extract structured, machine-readable data from unstructured content.
+      You can understand scanned and handwritten documents from images.
+      Your role is to extract structured, machine-readable data from unstructured content.
 
-    Always follow these rules:
-    - Identify the document type correctly
-    - Interpret handwritten text and fix recognition errors
-    - Extract only information present in the document
-    - Normalize values where possible
-    - Return valid JSON only
-    - Do not include explanations, markdown, or extra text
-    ```
+      Always follow these rules:
+      - Identify the document type correctly
+      - Interpret handwritten text and fix recognition errors
+      - Extract only information present in the document
+      - Normalize values where possible
+      - Return valid JSON only
+      - Do not include explanations, markdown, or extra text
+      ```
 
-16. Select **Apply changes** → **Continue**
+  1. Select **Apply changes** → **Continue**
 
-17. Upload `handwritten_note.jpg`.
+  1. Upload `handwritten_note.jpg`.
 
-18. Use the following prompt:
+  1. Use the following prompt:
 
-    ```
-    You are an AI assistant that understands handwritten documents.
+      ```
+      You are an AI assistant that understands handwritten documents.
 
-    Identify:
-    - Document type
-    - Person name
-    - Summary
-    - Action required
+      Identify:
+      - Document type
+      - Person name
+      - Summary
+      - Action required
 
-    Return VALID JSON only.
-    ```
+      Return VALID JSON only.
+      ```
 
-19. Click **Submit**.
+  1. Click **Submit**.
 
 ## Expected Outputs
 
 ### Invoice Output
 
-```json
-{
-  "documentType": "Invoice",
-  "invoiceNumber": "INV-1001",
-  "vendor": "ABC Corporation",
-  "date": "2026-01-21",
-  "totalAmount": 1250,
-  "currency": "USD"
-}
-```
+  ```json
+  {
+    "documentType": "Invoice",
+    "invoiceNumber": "INV-1001",
+    "vendor": "ABC Corporation",
+    "date": "2026-01-21",
+    "totalAmount": 1250,
+    "currency": "USD"
+  }
+  ```
 
 ### Handwritten Note Output
 
-```json
-{
-  "documentType": "Patient Note",
-  "personName": "John Doe",
-  "summary": "Patient prescribed medication for 5 days",
-  "actionRequired": "Follow-up required"
-}
-```
+  ```json
+  {
+    "documentType": "Patient Note",
+    "personName": "John Doe",
+    "summary": "Patient prescribed medication for 5 days",
+    "actionRequired": "Follow-up required"
+  }
+  ```
 
 <validation step="d8239636-15d6-4f78-b064-786b79917066" />
  

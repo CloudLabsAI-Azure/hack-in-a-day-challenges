@@ -32,18 +32,18 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. Configure the AI Foundry project:
 
-   - **Subscription**: Select the avialble **Azure subscription**.
+   - **Subscription**: Select the available **Azure subscription**.
    - **Resource Group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
    - **Project name**: **sql-modernize-<inject key="DeploymentID" enableCopy="false"/>**
    - **Region**: **<inject key="Region"></inject>**.
-   - **Default project name**: Keep the name **Default**.
+   - **Default project name**: Keep it as default
    - Click **Review + Create**.
 
 1. Click **Create**.
 
-1. Wait for deployment (2-3 minutes).
+1. Wait for the deployment as it can take 2-3 minutes.
 
-1. Once created, click **Go to Foundry Project** in the overview section.
+1. Once created, click **Go to Foundry portal** in the overview section.
 
 <validation step="616b2c9f-85e8-44de-932a-418e889351a1" />
  
@@ -69,9 +69,9 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
    - Click **Customize**.
    - **Tokens per Minute Rate Limit**: **50K**
 
-   > **Important**: Do not increase the TPM limit beyond 50K to avoid exceeding quota limits and additional costs.
+      > **Important**: Do not increase the TPM limit beyond 50K to avoid exceeding quota limits and additional costs.
 
-1. Click **Deploy**.
+1. Click **Create**.
 
 ### Part 4: Test the Model Deployment
 
@@ -79,7 +79,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. Select **Open in playground**.
 
-1. Test with a simple prompt:
+1. In the **Chat History** page, enter and test with the simple prompt:
    ```
    Translate this Oracle SQL to Azure SQL: SELECT * FROM dual WHERE ROWNUM <= 5;
    ```
@@ -99,23 +99,25 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. Click **+ Create**.
 
-1. Select **Azure Cosmos DB for NoSQL** (Core SQL API).
+1. Click on *Create** for **Azure Cosmos DB for NoSQL**.
 
 1. Configure Cosmos DB:
 
-   - **Workload Type**: Select **Learning**.
-   - **Subscription**: Select the avialble **Azure subscription**.
-   - **Resource Group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**.
-   - **Account Name**: **sql-modernization-cosmos-<inject key="DeploymentID" enableCopy="false"/>**.
-   - **Availability Zones**: Select **Disable**.
-   - **Location**: Keep it **Defualt**.
-   - **Capacity mode**: Select **Provisioned throughput**.
-   - **Apply Free Tier Discount**: Select **Apply**.
-   - **Limit total account throughput**: Turn **On** the **Checkbox**.
+      - **Workload Type**: Select **Development/Testing**
+      - **Subscription**: Select the available **Azure subscription**
+      - **Resource Group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+      - **Account Name**: **sql-modernization-cosmos-<inject key="DeploymentID" enableCopy="false"/>**
+      - **Availability Zones**: Select **Disable**
+      - **Location**: Keep it **Default**
+      - **Capacity mode**: Select **Provisioned throughput**
+      - **Apply Free Tier Discount**: Select **Apply**
+      - **Limit total account throughput**: Keep it selected
+
+         >**Note:** If you are unable to create **Azure Cosmos DB** with the workload type set to **Development/Testing**, select **Production** and try again.
 
 1. Click **Review + Create**, then **Create**.
 
-1. Wait for deployment (10-15 minutes).
+1. Wait for the deployment as it can take 10-15 minutes.
 
 <validation step="c9460cd7-b2b8-4294-8143-516ccadd3f20" />
  
@@ -126,54 +128,51 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 ### Part 6: Create Cosmos DB Database and Containers
 
-1. In your Cosmos DB account, click on **Data Explorer** in the left navigation.
+1. In your Cosmos DB account, click on **Data Explorer** from the left navigation.
 
-1. Click **New Database**.
+   >**Note:** Close all the pop-ups.
+
+1. Click **+ New Container** drop-down. From the drop-down select **+ New Database**.
 
 1. Configure the database:
 
-   - **Database id**: `SQLModernizationDB`
-   - **Provision throughput**: Check this box.
-   - **Database throughput**: Select **Manual**.
-   - **Database Required RU/s**: **400** RU/s.
+      - **Database id**: `SQLModernizationDB`
+      - Select **OK**
 
 1. Click **OK**.
 
 1. Create the first container for translation results:
 
-   - Expand **SQLModernizationDB** and click **New Container**
-   - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
-   - **Container id**: `TranslationResults`
-   - **Indexing**: Selct **Automatic**.
-   - **Partition key**: `/sourceDialect`
-   - Click **OK**
+      - Right-Click on the **SQLModernizationDB** and click **New Container**
+      - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
+      - **Container id**: `TranslationResults`
+      - **Partition key**: `/sourceDialect`
+      - Click **OK**
 
 1. Create a second container for validation logs:
 
-   - Expand **SQLModernizationDB** and click **New Container** again
+   - Right-Click on the **SQLModernizationDB** and click **New Container** again
    - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
    - **Container id**: `ValidationLogs`
-   - **Indexing**: Selct **Automatic**.
    - **Partition key**: `/translationId`
    - Click **OK**
 
 1. Create a third container for optimization suggestions:
 
-   - Expand **SQLModernizationDB** and click **New Container** again
-   - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
-   - **Container id**: `OptimizationResults`
-   - **Indexing**: Selct **Automatic**.
-   - **Partition key**: `/translationId`
-   - Click **OK**
+      - Right-Click on the **SQLModernizationDB** and click **New Container** again
+      - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
+      - **Container id**: `OptimizationResults`
+      - **Partition key**: `/translationId`
+      - Click **OK**
 
 1. Verify all three containers are visible in Data Explorer.
 
 1. Navigate to **Keys** in the left menu under **Settings** and copy:
 
-   - **URI**
-   - **PRIMARY KEY**
+      - **URI**
+      - **PRIMARY KEY**
 
-   Save these values for later use.
+      - Save these values for later use.
 
 <validation step="47428908-2f8d-456b-84a5-df4c148f8c67" />
  
@@ -187,8 +186,9 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 1. Navigate back to your resource group: **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
 
 1. Verify you see the following resources:
-   - Microsoft Foundry hub and project resources
-   - Cosmos DB account
+
+      - Microsoft Foundry hub and project resources
+      - Cosmos DB account
 
 1. Ensure all resources show **Deployment succeeded** status.
 

@@ -10,17 +10,17 @@ In this challenge, you’ll create the **Azure AI Document Intelligence** resour
 
 ## Accessing the Datasets
 
-Please download and extract the datasets required for this challenge here - [Datasets](https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/blob/content-processing-files/co-lab-files.zip)
+Please download and extract the datasets required for this challenge here - [Datasets](https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/content-processing-files.zip)
 
    ```
-   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/blob/content-processing-files/co-lab-files.zip/
+   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/content-processing-files.zip
    ```
 
 ## Challenge Objectives
 
 - Create an **Azure Blob Storage account** for document ingestion.
 
-- Create a **Blob container** (e.g., documents) to upload files.
+- Create a **Blob container** to upload files.
 
 - Upload sample documents (invoice.pdf, handwritten_note.jpg) to Blob Storage.
 
@@ -36,85 +36,93 @@ Please download and extract the datasets required for this challenge here - [Dat
 
 ## Steps to Complete
 
-1. In the **Azure Portal**, search for **Storage accounts** and click **Create**.
+   1. In the **Azure Portal**, search for **Storage accounts** and click **Create**.
 
-2. Under **Basics**, provide:
+   1. Under **Basics**, provide:
 
-   * **Subscription:** Use the available subscription
-   * **Resource Group:** Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   * **Storage account name:** **docstore<inject key="DeploymentID" enableCopy="false"/>**
-   * **Region:** Choose the same region for all resources
-   * **Performance:** Standard
-   * **Redundancy:** Locally-redundant storage (LRS)
+      * **Subscription:** Use the available subscription
+      * **Resource Group:** Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+      * **Storage account name:** **docstore<inject key="DeploymentID" enableCopy="false"/>**
+      * **Region**: **<inject key="Region"></inject>**
+      * **Performance:** Standard
+      * **Redundancy:** Locally-redundant storage (LRS)
 
-3. Click **Review + Create** → **Create**.
+   1. Click **Review + Create** → **Create**.
 
-4. After deployment succeeds, open the **Storage account**.
+   1. After deployment succeeds, open the **Storage account**.
 
 ### Create a Blob Container
 
-5. In the storage account, go to **Containers**.
+   1. In the storage account, go to **Containers** under **Data storage**.
 
-6. Click **+ Add container** and provide:
+   1. Click **+ Add container** and provide:
 
-   * **Name:** `documents`
-   * **Public access level:** Private (no anonymous access)
+      * **Name:** `documents`
+      * **Public access level:** Private (no anonymous access)
 
-7. Click **Create**.
+   1. Click **Create**.
 
 ### Upload Sample Documents
 
-8. Open the `documents` container.
+   1. Open the `documents` container.
 
-9. Click **Upload** and upload:
+   1. Click **Upload** and upload:
 
-   * `invoice.pdf`
-   * `handwritten_note.jpg`
+      * `invoice.pdf`
+      * `handwritten_note.jpg`
 
-10. Click **Upload** and confirm the files appear in the list.
+   1. Click **Upload** and confirm the files appear in the list.
 
 ### Create Azure Document Intelligence
 
-11. In the **Azure Portal**, search for **Document Intelligence** and click **Create**.
+   1. In the **Azure Portal**, search for **Document Intelligence** and click **Create**.
 
-12. Under **Basics**, provide:
+   1. Under **Basics**, provide:
 
-   * **Subscription:** Use the available subscription
-   * **Resource Group:** Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   * **Region:** Same region as storage
-   * **Name:** **doc-intel-<inject key="DeploymentID" enableCopy="false"/>**
-   * **Pricing Tier:** Free (F0) *(or Standard if F0 is unavailable)*
+      * **Subscription:** Use the available subscription
+      * **Resource Group:** Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+      * **Region**: **<inject key="Region"></inject>**
+      * **Name:** **doc-intel-<inject key="DeploymentID" enableCopy="false"/>**
+      * **Pricing Tier:** Free (F0) *(or Standard if F0 is unavailable)*
 
-13. Click **Review + Create** → **Create**.
+   1. Click **Review + Create** → **Create**.
 
-14. After deployment succeeds, open the **Document Intelligence** resource.
+   1. After deployment succeeds, open the **Document Intelligence** resource.
 
 ### Run OCR Using Document Intelligence Studio
 
-15. In the Document Intelligence resource, click **Go to Document Intelligence Studio**.
+   1. In the Document Intelligence resource, click **Go to Document Intelligence Studio** under the **Get Started** section.
 
-16. Select **Document analysis**.
+   1. Select **Document analysis** by clicking on **Start with Document analysis**.
 
-17. On the **Welcome to Document Intelligence Studio**, select the following:
+   1. On the **Welcome to Document Intelligence Studio**, choose the **Layout** or **General Document** model.
 
-   * **Subscription:** Use the available subscription
-   * **Resource Group:** Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   * **Document Intelligence:** **doc-intel-<inject key="DeploymentID" enableCopy="false"/>**
-   * Select **Create** → **Finish**
+   1. Then Select the following:
 
-18. Choose the **Layout** (or **General Document**) model.
+      * **Access By:** Use the available subscription
+      * **Subscription:** Use the available subscription
+      * **Resource Group:** Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+      * **Document Intelligence:** **doc-intel-<inject key="DeploymentID" enableCopy="false"/>**
+      * Select **Continue** → **Finish**
 
-19. Click **Upload file**, select `invoice.pdf`, and click **Analyze**.
+   1. Upload files by clicking on **Browse for files** and upload `invoice.pdf`, and click **Run Analyze**.
 
-20. Repeat the same steps for `handwritten_note.jpg`.
+   1. Repeat the same steps for `handwritten_note.jpg`.
+
+   1. Perform analysis on the sample documents provided by default by selecting a sample file and clicking **Run Analyze**.
+
+1. After the analysis completes, select the **invoice.pdf** document, click on the **Result** tab to view the extracted JSON output.
+
+1. After the analysis completes, select the **invoice.pdf** document, click on the **Result** tab to view the extracted JSON output.
+
+1. Do not close this tab as it will be used in the next challenge.
 
 ### Validate OCR Output
 
-21. Confirm that:
+   1. Confirm that:
 
-* Text is extracted from both documents
-* Tables are detected in the invoice
-* Handwritten text is partially recognized
+   * Text is extracted from both documents
+   * Tables are detected in the invoice
 
 <validation step="67fcae6d-e490-4215-8b86-e1cdc1722cc2" />
  
@@ -122,7 +130,6 @@ Please download and extract the datasets required for this challenge here - [Dat
 > - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
-
 
 ### Success Criteria
 
