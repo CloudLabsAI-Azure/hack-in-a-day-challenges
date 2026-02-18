@@ -13,9 +13,8 @@ import uuid
 import re
 import time
 import pandas as pd
-from azure.ai.projects import AIProjectClient
+from azure.ai.agents import AgentsClient
 from azure.identity import DefaultAzureCredential
-from azure.ai.agents.models import ListSortOrder
 
 # Load environment variables
 load_dotenv()
@@ -360,7 +359,11 @@ def parse_agent_response(response_text):
     return result
 
 def call_agent_api(sql_input):
-    """Call Azure AI Foundry Agent using Azure AI Projects SDK"""
+    """Call Azure AI Foundry Agent using azure-ai-agents SDK.
+    
+    Uses AgentsClient from the azure-ai-agents package which provides
+    .threads, .messages, and .runs sub-clients for agent execution.
+    """
     try:
         # Get configuration from environment
         project_endpoint = os.getenv("AGENT_API_ENDPOINT")
@@ -371,29 +374,29 @@ def call_agent_api(sql_input):
             st.info("💡 Make sure AGENT_API_ENDPOINT and AGENT_ID are set in your .env file")
             return None
         
-        # Initialize project client with Azure CLI credentials
-        with st.spinner("Connecting to Microsoft Foundry..."):
-            project = AIProjectClient(
-                credential=DefaultAzureCredential(),
-                endpoint=project_endpoint
+        # Initialize AgentsClient with Azure CLI credentials
+        with st.spinner("Connecting to Azure AI Foundry..."):
+            client = AgentsClient(
+                endpoint=project_endpoint,
+                credential=DefaultAzureCredential()
             )
         
-        # Step 1: Create thread
+        # Step 1: Create a conversation thread
         with st.spinner("Creating conversation thread..."):
-            thread = project.agents.threads.create()
+            thread = client.threads.create()
             thread_id = thread.id
         
-        # Step 2: Add message
+        # Step 2: Add the user's SQL as a message
         with st.spinner("Sending Oracle SQL to Translation Agent..."):
-            message = project.agents.messages.create(
+            client.messages.create(
                 thread_id=thread_id,
                 role="user",
                 content=sql_input
             )
         
-        # Step 3: Run agent
+        # Step 3: Run the agent and wait for completion
         with st.spinner("Agent processing your SQL... This may take a minute..."):
-            run = project.agents.runs.create_and_process(
+            run = client.runs.create_and_process(
                 thread_id=thread_id,
                 agent_id=agent_id
             )
@@ -405,21 +408,43 @@ def call_agent_api(sql_input):
         
         st.success("Agent processing completed!")
         
-        # Step 4: Get messages
+        # Step 4: Retrieve messages from the thread
         with st.spinner("Retrieving results..."):
-            messages = project.agents.messages.list(thread_id=thread_id)
-            messages_list = list(messages)
+            messages_response = client.messages.list(thread_id=thread_id)
+            
+            # Handle different response formats
+            if hasattr(messages_response, 'data'):
+                messages_list = messages_response.data
+            else:
+                messages_list = list(messages_response)
         
-        # Extract assistant response - get the agent's response
+        # Extract assistant/agent response text
         response_text = ""
-        from azure.ai.agents.models import MessageRole
         for msg in messages_list:
-            if msg.role == MessageRole.AGENT:
-                # Get text content from the message
+            role_str = str(msg.role).lower()
+            is_agent_msg = any(r in role_str for r in ('agent', 'assistant'))
+            
+            if not is_agent_msg:
+                continue
+            
+            # Pattern 1: text_messages attribute
+            if hasattr(msg, 'text_messages') and msg.text_messages:
+                for tm in msg.text_messages:
+                    if hasattr(tm, 'text') and hasattr(tm.text, 'value'):
+                        response_text += tm.text.value + "\n"
+                    elif isinstance(tm, str):
+                        response_text += tm + "\n"
+            # Pattern 2: content list
+            elif hasattr(msg, 'content') and msg.content:
                 for content_item in msg.content:
-                    if hasattr(content_item, 'type') and content_item.type == 'text':
-                        if hasattr(content_item, 'text') and hasattr(content_item.text, 'value'):
-                            response_text += content_item.text.value + "\n"
+                    content_type = str(getattr(content_item, 'type', '')).lower()
+                    if content_type == 'text':
+                        text_obj = getattr(content_item, 'text', None)
+                        if text_obj is not None:
+                            if hasattr(text_obj, 'value'):
+                                response_text += text_obj.value + "\n"
+                            elif isinstance(text_obj, str):
+                                response_text += text_obj + "\n"
         
         if not response_text:
             st.error("No response from agent")
