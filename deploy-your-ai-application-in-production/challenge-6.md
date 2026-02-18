@@ -100,6 +100,18 @@ Verify chat session history is saved to Azure Storage:
 ```powershell
 $storageName = az storage account list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[0].name" -o tsv
 
+# Assign Storage Blob Data Reader to the current user (needed for az CLI auth)
+$currentUserId = az ad signed-in-user show --query id -o tsv
+$storageId = az storage account show --name $storageName -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query id -o tsv
+
+az role assignment create `
+ --assignee $currentUserId `
+ --role "Storage Blob Data Reader" `
+ --scope $storageId
+
+# Wait a moment for role propagation
+Start-Sleep -Seconds 30
+
 az storage blob list `
  --account-name $storageName `
  --container-name "chat-sessions" `

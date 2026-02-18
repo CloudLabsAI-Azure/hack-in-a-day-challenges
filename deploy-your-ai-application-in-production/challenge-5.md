@@ -61,7 +61,11 @@ Expand-Archive -Path "C:\Code\SecureAI\app-code.zip" -DestinationPath "C:\Code\S
 
 # Copy codefiles to a clean working directory
 New-Item -Path "C:\Code\SecureAI\chat-app" -ItemType Directory -Force
-Copy-Item -Path "C:\Code\SecureAI\hack-in-a-day-challenges-deploy-your-ai-application\*" -Destination "C:\Code\SecureAI\chat-app" -Recurse -Force
+Copy-Item -Path "C:\Code\SecureAI\hack-in-a-day-challenges-deploy-your-ai-application\codefiles\*" -Destination "C:\Code\SecureAI\chat-app\" -Recurse -Force
+
+# Clean up the extracted folder and zip
+Remove-Item -Path "C:\Code\SecureAI\hack-in-a-day-challenges-deploy-your-ai-application" -Recurse -Force
+Remove-Item -Path "C:\Code\SecureAI\app-code.zip" -Force
 
 # Navigate to the app directory
 Set-Location "C:\Code\SecureAI\chat-app"
@@ -82,6 +86,7 @@ Get-ChildItem -Path "C:\Code\SecureAI\chat-app" -Recurse -Name
    app.py
    README.md
    requirements.txt
+   secure-chatbot.py
    config\
    config\__init__.py
    config\settings.py
