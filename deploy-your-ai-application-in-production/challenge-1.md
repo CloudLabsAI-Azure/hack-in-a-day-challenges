@@ -113,7 +113,7 @@ Now you'll deploy a Windows VM in the application subnet where you'll host the s
    **Basics tab**:
    - **Subscription**: Select your available Azure subscription
    - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Virtual machine name**: **vm-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Virtual machine name**: **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**
    - **Region**: **<inject key="Region"></inject>**
    - **Availability options**: **No infrastructure redundancy required**
    - **Security type**: **Standard**
