@@ -172,7 +172,8 @@ pip install -r requirements.txt
 
 This installs:
 - `streamlit` - Web framework
-- `azure-ai-projects` - Microsoft Foundry SDK
+- `azure-ai-agents` - Azure AI Agents SDK (for thread/message/run operations)
+- `azure-ai-projects` - Microsoft Foundry SDK (for project management)
 - `azure-identity` - Azure authentication
 - `azure-cosmos` - Cosmos DB SDK
 - `python-dotenv` - Environment variables
@@ -314,7 +315,7 @@ Expected:
 - [ ] Code package downloaded and extracted successfully
 - [ ] Azure CLI installed and authenticated (`az login` completed)
 - [ ] `.env` file configured with correct credentials
-- [ ] All dependencies installed successfully (`azure-ai-projects==1.0.0` included)
+- [ ] All dependencies installed successfully (`azure-ai-agents==1.1.0` included)
 - [ ] Streamlit app runs without errors
 - [ ] Browser opens to `http://localhost:8501` or `http://localhost:8502`
 - [ ] Sidebar shows green checkmarks for all 3 agents
@@ -331,7 +332,7 @@ Expected:
 
 **Issue**: `ModuleNotFoundError: No module named 'azure'`
 
-**Solution**: Run `pip install -r requirements.txt` in the codefiles folder. Ensure `azure-ai-projects==1.0.0` is installed (not 2.0.0b3).
+**Solution**: Run `pip install -r requirements.txt` in the codefiles folder. Ensure `azure-ai-agents==1.1.0` is installed.
 
 ---
 
@@ -381,6 +382,7 @@ Expected:
 - Verify Connected agents are configured in Microsoft Foundry (from Challenges 4-5)
 - Check Translation Agent has `validation_agent` and `optimization_agent` in Connected agents
 - Ensure activation details are in Translation Agent instructions
+- Verify the Translation Agent instructions do NOT contain "Return ONLY" which can prevent hand-offs
 
 ---
 
@@ -426,10 +428,10 @@ The application uses **Azure CLI authentication** instead of API keys:
 
 ### SDK Details
 
-- **Package**: `azure-ai-projects==1.0.0` (stable release)
-- **Alternative**: Do NOT use `azure-ai-projects==2.0.0b3` (beta, missing features)
-- **Agent Message Role**: Uses `MessageRole.AGENT` enum from `azure.ai.agents.models`
-- **Thread Management**: Automatic thread creation and message polling
+- **Package**: `azure-ai-agents==1.1.0` (provides `AgentsClient` with `.threads`, `.messages`, `.runs` sub-clients)
+- **Project SDK**: `azure-ai-projects==2.0.0b3` (for project-level management)
+- **Agent Message Role**: Uses `agent` or `assistant` role string from agent responses
+- **Thread Management**: Automatic thread creation and message polling via `AgentsClient`
 
 ### Endpoint Format
 

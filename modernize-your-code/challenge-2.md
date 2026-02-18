@@ -102,8 +102,8 @@ In this challenge, you will create your first AI agent directly in the Microsoft
       - Oracle RAISE_APPLICATION_ERROR → Azure SQL RAISERROR or THROW
 
    OUTPUT REQUIREMENTS:
-   - Return ONLY the translated Azure SQL T-SQL code
-   - Do NOT include explanations, comments about the translation process, or markdown code blocks
+   - Return the translated Azure SQL T-SQL code inside a ```sql code block
+   - Do NOT include explanations or commentary about the translation process
    - Preserve the original query logic and structure
    - Ensure proper T-SQL syntax
    - Maintain readability with proper indentation
