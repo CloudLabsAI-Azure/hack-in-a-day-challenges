@@ -53,7 +53,7 @@ Please download and extract the datasets required for this challenge here - [Dat
 
 ### Create a Blob Container
 
-   1. In the storage account, go to **Containers**.
+   1. In the storage account, go to **Containers** under **Data storage**.
 
    1. Click **+ Add container** and provide:
 
@@ -81,7 +81,7 @@ Please download and extract the datasets required for this challenge here - [Dat
 
       * **Subscription:** Use the available subscription
       * **Resource Group:** Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-      * **Region:** Same region as storage
+      * **Region**: **<inject key="Region"></inject>**
       * **Name:** **doc-intel-<inject key="DeploymentID" enableCopy="false"/>**
       * **Pricing Tier:** Free (F0) *(or Standard if F0 is unavailable)*
 
@@ -91,18 +91,18 @@ Please download and extract the datasets required for this challenge here - [Dat
 
 ### Run OCR Using Document Intelligence Studio
 
-   1. In the Document Intelligence resource, click **Go to Document Intelligence Studio**.
+   1. In the Document Intelligence resource, click **Go to Document Intelligence Studio** under the **Get Started** section.
 
-   1. Select **Document analysis**.
+   1. Select **Document analysis** by clicking on **Start with Document analysis**.
 
-   1. On the **Welcome to Document Intelligence Studio**, select the following:
+   1. On the **Welcome to Document Intelligence Studio**, choose the **Layout** or **General Document** model.
+
+   1. Then Select the following:
 
       * **Subscription:** Use the available subscription
       * **Resource Group:** Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
       * **Document Intelligence:** **doc-intel-<inject key="DeploymentID" enableCopy="false"/>**
       * Select **Create** → **Finish**
-
-   1. Choose the **Layout** (or **General Document**) model.
 
    1. Click **Upload file**, select `invoice.pdf`, and click **Analyze**.
 
