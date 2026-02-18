@@ -10,17 +10,17 @@ In this challenge, you’ll create the **Azure AI Document Intelligence** resour
 
 ## Accessing the Datasets
 
-Please download and extract the datasets required for this challenge here - [Datasets](https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/blob/content-processing-files/co-lab-files.zip)
+Please download and extract the datasets required for this challenge here - [Datasets](https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/content-processing-files.zip)
 
    ```
-   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/blob/content-processing-files/co-lab-files.zip/
+   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/content-processing-files.zip
    ```
 
 ## Challenge Objectives
 
 - Create an **Azure Blob Storage account** for document ingestion.
 
-- Create a **Blob container** (e.g., documents) to upload files.
+- Create a **Blob container** to upload files.
 
 - Upload sample documents (invoice.pdf, handwritten_note.jpg) to Blob Storage.
 
