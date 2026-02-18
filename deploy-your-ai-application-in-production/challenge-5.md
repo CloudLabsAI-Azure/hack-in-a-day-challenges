@@ -48,7 +48,7 @@ The application code is provided in a pre-built package. You'll download it dire
 New-Item -Path "C:\Code\SecureAI" -ItemType Directory -Force
 
 # Download the application code
-Invoke-WebRequest -Uri "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/deploy-your-ai-application-in-production.zip" -OutFile "C:\Code\SecureAI\app-code.zip"
+Invoke-WebRequest -Uri "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/deploy-your-ai-application.zip" -OutFile "C:\Code\SecureAI\app-code.zip"
 
 Write-Host "Download complete!"
 ```
@@ -61,7 +61,7 @@ Expand-Archive -Path "C:\Code\SecureAI\app-code.zip" -DestinationPath "C:\Code\S
 
 # Copy codefiles to a clean working directory
 New-Item -Path "C:\Code\SecureAI\chat-app" -ItemType Directory -Force
-Copy-Item -Path "C:\Code\SecureAI\hack-in-a-day-challenges-deploy-your-ai-application-in-production\deploy-your-ai-application-in-production\codefiles\*" -Destination "C:\Code\SecureAI\chat-app" -Recurse -Force
+Copy-Item -Path "C:\Code\SecureAI\hack-in-a-day-challenges-deploy-your-ai-application\deploy-your-ai-application-in-production\codefiles\*" -Destination "C:\Code\SecureAI\chat-app" -Recurse -Force
 
 # Navigate to the app directory
 Set-Location "C:\Code\SecureAI\chat-app"
