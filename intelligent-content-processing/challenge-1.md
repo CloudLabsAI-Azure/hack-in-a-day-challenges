@@ -43,7 +43,7 @@ Please download and extract the datasets required for this challenge here - [Dat
    * **Subscription:** Use the available subscription
    * **Resource Group:** Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
    * **Storage account name:** **docstore<inject key="DeploymentID" enableCopy="false"/>**
-   * **Region:** Choose the same region for all resources
+   * **Region**: **<inject key="Region"></inject>**
    * **Performance:** Standard
    * **Redundancy:** Locally-redundant storage (LRS)
 
