@@ -35,74 +35,25 @@ Let's build a secure ChatGPT-like experience!
 
 ### Part 1: Download and Extract Application Code
 
-The application code is provided in a pre-built package. You'll download it directly to your VM.
-
-1. **Connect to Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion if not already connected.
-
-1. **Open VS Code** on the VM and open a PowerShell terminal (Ctrl + `).
+The application code is provided in a pre-built package.
 
 1. **Download the code package**:
-
-```powershell
-# Create working directory
-New-Item -Path "C:\Code\SecureAI" -ItemType Directory -Force
-
-# Download the application code
-Invoke-WebRequest -Uri "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/deploy-your-ai-application.zip" -OutFile "C:\Code\SecureAI\app-code.zip"
-
-Write-Host "Download complete!"
-```
-
-4. **Extract the ZIP file**:
-
-```powershell
-# Extract the archive
-Expand-Archive -Path "C:\Code\SecureAI\app-code.zip" -DestinationPath "C:\Code\SecureAI\" -Force
-
-# Copy codefiles to a clean working directory
-New-Item -Path "C:\Code\SecureAI\chat-app" -ItemType Directory -Force
-Copy-Item -Path "C:\Code\SecureAI\hack-in-a-day-challenges-deploy-your-ai-application\codefiles\*" -Destination "C:\Code\SecureAI\chat-app\" -Recurse -Force
-
-# Clean up the extracted folder and zip
-Remove-Item -Path "C:\Code\SecureAI\hack-in-a-day-challenges-deploy-your-ai-application" -Recurse -Force
-Remove-Item -Path "C:\Code\SecureAI\app-code.zip" -Force
-
-# Navigate to the app directory
-Set-Location "C:\Code\SecureAI\chat-app"
-
-Write-Host "Extraction complete!"
-```
-
-5. **Verify the project structure**:
-
-```powershell
-Get-ChildItem -Path "C:\Code\SecureAI\chat-app" -Recurse -Name
-```
-
-   You should see:
+   
+   Visit this link in your browser:
    ```
-   .env.example
-   .gitignore
-   app.py
-   README.md
-   requirements.txt
-   secure-chatbot.py
-   config\
-   config\__init__.py
-   config\settings.py
-   services\
-   services\__init__.py
-   services\azure_auth.py
-   services\keyvault_service.py
-   services\openai_service.py
-   services\storage_service.py
-   utils\
-   utils\__init__.py
-   utils\logger.py
-   utils\validators.py
+   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/deploy-your-ai-application.zip
    ```
 
-   > **Note**: This is a fully built, production-grade Streamlit application with modular services for authentication, Key Vault, OpenAI, and storage. You don't need to modify any code files — just configure the `.env` file!
+2. **Extract the ZIP file**:
+   
+   - Right-click the downloaded `hack-in-a-day-challenges-deploy-your-ai-application.zip` file
+   - Select **Extract All...**
+   - Choose a location like `C:\Code\`
+   - Click **Extract**
+
+3. **Navigate to the codefiles folder**:
+   
+   Open VSCode and click on open folder and select the folder `C:\Code\hack-in-a-day-challenges-deploy-your-ai-application\codefiles`
 
 ### Part 2: Configure the Application
 
@@ -252,7 +203,7 @@ Moment of truth!
 1. **Make sure you're in the app directory with the virtual environment activated**:
 
 ```powershell
-Set-Location "C:\Code\SecureAI\chat-app"
+Set-Location "C:\Code\hack-in-a-day-challenges-deploy-your-ai-application\codefiles"
 .\venv\Scripts\Activate.ps1
 ```
 
@@ -306,7 +257,7 @@ How does that apply to Azure managed identities?
    Open a **new** PowerShell terminal (keep the app running) and run:
 
 ```powershell
-Select-String -Path "C:\Code\SecureAI\chat-app\app.py" -Pattern "api[_-]?key" -CaseSensitive:$false
+Select-String -Path "C:\Code\hack-in-a-day-challenges-deploy-your-ai-application\codefiles\app.py" -Pattern "api[_-]?key" -CaseSensitive:$false
 # Should return NO MATCHES - all auth goes through Managed Identity!
 ```
 
@@ -314,7 +265,7 @@ Select-String -Path "C:\Code\SecureAI\chat-app\app.py" -Pattern "api[_-]?key" -C
 
 Validate your app deployment:
 
-- [ ] Application code downloaded and extracted to `C:\Code\SecureAI\chat-app`
+- [ ] Application code downloaded and extracted to `C:\Code\hack-in-a-day-challenges-deploy-your-ai-application\codefiles`
 - [ ] `.env` file configured with your Key Vault name (no secrets in the file!)
 - [ ] Virtual environment created and dependencies installed
 - [ ] App starts without errors (`streamlit run app.py`)

@@ -15,7 +15,7 @@ By the end, your secure chat application will be running on a production URL —
 ## Prerequisites
 
 - Completed Challenge 6 (Application tested locally, connectivity validated)
-- Chat application code at `C:\Code\SecureAI\chat-app` on the VM
+- Chat application code at `C:\Code\hack-in-a-day-challenges-deploy-your-ai-application\codefiles` on the VM
 - All private endpoints configured and DNS zones linked to VNet
 - Connected to **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion
 - Azure CLI logged in (`az login` completed)
@@ -154,15 +154,19 @@ Write-Host "VNet integration configured"
 
 ```powershell
 # Route all outbound traffic through VNet
-az webapp config set `
- --name "app-secureai-<inject key="DeploymentID" enableCopy="false"/>" `
+az resource update `
  --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --vnet-route-all-enabled true
+ --name "app-secureai-<inject key="DeploymentID" enableCopy="false"/>" `
+ --resource-type "Microsoft.Web/sites" `
+ --api-version "2023-12-01" `
+ --set properties.vnetRouteAllEnabled=true
 
 Write-Host "Route All enabled - all traffic goes through VNet"
 ```
 
    > **Why Route All?** Without this, the App Service would resolve DNS using public DNS servers and try to connect to the public endpoints (which are disabled). With Route All enabled, DNS queries go through Azure DNS in the VNet, which resolves private DNS zones to private IPs.
+   >
+   > **Note**: We use `az resource update` with API version `2023-12-01` because the `--vnet-route-all-enabled` flag on `az webapp config set` is deprecated in newer Azure CLI versions and may silently fail.
 
 ### Part 5: Configure App Settings and Startup Command
 
@@ -183,6 +187,11 @@ az webapp config appsettings set `
 
 Write-Host "App Settings configured"
 ```
+
+   > **Note**: The Azure CLI output may show all setting values as `null` — this is expected behavior in newer CLI versions that mask values for security. The settings are applied correctly. You can verify with:
+   > ```powershell
+   > az webapp config appsettings list --name "app-secureai-<inject key="DeploymentID" enableCopy="false"/>" --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[].{Name:name, Value:value}" -o table
+   > ```
 
    > **Key Settings Explained**:
    > - `KEY_VAULT_NAME`: The only config needed — all secrets come from Key Vault at runtime
@@ -207,7 +216,11 @@ Write-Host "Startup command configured for Streamlit"
 1. **Prepare the deployment package** (clean up local-only files):
 
 ```powershell
-Set-Location "C:\Code\SecureAI\chat-app"
+# Ensure you are in the chat application directory
+Set-Location "C:\Code\hack-in-a-day-challenges-deploy-your-ai-application\codefiles"
+
+# Verify you are in the correct directory (should contain app.py, requirements.txt, etc.)
+Get-ChildItem -Name
 
 # Remove local-only files that shouldn't be deployed
 Remove-Item -Path ".\venv" -Recurse -Force -ErrorAction SilentlyContinue
@@ -219,24 +232,22 @@ Write-Host "Cleaned up local files"
 ```
 
    > **Note**: We remove `.env` because App Settings replace it on App Service. We remove `venv/` because Oryx creates its own virtual environment during deployment. We remove `__pycache__/` for a clean deployment.
+   >
+   > **Important**: You must be in the `C:\Code\hack-in-a-day-challenges-deploy-your-ai-application\codefiles` directory (set up in Challenge 5). If this path does not exist, go back to Challenge 5 and complete the code download steps first.
 
-2. **Create deployment ZIP and deploy**:
+2. **Deploy to App Service**:
 
 ```powershell
-# Create the deployment package
-Compress-Archive -Path "C:\Code\SecureAI\chat-app\*" -DestinationPath "C:\Code\SecureAI\app-deploy.zip" -Force
-
-Write-Host "Deployment package created: app-deploy.zip"
-
-# Deploy to App Service
-az webapp deploy `
+# Deploy directly from the current directory (builds and deploys in one step)
+az webapp up `
  --name "app-secureai-<inject key="DeploymentID" enableCopy="false"/>" `
  --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --src-path "C:\Code\SecureAI\app-deploy.zip" `
- --type zip
+ --runtime "PYTHON:3.11"
 
-Write-Host "Deployment initiated!"
+Write-Host "Deployment complete!"
 ```
+
+   > **Why `az webapp up`?** This command bundles build and deployment into a single step. It uploads your code, triggers the **Oryx build pipeline** (which detects `requirements.txt` and runs `pip install`), and deploys the result. The deployment takes **5-10 minutes** on B1 tier.
 
 3. **Wait for deployment to complete** (Oryx will install Python dependencies — this takes **3-5 minutes**):
 
@@ -301,11 +312,11 @@ $vnetInt = az webapp vnet-integration list `
 if ($vnetInt) { Write-Host "[PASS] VNet Integration: $vnetInt" -ForegroundColor Green } else { Write-Host "[FAIL] VNet Integration" -ForegroundColor Red }
 
 # 3. Route All
-$routeAll = az webapp config show `
+$routeAll = az webapp show `
  --name "app-secureai-<inject key="DeploymentID" enableCopy="false"/>" `
  --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --query "vnetRouteAllEnabled" -o tsv
-if ($routeAll -eq "True") { Write-Host "[PASS] Route All enabled" -ForegroundColor Green } else { Write-Host "[WARN] Route All: $routeAll" -ForegroundColor Yellow }
+ --query "outboundVnetRouting.allTraffic" -o tsv
+if ($routeAll -eq "true") { Write-Host "[PASS] Route All enabled" -ForegroundColor Green } else { Write-Host "[WARN] Route All: $routeAll (try: az resource update --resource-group challenge-rg-<inject key='DeploymentID' enableCopy='false'/> --name app-secureai-<inject key='DeploymentID' enableCopy='false'/> --resource-type Microsoft.Web/sites --api-version 2023-12-01 --set properties.vnetRouteAllEnabled=true)" -ForegroundColor Yellow }
 
 # 4. Private Endpoints
 $peCount = (az network private-endpoint list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "length(@)")

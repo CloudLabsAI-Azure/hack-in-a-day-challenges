@@ -261,7 +261,7 @@ The VM is a fresh Windows Server 2022 instance. You'll install Chocolatey (packa
 
 1. **Create working directory**:
    ```powershell
-   New-Item -Path "C:\Code\SecureAI" -ItemType Directory -Force
+   New-Item -Path "C:\Code" -ItemType Directory -Force
    ```
 
 > **Note**: Keep this Bastion session open - you'll use it throughout the hackathon. Username: **azureuser**, Password: **SecureAI@2026**
