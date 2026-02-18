@@ -27,7 +27,6 @@ Using **Microsoft Foundry (gpt-4o-mini)**, participants will convert unstructure
    * **Resource Group:** Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
    * **Region**: **<inject key="Region"></inject>**
    * **Name:** **openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>**
-   * **Pricing Tier:** Standard
 
 1. Click **Review + Create** → **Create**.
 
@@ -35,26 +34,29 @@ Using **Microsoft Foundry (gpt-4o-mini)**, participants will convert unstructure
 
 ### Deploy the GPT Model
 
-1. In the Microsoft Foundry resource, click **Go to Microsoft Foundry Studio**.
+1. In the Microsoft Foundry resource, click **Go to Foundry portal** in the **Overview** section.
 
-1. Navigate to **Deployments** → **Create deployment**.
+1. Navigate to **Model + endpoints** under the **My assets** section in the left pane.
+
+1. Select **+Deploy model** → **Deploy base model**.
+
+1. Search **gpt-4o-mini** and click **Confirm**.
 
 1. Provide:
 
-   * **Model:** `gpt-4o-mini`
    * **Deployment name:** `gpt-4o-mini`
    * **Deployment type:** `Standard`
-   * **Version:** Default / Latest
+   * Click on **Cusotmize** to expand Deployment details.
+   * **Tokens per Minute Rate Limit:** `50K`
 
 1. Click **Deploy** and wait for deployment to complete.
 
 ### Extract Structured Data from OCR Text (PDF Flow)
 
-1. In **Microsoft Foundry Studio**, go to **Chat playground**.
+1. In **Microsoft Foundry Studio**, go to **Open in playground**.
 
 1. Select the deployment:
 
-    * **Model:** `gpt-4o-mini`
     * **Give the model instructions and context:** 
     
       ```

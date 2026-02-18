@@ -111,13 +111,18 @@ Please download and extract the datasets required for this challenge here - [Dat
 
    1. Perform analysis on the sample documents provided by default by selecting a sample file and clicking **Run Analyze**.
 
+1. After the analysis completes, select the **invoice.pdf** document, click on the **Result** tab to view the extracted JSON output.
+
+1. After the analysis completes, select the **invoice.pdf** document, click on the **Result** tab to view the extracted JSON output.
+
+1. Do not close this tab as it will be used in the next challenge.
+
 ### Validate OCR Output
 
    1. Confirm that:
 
    * Text is extracted from both documents
    * Tables are detected in the invoice
-   * Handwritten text is partially recognized
 
 <validation step="67fcae6d-e490-4215-8b86-e1cdc1722cc2" />
  
