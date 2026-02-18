@@ -40,6 +40,13 @@ In this challenge, you will create your first AI agent directly in the Microsoft
 
 1. The system will auto-generate an **Agent ID** (e.g., asst_xxxxx). Keep this for reference.
 
+<validation step="9a022344-6b1a-48a9-9788-7b5183d1593e" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ### Part 3: Write Agent Instructions
 
 1. In the **Instructions** text box, copy and paste the following complete instructions:

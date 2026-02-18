@@ -25,6 +25,13 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
    - **Agent name**: `SQL-Optimization-Agent`
    - **Deployment**: **sql-translator**
 
+<validation step="25b2524e-83cc-4534-8788-922fd59843c9" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ### Part 2: Write Optimization Instructions
 
 1. In the **Instructions** box, paste:
