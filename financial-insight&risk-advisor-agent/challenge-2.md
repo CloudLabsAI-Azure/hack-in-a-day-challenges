@@ -12,7 +12,7 @@ In this challenge, you will upload **quarterly finance PDFs, cash flow reports, 
 
 ## Steps to Complete
 
-1. From the Copilot Studio home screen, open the **HR Interview Copilot** created previously.
+1. From the Copilot Studio home screen, open the **agent** created previously.
 
 1. In top navigation bar, select **Knowledge**.
 
@@ -35,3 +35,4 @@ In this challenge, you will upload **quarterly finance PDFs, cash flow reports, 
 - [Supported Document Formats](https://learn.microsoft.com/microsoft-copilot-studio/knowledge#supported-file-formats)
 
 Click **Next** to continue to **Challenge 03: Build Financial Analysis Topics**.
+
