@@ -75,8 +75,6 @@ Using **Microsoft Foundry (gpt-4o-mini)**, participants will convert unstructure
 
 1. Select **Apply changes** → **Continue**
 
-2. Paste the **OCR text** extracted in Challenge 01 from `invoice.pdf`.
-
 1. Use the following prompt:
 
     ```
@@ -96,74 +94,74 @@ Using **Microsoft Foundry (gpt-4o-mini)**, participants will convert unstructure
     <Paste OCR text here>
     ```
 
-1. Click **Submit**.
+  1. Replace **OCR TEXT: <Paste OCR text here>** in the prompt by pasting the JSON output copied earlier from the **Result** tab of `invoice.pdf` in Challenge 01, and then click **Submit**.
 
 ### Extract Structured Data from Image (Handwritten Note Flow)
 
-1. In the **Chat playground**, click **Add image**.
+  1. In the **Chat playground**, click **Add image**.
 
-1. Update the **Give the model instructions and context:** 
+  1. Update the **Give the model instructions and context:** 
 
-    ```
-    You are an AI assistant specialized in enterprise document processing.
+      ```
+      You are an AI assistant specialized in enterprise document processing.
 
-    You can understand scanned and handwritten documents from images.
-    Your role is to extract structured, machine-readable data from unstructured content.
+      You can understand scanned and handwritten documents from images.
+      Your role is to extract structured, machine-readable data from unstructured content.
 
-    Always follow these rules:
-    - Identify the document type correctly
-    - Interpret handwritten text and fix recognition errors
-    - Extract only information present in the document
-    - Normalize values where possible
-    - Return valid JSON only
-    - Do not include explanations, markdown, or extra text
-    ```
+      Always follow these rules:
+      - Identify the document type correctly
+      - Interpret handwritten text and fix recognition errors
+      - Extract only information present in the document
+      - Normalize values where possible
+      - Return valid JSON only
+      - Do not include explanations, markdown, or extra text
+      ```
 
-1. Select **Apply changes** → **Continue**
+  1. Select **Apply changes** → **Continue**
 
-1. Upload `handwritten_note.jpg`.
+  1. Upload `handwritten_note.jpg`.
 
-1. Use the following prompt:
+  1. Use the following prompt:
 
-    ```
-    You are an AI assistant that understands handwritten documents.
+      ```
+      You are an AI assistant that understands handwritten documents.
 
-    Identify:
-    - Document type
-    - Person name
-    - Summary
-    - Action required
+      Identify:
+      - Document type
+      - Person name
+      - Summary
+      - Action required
 
-    Return VALID JSON only.
-    ```
+      Return VALID JSON only.
+      ```
 
-1. Click **Submit**.
+  1. Click **Submit**.
 
 ## Expected Outputs
 
 ### Invoice Output
 
-```json
-{
-  "documentType": "Invoice",
-  "invoiceNumber": "INV-1001",
-  "vendor": "ABC Corporation",
-  "date": "2026-01-21",
-  "totalAmount": 1250,
-  "currency": "USD"
-}
-```
+  ```json
+  {
+    "documentType": "Invoice",
+    "invoiceNumber": "INV-1001",
+    "vendor": "ABC Corporation",
+    "date": "2026-01-21",
+    "totalAmount": 1250,
+    "currency": "USD"
+  }
+  ```
 
 ### Handwritten Note Output
 
-```json
-{
-  "documentType": "Patient Note",
-  "personName": "John Doe",
-  "summary": "Patient prescribed medication for 5 days",
-  "actionRequired": "Follow-up required"
-}
-```
+  ```json
+  {
+    "documentType": "Patient Note",
+    "personName": "John Doe",
+    "summary": "Patient prescribed medication for 5 days",
+    "actionRequired": "Follow-up required"
+  }
+  ```
 
 <validation step="d8239636-15d6-4f78-b064-786b79917066" />
  
