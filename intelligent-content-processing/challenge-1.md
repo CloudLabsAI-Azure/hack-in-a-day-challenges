@@ -99,14 +99,17 @@ Please download and extract the datasets required for this challenge here - [Dat
 
    1. Then Select the following:
 
+      * **Access By:** Use the available subscription
       * **Subscription:** Use the available subscription
       * **Resource Group:** Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
       * **Document Intelligence:** **doc-intel-<inject key="DeploymentID" enableCopy="false"/>**
-      * Select **Create** → **Finish**
+      * Select **Continue** → **Finish**
 
-   1. Click **Upload file**, select `invoice.pdf`, and click **Analyze**.
+   1. Upload files by clicking on **Browse for files** and upload `invoice.pdf`, and click **Run Analyze**.
 
    1. Repeat the same steps for `handwritten_note.jpg`.
+
+   1. Perform analysis on the sample documents provided by default by selecting a sample file and clicking **Run Analyze**.
 
 ### Validate OCR Output
 
