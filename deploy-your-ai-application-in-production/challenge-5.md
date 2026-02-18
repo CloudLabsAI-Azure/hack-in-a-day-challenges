@@ -42,8 +42,8 @@ Let's build a secure ChatGPT-like experience!
 1. **Create the app directory**:
 
 ```powershell
-New-Item -Path "C:\LabFiles\SecureAI\chat-app" -ItemType Directory -Force
-Set-Location "C:\LabFiles\SecureAI\chat-app"
+New-Item -Path "C:\Code\SecureAI\chat-app" -ItemType Directory -Force
+Set-Location "C:\Code\SecureAI\chat-app"
 
 # Create subdirectories
 New-Item -Path ".\pages" -ItemType Directory -Force
@@ -53,7 +53,7 @@ New-Item -Path ".\utils" -ItemType Directory -Force
 2. **Verify directory structure**:
 
 ```powershell
-Get-ChildItem -Path "C:\LabFiles\SecureAI\chat-app" -Recurse
+Get-ChildItem -Path "C:\Code\SecureAI\chat-app" -Recurse
 ```
 
 Should show:
@@ -80,6 +80,7 @@ Secure Azure OpenAI Chat Application
 """
 import streamlit as st
 import os
+from dotenv import load_dotenv
 from openai import AzureOpenAI
 from azure.identity import DefaultAzureCredential
 from azure.keyvault.secrets import SecretClient
@@ -87,6 +88,9 @@ from azure.storage.blob import BlobServiceClient
 import json
 from datetime import datetime
 import uuid
+
+# Load .env file
+load_dotenv()
 
 # Page config
 st.set_page_config(
@@ -266,18 +270,18 @@ Write-Host "Created app.py"
 
 ```powershell
 @'
-streamlit==1.31.0
-openai==2.15.0
-azure-identity==1.15.0
-azure-keyvault-secrets==4.7.0
-azure-storage-blob==12.19.0
-python-dotenv==1.0.0
+streamlit>=1.31.0
+openai>=1.12.0
+azure-identity>=1.15.0
+azure-keyvault-secrets>=4.7.0
+azure-storage-blob>=12.19.0
+python-dotenv>=1.0.0
 '@ | Out-File -FilePath "requirements.txt" -Encoding UTF8
 
 Write-Host "Created requirements.txt"
 ```
 
-> **Critical**: We're using `openai==2.15.0` (or later). Versions earlier than 2.x will fail with errors like "Client.__init__() got an unexpected keyword argument 'proxies'". This is due to breaking changes in the OpenAI Python SDK and its compatibility with Azure SDK components.
+> **Critical**: We need `openai>=1.12.0` (v2 recommended). Versions earlier than 1.x will fail with errors like "Client.__init__() got an unexpected keyword argument 'proxies'". This is due to breaking changes in the OpenAI Python SDK and its compatibility with Azure SDK components.
 
 3. **Create README**:
 
@@ -323,7 +327,7 @@ Write-Host "Created README.md"
 
 ### Part 3: Create Environment Configuration
 
-1. **Get your Key Vault name**:
+1. **Get your Key Vault name and create `.env` file**:
 
 ```powershell
 $kvName = az keyvault list `
@@ -331,82 +335,44 @@ $kvName = az keyvault list `
  --query "[0].name" -o tsv
 
 Write-Host "Key Vault Name: $kvName"
+
+# Create .env file (ONLY Key Vault name - all other config from KV!)
+@"
+# Secure Chat Application Configuration
+# Only the Key Vault name is needed - everything else retrieved from Key Vault!
+KEY_VAULT_NAME=$kvName
+"@ | Out-File -FilePath ".env" -Encoding UTF8
+
+Write-Host "Created .env file"
 ```
 
-2. **Get Storage Account name** (for session history):
+2. **Store Storage Account name in Key Vault** (if not already done in Challenge 3):
 
 ```powershell
 $storageName = az storage account list `
  --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[0].name" -o tsv
 
-Write-Host "Storage Account Name: $storageName"
-```
+# Temporarily enable Key Vault public access
+az keyvault update `
+ --name $kvName `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+ --public-network-access Enabled
 
-3. **Create `.env` file** (ONLY Key Vault name - all other config from KV!):
-
-```powershell
-@"
-# Secure Chat Application Configuration
-# Only the Key Vault name is needed - everything else retrieved from Key Vault!
-
-# Key Vault Name (the ONLY thing you need to configure!)
-KEY_VAULT_NAME=$kvName
-
-# Optional: Enable debug mode
-# DEBUG=false
-
-# That's it! The app retrieves these from Key Vault:
-# - OpenAIEndpoint
-# - ChatModelDeployment 
-# - OpenAIApiVersion
-# - StorageAccountName (optional)
-
-# NO API KEYS! NO CREDENTIALS! Everything via Managed Identity
-"@ | Out-File -FilePath ".env" -Encoding UTF8
-
-Write-Host "Created .env file"
-```
-
-4. **Store Storage Account name in Key Vault** (so app can retrieve it):
-
-```powershell
 az keyvault secret set `
  --vault-name $kvName `
  --name "StorageAccountName" `
  --value $storageName
 
-Write-Host "Stored storage account name in Key Vault"
-```
+Write-Host "Stored StorageAccountName in Key Vault"
 
-5. **Create `.env.example`** (template for others):
+# Disable public access again
+az keyvault update `
+ --name $kvName `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+ --public-network-access Disabled
 
-```powershell
-@'
-# Secure Chat Application Configuration Template
-
-# Key Vault Name (replace with your actual Key Vault name)
-KEY_VAULT_NAME=your-keyvault-name
-
-# Optional: Enable debug logging
-# DEBUG=false
-
-# ============================================
-# SECURITY NOTE:
-# ============================================
-# This is the ONLY thing you configure!
-# The app retrieves all other settings from Key Vault:
-# - OpenAIEndpoint
-# - ChatModelDeployment
-# - OpenAIApiVersion
-# - StorageAccountName
-#
-# NO API KEYS OR CREDENTIALS SHOULD EVER BE IN THIS FILE!
-# Authentication uses Managed Identity only.
-# ============================================
-'@ | Out-File -FilePath ".env.example" -Encoding UTF8
-
-Write-Host "Created .env.example"
+Write-Host "Key Vault secured"
 ```
 
 ### Part 4: Install Dependencies
@@ -434,44 +400,43 @@ pip install -r requirements.txt
 
 This will take 2-3 minutes. You should see:
 ```
-Successfully installed streamlit-1.31.0 openai-1.12.0 azure-identity-1.15.0 ...
+Successfully installed streamlit-x.x.x openai-x.x.x azure-identity-x.x.x ...
 ```
 
-### Part 5: Configure Storage Account Access
+### Part 5: Verify Storage Account Access
 
-The app saves session history to Blob Storage. Let's ensure managed identity can access it.
-
-1. **Get VM's managed identity**:
+The app saves session history to Blob Storage. Verify managed identity has access (should be assigned from Challenge 3).
 
 ```powershell
 $identityId = az vm show `
  --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --name "vm-<inject key="DeploymentID" enableCopy="false"/>" `
  --query identity.principalId -o tsv
-```
 
-2. **Verify Storage Blob Data Contributor role** (should be assigned in Challenge 3):
+$storageName = az storage account list `
+ --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+ --query "[0].name" -o tsv
 
-```powershell
 $storageId = az storage account show `
  --name $storageName `
  --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query id -o tsv
 
-az role assignment list `
+# Check if role is already assigned
+$existing = az role assignment list `
  --assignee $identityId `
  --scope $storageId `
- --query "[?roleDefinitionName=='Storage Blob Data Contributor']" `
- --output table
-```
+ --query "[?roleDefinitionName=='Storage Blob Data Contributor']" -o tsv
 
-If not assigned, assign it:
-
-```powershell
-az role assignment create `
+if (-not $existing) {
+ az role assignment create `
  --assignee $identityId `
  --role "Storage Blob Data Contributor" `
  --scope $storageId
+ Write-Host "Assigned Storage Blob Data Contributor"
+} else {
+ Write-Host "Storage Blob Data Contributor already assigned"
+}
 ```
 
 ### Part 6: Run the Chat Application
@@ -507,314 +472,41 @@ streamlit run app.py
 
 ### Part 7: Test the Chat Application
 
-Let's validate everything works!
+1. **Send a test message** in the chat input:
 
-1. **Test 1: Simple question**
-
-In the chat input, type:
 ```
 What is the principle of least privilege?
 ```
 
-Expected:
-   - Response appears (streaming effect!)
-   - No errors
-   - Professional security advice
+   - You should receive an AI response with streaming effect
+   - Sidebar shows **Authenticated**, **Managed Identity**, and **Private Only**
 
-2. **Test 2: Multi-turn conversation**
+2. **Send a follow-up** to test multi-turn conversation:
 
-Continue the conversation:
 ```
 How does that apply to Azure managed identities?
 ```
 
-Expected:
-- Contextual response (remembers previous question)
-- Mentions managed identities specifically
-- Message count increments in sidebar
+   - Response should reference the previous question (context maintained)
 
-3. **Test 3: Technical question**
+3. **Verify no API keys in code** (quick security check):
 
-Ask:
-```
-Explain the difference between private endpoints and service endpoints.
-```
-
-Expected:
-- Detailed technical response
-- Mentions Azure networking concepts
-- Streaming works smoothly
-
-4. **Test 4: Session history**
-
-Check if session is saved to storage:
+   Open a **new** PowerShell terminal (keep app running) and run:
 
 ```powershell
-# In a NEW PowerShell window (keep app running!)
-az storage blob list `
- --account-name $storageName `
- --container-name "chat-sessions" `
- --auth-mode login `
- --query "[].name" `
- --output table
-```
-
-Expected:
-- See a `.json` file with your session ID
-- File name matches session ID from sidebar
-
-5. **Download and view session**:
-
-```powershell
-$sessionId = (az storage blob list --account-name $storageName --container-name "chat-sessions" --auth-mode login --query "[0].name" -o tsv)
-
-az storage blob download `
- --account-name $storageName `
- --container-name "chat-sessions" `
- --name $sessionId `
- --file "C:\LabFiles\session-backup.json" `
- --auth-mode login
-
-notepad C:\LabFiles\session-backup.json
-```
-
-Expected:
-- JSON file with all your messages
-- Timestamps
-- Full conversation history
-
-### Part 8: Test External Access (Security Validation)
-
-Let's prove that your security architecture actually works by testing from outside Azure!
-
-**This test should FAIL - and that's a good thing!** If it fails, it proves your application is properly secured and can only be accessed from within your Azure VNET.
-
-1. **On your local machine** (not the VM), open PowerShell or a terminal.
-
-2. **Clone or create the simple test script**:
-
-Create a file called `test-security.py` on your local machine:
-
-```python
-import os
-from openai import AzureOpenAI
-from azure.identity import DefaultAzureCredential
-from azure.keyvault.secrets import SecretClient
-
-# This will attempt to connect using your local credentials
-credential = DefaultAzureCredential()
-
-kv_url = "https://kv-secureai-<DID>.vault.azure.net"
-secret_client = SecretClient(vault_url=kv_url, credential=credential)
-
-try:
-    openai_endpoint = secret_client.get_secret("OpenAIEndpoint").value
-    print(f"? Key Vault accessible: {openai_endpoint}")
-except Exception as e:
-    print(f"? Key Vault access denied (GOOD!): {e}")
-
-# Try to connect to OpenAI
-try:
-    openai_client = AzureOpenAI(
-        azure_endpoint="https://openai-secureai-<DID>.openai.azure.com/",
-        api_version="2024-08-01-preview",
-        azure_ad_token_provider=lambda: credential.get_token(
-            "https://cognitiveservices.azure.com/.default"
-        ).token
-    )
-    response = openai_client.chat.completions.create(
-        model="secure-chat",
-        messages=[{"role": "user", "content": "test"}]
-    )
-    print("? OpenAI accessible (BAD! Security issue!)")
-except Exception as e:
-    print(f"? OpenAI access denied (GOOD!): {e}")
-```
-
-3. **Run the test**:
-
-```powershell
-python test-security.py
-```
-
-**Expected output (all should FAIL):**
-```
-? Key Vault access denied (GOOD!): (Forbidden) Public network access is disabled...
-? OpenAI access denied (GOOD!): ManagedIdentityCredential authentication unavailable, no response from the IMDS endpoint
-```
-
-**What this proves:**
-- ? Key Vault blocks all external access (public network disabled)
-- ? OpenAI blocks all external access (private endpoint only)
-- ? Managed Identity only works on Azure VMs (not your local machine)
-- ? Your application is truly secure!
-
-> **Important**: If you CAN access these services from your local machine, that means your security configuration has issues. Go back and verify:
-> - Public network access is disabled on Key Vault and OpenAI
-> - Private endpoints are configured correctly
-> - NSG rules are restrictive
-
-4. **Now run the same code on the VM** (via Bastion):
-
-Connect to your VM, create the same test script, and run it. This time it should succeed because:
-- The VM has managed identity
-- The VM can access private endpoints through the VNET
-- All security checks pass
-
-This validates your zero-trust architecture is working correctly!
-
-### Part 9: Security Validation Checklist
-
-Let's verify the security configuration on the VM!
-
-1. **Check for API keys in code** (should be NONE!):
-
-```powershell
-Select-String -Path "app.py" -Pattern "api[_-]?key" -CaseSensitive
-
-# Should return: NO MATCHES FOUND
-```
-
-2. **Check .env file** (should have ONLY Key Vault name):
-
-```powershell
-Get-Content ".env"
-```
-
-Expected:
-- Only `KEY_VAULT_NAME=...`
-- NO API keys
-- NO passwords
-- NO connection strings
-
-3. **Verify all authentication is managed identity**:
-
-```powershell
-Select-String -Path "app.py" -Pattern "DefaultAzureCredential"
-```
-
-Expected:
-- Found! (This proves managed identity is used)
-
-4. **Check that all secrets come from Key Vault**:
-
-```powershell
-Select-String -Path "app.py" -Pattern "secret_client.get_secret"
-```
-
-Expected:
-- Multiple matches (OpenAIEndpoint, ChatModelDeployment, etc.)
-
-### Part 9: Test Error Handling
-
-Let's verify the app handles errors gracefully.
-
-1. **Test invalid input**:
-
-In the chat, try an extremely long prompt (copy-paste lorem ipsum 5 times).
-
-Expected:
-- App should handle it
-- May truncate or return a sensible error
-- App doesn't crash
-
-2. **Test rapid requests**:
-
-Send 3-4 messages quickly in succession.
-
-Expected:
-- All process correctly
-- No rate limit errors (capacity set appropriately)
-- Responses in correct order
-
-### Part 10: Document Your Deployment
-
-```powershell
-@"
-=== Secure Chat Application Deployment ===
-Date: $(Get-Date)
-
-Application Details:
-- Name: Secure Azure OpenAI Chat
-- Framework: Streamlit
-- Location: C:\LabFiles\SecureAI\chat-app
-- URL: http://localhost:8501
-
-Security Configuration:
-- Authentication: Managed Identity (DefaultAzureCredential)
-- API Keys in Code: NONE
-- API Keys in .env: NONE
-- Secrets Storage: Azure Key Vault
-- Network Access: Private Endpoints Only
-- Public Internet: BLOCKED
-
-Key Vault Secrets Retrieved:
-- OpenAIEndpoint
-- ChatModelDeployment
-- OpenAIApiVersion
-- StorageAccountName
-
-Azure Services Used:
-1. Azure OpenAI (private endpoint)
-   - Chat completions via managed identity
- 
-2. Azure Key Vault (private endpoint)
-   - All configuration stored as secrets
- 
-3. Azure Storage (private endpoint)
-   - Session history in 'chat-sessions' container
- 
-Features Working:
-- Chat completions
-- Streaming responses
-- Multi-turn conversations
-- Session history
-- Managed identity auth
-- Private endpoint connectivity
-- Error handling
-
-Performance:
-- Latency: ~1-3 seconds per response
-- Streaming: Real-time token display
-- Session persistence: Automatic to blob storage
-
-Test Results:
-- Simple questions: PASSED
-- Multi-turn conversations: PASSED
-- Technical questions: PASSED
-- Session history: PASSED
-- Security validation: PASSED
-
-Ready for Testing via Bastion: YES
-
-Next Steps:
-- Test access via Azure Bastion (Challenge 6)
-- Validate WAF compliance (Challenge 7)
-- Consider adding authentication/authorization
-- Deploy to App Service with private endpoint
-"@ | Out-File -FilePath "C:\LabFiles\app-deployment.txt"
-
-notepad C:\LabFiles\app-deployment.txt
+Select-String -Path "C:\Code\SecureAI\chat-app\app.py" -Pattern "api[_-]?key"
+# Should return NO MATCHES
 ```
 
 ## Success Criteria
 
 Validate your app deployment:
 
-- [ ] Application directory created with proper structure
-- [ ] All Python files created (`app.py`, `requirements.txt`, `README.md`)
+- [ ] Application files created (`app.py`, `requirements.txt`)
 - [ ] `.env` file created with ONLY Key Vault name (no secrets!)
-- [ ] Virtual environment created and activated
-- [ ] All dependencies installed successfully
-- [ ] Storage Account name added to Key Vault
-- [ ] Managed identity has Storage Blob Data Contributor role
+- [ ] Virtual environment created and dependencies installed
 - [ ] App starts without errors (`streamlit run app.py`)
-- [ ] Browser opens to `http://localhost:8501`
-- [ ] Sidebar shows "Authenticated"
+- [ ] Sidebar shows "Authenticated" with Managed Identity
 - [ ] Chat completions work (receive AI responses)
-- [ ] Streaming responses work
 - [ ] Multi-turn conversations work (context maintained)
-- [ ] Session history saved to Blob Storage
-- [ ] Security validation passed (no API keys, all managed identity)
-- [ ] Error handling works (no crashes)
-- [ ] Deployment documented in `app-deployment.txt`
+- [ ] No API keys in code or config files

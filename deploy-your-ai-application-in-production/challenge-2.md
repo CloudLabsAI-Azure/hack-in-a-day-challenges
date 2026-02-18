@@ -9,7 +9,7 @@ This is where enterprises fail most often - deploying services with default sett
 ## Prerequisites
 
 - Completed Challenge 1 (Infrastructure deployed via Azure Portal)
-- Resource group `challenge-rg-<inject key="DeploymentID" enableCopy="false"/>` contains:
+- Resource group **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>** contains:
    - Virtual Network with subnets
    - Application VM (vm-<inject key="DeploymentID" enableCopy="false"/>)
    - Azure AI Foundry (includes OpenAI)
@@ -29,9 +29,9 @@ This is where enterprises fail most often - deploying services with default sett
 
 First, understand what was deployed.
 
-1. **In Azure Portal**, navigate to your resource group: `challenge-rg-<inject key="DeploymentID" enableCopy="false"/>`
+1. **In Azure Portal**, navigate to your resource group: **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
 
-2. **Find the Virtual Network** (name: `vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>`)
+2. **Find the Virtual Network** (name: **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**)
 
 3. Click on it, then click **Subnets** in the left menu
 
@@ -95,9 +95,9 @@ Let's create an NSG with restrictive rules using the Azure Portal.
 
    Click **+ Add** again to add the second rule:
    
-   **Allow Azure Services Rule**:
+   **Allow VNet Services Rule**:
    - **Source**: **Service Tag**
-   - **Source service tag**: **AzureCloud**
+   - **Source service tag**: **VirtualNetwork**
    - **Source port ranges**: *****
    - **Destination**: **Any**
    - **Service**: **HTTPS**
@@ -105,8 +105,8 @@ Let's create an NSG with restrictive rules using the Azure Portal.
    - **Protocol**: **TCP**
    - **Action**: **Allow**
    - **Priority**: **110**
-   - **Name**: **AllowAzureServices**
-   - **Description**: **Allow Azure backend services**
+   - **Name**: **AllowVNetServices**
+   - **Description**: **Allow HTTPS from virtual network**
    - Click **Add**
 
    Click **+ Add** again to add the deny rule:
@@ -185,7 +185,7 @@ Now that public access is disabled, create a private endpoint to enable secure c
 
 1. **In Azure Portal**, navigate to your **kv-secureai-<inject key="DeploymentID" enableCopy="false"/>** Key Vault.
 
-1. In the left navigation, click **Networking** ? **Private endpoint connections** tab.
+1. In the left navigation, click **Networking** → **Private endpoint connections** tab.
 
 1. Click **+ Create**.
 
@@ -239,7 +239,7 @@ Create a private endpoint for your OpenAI service to ensure all AI traffic stays
 
 1. **In Azure Portal**, navigate to your **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>** Azure AI Foundry resource.
 
-1. In the left navigation, click **Networking** ? **Private endpoint connections** tab.
+1. In the left navigation, click **Networking** → **Private endpoint connections** tab.
 
 1. Click **+ Private endpoint**.
 
@@ -287,7 +287,61 @@ Create a private endpoint for your OpenAI service to ensure all AI traffic stays
 
 1. **Note the private IP address** assigned (should be in 10.0.1.x range).
 
-### Part 6: Verify Private DNS Configuration
+### Part 6: Create Private Endpoint for Azure Storage Account
+
+Create a private endpoint for your Storage Account so that blob storage traffic stays within your VNET.
+
+1. **In Azure Portal**, navigate to your **stsecureai<inject key="DeploymentID" enableCopy="false"/>** Storage Account.
+
+1. In the left navigation, click **Networking** → **Private endpoint connections** tab.
+
+1. Click **+ Private endpoint**.
+
+1. Configure the private endpoint:
+
+   **Basics tab**:
+   - **Subscription**: Select your available Azure subscription
+   - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Name**: **pe-storage-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Network Interface Name**: **nic-pe-storage-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Region**: **<inject key="Region"></inject>**
+   - Click **Next: Resource**
+
+   **Resource tab**:
+   - **Connection method**: **Connect to an Azure resource in my directory**
+   - **Subscription**: Should be pre-selected
+   - **Resource type**: **Microsoft.Storage/storageAccounts**
+   - **Resource**: Select **stsecureai<inject key="DeploymentID" enableCopy="false"/>**
+   - **Target sub-resource**: **blob**
+   - Click **Next: Virtual Network**
+
+   **Virtual Network tab**:
+   - **Virtual network**: Select **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Subnet**: Select **snet-storage-services (10.0.2.0/24)**
+   - **Private IP configuration**: **Dynamically allocate IP address**
+   - **Application security group**: Leave blank
+   - Click **Next: DNS**
+
+   **DNS tab**:
+   - **Integrate with private DNS zone**: **Yes**
+   - **Subscription**: Should be pre-selected
+   - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Private DNS zones**: Should show **privatelink.blob.core.windows.net** (will be created if it doesn't exist)
+   - Click **Next: Tags**
+
+   **Tags tab**:
+   - Leave blank
+   - Click **Next: Review + create**
+
+1. Click **Create**.
+
+1. Wait for deployment (**1-2 minutes**).
+
+1. Once complete, click **Go to resource** to view the private endpoint details.
+
+1. **Note the private IP address** assigned (should be in 10.0.2.x range).
+
+### Part 7: Verify Private DNS Configuration
 
 After creating private endpoints, verify that the Private DNS zones were created and linked to your VNET.
 
@@ -296,6 +350,7 @@ After creating private endpoints, verify that the Private DNS zones were created
 1. Look for Private DNS zone resources (filter by type "Private DNS zone"):
    - **privatelink.vaultcore.azure.net**
    - **privatelink.openai.azure.com**
+   - **privatelink.blob.core.windows.net**
 
 1. Click on **privatelink.vaultcore.azure.net**.
 
@@ -309,9 +364,11 @@ After creating private endpoints, verify that the Private DNS zones were created
 
 1. **Repeat steps 3-7** for **privatelink.openai.azure.com** (should show A record to 10.0.1.x).
 
+1. **Repeat steps 3-7** for **privatelink.blob.core.windows.net** (should show A record to 10.0.2.x).
+
 > **Why this matters**: Private DNS zones ensure that when your VM resolves names like `kv-secureai-<DID>.vault.azure.net`, it resolves to the private IP address instead of the public endpoint. This keeps all traffic within your VNET.
 
-### Part 7: Validate Private Endpoint Connectivity (Using VS Code)
+### Part 8: Validate Private Endpoint Connectivity (Using VS Code)
 
 Ensure all services are reachable via private endpoints only. For this validation, we'll use VS Code on **vm-<inject key="DeploymentID" enableCopy="false"/>**.
 
@@ -342,6 +399,7 @@ az network private-dns zone list `
 You should see zones like:
 - `privatelink.openai.azure.com`
 - `privatelink.vaultcore.azure.net`
+- `privatelink.blob.core.windows.net`
 
 3. **Verify VNET link for DNS zones**:
 
@@ -357,7 +415,7 @@ az network private-dns link vnet list `
 
 The VNET should be linked to enable DNS resolution.
 
-### Part 8: Test DNS Resolution for Private Endpoints (Using VS Code)
+### Part 9: Test DNS Resolution for Private Endpoints (Using VS Code)
 
 Verify that service names resolve to private IP addresses (not public). Continue using VS Code PowerShell terminal.
 
@@ -387,7 +445,15 @@ nslookup kv-secureai-<inject key="DeploymentID" enableCopy="false"/>.vault.azure
 
 Expected private IP in `10.0.2.x` range.
 
-3. **Test connectivity to Key Vault**:
+3. **Test Storage Account endpoint**:
+
+```powershell
+nslookup stsecureai<inject key="DeploymentID" enableCopy="false"/>.blob.core.windows.net
+```
+
+Expected private IP in `10.0.2.x` range.
+
+4. **Test connectivity to Key Vault**:
 
 ```powershell
 # Try to list secrets (you should get an access denied, but connection should work)
@@ -396,84 +462,43 @@ az keyvault secret list --vault-name kv-secureai-<inject key="DeploymentID" enab
 
 If you see a permission error (not a network error), private endpoint is working!
 
-### Part 9: Test Public Access is Blocked
+### Part 10: Validate Public Access is Blocked
 
-Validate that trying to access services from the internet fails (security validation).
+Verify that your services are properly locked down by checking network settings in the Azure Portal.
 
-**From your local machine** (not the VM):
+1. **Verify Azure OpenAI network settings**:
 
-1. **Open PowerShell** on your local machine.
+   - In Azure Portal, navigate to **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>**
+   - Click **Networking** in the left menu
+   - Under **Firewalls and virtual networks**, confirm:
+     - **Public network access**: **Selected Networks and Private Endpoints** (only your VNET is listed)
+     - Under **Private endpoint connections** tab: private endpoint shows **Approved**
 
-1. **Try to access Key Vault** from your local machine:
+2. **Verify Storage Account network settings**:
 
-```powershell
-az keyvault secret list --vault-name kv-secureai-<inject key="DeploymentID" enableCopy="false"/>
-```
+   - Navigate to **stsecureai<inject key="DeploymentID" enableCopy="false"/>**
+   - Click **Networking** in the left menu
+   - Confirm **Public network access** is set to **Disabled**
+   - Under **Private endpoint connections** tab: private endpoint shows **Approved**
 
-**Expected result**: Should fail with error:
-```
-(Forbidden) Public network access is disabled and request is not from a trusted service nor via an approved private link.
-```
+3. **Verify Key Vault network settings**:
 
-? **This is the desired behavior!** It proves your Key Vault is completely isolated from the internet.
+   - Navigate to **kv-secureai-<inject key="DeploymentID" enableCopy="false"/>**
+   - Click **Networking** in the left menu
+   - Confirm **Public network access** is set to **Disabled**
+   - Under **Private endpoint connections** tab: private endpoint shows **Approved**
 
-3. **Test Storage Account**:
+4. **Test public access is blocked** (optional):
 
-```powershell
-nslookup "$storageName.blob.core.windows.net"
-```
+   Open a browser on your **local machine** (NOT the VM) and navigate to:
 
-Should also return a private IP (`10.0.x.x`).
+   ```
+   https://openai-secureai-<inject key="DeploymentID" enableCopy="false"/>.openai.azure.com
+   ```
 
-4. **Test Key Vault endpoint**:
+   You should get **Error 403: Forbidden** or **Connection timeout** — this confirms public access is blocked!
 
-```powershell
-nslookup "$kvName.vault.azure.net"
-```
-
-Should return a private IP.
-
-5. **If you get public IPs**, DNS is not properly configured. Check:
- - Private DNS zones are created
- - VNET is linked to the zones
- - Your VM's VNET DNS is using Azure-provided DNS (168.63.129.16)
-
-### Part 6: Validate Public Access is Blocked
-
-Let's prove that services are truly inaccessible from the internet.
-
-1. **Try to access OpenAI from the internet** (this should fail):
-
-Open your **local machine** browser (NOT the VM), and try to navigate to:
-
-```
-https://<your-openai-name>.openai.azure.com
-```
-
-You should get:
-- **Error 403: Forbidden** or
-- **Connection timeout** or 
-- **This service is not accessible from this network**
-
-This confirms public access is blocked!
-
-2. **Try accessing Key Vault publicly** (should also fail):
-
-```
-https://<your-kv-name>.vault.azure.net
-```
-
-Should return an error - public access denied.
-
-3. **Check Azure Portal indicators**:
-
-- Go to your OpenAI resource in the portal
-- Click **Networking** in left menu
-- Under "Firewalls and virtual networks", it should show:
-   - **Public network access**: Disabled (or Selected Networks)
-   - **Private endpoint connections**: Approved
-
-### Part 7: Create NSG for Storage Subnet (Using Portal)
+### Part 11: Create NSG for Storage Subnet (Using Portal)
 
 Repeat NSG creation for the storage subnet using Azure Portal.
 
@@ -521,17 +546,21 @@ Repeat NSG creation for the storage subnet using Azure Portal.
    - **Subnet**: Select **snet-storage-services**
    - Click **OK**
 
-### Part 8: Document Your Network Configuration (Using VS Code)
+### Part 12: Document Your Network Configuration (Using VS Code)
 
 Save your network topology for reference using VS Code PowerShell terminal.
 
 1. **Create a network diagram document**:
 
 ```powershell
-# Get VNET name
+# Get resource names
 $vnetName = az network vnet list `
  --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[?contains(name, 'vnet')].name" -o tsv
+
+$openaiName = "openai-secureai-<inject key="DeploymentID" enableCopy="false"/>"
+$storageName = "stsecureai<inject key="DeploymentID" enableCopy="false"/>"
+$kvName = "kv-secureai-<inject key="DeploymentID" enableCopy="false"/>"
 
 # Create documentation
 @"
@@ -552,7 +581,7 @@ Private Endpoints:
 - Key Vault: $kvName (Private IP in storage-services subnet)
 
 Public Access Status:
-- OpenAI: DISABLED
+- OpenAI: Selected Networks (VNET only)
 - Storage: DISABLED
 - Key Vault: DISABLED
 
@@ -562,10 +591,10 @@ DNS Configuration:
 - Services resolve to private IPs only
 
 Security Posture: LOCKED DOWN
-"@ | Out-File -FilePath "C:\LabFiles\network-config.txt"
+"@ | Out-File -FilePath "C:\Code\network-config.txt"
 
-Write-Host "Network configuration documented at C:\LabFiles\network-config.txt"
-notepad C:\LabFiles\network-config.txt
+Write-Host "Network configuration documented at C:\Code\network-config.txt"
+notepad C:\Code\network-config.txt
 ```
 
 ## Success Criteria
@@ -584,20 +613,14 @@ Verify your network is fully secured:
 - [ ] VNET is linked to all private DNS zones
 - [ ] DNS resolution returns private IPs (10.0.x.x) not public IPs
 - [ ] Accessing services from public internet is BLOCKED (403/timeout errors)
+- [ ] Private endpoint for Storage Account created and approved
 - [ ] Network configuration documented in `network-config.txt`
-
-## Success Criteria
-
-- Microsoft Foundry project created with GPT-4.1 model deployed successfully
-- Model tested in Chat Playground and working correctly
-- Cosmos DB account created with database and three containers (TranslationResults, ValidationLogs, OptimizationResults)
-- All connection strings, keys, and endpoints documented for future use
-- All resources deployed in the same resource group and region
 
 ## Additional Resources
 
-- [Azure OpenAI in AI Foundry](https://learn.microsoft.com/azure/ai-services/openai/)
-- [Microsoft Foundry Overview](https://learn.microsoft.com/azure/ai-studio/)
-- [Azure Cosmos DB for NoSQL](https://learn.microsoft.com/azure/cosmos-db/nosql/)
+- [Azure Network Security Groups](https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview)
+- [Azure Private Endpoints](https://learn.microsoft.com/azure/private-link/private-endpoint-overview)
+- [Azure Private DNS Zones](https://learn.microsoft.com/azure/dns/private-dns-overview)
+- [Azure OpenAI Network Security](https://learn.microsoft.com/azure/ai-services/openai/how-to/managed-identity)
 
-Now, click **Next** to continue to **Challenge 02**.
+Now, click **Next** to continue to **Challenge 03**.

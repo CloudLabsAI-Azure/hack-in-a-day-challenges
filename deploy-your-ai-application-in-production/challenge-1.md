@@ -227,53 +227,41 @@ Now let's install Azure Bastion and connect to the VM.
 
 1. Wait for Windows to finish setup (may take 1-2 minutes on first connection).
 
-### Part 6: Install Required Software on VM
+### Part 6: Install Required Software and Set Up VM
 
-Now that you're connected to the VM, let's install the required software manually.
+The VM is a fresh Windows Server 2022 instance. You'll install Chocolatey (package manager), then use it to install Python 3.11, VS Code, Azure CLI, and Git.
 
-1. Once connected to **vm-<inject key="DeploymentID" enableCopy="false"/>**, open **PowerShell as Administrator** (search in Start menu, right-click, "Run as administrator").
+1. Once connected to **vm-<inject key="DeploymentID" enableCopy="false"/>**, open **PowerShell as Administrator** (right-click Start → Windows PowerShell (Admin)).
 
-1. **Install Chocolatey** (package manager for Windows):
+1. **Install Chocolatey** (Windows package manager):
    ```powershell
    Set-ExecutionPolicy Bypass -Scope Process -Force
    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-   iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+   Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
    ```
 
-1. **Close and reopen PowerShell as Administrator** to refresh environment variables.
+1. **Close and reopen PowerShell as Administrator** to refresh the PATH.
 
-1. **Install Python 3.11**:
+1. **Install Python 3.11, VS Code, Azure CLI, and Git**:
    ```powershell
-   choco install python311 -y
+   choco install python311 vscode azure-cli git -y
    ```
 
-1. **Install VS Code**:
-   ```powershell
-   choco install vscode -y
-   ```
+1. **Close and reopen PowerShell as Administrator** again to refresh the PATH after installation.
 
-1. **Install Azure CLI**:
-   ```powershell
-   choco install azure-cli -y
-   ```
-
-1. **Install Git** (optional but useful):
-   ```powershell
-   choco install git -y
-   ```
-
-1. **Close and reopen PowerShell** to refresh environment variables.
-
-1. **Verify installations**:
+1. **Verify all tools are installed**:
    ```powershell
    python --version    # Should show: Python 3.11.x
    code --version      # Should show VS Code version
    az --version        # Should show Azure CLI version
+   git --version       # Should show Git version
    ```
+
+   > **Note**: If `python` is not recognized, try `python3 --version` or run `refreshenv` to reload environment variables.
 
 1. **Create working directory**:
    ```powershell
-   New-Item -Path "C:\LabFiles\SecureAI" -ItemType Directory -Force
+   New-Item -Path "C:\Code\SecureAI" -ItemType Directory -Force
    ```
 
 > **Note**: Keep this Bastion session open - you'll use it throughout the hackathon. Username: **azureuser**, Password: **SecureAI@2026**
@@ -327,21 +315,39 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
    az cognitiveservices account update `
      --name openai-secureai-<inject key="DeploymentID" enableCopy="false"/> `
      --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> `
-     --custom-domain openai-secureai-<inject key="DeploymentID" enableCopy="false"/>
+     --custom-domain openai-secureai-<inject key="DeploymentID" enableCopy="false"/> `
+     --output none
    ```
+   
+   > **Note**: The `--output none` flag suppresses the verbose JSON output. If the command completes without errors, the custom domain was set successfully.
 
 1. **Verify the custom domain** was set:
    ```powershell
    az cognitiveservices account show `
      --name openai-secureai-<inject key="DeploymentID" enableCopy="false"/> `
      --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> `
-     --query "properties.endpoint" -o tsv
+     --query "properties.customSubDomainName" -o tsv
    ```
    
    Should return:
    ```
+   openai-secureai-<inject key="DeploymentID" enableCopy="false"/>
+   ```
+
+   You can also confirm the OpenAI endpoint is available:
+   ```powershell
+   az cognitiveservices account show `
+     --name openai-secureai-<inject key="DeploymentID" enableCopy="false"/> `
+     --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> `
+     --query "properties.endpoints" -o json | Select-String "openai.azure.com"
+   ```
+   
+   You should see a line containing:
+   ```
    https://openai-secureai-<inject key="DeploymentID" enableCopy="false"/>.openai.azure.com/
    ```
+
+   > **Note**: The primary `properties.endpoint` returns a `cognitiveservices.azure.com` URL since AI Foundry creates a multi-service resource. For OpenAI API calls, use the `.openai.azure.com` endpoint shown above.
 
 > **Important**: Complete this step before proceeding to Challenge 2. Without the custom domain, private endpoint creation will succeed but authentication will fail.
 
