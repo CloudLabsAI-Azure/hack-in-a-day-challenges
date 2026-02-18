@@ -25,7 +25,7 @@ Using **Microsoft Foundry (gpt-4o-mini)**, participants will convert unstructure
 
    * **Subscription:** Use the available subscription
    * **Resource Group:** Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   * **Region:** Choose a supported Microsoft Foundry region
+   * **Region**: **<inject key="Region"></inject>**
    * **Name:** **openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>**
    * **Pricing Tier:** Standard
 
