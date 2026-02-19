@@ -1,6 +1,6 @@
 # Challenge 05: Deploy Secure Chat Application
 
-## Introduction1
+## Introduction
 
 All the infrastructure is ready! Now comes the fun part - deploying a secure, production-ready chat application that uses everything you've built:
 
