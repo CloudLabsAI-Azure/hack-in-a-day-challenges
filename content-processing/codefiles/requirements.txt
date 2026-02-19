@@ -1,0 +1,29 @@
+# Streamlit Web Framework
+streamlit==1.30.0
+
+# Azure AI Agents SDK (provides AgentsClient for agent pipeline execution)
+azure-ai-agents==1.1.0
+
+# Azure AI Projects SDK (project-level management)
+azure-ai-projects==2.0.0b3
+
+# Azure AI Document Intelligence SDK (OCR extraction)
+azure-ai-documentintelligence>=1.0.0
+
+# Azure Blob Storage SDK
+azure-storage-blob>=12.19.0
+
+# Azure Cosmos DB SDK
+azure-cosmos>=4.7
+
+# Azure Identity for DefaultAzureCredential
+azure-identity
+
+# Environment Configuration
+python-dotenv==1.0.0
+
+# HTTP Requests
+requests==2.31.0
+
+# Data Processing
+pandas
