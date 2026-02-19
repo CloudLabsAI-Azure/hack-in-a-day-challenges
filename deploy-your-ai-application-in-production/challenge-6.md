@@ -10,11 +10,11 @@ This proves your entire architecture works through private networking only!
 
 ## Prerequisites
 
-- Completed Challenge 5 (Chat application deployed and tested on **vm-<inject key="DeploymentID" enableCopy="false"/>**)
+- Completed Challenge 5 (Chat application deployed and tested on **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**)
 - Azure Bastion deployed (from pre-configured environment)
-- Chat application running on **vm-<inject key="DeploymentID" enableCopy="false"/>**
+- Chat application running on **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**
 - All services using private endpoints
-- VS Code open with PowerShell terminal on **vm-<inject key="DeploymentID" enableCopy="false"/>**
+- VS Code open with PowerShell terminal on **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**
 - Azure CLI logged in
 
 ## Challenge Objectives
@@ -32,7 +32,7 @@ This proves your entire architecture works through private networking only!
 
 You should already be connected to your VM via Bastion from previous challenges. If not:
 
-1. **In Azure Portal**, navigate to **vm-<inject key="DeploymentID" enableCopy="false"/>**.
+1. **In Azure Portal**, navigate to **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**.
 1. Click **Connect** → **Bastion**.
 1. Enter credentials:
    - **Username**: `azureuser`
@@ -52,7 +52,7 @@ ipconfig | Select-String "IPv4"
 1. **Start the chat app** (if not already running):
 
 ```powershell
-cd C:\Code\SecureAI\chat-app
+cd C:\Code\hack-in-a-day-challenges-deploy-your-ai-application\codefiles
 .\venv\Scripts\Activate.ps1
 streamlit run app.py
 ```
@@ -99,6 +99,18 @@ Verify chat session history is saved to Azure Storage:
 
 ```powershell
 $storageName = az storage account list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[0].name" -o tsv
+
+# Assign Storage Blob Data Reader to the current user (needed for az CLI auth)
+$currentUserId = az ad signed-in-user show --query id -o tsv
+$storageId = az storage account show --name $storageName -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query id -o tsv
+
+az role assignment create `
+ --assignee $currentUserId `
+ --role "Storage Blob Data Reader" `
+ --scope $storageId
+
+# Wait a moment for role propagation
+Start-Sleep -Seconds 30
 
 az storage blob list `
  --account-name $storageName `

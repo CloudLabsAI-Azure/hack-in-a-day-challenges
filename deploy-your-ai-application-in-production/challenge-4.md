@@ -30,7 +30,7 @@ By the end, you'll have a fully operational, secure OpenAI service ready for you
 
 ### Part 1: Verify OpenAI Resource and Check Available Models
 
-1. **Open VS Code PowerShell terminal** on **vm-<inject key="DeploymentID" enableCopy="false"/>** and run:
+1. **Open VS Code PowerShell terminal** on **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** and run:
 
 ```powershell
 $openaiName = az cognitiveservices account list `

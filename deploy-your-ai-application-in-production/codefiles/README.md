@@ -150,8 +150,8 @@ A production-grade, enterprise-ready chat application built with Azure OpenAI, f
 ### 1. Clone/Download the Project
 
 ```bash
-cd C:\Code\SecureAI
-# Project files should be in chat-app directory
+cd C:\Code\hack-in-a-day-challenges-deploy-your-ai-application\codefiles
+# Project files should be in this directory
 ```
 
 ### 2. Create Virtual Environment

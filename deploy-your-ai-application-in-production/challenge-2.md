@@ -11,11 +11,11 @@ This is where enterprises fail most often - deploying services with default sett
 - Completed Challenge 1 (Infrastructure deployed via Azure Portal)
 - Resource group **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>** contains:
    - Virtual Network with subnets
-   - Application VM (vm-<inject key="DeploymentID" enableCopy="false"/>)
+   - Application VM (Hack-vm-<inject key="DeploymentID" enableCopy="false"/>)
    - Azure AI Foundry (includes OpenAI)
    - Storage Account
    - Key Vault
-- Connected to **vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion
+- Connected to **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion
 - Configure Network Security Group (NSG) rules for AI services subnet
 - Disable public network access on all AI services
 - Configure subnet delegation for private endpoints
@@ -370,9 +370,9 @@ After creating private endpoints, verify that the Private DNS zones were created
 
 ### Part 8: Validate Private Endpoint Connectivity (Using VS Code)
 
-Ensure all services are reachable via private endpoints only. For this validation, we'll use VS Code on **vm-<inject key="DeploymentID" enableCopy="false"/>**.
+Ensure all services are reachable via private endpoints only. For this validation, we'll use VS Code on **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**.
 
-> **Note**: Connect to **vm-<inject key="DeploymentID" enableCopy="false"/>** via Bastion, open VS Code, open a PowerShell terminal (Ctrl + `), and ensure you're logged in to Azure CLI (`az login`).
+> **Note**: Connect to **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** via Bastion, open VS Code, open a PowerShell terminal (Ctrl + `), and ensure you're logged in to Azure CLI (`az login`).
 
 1. **List all private endpoints**:
 

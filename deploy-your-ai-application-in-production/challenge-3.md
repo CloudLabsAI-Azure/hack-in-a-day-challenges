@@ -11,7 +11,7 @@ Network isolation alone isn't enough. Even with private endpoints, you need stro
 - Completed Challenge 2 (Network security configured)
 - All services have public access disabled
 - Private endpoints deployed and approved
-- Connected to **vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion
+- Connected to **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion
 - VS Code open with PowerShell terminal
 - Azure CLI logged in (`az login` completed)
 
@@ -29,10 +29,10 @@ Network isolation alone isn't enough. Even with private endpoints, you need stro
 
 Your VM needs an identity to authenticate to Azure services without passwords or API keys.
 
-1. **Open VS Code PowerShell terminal** on **vm-<inject key="DeploymentID" enableCopy="false"/>** and run:
+1. **Open VS Code PowerShell terminal** on **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** and run:
 
 ```powershell
-$vmName = "vm-<inject key="DeploymentID" enableCopy="false"/>"
+$vmName = "Hack-vm-<inject key="DeploymentID" enableCopy="false"/>"
 
 # Enable system-assigned managed identity
 az vm identity assign `

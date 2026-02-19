@@ -6,7 +6,11 @@ This app demonstrates passwordless authentication to Azure OpenAI
 from azure.identity import DefaultAzureCredential
 from azure.keyvault.secrets import SecretClient
 from openai import AzureOpenAI
+import os
 import sys
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def main():
     print("=" * 70)
@@ -18,7 +22,7 @@ def main():
     credential = DefaultAzureCredential()
     
     # Connect to Key Vault
-    kv_name = "kv-secureai-2041411"  # Your Key Vault name
+    kv_name = os.getenv("KEY_VAULT_NAME", "kv-secureai-XXXXXXX")  # Set in .env file
     kv_url = f"https://{kv_name}.vault.azure.net"
     
     print(f"🔑 Retrieving secrets from Key Vault: {kv_name}")
