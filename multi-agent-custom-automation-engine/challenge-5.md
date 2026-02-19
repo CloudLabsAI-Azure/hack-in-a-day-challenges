@@ -67,7 +67,7 @@ In the **project root**, create a file named:
 Dockerfile
 ```
 
-Paste **exactly** this content:
+Paste **exactly** this content, and save the file:
 
 ```dockerfile
 FROM python:3.10-slim
@@ -86,11 +86,19 @@ CMD ["python", "app/main.py"]
 
 ## Step 4: Build the Image Using Azure ACR
 
-Run this command from the project root:
+1. Run the command to login to Azure.
 
-```powershell
-az acr build --registry agentacr<inject key="DeploymentID" enableCopy="false"/> --image agent-orchestrator:v1 .
-```
+   ```
+   az login
+   ```
+
+   >**Note:** Sign in with the azure credentials.
+
+2. Run this command from the project root:
+
+   ```powershell
+   az acr build --registry agentacr<inject key="DeploymentID" enableCopy="false"/> --image agent-orchestrator:v1 .
+   ```
 
 ### Expected Result
 
@@ -102,7 +110,7 @@ Successfully built and pushed image
 
 1. Open **Azure Portal**
 2. Go to **Container Registry → agentacr<inject key="DeploymentID" enableCopy="false"/>**
-3. Select **Repositories**
+3. Select **Services** > **Repositories**
 4. Confirm:
 
    ```
