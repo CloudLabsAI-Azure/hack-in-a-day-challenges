@@ -264,7 +264,7 @@ Write-Host "Key Vault secured"
 Confirm all role assignments are in place:
 
 ```powershell
-az role assignment list --assignee $identityId --output table
+az role assignment list --assignee $identityId --all --output table
 ```
 
 You should see:

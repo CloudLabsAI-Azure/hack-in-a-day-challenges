@@ -122,6 +122,17 @@ az storage blob list `
 
    You should see your session file(s) listed with timestamps matching your chat activity.
 
+   > **Note**: If you see a permissions error (e.g., "You do not have the required permissions"), wait 2-4 minutes for the RBAC role assignment to propagate and then retry the below command:
+   >
+   > ```powershell
+   > az storage blob list `
+   >  --account-name $storageName `
+   >  --container-name "chat-sessions" `
+   >  --auth-mode login `
+   >  --query "[].{Name:name, Size:properties.contentLength, LastModified:properties.lastModified}" `
+   >  --output table
+   > ```
+
    > **Note**: If the `chat-sessions` container doesn't exist yet, the app will create it on the first message. If you see an error, send a message in the app first and retry.
 
 ## Success Criteria

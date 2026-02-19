@@ -462,6 +462,8 @@ az keyvault secret list --vault-name kv-secureai-<inject key="DeploymentID" enab
 
 If you see a permission error (not a network error), private endpoint is working!
 
+> **Note:** If the output returns an empty list `[]`, that's completely expected, no secrets have been added to the Key Vault yet. The important thing is that the command didn't return a network error, which confirms that private endpoint connectivity to Key Vault is working correctly.
+
 ### Part 10: Validate Public Access is Blocked
 
 Verify that your services are properly locked down by checking network settings in the Azure Portal.
