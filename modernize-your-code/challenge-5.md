@@ -340,9 +340,8 @@ Expected:
   $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
   ```
 
-## Next Steps
+## Congratulations! You've successfully:
 
-Congratulations! You've successfully:
 - Built a 3-agent AI system in Microsoft Foundry
 - Connected agents in a pipeline (Translation → Validation, Optimization)
 - Run a Streamlit web application locally
