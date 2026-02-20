@@ -117,16 +117,16 @@ You need three values to connect to your agents:
     DATABASE_NAME=SQLModernizationDB
     ```
 
-**Important Notes:**
-- Replace `<DeploymentID>` with your actual deployment ID (e.g., 2034545)
-- **CRITICAL:** Endpoint must end with `/api/projects/proj-default` (the project name is always `proj-default`)
-- Replace `<your-agent-id>` with your Translation Agent ID from step 6 (starts with `asst_`)
-- Replace `<your-cosmos-primary-key>` with your Cosmos DB Primary Key
-- The app uses Azure CLI authentication (`az login`), so no API key is needed for agents
+    - **Important Notes:**
+        - Replace `<DeploymentID>` with your actual deployment ID (e.g., 2034545)
+        - **CRITICAL:** Endpoint must end with `/api/projects/proj-default` (the project name is always `proj-default`)
+        - Replace `<your-agent-id>` with your Translation Agent ID from step 6 (starts with `asst_`)
+        - Replace `<your-cosmos-primary-key>` with your Cosmos DB Primary Key
+        - The app uses Azure CLI authentication (`az login`), so no API key is needed for agents
 
 5. Save the file.
 
-### Part 5: Review the Code (Optional but Recommended)
+### Part 5: Review the Code
 
 Before running, take a moment to explore the application code:
 
@@ -181,14 +181,7 @@ This installs:
 
 1. Enter the email as **<inject key="AzureAdUserEmail"></inject>** and hit enter.
 
-
-
-**macOS/Linux:**
-```bash
-streamlit run app.py
-```
-
-The application will automatically open in your browser at `http://localhost:8501` or `http://localhost:8502`
+1. The application will automatically open in your browser at `http://localhost:8501` or `http://localhost:8502`
 
 ### Part 8: Test the Multi-Agent Pipeline
 
@@ -253,7 +246,7 @@ WHERE ROWNUM <= 10
 ORDER BY salary DESC;
 ```
 
-Expected: Should convert `ROWNUM <= 10` to `TOP 10`
+Expected Output: Should convert `ROWNUM <= 10` to `TOP 10`
 
 ---
 
@@ -276,7 +269,7 @@ START WITH manager_id IS NULL
 CONNECT BY PRIOR emp_id = manager_id;
 ```
 
-Expected:
+Expected Output:
 - Translation: Recursive CTE with `WITH` clause
 - Validation: Should flag if indexes missing
 - Optimization: Should suggest indexes on `manager_id` and `emp_id`
@@ -290,55 +283,14 @@ FROM employees
 WHERE dept_id = 10
 GROUP BY -- Missing column list
 ```
-```
 
-Expected:
-- Validation: Should show error with syntax error
-- Details: Missing GROUP BY columns
+<validation step="34d75f14-cc71-4256-b6a1-731aeff9dca9" />
 
----
 
-**Test 5: File Upload**
-1. Create a file `test.sql` with any Oracle SQL
-2. Upload it using the file uploader
-3. Click "Modernize SQL"
-4. Verify it processes correctly
-
-## Success Criteria
-
-- [ ] Code package downloaded and extracted successfully
-- [ ] Azure CLI installed and authenticated (`az login` completed)
-- [ ] `.env` file configured with correct credentials
-- [ ] All dependencies installed successfully (`azure-ai-agents==1.1.0` included)
-- [ ] Streamlit app runs without errors
-- [ ] Browser opens to `http://localhost:8501` or `http://localhost:8502`
-- [ ] Sidebar shows green checkmarks for all 3 agents
-- [ ] Can process sample queries successfully
-- [ ] Can upload and process .sql files
-- [ ] Results tab shows translation + validation + optimization
-- [ ] Professional gradient completion banner displays after processing
-- [ ] App automatically switches to Results tab after completion
-- [ ] History tab shows previous translations from Cosmos DB
-- [ ] Cosmos DB saves results (verify in Azure Portal)
-- [ ] UI is responsive and visually premium
-
-## Troubleshooting
-
-**Issue**: `ModuleNotFoundError: No module named 'azure'`
-
-**Solution**: Run `pip install -r requirements.txt` in the codefiles folder. Ensure `azure-ai-agents==1.1.0` is installed.
-
----
-
-**Issue**: `DefaultAzureCredential failed to retrieve a token`
-
-**Solution**: 
-- Run `az login` in terminal to authenticate
-- If on Windows, restart terminal after Azure CLI installation to refresh PATH
-- Run this in PowerShell before starting app:
-  ```powershell
-  $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-  ```
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
 ## Congratulations! You've successfully:
 
