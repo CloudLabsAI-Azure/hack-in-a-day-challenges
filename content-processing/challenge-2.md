@@ -235,7 +235,6 @@ Getting classification right is critical because it determines which extraction 
 
 <validation step="d8239636-15d6-4f78-b064-786b79917066" />
 
- 
 > **Congratulations** on completing the Task! Now, it's time to validate it. Here are the steps:
 > - Hit the Validate button for the corresponding Task. If you receive a success message, you can proceed to the next Task.
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.

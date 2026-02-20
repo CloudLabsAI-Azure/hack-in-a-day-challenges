@@ -205,7 +205,7 @@ You will also upload sample documents and test Document Intelligence's OCR capab
    - Container: `ProcessedDocuments` (partition key: `/docType`)
    - Container: `ReviewQueue` (partition key: `/documentId`)
 
-<validation step="8d4e6f7a-1b2c-4d9e-0f3a-5b6c7d8e9f0a" />
+<validation step="67fcae6d-e490-4215-8b86-e1cdc1722cc2" />
 
  
 > **Congratulations** on completing the Task! Now, it's time to validate it. Here are the steps:

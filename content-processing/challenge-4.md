@@ -206,7 +206,6 @@ In this challenge, you will configure and run the pre-built application, then te
 
 <validation step="91273538-4019-4887-8d59-87c8bda31f27" />
 
- 
 > **Congratulations** on completing the Task! Now, it's time to validate it. Here are the steps:
 > - Hit the Validate button for the corresponding Task. If you receive a success message, you can proceed to the next Task.
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.

@@ -107,7 +107,7 @@ In this final challenge, you will use the dashboard's **Review Queue** to examin
    ORDER BY c.timestamp DESC
    ```
 
-<validation step="3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f" />
+<validation step="b168305b-cf36-4d19-92dc-0496001a08b0" />
 
  
 > **Congratulations** on completing the Task! Now, it's time to validate it. Here are the steps:
