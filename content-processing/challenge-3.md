@@ -375,16 +375,6 @@ You will then use Microsoft Foundry's **Connected Agents** feature to chain all 
 
 1. **Test 3: Receipt - Expected AUTO_APPROVE.** Test with the receipt OCR text from Challenge 02 to confirm consistent pipeline behaviour.
 
-## Success Criteria
-
-- `Data-Extraction-Agent` is created with type-specific extraction schemas
-- `Quality-Validation-Agent` is created with confidence scoring and routing logic
-- Classification Agent has **both** `extraction_agent` and `validation_agent` as connected agents
-- Pipeline instructions appended to the Classification Agent for orchestration
-- Full pipeline test: Clean invoice - classified, extracted, validated - `AUTO_APPROVE` with confidence >= 0.85
-- Full pipeline test: Ambiguous/poor document - `MANUAL_REVIEW` with clear review_reasons
-- All three agents return valid JSON in the specified formats
-
 ## Additional Resources
 
 - [Connected Agents in Microsoft Foundry](https://learn.microsoft.com/en-us/azure/ai-studio/concepts/agents)

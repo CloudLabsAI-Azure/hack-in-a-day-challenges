@@ -238,15 +238,6 @@ Getting classification right is critical because it determines which extraction 
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
-## Success Criteria
-
-- `Document-Classification-Agent` is created in your Microsoft Foundry project
-- Agent correctly classifies an invoice with confidence >= 0.90
-- Agent correctly classifies a receipt with confidence >= 0.90
-- Agent correctly classifies an identity document with confidence >= 0.85
-- Agent returns lower confidence (< 0.85) for ambiguous text
-- All responses are valid JSON in the specified format
-
 ## Additional Resources
 
 - [Microsoft Foundry Agents Overview](https://learn.microsoft.com/en-us/azure/ai-studio/concepts/agents)

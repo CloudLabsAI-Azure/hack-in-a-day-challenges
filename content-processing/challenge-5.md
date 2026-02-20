@@ -47,20 +47,12 @@ In this final challenge, you will use the dashboard's **Review Queue** to examin
    - **Reject** - Marks the document as `REJECTED` in `ReviewQueue`, with an optional rejection reason
    - **Edit & Approve** - Opens an editor to correct extracted fields, then approves the corrected version
 
-1. **Approve** at least one document - this demonstrates the human-in-the-loop workflow. The document should:
+1. **Review** at least one document - this demonstrates the human-in-the-loop workflow. The document should:
 
    - Disappear from the Review Queue
    - Appear in the `ProcessedDocuments` Cosmos DB container with `review_status: "HUMAN_APPROVED"`
 
 1. **Reject** at least one document (you can reject the `poor_scan.txt` if it's in the queue). Provide a rejection reason like "Document is illegible, rescan required."
-
-<validation step="b168305b-cf36-4d19-92dc-0496001a08b0" />
-
- 
-> **Congratulations** on completing the Task! Now, it's time to validate it. Here are the steps:
-> - Hit the Validate button for the corresponding Task. If you receive a success message, you can proceed to the next Task.
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
 ### Task 3: Explore the Analytics Dashboard
 
@@ -108,22 +100,11 @@ In this final challenge, you will use the dashboard's **Review Queue** to examin
    ```
 
 <validation step="b168305b-cf36-4d19-92dc-0496001a08b0" />
-
  
 > **Congratulations** on completing the Task! Now, it's time to validate it. Here are the steps:
 > - Hit the Validate button for the corresponding Task. If you receive a success message, you can proceed to the next Task.
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
-
-## Success Criteria
-
-- All 5 sample documents have been processed through the pipeline
-- At least 2 documents were auto-approved (routed to `ProcessedDocuments`)
-- At least 1 document was sent to the Review Queue
-- At least 1 document was manually approved from the Review Queue (status: `HUMAN_APPROVED`)
-- At least 1 document was rejected from the Review Queue (with a rejection reason)
-- Analytics dashboard shows accurate metrics matching your processing history
-- Cosmos DB contains complete records in both `ProcessedDocuments` and `ReviewQueue` containers
 
 ## Additional Resources
 

@@ -42,25 +42,6 @@ In this challenge, you will configure and run the pre-built application, then te
 
    > **Note:** If git is not available, you can download the ZIP from `https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/main.zip` and extract it to `C:\ContentProcessing`.
 
-1. Verify you have the following files:
-
-   ```
-   codefiles/
-   ├── app.py                  # Main Streamlit application
-   ├── doc_processor.py        # Document Intelligence SDK integration
-   ├── cosmos_helper.py        # Cosmos DB operations (dual container)
-   ├── requirements.txt        # Python dependencies
-   ├── .env.example            # Environment variable template
-   ├── Dockerfile              # Container deployment (optional)
-   ├── README.md               # Code documentation
-   └── sample_data/            # Sample OCR outputs for testing
-       ├── invoice_ocr.txt
-       ├── receipt_ocr.txt
-       ├── medical_form_ocr.txt
-       ├── insurance_claim_ocr.txt
-       └── identity_doc_ocr.txt
-   ```
-
 ### Task 2: Configure Environment Variables
 
 1. Copy the environment template:
@@ -80,7 +61,7 @@ In this challenge, you will configure and run the pre-built application, then te
    **Microsoft Foundry Agent Configuration:**
 
    - **AGENT_API_ENDPOINT** - Go to [Microsoft Foundry](https://ai.azure.com) > Your project (**proj-default**) > **Settings** > **Overview**. Copy the **Project endpoint**.
-     - Format: **https://content-hub-<inject key="DeploymentID" enableCopy="false"/>.services.ai.azure.com/api/projects/proj-default**
+    - Format: **https://content-hub-<inject key="DeploymentID" enableCopy="false"/>.services.ai.azure.com/api/projects/proj-default**
 
    - **AGENT_ID** - Go to **Agents** > Open **Document-Classification-Agent** > Copy the **Agent ID** from the Setup panel (starts with `asst_`).
 
@@ -236,26 +217,6 @@ In this challenge, you will configure and run the pre-built application, then te
    - **Route to ReviewQueue** with `MANUAL_REVIEW` and clear review reasons
 
 1. Verify in Cosmos DB that this document appears in the **ReviewQueue** container.
-
-## Success Criteria
-
-- Application runs at `http://localhost:8501` with all services connected (green status)
-- Successfully processed an invoice - classified as INVOICE, data extracted, auto-approved
-- Successfully processed a receipt - classified as RECEIPT, data extracted, routed correctly
-- At least one document appears in the `ProcessedDocuments` Cosmos DB container with full pipeline results
-- A low-quality document was routed to the `ReviewQueue` container with review reasons
-- The processing pipeline shows real-time status updates in the UI
-
-## Troubleshooting
-
-- **ModuleNotFoundError** - Run `pip install -r requirements.txt` again
-- **DefaultAzureCredential error** - Run `az login` and ensure you are signed in with lab credentials
-- **Agent returns empty response** - Verify `AGENT_ID` matches the Classification Agent's ID (starts with `asst_`)
-- **Document Intelligence fails** - Check `DOC_INTELLIGENCE_ENDPOINT` includes the trailing `/`
-- **Cosmos DB write fails** - Verify `COSMOS_KEY` is the Primary Key (not the Connection String)
-- **Blob upload fails** - Check `STORAGE_CONNECTION_STRING` is the full connection string
-- **App won't start** - Check for port conflicts: `streamlit run app.py --server.port 8502`
-- **Pipeline runs but no routing** - Ensure Validation Agent returns `routing_decision` in its JSON output
 
 ## Additional Resources
 

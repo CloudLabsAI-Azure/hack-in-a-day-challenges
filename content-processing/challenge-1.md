@@ -194,15 +194,6 @@ You will also upload sample documents and test Document Intelligence's OCR capab
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
-## Success Criteria
-
-- Storage Account **docstore<inject key="DeploymentID" enableCopy="false"/>** exists with `documents` and `processed` containers
-- 5 sample documents are uploaded to the `documents` container
-- Document Intelligence resource **doc-intel-<inject key="DeploymentID" enableCopy="false"/>** is provisioned
-- You successfully analyzed at least one document in Document Intelligence Studio and observed extracted text
-- Microsoft Foundry project with **openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>** is created with `doc-processor` GPT deployment
-- Cosmos DB account **cosmos-docs-<inject key="DeploymentID" enableCopy="false"/>** has database `ContentProcessingDB` with `ProcessedDocuments` and `ReviewQueue` containers
-
 ## Additional Resources
 
 - [Azure Blob Storage Documentation](https://learn.microsoft.com/en-us/azure/storage/blobs/)
