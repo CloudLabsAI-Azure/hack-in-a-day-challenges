@@ -16,7 +16,7 @@ In this final challenge, you'll use the dashboard's **Review Queue** to examine,
 
 ## Steps to Complete
 
-### Part 1: Process All Sample Documents
+### Task 1: Process All Sample Documents
 
 1. In the Streamlit app, go to the **Process Documents** tab.
 
@@ -32,7 +32,7 @@ In this final challenge, you'll use the dashboard's **Review Queue** to examine,
 
 1. After processing all documents, note how many were auto-approved vs. sent to review.
 
-### Part 2: Review Flagged Documents
+### Task 2: Review Flagged Documents
 
 1. Click on the **🔍 Review Queue** tab.
 
@@ -66,7 +66,7 @@ In this final challenge, you'll use the dashboard's **Review Queue** to examine,
 > - At least one document was approved from the Review Queue
 > - The approved document appears in the `ProcessedDocuments` container with `review_status: "HUMAN_APPROVED"`
 
-### Part 3: Explore the Analytics Dashboard
+### Task 3: Explore the Analytics Dashboard
 
 1. Click on the **📊 Analytics** tab.
 
@@ -88,7 +88,7 @@ In this final challenge, you'll use the dashboard's **Review Queue** to examine,
 
 1. Review the metrics and confirm they match your processing history.
 
-### Part 4: Validate End-to-End in Cosmos DB
+### Task 4: Validate End-to-End in Cosmos DB
 
 1. Go to the Azure portal → Cosmos DB → **Data Explorer**.
 
@@ -131,30 +131,6 @@ In this final challenge, you'll use the dashboard's **Review Queue** to examine,
 - At least 1 document was rejected from the Review Queue (with a rejection reason)
 - Analytics dashboard shows accurate metrics matching your processing history
 - Cosmos DB contains complete records in both `ProcessedDocuments` and `ReviewQueue` containers
-
-## Bonus Challenges
-
-If you have time remaining, try these extensions:
-
-### Bonus 1: Batch Processing
-Upload multiple documents at once using the batch upload feature. Process 3+ documents simultaneously and observe how the pipeline handles concurrent processing.
-
-### Bonus 2: Custom Document Type
-Add a new document type to your Classification Agent (e.g., `PURCHASE_ORDER` or `CONTRACT`). Update the Extraction Agent with a corresponding schema. Test with a sample document of that type.
-
-### Bonus 3: Confidence Threshold Tuning
-Experiment with different confidence thresholds. What happens if you set the threshold to 0.70 instead of 0.85? To 0.95? How does it affect the balance between auto-approval and human review?
-
-### Bonus 4: Docker Deployment
-Build and run the application as a Docker container:
-
-```powershell
-docker build -t content-processing .
-docker run -p 8501:8501 --env-file .env content-processing
-```
-
-### Bonus 5: Export Processing Report
-Use the Analytics tab's **Export** button to download a CSV or PDF report of all processed documents, including classification, confidence scores, and routing decisions.
 
 ## Additional Resources
 

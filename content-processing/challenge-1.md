@@ -17,7 +17,7 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 
 ## Steps to Complete
 
-### Part 1: Create Azure Storage Account
+### Task 1: Create Azure Storage Account
 
 1. In the Azure portal, click **+ Create a resource** and search for **Storage account**.
 
@@ -40,7 +40,7 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 
 1. Click **+ Container** again and create a second container named **processed** with **Private** access level.
 
-### Part 2: Upload Sample Documents
+### Task 2: Upload Sample Documents
 
 1. Download the sample documents from:
 
@@ -69,11 +69,11 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 > **Congratulations!** You've created the Storage Account and uploaded sample documents.
 >
 > If validation fails, verify:
-> - The Storage Account name is `docstore<inject key="DeploymentID" enableCopy="false"/>`
+> - The Storage Account name is **docstore<inject key="DeploymentID" enableCopy="false"/>**
 > - The `documents` container exists and contains all 5 files
 > - The `processed` container exists
 
-### Part 3: Create Azure AI Document Intelligence Resource
+### Task 3: Create Azure AI Document Intelligence Resource
 
 1. In the Azure portal, click **+ Create a resource** and search for **Document Intelligence**.
 
@@ -89,7 +89,7 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 
 1. Click **Review + Create**, then **Create**. Wait for deployment to complete.
 
-### Part 4: Test OCR in Document Intelligence Studio
+### Task 4: Test OCR in Document Intelligence Studio
 
 1. Navigate to [Document Intelligence Studio](https://documentintelligence.ai.azure.com/studio).
 
@@ -108,21 +108,21 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 1. Observe the extracted content:
    - **Text** — The full text extracted from the document, preserving reading order
    - **Words and Lines** — Individual words and lines detected with confidence scores
-   - **Pages** — Page-level metadata including dimensions and language
+   - **Pages** — Page-level metadata, including dimensions and language
 
    > **Note:** The OCR/Read model focuses on text extraction — which is exactly what our AI agents need. The agents downstream will handle classification, structured data extraction, and validation. We don't need Layout's table/structure detection because the agents are smart enough to understand the text format.
 
-1. Try analyzing `receipt_café.jpg` and `drivers_license.jpg` as well. Notice how Document Intelligence handles different document formats (PDF vs image) and layouts.
+1. Try analysing `receipt_café.jpg` and `drivers_license.jpg` as well. Notice how Document Intelligence handles different document formats (PDF vs image) and layouts.
 
 <validation step="6b2c4d5e-9f0a-4b7c-8d1e-3f4a5b6c7d8e" />
 
-> **Congratulations!** Document Intelligence is set up and extracting text from your documents.
+> **Congratulations!** Document Intelligence is set up and is extracting text from your documents.
 >
 > If validation fails, verify:
 > - The Document Intelligence resource exists in your resource group
-> - You can successfully analyze a document in the Studio
+> - You can successfully analyse a document in the Studio
 
-### Part 5: Create Microsoft Foundry Resource and Deploy GPT-4.1
+### Task 5: Create Microsoft Foundry Resource and Deploy GPT-4.1
 
 1. In the Azure portal, search for **Microsoft Foundry** in the top search bar.
 
@@ -173,7 +173,7 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 > - The default project `proj-default` is created
 > - The `doc-processor` model deployment is in **Succeeded** state
 
-### Part 6: Create Azure Cosmos DB Account
+### Task 6: Create Azure Cosmos DB Account
 
 1. In the Azure portal, click **+ Create a resource** and search for **Azure Cosmos DB**.
 

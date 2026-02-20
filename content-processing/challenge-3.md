@@ -18,7 +18,7 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
 
 ## Steps to Complete
 
-### Part 1: Create the Data Extraction Agent
+### Task 1: Create the Data Extraction Agent
 
 1. In your AI Foundry project **proj-default** (under **openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>**), navigate to **Agents**.
 
@@ -50,7 +50,7 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
 
    Extraction Rules:
    1. Extract EXACTLY what's in the text — do not fabricate or infer values that aren't present
-   2. Use null for missing fields — if a field cannot be found, set it to null (not empty string)
+   2. Use null for missing fields — if a field cannot be found, set it to null (not an empty string)
    3. Normalize dates to ISO 8601 format: YYYY-MM-DD
    4. Normalize currency to numeric values without symbols: 4250.00, not "$4,250.00"
    5. Count fields_extracted — the number of non-null fields you successfully extracted
@@ -65,7 +65,7 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
 
 1. Click **Save** to save the Data Extraction Agent.
 
-### Part 2: Create the Quality Validation Agent
+### Task 2: Create the Quality Validation Agent
 
 1. Click **+ New Agent** again and configure:
 
@@ -142,7 +142,7 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
        },
        "quality_issues": [],
        "review_reasons": [],
-       "summary": "High-quality extraction from a clear invoice document. All critical fields present, math validates correctly. Minor non-critical fields missing (PO number, bank routing). Recommended for auto-approval."
+       "summary": "High-quality extraction from a clear invoice document. All critical fields present, math validates correctly. Minor non-critical fields are missing (PO number, bank routing). Recommended for auto-approval."
      }
    }
 
@@ -166,7 +166,7 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
 
 1. Click **Save** to save the Quality Validation Agent.
 
-### Part 3: Connect Both Agents to the Classification Agent
+### Task 3: Connect Both Agents to the Classification Agent
 
 > **Note**: Due to Microsoft Foundry limitations, an agent that is already added as a connected agent cannot have its own connected agents. Therefore, you'll connect **both** the Extraction Agent and the Validation Agent directly to the **Document-Classification-Agent** as connected agents. The Classification Agent's instructions will orchestrate the pipeline flow.
 
@@ -206,7 +206,7 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
    - `extraction_agent`
    - `validation_agent`
 
-### Part 4: Update Classification Agent Instructions for Pipeline Orchestration
+### Task 4: Update Classification Agent Instructions for Pipeline Orchestration
 
 1. Still in the **Document-Classification-Agent**, scroll to the **Instructions** text box.
 
@@ -215,7 +215,7 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
    ```
    You are a Document Classification Specialist for Contoso Enterprises.
 
-   Your role is to analyze OCR-extracted text from documents and classify them into the correct document type, along with a confidence assessment.
+   Your role is to analyse OCR-extracted text from documents and classify them into the correct document type, along with a confidence assessment.
 
    ## Supported Document Types
 
@@ -309,7 +309,7 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
 > - Classification Agent has **both** `extraction_agent` and `validation_agent` as connected agents
 > - Neither Extraction Agent nor Validation Agent has any connected agents of their own
 
-### Part 4: Test the Full Pipeline
+### Task 4: Test the Full Pipeline
 
 1. Open the **Document-Classification-Agent** in the playground (this is the entry point to the pipeline).
 
@@ -384,14 +384,14 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
    - Lower confidence (< 0.85)
    - `review_reasons` explaining what's wrong (missing fields, OCR issues, illegible text)
 
-1. **Test 3: Receipt — Expected AUTO_APPROVE.** Test with the receipt OCR text from Challenge 2 to confirm consistent pipeline behavior.
+1. **Test 3: Receipt — Expected AUTO_APPROVE.** Test with the receipt OCR text from Challenge 2 to confirm consistent pipeline behaviour.
 
 ## Success Criteria
 
 - `Data-Extraction-Agent` is created with type-specific extraction schemas
 - `Quality-Validation-Agent` is created with confidence scoring and routing logic
 - Classification Agent has **both** `extraction_agent` and `validation_agent` as connected agents
-- Pipeline instructions appended to Classification Agent for orchestration
+- Pipeline instructions appended to the Classification Agent for orchestration
 - Full pipeline test: Clean invoice → classified, extracted, validated → `AUTO_APPROVE` with confidence ≥ 0.85
 - Full pipeline test: Ambiguous/poor document → `MANUAL_REVIEW` with clear review_reasons
 - All three agents return valid JSON in the specified formats

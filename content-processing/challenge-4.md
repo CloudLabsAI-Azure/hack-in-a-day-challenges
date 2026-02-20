@@ -6,7 +6,7 @@ You've built the infrastructure, created three specialized AI agents, and connec
 
 1. **Upload** documents via the web interface
 2. **Store** them in Azure Blob Storage
-3. **Analyze** them with Azure AI Document Intelligence (OCR extraction)
+3. **Analyse** them with Azure AI Document Intelligence (OCR extraction)
 4. **Process** the extracted text through your 3-agent AI pipeline
 5. **Route** results to the appropriate Cosmos DB container based on confidence
 
@@ -22,7 +22,7 @@ In this challenge, you'll configure and run the pre-built application, then test
 
 ## Steps to Complete
 
-### Part 1: Download the Application Code
+### Task 1: Download the Application Code
 
 1. On your lab VM, open a terminal (PowerShell or Command Prompt).
 
@@ -40,7 +40,7 @@ In this challenge, you'll configure and run the pre-built application, then test
    cd hack-in-a-day-challenges\content-processing\codefiles
    ```
 
-   > **Note:** If git is not available, you can download the ZIP from `https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/main.zip` and extract to `C:\ContentProcessing`.
+   > **Note:** If git is not available, you can download the ZIP from `https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/main.zip` and extract it to `C:\ContentProcessing`.
 
 1. Verify you have the following files:
 
@@ -61,7 +61,7 @@ In this challenge, you'll configure and run the pre-built application, then test
        └── identity_doc_ocr.txt
    ```
 
-### Part 2: Configure Environment Variables
+### Task 2: Configure Environment Variables
 
 1. Copy the environment template:
 
@@ -120,7 +120,7 @@ In this challenge, you'll configure and run the pre-built application, then test
 
 1. Save the `.env` file.
 
-### Part 3: Install Dependencies and Authenticate
+### Task 3: Install Dependencies and Authenticate
 
 1. Install Python dependencies:
 
@@ -144,7 +144,7 @@ In this challenge, you'll configure and run the pre-built application, then test
    az account set --subscription "<inject key="SubscriptionID" />"
    ```
 
-### Part 4: Run the Application
+### Task 4: Run the Application
 
 1. Start the Streamlit application:
 
@@ -159,7 +159,7 @@ In this challenge, you'll configure and run the pre-built application, then test
 
 1. If any service shows a red status indicator in the sidebar, check your `.env` configuration for that service.
 
-### Part 5: Process Your First Document
+### Task 5: Process Your First Document
 
 1. In the **Process Documents** tab, you have two options:
    - **Upload a file** — drag and drop or browse for a document
@@ -188,7 +188,7 @@ In this challenge, you'll configure and run the pre-built application, then test
 
 1. Process two more documents — select `receipt_cafe` and `identity_doc` from the sample data and process them.
 
-### Part 6: Verify Data in Cosmos DB
+### Task 6: Verify Data in Cosmos DB
 
 1. Go to the Azure portal → Cosmos DB account **content-cosmos-<inject key="DeploymentID" enableCopy="false"/>** → **Data Explorer**.
 
@@ -211,7 +211,7 @@ In this challenge, you'll configure and run the pre-built application, then test
 > - At least one document was processed and saved to Cosmos DB
 > - The sidebar shows green status for all connected services
 
-### Part 7: Test Smart Routing
+### Task 7: Test Smart Routing
 
 1. To test that low-confidence documents are routed correctly, use the **Upload a file** option.
 

@@ -41,7 +41,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. Click **Create**.
 
-1. Wait for the deployment as it can take 2-3 minutes.
+1. Please wait for the deployment to complete as it can take 2-3 minutes.
 
 1. Once created, click **Go to Foundry portal** in the overview section.
 
@@ -53,15 +53,15 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
-### Task 3: Deploy GPT-4.1 Model in AI Foundry
+### Task 3: Deploy GPT-4.1 Model in Microsoft Foundry
 
-1. In **Microsoft Foundry Studio**.
+1. In **Microsoft Foundry** portal.
 
-1. Click on **Models + Endpoints** in the left navigation menu.
+1. Click on **Models + Endpoints** from the left navigation menu.
 
-1. Click **+ Deploy model** and select **Deploy base model**.
+1. Click on **+ Deploy model** and select **Deploy base model**.
 
-1. Search for and select **gpt-4.1** from the model catalog and click **Confirm**.
+1. Search for and select **gpt-4.1** from the model catalog and click on **Confirm** button.
 
 1. Configure the deployment:
 
@@ -85,7 +85,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
    Translate this Oracle SQL to Azure SQL: SELECT * FROM dual WHERE ROWNUM <= 5;
    ```
 
-1. Verify you get a response with Azure SQL translation.
+1. Verify you receive a response with Azure SQL translation.
 
 <validation step="0561d3a2-e34a-4731-925b-4e0b02decc29" />
  
@@ -98,9 +98,9 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. In the **Azure Portal**, search for **Azure Cosmos DB** and select it.
 
-1. Click **+ Create**.
+1. Click on **+ Create** button.
 
-1. Click on *Create** for **Azure Cosmos DB for NoSQL**.
+1. Click on **Create** for **Azure Cosmos DB for NoSQL**.
 
 1. Configure Cosmos DB:
 
@@ -118,7 +118,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. Click **Review + Create**, then **Create**.
 
-1. Wait for the deployment as it can take 10-15 minutes.
+1. Wait for the deployment to complete as it can take 10-15 minutes.
 
 <validation step="c9460cd7-b2b8-4294-8143-516ccadd3f20" />
  
@@ -131,20 +131,20 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. In your Cosmos DB account, click on **Data Explorer** from the left navigation.
 
-      >**Note:** Close all the pop-ups.
+      >**Note:** Close all pop-up windows.
 
-2. Click **+ New Container** drop-down. From the drop-down select **+ New Database**.
+2. Click **+ New Container** drop-down. From the drop-down, select **+ New Database**.
 
 3. Configure the database:
 
       - **Database id**: `SQLModernizationDB`
-      - Select **OK**
+      - Click **OK**
 
 4. Click **OK**.
 
 5. Create the first container for translation results:
 
-     - Right-Click on the **SQLModernizationDB** and click **New Container**
+    - Right-Click on the **SQLModernizationDB** and click **New Container**
     - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
     - **Container id**: `TranslationResults`
     - **Partition key**: `/sourceDialect`

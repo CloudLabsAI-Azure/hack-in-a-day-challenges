@@ -28,7 +28,7 @@ By the end, you'll have a fully operational, secure OpenAI service ready for you
 
 ## Steps to Complete
 
-### Part 1: Verify OpenAI Resource and Check Available Models
+### Task 1: Verify OpenAI Resource and Check Available Models
 
 1. **Open VS Code PowerShell terminal** on **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** and run:
 
@@ -57,9 +57,9 @@ By the end, you'll have a fully operational, secure OpenAI service ready for you
 
    - You should see the **secure-chat** deployment from Challenge 1. This will be your primary chat model.
 
-### Part 2: Store Model Configuration in Key Vault
+### Task 2: Store Model Configuration in Key Vault
 
-Store the deployment name and API version so your app can retrieve them securely.
+Store the deployment name and API version, so your app can retrieve them securely.
 
 ```powershell
 $kvName = az keyvault list `
@@ -97,7 +97,7 @@ Write-Host "Key Vault secured"
 
    > **Note**: If you deployed a different model, replace `"secure-chat"` with your deployment name.
 
-### Part 3: Test Chat Completions with Managed Identity
+### Task 3: Test Chat Completions with Managed Identity
 
 Validate that Azure OpenAI works end-to-end with managed identity authentication.
 

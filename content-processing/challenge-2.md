@@ -15,7 +15,7 @@ Getting classification right is critical because it determines which extraction 
 
 ## Steps to Complete
 
-### Part 1: Navigate to AI Foundry Agents
+### Task 1: Navigate to AI Foundry Agents
 
 1. Go to [Azure AI Foundry](https://ai.azure.com) and open your project **proj-default** (under the Foundry resource **openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>**).
 
@@ -23,7 +23,7 @@ Getting classification right is critical because it determines which extraction 
 
 1. Click **+ New Agent** to create your first agent.
 
-### Part 2: Configure the Classification Agent
+### Task 2: Configure the Classification Agent
 
 1. Set the **Agent name** to:
 
@@ -38,7 +38,7 @@ Getting classification right is critical because it determines which extraction 
    ```
    You are a Document Classification Specialist for Contoso Enterprises.
 
-   Your role is to analyze OCR-extracted text from documents and classify them into the correct document type, along with a confidence assessment.
+   Your role is to analyse OCR-extracted text from documents and classify them into the correct document type, along with a confidence assessment.
 
    ## Supported Document Types
 
@@ -64,7 +64,7 @@ Getting classification right is critical because it determines which extraction 
 
    ## Classification Rules
 
-   - Analyze the ENTIRE text before classifying — don't jump to conclusions from the first few words
+   - Analyse the ENTIRE text before classifying — don't jump to conclusions from the first few words
    - Consider multiple indicators — a single keyword match is not sufficient
    - If a document matches multiple types, choose the BEST match based on the strongest cluster of indicators
    - If you cannot determine the type with reasonable confidence, use "UNKNOWN"
@@ -110,7 +110,7 @@ Getting classification right is critical because it determines which extraction 
 
 1. Note the **Agent ID** displayed in the Setup panel (starts with `asst_`). You'll need this later.
 
-### Part 3: Test the Classification Agent in the Playground
+### Task 3: Test the Classification Agent in the Playground
 
 1. In the agent's page, you should see the **Playground** / chat panel on the right.
 

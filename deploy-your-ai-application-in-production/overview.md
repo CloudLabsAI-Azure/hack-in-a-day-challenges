@@ -32,7 +32,7 @@ A fully secure AI chat application with:
 ## Technologies Used
 
 - **Azure AI Foundry**: Enterprise AI platform with built-in security
-- **Azure OpenAI**: GPT-4 models with private endpoints
+- **Azure OpenAI**: GPT-4.1 models with private endpoints
 - **Azure Virtual Network**: Network isolation and segmentation
 - **Private Endpoints**: Secure connectivity without public IPs
 - **Azure Key Vault**: Centralized secret management
@@ -92,13 +92,13 @@ Configure Network Security Groups, disable all public access, and validate priva
 Set up managed identities, configure RBAC roles, and establish Key Vault access policies. Implement passwordless authentication patterns.
 
 ### Challenge 4: Secure Azure OpenAI Deployment
-Deploy GPT-4 model with private endpoint, configure deployment settings, and secure API configuration in Key Vault. Test private connectivity.
+Deploy the GPT-4.1 model with a private endpoint, configure deployment settings, and secure API configuration in Key Vault. Test private connectivity.
 
 ### Challenge 5: Deploy and Configure the Chat Application
 Download the pre-built secure chat application, configure environment variables with private endpoints, and run the application on your VM.
 
 ### Challenge 6: Test Secure Connectivity via Azure Bastion
-Connect to the VM using Azure Bastion (no public IP needed), validate the chat application works, and verify all traffic flows through private network.
+Connect to the VM using Azure Bastion (no public IP needed), validate the chat application works, and verify all traffic flows through the private network.
 
 ### Challenge 7: Deploy Application to Azure App Service
 Deploy the chat application to Azure App Service with VNet integration, managed identity, and private endpoint connectivity. Verify the production deployment works end-to-end.
@@ -161,7 +161,5 @@ This architecture pattern applies to:
 - [Azure Well-Architected Framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure Private Link Documentation](https://learn.microsoft.com/azure/private-link/)
 - [Managed Identity Best Practices](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
-
----
 
 Ready to build enterprise-grade AI? Let's get started! 
