@@ -31,7 +31,7 @@ def main():
     try:
         # Get configuration from Key Vault (no hardcoded values!)
         openai_endpoint = secret_client.get_secret("OpenAIEndpoint").value
-        deployment_name = secret_client.get_secret("OpenAIDeployment").value
+        deployment_name = secret_client.get_secret("ChatModelDeployment").value
         api_version = secret_client.get_secret("OpenAIApiVersion").value
         
         print(f"✅ Endpoint: {openai_endpoint}")

@@ -127,8 +127,6 @@ Verify chat session history is saved to Azure Storage:
 
    - You should see your session file(s) listed with timestamps matching your chat activity.
 
-      > **Note**: If the `chat-sessions` container doesn't exist yet, the app will create it on the first message. If you see an error, send a message in the app first and retry.
-
 ## Success Criteria
 
 Validate your secure connectivity:
