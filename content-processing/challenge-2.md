@@ -15,23 +15,21 @@ Getting classification right is critical because it determines which extraction 
 
 ## Steps to Complete
 
-### Task 1: Navigate to Microsoft Foundry Agents
+### Task 1: Navigate and Configure Microsoft Foundry Agents
 
-1. Go to [Microsoft Foundry](https://ai.azure.com) and open your project **proj-default** (under the Foundry resource **openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>**).
+1. Go to **Microsoft Foundry**.
 
 1. In the left navigation menu, click **Agents**.
 
-1. Click **+ New Agent** to create your first agent.
+1. Choose the existing **Default Agent**
 
-### Task 2: Configure the Classification Agent
-
-1. Set the **Agent name** to:
+1. Rename the **Agent** to:
 
    ```
    Document-Classification-Agent
    ```
 
-1. Under **Model**, select the **doc-processor** deployment (GPT-4.1) you created in Challenge 01.
+1. Under **Model**, select the **doc-processor** deployment (GPT model) you created in Challenge 01.
 
 1. In the **Instructions** field, copy the entire block below and paste it into the Instructions box:
 
@@ -239,15 +237,6 @@ Getting classification right is critical because it determines which extraction 
 > - Hit the Validate button for the corresponding Task. If you receive a success message, you can proceed to the next Task.
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
-
-## Success Criteria
-
-- `Document-Classification-Agent` is created in your Microsoft Foundry project
-- Agent correctly classifies an invoice with confidence >= 0.90
-- Agent correctly classifies a receipt with confidence >= 0.90
-- Agent correctly classifies an identity document with confidence >= 0.85
-- Agent returns lower confidence (< 0.85) for ambiguous text
-- All responses are valid JSON in the specified format
 
 ## Additional Resources
 

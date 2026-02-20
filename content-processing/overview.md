@@ -1,5 +1,7 @@
 # Intelligent Content Processing: AI-Powered Document Pipeline
 
+**Duration:** 6 hours
+
 ## Overview
 
 Every day, enterprises process thousands of documents - invoices from vendors, insurance claims, medical forms, receipts, and identity documents. At **Contoso Enterprises**, a diversified conglomerate spanning finance, healthcare, and insurance, this manual document processing bottleneck costs **$2.4 million annually** in labor and delays critical business decisions by an average of 72 hours.
@@ -16,11 +18,11 @@ Your mission: **Build an AI-powered document processing pipeline** that automati
 
 ## Challenges
 
-- **Challenge 01: Set Up Azure Infrastructure** (~40 min) - Provision Storage Account, Document Intelligence, Microsoft Foundry project (GPT-4.1), and Cosmos DB with dual containers. Upload sample documents and test OCR extraction.
-- **Challenge 02: Build the Document Classification Agent** (~40 min) - Create a classification agent in Microsoft Foundry that identifies document types (invoice, receipt, medical form, insurance claim, ID) from OCR text and returns structured JSON.
-- **Challenge 03: Build Extraction & Validation Agents + Connect Pipeline** (~60 min) - Create extraction and validation agents. Connect all three agents using Foundry's connected agents feature for automatic hand-off. Test the full pipeline.
-- **Challenge 04: Run the Content Processing Application** (~50 min) - Configure and run the pre-built Streamlit application. Upload documents, watch the pipeline process them, and verify smart routing to the correct Cosmos DB container.
-- **Challenge 05: Review Queue & End-to-End Validation** (~30 min) - Use the dashboard's Review tab to approve or reject low-confidence documents. Process all sample documents end-to-end. Explore the analytics dashboard.
+- **Challenge 01: Set Up Azure Infrastructure**- Provision Storage Account, Document Intelligence, Microsoft Foundry project, and Cosmos DB with dual containers. Upload sample documents and test OCR extraction.
+- **Challenge 02: Build the Document Classification Agent**- Create a classification agent in Microsoft Foundry that identifies document types (invoice, receipt, medical form, insurance claim, ID) from OCR text and returns structured JSON.
+- **Challenge 03: Build Extraction & Validation Agents + Connect Pipeline**- Create extraction and validation agents. Connect all three agents using Foundry's connected agents feature for automatic hand-off. Test the full pipeline.
+- **Challenge 04: Run the Content Processing Application**- Configure and run the pre-built Streamlit application. Upload documents, watch the pipeline process them, and verify smart routing to the correct Cosmos DB container.
+- **Challenge 05: Review Queue & End-to-End Validation**- Use the dashboard's Review tab to approve or reject low-confidence documents. Process all sample documents end-to-end. Explore the analytics dashboard.
 
 ## Learning Objectives
 
@@ -44,7 +46,5 @@ By completing this hackathon, you will:
 ## Hackathon Format
 
 This is a **challenge-based hackathon** - each challenge gives you objectives and success criteria, with guided steps to help you along the way. You will build progressively, starting from infrastructure setup and ending with a fully functional, demo-able document processing pipeline.
-
-**Duration:** ~4-6 hours (depending on experience level)
 
 Click **Next** to set up your lab environment.

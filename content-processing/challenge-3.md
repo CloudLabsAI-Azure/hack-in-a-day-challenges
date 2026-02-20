@@ -25,7 +25,7 @@ You will then use Microsoft Foundry's **Connected Agents** feature to chain all 
 1. Click **+ New Agent** and configure:
 
    - **Agent name**: `Data-Extraction-Agent`
-   - **Model**: `doc-processor` (GPT-4.1)
+   - **Model**: `doc-processor` (GPT)
 
 1. In the **Instructions** field, copy the entire block below and paste it into the Instructions box:
 
@@ -70,7 +70,7 @@ You will then use Microsoft Foundry's **Connected Agents** feature to chain all 
 1. Click **+ New Agent** again and configure:
 
    - **Agent name**: `Quality-Validation-Agent`
-   - **Model**: `doc-processor` (GPT-4.1)
+   - **Model**: `doc-processor` (GPT)
 
 1. In the **Instructions** field, copy the entire block below and paste it into the Instructions box:
 
@@ -298,14 +298,6 @@ You will then use Microsoft Foundry's **Connected Agents** feature to chain all 
 
 1. Click **Save**.
 
-<validation step="0f1a2b3c-4d5e-6f7a-8b9c-0d1e2f3a4b5c" />
-
- 
-> **Congratulations** on completing the Task! Now, it's time to validate it. Here are the steps:
-> - Hit the Validate button for the corresponding Task. If you receive a success message, you can proceed to the next Task.
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
-
 ### Task 5: Test the Full Pipeline
 
 1. Open the **Document-Classification-Agent** in the playground (this is the entry point to the pipeline).
@@ -382,16 +374,6 @@ You will then use Microsoft Foundry's **Connected Agents** feature to chain all 
    - `review_reasons` explaining what's wrong (missing fields, OCR issues, illegible text)
 
 1. **Test 3: Receipt - Expected AUTO_APPROVE.** Test with the receipt OCR text from Challenge 02 to confirm consistent pipeline behaviour.
-
-## Success Criteria
-
-- `Data-Extraction-Agent` is created with type-specific extraction schemas
-- `Quality-Validation-Agent` is created with confidence scoring and routing logic
-- Classification Agent has **both** `extraction_agent` and `validation_agent` as connected agents
-- Pipeline instructions appended to the Classification Agent for orchestration
-- Full pipeline test: Clean invoice - classified, extracted, validated - `AUTO_APPROVE` with confidence >= 0.85
-- Full pipeline test: Ambiguous/poor document - `MANUAL_REVIEW` with clear review_reasons
-- All three agents return valid JSON in the specified formats
 
 ## Additional Resources
 
