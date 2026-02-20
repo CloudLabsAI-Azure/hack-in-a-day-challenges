@@ -37,7 +37,7 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
 ### Part 2: Create Virtual Network
 
-1. In the **Azure Portal**, click **+ Create a resource**.
+1. In the **Azure Portal**, navigate to the **Home** page and click **+ Create a resource**.
 
 1. Search for **Virtual Network** and select it.
 
@@ -45,15 +45,13 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
 1. Configure the Virtual Network:
 
-   **Basics tab**:
-   - **Subscription**: Select your available Azure subscription
-   - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Virtual network name**: **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Region**: **<inject key="Region"></inject>**
+   - **Basics tab**:
+      - **Subscription**: Select your available Azure subscription
+      - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+      - **Virtual network name**: **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
+      - **Region**: **<inject key="Region"></inject>**
 
-1. Click **Next: Security**.
-
-   - Leave everything **turned off (default)**, then click **Next**.
+1. Click **Next**. On the **Security** tab leave everything **turned off (default)**, then click **Next**.
 
 1. On **IP Addresses**.
 
@@ -64,13 +62,13 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
    - **Subnet purpose**: **Default**
    - **Name**: **snet-ai-services**
+   - Verify **Include an IPv4 address space** is checked
    - **Starting address**: **10.0.1.0**
    - **Size**: **/24 (256 addresses)**
-   - Verify **Include an IPv4 address space** is checked
    - Verify **NAT gateway**, **Network security group**, and **Route table** are set to **None**
    - Verify **Private endpoint network policy** is **Disabled**
    - Leave everything else as default
-   - Click **Add**
+   - Click **Save**
 
 1. Click **+ Add subnet** to add the second subnet. Configure the following:
 
@@ -94,48 +92,47 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
 1. Click **Create**.
 
-1. Wait for deployment (30 seconds).
+1. Wait for the deployment to complete; it will take a maximum of 30 seconds.
 
-1. Once complete, click **Go to resource** to verify all three subnets were created.
+1. Once the deployment is complete, click **Go to resource**. To verify that all three subnets were created, select **Settings** > **Subnets** from the left navigation menu.
+
 
 ### Part 3: Create Application Virtual Machine
 
 Now you'll deploy a Windows VM in the application subnet where you'll host the secure chat application.
 
-1. In the **Azure Portal**, click **+ Create a resource**.
+1. In the **Azure Portal**, search for **Virtual Machine** and select it.
 
-1. Search for **Virtual Machine** and select it.
-
-1. Click **Create**.
+1. Click **Create** > **Virtual machine**.
 
 1. Configure the Virtual Machine:
 
-   **Basics tab**:
-   - **Subscription**: Select your available Azure subscription
-   - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Virtual machine name**: **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Region**: **<inject key="Region"></inject>**
-   - **Availability options**: **No infrastructure redundancy required**
-   - **Security type**: **Standard**
-   - **Image**: **Windows Server 2022 Datacenter: Azure Edition - x64 Gen2**
-   - **Size**: Click **See all sizes**, search for **Standard_B2s**, select it, and click **Select**
+   - **Basics tab**:
+      - **Subscription**: Select your available Azure subscription
+      - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+      - **Virtual machine name**: **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**
+      - **Region**: **<inject key="Region"></inject>**
+      - **Availability options**: **No infrastructure redundancy required**
+      - **Security type**: **Standard**
+      - **Image**: **See all images** > **Windows server** > **Windows Server 2022 Datacenter: Azure Edition - x64 Gen2**
+      - **Size**: Click **See all sizes**, search for **Standard_B2s**, select it, and click **Select**
    
-      > **Note**: We're using Standard_B2s (2 vCPU, 4GB RAM) which is cost-effective for testing while providing adequate performance for this lab.
+         > **Note**: We're using Standard_B2s (2 vCPU, 4GB RAM) which is cost-effective for testing while providing adequate performance for this lab.
    
-   **Administrator account**:
-   - **Username**: **azureuser**
-   - **Password**: **SecureAI@2026**
-   - **Confirm password**: **SecureAI@2026**
+   - **Administrator account**:
+      - **Username**: **azureuser**
+      - **Password**: **SecureAI@2026**
+      - **Confirm password**: **SecureAI@2026**
    
-   **Inbound port rules**:
-   - **Public inbound ports**: **None** (we'll use Azure Bastion)
+   - **Inbound port rules**:
+      - **Public inbound ports**: **None** (we'll use Azure Bastion)
    
-1. Click **Next: Disks**.
+1. Click **Next: Disks >**.
 
-   **Disks tab**:
-   - **OS disk type**: **Standard SSD (locally-redundant storage)**
-   - Leave everything else as default
-   - Click **Next: Networking**
+   - **Disks tab**:
+      - **OS disk type**: **Standard SSD (locally-redundant storage)**
+      - Leave everything else as default
+      - Click **Next: Networking**
 
 1. **Networking tab**:
    - **Virtual network**: Select **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
@@ -146,7 +143,7 @@ Now you'll deploy a Windows VM in the application subnet where you'll host the s
    - Click **Next: Management**
 
 1. **Management tab**:
-   - **System assigned managed identity**: **Off** (we'll enable this in Challenge 3)
+   - **Enable system assigned managed identity**: **Off** (we'll enable this in Challenge 3)
    - **Enable auto-shutdown**: **Off**
    - Leave everything else as default
    - Click **Next: Monitoring**
@@ -159,13 +156,12 @@ Now you'll deploy a Windows VM in the application subnet where you'll host the s
 1. **Advanced tab**:
    - Leave all settings as default
    - **Do not add Custom Script Extension** (we'll install software manually after connecting via Bastion)
-   - Click **Review + create**
 
 1. Click **Review + create**.
 
 1. Review the configuration and click **Create**.
 
-1. Wait for deployment (**3-5 minutes**).
+1. Wait for the deployment to complete; it will take a maximum of **3-5 minutes**.
 
 1. Once complete, click **Go to resource**.
 
@@ -175,7 +171,7 @@ Before we can connect to the VM, we need to create a dedicated subnet for Azure 
 
 1. In the **Azure Portal**, navigate to your **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>** virtual network.
 
-1. In the left navigation, click **Subnets**.
+1. In the left navigation, click **Settings** > **Subnets**.
 
 1. Click **+ Subnet**.
 
@@ -185,11 +181,11 @@ Before we can connect to the VM, we need to create a dedicated subnet for Azure 
    - **Starting address**: **10.0.4.0**
    - **Subnet size**: **/26 (64 addresses)**
    
-   > **Important**: Azure Bastion requires a dedicated subnet named exactly "AzureBastionSubnet" with at least /26 CIDR.
+      > **Important**: Azure Bastion requires a dedicated subnet named exactly "AzureBastionSubnet" with at least /26 CIDR.
 
-1. Click **Save**.
+1. Click **Add**.
 
-1. Wait for the subnet creation to complete (30 seconds).
+1. Wait for the deployment to complete; it will take a maximum of 30 seconds.
 
 ### Part 5: Test VM Connection via Bastion
 
@@ -197,31 +193,35 @@ Now let's install Azure Bastion and connect to the VM.
 
 1. In the **Azure Portal**, navigate to your **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** Virtual Machine resource.
 
-1. In the left navigation, click **Connect** ? **Connect via Bastion**.
+1. In the left navigation, click **Connect** > **Connect via Bastion**.
 
-1. On the Bastion connection page, click **Deploy Bastion**.
+1. On the **Hack-vm-<inject key="DeploymentID" enableCopy="false"/> | Bastion** page, expand **Dedicated Deployment Options**. Select **Configure manually**
 
 1. Configure Bastion:
    - **Name**: **bastion-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Tier**: **Developer** (cost-effective for testing)
-   - **Virtual network**: **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>** (should be pre-selected)
-   - **Subnet**: **AzureBastionSubnet (10.0.4.0/26)** (should be pre-selected)
+   - **Tier**: **Standard**
+   - **Virtual network**: **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Subnet**: **AzureBastionSubnet (10.0.4.0/26)** 
    - **Public IP address**: Click **Create new**
      - **Name**: **bastion-ip-<inject key="DeploymentID" enableCopy="false"/>**
-     - Click **OK**
 
-1. Click **Deploy Bastion**.
+1. Click **Review + create**. Click on **Create**
 
-1. Wait for deployment (**8-12 minutes**). This is a good time for a coffee break!
+1. Wait for the deployment to complete; it will take a maximum of **8-12 minutes**. 
 
-1. Once complete, the Bastion connection dialog will appear automatically.
+1. Navigate to your **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** Virtual Machine resource.
 
-1. Configure Bastion connection:
-   - **Username**: **azureuser**
+1. In the left navigation, click **Connect** > **Connect via Bastion**.
+
+1. Expand **Connection Settings**:
+
    - **Authentication Type**: **Password**
+   - **Username**: **azureuser**
    - **Password**: **SecureAI@2026**
 
 1. Click **Connect**.
+
+   >**Note:** If the error message appears—“**A popup blocker is preventing a new window from opening. Please allow popups and retry.**”—enable pop-ups from the top navigation menu and try again.
 
 1. A new browser tab will open with a remote desktop session.
 
@@ -264,32 +264,36 @@ The VM is a fresh Windows Server 2022 instance. You'll install Chocolatey (packa
    New-Item -Path "C:\Code" -ItemType Directory -Force
    ```
 
-> **Note**: Keep this Bastion session open - you'll use it throughout the hackathon. Username: **azureuser**, Password: **SecureAI@2026**
+1. Keep the bastion session open - you'll use it throughout the hackathon. Username: **azureuser**, Password: **SecureAI@2026**
 
-### Part 7: Create Azure AI Foundry Project
+1. Inside the bastion VM, open **File Explorer**, and create a folder name `Code` inside `C:\`.
 
-1. In the **Azure Portal**, click **+ Create a resource**.
+   >**Note:** If it is already created skip this step, and proceed to the next part.
 
-1. Search for **Azure AI Foundry** and select it.
+### Part 7: Create Microsoft Foundry Project
+
+1. In the **Azure Portal**, from the **Home** page, click **+ Create a resource**.
+
+1. Search for **Microsoft Foundry** and select it.
 
 1. Click **Create**.
 
-1. Configure Azure AI Foundry:
+1. Configure Microsoft Foundry:
 
-   **Basics tab**:
-   - **Subscription**: Select your available Azure subscription
-   - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Name**: **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Region**: **<inject key="Region"></inject>**
-   - **Default project name**: Keep as **proj-default**
+   - **Basics tab**:
+      - **Subscription**: Select your available Azure subscription
+      - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+      - **Name**: **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>**
+      - **Region**: **<inject key="Region"></inject>**
+      - **Default project name**: Keep as **proj-default**
 
-   > **Note**: This creates both an AI Foundry Hub (resource) and a default project inside it.
+         > **Note**: This creates both an Microsoft Foundry Hub (resource) and a default project inside it.
 
 1. Click **Review + Create**.
 
 1. Click **Create**.
 
-1. Wait for deployment (**3-5 minutes** this creates multiple resources).
+1. Wait for the deployment to complete; it will take a maximum of **3-5 minutes**.
 
 1. Once complete, click **Go to resource**.
 
@@ -301,16 +305,19 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 **Using VS Code on Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**:
 
-1. **Open VS Code** on your VM (connected via Bastion).
+1. Switch to the Bastion VM, **Open VS Code**.
 
-1. **Open a PowerShell terminal** (Ctrl + `).
+1. **Open a PowerShell terminal**, by pressing `Ctrl+J` in the keyboard.
 
 1. **Login to Azure**:
+
    ```powershell
    az login
    ```
+1. Login in with your azure credentials. Hit enter once asked for the subscription.
 
 1. **Configure custom domain** for your OpenAI resource:
+
    ```powershell
    az cognitiveservices account update `
      --name openai-secureai-<inject key="DeploymentID" enableCopy="false"/> `
@@ -322,6 +329,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
    > **Note**: The `--output none` flag suppresses the verbose JSON output. If the command completes without errors, the custom domain was set successfully.
 
 1. **Verify the custom domain** was set:
+
    ```powershell
    az cognitiveservices account show `
      --name openai-secureai-<inject key="DeploymentID" enableCopy="false"/> `
@@ -329,39 +337,44 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
      --query "properties.customSubDomainName" -o tsv
    ```
    
-   Should return:
-   ```
-   openai-secureai-<inject key="DeploymentID" enableCopy="false"/>
-   ```
+   - Should return:
 
-   You can also confirm the OpenAI endpoint is available:
-   ```powershell
-   az cognitiveservices account show `
-     --name openai-secureai-<inject key="DeploymentID" enableCopy="false"/> `
-     --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> `
-     --query "properties.endpoints" -o json | Select-String "openai.azure.com"
-   ```
+      ```
+      openai-secureai-<inject key="DeploymentID" enableCopy="false"/>
+      ```
+
+   - You can also confirm the OpenAI endpoint is available:
+
+      ```powershell
+      az cognitiveservices account show `
+      --name openai-secureai-<inject key="DeploymentID" enableCopy="false"/> `
+      --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> `
+      --query "properties.endpoints" -o json | Select-String "openai.azure.com"
+      ```
    
-   You should see a line containing:
-   ```
-   https://openai-secureai-<inject key="DeploymentID" enableCopy="false"/>.openai.azure.com/
-   ```
+   - You should see a line containing:
 
-   > **Note**: The primary `properties.endpoint` returns a `cognitiveservices.azure.com` URL since AI Foundry creates a multi-service resource. For OpenAI API calls, use the `.openai.azure.com` endpoint shown above.
+      ```
+      https://openai-secureai-<inject key="DeploymentID" enableCopy="false"/>.openai.azure.com/
+      ```
+
+      > **Note**: The primary `properties.endpoint` returns a `cognitiveservices.azure.com` URL since AI Foundry creates a multi-service resource. For OpenAI API calls, use the `.openai.azure.com` endpoint shown above.
 
 > **Important**: Complete this step before proceeding to Challenge 2. Without the custom domain, private endpoint creation will succeed but authentication will fail.
 
 ### Part 9: Deploy GPT-4 Model in Azure AI Foundry
 
+1. Switch to the **Azure portal** under **labvm-<inject key="DeploymentID" enableCopy="false"/>**.
+
 1. In your **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>** resource.
 
 1. Click on **Go to Foundry portal**.
 
-1. In Azure AI Foundry portal, verify your project is: **proj-default**.
+1. In Microsoft Foundry portal, verify your project is: **proj-default**.
 
 1. In the left navigation, click **Models + Endpoints**.
 
-1. Click **+ Deploy model** ? **Deploy base model**.
+1. Click **+ Deploy model** > **Deploy base model**.
 
 1. Search for and select **gpt-4.1** from the model catalog.
 
@@ -371,19 +384,16 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
    - **Deployment name**: **secure-chat**
    - **Deployment type**: **Global Standard**
+   - Select **Customize**
    - **Tokens per Minute Rate Limit (thousands)**: **40K**
 
-   > **Important**: Do not increase TPM beyond 40K to avoid quota issues. We're using 40K to allow sufficient capacity for testing.
+      > **Important**: Do not increase TPM beyond 40K to avoid quota issues. We're using 40K to allow sufficient capacity for testing.
 
 1. Click **Deploy**.
 
-1. Wait for deployment to complete (30-60 seconds).
-
 ### Part 10: Test the Model Deployment
 
-1. In the **Models + Endpoints** page, find your **secure-chat** deployment.
-
-1. Click **Open in playground**.
+1.  On the **secure-chat** deployment page, click **Open in playground**.
 
 1. In the **Chat session** section, test with this prompt:
 
@@ -393,13 +403,14 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 1. Verify you get a response from GPT-4.
 
-1. Click **View code** (top right).
+1. Click **View code** (top left).
 
 1. Select the **Python** tab.
 
 1. **Note the endpoint format** - it should look like:
+
    ```
-   https://openai-secureai-<DID>.openai.azure.com/
+   https://openai-secureai-<inject key="DeploymentID" enableCopy="false"/>.openai.azure.com/
    ```
    This is the custom domain you configured in Part 8. You'll store this in Key Vault in the next challenge.
 
@@ -415,25 +426,27 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 1. Configure Key Vault:
 
-   **Basics tab**:
-   - **Subscription**: Select your available Azure subscription
-   - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Key vault name**: **kv-secureai-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Region**: **<inject key="Region"></inject>**
-   - **Pricing tier**: **Standard**
+   - **Basics tab**:
 
-1. Click **Next: Access configuration**.
+      - **Subscription**: Select your available Azure subscription
+      - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+      - **Key vault name**: **kv-secureai-<inject key="DeploymentID" enableCopy="false"/>**
+      - **Region**: **<inject key="Region"></inject>**
+      - **Pricing tier**: **Standard**
 
-   **Access configuration tab**:
-   - **Permission model**: Select **Azure role-based access control (RBAC)**
+1. Click **Next**.
+
+   - **Access configuration tab**:
+
+      - **Permission model**: Select **Azure role-based access control (RBAC)**
    
-   > This is more secure than the legacy access policies model.
+         > This is more secure than the legacy access policies model.
 
 1. Click **Review + Create**.
 
 1. Click **Create**.
 
-1. Wait for deployment (30 seconds).
+1. Wait for the deployment to complete; it will take a maximum of 30 seconds.
 
 1. Once complete, click **Go to resource**.
 
@@ -443,7 +456,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 1. In the left navigation, click **Access control (IAM)**.
 
-1. Click **+ Add** ? **Add role assignment**.
+1. Click **+ Add** > **Add role assignment**.
 
 1. In the **Role** tab:
 
@@ -455,8 +468,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
    - **Assign access to**: Select **User, group, or service principal**
    - Click **+ Select members**
-   - Search for your email: **<inject key="AzureAdUserEmail"></inject>**
-   - Select yourself
+   - Search and select: **<inject key="AzureAdUserEmail"></inject>**
    - Click **Select**
 
 1. Click **Review + assign**.
@@ -475,31 +487,31 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 1. Configure Storage Account:
 
-   **Basics tab**:
-   - **Subscription**: Select your available Azure subscription
-   - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Storage account name**: **stsecureai<inject key="DeploymentID" enableCopy="false"/>** (lowercase, no hyphens)
-   - **Region**: **<inject key="Region"></inject>**
-   - **Performance**: **Standard**
-   - **Redundancy**: **Locally-redundant storage (LRS)**
+   - **Basics tab**:
+      - **Subscription**: Select your available Azure subscription
+      - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+      - **Storage account name**: **stsecureai<inject key="DeploymentID" enableCopy="false"/>**
+      - **Region**: **<inject key="Region"></inject>**
+      - **Performance**: **Standard**
+      - **Redundancy**: **Locally-redundant storage (LRS)**
 
-1. Click **Next: Advanced**.
+1. Click **Next**.
 
-   **Advanced tab**:
-   - **Require secure transfer for REST API operations**: **Enabled** (should be checked)
-   - **Allow enabling public access on containers**: **Disabled** (uncheck this!)
-   - **Minimum TLS version**: **Version 1.2**
+   - **Advanced tab**:
+      - **Require secure transfer for REST API operations**: **Enabled** (should be checked)
+      - **Allow enabling public access on containers**: **Disabled** (uncheck this!)
+      - **Minimum TLS version**: **Version 1.2**
 
-1. Click **Next: Networking**.
+1. Click **Next**.
 
-   **Networking tab**:
-   - **Network access**: Select **Enable public access from all networks** (we'll restrict in Challenge 2)
+   - **Networking tab**:
+      - **Public network access scope**: Select **Enable from all networks** (we'll restrict in Challenge 2)
 
 1. Click **Review + Create**.
 
 1. Click **Create**.
 
-1. Wait for deployment (1-2 minutes).
+1. Wait for the deployment to complete; it will take a maximum of 1-2 minutes.
 
 1. Once complete, click **Go to resource**.
 
@@ -509,12 +521,11 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 1. In the left navigation, under **Data storage**, click **Containers**.
 
-1. Click **+ Container** (top button).
+1. Click **+ Add container**.
 
 1. Configure the container:
 
    - **Name**: **chat-sessions**
-   - **Public access level**: **Private (no anonymous access)**
 
 1. Click **Create**.
 
@@ -527,6 +538,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 1. Verify you see the following resources:
 
    - **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>** (Virtual network)
+
    - **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** (Virtual machine)
 
 1. In the left navigation, click **Subnets**.

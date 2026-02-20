@@ -2,17 +2,17 @@
 
 ## Introduction
 
-Before building the AI-powered SQL modernization pipeline, you need to provision the necessary Azure infrastructure. This challenge involves creating Microsoft Foundry project with GPT-4.1 model deployment and Cosmos DB for storing translation results and history.
+Before building the AI-powered SQL modernization pipeline, you need to provision the necessary Azure infrastructure. This challenge involves creating a Microsoft Foundry project with GPT-4.1 model deployment and Cosmos DB for storing translation results and history.
 
 ## Challenge Objectives
 
-- Set up an Microsoft Foundry project with GPT-4.1 model deployment
-- Provision Cosmos DB with appropriate database and containers
+- Set up a Microsoft Foundry project with GPT-4.1 model deployment
+- Provision Cosmos DB with an appropriate database and containers
 - Verify all resources are properly configured and accessible
 
 ## Steps to Complete
 
-### Part 1: Verify Pre-Deployed Resource Group
+### Task 1: Verify Pre-Deployed Resource Group
 
 1. In the **Azure Portal**, search for **Resource groups** in the top search bar and select it.
 
@@ -22,7 +22,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. This resource group will be used for all resources you create in this hackathon.
 
-### Part 2: Create Microsoft Foundry Project with Model Deployment
+### Task 2: Create Microsoft Foundry Project with Model Deployment
 
 1. In the **Azure Portal**, search for **Microsoft Foundry** and select it.
 
@@ -46,13 +46,14 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 1. Once created, click **Go to Foundry portal** in the overview section.
 
 <validation step="616b2c9f-85e8-44de-932a-418e889351a1" />
+
  
 > **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
 > - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
-### Part 3: Deploy GPT-4.1 Model in AI Foundry
+### Task 3: Deploy GPT-4.1 Model in AI Foundry
 
 1. In **Microsoft Foundry Studio**.
 
@@ -64,16 +65,16 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. Configure the deployment:
 
-   - **Deployment name**: `sql-translator`
-   - **Deployment type**: **Global Standard**
-   - Click **Customize**.
-   - **Tokens per Minute Rate Limit**: **50K**
+      - **Deployment name**: `sql-translator`
+      - **Deployment type**: **Global Standard**
+      - Click **Customize**.
+      - **Tokens per Minute Rate Limit**: **50K**
 
-      > **Important**: Do not increase the TPM limit beyond 50K to avoid exceeding quota limits and additional costs.
+         > **Important**: Do not increase the TPM limit beyond 50K to avoid exceeding quota limits and additional costs.
 
 1. Click **Create**.
 
-### Part 4: Test the Model Deployment
+### Task 4: Test the Model Deployment
 
 1. In your `sql-translator` model deployment.
 
@@ -93,7 +94,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
-### Part 5: Create Azure Cosmos DB
+### Task 5: Create Azure Cosmos DB
 
 1. In the **Azure Portal**, search for **Azure Cosmos DB** and select it.
 
@@ -126,38 +127,38 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
-### Part 6: Create Cosmos DB Database and Containers
+### Task 6: Create Cosmos DB Database and Containers
 
 1. In your Cosmos DB account, click on **Data Explorer** from the left navigation.
 
-   >**Note:** Close all the pop-ups.
+      >**Note:** Close all the pop-ups.
 
-1. Click **+ New Container** drop-down. From the drop-down select **+ New Database**.
+2. Click **+ New Container** drop-down. From the drop-down select **+ New Database**.
 
-1. Configure the database:
+3. Configure the database:
 
       - **Database id**: `SQLModernizationDB`
       - Select **OK**
 
-1. Click **OK**.
+4. Click **OK**.
 
-1. Create the first container for translation results:
+5. Create the first container for translation results:
 
-      - Right-Click on the **SQLModernizationDB** and click **New Container**
-      - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
-      - **Container id**: `TranslationResults`
-      - **Partition key**: `/sourceDialect`
-      - Click **OK**
+     - Right-Click on the **SQLModernizationDB** and click **New Container**
+    - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
+    - **Container id**: `TranslationResults`
+    - **Partition key**: `/sourceDialect`
+    - Click **OK**
 
-1. Create a second container for validation logs:
+6. Create a second container for validation logs:
 
-   - Right-Click on the **SQLModernizationDB** and click **New Container** again
-   - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
-   - **Container id**: `ValidationLogs`
-   - **Partition key**: `/translationId`
-   - Click **OK**
+    - Right-Click on the **SQLModernizationDB** and click **New Container** again
+    - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
+    - **Container id**: `ValidationLogs`
+    - **Partition key**: `/translationId`
+    - Click **OK**
 
-1. Create a third container for optimization suggestions:
+7. Create a third container for optimization suggestions:
 
       - Right-Click on the **SQLModernizationDB** and click **New Container** again
       - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
@@ -165,9 +166,9 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
       - **Partition key**: `/translationId`
       - Click **OK**
 
-1. Verify all three containers are visible in Data Explorer.
+8. Verify all three containers are visible in Data Explorer.
 
-1. Navigate to **Keys** in the left menu under **Settings** and copy:
+9. Navigate to **Keys** in the left menu under **Settings** and copy:
 
       - **URI**
       - **PRIMARY KEY**
@@ -181,7 +182,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
-### Part 7: Verify All Resources
+### Task 7: Verify All Resources
 
 1. Navigate back to your resource group: **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
 
@@ -192,7 +193,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. Ensure all resources show **Deployment succeeded** status.
 
-### Part 8: Gather Configuration Values
+### Task 8: Gather Configuration Values
 
 Create a text file or note with the following information (you'll need these in subsequent challenges):
 

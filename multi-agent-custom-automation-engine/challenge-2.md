@@ -44,7 +44,7 @@ Extract structured data from raw text input.
 
 ### Step 2.1: Create `extraction_agent.py`
 
-Paste the following code:
+Paste the following code, and save the file:
 
   ```python
   from semantic_kernel import Kernel
@@ -82,6 +82,8 @@ Validate extracted data for completeness and correctness.
 
 ### Step 3.1: Create `validation_agent.py`
 
+Paste the following code, and save the file:
+
   ```python
   from semantic_kernel import Kernel
 
@@ -113,6 +115,8 @@ Generate email or notification content based on validated data.
 
 ### Step 4.1: Create `communication_agent.py`
 
+Paste the following code, and save the file:
+
   ```python
   from semantic_kernel import Kernel
 
@@ -143,6 +147,8 @@ Generate a human-readable summary of the workflow.
 
 ### Step 5.1: Create `reporting_agent.py`
 
+Paste the following code, and save the file:
+
   ```python
   from semantic_kernel import Kernel
 
@@ -167,7 +173,7 @@ Generate a human-readable summary of the workflow.
 
 ## Step 6: Test Agents Individually
 
-Update `app/main.py` temporarily to test **only the Extraction Agent**.
+Update `app/main.py` temporarily to test **only the Extraction Agent** and save the file.
 
   ```python
   import os

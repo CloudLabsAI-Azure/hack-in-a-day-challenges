@@ -15,7 +15,7 @@ Now that you have a Translation Agent, you need a Validation Agent to check if t
 
 ## Steps to Complete
 
-### Part 1: Create Validation Agent
+### Task 1: Create Validation Agent
 
 1. In **Microsoft Foundry Studio**, navigate to **Agents**.
 
@@ -32,7 +32,7 @@ Now that you have a Translation Agent, you need a Validation Agent to check if t
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
-### Part 2: Write Validation Instructions
+### Task 2: Write Validation Instructions
 
 1. In the **Instructions** box, paste:
 
@@ -91,7 +91,7 @@ Now that you have a Translation Agent, you need a Validation Agent to check if t
 
 2. Save the instructions.
 
-### Part 3: Add Agent Description
+### Task 3: Add Agent Description
 
 1. Expand **Agent Description** and add:
 
@@ -99,7 +99,7 @@ Now that you have a Translation Agent, you need a Validation Agent to check if t
       Validates Azure SQL T-SQL code for syntax correctness, semantic validity, and best practice compliance. Returns structured JSON with error details and suggestions.
       ```
 
-### Part 4: Test Validation Agent Independently
+### Task 4: Test Validation Agent Independently
 
 1. Click **Try in playground**.
 
@@ -133,7 +133,7 @@ Now that you have a Translation Agent, you need a Validation Agent to check if t
 
 7. Verify it flags the missing GROUP BY for the aggregate function.
 
-### Part 5: Connect Validation Agent to Translation Agent
+### Task 5: Connect Validation Agent to Translation Agent
 
 Now comes the key part - connecting the agents!
 
@@ -145,7 +145,7 @@ Now comes the key part - connecting the agents!
 
 4. Click **+ Add**.
 
-5. In the **Adding a connected agent** dialog, configure:
+5. In the **Adding a connected agent** pane, configure:
 
       - **Agent**: Select **SQL-Validation-Agent** from dropdown
       - **Unique name**: Enter `validation_agent`
@@ -160,7 +160,7 @@ Now comes the key part - connecting the agents!
 
 7. You should now see **SQL-Validation-Agent** listed under Connected agents with the unique name `validation_agent`.
 
-### Part 6: Update Translation Agent Instructions for Hand-Off
+### Task 6: Update Translation Agent Instructions for Hand-Off
 
 1. Still in the **SQL-Translation-Agent** configuration, scroll to the **Instructions** text box.
 
@@ -191,7 +191,7 @@ Now comes the key part - connecting the agents!
 
 4. The agent will auto-save. The Translation Agent now knows to pass work to the Validation Agent.
 
-### Part 7: Test the Connected Pipeline
+### Task 7: Test the Connected Pipeline
 
 1. Go back to **SQL-Translation-Agent**.
 
@@ -217,7 +217,7 @@ Now comes the key part - connecting the agents!
       - Translated SQL from Agent 1
       - Validation JSON from Agent 2
 
-### Part 8: Test with Complex Query
+### Task 8: Test with Complex Query
 
 1. In the same playground, test with hierarchical query:
 
@@ -234,7 +234,7 @@ Now comes the key part - connecting the agents!
       - Agent 2 validates the CTE syntax
       - Both results appear in the conversation
 
-### Part 9: Test Error Handling
+### Task 9: Test Error Handling
 
 1. Intentionally send broken Oracle SQL:
 
@@ -248,7 +248,7 @@ Now comes the key part - connecting the agents!
       - Validation Agent identifies syntax errors
       - You can see the validation flagged issues
 
-### Part 10: Save Agent IDs
+### Task 10: Save Agent IDs
 
 1. Go back to **Agents** list.
 
@@ -266,8 +266,8 @@ Now comes the key part - connecting the agents!
 - Validation Agent successfully connected to Translation Agent
 - Pipeline tested: Oracle SQL → Translation → Validation
 - Hand-off happens automatically without manual intervention
-- Both agent results visible in playground conversation
-- Complex queries (CTEs, joins) flow through pipeline correctly
+- Both agent results are visible in the playground conversation
+- Complex queries (CTEs, joins) flow through the pipeline correctly
 
 ## Additional Resources
 

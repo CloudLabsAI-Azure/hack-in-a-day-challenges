@@ -63,7 +63,7 @@ In this challenge, you will prepare the **core infrastructure** required to buil
    * **Database ID:** `agent-memory-db`
    * Select **OK**
 
-4. Click **New Container** >:
+4. Right-Click on the *agent-memory-db* and select **New Container**:
 
    * Select **Use existing**
    * **Container ID:** `agent-state`
@@ -73,7 +73,7 @@ In this challenge, you will prepare the **core infrastructure** required to buil
 
 ### Step 5: Create Azure Container Registry (ACR)
 
-1. In the **Azure Portal**, search for **Container Registries** and click **Create**.
+1. In the **Azure Portal**, search for **Container registries** and click **+ Create**.
 
 2. Under **Basics**, provide:
 
@@ -89,13 +89,16 @@ In this challenge, you will prepare the **core infrastructure** required to buil
 
 #### Step 6.1: Create Project Folder Structure
 
-1. Create a new folder named:
+1. In the `C: drive` create a new folder named:
 
    ```
    multi-agent-engine
    ```
 
-2. Inside the folder, create the following structure:
+1. From the Desktop, open a **Visual Studio Code**. Open the new folder `multi-agent-engine` that you created.
+
+
+1. Inside the folder, create the following structure:
 
    ```
    multi-agent-engine/
@@ -110,17 +113,15 @@ In this challenge, you will prepare the **core infrastructure** required to buil
 
 #### Step 6.2: Create and Activate Virtual Environment (Windows)
 
-1. Open **VS Code** and open the `multi-agent-engine` folder.
+1. Open the **Terminal** in VS Code, by pressing `CTRL+J` in keyboard.
 
-2. Open the **Terminal** in VS Code.
-
-3. Create a virtual environment using the Python launcher:
+1. Create a virtual environment using the Python launcher:
 
    ```powershell
    py -m venv .venv
    ```
 
-4. Activate the virtual environment:
+1. Activate the virtual environment:
 
    ```powershell
    .venv\Scripts\activate
@@ -130,7 +131,7 @@ You should see `(.venv)` in the terminal prompt.
 
 #### Step 6.3: Install Required Packages
 
-1. Add the following to `requirements.txt`:
+1. Add the following to `requirements.txt`, and save the txt file:
 
    ```txt
    semantic-kernel
@@ -143,11 +144,13 @@ You should see `(.venv)` in the terminal prompt.
    pip install -r requirements.txt
    ```
 
+   >**Note:** It will take 5-10 minutes to deploy.
+
 #### Step 6.4: Configure Environment Variables
 
 1. Open the `.env` file in the project root.
 
-2. Add the following values (replace placeholders):
+2. Add the following values (replace placeholders) and save the file:
 
    ```env
    AZURE_OPENAI_ENDPOINT=https://<your-openai-resource-name>.openai.azure.com/
@@ -155,7 +158,7 @@ You should see `(.venv)` in the terminal prompt.
    AZURE_DEPLOYMENT_NAME=agent-gpt-4o-mini
    ```
 
-> **Note:** The deployment name must exactly match the deployment created in Microsoft Foundry Portal.
+   > **Note:** You can get the values from the **Microsoft Foundry** → **Keys and Endpoint** resource that you created.
 
 #### Step 6.5: Verify Semantic Kernel Setup
 

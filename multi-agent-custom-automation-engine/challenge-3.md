@@ -85,7 +85,7 @@ pip install azure-cosmos
 
 ## Step 4: Configure Cosmos DB Connection
 
-Add these values to your `.env` file:
+Add these values to your `.env` file and save the file:
 
    ```env
    COSMOS_DB_ENDPOINT=https://<your-cosmos-account>.documents.azure.com:443/
@@ -94,16 +94,18 @@ Add these values to your `.env` file:
    COSMOS_DB_CONTAINER=agent-state
    ```
 
-   > Use **Keys → Primary Key** from the Cosmos DB resource in Azure Portal.
+   > **Note:** Use **Settings → Key** from the Cosmos DB resource in Azure Portal.
 
 
 ## Step 5: Create Cosmos DB Helper Module
 
-Create a new file:
+1. Create a new file using the below format:
 
-```
-app/storage/cosmos_client.py
-```
+   ```
+   app/storage/cosmos_client.py
+   ```
+
+1. Now, add the below code in the `cosmos_client.py` and save the file.
 
    ```python
    import os
@@ -155,9 +157,9 @@ Update **`main.py`** temporarily to test shared memory.
       kernel.add_service(
          AzureChatCompletion(
                service_id="chat",
-               deployment_name=os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"],
+               deployment_name=os.environ["AZURE_DEPLOYMENT_NAME"],
                endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
-               api_key=os.environ["AZURE_OPENAI_API_KEY"]
+               api_key=os.environ["MICROSOFT_FOUNDRY_API_KEY"]
          )
       )
 

@@ -50,7 +50,7 @@ app/orchestrator.py
 
 ## Step 2: Implement Orchestrator Logic
 
-Paste the following code into `orchestrator.py`:
+Paste the following code into `orchestrator.py`, and save the file:
 
 ```python
 from agents.extraction_agent import run_extraction
@@ -144,9 +144,9 @@ async def main():
     kernel.add_service(
         AzureChatCompletion(
             service_id="chat",
-            deployment_name=os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"],
+            deployment_name=os.environ["AZURE_DEPLOYMENT_NAME"],
             endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
-            api_key=os.environ["AZURE_OPENAI_API_KEY"]
+            api_key=os.environ["MICROSOFT_FOUNDRY_API_KEY"]
         )
     )
 
@@ -182,7 +182,7 @@ Create a new file:
 app/agents/validation_agent.py
 ```
 
-Paste the following code:
+Paste the following code, and save the file:
 
 ```python
 from semantic_kernel import Kernel
@@ -212,8 +212,6 @@ Extracted Data:
     return result
 ```
 
-Save the file.
-
 ## Step 6: Recreate the Communication Agent
 
 Create a new file:
@@ -222,7 +220,7 @@ Create a new file:
 app/agents/communication_agent.py
 ```
 
-Paste the following code:
+Paste the following code and save the file:
 
 ```python
 from semantic_kernel import Kernel
@@ -251,8 +249,6 @@ Validated Data:
     return result
 ```
 
-Save the file.
-
 ## Step 7: Recreate the Reporting Agent
 
 Create a new file:
@@ -261,7 +257,7 @@ Create a new file:
 app/agents/reporting_agent.py
 ```
 
-Paste the following code:
+Paste the following code and save the file:
 
 ```python
 from semantic_kernel import Kernel
@@ -289,8 +285,6 @@ Workflow State:
 
     return result
 ```
-
-Save the file.
 
 ## Step 8: Run the Full Workflow
 
