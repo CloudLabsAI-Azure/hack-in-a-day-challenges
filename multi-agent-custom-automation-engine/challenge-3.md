@@ -221,13 +221,19 @@ py app/main.py
    * Extraction output
    * History entry
 
-## Completion Criteria
+## Success Criteria
 
-You have successfully completed Challenge 03:
+- Cosmos DB stores workflow state with the correct schema (`workflowId`, `currentStep`, `status`, `agentData`, `history`)
+- Agent output from the Extraction Agent is persisted in Cosmos DB
+- Workflow state can be retrieved by workflow ID
+- Data is visible in Azure Portal → Data Explorer under `agent-memory-db` / `agent-state`
+- The `save_workflow_state` and `get_workflow_state` functions work correctly
 
-* Cosmos DB stores workflow state
-* Agent output is persisted
-* Workflow state can be retrieved
-* Data is visible in Azure Portal
+## Additional Resources
+
+- [Azure Cosmos DB for NoSQL Documentation](https://learn.microsoft.com/azure/cosmos-db/nosql/)
+- [Azure Cosmos DB Python SDK](https://learn.microsoft.com/azure/cosmos-db/nosql/sdk-python)
+- [Semantic Kernel Memory and State](https://learn.microsoft.com/semantic-kernel/overview/)
+- [Multi-Agent Shared Memory Patterns](https://learn.microsoft.com/azure/architecture/patterns/event-sourcing)
 
 Now, click **Next** to continue to **Challenge 04**.

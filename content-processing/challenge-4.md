@@ -1,8 +1,8 @@
-# Challenge 4: Run the Content Processing Application
+# Challenge 04: Run the Content Processing Application
 
 ## Introduction
 
-You've built the infrastructure, created three specialized AI agents, and connected them into an automated pipeline. Now it's time to bring everything together with a **production-grade Streamlit application** that orchestrates the full document processing workflow:
+You have built the infrastructure, created three specialized AI agents, and connected them into an automated pipeline. Now it's time to bring everything together with a **production-grade Streamlit application** that orchestrates the full document processing workflow:
 
 1. **Upload** documents via the web interface
 2. **Store** them in Azure Blob Storage
@@ -10,7 +10,7 @@ You've built the infrastructure, created three specialized AI agents, and connec
 4. **Process** the extracted text through your 3-agent AI pipeline
 5. **Route** results to the appropriate Cosmos DB container based on confidence
 
-In this challenge, you'll configure and run the pre-built application, then test it with your sample documents.
+In this challenge, you will configure and run the pre-built application, then test it with your sample documents.
 
 ## Challenge Objectives
 
@@ -77,31 +77,31 @@ In this challenge, you'll configure and run the pre-built application, then test
 
 1. Fill in the following values:
 
-   **Azure AI Foundry Agent Configuration:**
+   **Microsoft Foundry Agent Configuration:**
 
-   - **AGENT_API_ENDPOINT** — Go to [Azure AI Foundry](https://ai.azure.com) → Your project (**proj-default**) → **Settings** → **Overview**. Copy the **Project endpoint**.
+   - **AGENT_API_ENDPOINT** - Go to [Microsoft Foundry](https://ai.azure.com) > Your project (**proj-default**) > **Settings** > **Overview**. Copy the **Project endpoint**.
      - Format: **https://content-hub-<inject key="DeploymentID" enableCopy="false"/>.services.ai.azure.com/api/projects/proj-default**
 
-   - **AGENT_ID** — Go to **Agents** → Open **Document-Classification-Agent** → Copy the **Agent ID** from the Setup panel (starts with `asst_`).
+   - **AGENT_ID** - Go to **Agents** > Open **Document-Classification-Agent** > Copy the **Agent ID** from the Setup panel (starts with `asst_`).
 
    **Azure AI Document Intelligence:**
 
-   - **DOC_INTELLIGENCE_ENDPOINT** — Go to Azure portal → your Document Intelligence resource **doc-intelligence-<inject key="DeploymentID" enableCopy="false"/>** → **Keys and Endpoint** → Copy **Endpoint**.
-   - **DOC_INTELLIGENCE_KEY** — Same page → Copy **Key 1**.
+   - **DOC_INTELLIGENCE_ENDPOINT** - Go to Azure portal > your Document Intelligence resource **doc-intelligence-<inject key="DeploymentID" enableCopy="false"/>** > **Keys and Endpoint** > Copy **Endpoint**.
+   - **DOC_INTELLIGENCE_KEY** - Same page > Copy **Key 1**.
 
    **Azure Blob Storage:**
 
-   - **STORAGE_CONNECTION_STRING** — Go to Azure portal → Storage Account **contentstore<inject key="DeploymentID" enableCopy="false"/>** → **Access keys** → Copy **Connection string** for Key 1.
+   - **STORAGE_CONNECTION_STRING** - Go to Azure portal > Storage Account **contentstore<inject key="DeploymentID" enableCopy="false"/>** > **Access keys** > Copy **Connection string** for Key 1.
 
    **Azure Cosmos DB:**
 
-   - **COSMOS_ENDPOINT** — Go to Azure portal → Cosmos DB account **content-cosmos-<inject key="DeploymentID" enableCopy="false"/>** → **Keys** → Copy **URI**.
-   - **COSMOS_KEY** — Same page → Copy **Primary Key**.
+   - **COSMOS_ENDPOINT** - Go to Azure portal > Cosmos DB account **content-cosmos-<inject key="DeploymentID" enableCopy="false"/>** > **Keys** > Copy **URI**.
+   - **COSMOS_KEY** - Same page > Copy **Primary Key**.
 
 1. Your `.env` file should look like this (with your actual values):
 
    ```env
-   # Azure AI Foundry
+   # Microsoft Foundry
    AGENT_API_ENDPOINT=https://content-hub-XXXXX.services.ai.azure.com/api/projects/proj-default
    AGENT_ID=asst_XXXXXXXXXXXX
 
@@ -130,13 +130,13 @@ In this challenge, you'll configure and run the pre-built application, then test
 
    > **Note:** If you encounter permission errors, try `pip install --user -r requirements.txt`.
 
-1. Authenticate with Azure CLI (required for the AI Foundry Agents SDK):
+1. Authenticate with Azure CLI (required for the Microsoft Foundry Agents SDK):
 
    ```powershell
    az login
    ```
 
-   Sign in with your lab credentials: **<inject key="AzureAdUserEmail" />**
+   Sign in with your lab credentials: <inject key="AzureAdUserEmail" />
 
 1. Set the default subscription:
 
@@ -153,7 +153,8 @@ In this challenge, you'll configure and run the pre-built application, then test
    ```
 
 1. The application should open in your browser at `http://localhost:8501`. You should see:
-   - A gradient header: **📄 Intelligent Content Processing**
+
+   - A gradient header: **Intelligent Content Processing**
    - A sidebar showing connection status for all services (Agents, Document Intelligence, Blob Storage, Cosmos DB)
    - Four tabs: **Process Documents**, **Processing Results**, **Review Queue**, **Analytics**
 
@@ -162,54 +163,53 @@ In this challenge, you'll configure and run the pre-built application, then test
 ### Task 5: Process Your First Document
 
 1. In the **Process Documents** tab, you have two options:
-   - **Upload a file** — drag and drop or browse for a document
-   - **Use sample data** — select from pre-loaded sample documents
+
+   - **Upload a file** - drag and drop or browse for a document
+   - **Use sample data** - select from pre-loaded sample documents
 
 1. Click **Use sample data** and select `invoice_contoso` from the dropdown.
 
-1. Click **🚀 Process Document**.
+1. Click **Process Document**.
 
 1. Watch the processing pipeline execute:
 
-   | Step | What Happens |
-   |------|-------------|
-   | **1. Upload** | Document is uploaded to Azure Blob Storage `documents` container |
-   | **2. OCR** | Document Intelligence extracts text, tables, and key-value pairs |
-   | **3. Classification** | Agent classifies the document type (INVOICE) |
-   | **4. Extraction** | Agent extracts structured data (vendor, line items, totals) |
-   | **5. Validation** | Agent validates data quality and assigns confidence score |
-   | **6. Routing** | Based on confidence: auto-approved → `ProcessedDocuments` or review needed → `ReviewQueue` |
+   - **Step 1 - Upload**: Document is uploaded to Azure Blob Storage `documents` container
+   - **Step 2 - OCR**: Document Intelligence extracts text, tables, and key-value pairs
+   - **Step 3 - Classification**: Agent classifies the document type (INVOICE)
+   - **Step 4 - Extraction**: Agent extracts structured data (vendor, line items, totals)
+   - **Step 5 - Validation**: Agent validates data quality and assigns confidence score
+   - **Step 6 - Routing**: Based on confidence: auto-approved to `ProcessedDocuments` or review needed to `ReviewQueue`
 
 1. The results panel should show:
+
    - **Classification**: INVOICE with high confidence
    - **Extracted Data**: Structured JSON with vendor info, invoice details, line items, totals
-   - **Validation**: Confidence score ≥ 0.85, routing: AUTO_APPROVE
-   - **Status**: ✅ Saved to `ProcessedDocuments` container
+   - **Validation**: Confidence score >= 0.85, routing: AUTO_APPROVE
+   - **Status**: Saved to `ProcessedDocuments` container
 
-1. Process two more documents — select `receipt_cafe` and `identity_doc` from the sample data and process them.
+1. Process two more documents - select `receipt_cafe` and `identity_doc` from the sample data and process them.
 
 ### Task 6: Verify Data in Cosmos DB
 
-1. Go to the Azure portal → Cosmos DB account **content-cosmos-<inject key="DeploymentID" enableCopy="false"/>** → **Data Explorer**.
+1. Go to the Azure portal > Cosmos DB account **content-cosmos-<inject key="DeploymentID" enableCopy="false"/>** > **Data Explorer**.
 
-1. Expand **ContentProcessingDB** → **ProcessedDocuments**.
+1. Expand **ContentProcessingDB** > **ProcessedDocuments**.
 
 1. Click **Items** to see the auto-approved documents. You should see at least one item with:
+
    - A `docType` field (e.g., "INVOICE")
    - Classification, extraction, and validation results
    - `routing_decision`: "AUTO_APPROVE"
-   - `confidence_score` ≥ 0.85
+   - `confidence_score` >= 0.85
 
 1. Expand **ReviewQueue** and check if any documents were routed for human review.
 
 <validation step="91273538-4019-4887-8d59-87c8bda31f27" />
 
-> **Congratulations!** Your content processing application is live and routing documents intelligently.
->
-> If validation fails, verify:
-> - The Streamlit app runs without errors at http://localhost:8501
-> - At least one document was processed and saved to Cosmos DB
-> - The sidebar shows green status for all connected services
+> **Congratulations** on completing the Task! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Task. If you receive a success message, you can proceed to the next Task.
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
 ### Task 7: Test Smart Routing
 
@@ -230,6 +230,7 @@ In this challenge, you'll configure and run the pre-built application, then test
    ```
 
 1. Upload this file and process it. The pipeline should:
+
    - Struggle to classify (lower confidence)
    - Extract minimal data (many null fields)
    - **Route to ReviewQueue** with `MANUAL_REVIEW` and clear review reasons
@@ -239,24 +240,22 @@ In this challenge, you'll configure and run the pre-built application, then test
 ## Success Criteria
 
 - Application runs at `http://localhost:8501` with all services connected (green status)
-- Successfully processed an invoice — classified as INVOICE, data extracted, auto-approved
-- Successfully processed a receipt — classified as RECEIPT, data extracted, routed correctly
+- Successfully processed an invoice - classified as INVOICE, data extracted, auto-approved
+- Successfully processed a receipt - classified as RECEIPT, data extracted, routed correctly
 - At least one document appears in the `ProcessedDocuments` Cosmos DB container with full pipeline results
 - A low-quality document was routed to the `ReviewQueue` container with review reasons
 - The processing pipeline shows real-time status updates in the UI
 
 ## Troubleshooting
 
-| Issue | Solution |
-|-------|----------|
-| `ModuleNotFoundError` | Run `pip install -r requirements.txt` again |
-| `DefaultAzureCredential` error | Run `az login` and ensure you're signed in with lab credentials |
-| Agent returns empty response | Verify `AGENT_ID` matches the Classification Agent's ID (starts with `asst_`) |
-| Document Intelligence fails | Check `DOC_INTELLIGENCE_ENDPOINT` includes the trailing `/` |
-| Cosmos DB write fails | Verify `COSMOS_KEY` is the Primary Key (not the Connection String) |
-| Blob upload fails | Check `STORAGE_CONNECTION_STRING` is the full connection string |
-| App won't start | Check for port conflicts: `streamlit run app.py --server.port 8502` |
-| Pipeline runs but no routing | Ensure Validation Agent returns `routing_decision` in its JSON output |
+- **ModuleNotFoundError** - Run `pip install -r requirements.txt` again
+- **DefaultAzureCredential error** - Run `az login` and ensure you are signed in with lab credentials
+- **Agent returns empty response** - Verify `AGENT_ID` matches the Classification Agent's ID (starts with `asst_`)
+- **Document Intelligence fails** - Check `DOC_INTELLIGENCE_ENDPOINT` includes the trailing `/`
+- **Cosmos DB write fails** - Verify `COSMOS_KEY` is the Primary Key (not the Connection String)
+- **Blob upload fails** - Check `STORAGE_CONNECTION_STRING` is the full connection string
+- **App won't start** - Check for port conflicts: `streamlit run app.py --server.port 8502`
+- **Pipeline runs but no routing** - Ensure Validation Agent returns `routing_decision` in its JSON output
 
 ## Additional Resources
 
@@ -264,4 +263,4 @@ In this challenge, you'll configure and run the pre-built application, then test
 - [Streamlit Documentation](https://docs.streamlit.io/)
 - [Azure Blob Storage Python SDK](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-python)
 
-Click **Next** to continue to **Challenge 5: Review Queue & End-to-End Validation**.
+Now, click **Next** to continue to **Challenge 05**.

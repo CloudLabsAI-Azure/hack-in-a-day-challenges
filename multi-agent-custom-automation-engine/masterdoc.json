@@ -2,7 +2,7 @@
     {
         "Name": "Multi-Agent Custom Automation Engine",
         "Language": "English",
-        "BaseURL": "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges.git",
+        "BaseURL": "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges",
         "Files": [
             {
                 "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/multi-agent-custom-automation-engine/overview.md",

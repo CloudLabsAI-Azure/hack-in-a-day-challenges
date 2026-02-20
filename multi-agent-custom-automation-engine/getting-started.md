@@ -28,15 +28,19 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 > **Note:** If the VM is not in use, please **deallocate** it to avoid unnecessary resource consumption.
 
-## Let's Get Started with Microsoft Azure
+## Let's Get Started with Multi-Agent Automation
 
-1. In the JumpVM, click on **Microsoft Edge** browser which is created on desktop.
+1. In the JumpVM, click on the **Microsoft Edge** browser shortcut which is created on the desktop.
 
    ![](./media/gs-up1.png)
 
-1. Navigate to **Microsoft Fabric** portal by typing `https://fabric.microsoft.com` in the address bar.
+1. Navigate to the **Azure Portal**:
 
-1. On the **Sign into Microsoft** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
+   ```
+   https://portal.azure.com/
+   ```
+
+1. On the **Sign into Microsoft Azure** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
 
    - Email/Username: <inject key="AzureAdUserEmail"></inject>
 
@@ -48,12 +52,22 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
      ![](./media/gs-lab3-g3.png)
 
-     >**Note:** If you see the Action Required dialog box, then select Ask Later option.
+     >**Note:** If you see the Action Required dialog box, then select the Ask Later option.
      
 1. If you see the pop-up **Stay Signed in?**, click No.
 
    ![](./media/gs-4.png)
 
-Now, click on the **Next** from lower right corner to move on next page.
+1. Welcome to **Azure Portal**! You're now ready to start building your Multi-Agent Automation Engine using Microsoft Foundry, Semantic Kernel, Cosmos DB, and Azure Container Registry.
 
-## Happy Hacking!!
+1. The lab environment includes:
+   - Azure subscription with Owner permissions
+   - Pre-configured resource group for deployments
+   - Access to Microsoft Foundry (Azure AI Foundry)
+   - Pre-built Streamlit application code (download link provided in Challenge 5)
+   - Python 3.11 and VS Code pre-installed
+   - Azure CLI for authentication
+
+Now, click on the **Next** from the lower right corner to move on to the next page.
+
+## Happy Hacking!

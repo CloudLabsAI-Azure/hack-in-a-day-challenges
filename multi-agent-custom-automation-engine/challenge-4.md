@@ -162,131 +162,28 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## Step 4: Delete Existing Agent Files
+## Step 4: Verify Agent Compatibility
 
-To avoid leftover or cached prompt issues, **delete** the following files completely:
+Before running the orchestrator, verify that your agents from Challenge 02 are compatible with the orchestrator.
 
-```
-app/agents/validation_agent.py
-app/agents/communication_agent.py
-app/agents/reporting_agent.py
-```
+The orchestrator expects the following function signatures:
 
-> Do not edit these files — delete them first.
+| Agent | Function | Input |
+|-------|----------|-------|
+| Extraction Agent | `run_extraction(kernel, input_text)` | Raw text string |
+| Validation Agent | `run_validation(kernel, extracted_text)` | Extracted JSON string |
+| Communication Agent | `run_communication(kernel, validated_text)` | Validated JSON string |
+| Reporting Agent | `run_reporting(kernel, workflow_data)` | Workflow state (dict or string) |
 
-## Step 5: Recreate the Validation Agent
+Open each agent file in `app/agents/` and confirm:
 
-Create a new file:
+* Each function uses `KernelArguments` for prompt variables
+* Each prompt uses `{{$data}}` or `{{$inputText}}` template syntax
+* Each function returns the result from `kernel.invoke_prompt()`
 
-```
-app/agents/validation_agent.py
-```
+> **Note:** If you completed Challenge 02 correctly, all agents should already be compatible. No changes are needed.
 
-Paste the following code, and save the file:
-
-```python
-from semantic_kernel import Kernel
-from semantic_kernel.functions import KernelArguments
-
-async def run_validation(kernel: Kernel, extracted_text: str):
-    prompt = """
-You are a validation agent.
-
-Validate the extracted data below.
-Check for missing or inconsistent fields.
-Return ONLY valid JSON.
-
-Extracted Data:
-{{$data}}
-"""
-
-    arguments = KernelArguments(
-        data=extracted_text
-    )
-
-    result = await kernel.invoke_prompt(
-        prompt=prompt,
-        arguments=arguments
-    )
-
-    return result
-```
-
-## Step 6: Recreate the Communication Agent
-
-Create a new file:
-
-```
-app/agents/communication_agent.py
-```
-
-Paste the following code and save the file:
-
-```python
-from semantic_kernel import Kernel
-from semantic_kernel.functions import KernelArguments
-
-async def run_communication(kernel: Kernel, validated_text: str):
-    prompt = """
-You are a communication agent.
-
-Draft a professional email based on the validated data below.
-Return ONLY valid JSON with subject and body.
-
-Validated Data:
-{{$data}}
-"""
-
-    arguments = KernelArguments(
-        data=validated_text
-    )
-
-    result = await kernel.invoke_prompt(
-        prompt=prompt,
-        arguments=arguments
-    )
-
-    return result
-```
-
-## Step 7: Recreate the Reporting Agent
-
-Create a new file:
-
-```
-app/agents/reporting_agent.py
-```
-
-Paste the following code and save the file:
-
-```python
-from semantic_kernel import Kernel
-from semantic_kernel.functions import KernelArguments
-
-async def run_reporting(kernel: Kernel, workflow_state: dict):
-    prompt = """
-You are a reporting agent.
-
-Summarize the workflow execution below.
-Return ONLY valid JSON.
-
-Workflow State:
-{{$data}}
-"""
-
-    arguments = KernelArguments(
-        data=str(workflow_state)
-    )
-
-    result = await kernel.invoke_prompt(
-        prompt=prompt,
-        arguments=arguments
-    )
-
-    return result
-```
-
-## Step 8: Run the Full Workflow
+## Step 5: Run the Full Workflow
 
 Run:
 
@@ -294,7 +191,7 @@ Run:
 py app/main.py
 ```
 
-## Step 9: Verify Workflow Execution
+## Step 6: Verify Workflow Execution
 
 In **Azure Portal → Cosmos DB → Data Explorer**:
 
@@ -311,14 +208,21 @@ In **Azure Portal → Cosmos DB → Data Explorer**:
     * reporting
   * `history` contains all agent executions
 
-## Completion Criteria
+## Success Criteria
 
-You have successfully completed Challenge 04:
+- Orchestrator module (`orchestrator.py`) executes all four agents sequentially
+- Each agent writes its output to the Cosmos DB workflow state
+- Workflow state transitions correctly through `extraction` → `validation` → `communication` → `reporting` → `completed`
+- Final `status` is `COMPLETED` in the Cosmos DB document
+- `agentData` contains outputs from all four agents (extraction, validation, communication, reporting)
+- `history` array contains all four agent execution entries
+- Full execution history is visible in Azure Portal → Data Explorer
 
-* Orchestrator executes all agents sequentially
-* Each agent writes output to Cosmos DB
-* Workflow state transitions correctly
-* Final status is `COMPLETED`
-* Full execution history is visible
+## Additional Resources
+
+- [Semantic Kernel Orchestration](https://learn.microsoft.com/semantic-kernel/overview/)
+- [Multi-Agent Orchestration Patterns](https://learn.microsoft.com/azure/architecture/patterns/choreography)
+- [Azure Cosmos DB Data Explorer](https://learn.microsoft.com/azure/cosmos-db/data-explorer)
+- [Building AI Agents with Semantic Kernel](https://learn.microsoft.com/semantic-kernel/frameworks/agent/)
 
 Now, click **Next** to continue to **Challenge 05**.

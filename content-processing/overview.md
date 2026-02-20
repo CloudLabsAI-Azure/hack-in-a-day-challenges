@@ -2,62 +2,25 @@
 
 ## Overview
 
-Every day, enterprises process thousands of documents — invoices from vendors, insurance claims, medical forms, receipts, and identity documents. At **Contoso Enterprises**, a diversified conglomerate spanning finance, healthcare, and insurance, this manual document processing bottleneck costs **$2.4 million annually** in labor and delays critical business decisions by an average of 72 hours.
+Every day, enterprises process thousands of documents - invoices from vendors, insurance claims, medical forms, receipts, and identity documents. At **Contoso Enterprises**, a diversified conglomerate spanning finance, healthcare, and insurance, this manual document processing bottleneck costs **$2.4 million annually** in labor and delays critical business decisions by an average of 72 hours.
 
-Your mission: **Build an AI-powered document processing pipeline** that automatically ingests documents, extracts text using Azure AI Document Intelligence, classifies and extracts structured data using a multi-agent AI pipeline, and intelligently routes results based on confidence scoring — high-confidence documents are auto-approved, while low-confidence documents are flagged for human review.
-
-## Architecture
-
-```
-┌──────────────┐     ┌─────────────────────┐     ┌──────────────────────────────────┐
-│  Document     │     │  Azure AI Document  │     │  Azure AI Foundry Agent Pipeline │
-│  Upload       │────▶│  Intelligence       │────▶│                                  │
-│  (Blob Store) │     │  (OCR + Layout)     │     │  Classification Agent            │
-└──────────────┘     └─────────────────────┘     │       ↓ (connected)              │
-                                                  │  Extraction Agent                │
-                                                  │       ↓ (connected)              │
-                                                  │  Validation Agent                │
-                                                  └──────────┬───────────────────────┘
-                                                             │
-                                                    ┌────────┴────────┐
-                                                    │  Smart Router   │
-                                                    └───┬─────────┬───┘
-                                                        │         │
-                                            ┌───────────▼──┐  ┌──▼──────────────┐
-                                            │ Auto-Approved │  │  Review Queue   │
-                                            │ (Cosmos DB)   │  │  (Cosmos DB)    │
-                                            │ confidence    │  │  confidence     │
-                                            │ ≥ 0.85       │  │  < 0.85        │
-                                            └──────────────┘  └─────────────────┘
-                                                        │         │
-                                                    ┌───▼─────────▼───┐
-                                                    │   Streamlit     │
-                                                    │   Dashboard     │
-                                                    │   (Upload,      │
-                                                    │    Review,      │
-                                                    │    Analytics)   │
-                                                    └─────────────────┘
-```
+Your mission: **Build an AI-powered document processing pipeline** that automatically ingests documents, extracts text using Azure AI Document Intelligence, classifies and extracts structured data using a multi-agent AI pipeline, and intelligently routes results based on confidence scoring - high-confidence documents are auto-approved, while low-confidence documents are flagged for human review.
 
 ## Key Azure Services
 
-| Service | Purpose |
-|---------|---------|
-| **Azure Blob Storage** | Document ingestion and storage |
-| **Azure AI Document Intelligence** | OCR extraction — text, tables, key-value pairs from PDFs, images, scans |
-| **Microsoft Foundry (Azure AI Foundry)** | Multi-agent AI pipeline — classification, extraction, validation |
-| **Azure Cosmos DB (NoSQL)** | Dual-container persistence — auto-approved results + human review queue |
-| **Streamlit** | Interactive dashboard for upload, review, and analytics |
+- **Azure Blob Storage** - Document ingestion and storage
+- **Azure AI Document Intelligence** - OCR extraction: text, tables, key-value pairs from PDFs, images, scans
+- **Microsoft Foundry** - Multi-agent AI pipeline: classification, extraction, validation
+- **Azure Cosmos DB (NoSQL)** - Dual-container persistence: auto-approved results + human review queue
+- **Streamlit** - Interactive dashboard for upload, review, and analytics
 
 ## Challenges
 
-| Challenge | Title | Duration | Description |
-|-----------|-------|----------|-------------|
-| **1** | Set Up Azure Infrastructure | ~40 min | Provision Storage Account, Document Intelligence, AI Foundry project (GPT-4.1), and Cosmos DB with dual containers. Upload sample documents and test OCR extraction. |
-| **2** | Build the Document Classification Agent | ~40 min | Create a classification agent in Azure AI Foundry that identifies document types (invoice, receipt, medical form, insurance claim, ID) from OCR text and returns structured JSON. |
-| **3** | Build Extraction & Validation Agents + Connect Pipeline | ~60 min | Create extraction and validation agents. Connect all three agents using Foundry's connected agents feature for automatic hand-off. Test the full pipeline. |
-| **4** | Run the Content Processing Application | ~50 min | Configure and run the pre-built Streamlit application. Upload documents, watch the pipeline process them, and verify smart routing to the correct Cosmos DB container. |
-| **5** | Review Queue & End-to-End Validation | ~30 min | Use the dashboard's Review tab to approve or reject low-confidence documents. Process all sample documents end-to-end. Explore the analytics dashboard. Tackle bonus challenges. |
+- **Challenge 01: Set Up Azure Infrastructure** (~40 min) - Provision Storage Account, Document Intelligence, Microsoft Foundry project (GPT-4.1), and Cosmos DB with dual containers. Upload sample documents and test OCR extraction.
+- **Challenge 02: Build the Document Classification Agent** (~40 min) - Create a classification agent in Microsoft Foundry that identifies document types (invoice, receipt, medical form, insurance claim, ID) from OCR text and returns structured JSON.
+- **Challenge 03: Build Extraction & Validation Agents + Connect Pipeline** (~60 min) - Create extraction and validation agents. Connect all three agents using Foundry's connected agents feature for automatic hand-off. Test the full pipeline.
+- **Challenge 04: Run the Content Processing Application** (~50 min) - Configure and run the pre-built Streamlit application. Upload documents, watch the pipeline process them, and verify smart routing to the correct Cosmos DB container.
+- **Challenge 05: Review Queue & End-to-End Validation** (~30 min) - Use the dashboard's Review tab to approve or reject low-confidence documents. Process all sample documents end-to-end. Explore the analytics dashboard.
 
 ## Learning Objectives
 
@@ -75,13 +38,13 @@ By completing this hackathon, you will:
 
 - Basic familiarity with the Azure portal
 - Understanding of AI/ML concepts (no deep expertise required)
-- Basic Python knowledge (helpful but not mandatory — code is pre-built)
+- Basic Python knowledge (helpful but not mandatory - code is pre-built)
 - Curiosity and willingness to experiment!
 
 ## Hackathon Format
 
-This is a **challenge-based hackathon** — each challenge gives you objectives and success criteria, with guided steps to help you along the way. You'll build progressively, starting from infrastructure setup and ending with a fully functional, demo-able document processing pipeline.
+This is a **challenge-based hackathon** - each challenge gives you objectives and success criteria, with guided steps to help you along the way. You will build progressively, starting from infrastructure setup and ending with a fully functional, demo-able document processing pipeline.
 
-**Duration:** ~4–6 hours (depending on experience level)
+**Duration:** ~4-6 hours (depending on experience level)
 
 Click **Next** to set up your lab environment.

@@ -37,6 +37,58 @@ A **central orchestrator** coordinates these agents, routes tasks, manages workf
 
 The lab focuses on **core AI orchestration principles**, not infrastructure complexity, ensuring that all participants can complete the solution within the allocated time.
 
+## Architecture
+
+```
+┌─────────────────┐     ┌─────────────────────────┐
+│  User Input     │     │  Central Orchestrator   │
+│  (Text / File   │────▶│  (Semantic Kernel)       │
+│   / Sample Data)│     │                         │
+└─────────────────┘     └────────────┬────────────┘
+                                  │
+                    ┌────────────▼────────────┐
+                    │  Extraction Agent       │
+                    │  (Structured Data)      │
+                    └────────────┬────────────┘
+                                  │
+                    ┌────────────▼────────────┐
+                    │  Validation Agent       │
+                    │  (Quality Check)        │
+                    └────────────┬────────────┘
+                                  │
+                    ┌────────────▼────────────┐
+                    │  Communication Agent    │
+                    │  (Email / Notification) │
+                    └────────────┬────────────┘
+                                  │
+                    ┌────────────▼────────────┐
+                    │  Reporting Agent        │
+                    │  (Summary / Report)     │
+                    └────────────┬────────────┘
+                                  │
+                    ┌────────────▼────────────┐
+                    │  Azure Cosmos DB        │
+                    │  (Shared Memory &       │
+                    │   Audit Trail)          │
+                    └─────────────────────────┘
+                                  │
+                    ┌────────────▼────────────┐
+                    │  Streamlit Dashboard    │
+                    │  (Process, Results,     │
+                    │   History)              │
+                    └─────────────────────────┘
+```
+
+## Key Azure Services
+
+| Service | Purpose |
+|---------|---------|
+| **Microsoft Foundry (Azure AI Foundry)** | AI model hosting — GPT-4o-mini for agent intelligence |
+| **Azure Cosmos DB (NoSQL)** | Shared memory — workflow state, agent outputs, audit history |
+| **Azure Container Registry** | (Bonus) Container image storage for deployment |
+| **Semantic Kernel** | Multi-agent orchestration framework |
+| **Streamlit** | Production dashboard for workflow processing and history |
+
 ## Learning Objectives
 
 By completing this hackathon, you will learn how to:
@@ -52,20 +104,13 @@ By completing this hackathon, you will learn how to:
 
 This lab is structured into **five progressive challenges**, each building on the previous one to model a real-world enterprise automation lifecycle:
 
-* **Challenge 01: Environment & AI Foundation Setup**
-  Set up the development environment and configure access to AI services.
-
-* **Challenge 02: Build the First AI Agent (Extraction)**
-  Create a specialized agent that extracts structured data from natural language input.
-
-* **Challenge 03: Shared Memory with Cosmos DB**
-  Persist workflow state and agent outputs using a shared data store.
-
-* **Challenge 04: Central Orchestrator & Agent Collaboration**
-  Implement the orchestrator that coordinates multiple agents and manages workflow execution.
-
-* **Challenge 05: End-to-End Execution & Validation**
-  Run the complete multi-agent workflow, validate outputs, and review execution history.
+| Challenge | Title | Duration | Description |
+|-----------|-------|----------|-------------|
+| **1** | Environment & AI Foundation Setup | ~45 min | Provision Microsoft Foundry, Cosmos DB, and ACR. Initialize Semantic Kernel project and define agent roles. |
+| **2** | Build Specialized AI Agents | ~40 min | Create four AI agents (Extraction, Validation, Communication, Reporting) using Semantic Kernel with proper prompt templates. |
+| **3** | Shared Memory with Cosmos DB | ~40 min | Persist workflow state and agent outputs using a shared data store. Enable agents to read prior results. |
+| **4** | Central Orchestrator & Agent Collaboration | ~45 min | Implement the orchestrator that coordinates all agents, manages workflow execution, and maintains audit trails. |
+| **5** | Production Dashboard & End-to-End Validation | ~50 min | Configure and run the pre-built Streamlit dashboard. Test multi-agent pipeline with sample enterprise scenarios. Verify in Cosmos DB. |
 
 Each challenge is designed to be **independently verifiable**, ensuring steady progress and clear milestones throughout the hackathon.
 
@@ -73,11 +118,20 @@ Each challenge is designed to be **independently verifiable**, ensuring steady p
 
 By the end of this lab, you will have built:
 
-* A fully functional **multi-agent automation engine**
-* Specialized AI agents collaborating intelligently
-* A centralized orchestration layer managing execution flow
-* A shared memory system enabling transparency and auditability
-* A production-style AI automation pattern suitable for enterprise use cases
+* A fully functional **multi-agent automation engine** with four specialized AI agents
+* A centralized **orchestration layer** managing execution flow using Semantic Kernel
+* A **shared memory system** (Cosmos DB) enabling transparency and auditability
+* A **production-grade Streamlit dashboard** for workflow processing, results visualization, and history
+* A containerizable solution pattern suitable for enterprise deployment
+
+## Prerequisites
+
+- Basic familiarity with the Azure portal
+- Understanding of AI/ML concepts (no deep expertise required)
+- Basic Python knowledge (helpful but not mandatory — code is pre-built)
+- Curiosity and willingness to experiment!
+
+**Duration:** ~4–6 hours (depending on experience level)
 
 ## Final Note
 

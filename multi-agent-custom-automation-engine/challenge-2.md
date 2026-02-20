@@ -86,22 +86,27 @@ Paste the following code, and save the file:
 
   ```python
   from semantic_kernel import Kernel
+  from semantic_kernel.functions import KernelArguments
 
-  async def run_validation(kernel: Kernel, extracted_json: str):
+  async def run_validation(kernel: Kernel, extracted_text: str):
       prompt = """
-      You are a validation agent.
+You are a validation agent.
 
-      Validate the extracted data.
-      Check for missing or inconsistent fields.
-      Return valid JSON only.
+Validate the extracted data below.
+Check for missing or inconsistent fields.
+Return ONLY valid JSON.
 
-      INPUT:
-      {{input}}
-      """
+Extracted Data:
+{{$data}}
+"""
+
+      arguments = KernelArguments(
+          data=extracted_text
+      )
 
       result = await kernel.invoke_prompt(
-          prompt,
-          input=extracted_json
+          prompt=prompt,
+          arguments=arguments
       )
 
       return result
@@ -119,21 +124,26 @@ Paste the following code, and save the file:
 
   ```python
   from semantic_kernel import Kernel
+  from semantic_kernel.functions import KernelArguments
 
-  async def run_communication(kernel: Kernel, validated_json: str):
+  async def run_communication(kernel: Kernel, validated_text: str):
       prompt = """
-      You are a communication agent.
+You are a communication agent.
 
-      Draft a professional email message based on the validated data.
-      Return valid JSON only with subject and body.
+Draft a professional email based on the validated data below.
+Return ONLY valid JSON with subject and body.
 
-      INPUT:
-      {{input}}
-      """
+Validated Data:
+{{$data}}
+"""
+
+      arguments = KernelArguments(
+          data=validated_text
+      )
 
       result = await kernel.invoke_prompt(
-          prompt,
-          input=validated_json
+          prompt=prompt,
+          arguments=arguments
       )
 
       return result
@@ -151,21 +161,26 @@ Paste the following code, and save the file:
 
   ```python
   from semantic_kernel import Kernel
+  from semantic_kernel.functions import KernelArguments
 
-  async def run_reporting(kernel: Kernel, workflow_data: str):
+  async def run_reporting(kernel: Kernel, workflow_data):
       prompt = """
-      You are a reporting agent.
+You are a reporting agent.
 
-      Summarize the workflow outcome in a concise manner.
-      Return valid JSON only.
+Summarize the workflow execution below.
+Return ONLY valid JSON.
 
-      INPUT:
-      {{input}}
-      """
+Workflow State:
+{{$data}}
+"""
+
+      arguments = KernelArguments(
+          data=str(workflow_data)
+      )
 
       result = await kernel.invoke_prompt(
-          prompt,
-          input=workflow_data
+          prompt=prompt,
+          arguments=arguments
       )
 
       return result
@@ -226,13 +241,19 @@ Expected output (example):
 
 Minor variations are acceptable.
 
-## Completion Criteria
+## Success Criteria
 
-You have successfully completed Challenge 02:
+- All four agent files are created (`extraction_agent.py`, `validation_agent.py`, `communication_agent.py`, `reporting_agent.py`)
+- Each agent has one clear responsibility and uses `KernelArguments` for prompt variables
+- Agents return structured JSON output
+- The Extraction Agent runs successfully with the sample input and produces valid output
+- Agent folder structure matches the expected layout
 
-* All four agents are created
-* Each agent has one clear responsibility
-* Agents return structured JSON
-* At least one agent runs successfully
+## Additional Resources
+
+- [Semantic Kernel Overview](https://learn.microsoft.com/semantic-kernel/overview/)
+- [Semantic Kernel Prompt Templates](https://learn.microsoft.com/semantic-kernel/prompts/)
+- [Azure OpenAI Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)
+- [Multi-Agent Design Patterns](https://learn.microsoft.com/semantic-kernel/frameworks/agent/agent-architecture)
 
 Now, click **Next** to continue to **Challenge 03**.
