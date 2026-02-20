@@ -25,7 +25,7 @@ You will then use Microsoft Foundry's **Connected Agents** feature to chain all 
 1. Click **+ New Agent** and configure:
 
    - **Agent name**: `Data-Extraction-Agent`
-   - **Model**: `doc-processor` (GPT-4.1)
+   - **Model**: `doc-processor` (GPT)
 
 1. In the **Instructions** field, copy the entire block below and paste it into the Instructions box:
 
@@ -70,7 +70,7 @@ You will then use Microsoft Foundry's **Connected Agents** feature to chain all 
 1. Click **+ New Agent** again and configure:
 
    - **Agent name**: `Quality-Validation-Agent`
-   - **Model**: `doc-processor` (GPT-4.1)
+   - **Model**: `doc-processor` (GPT)
 
 1. In the **Instructions** field, copy the entire block below and paste it into the Instructions box:
 

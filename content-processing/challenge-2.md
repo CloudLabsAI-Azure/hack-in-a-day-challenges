@@ -31,7 +31,7 @@ Getting classification right is critical because it determines which extraction 
    Document-Classification-Agent
    ```
 
-1. Under **Model**, select the **doc-processor** deployment (GPT-4.1) you created in Challenge 01.
+1. Under **Model**, select the **doc-processor** deployment (GPT model) you created in Challenge 01.
 
 1. In the **Instructions** field, copy the entire block below and paste it into the Instructions box:
 

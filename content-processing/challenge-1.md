@@ -12,7 +12,7 @@ You will also upload sample documents and test Document Intelligence's OCR capab
 - Upload 5 sample documents (invoice, receipt, medical form, insurance claim, ID)
 - Create an Azure AI Document Intelligence resource
 - Test OCR extraction in Document Intelligence Studio
-- Create a Microsoft Foundry project and deploy a GPT-4.1 model
+- Create a Microsoft Foundry project and deploy a GPT model
 - Create an Azure Cosmos DB account with two containers: ProcessedDocuments and ReviewQueue
 
 ## Steps to Complete
@@ -70,15 +70,20 @@ You will also upload sample documents and test Document Intelligence's OCR capab
    - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
    - **Region**: **<inject key="Region" />**
    - **Name**: **doc-intel-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Pricing tier**: **Free F0** (or Standard S0 if F0 is unavailable)
+   - **Pricing tier**: **Standard S0**.
 
 1. Click **Review + Create**, then **Create**. Wait for deployment to complete.
 
 ### Task 4: Test OCR in Document Intelligence Studio
 
-1. Navigate to [Document Intelligence Studio](https://documentintelligence.ai.azure.com/studio).
+1. In the Azure portal, navigate to your deployed **doc-intel-<inject key="DeploymentID" enableCopy="false"/>** Document Intelligence.
 
-1. Sign in with your lab credentials: <inject key="AzureAdUserEmail" />
+1. On the **Overview** page, select **Go to Document Intelligence Studio** to open the studio in a new tab.
+
+1. If prompted on the **Sign into Microsoft Azure** tab, enter the provided credentials and select **Sign in**.
+
+   - **Email**: <inject key="AzureAdUserEmail" />
+   - **Password**: <inject key="AzureAdUserPassword" />
 
 1. Under **Document analysis**, select **OCR/Read**.
 
@@ -86,6 +91,7 @@ You will also upload sample documents and test Document Intelligence's OCR capab
 
    - **Subscription**: Select the available **Azure subscription**
    - **Resource**: Select **doc-intel-<inject key="DeploymentID" enableCopy="false"/>**
+   - click **Submit**
 
 1. Click **Browse for files** and upload **invoice_contoso.pdf** from your sample documents.
 
@@ -99,9 +105,9 @@ You will also upload sample documents and test Document Intelligence's OCR capab
 
    > **Note:** The OCR/Read model focuses on text extraction, which is exactly what our AI agents need. The agents downstream will handle classification, structured data extraction, and validation. We don't need Layout's table/structure detection because the agents are smart enough to understand the text format.
 
-1. Try analysing **receipt_cafe.jpg** and **drivers_license.jpg** as well. Notice how Document Intelligence handles different document formats (PDF vs image) and layouts.
+1. Try analysing **Images** as well. Notice how Document Intelligence handles different document formats (PDF vs image) and layouts.
 
-### Task 5: Create Microsoft Foundry Resource and Deploy GPT-4.1
+### Task 5: Create Microsoft Foundry Resource and Deploy GPT Model
 
 1. In the Azure portal, search for **Microsoft Foundry** in the top search bar.
 
@@ -201,7 +207,7 @@ You will also upload sample documents and test Document Intelligence's OCR capab
 - 5 sample documents are uploaded to the `documents` container
 - Document Intelligence resource **doc-intel-<inject key="DeploymentID" enableCopy="false"/>** is provisioned
 - You successfully analyzed at least one document in Document Intelligence Studio and observed extracted text
-- Microsoft Foundry project with **openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>** is created with `doc-processor` GPT-4.1 deployment
+- Microsoft Foundry project with **openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>** is created with `doc-processor` GPT deployment
 - Cosmos DB account **cosmos-docs-<inject key="DeploymentID" enableCopy="false"/>** has database `ContentProcessingDB` with `ProcessedDocuments` and `ReviewQueue` containers
 
 ## Additional Resources
