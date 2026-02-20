@@ -736,14 +736,6 @@ ORDER BY emp_level, emp_name;
 3. Look in the Setup panel on the right
 4. Copy the value from "Agent ID:" field (starts with `asst_`)
 
-## Bonus Challenges
-
-1. **Batch Processing**: Add file upload to process multiple .sql files at once
-2. **Export Report**: Add "Download as PDF" button with translation comparison
-3. **Metrics Dashboard**: Query Cosmos DB to show statistics (success rate, most common errors, average optimization score)
-4. **Code Diff View**: Use `difflib` to show side-by-side Oracle vs T-SQL comparison
-5. **Chat Interface**: Add conversational UI where users can ask follow-up questions about the translation
-
 ## Next Steps
 
 Congratulations! You've built a complete multi-agent SQL modernization platform. You can:
@@ -1166,6 +1158,14 @@ with col3:
    - Optimization suggests indexes, rewrites, Azure features
    - Results saved to Cosmos DB
    - History tab shows the entry
+
+<validation step="34d75f14-cc71-4256-b6a1-731aeff9dca9" />
+
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
 ## Success Criteria
 

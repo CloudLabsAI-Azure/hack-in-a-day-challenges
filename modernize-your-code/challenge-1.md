@@ -46,6 +46,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 1. Once created, click **Go to Foundry portal** in the overview section.
 
 <validation step="616b2c9f-85e8-44de-932a-418e889351a1" />
+
  
 > **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
 > - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
