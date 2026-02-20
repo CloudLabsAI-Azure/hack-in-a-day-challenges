@@ -64,12 +64,12 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. Configure the deployment:
 
-   - **Deployment name**: `sql-translator`
-   - **Deployment type**: **Global Standard**
-   - Click **Customize**.
-   - **Tokens per Minute Rate Limit**: **50K**
+      - **Deployment name**: `sql-translator`
+      - **Deployment type**: **Global Standard**
+      - Click **Customize**.
+      - **Tokens per Minute Rate Limit**: **50K**
 
-      > **Important**: Do not increase the TPM limit beyond 50K to avoid exceeding quota limits and additional costs.
+         > **Important**: Do not increase the TPM limit beyond 50K to avoid exceeding quota limits and additional costs.
 
 1. Click **Create**.
 
@@ -130,7 +130,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. In your Cosmos DB account, click on **Data Explorer** from the left navigation.
 
-   >**Note:** Close all the pop-ups.
+      >**Note:** Close all the pop-ups.
 
 1. Click **+ New Container** drop-down. From the drop-down select **+ New Database**.
 

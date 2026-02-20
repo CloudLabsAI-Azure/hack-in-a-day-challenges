@@ -532,7 +532,7 @@ response_text = assistant_messages[0]["content"][0]["text"]["value"]
 
 > **Key Point**: When you call the Translation Agent, it automatically calls the connected Validation and Optimization agents. The response includes all three outputs in one message.
 
-### Part 5: Response Parsing
+### Part 9: Response Parsing
 
 The app uses regex to extract the three agent outputs:
 
@@ -561,83 +561,83 @@ def parse_agent_response(response_text):
     return result
 ```
 
-### Part 6: Deploy to Azure Container Apps
+### Part 10: Deploy to Azure Container Apps
 
 Now that your app works locally, let's deploy it to Azure for production use.
 
 1. Create a **Dockerfile** in your project folder:
 
-```dockerfile
-FROM python:3.11-slim
+    ```dockerfile
+    FROM python:3.11-slim
 
-WORKDIR /app
+    WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+    COPY requirements.txt .
+    RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app.py .
-COPY .env .
+    COPY app.py .
+    COPY .env .
 
-EXPOSE 8501
+    EXPOSE 8501
 
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
-```
+    CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+    ```
 
 2. Build and test Docker image locally:
 
-```bash
-docker build -t sql-modernization-app .
-docker run -p 8501:8501 sql-modernization-app
-```
+    ```bash
+    docker build -t sql-modernization-app .
+    docker run -p 8501:8501 sql-modernization-app
+    ```
 
 3. Visit `http://localhost:8501` to test the containerized app.
 
 4. Push to Azure Container Registry:
 
-```bash
-# Login to Azure
-az login
+    ```bash
+    # Login to Azure
+    az login
 
-# Create Azure Container Registry (if not exists)
-az acr create --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> --name sqlmodernizationacr<inject key="DeploymentID" enableCopy="false"/> --sku Basic
+    # Create Azure Container Registry (if not exists)
+    az acr create --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> --name sqlmodernizationacr<inject key="DeploymentID" enableCopy="false"/> --sku Basic
 
-# Login to ACR
-az acr login --name sqlmodernizationacr<inject key="DeploymentID" enableCopy="false"/>
+    # Login to ACR
+    az acr login --name sqlmodernizationacr<inject key="DeploymentID" enableCopy="false"/>
 
-# Tag and push image
-docker tag sql-modernization-app sqlmodernizationacr<inject key="DeploymentID" enableCopy="false"/>.azurecr.io/sql-modernization-app:v1
-docker push sqlmodernizationacr<inject key="DeploymentID" enableCopy="false"/>.azurecr.io/sql-modernization-app:v1
-```
+    # Tag and push image
+    docker tag sql-modernization-app sqlmodernizationacr<inject key="DeploymentID" enableCopy="false"/>.azurecr.io/sql-modernization-app:v1
+    docker push sqlmodernizationacr<inject key="DeploymentID" enableCopy="false"/>.azurecr.io/sql-modernization-app:v1
+    ```
 
 5. Create Azure Container App:
 
-```bash
-az containerapp create \
-  --name sql-modernization-app \
-  --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> \
-  --environment sql-modernization-env \
-  --image sqlmodernizationacr<inject key="DeploymentID" enableCopy="false"/>.azurecr.io/sql-modernization-app:v1 \
-  --target-port 8501 \
-  --ingress external \
-  --registry-server sqlmodernizationacr<inject key="DeploymentID" enableCopy="false"/>.azurecr.io \
-  --env-vars \
-    AGENT_API_ENDPOINT="<your-endpoint>" \
-    AGENT_API_KEY="<your-api-key>" \
-    AGENT_ID="<your-agent-id>" \
-    COSMOS_ENDPOINT="<your-cosmos-endpoint>" \
-    COSMOS_KEY="<your-cosmos-key>" \
-    DATABASE_NAME="SQLModernizationDB"
-```
+    ```bash
+    az containerapp create \
+    --name sql-modernization-app \
+    --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> \
+    --environment sql-modernization-env \
+    --image sqlmodernizationacr<inject key="DeploymentID" enableCopy="false"/>.azurecr.io/sql-modernization-app:v1 \
+    --target-port 8501 \
+    --ingress external \
+    --registry-server sqlmodernizationacr<inject key="DeploymentID" enableCopy="false"/>.azurecr.io \
+    --env-vars \
+        AGENT_API_ENDPOINT="<your-endpoint>" \
+        AGENT_API_KEY="<your-api-key>" \
+        AGENT_ID="<your-agent-id>" \
+        COSMOS_ENDPOINT="<your-cosmos-endpoint>" \
+        COSMOS_KEY="<your-cosmos-key>" \
+        DATABASE_NAME="SQLModernizationDB"
+    ```
 
 6. Get the public URL:
 
-```bash
-az containerapp show --name sql-modernization-app --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> --query properties.configuration.ingress.fqdn -o tsv
-```
+    ```bash
+    az containerapp show --name sql-modernization-app --resource-group challenge-rg-<inject key="DeploymentID" enableCopy="false"/> --query properties.configuration.ingress.fqdn -o tsv
+    ```
 
 7. Visit the URL and test your deployed app!
 
-### Part 7: Verify Complete Pipeline
+### Part 11: Verify Complete Pipeline
 
 Test with this complex Oracle query to verify all 3 agents work:
 
@@ -697,13 +697,13 @@ ORDER BY emp_level, emp_name;
 
 ## Success Criteria
 
-- [ ] Retrieved agent API credentials from Microsoft Foundry project
-- [ ] Configured .env file with AGENT_API_ENDPOINT, AGENT_API_KEY, AGENT_ID
-- [ ] Streamlit app runs locally and calls Translation Agent
-- [ ] App displays results from all 3 connected agents (Translation, Validation, Optimization)
-- [ ] Results saved to Cosmos DB TranslationResults container
-- [ ] App deployed to Azure Container Apps with public URL
-- [ ] Can test production app with complex Oracle SQL and see 3-phase results
+- Retrieved agent API credentials from Microsoft Foundry project
+- Configured .env file with AGENT_API_ENDPOINT, AGENT_API_KEY, AGENT_ID
+- Streamlit app runs locally and calls Translation Agent
+- App displays results from all 3 connected agents (Translation, Validation, Optimization)
+- Results saved to Cosmos DB TranslationResults container
+- App deployed to Azure Container Apps with public URL
+- Can test production app with complex Oracle SQL and see 3-phase results
 
 ## Troubleshooting
 
@@ -906,20 +906,23 @@ with tab3:
 1. Open terminal in your project folder.
 
 2. Create virtual environment:
-```bash
-python -m venv venv
-venv\Scripts\activate
-```
+
+    ```bash
+    python -m venv venv
+    venv\Scripts\activate
+    ```
 
 3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 4. Run Streamlit:
-```bash
-streamlit run app.py
-```
+
+    ```bash
+    streamlit run app.py
+    ```
 
 5. Browser should open automatically at `http://localhost:8501`.
 
@@ -934,91 +937,91 @@ streamlit run app.py
 
 Create **utils/agent_parser.py** to parse agent responses better:
 
-```python
-import json
-import re
+    ```python
+    import json
+    import re
 
-def parse_agent_response(response_text):
-    """
-    Parse the response from connected agents pipeline
-    Returns: dict with translation, validation, optimization sections
-    """
-    sections = {
-        'translation': '',
-        'validation': {},
-        'optimization': {}
-    }
-    
-    # Extract SQL code blocks
-    sql_matches = re.findall(r'```sql\n(.*?)```', response_text, re.DOTALL)
-    if sql_matches:
-        sections['translation'] = sql_matches[0].strip()
-    
-    # Extract JSON blocks (validation/optimization results)
-    json_matches = re.findall(r'```json\n(.*?)```', response_text, re.DOTALL)
-    for json_text in json_matches:
-        try:
-            data = json.loads(json_text)
-            if 'valid' in data or 'syntax_errors' in data:
-                sections['validation'] = data
-            elif 'optimization_score' in data or 'recommendations' in data:
-                sections['optimization'] = data
-        except json.JSONDecodeError:
-            continue
-    
-    return sections
+    def parse_agent_response(response_text):
+        """
+        Parse the response from connected agents pipeline
+        Returns: dict with translation, validation, optimization sections
+        """
+        sections = {
+            'translation': '',
+            'validation': {},
+            'optimization': {}
+        }
+        
+        # Extract SQL code blocks
+        sql_matches = re.findall(r'```sql\n(.*?)```', response_text, re.DOTALL)
+        if sql_matches:
+            sections['translation'] = sql_matches[0].strip()
+        
+        # Extract JSON blocks (validation/optimization results)
+        json_matches = re.findall(r'```json\n(.*?)```', response_text, re.DOTALL)
+        for json_text in json_matches:
+            try:
+                data = json.loads(json_text)
+                if 'valid' in data or 'syntax_errors' in data:
+                    sections['validation'] = data
+                elif 'optimization_score' in data or 'recommendations' in data:
+                    sections['optimization'] = data
+            except json.JSONDecodeError:
+                continue
+        
+        return sections
 
-def format_validation_results(validation_data):
-    """Format validation results for display"""
-    if not validation_data:
-        return "No validation data available"
-    
-    output = []
-    
-    if validation_data.get('valid'):
-        output.append("[PASS] Syntax validation passed")
-    else:
-        output.append("[FAIL] Syntax validation failed")
-    
-    if 'syntax_errors' in validation_data:
-        output.append("\n**Syntax Errors:**")
-        for error in validation_data['syntax_errors']:
-            output.append(f"- {error}")
-    
-    if 'semantic_errors' in validation_data:
-        output.append("\n**Semantic Errors:**")
-        for error in validation_data['semantic_errors']:
-            output.append(f"- {error}")
-    
-    return "\n".join(output)
+    def format_validation_results(validation_data):
+        """Format validation results for display"""
+        if not validation_data:
+            return "No validation data available"
+        
+        output = []
+        
+        if validation_data.get('valid'):
+            output.append("[PASS] Syntax validation passed")
+        else:
+            output.append("[FAIL] Syntax validation failed")
+        
+        if 'syntax_errors' in validation_data:
+            output.append("\n**Syntax Errors:**")
+            for error in validation_data['syntax_errors']:
+                output.append(f"- {error}")
+        
+        if 'semantic_errors' in validation_data:
+            output.append("\n**Semantic Errors:**")
+            for error in validation_data['semantic_errors']:
+                output.append(f"- {error}")
+        
+        return "\n".join(output)
 
-def format_optimization_results(optimization_data):
-    """Format optimization results for display"""
-    if not optimization_data:
-        return "No optimization data available"
-    
-    output = []
-    
-    score = optimization_data.get('optimization_score', 'N/A')
-    output.append(f"**Optimization Score:** {score}/100")
-    
-    if 'index_recommendations' in optimization_data:
-        output.append("\n**Index Recommendations:**")
-        for rec in optimization_data['index_recommendations']:
-            output.append(f"- {rec}")
-    
-    if 'query_rewrites' in optimization_data:
-        output.append("\n**Query Rewrites:**")
-        for rewrite in optimization_data['query_rewrites']:
-            output.append(f"- {rewrite}")
-    
-    if 'azure_features' in optimization_data:
-        output.append("\n**Azure SQL Features:**")
-        for feature in optimization_data['azure_features']:
-            output.append(f"- {feature}")
-    
-    return "\n".join(output)
-```
+    def format_optimization_results(optimization_data):
+        """Format optimization results for display"""
+        if not optimization_data:
+            return "No optimization data available"
+        
+        output = []
+        
+        score = optimization_data.get('optimization_score', 'N/A')
+        output.append(f"**Optimization Score:** {score}/100")
+        
+        if 'index_recommendations' in optimization_data:
+            output.append("\n**Index Recommendations:**")
+            for rec in optimization_data['index_recommendations']:
+                output.append(f"- {rec}")
+        
+        if 'query_rewrites' in optimization_data:
+            output.append("\n**Query Rewrites:**")
+            for rewrite in optimization_data['query_rewrites']:
+                output.append(f"- {rewrite}")
+        
+        if 'azure_features' in optimization_data:
+            output.append("\n**Azure SQL Features:**")
+            for feature in optimization_data['azure_features']:
+                output.append(f"- {feature}")
+        
+        return "\n".join(output)
+    ```
 
 Update **app.py** to use the parser (in the Translation Results tab):
 
@@ -1050,108 +1053,112 @@ with col3:
 
 1. Create **Dockerfile**:
 
-```dockerfile
-FROM python:3.11-slim
+    ```dockerfile
+    FROM python:3.11-slim
 
-WORKDIR /app
+    WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+    COPY requirements.txt .
+    RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+    COPY . .
 
-EXPOSE 8501
+    EXPOSE 8501
 
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
-```
+    CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+    ```
 
 2. Create **.dockerignore**:
 
-```
-venv/
-__pycache__/
-*.pyc
-.env
-.git
-```
+    ```
+    venv/
+    __pycache__/
+    *.pyc
+    .env
+    .git
+    ```
 
 3. Build Docker image:
-```bash
-docker build -t sql-modernization-app .
-```
+
+    ```bash
+    docker build -t sql-modernization-app .
+    ```
 
 4. Test locally:
-```bash
-docker run -p 8501:8501 --env-file .env sql-modernization-app
-```
+
+    ```bash
+    docker run -p 8501:8501 --env-file .env sql-modernization-app
+    ```
 
 5. Create **Azure Container Registry**:
 
-In Azure Portal:
-- Search for **Container Registry**
-- Click **+ Create**
-- **Resource Group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-- **Registry name**: **sqlmodacr<inject key="DeploymentID" enableCopy="false"/>**
-- **SKU**: **Basic**
-- Click **Review + Create**
+    - In Azure Portal:
+
+        - Search for **Container Registry**
+        - Click **+ Create**
+        - **Resource Group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+        - **Registry name**: **sqlmodacr<inject key="DeploymentID" enableCopy="false"/>**
+        - **SKU**: **Basic**
+        - Click **Review + Create**
 
 6. Push image to ACR:
 
-```bash
-az acr login --name sqlmodacr<inject key="DeploymentID" enableCopy="false"/>
-docker tag sql-modernization-app sqlmodacr<inject key="DeploymentID" enableCopy="false"/>.azurecr.io/sql-modernization-app:v1
-docker push sqlmodacr<inject key="DeploymentID" enableCopy="false"/>.azurecr.io/sql-modernization-app:v1
-```
+    ```bash
+    az acr login --name sqlmodacr<inject key="DeploymentID" enableCopy="false"/>
+    docker tag sql-modernization-app sqlmodacr<inject key="DeploymentID" enableCopy="false"/>.azurecr.io/sql-modernization-app:v1
+    docker push sqlmodacr<inject key="DeploymentID" enableCopy="false"/>.azurecr.io/sql-modernization-app:v1
+    ```
 
 7. Create **Azure Container App**:
 
-- Search for **Container Apps**
-- Click **+ Create**
-- **Resource Group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-- **Container app name**: **sql-mod-app**
-- **Region**: **<inject key="Region"></inject>**
-- **Container Apps Environment**: Create new
-- **Container**: Select from Azure Container Registry
-  - **Registry**: **sqlmodacr<inject key="DeploymentID" enableCopy="false"/>**
-  - **Image**: **sql-modernization-app**
-  - **Tag**: **v1**
-- **Ingress**: Enabled
-  - **Target port**: **8501**
-  - **Ingress traffic**: **Accept from anywhere**
-- Click **Review + Create**
+    - Search for **Container Apps**
+    - Click **+ Create**
+    - **Resource Group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+    - **Container app name**: **sql-mod-app**
+    - **Region**: **<inject key="Region"></inject>**
+    - **Container Apps Environment**: Create new
+    - **Container**: Select from Azure Container Registry
+    - **Registry**: **sqlmodacr<inject key="DeploymentID" enableCopy="false"/>**
+    - **Image**: **sql-modernization-app**
+    - **Tag**: **v1**
+    - **Ingress**: Enabled
+    - **Target port**: **8501**
+    - **Ingress traffic**: **Accept from anywhere**
+    - Click **Review + Create**
 
 8. Add environment variables:
 
-After creation:
-- Go to Container App → **Secrets**
-- Add your .env values as secrets
-- Go to **Environment variables**
-- Reference the secrets
+    - After creation:
+    - Go to Container App → **Secrets**
+    - Add your .env values as secrets
+    - Go to **Environment variables**
+    - Reference the secrets
 
 9. Get app URL:
 
-- Go to **Overview**
-- Copy **Application Url**
-- Open in browser
+    - Go to **Overview**
+    - Copy **Application Url**
+    - Open in browser
 
 ### Part 7: Test Production Deployment
 
 1. Open the Container App URL.
 
 2. Upload a complex Oracle SQL file:
-```sql
-SELECT 
-    e.emp_id,
-    e.emp_name,
-    NVL(e.salary, 0) as salary,
-    d.dept_name,
-    TO_CHAR(e.hire_date, 'YYYY-MM-DD') as hire_date
-FROM employees e
-INNER JOIN departments d ON e.dept_id = d.dept_id
-WHERE e.hire_date > SYSDATE - 30
-AND ROWNUM <= 100
-ORDER BY e.salary DESC;
-```
+
+    ```sql
+    SELECT 
+        e.emp_id,
+        e.emp_name,
+        NVL(e.salary, 0) as salary,
+        d.dept_name,
+        TO_CHAR(e.hire_date, 'YYYY-MM-DD') as hire_date
+    FROM employees e
+    INNER JOIN departments d ON e.dept_id = d.dept_id
+    WHERE e.hire_date > SYSDATE - 30
+    AND ROWNUM <= 100
+    ORDER BY e.salary DESC;
+    ```
 
 3. Verify:
    - Translation appears with proper T-SQL syntax
