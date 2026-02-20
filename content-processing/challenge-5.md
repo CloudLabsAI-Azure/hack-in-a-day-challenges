@@ -48,9 +48,9 @@ In this final challenge, you'll use the dashboard's **Review Queue** to examine,
 
    | Action | Effect |
    |--------|--------|
-   | **✅ Approve** | Moves the document from `ReviewQueue` to `ProcessedDocuments` container, marks status as `HUMAN_APPROVED` |
-   | **❌ Reject** | Marks the document as `REJECTED` in `ReviewQueue`, with an optional rejection reason |
-   | **✏️ Edit & Approve** | Opens an editor to correct extracted fields, then approves the corrected version |
+   | **Approve** | Moves the document from `ReviewQueue` to `ProcessedDocuments` container, marks status as `HUMAN_APPROVED` |
+   | **Reject** | Marks the document as `REJECTED` in `ReviewQueue`, with an optional rejection reason |
+   | **Edit & Approve** | Opens an editor to correct extracted fields, then approves the corrected version |
 
 1. **Approve** at least one document — this demonstrates the human-in-the-loop workflow. The document should:
    - Disappear from the Review Queue
@@ -58,7 +58,7 @@ In this final challenge, you'll use the dashboard's **Review Queue** to examine,
 
 1. **Reject** at least one document (you can reject the `poor_scan.txt` if it's in the queue). Provide a rejection reason like "Document is illegible, rescan required."
 
-<validation step="2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e" />
+<validation step="b168305b-cf36-4d19-92dc-0496001a08b0" />
 
 > **Congratulations!** You've demonstrated the complete human-in-the-loop workflow.
 >
@@ -124,13 +124,13 @@ In this final challenge, you'll use the dashboard's **Review Queue** to examine,
 
 ## Success Criteria
 
-- [ ] All 5 sample documents have been processed through the pipeline
-- [ ] At least 2 documents were auto-approved (routed to `ProcessedDocuments`)
-- [ ] At least 1 document was sent to the Review Queue
-- [ ] At least 1 document was manually approved from the Review Queue (status: `HUMAN_APPROVED`)
-- [ ] At least 1 document was rejected from the Review Queue (with a rejection reason)
-- [ ] Analytics dashboard shows accurate metrics matching your processing history
-- [ ] Cosmos DB contains complete records in both `ProcessedDocuments` and `ReviewQueue` containers
+- All 5 sample documents have been processed through the pipeline
+- At least 2 documents were auto-approved (routed to `ProcessedDocuments`)
+- At least 1 document was sent to the Review Queue
+- At least 1 document was manually approved from the Review Queue (status: `HUMAN_APPROVED`)
+- At least 1 document was rejected from the Review Queue (with a rejection reason)
+- Analytics dashboard shows accurate metrics matching your processing history
+- Cosmos DB contains complete records in both `ProcessedDocuments` and `ReviewQueue` containers
 
 ## Bonus Challenges
 

@@ -80,40 +80,40 @@ In this challenge, you'll configure and run the pre-built application, then test
    **Azure AI Foundry Agent Configuration:**
 
    - **AGENT_API_ENDPOINT** — Go to [Azure AI Foundry](https://ai.azure.com) → Your project (**proj-default**) → **Settings** → **Overview**. Copy the **Project endpoint**.
-     - Format: `https://openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>.services.ai.azure.com/api/projects/proj-default`
+     - Format: **https://content-hub-<inject key="DeploymentID" enableCopy="false"/>.services.ai.azure.com/api/projects/proj-default**
 
    - **AGENT_ID** — Go to **Agents** → Open **Document-Classification-Agent** → Copy the **Agent ID** from the Setup panel (starts with `asst_`).
 
    **Azure AI Document Intelligence:**
 
-   - **DOC_INTELLIGENCE_ENDPOINT** — Go to Azure portal → your Document Intelligence resource `doc-intel-<inject key="DeploymentID" enableCopy="false"/>` → **Keys and Endpoint** → Copy **Endpoint**.
+   - **DOC_INTELLIGENCE_ENDPOINT** — Go to Azure portal → your Document Intelligence resource **doc-intelligence-<inject key="DeploymentID" enableCopy="false"/>** → **Keys and Endpoint** → Copy **Endpoint**.
    - **DOC_INTELLIGENCE_KEY** — Same page → Copy **Key 1**.
 
    **Azure Blob Storage:**
 
-   - **STORAGE_CONNECTION_STRING** — Go to Azure portal → Storage Account `docstore<inject key="DeploymentID" enableCopy="false"/>` → **Access keys** → Copy **Connection string** for Key 1.
+   - **STORAGE_CONNECTION_STRING** — Go to Azure portal → Storage Account **contentstore<inject key="DeploymentID" enableCopy="false"/>** → **Access keys** → Copy **Connection string** for Key 1.
 
    **Azure Cosmos DB:**
 
-   - **COSMOS_ENDPOINT** — Go to Azure portal → Cosmos DB account `cosmos-docs-<inject key="DeploymentID" enableCopy="false"/>` → **Keys** → Copy **URI**.
+   - **COSMOS_ENDPOINT** — Go to Azure portal → Cosmos DB account **content-cosmos-<inject key="DeploymentID" enableCopy="false"/>** → **Keys** → Copy **URI**.
    - **COSMOS_KEY** — Same page → Copy **Primary Key**.
 
 1. Your `.env` file should look like this (with your actual values):
 
    ```env
    # Azure AI Foundry
-   AGENT_API_ENDPOINT=https://openai-doc-ai-XXXXX.services.ai.azure.com/api/projects/proj-default
+   AGENT_API_ENDPOINT=https://content-hub-XXXXX.services.ai.azure.com/api/projects/proj-default
    AGENT_ID=asst_XXXXXXXXXXXX
 
    # Document Intelligence
-   DOC_INTELLIGENCE_ENDPOINT=https://doc-intel-XXXXX.cognitiveservices.azure.com/
+   DOC_INTELLIGENCE_ENDPOINT=https://doc-intelligence-XXXXX.cognitiveservices.azure.com/
    DOC_INTELLIGENCE_KEY=your-key-here
 
    # Blob Storage
    STORAGE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=...
 
    # Cosmos DB
-   COSMOS_ENDPOINT=https://cosmos-docs-XXXXX.documents.azure.com:443/
+   COSMOS_ENDPOINT=https://content-cosmos-XXXXX.documents.azure.com:443/
    COSMOS_KEY=your-cosmos-key-here
    DATABASE_NAME=ContentProcessingDB
    ```
@@ -190,7 +190,7 @@ In this challenge, you'll configure and run the pre-built application, then test
 
 ### Part 6: Verify Data in Cosmos DB
 
-1. Go to the Azure portal → Cosmos DB account `cosmos-docs-<inject key="DeploymentID" enableCopy="false"/>` → **Data Explorer**.
+1. Go to the Azure portal → Cosmos DB account **content-cosmos-<inject key="DeploymentID" enableCopy="false"/>** → **Data Explorer**.
 
 1. Expand **ContentProcessingDB** → **ProcessedDocuments**.
 
@@ -202,7 +202,7 @@ In this challenge, you'll configure and run the pre-built application, then test
 
 1. Expand **ReviewQueue** and check if any documents were routed for human review.
 
-<validation step="1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d" />
+<validation step="91273538-4019-4887-8d59-87c8bda31f27" />
 
 > **Congratulations!** Your content processing application is live and routing documents intelligently.
 >
@@ -238,12 +238,12 @@ In this challenge, you'll configure and run the pre-built application, then test
 
 ## Success Criteria
 
-- [ ] Application runs at `http://localhost:8501` with all services connected (green status)
-- [ ] Successfully processed an invoice — classified as INVOICE, data extracted, auto-approved
-- [ ] Successfully processed a receipt — classified as RECEIPT, data extracted, routed correctly
-- [ ] At least one document appears in the `ProcessedDocuments` Cosmos DB container with full pipeline results
-- [ ] A low-quality document was routed to the `ReviewQueue` container with review reasons
-- [ ] The processing pipeline shows real-time status updates in the UI
+- Application runs at `http://localhost:8501` with all services connected (green status)
+- Successfully processed an invoice — classified as INVOICE, data extracted, auto-approved
+- Successfully processed a receipt — classified as RECEIPT, data extracted, routed correctly
+- At least one document appears in the `ProcessedDocuments` Cosmos DB container with full pipeline results
+- A low-quality document was routed to the `ReviewQueue` container with review reasons
+- The processing pipeline shows real-time status updates in the UI
 
 ## Troubleshooting
 

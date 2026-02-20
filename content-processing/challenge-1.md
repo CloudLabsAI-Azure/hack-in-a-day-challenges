@@ -164,7 +164,7 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 
 1. Click **Deploy** and wait for the model to be ready.
 
-<validation step="7c3d5e6f-0a1b-4c8d-9e2f-4a5b6c7d8e9f" />
+<validation step="67fcae6d-e490-4215-8b86-e1cdc1722cc2" />
 
 > **Congratulations!** Your Foundry resource, project, and GPT-4.1 model are ready.
 >
@@ -224,17 +224,17 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 > **Congratulations!** Your Cosmos DB is configured with dual containers for smart routing.
 >
 > If validation fails, verify:
-> - Cosmos DB account name is `cosmos-docs-<inject key="DeploymentID" enableCopy="false"/>`
+> - Cosmos DB account name is cosmos-docs-<inject key="DeploymentID" enableCopy="false"/>
 > - Both `ProcessedDocuments` and `ReviewQueue` containers exist with correct partition keys
 
 ## Success Criteria
 
-- [ ] Storage Account `docstore<inject key="DeploymentID" enableCopy="false"/>` exists with `documents` and `processed` containers
-- [ ] 5 sample documents are uploaded to the `documents` container
-- [ ] Document Intelligence resource `doc-intel-<inject key="DeploymentID" enableCopy="false"/>` is provisioned
-- [ ] You successfully analyzed at least one document in Document Intelligence Studio and observed extracted text/tables
-- [ ] AI Foundry project `content-processor-<inject key="DeploymentID" enableCopy="false"/>` is created with `doc-processor` GPT-4.1 deployment
-- [ ] Cosmos DB account `cosmos-docs-<inject key="DeploymentID" enableCopy="false"/>` has database `ContentProcessingDB` with `ProcessedDocuments` and `ReviewQueue` containers
+- Storage Account **docstore<inject key="DeploymentID" enableCopy="false"/>** exists with `documents` and `processed` containers
+- 5 sample documents are uploaded to the `documents` container
+- Document Intelligence resource **doc-intel-<inject key="DeploymentID" enableCopy="false"/>** is provisioned
+- You successfully analyzed at least one document in Document Intelligence Studio and observed extracted text/tables
+- AI Foundry project **content-processor-<inject key="DeploymentID" enableCopy="false"/>** is created with `doc-processor` GPT-4.1 deployment
+- Cosmos DB account **cosmos-docs-<inject key="DeploymentID" enableCopy="false"/>** has database `ContentProcessingDB` with `ProcessedDocuments` and `ReviewQueue` containers
 
 ## Additional Resources
 
