@@ -20,7 +20,7 @@ The data engineering team needs an automated, AI-powered system that can:
 - Provide a retry mechanism for failed translations
 - Scale to process thousands of queries efficiently
 
-Using Microsoft Foundry (with models such as GPT-4.1, for example), Cosmos DB, and Azure Container Apps, you will build a complete SQL modernization solution that demonstrates how AI can accelerate enterprise cloud migration at scale.
+Using Microsoft Foundry (with models such as GPT-4.1), Cosmos DB, and Azure Container Apps, you will build a complete SQL modernization solution that demonstrates how AI can accelerate enterprise cloud migration at scale.
 
 ## Introduction
 
