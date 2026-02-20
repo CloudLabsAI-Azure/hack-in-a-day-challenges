@@ -2,12 +2,12 @@
 
 ## Introduction
 
-Before building the AI-powered SQL modernization pipeline, you need to provision the necessary Azure infrastructure. This challenge involves creating Microsoft Foundry project with GPT-4.1 model deployment and Cosmos DB for storing translation results and history.
+Before building the AI-powered SQL modernization pipeline, you need to provision the necessary Azure infrastructure. This challenge involves creating a Microsoft Foundry project with GPT-4.1 model deployment and Cosmos DB for storing translation results and history.
 
 ## Challenge Objectives
 
-- Set up an Microsoft Foundry project with GPT-4.1 model deployment
-- Provision Cosmos DB with appropriate database and containers
+- Set up a Microsoft Foundry project with GPT-4.1 model deployment
+- Provision Cosmos DB with an appropriate database and containers
 - Verify all resources are properly configured and accessible
 
 ## Steps to Complete

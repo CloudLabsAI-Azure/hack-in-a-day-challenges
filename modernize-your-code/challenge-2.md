@@ -23,11 +23,11 @@ In this challenge, you will create your first AI agent directly in the Microsoft
 
 1. In the left navigation menu, under **Build and customize**. Click on **Agents**.
 
-1. You should see a **Defualt Agent** on the *Create and debug your agents* page.
+1. You should see a **Default Agent** on the *Create and debug your agents* page.
 
 ### Task 2: Create Translation Agent
 
-1. Click on the **defualt Agent**.
+1. Click on the **default Agent**.
 
 1. In the **Setup** panel on the right, configure:
 

@@ -145,7 +145,7 @@ Now comes the key part - connecting the agents!
 
 4. Click **+ Add**.
 
-5. In the **Adding a connected agent** dialog, configure:
+5. In the **Adding a connected agent** pane, configure:
 
       - **Agent**: Select **SQL-Validation-Agent** from dropdown
       - **Unique name**: Enter `validation_agent`
@@ -266,8 +266,8 @@ Now comes the key part - connecting the agents!
 - Validation Agent successfully connected to Translation Agent
 - Pipeline tested: Oracle SQL → Translation → Validation
 - Hand-off happens automatically without manual intervention
-- Both agent results visible in playground conversation
-- Complex queries (CTEs, joins) flow through pipeline correctly
+- Both agent results are visible in the playground conversation
+- Complex queries (CTEs, joins) flow through the pipeline correctly
 
 ## Additional Resources
 

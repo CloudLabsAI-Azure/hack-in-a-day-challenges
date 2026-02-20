@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Your SQL translation and validation pipeline is working! Now you'll add the final agent: the Optimization Agent. This agent analyzes translated Azure SQL code and provides performance recommendations including indexes, query hints, and Azure-specific features. You'll connect it to complete the three-agent pipeline where data flows automatically through translation → validation → optimization.
+Your SQL translation and validation pipeline is working! Now you'll add the final agent: the Optimization Agent. This agent analyses translated Azure SQL code and provides performance recommendations, including indexes, query hints, and Azure-specific features. You'll connect it to complete the three-agent pipeline where data flows automatically through translation → validation → optimization.
 
 ## Challenge Objectives
 
@@ -37,7 +37,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 1. In the **Instructions** box, paste:
 
       ```
-      You are an Azure SQL Database performance optimization expert. Your role is to analyze T-SQL code and provide specific, actionable optimization recommendations.
+      You are an Azure SQL Database performance optimization expert. Your role is to analyse T-SQL code and provide specific, actionable optimization recommendations.
 
       OPTIMIZATION ANALYSIS:
 
@@ -63,7 +63,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
          - Suggest partitioning for very large tables (> 100GB)
 
       4. Query Hints and Settings:
-         - Recommend NOLOCK only when dirty reads acceptable
+         - Recommend NOLOCK only when dirty reads are acceptable
          - Suggest RECOMPILE for queries with parameter sniffing issues
          - Recommend SET NOCOUNT ON for procedures
          - Suggest appropriate transaction isolation levels
@@ -125,7 +125,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 1. Expand **Agent Description**:
 
       ```
-      Analyzes Azure SQL T-SQL code and provides performance optimization recommendations including indexes, query rewrites, and Azure-specific features. Returns structured JSON with prioritized suggestions.
+      Analyses Azure SQL T-SQL code and provides performance optimization recommendations, including indexes, query rewrites, and Azure-specific features. Returns structured JSON with prioritised suggestions.
       ```
 
 ### Task 4: Test Optimization Agent Independently
@@ -307,8 +307,8 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 2. Verify Optimization Agent suggests:
 
       - Change old-style join to INNER JOIN
-      - Add index or computed column for `YEAR(OrderDate)`
-      - Possibly rewrite to avoid function on column
+      - Add an index or computed column for `YEAR(OrderDate)`
+      - Possibly rewrite to avoid a function on a column
 
 ### Task 11: Document Agent IDs
 
@@ -325,10 +325,10 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 ## Success Criteria
 
 - Optimization Agent created successfully
-- Agent analyzes queries and provides optimization score
+- Agent analyses queries and provides optimization score
 - Agent suggests specific index recommendations
 - Agent identifies cursor-based code and suggests set-based rewrites
-- Agent recommends Azure SQL specific features
+- Agent recommends Azure SQL-specific features
 - Optimization Agent connected to Validation Agent
 - Three-agent pipeline works end-to-end: Translation → Validation → Optimization
 - Valid SQL flows through all three agents

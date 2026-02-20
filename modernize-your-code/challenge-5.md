@@ -62,7 +62,7 @@ The application uses Azure CLI authentication to connect to your agents.
    Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi'
    ```
 
-1. Accept the terms and license agreement and select **Install**. Once done select **Finish**.
+1. Accept the terms and license agreement and select **Install**. Once done, select **Finish**.
 
 1. **Login to Azure**:
    ```bash
@@ -310,9 +310,9 @@ GROUP BY -- Missing column list
 
 ## Success Criteria
 
-- Retrieved agent API credentials from Microsoft Foundry project
+- Retrieved agent API credentials from the Microsoft Foundry project
 - Configured .env file with AGENT_API_ENDPOINT, AGENT_API_KEY, AGENT_ID
-- Streamlit app runs locally and calls Translation Agent
+- Streamlit app runs locally and calls the Translation Agent
 - App displays results from all 3 connected agents (Translation, Validation, Optimization)
 - Results saved to Cosmos DB TranslationResults container
 - App deployed to Azure Container Apps with public URL

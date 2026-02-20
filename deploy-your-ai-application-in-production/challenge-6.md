@@ -30,16 +30,20 @@ This proves your entire architecture works through private networking only!
 
 ### Part 1: Verify Bastion and Connect to VM
 
-You should already be connected to your VM via Bastion from previous challenges. If not:
+You should already be connected to your VM via Bastion from the previous challenges. If not, complete **Task 1** and **Task 2**. Otherwise, you can skip them and proceed directly to **Task 3**.
 
-1. **In Azure Portal**, navigate to **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**.
+1. Make sure that you are inside the **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**.
+
 1. Click **Connect** → **Bastion**.
+
 1. Enter credentials:
+
    - **Username**: `azureuser`
    - **Password**: <inject key="VMAdminPassword"></inject>
+
 1. Click **Connect** (opens a new browser tab with remote desktop session).
 
-2. **Verify you're on the VM** (in PowerShell terminal):
+1. Run the below command in the PowerShell terminal:
 
    ```powershell
    hostname

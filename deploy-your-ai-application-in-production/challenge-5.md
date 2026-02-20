@@ -274,3 +274,5 @@ Validate your app deployment:
 - Chat completions work (receive AI responses)
 - Multi-turn conversations work (context maintained)
 - No API keys in code or config files
+
+Now, click **Next** to continue to **Challenge 06**.
