@@ -62,9 +62,9 @@ class DocumentProcessor:
             }
             content_type = content_type_map.get(ext, "application/octet-stream")
 
-            # Analyze with Layout model
+            # Analyze with OCR/Read model
             poller = self.client.begin_analyze_document(
-                model_id="prebuilt-layout",
+                model_id="prebuilt-read",
                 analyze_request=file_content,
                 content_type=content_type,
             )

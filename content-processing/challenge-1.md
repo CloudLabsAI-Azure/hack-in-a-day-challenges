@@ -95,7 +95,7 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 
 1. Sign in with your lab credentials: **<inject key="AzureAdUserEmail" />**
 
-1. Under **Document analysis**, select **Layout**.
+1. Under **Document analysis**, select **OCR/Read**.
 
 1. In the top bar, click **Configure** and select:
    - **Subscription:** Your Azure subscription
@@ -106,11 +106,11 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 1. Click **Run analysis** and wait for results.
 
 1. Observe the extracted content:
-   - **Text** — The full text extracted from the document
-   - **Tables** — Any tables detected, with rows and columns preserved
-   - **Key-Value Pairs** — Detected field labels and their values (e.g., "Invoice Number: INV-2025-001")
+   - **Text** — The full text extracted from the document, preserving reading order
+   - **Words and Lines** — Individual words and lines detected with confidence scores
+   - **Pages** — Page-level metadata including dimensions and language
 
-   > **Note:** This is the raw OCR output that your AI agents will receive in later challenges. The agents will classify, extract structured data from, and validate this text — turning messy OCR output into clean, structured JSON.
+   > **Note:** The OCR/Read model focuses on text extraction — which is exactly what our AI agents need. The agents downstream will handle classification, structured data extraction, and validation. We don't need Layout's table/structure detection because the agents are smart enough to understand the text format.
 
 1. Try analyzing `receipt_café.jpg` and `drivers_license.jpg` as well. Notice how Document Intelligence handles different document formats (PDF vs image) and layouts.
 
