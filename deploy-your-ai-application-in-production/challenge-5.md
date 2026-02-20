@@ -1,6 +1,6 @@
 # Challenge 05: Deploy Secure Chat Application
 
-## Introduction1
+## Introduction
 
 All the infrastructure is ready! Now comes the fun part - deploying a secure, production-ready chat application that uses everything you've built:
 
@@ -37,7 +37,7 @@ Let's build a secure ChatGPT-like experience!
 
 The application code is provided in a pre-built package.
 
-1. **Download the code package**:
+1. In the Bastion VM, open a edge browser tab **Download the code package**, and select **open file**:
    
    Visit this link in your browser:
    ```
@@ -48,12 +48,12 @@ The application code is provided in a pre-built package.
    
    - Right-click the downloaded `hack-in-a-day-challenges-deploy-your-ai-application.zip` file
    - Select **Extract All...**
-   - Choose a location like `C:\Code\`
+   - Choose a location `C:\Code\`
    - Click **Extract**
 
 3. **Navigate to the codefiles folder**:
    
-   Open VSCode and click on open folder and select the folder `C:\Code\hack-in-a-day-challenges-deploy-your-ai-application\codefiles`
+   - Open VSCode, select **File** > click on **Open folder** and select the folder `C:\Code\hack-in-a-day-challenges-deploy-your-ai-application\codefiles`
 
 ### Part 2: Configure the Application
 

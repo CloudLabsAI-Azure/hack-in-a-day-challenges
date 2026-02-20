@@ -45,11 +45,11 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
 1. Configure the Virtual Network:
 
-   **Basics tab**:
-   - **Subscription**: Select your available Azure subscription
-   - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Virtual network name**: **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Region**: **<inject key="Region"></inject>**
+   - **Basics tab**:
+      - **Subscription**: Select your available Azure subscription
+      - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+      - **Virtual network name**: **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
+      - **Region**: **<inject key="Region"></inject>**
 
 1. Click **Next**. On the **Security** tab leave everything **turned off (default)**, then click **Next**.
 
@@ -266,6 +266,10 @@ The VM is a fresh Windows Server 2022 instance. You'll install Chocolatey (packa
 
 1. Keep the bastion session open - you'll use it throughout the hackathon. Username: **azureuser**, Password: **SecureAI@2026**
 
+1. Inside the bastion VM, open **File Explorer**, and create a folder name `Code` inside `C:\`.
+
+   >**Note:** If it is already created skip this step, and proceed to the next part.
+
 ### Part 7: Create Microsoft Foundry Project
 
 1. In the **Azure Portal**, from the **Home** page, click **+ Create a resource**.
@@ -276,14 +280,14 @@ The VM is a fresh Windows Server 2022 instance. You'll install Chocolatey (packa
 
 1. Configure Microsoft Foundry:
 
-   **Basics tab**:
-   - **Subscription**: Select your available Azure subscription
-   - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Name**: **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Region**: **<inject key="Region"></inject>**
-   - **Default project name**: Keep as **proj-default**
+   - **Basics tab**:
+      - **Subscription**: Select your available Azure subscription
+      - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+      - **Name**: **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>**
+      - **Region**: **<inject key="Region"></inject>**
+      - **Default project name**: Keep as **proj-default**
 
-      > **Note**: This creates both an Microsoft Foundry Hub (resource) and a default project inside it.
+         > **Note**: This creates both an Microsoft Foundry Hub (resource) and a default project inside it.
 
 1. Click **Review + Create**.
 
@@ -354,7 +358,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
       https://openai-secureai-<inject key="DeploymentID" enableCopy="false"/>.openai.azure.com/
       ```
 
-   > **Note**: The primary `properties.endpoint` returns a `cognitiveservices.azure.com` URL since AI Foundry creates a multi-service resource. For OpenAI API calls, use the `.openai.azure.com` endpoint shown above.
+      > **Note**: The primary `properties.endpoint` returns a `cognitiveservices.azure.com` URL since AI Foundry creates a multi-service resource. For OpenAI API calls, use the `.openai.azure.com` endpoint shown above.
 
 > **Important**: Complete this step before proceeding to Challenge 2. Without the custom domain, private endpoint creation will succeed but authentication will fail.
 

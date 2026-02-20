@@ -162,18 +162,6 @@ Validate that Azure OpenAI works end-to-end with managed identity authentication
 
 If you get an error, wait 2-3 minutes for RBAC to propagate and retry.
 
-### Part 4: Configure Content Filtering (Optional)
-
-Azure OpenAI includes responsible AI content filtering by default. You can optionally create a custom filter.
-
-1. **In Azure Portal**, navigate to your **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>** resource.
-
-1. Click **Content filters** (left menu under Management).
-
-1. Review the default filter policy. The defaults are sufficient for this lab.
-
-   > **Note**: Custom content filters can be created here to adjust severity thresholds for Hate, Sexual, Violence, and Self-harm categories. This step is optional.
-
 ## Success Criteria
 
 Validate your OpenAI setup:
@@ -182,4 +170,5 @@ Validate your OpenAI setup:
 - Model deployment name stored in Key Vault as `ChatModelDeployment`
 - API version stored in Key Vault as `OpenAIApiVersion`
 - Test script successfully calls chat completions using managed identity (no API keys)
-- Content filtering reviewed
+
+Now, click **Next** to continue to **Challenge 05**.

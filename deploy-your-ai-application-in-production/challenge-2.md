@@ -368,7 +368,7 @@ After creating private endpoints, verify that the Private DNS zones were created
 
 1. **Repeat steps 3-7** for **privatelink.blob.core.windows.net** (should show A record to 10.0.2.x).
 
-> **Why this matters**: Private DNS zones ensure that when your VM resolves names like `kv-secureai-<DID>.vault.azure.net`, it resolves to the private IP address instead of the public endpoint. This keeps all traffic within your VNET.
+   > **Why this matters**: Private DNS zones ensure that when your VM resolves names like `kv-secureai-<DID>.vault.azure.net`, it resolves to the private IP address instead of the public endpoint. This keeps all traffic within your VNET.
 
 ### Part 8: Validate Private Endpoint Connectivity (Using VS Code)
 
