@@ -6,39 +6,6 @@ Every day, enterprises process thousands of documents - invoices from vendors, i
 
 Your mission: **Build an AI-powered document processing pipeline** that automatically ingests documents, extracts text using Azure AI Document Intelligence, classifies and extracts structured data using a multi-agent AI pipeline, and intelligently routes results based on confidence scoring - high-confidence documents are auto-approved, while low-confidence documents are flagged for human review.
 
-## Architecture
-
-```
-┌──────────────┐     ┌─────────────────────┐     ┌──────────────────────────────────┐
-│  Document     │     │  Azure AI Document  │     │  Microsoft Foundry Agent Pipeline│
-│  Upload       │────>│  Intelligence       │────>│                                  │
-│  (Blob Store) │     │  (OCR + Layout)     │     │  Classification Agent            │
-└──────────────┘     └─────────────────────┘     │       ↓ (connected)              │
-                                                  │  Extraction Agent                │
-                                                  │       ↓ (connected)              │
-                                                  │  Validation Agent                │
-                                                  └──────────┬───────────────────────┘
-                                                             │
-                                                    ┌────────┴────────┐
-                                                    │  Smart Router   │
-                                                    └───┬─────────┬───┘
-                                                        │         │
-                                            ┌───────────▼──┐  ┌──▼──────────────┐
-                                            │ Auto-Approved │  │  Review Queue   │
-                                            │ (Cosmos DB)   │  │  (Cosmos DB)    │
-                                            │ confidence    │  │  confidence     │
-                                            │ >= 0.85      │  │  < 0.85        │
-                                            └──────────────┘  └─────────────────┘
-                                                        │         │
-                                                    ┌───▼─────────▼───┐
-                                                    │   Streamlit     │
-                                                    │   Dashboard     │
-                                                    │   (Upload,      │
-                                                    │    Review,      │
-                                                    │    Analytics)   │
-                                                    └─────────────────┘
-```
-
 ## Key Azure Services
 
 - **Azure Blob Storage** - Document ingestion and storage
