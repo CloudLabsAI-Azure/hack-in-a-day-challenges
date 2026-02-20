@@ -151,11 +151,11 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. Create a second container for validation logs:
 
-   - Right-Click on the **SQLModernizationDB** and click **New Container** again
-   - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
-   - **Container id**: `ValidationLogs`
-   - **Partition key**: `/translationId`
-   - Click **OK**
+      - Right-Click on the **SQLModernizationDB** and click **New Container** again
+      - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
+      - **Container id**: `ValidationLogs`
+      - **Partition key**: `/translationId`
+      - Click **OK**
 
 1. Create a third container for optimization suggestions:
 
