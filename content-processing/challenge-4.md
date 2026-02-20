@@ -6,7 +6,7 @@ You've built the infrastructure, created three specialized AI agents, and connec
 
 1. **Upload** documents via the web interface
 2. **Store** them in Azure Blob Storage
-3. **Analyze** them with Azure AI Document Intelligence (OCR extraction)
+3. **Analyse** them with Azure AI Document Intelligence (OCR extraction)
 4. **Process** the extracted text through your 3-agent AI pipeline
 5. **Route** results to the appropriate Cosmos DB container based on confidence
 
@@ -40,7 +40,7 @@ In this challenge, you'll configure and run the pre-built application, then test
    cd hack-in-a-day-challenges\content-processing\codefiles
    ```
 
-   > **Note:** If git is not available, you can download the ZIP from `https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/main.zip` and extract to `C:\ContentProcessing`.
+   > **Note:** If git is not available, you can download the ZIP from `https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/main.zip` and extract it to `C:\ContentProcessing`.
 
 1. Verify you have the following files:
 

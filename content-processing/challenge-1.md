@@ -108,19 +108,19 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 1. Observe the extracted content:
    - **Text** — The full text extracted from the document, preserving reading order
    - **Words and Lines** — Individual words and lines detected with confidence scores
-   - **Pages** — Page-level metadata including dimensions and language
+   - **Pages** — Page-level metadata, including dimensions and language
 
    > **Note:** The OCR/Read model focuses on text extraction — which is exactly what our AI agents need. The agents downstream will handle classification, structured data extraction, and validation. We don't need Layout's table/structure detection because the agents are smart enough to understand the text format.
 
-1. Try analyzing `receipt_café.jpg` and `drivers_license.jpg` as well. Notice how Document Intelligence handles different document formats (PDF vs image) and layouts.
+1. Try analysing `receipt_café.jpg` and `drivers_license.jpg` as well. Notice how Document Intelligence handles different document formats (PDF vs image) and layouts.
 
 <validation step="6b2c4d5e-9f0a-4b7c-8d1e-3f4a5b6c7d8e" />
 
-> **Congratulations!** Document Intelligence is set up and extracting text from your documents.
+> **Congratulations!** Document Intelligence is set up and is extracting text from your documents.
 >
 > If validation fails, verify:
 > - The Document Intelligence resource exists in your resource group
-> - You can successfully analyze a document in the Studio
+> - You can successfully analyse a document in the Studio
 
 ### Part 5: Create Microsoft Foundry Resource and Deploy GPT-4.1
 
