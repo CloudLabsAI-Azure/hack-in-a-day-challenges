@@ -20,7 +20,7 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
 
 ### Part 1: Create the Data Extraction Agent
 
-1. In your AI Foundry project **proj-default** (under **content-hub-<inject key="DeploymentID" enableCopy="false"/>**), navigate to **Agents**.
+1. In your AI Foundry project **proj-default** (under **openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>**), navigate to **Agents**.
 
 1. Click **+ New Agent** and configure:
 

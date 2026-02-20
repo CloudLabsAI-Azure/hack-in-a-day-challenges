@@ -80,40 +80,40 @@ In this challenge, you'll configure and run the pre-built application, then test
    **Azure AI Foundry Agent Configuration:**
 
    - **AGENT_API_ENDPOINT** — Go to [Azure AI Foundry](https://ai.azure.com) → Your project (**proj-default**) → **Settings** → **Overview**. Copy the **Project endpoint**.
-     - Format: `https://content-hub-<inject key="DeploymentID" enableCopy="false"/>.services.ai.azure.com/api/projects/proj-default`
+     - Format: `https://openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>.services.ai.azure.com/api/projects/proj-default`
 
    - **AGENT_ID** — Go to **Agents** → Open **Document-Classification-Agent** → Copy the **Agent ID** from the Setup panel (starts with `asst_`).
 
    **Azure AI Document Intelligence:**
 
-   - **DOC_INTELLIGENCE_ENDPOINT** — Go to Azure portal → your Document Intelligence resource `doc-intelligence-<inject key="DeploymentID" enableCopy="false"/>` → **Keys and Endpoint** → Copy **Endpoint**.
+   - **DOC_INTELLIGENCE_ENDPOINT** — Go to Azure portal → your Document Intelligence resource `doc-intel-<inject key="DeploymentID" enableCopy="false"/>` → **Keys and Endpoint** → Copy **Endpoint**.
    - **DOC_INTELLIGENCE_KEY** — Same page → Copy **Key 1**.
 
    **Azure Blob Storage:**
 
-   - **STORAGE_CONNECTION_STRING** — Go to Azure portal → Storage Account `contentstore<inject key="DeploymentID" enableCopy="false"/>` → **Access keys** → Copy **Connection string** for Key 1.
+   - **STORAGE_CONNECTION_STRING** — Go to Azure portal → Storage Account `docstore<inject key="DeploymentID" enableCopy="false"/>` → **Access keys** → Copy **Connection string** for Key 1.
 
    **Azure Cosmos DB:**
 
-   - **COSMOS_ENDPOINT** — Go to Azure portal → Cosmos DB account `content-cosmos-<inject key="DeploymentID" enableCopy="false"/>` → **Keys** → Copy **URI**.
+   - **COSMOS_ENDPOINT** — Go to Azure portal → Cosmos DB account `cosmos-docs-<inject key="DeploymentID" enableCopy="false"/>` → **Keys** → Copy **URI**.
    - **COSMOS_KEY** — Same page → Copy **Primary Key**.
 
 1. Your `.env` file should look like this (with your actual values):
 
    ```env
    # Azure AI Foundry
-   AGENT_API_ENDPOINT=https://content-hub-XXXXX.services.ai.azure.com/api/projects/proj-default
+   AGENT_API_ENDPOINT=https://openai-doc-ai-XXXXX.services.ai.azure.com/api/projects/proj-default
    AGENT_ID=asst_XXXXXXXXXXXX
 
    # Document Intelligence
-   DOC_INTELLIGENCE_ENDPOINT=https://doc-intelligence-XXXXX.cognitiveservices.azure.com/
+   DOC_INTELLIGENCE_ENDPOINT=https://doc-intel-XXXXX.cognitiveservices.azure.com/
    DOC_INTELLIGENCE_KEY=your-key-here
 
    # Blob Storage
    STORAGE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=...
 
    # Cosmos DB
-   COSMOS_ENDPOINT=https://content-cosmos-XXXXX.documents.azure.com:443/
+   COSMOS_ENDPOINT=https://cosmos-docs-XXXXX.documents.azure.com:443/
    COSMOS_KEY=your-cosmos-key-here
    DATABASE_NAME=ContentProcessingDB
    ```
@@ -190,7 +190,7 @@ In this challenge, you'll configure and run the pre-built application, then test
 
 ### Part 6: Verify Data in Cosmos DB
 
-1. Go to the Azure portal → Cosmos DB account `content-cosmos-<inject key="DeploymentID" enableCopy="false"/>` → **Data Explorer**.
+1. Go to the Azure portal → Cosmos DB account `cosmos-docs-<inject key="DeploymentID" enableCopy="false"/>` → **Data Explorer**.
 
 1. Expand **ContentProcessingDB** → **ProcessedDocuments**.
 

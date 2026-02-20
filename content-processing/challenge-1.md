@@ -27,7 +27,7 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
    |---------|-------|
    | **Subscription** | Your Azure subscription |
    | **Resource group** | challenge-rg-<inject key="DeploymentID" enableCopy="false"/> |
-   | **Storage account name** | contentstore<inject key="DeploymentID" enableCopy="false"/> |
+   | **Storage account name** | docstore<inject key="DeploymentID" enableCopy="false"/> |
    | **Region** | <inject key="Region" /> |
    | **Performance** | Standard |
    | **Redundancy** | Locally-redundant storage (LRS) |
@@ -69,7 +69,7 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 > **Congratulations!** You've created the Storage Account and uploaded sample documents.
 >
 > If validation fails, verify:
-> - The Storage Account name is `contentstore<inject key="DeploymentID" enableCopy="false"/>`
+> - The Storage Account name is `docstore<inject key="DeploymentID" enableCopy="false"/>`
 > - The `documents` container exists and contains all 5 files
 > - The `processed` container exists
 
@@ -84,7 +84,7 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
    | **Subscription** | Your Azure subscription |
    | **Resource group** | challenge-rg-<inject key="DeploymentID" enableCopy="false"/> |
    | **Region** | <inject key="Region" /> |
-   | **Name** | doc-intelligence-<inject key="DeploymentID" enableCopy="false"/> |
+   | **Name** | doc-intel-<inject key="DeploymentID" enableCopy="false"/> |
    | **Pricing tier** | Free F0 (or Standard S0 if F0 is unavailable) |
 
 1. Click **Review + Create**, then **Create**. Wait for deployment to complete.
@@ -99,7 +99,7 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 
 1. In the top bar, click **Configure** and select:
    - **Subscription:** Your Azure subscription
-   - **Resource:** doc-intelligence-<inject key="DeploymentID" enableCopy="false"/>
+   - **Resource:** doc-intel-<inject key="DeploymentID" enableCopy="false"/>
 
 1. Click **Browse for files** and upload `invoice_contoso.pdf` from your sample documents.
 
@@ -136,7 +136,7 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
    |---------|-------|
    | **Subscription** | Your Azure subscription |
    | **Resource group** | challenge-rg-<inject key="DeploymentID" enableCopy="false"/> |
-   | **Name** | content-hub-<inject key="DeploymentID" enableCopy="false"/> |
+   | **Name** | openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/> |
    | **Region** | <inject key="Region" /> |
    | **Default project name** | Leave as `proj-default` |
 
@@ -169,7 +169,7 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 > **Congratulations!** Your Foundry resource, project, and GPT-4.1 model are ready.
 >
 > If validation fails, verify:
-> - The Foundry resource `content-hub-<inject key="DeploymentID" enableCopy="false"/>` exists in your resource group
+> - The Foundry resource `openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>` exists in your resource group
 > - The default project `proj-default` is created
 > - The `doc-processor` model deployment is in **Succeeded** state
 
@@ -185,7 +185,7 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
    |---------|-------|
    | **Subscription** | Your Azure subscription |
    | **Resource group** | challenge-rg-<inject key="DeploymentID" enableCopy="false"/> |
-   | **Account Name** | content-cosmos-<inject key="DeploymentID" enableCopy="false"/> |
+   | **Account Name** | cosmos-docs-<inject key="DeploymentID" enableCopy="false"/> |
    | **Region** | <inject key="Region" /> |
    | **Capacity mode** | Serverless |
 
@@ -224,17 +224,17 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 > **Congratulations!** Your Cosmos DB is configured with dual containers for smart routing.
 >
 > If validation fails, verify:
-> - Cosmos DB account name is `content-cosmos-<inject key="DeploymentID" enableCopy="false"/>`
+> - Cosmos DB account name is `cosmos-docs-<inject key="DeploymentID" enableCopy="false"/>`
 > - Both `ProcessedDocuments` and `ReviewQueue` containers exist with correct partition keys
 
 ## Success Criteria
 
-- [ ] Storage Account `contentstore<inject key="DeploymentID" enableCopy="false"/>` exists with `documents` and `processed` containers
+- [ ] Storage Account `docstore<inject key="DeploymentID" enableCopy="false"/>` exists with `documents` and `processed` containers
 - [ ] 5 sample documents are uploaded to the `documents` container
-- [ ] Document Intelligence resource `doc-intelligence-<inject key="DeploymentID" enableCopy="false"/>` is provisioned
+- [ ] Document Intelligence resource `doc-intel-<inject key="DeploymentID" enableCopy="false"/>` is provisioned
 - [ ] You successfully analyzed at least one document in Document Intelligence Studio and observed extracted text/tables
 - [ ] AI Foundry project `content-processor-<inject key="DeploymentID" enableCopy="false"/>` is created with `doc-processor` GPT-4.1 deployment
-- [ ] Cosmos DB account `content-cosmos-<inject key="DeploymentID" enableCopy="false"/>` has database `ContentProcessingDB` with `ProcessedDocuments` and `ReviewQueue` containers
+- [ ] Cosmos DB account `cosmos-docs-<inject key="DeploymentID" enableCopy="false"/>` has database `ContentProcessingDB` with `ProcessedDocuments` and `ReviewQueue` containers
 
 ## Additional Resources
 

@@ -17,7 +17,7 @@ Getting classification right is critical because it determines which extraction 
 
 ### Part 1: Navigate to AI Foundry Agents
 
-1. Go to [Azure AI Foundry](https://ai.azure.com) and open your project **proj-default** (under the Foundry resource **content-hub-<inject key="DeploymentID" enableCopy="false"/>**).
+1. Go to [Azure AI Foundry](https://ai.azure.com) and open your project **proj-default** (under the Foundry resource **openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>**).
 
 1. In the left navigation menu, click **Agents**.
 
