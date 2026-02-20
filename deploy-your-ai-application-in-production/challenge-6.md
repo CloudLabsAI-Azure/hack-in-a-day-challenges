@@ -41,25 +41,26 @@ You should already be connected to your VM via Bastion from previous challenges.
 
 2. **Verify you're on the VM** (in PowerShell terminal):
 
-```powershell
-hostname
-ipconfig | Select-String "IPv4"
-# Should show private IP (10.0.3.x) - no public IP!
-```
+   ```powershell
+   hostname
+   ipconfig | Select-String "IPv4"
+   # Should show private IP (10.0.3.x) - no public IP!
+   ```
 
 ### Part 2: Run and Test Chat Application Through Bastion
 
 1. **Start the chat app** (if not already running):
 
-```powershell
-cd C:\Code\hack-in-a-day-challenges-deploy-your-ai-application\codefiles
-.\venv\Scripts\Activate.ps1
-streamlit run app.py
-```
+   ```powershell
+   cd C:\Code\hack-in-a-day-challenges-deploy-your-ai-application\codefiles
+   .\venv\Scripts\Activate.ps1
+   streamlit run app.py
+   ```
 
 2. **Open browser** to `http://localhost:8501` if it doesn't open automatically.
 
 3. **Verify the app works**:
+
    - Sidebar shows **Authenticated** and **Managed Identity**
    - Send a test message: `What is Azure Bastion?`
    - Confirm you receive an AI response
@@ -97,38 +98,38 @@ Verify chat session history is saved to Azure Storage:
 
 2. **Check if sessions are saved** (open a new PowerShell terminal):
 
-```powershell
-$storageName = az storage account list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[0].name" -o tsv
+   ```powershell
+   $storageName = az storage account list -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query "[0].name" -o tsv
 
-# Assign Storage Blob Data Reader to the current user (needed for az CLI auth)
-$currentUserId = az ad signed-in-user show --query id -o tsv
-$storageId = az storage account show --name $storageName -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query id -o tsv
+   # Assign Storage Blob Data Reader to the current user (needed for az CLI auth)
+   $currentUserId = az ad signed-in-user show --query id -o tsv
+   $storageId = az storage account show --name $storageName -g "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" --query id -o tsv
 
-az role assignment create `
- --assignee $currentUserId `
- --role "Storage Blob Data Reader" `
- --scope $storageId
+   az role assignment create `
+   --assignee $currentUserId `
+   --role "Storage Blob Data Reader" `
+   --scope $storageId
 
-# Wait a moment for role propagation
-Start-Sleep -Seconds 30
+   # Wait a moment for role propagation
+   Start-Sleep -Seconds 30
 
-az storage blob list `
- --account-name $storageName `
- --container-name "chat-sessions" `
- --auth-mode login `
- --query "[].{Name:name, Size:properties.contentLength, LastModified:properties.lastModified}" `
- --output table
-```
+   az storage blob list `
+   --account-name $storageName `
+   --container-name "chat-sessions" `
+   --auth-mode login `
+   --query "[].{Name:name, Size:properties.contentLength, LastModified:properties.lastModified}" `
+   --output table
+   ```
 
-   You should see your session file(s) listed with timestamps matching your chat activity.
+   - You should see your session file(s) listed with timestamps matching your chat activity.
 
-   > **Note**: If the `chat-sessions` container doesn't exist yet, the app will create it on the first message. If you see an error, send a message in the app first and retry.
+      > **Note**: If the `chat-sessions` container doesn't exist yet, the app will create it on the first message. If you see an error, send a message in the app first and retry.
 
 ## Success Criteria
 
 Validate your secure connectivity:
 
-- [ ] Connected to VM via Azure Bastion (no public IP)
-- [ ] Chat application accessible and working through Bastion session
-- [ ] DNS resolves all services to private IPs (10.0.x.x)
-- [ ] Session history saved to Blob Storage
+- Connected to VM via Azure Bastion (no public IP)
+- Chat application accessible and working through Bastion session
+- DNS resolves all services to private IPs (10.0.x.x)
+- Session history saved to Blob Storage

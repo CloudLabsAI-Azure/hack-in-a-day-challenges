@@ -32,30 +32,30 @@ By the end, you'll have a fully operational, secure OpenAI service ready for you
 
 1. **Open VS Code PowerShell terminal** on **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** and run:
 
-```powershell
-$openaiName = az cognitiveservices account list `
- --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --query "[?kind=='AIServices'].name" -o tsv
+   ```powershell
+   $openaiName = az cognitiveservices account list `
+   --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+   --query "[?kind=='AIServices'].name" -o tsv
 
-Write-Host "OpenAI Resource: $openaiName"
+   Write-Host "OpenAI Resource: $openaiName"
 
-# Get endpoint
-$endpoint = az cognitiveservices account show `
- --name $openaiName `
- --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --query properties.endpoint -o tsv
+   # Get endpoint
+   $endpoint = az cognitiveservices account show `
+   --name $openaiName `
+   --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+   --query properties.endpoint -o tsv
 
-Write-Host "Endpoint: $endpoint"
+   Write-Host "Endpoint: $endpoint"
 
-# List existing deployments
-az cognitiveservices account deployment list `
- --name $openaiName `
- --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --query "[].{Name:name, Model:properties.model.name, Version:properties.model.version}" `
- --output table
-```
+   # List existing deployments
+   az cognitiveservices account deployment list `
+   --name $openaiName `
+   --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+   --query "[].{Name:name, Model:properties.model.name, Version:properties.model.version}" `
+   --output table
+   ```
 
-   You should see the **secure-chat** deployment from Challenge 1. This will be your primary chat model.
+   - You should see the **secure-chat** deployment from Challenge 1. This will be your primary chat model.
 
 ### Part 2: Store Model Configuration in Key Vault
 
@@ -103,62 +103,62 @@ Validate that Azure OpenAI works end-to-end with managed identity authentication
 
 1. **Install required Python packages** (if not already installed):
 
-```powershell
-New-Item -Path "C:\Code" -ItemType Directory -Force
-pip install azure-identity azure-keyvault-secrets openai
-```
+   ```powershell
+   New-Item -Path "C:\Code" -ItemType Directory -Force
+   pip install azure-identity azure-keyvault-secrets openai
+   ```
 
 2. **Create and run the test script**:
 
-```powershell
-@'
-"""
-Quick test: Azure OpenAI via Private Endpoint with Managed Identity
-"""
-from azure.identity import DefaultAzureCredential
-from azure.keyvault.secrets import SecretClient
-from openai import AzureOpenAI
+   ```powershell
+   @'
+   """
+   Quick test: Azure OpenAI via Private Endpoint with Managed Identity
+   """
+   from azure.identity import DefaultAzureCredential
+   from azure.keyvault.secrets import SecretClient
+   from openai import AzureOpenAI
 
-credential = DefaultAzureCredential()
+   credential = DefaultAzureCredential()
 
-# Get config from Key Vault
-kv_name = "$kvName"
-kv_url = f"https://{kv_name}.vault.azure.net"
-secret_client = SecretClient(vault_url=kv_url, credential=credential)
+   # Get config from Key Vault
+   kv_name = "$kvName"
+   kv_url = f"https://{kv_name}.vault.azure.net"
+   secret_client = SecretClient(vault_url=kv_url, credential=credential)
 
-openai_endpoint = secret_client.get_secret("OpenAIEndpoint").value
-chat_deployment = secret_client.get_secret("ChatModelDeployment").value
-api_version = secret_client.get_secret("OpenAIApiVersion").value
+   openai_endpoint = secret_client.get_secret("OpenAIEndpoint").value
+   chat_deployment = secret_client.get_secret("ChatModelDeployment").value
+   api_version = secret_client.get_secret("OpenAIApiVersion").value
 
-print(f"Endpoint: {openai_endpoint}")
-print(f"Model: {chat_deployment}")
+   print(f"Endpoint: {openai_endpoint}")
+   print(f"Model: {chat_deployment}")
 
-# Create OpenAI client with managed identity
-client = AzureOpenAI(
- azure_endpoint=openai_endpoint,
- api_version=api_version,
- azure_ad_token_provider=lambda: credential.get_token(
- "https://cognitiveservices.azure.com/.default"
- ).token
-)
+   # Create OpenAI client with managed identity
+   client = AzureOpenAI(
+   azure_endpoint=openai_endpoint,
+   api_version=api_version,
+   azure_ad_token_provider=lambda: credential.get_token(
+   "https://cognitiveservices.azure.com/.default"
+   ).token
+   )
 
-# Test chat completion
-response = client.chat.completions.create(
- model=chat_deployment,
- messages=[
- {"role": "system", "content": "You are a helpful assistant."},
- {"role": "user", "content": "Explain managed identity in one sentence."}
- ],
- max_tokens=100
-)
+   # Test chat completion
+   response = client.chat.completions.create(
+   model=chat_deployment,
+   messages=[
+   {"role": "system", "content": "You are a helpful assistant."},
+   {"role": "user", "content": "Explain managed identity in one sentence."}
+   ],
+   max_tokens=100
+   )
 
-print(f"\nAI Response: {response.choices[0].message.content}")
-print(f"Tokens used: {response.usage.total_tokens}")
-print("\nSUCCESS: Managed identity auth to Azure OpenAI is working!")
-'@ -replace '\$kvName', $kvName | Out-File -FilePath "C:\Code\test_openai_quick.py" -Encoding UTF8
+   print(f"\nAI Response: {response.choices[0].message.content}")
+   print(f"Tokens used: {response.usage.total_tokens}")
+   print("\nSUCCESS: Managed identity auth to Azure OpenAI is working!")
+   '@ -replace '\$kvName', $kvName | Out-File -FilePath "C:\Code\test_openai_quick.py" -Encoding UTF8
 
-python "C:\Code\test_openai_quick.py"
-```
+   python "C:\Code\test_openai_quick.py"
+   ```
 
 If you get an error, wait 2-3 minutes for RBAC to propagate and retry.
 
@@ -178,8 +178,8 @@ Azure OpenAI includes responsible AI content filtering by default. You can optio
 
 Validate your OpenAI setup:
 
-- [ ] GPT model deployed (either **secure-chat** from Ch1 or additional deployment)
-- [ ] Model deployment name stored in Key Vault as `ChatModelDeployment`
-- [ ] API version stored in Key Vault as `OpenAIApiVersion`
-- [ ] Test script successfully calls chat completions using managed identity (no API keys)
-- [ ] Content filtering reviewed
+- GPT model deployed (either **secure-chat** from Ch1 or additional deployment)
+- Model deployment name stored in Key Vault as `ChatModelDeployment`
+- API version stored in Key Vault as `OpenAIApiVersion`
+- Test script successfully calls chat completions using managed identity (no API keys)
+- Content filtering reviewed
