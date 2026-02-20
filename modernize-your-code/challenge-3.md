@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Now that you have a Translation Agent, you need a Validation Agent to check whether the translated SQL is correct. In this challenge, you will create a second agent that validates Azure SQL T-SQL syntax and semantics. More importantly, you will connect this agent to your Translation Agent so that translations automatically flow to validation — creating your first multi-agent pipeline!
+Now that you have a Translation Agent, you need a Validation Agent to check whether the translated SQL is correct. In this challenge, you will create a second agent that validates Azure SQL T-SQL syntax and semantics. More importantly, you will connect this agent to your Translation Agent so that translations automatically flow to validation - creating your first multi-agent pipeline!
 
 ## Challenge Objectives
 
@@ -17,11 +17,11 @@ Now that you have a Translation Agent, you need a Validation Agent to check whet
 
 ### Task 1: Create the Validation Agent
 
-1. In **Microsoft Foundry Studio**, navigate to **Agents**.
+1. In **Microsoft Foundry**, navigate to **Agents**.
 
-2. Click **+ New agent**.
+2. Click on **+ New agent**.
 
-3. Configure the agent:
+3. Configure the agent with below details:
    - **Agent name**: `SQL-Validation-Agent`
    - **Deployment**: Select **sql-translator**
 
@@ -34,7 +34,7 @@ Now that you have a Translation Agent, you need a Validation Agent to check whet
 
 ### Task 2: Write Validation Instructions
 
-1. In the **Instructions** box, paste:
+1. In the **Instructions** box, paste the below content:
 
       ```
       You are an Azure SQL T-SQL validation expert. Your role is to analyze T-SQL code and determine if it is syntactically and semantically correct.
@@ -101,7 +101,7 @@ Now that you have a Translation Agent, you need a Validation Agent to check whet
 
 ### Task 4: Test Validation Agent Independently
 
-1. Click **Try in playground**.
+1. Click on **Try in playground**.
 
 2. Test with VALID SQL:
 
@@ -143,26 +143,25 @@ Now comes the key part connecting the agents!
 
 3. In the **Setup** panel on the right, scroll down to the **Connected agents** section.
 
-4. Click **+ Add**.
+4. Click on **+ Add**.
 
 5. In the **Adding a connected agent** pane, configure:
 
       - **Agent**: Select **SQL-Validation-Agent** from the dropdown
       - **Unique name**: Enter `validation_agent`
-      - **Tools**: (Shows agent tools if any - leave as is)
       - **Detail the steps to activate the agent**: Enter:
 
          ```
          After completing the SQL translation from Oracle to Azure SQL T-SQL, automatically transfer the translated SQL to the SQL-Validation-Agent for syntax and semantic validation.
          ```
 
-6. Click **Add**.
+6. Click on **Add**.
 
 7. You should now see **SQL-Validation-Agent** listed under Connected agents with the unique name `validation_agent`.
 
 ### Task 6: Update Translation Agent Instructions for Hand-Off
 
-1. Still in the **SQL-Translation-Agent** configuration, scroll to the **Instructions** text box.
+1. From the **SQL-Translation-Agent** configuration, scroll to the **Instructions** text box.
 
 2. Add the following to the **very end** of your existing Translation Agent instructions (after the OUTPUT REQUIREMENTS section):
 
@@ -173,7 +172,7 @@ Now comes the key part connecting the agents!
       2. Include the validation results in your response
       ```
 
-3. The complete end of your instructions should now look like:
+3. The complete end of your instructions should now look like below mentioned output:
 
       ```
       OUTPUT REQUIREMENTS:
@@ -195,7 +194,7 @@ Now comes the key part connecting the agents!
 
 1. Go back to **SQL-Translation-Agent**.
 
-2. Click **Try in playground**.
+2. Click on **Try in playground**.
 
 3. Send this Oracle query:
 

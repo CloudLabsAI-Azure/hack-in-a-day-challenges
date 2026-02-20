@@ -2,14 +2,11 @@
 
 ## Introduction
 
-Your three-agent pipeline is operational! All the code has been built for you. In this challenge, you will configure and run a Streamlit web application locally that provides a beautiful interface for your SQL modernization system.
+Your three-agent pipeline is operational! All the code has been built for you. In this challenge, you will configure and run a Streamlit web application locally that provides a interface for your SQL modernization system.
 
 ## Prerequisites
 
 - Completed Challenge 4 (all three agents created and connected)
-- Visual Studio Code installed
-- Python 3.11+ installed
-- Azure CLI installed and authenticated (`az login`)
 
 ## Challenge Objectives
 
@@ -29,19 +26,19 @@ The application code is provided in a pre-built package.
 
 1. **Download the code package**:
    
-   Visit this link in your browser:
+   Access the link mentioned below using browser:
    ```
    https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/modernize-your-code.zip
    ```
 
-2. **Extract the ZIP file**:
+1. **Extract the ZIP file**:
    
-   - Right-click the downloaded `modernize-your-code.zip` file
-   - Select **Extract All...**
-   - Choose a location like `C:\LabFiles\` or your Desktop
-   - Click **Extract**
+   - Right-click on the downloaded `modernize-your-code.zip` file
+   - Select the **Extract All...** option
+   - Choose a location `C:\LabFiles\` or your Desktop
+   - Click on **Extract**
 
-3. **Navigate to the codefiles folder**:
+1. **Navigate to the codefiles folder**:
    
    Open File Explorer and go to:
    ```
@@ -77,12 +74,12 @@ The application uses Azure CLI authentication to connect to your agents.
 
 You need three values to connect to your agents:
 
-1. Go to **Microsoft Foundry Studio** → the project that is created.
+1. Go to **Microsoft Foundry** and open the project that you created in earlier challenge.
 
-1. In the Overview section, find the **Microsoft Foundry project endpoint**:
+1. In the Overview section, find the **Microsoft Foundry project endpoint** which would look like the below mentioned example:
 
    - Example format: `https://sql-modernize-2034545.services.ai.azure.com/api/projects/proj-default`
-   - **CRITICAL:** The project name at the end is always `proj-default` (not sql-modernize-XXXX)
+   - **Important:** The project name at the end is always `proj-default` (not sql-modernize-XXXX)
    - Make sure it ends with `/api/projects/proj-default`
 
 1. Navigate to **Agents** in the left menu.
@@ -119,7 +116,7 @@ You need three values to connect to your agents:
 
     - **Important Notes:**
         - Replace `<DeploymentID>` with your actual deployment ID (for example, 2034545)
-        - **CRITICAL:** Endpoint must end with `/api/projects/proj-default` (the project name is always `proj-default`)
+        - **Note:** Endpoint must end with `/api/projects/proj-default` (the project name is always `proj-default`)
         - Replace `<your-agent-id>` with your Translation Agent ID from step 6 (starts with `asst_`)
         - Replace `<your-cosmos-primary-key>` with your Cosmos DB Primary Key
         - The app uses Azure CLI authentication (`az login`), so no API key is required for agents.
@@ -194,7 +191,7 @@ This installs:
 
 3. **Option A: Use a Sample Query**
    - On the right side, select a sample from the dropdown (e.g., "Hierarchical Query (CONNECT BY)")
-   - Click **"Load Sample"**
+   - Click on **"Load Sample"**
 
 4. **Option B: Upload a SQL File**
    - Click the file upload area
