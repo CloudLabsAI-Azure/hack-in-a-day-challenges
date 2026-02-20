@@ -30,7 +30,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 ## Let's Get Started with SQL Modernization
 
-1. In the JumpVM, click on **Microsoft Edge** browser shortcut which is created on desktop.
+1. In the JumpVM, click on the **Microsoft Edge** browser shortcut which is created on the desktop.
 
    ![](./media/gs-up1.png)
 
@@ -52,7 +52,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
      ![](./media/gs-lab3-g3.png)
 
-     >**Note:** If you see the Action Required dialog box, then select Ask Later option.
+     >**Note:** If you see the Action Required dialog box, then select the Ask Later option.
      
 1. If you see the pop-up **Stay Signed in?**, click No.
 
@@ -69,6 +69,6 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
    - Python 3.11 and VS Code pre-installed
    - Azure CLI for authentication
 
-Now, click on the **Next** from lower right corner to move on next page.
+Now, click on the **Next** from the lower right corner to move on to the next page.
 
 ## Happy Hacking!
