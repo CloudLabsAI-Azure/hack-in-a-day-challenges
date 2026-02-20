@@ -12,7 +12,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 ## Steps to Complete
 
-### Part 1: Verify Pre-Deployed Resource Group
+### Task 1: Verify Pre-Deployed Resource Group
 
 1. In the **Azure Portal**, search for **Resource groups** in the top search bar and select it.
 
@@ -22,7 +22,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. This resource group will be used for all resources you create in this hackathon.
 
-### Part 2: Create Microsoft Foundry Project with Model Deployment
+### Task 2: Create Microsoft Foundry Project with Model Deployment
 
 1. In the **Azure Portal**, search for **Microsoft Foundry** and select it.
 
@@ -53,7 +53,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
-### Part 3: Deploy GPT-4.1 Model in AI Foundry
+### Task 3: Deploy GPT-4.1 Model in AI Foundry
 
 1. In **Microsoft Foundry Studio**.
 
@@ -74,7 +74,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. Click **Create**.
 
-### Part 4: Test the Model Deployment
+### Task 4: Test the Model Deployment
 
 1. In your `sql-translator` model deployment.
 
@@ -94,7 +94,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
-### Part 5: Create Azure Cosmos DB
+### Task 5: Create Azure Cosmos DB
 
 1. In the **Azure Portal**, search for **Azure Cosmos DB** and select it.
 
@@ -127,7 +127,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
-### Part 6: Create Cosmos DB Database and Containers
+### Task 6: Create Cosmos DB Database and Containers
 
 1. In your Cosmos DB account, click on **Data Explorer** from the left navigation.
 
@@ -182,7 +182,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
-### Part 7: Verify All Resources
+### Task 7: Verify All Resources
 
 1. Navigate back to your resource group: **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
 
@@ -193,7 +193,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. Ensure all resources show **Deployment succeeded** status.
 
-### Part 8: Gather Configuration Values
+### Task 8: Gather Configuration Values
 
 Create a text file or note with the following information (you'll need these in subsequent challenges):
 

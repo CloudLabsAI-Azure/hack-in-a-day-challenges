@@ -23,7 +23,7 @@ Your three-agent pipeline is operational! All the code has been built for you. I
 
 ## Steps to Complete
 
-### Part 1: Download and Extract Code Files
+### Task 1: Download and Extract Code Files
 
 The application code is provided in a pre-built package.
 
@@ -48,7 +48,7 @@ The application code is provided in a pre-built package.
    [extraction-path]\hack-in-a-day-challenges-modernize-your-code\modernize-your-code\codefiles
    ```
 
-### Part 2: Install and Authenticate with Azure CLI
+### Task 2: Install and Authenticate with Azure CLI
 
 The application uses Azure CLI authentication to connect to your agents.
 
@@ -73,7 +73,7 @@ The application uses Azure CLI authentication to connect to your agents.
 
 1. Don't change the subscription or tenant, hit enter.
 
-### Part 3: Get Your Agent Credentials
+### Task 3: Get Your Agent Credentials
 
 You need three values to connect to your agents:
 
@@ -95,9 +95,9 @@ You need three values to connect to your agents:
    - Go to Azure Portal → Your Cosmos DB account
    - Click **Keys** → Copy **URI** and **Primary Key**
 
-### Part 4: Configure the Application
+### Task 4: Configure the Application
 
-1. Navigate to the `codefiles` folder you extracted in Part 1.
+1. Navigate to the `codefiles` folder you extracted in Task 1.
 
 2. Locate the `.env.example` file.
 
@@ -126,7 +126,7 @@ You need three values to connect to your agents:
 
 5. Save the file.
 
-### Part 5: Review the Code
+### Task 5: Review the Code
 
 Before running, take a moment to explore the application code:
 
@@ -150,7 +150,7 @@ Before running, take a moment to explore the application code:
 - Production-ready premium styling
 - Auto-switch to Results tab after completion
 
-### Part 6: Install Dependencies
+### Task 6: Install Dependencies
 
 Open a terminal in the `codefiles` folder and run:
 
@@ -167,7 +167,7 @@ This installs:
 - `python-dotenv` - Environment variables
 - `pandas` - Data processing
 
-### Part 7: Run the Application
+### Task 7: Run the Application
 
 1. Start the Streamlit app with Azure CLI in PATH:
 
@@ -183,7 +183,7 @@ This installs:
 
 1. The application will automatically open in your browser at `http://localhost:8501` or `http://localhost:8502`
 
-### Part 8: Test the Multi-Agent Pipeline
+### Task 8: Test the Multi-Agent Pipeline
 
 1. You'll see a premium blue gradient header: **"SQL Modernization Assistant"**
 
@@ -234,7 +234,7 @@ This installs:
 
 10. Click the **"History"** tab to see all past translations from Cosmos DB
 
-### Part 9: Test Complex Scenarios
+### Task 9: Test Complex Scenarios
 
 Try these test cases to verify everything works:
 

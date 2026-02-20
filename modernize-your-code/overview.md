@@ -20,13 +20,13 @@ The data engineering team needs an automated, AI-powered system that can:
 - Provide a retry mechanism for failed translations
 - Scale to process thousands of queries efficiently
 
-Using Microsoft Foundry (with GPT-4), Cosmos DB, and Azure Container Apps, you will build a complete SQL modernization solution that demonstrates how AI can accelerate enterprise cloud migration at scale.
+Using Microsoft Foundry (with GPT-4.1), Cosmos DB, and Azure Container Apps, you will build a complete SQL modernization solution that demonstrates how AI can accelerate enterprise cloud migration at scale.
 
 ## Introduction
 
 Your mission is to build a Multi-Agent SQL Modernization Pipeline using Microsoft Foundry Agents that automates the translation, validation, and optimization of legacy SQL code. The system consists of three specialized AI agents built using the visual Agent builder:
 
-1. **SQL-Translation-Agent**: Converts Oracle PL/SQL syntax to Azure SQL T-SQL syntax using GPT-4
+1. **SQL-Translation-Agent**: Converts Oracle PL/SQL syntax to Azure SQL T-SQL syntax using GPT-4.1
 2. **SQL-Validation-Agent**: Verifies syntax correctness, checks for semantic errors, and validates translated SQL
 3. **SQL-Optimization-Agent**: Analyzes translated SQL and suggests performance improvements for Azure SQL
 
@@ -36,7 +36,7 @@ The agents are connected in a pipeline using AI Foundry's "Connected agents" fea
 
 By participating in this Hack in a Day, you will learn how to:
 
-- Create Microsoft Foundry project and deploy GPT-4 model
+- Create Microsoft Foundry project and deploy GPT-4.1 model
 - Build AI agents using the visual Agent builder in Microsoft Foundry
 - Design multi-agent systems with connected pipeline orchestration
 - Implement prompt engineering techniques for accurate SQL dialect conversion
@@ -52,7 +52,7 @@ By participating in this Hack in a Day, you will learn how to:
 This hands-on lab is structured into five progressive challenges:
 
 **Challenge 1: Set Up Azure Infrastructure**  
-Create Microsoft Foundry project with GPT-4 deployment and Cosmos DB for storing translation history.
+Create Microsoft Foundry project with GPT-4.1 deployment and Cosmos DB for storing translation history.
 
 **Challenge 2: Build the Translation Agent**  
 Create your first AI agent using the visual Agent builder in Microsoft Foundry. Configure comprehensive Oracle-to-T-SQL translation rules and test in the playground.
@@ -70,7 +70,7 @@ Throughout each challenge, you will iteratively build, test, and enhance your SQ
 
 ## Challenge Overview
 
-You will begin by provisioning Azure resources including Microsoft Foundry with GPT-4 deployment and Cosmos DB. Next, you will build three specialized AI agents using the visual Agent builder in Microsoft Foundry and connect them in a pipeline. Finally, you will authenticate with Azure CLI and run a pre-built Streamlit web application that integrates with the agent pipeline, creating a production-ready SQL modernization platform with a premium user interface.
+You will begin by provisioning Azure resources including Microsoft Foundry with GPT-4.1 deployment and Cosmos DB. Next, you will build three specialized AI agents using the visual Agent builder in Microsoft Foundry and connect them in a pipeline. Finally, you will authenticate with Azure CLI and run a pre-built Streamlit web application that integrates with the agent pipeline, creating a production-ready SQL modernization platform with a premium user interface.
 
 By the end of this Hack in a Day, you will have a fully functional Multi-Agent SQL Modernization System with connected agents, automatic persistence via Cosmos DB, and an intuitive web interface.
 

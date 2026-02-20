@@ -15,7 +15,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 
 ## Steps to Complete
 
-### Part 1: Create Optimization Agent
+### Task 1: Create Optimization Agent
 
 1. In **Microsoft Foundry Studio**, navigate to **Agents**.
 
@@ -32,7 +32,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
-### Part 2: Write Optimization Instructions
+### Task 2: Write Optimization Instructions
 
 1. In the **Instructions** box, paste:
 
@@ -120,7 +120,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
       - Below 50: Poor, needs major restructuring
       ```
 
-### Part 3: Add Agent Description
+### Task 3: Add Agent Description
 
 1. Expand **Agent Description**:
 
@@ -128,7 +128,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
       Analyzes Azure SQL T-SQL code and provides performance optimization recommendations including indexes, query rewrites, and Azure-specific features. Returns structured JSON with prioritized suggestions.
       ```
 
-### Part 4: Test Optimization Agent Independently
+### Task 4: Test Optimization Agent Independently
 
 1. Click **Try in playground**.
 
@@ -171,7 +171,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
       WHERE dept_id = 10;
       ```
 
-### Part 5: Connect Optimization Agent to Translation Agent
+### Task 5: Connect Optimization Agent to Translation Agent
 
 > **Note**: Due to Microsoft Foundry limitations, an agent that is already connected (like Validation Agent) cannot have its own connected agents. Therefore, we'll connect the Optimization Agent directly to the Translation Agent as a second connected agent.
 
@@ -201,7 +201,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
       - validation_agent
       - optimization_agent
 
-### Part 6: Update Translation Agent Instructions
+### Task 6: Update Translation Agent Instructions
 
 1. Still in **SQL-Translation-Agent**, scroll to the **Instructions** text box.
 
@@ -234,7 +234,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 
 4. The agent will auto-save.
 
-### Part 7: Test the Complete Three-Agent Pipeline
+### Task 7: Test the Complete Three-Agent Pipeline
 
 1. Go back to **SQL-Translation-Agent** (the first agent).
 
@@ -258,7 +258,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 
 5. Verify you see results from ALL THREE agents in sequence.
 
-### Part 8: Test with Complex Query
+### Task 8: Test with Complex Query
 
 1. Test with Oracle hierarchical query:
 
@@ -275,7 +275,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
       - Validates the CTE syntax
       - Suggests optimization (maybe index on manager_id and emp_id)
 
-### Part 9: Test Error Handling in Pipeline
+### Task 9: Test Error Handling in Pipeline
 
 1. Send malformed Oracle SQL:
 
@@ -292,7 +292,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 
 3. This confirms the pipeline properly handles failures!
 
-### Part 10: Test Performance Scenario
+### Task 10: Test Performance Scenario
 
 1. Send a query that needs optimization:
 
@@ -310,7 +310,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
       - Add index or computed column for `YEAR(OrderDate)`
       - Possibly rewrite to avoid function on column
 
-### Part 11: Document Agent IDs
+### Task 11: Document Agent IDs
 
 1. Go to **Agents** list.
 

@@ -89,7 +89,7 @@ The application code is provided in a pre-built package.
    Get-Content ".env"
    ```
 
-   - You should see `KEY_VAULT_NAME=kv-secureai-<inject key="DeploymentID" enableCopy="false"/>` (with your actual deployment ID).
+   - You should see **KEY_VAULT_NAME=kv-secureai-<inject key="DeploymentID" enableCopy="false"/>** (with your actual deployment ID).
 
       > **Important**: The `.env` file contains **only non-sensitive configuration**. All secrets (OpenAI endpoint, deployment name, API version, storage account name) are retrieved from Azure Key Vault at runtime using Managed Identity. No API keys anywhere!
 
@@ -153,10 +153,7 @@ Write-Host "Key Vault secured"
    pip install -r requirements.txt
    ```
 
-   - This will take 2-3 minutes. You should see:
-      ```
-      Successfully installed streamlit-x.x.x openai-x.x.x azure-identity-x.x.x ...
-      ```
+   - This will take 2-3 minutes to complete.
 
       > **Note**: The `requirements.txt` pins `openai>=1.12.0,<2.0.0`. Versions earlier than 1.x will fail with errors like "Client.__init__() got an unexpected keyword argument 'proxies'" due to breaking changes in the OpenAI Python SDK.
 
@@ -212,6 +209,8 @@ Moment of truth!
    ```powershell
    streamlit run app.py
    ```
+
+   >**Note:** When asked for **Email** type **<inject key="DeploymentID" enableCopy="false"/>** and hit enter.
 
 3. **Expected output**:
 
