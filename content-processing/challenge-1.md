@@ -60,14 +60,6 @@ You will also upload sample documents and test Document Intelligence's OCR capab
 
 1. Verify all 5 documents appear in the container.
 
-<validation step="5a1f3c2d-8e9b-4f6a-b7c1-2d3e4f5a6b7c" />
-
- 
-> **Congratulations** on completing the Task! Now, it's time to validate it. Here are the steps:
-> - Hit the Validate button for the corresponding Task. If you receive a success message, you can proceed to the next Task.
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
-
 ### Task 3: Create Azure AI Document Intelligence Resource
 
 1. In the Azure portal, click **+ Create a resource** and search for **Document Intelligence**.
@@ -109,14 +101,6 @@ You will also upload sample documents and test Document Intelligence's OCR capab
 
 1. Try analysing **receipt_cafe.jpg** and **drivers_license.jpg** as well. Notice how Document Intelligence handles different document formats (PDF vs image) and layouts.
 
-<validation step="6b2c4d5e-9f0a-4b7c-8d1e-3f4a5b6c7d8e" />
-
- 
-> **Congratulations** on completing the Task! Now, it's time to validate it. Here are the steps:
-> - Hit the Validate button for the corresponding Task. If you receive a success message, you can proceed to the next Task.
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
-
 ### Task 5: Create Microsoft Foundry Resource and Deploy GPT-4.1
 
 1. In the Azure portal, search for **Microsoft Foundry** in the top search bar.
@@ -157,7 +141,6 @@ You will also upload sample documents and test Document Intelligence's OCR capab
 
 <validation step="67fcae6d-e490-4215-8b86-e1cdc1722cc2" />
 
- 
 > **Congratulations** on completing the Task! Now, it's time to validate it. Here are the steps:
 > - Hit the Validate button for the corresponding Task. If you receive a success message, you can proceed to the next Task.
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
@@ -206,7 +189,6 @@ You will also upload sample documents and test Document Intelligence's OCR capab
    - Container: `ReviewQueue` (partition key: `/documentId`)
 
 <validation step="67fcae6d-e490-4215-8b86-e1cdc1722cc2" />
-
  
 > **Congratulations** on completing the Task! Now, it's time to validate it. Here are the steps:
 > - Hit the Validate button for the corresponding Task. If you receive a success message, you can proceed to the next Task.
