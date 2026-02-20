@@ -30,7 +30,7 @@ This proves your entire architecture works through private networking only!
 
 ### Part 1: Verify Bastion and Connect to VM
 
-You should already be connected to your VM via Bastion from the previous challenges. If not, complete **Task 1** and **Task 2**. Otherwise, you can skip them and proceed directly to **Task 3**.
+>**Note:** You should already be connected to your VM via Bastion from the previous challenges. If not, complete **Task 1** and **Task 2**. Otherwise, you can skip them and proceed directly to **Task 3**.
 
 1. Make sure that you are inside the **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**.
 
@@ -39,7 +39,7 @@ You should already be connected to your VM via Bastion from the previous challen
 1. Enter credentials:
 
    - **Username**: `azureuser`
-   - **Password**: <inject key="VMAdminPassword"></inject>
+   - **Password**: `SecureAI@2026`
 
 1. Click **Connect** (opens a new browser tab with remote desktop session).
 
@@ -137,3 +137,5 @@ Validate your secure connectivity:
 - Chat application accessible and working through Bastion session
 - DNS resolves all services to private IPs (10.0.x.x)
 - Session history saved to Blob Storage
+
+Now, click **Next** to continue to **Challenge 07**.
