@@ -2,20 +2,20 @@
 
 ## Introduction
 
-Now that you have a Translation Agent, you need a Validation Agent to check if the translated SQL is correct. In this challenge, you will create a second agent that validates Azure SQL T-SQL syntax and semantics. More importantly, you will **connect** this agent to your Translation Agent so that translations automatically flow to validation - creating your first multi-agent pipeline!
+Now that you have a Translation Agent, you need a Validation Agent to check whether the translated SQL is correct. In this challenge, you will create a second agent that validates Azure SQL T-SQL syntax and semantics. More importantly, you will connect this agent to your Translation Agent so that translations automatically flow to validation — creating your first multi-agent pipeline!
 
 ## Challenge Objectives
 
 - Create a Validation Agent with SQL validation instructions
-- Configure the agent to use GPT-4.1 deployment
+- Configure the agent to use the GPT-4.1 deployment
 - Test validation capabilities with correct and incorrect SQL
 - **Connect the Validation Agent to the Translation Agent** using "Connected agents"
 - Test the complete pipeline: Translation → Validation
-- Verify hand-off works automatically
+- Verify that the hand-off works automatically
 
 ## Steps to Complete
 
-### Task 1: Create Validation Agent
+### Task 1: Create the Validation Agent
 
 1. In **Microsoft Foundry Studio**, navigate to **Agents**.
 
@@ -111,7 +111,7 @@ Now that you have a Translation Agent, you need a Validation Agent to check if t
       WHERE hire_date > DATEADD(DAY, -30, GETDATE());
       ```
 
-3. Verify it returns `"valid": true` in JSON format.
+3. Verify that it returns `"valid": true` in JSON format.
 
 4. Test with INVALID SQL (syntax error):
 
@@ -121,9 +121,9 @@ Now that you have a Translation Agent, you need a Validation Agent to check if t
       WHERE hire_date > GETDATE()
       ```
 
-5. Verify it returns `"valid": false` and identifies missing commas.
+5. Verify that it returns `"valid": false` and identifies the missing commas.
 
-6. Test with semantic issue:
+6. Test with a semantic issue:
 
       ```sql
       SELECT emp_id, SUM(salary)
@@ -131,11 +131,11 @@ Now that you have a Translation Agent, you need a Validation Agent to check if t
       WHERE dept_id = 10;
       ```
 
-7. Verify it flags the missing GROUP BY for the aggregate function.
+7. Verify that it flags the missing GROUP BY for the aggregate function.
 
 ### Task 5: Connect Validation Agent to Translation Agent
 
-Now comes the key part - connecting the agents!
+Now comes the key part connecting the agents!
 
 1. Go back to the **Agents** list.
 
@@ -147,7 +147,7 @@ Now comes the key part - connecting the agents!
 
 5. In the **Adding a connected agent** pane, configure:
 
-      - **Agent**: Select **SQL-Validation-Agent** from dropdown
+      - **Agent**: Select **SQL-Validation-Agent** from the dropdown
       - **Unique name**: Enter `validation_agent`
       - **Tools**: (Shows agent tools if any - leave as is)
       - **Detail the steps to activate the agent**: Enter:
@@ -208,16 +208,16 @@ Now comes the key part - connecting the agents!
 4. Observe what happens:
 
       - Translation Agent translates it to T-SQL
-      - Translation Agent automatically hands off to Validation Agent
+      - The Translation Agent automatically hands it off to the Validation Agent
       - Validation Agent validates the T-SQL
       - You see results from BOTH agents
 
-5. Verify you see:
+5. Verify that you see:
 
       - Translated SQL from Agent 1
       - Validation JSON from Agent 2
 
-### Task 8: Test with Complex Query
+### Task 8: Test with a Complex Query
 
 1. In the same playground, test with hierarchical query:
 
@@ -230,7 +230,7 @@ Now comes the key part - connecting the agents!
 
 2. Verify:
 
-      - Agent 1 translates to CTE
+      - Agent 1 translates to a CTE
       - Agent 2 validates the CTE syntax
       - Both results appear in the conversation
 
@@ -245,7 +245,7 @@ Now comes the key part - connecting the agents!
 2. Observe:
 
       - Translation Agent attempts translation
-      - Validation Agent identifies syntax errors
+      - The Validation Agent identifies syntax errors
       - You can see the validation flagged issues
 
 ### Task 10: Save Agent IDs
@@ -259,8 +259,8 @@ Now comes the key part - connecting the agents!
 ## Success Criteria
 
 - Validation Agent created successfully
-- Agent validates correct SQL with `valid: true` response
-- Agent identifies syntax errors in malformed SQL
+- The agent validates correct SQL with a `valid: true` response
+- The agent identifies syntax errors in malformed SQL
 - Agent flags semantic issues (missing GROUP BY, etc.)
 - Agent returns structured JSON format
 - Validation Agent successfully connected to Translation Agent

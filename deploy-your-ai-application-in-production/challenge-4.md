@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Your OpenAI service is deployed with a private endpoint, but it's not fully configured yet. In this challenge, you'll deploy GPT models, configure content filtering, test embeddings, and validate that everything works through the private network with managed identity authentication.
+Your OpenAI service is deployed with a private endpoint, but it's not fully configured yet. In this challenge, you will deploy GPT models, configure content filtering, test embeddings, and validate that everything works through the private network with managed identity authentication.
 
-By the end, you'll have a fully operational, secure OpenAI service ready for your chat application!
+By the end, you will have a fully operational, secure OpenAI service ready for your chat application.
 
 ## Prerequisites
 
@@ -55,11 +55,11 @@ By the end, you'll have a fully operational, secure OpenAI service ready for you
    --output table
    ```
 
-   - You should see the **secure-chat** deployment from Challenge 1. This will be your primary chat model.
+   - You should see the **secure-chat** deployment from Challenge 1. This is your primary chat model.
 
 ### Task 2: Store Model Configuration in Key Vault
 
-Store the deployment name and API version, so your app can retrieve them securely.
+Store the deployment name and API version so your app can retrieve them securely.
 
 ```powershell
 $kvName = az keyvault list `
@@ -99,7 +99,7 @@ Write-Host "Key Vault secured"
 
 ### Task 3: Test Chat Completions with Managed Identity
 
-Validate that Azure OpenAI works end-to-end with managed identity authentication.
+Validate that Azure OpenAI works end to end with managed identity authentication.
 
 1. **Install required Python packages** (if not already installed):
 
@@ -160,13 +160,13 @@ Validate that Azure OpenAI works end-to-end with managed identity authentication
    python "C:\Code\test_openai_quick.py"
    ```
 
-If you get an error, wait 2-3 minutes for RBAC to propagate and retry.
+RBAC changes may take 2–3 minutes to propagate. Please wait a few minutes before testing to ensure the permissions have been applied successfully.
 
 ## Success Criteria
 
 Validate your OpenAI setup:
 
-- GPT model deployed (either **secure-chat** from Ch1 or additional deployment)
+- GPT model deployed (either **secure-chat** from Challenge 1 or additional deployment)
 - Model deployment name stored in Key Vault as `ChatModelDeployment`
 - API version stored in Key Vault as `OpenAIApiVersion`
 - Test script successfully calls chat completions using managed identity (no API keys)

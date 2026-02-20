@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Your three-agent pipeline is operational! All the code has been built for you. In this challenge, you'll configure and run a Streamlit web application locally that provides a beautiful interface for your SQL modernization system.
+Your three-agent pipeline is operational! All the code has been built for you. In this challenge, you will configure and run a Streamlit web application locally that provides a beautiful interface for your SQL modernization system.
 
 ## Prerequisites
 
@@ -52,7 +52,7 @@ The application code is provided in a pre-built package.
 
 The application uses Azure CLI authentication to connect to your agents.
 
-1. Open the **Windows Powershell** as an admin.
+1. Open the **Windows Powershell** as an administrator.
 
 1. **Install Azure CLI** (if not already installed):
    
@@ -71,13 +71,13 @@ The application uses Azure CLI authentication to connect to your agents.
    
 1. This will open a pop-up for authentication. Sign in with your Azure credentials.
 
-1. Don't change the subscription or tenant, hit enter.
+1. Do not change the subscription or tenant; press Enter.
 
 ### Task 3: Get Your Agent Credentials
 
 You need three values to connect to your agents:
 
-1. Go to **Microsoft Foundry Studio** → Your project.
+1. Go to **Microsoft Foundry Studio** → the project that is created.
 
 1. In the Overview section, find the **Microsoft Foundry project endpoint**:
 
@@ -91,7 +91,7 @@ You need three values to connect to your agents:
 
 1. In the Setup panel on the right, copy the **Agent ID** (starts with `asst_`).
 
-1. From Challenge 1, get your **Cosmos DB** connection details:
+1. From Challenge 1, retrieve your **Cosmos DB** connection details:
    - Go to Azure Portal → Your Cosmos DB account
    - Click **Keys** → Copy **URI** and **Primary Key**
 
@@ -118,17 +118,17 @@ You need three values to connect to your agents:
     ```
 
     - **Important Notes:**
-        - Replace `<DeploymentID>` with your actual deployment ID (e.g., 2034545)
+        - Replace `<DeploymentID>` with your actual deployment ID (for example, 2034545)
         - **CRITICAL:** Endpoint must end with `/api/projects/proj-default` (the project name is always `proj-default`)
         - Replace `<your-agent-id>` with your Translation Agent ID from step 6 (starts with `asst_`)
         - Replace `<your-cosmos-primary-key>` with your Cosmos DB Primary Key
-        - The app uses Azure CLI authentication (`az login`), so no API key is needed for agents
+        - The app uses Azure CLI authentication (`az login`), so no API key is required for agents.
 
 5. Save the file.
 
 ### Task 5: Review the Code
 
-Before running, take a moment to explore the application code:
+Before running the application, take a moment to explore the code:
 
 **app.py** - Main Streamlit application
 - **Lines 1-50**: Imports and Azure SDK configuration
@@ -205,7 +205,8 @@ This installs:
 
 6. Click the **"Modernize SQL"** button
 
-7. Watch the progress indicators as your query flows through all three agents:
+7. Watch the progress indicators as your query flows through all three agents.
+
    - Creating conversation thread...
    - Sending Oracle SQL to Translation Agent...
    - Starting multi-agent pipeline...
@@ -214,7 +215,7 @@ This installs:
 
 8. After completion, you'll see a **professional gradient completion banner** and the app will automatically switch to the **"Results"** tab.
 
-9. View the **three-column output**:
+9. View the **three-column output**.
 
    **Column 1: Translation**
    - Azure SQL T-SQL translation
@@ -232,7 +233,7 @@ This installs:
    - Suggested indexes
    - Raw JSON data
 
-10. Click the **"History"** tab to see all past translations from Cosmos DB
+10. Click the **"History"** tab to see all past translations from Cosmos DB.
 
 ### Task 9: Test Complex Scenarios
 
@@ -295,7 +296,7 @@ GROUP BY -- Missing column list
 ## Congratulations! You've successfully:
 
 - Built a 3-agent AI system in Microsoft Foundry
-- Connected agents in a pipeline (Translation → Validation, Optimization)
+- Connected agents in a pipeline (Translation → Validation → Optimization)
 - Run a Streamlit web application locally
 - Integrated with Cosmos DB for persistence
 - Created a complete SQL modernization platform
@@ -311,7 +312,7 @@ GROUP BY -- Missing column list
 ## Success Criteria
 
 - Retrieved agent API credentials from the Microsoft Foundry project
-- Configured .env file with AGENT_API_ENDPOINT, AGENT_API_KEY, AGENT_ID
+- Configured .env file with AGENT_API_ENDPOINT, AGENT_ID
 - Streamlit app runs locally and calls the Translation Agent
 - App displays results from all 3 connected agents (Translation, Validation, Optimization)
 - Results saved to Cosmos DB TranslationResults container

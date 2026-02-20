@@ -28,17 +28,11 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 > **Note:** If the VM is not in use, please **deallocate** it to avoid unnecessary resource consumption.
 
-## Let's Get Started with Secure AI Deployment
+## Let's Get Started Azure Portal
 
-1. In the JumpVM, click on **Microsoft Edge** browser shortcut which is created on desktop.
+1. In the JumpVM, double-click on the **Azure Portal** browser shortcut which is created on the desktop.
 
    ![](./media/gs-up1.png)
-
-1. Navigate to the **Azure Portal**:
-
-   ```
-   https://portal.azure.com/
-   ```
 
 1. On the **Sign into Microsoft Azure** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
 
