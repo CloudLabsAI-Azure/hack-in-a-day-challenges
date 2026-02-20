@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Network isolation alone isn't enough. Even with private endpoints, you need strong identity controls to ensure only authorized users and services can access your AI resources. In this challenge, you'll implement passwordless authentication using managed identities and configure role-based access control (RBAC) following the principle of least privilege.
+Network isolation alone isn't enough. Even with private endpoints, you need strong identity controls to ensure only authorized users and services can access your AI resources. In this challenge, you will implement passwordless authentication using managed identities and configure role-based access control (RBAC) following the principle of least privilege.
 
 **No more API keys in code or .env files!** Everything will use Entra ID authentication.
 
@@ -48,7 +48,7 @@ Your VM needs an identity to authenticate to Azure services without passwords or
    Write-Host "Managed Identity ID: $identityId"
    ```
 
-      > **Note**: Copy the `$identityId` value - you'll need it for RBAC assignments next.
+      > **Note**: Copy the `$identityId` value you will need it for RBAC assignments next.
 
 ### Task 2: Assign RBAC Roles for Azure OpenAI and Key Vault
 
@@ -108,11 +108,11 @@ Grant your VM's managed identity the necessary permissions via CLI.
    Write-Host "Assigned: Key Vault Secrets Officer to $userEmail"
    ```
 
-   > **Important**: RBAC takes 2-3 minutes to propagate. Wait before proceeding.
+   > **Important**: RBAC changes may take 2–3 minutes to propagate. Please wait a few minutes before testing to ensure the permissions have been applied successfully.
 
 ### Task 3: Store OpenAI Configuration in Key Vault (Using VS Code)
 
-Instead of storing endpoints and keys in files, store them securely in Key Vault. Since Key Vault has public access disabled, we'll temporarily enable it to add secrets from your VM.
+Instead of storing endpoints and keys in files, store them securely in Key Vault. Since Key Vault has public access disabled, you will temporarily enable it to add secrets from your VM.
 
 > **Note**: Open VS Code on your JumpVM and use the PowerShell terminal. Ensure you're logged in to Azure CLI (`az login`).
 
@@ -278,9 +278,9 @@ Verify your identity setup is complete:
 
 - VM has system-assigned managed identity enabled
 - Managed identity has "Cognitive Services OpenAI User" role on OpenAI resource
-- Managed identity has "Key Vault Secrets User" role on Key Vault
-- Managed identity has "Storage Blob Data Contributor" role on Storage Account
-- Your user account has "Key Vault Secrets Officer" role (to create secrets)
+- Managed identity has the "Key Vault Secrets User" role on the Key Vault
+- Managed identity has the "Storage Blob Data Contributor" role on the Storage Account
+- Your user account has the "Key Vault Secrets Officer" role (to create secrets)
 - OpenAI endpoint and deployment name stored in Key Vault as secrets
 - Storage Account name stored in Key Vault
 

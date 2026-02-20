@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Your chat application works locally on the VM — but that's not production! In this challenge, you'll deploy the application to **Azure App Service**, a fully managed PaaS platform that handles scaling, patching, and availability for you.
+Your chat application works locally on the VM but that is not production. In this challenge, you'll deploy the application to **Azure App Service**, a fully managed PaaS platform that handles scaling, patching, and availability for you.
 
 You'll configure:
 - **App Service with VNet Integration** so the app connects to your private endpoints
@@ -132,7 +132,7 @@ The App Service needs its own managed identity to authenticate to Key Vault, Ope
    Write-Host "All RBAC roles assigned to App Service identity"
    ```
 
-   > **Note**: RBAC role assignments take **2-3 minutes** to propagate. Continue with the next steps while they take effect.
+   > **Note**: RBAC changes may take 2–3 minutes to propagate. Please wait a few minutes before testing to ensure the permissions have been applied successfully.
 
 ### Task 4: Configure VNet Integration
 
@@ -292,7 +292,7 @@ Connect the App Service to your VNet so it can reach private endpoints.
    What is Azure App Service and how does it handle scaling?
    ```
    - You should receive an AI response
-   - This confirms: App Service → VNet → Private Endpoint → Azure OpenAI is working end-to-end
+   - This confirms that App Service → VNet → Private Endpoint → Azure OpenAI is working end-to-end
 
 5. **Verify the production security posture**:
 
@@ -361,9 +361,9 @@ If the app doesn't load or shows errors:
 
 3. **Common issues**:
 
-   - **"Key Vault Secrets User" error**: RBAC takes 2-3 min to propagate. Restart the app and try again.
+   - **"Key Vault Secrets User" error**: RBAC changes may take 2–3 minutes to propagate. Please restart the app and try again after waiting for the permissions to be fully applied..
    - **DNS resolution error**: Verify Route All is enabled and `WEBSITE_DNS_SERVER=168.63.129.16` is set.
-   - **Startup timeout**: Streamlit can take 1-2 minutes to start on B1 tier. Wait and refresh.
+   - **Startup timeout**: Streamlit can take 1–2 minutes to start on the B1 tier. Wait and refresh.
 
 ## Success Criteria
 
@@ -374,7 +374,7 @@ Validate your production deployment:
 - System-assigned managed identity enabled on App Service
 - RBAC roles assigned (Key Vault Secrets User, Cognitive Services OpenAI User, Storage Blob Data Contributor)
 - VNet integration configured with Route All enabled
-- Application deployed via zip deploy
+- Application deployed via zip deployment
 - App loads at `https://app-secureai-<inject key="DeploymentID" enableCopy="false"/>.azurewebsites.net`
 - Chat functionality works (AI responses via private endpoints)
 - Production readiness check passes all items

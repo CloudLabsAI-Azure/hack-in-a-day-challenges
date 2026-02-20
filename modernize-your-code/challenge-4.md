@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Your SQL translation and validation pipeline is working! Now you'll add the final agent: the Optimization Agent. This agent analyses translated Azure SQL code and provides performance recommendations, including indexes, query hints, and Azure-specific features. You'll connect it to complete the three-agent pipeline where data flows automatically through translation → validation → optimization.
+Your SQL translation and validation pipeline is working! Now you'll add the final agent: the Optimization Agent. This agent analyzes translated Azure SQL code and provides performance recommendations, including indexes, query hints, and Azure-specific features. You will connect it to complete the three-agent pipeline, where data flows automatically through translation → validation → optimization.
 
 ## Challenge Objectives
 
@@ -37,7 +37,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 1. In the **Instructions** box, paste:
 
       ```
-      You are an Azure SQL Database performance optimization expert. Your role is to analyse T-SQL code and provide specific, actionable optimization recommendations.
+      You are an Azure SQL Database performance optimization expert. Your role is to analyze T-SQL code and provide specific, actionable optimization recommendations.
 
       OPTIMIZATION ANALYSIS:
 
@@ -125,7 +125,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 1. Expand **Agent Description**:
 
       ```
-      Analyses Azure SQL T-SQL code and provides performance optimization recommendations, including indexes, query rewrites, and Azure-specific features. Returns structured JSON with prioritised suggestions.
+      Analyzes Azure SQL T-SQL code and provides performance optimization recommendations, including indexes, query rewrites, and Azure-specific features. Returns structured JSON with prioritized suggestions.
       ```
 
 ### Task 4: Test Optimization Agent Independently
@@ -185,9 +185,9 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 
 5. In the **Adding a connected agent** dialog, configure:
 
-      - **Agent**: Select **SQL-Optimization-Agent** from dropdown
+      - **Agent**: Select **SQL-Optimization-Agent** from the dropdown
       - **Unique name**: Enter `optimization_agent`
-      - **Tools**: (Shows agent tools if any - leave as it is)
+      - **Tools**: (Shows agent tools if any - leave as is)
       - **Detail the steps to activate the agent**: Enter:
 
          ```
@@ -250,13 +250,13 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
       ORDER BY commission DESC;
       ```
 
-4. Watch the magic happen:
+4. Observe what happens:
 
       - **Agent 1 (Translation)**: Translates to T-SQL
       - **Agent 2 (Validation)**: Validates syntax (should be valid)
       - **Agent 3 (Optimization)**: Analyzes and suggests optimizations
 
-5. Verify you see results from ALL THREE agents in sequence.
+5. Verify that you see results from ALL THREE agents in sequence.
 
 ### Task 8: Test with Complex Query
 
@@ -286,8 +286,8 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 2. Observe:
 
       - Translation Agent tries to translate
-      - Validation Agent finds error and STOPS (doesn't hand off)
-      - Optimization Agent is NOT called
+      - The Validation Agent finds an error and STOPS (does not hand off)
+      - The Optimization Agent is NOT called
       - You only see Translation and Validation results
 
 3. This confirms the pipeline properly handles failures!
@@ -320,16 +320,16 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
       - **SQL-Validation-Agent**: `asst_yyyyy`
       - **SQL-Optimization-Agent**: `asst_zzzzz`
 
-3. Save these - you'll need them in Challenge 6 for API calls.
+3. Save these you will need them in Challenge 6 for API calls.
 
 ## Success Criteria
 
 - Optimization Agent created successfully
-- Agent analyses queries and provides optimization score
+- The agent analyzes queries and provides an optimization score
 - Agent suggests specific index recommendations
 - Agent identifies cursor-based code and suggests set-based rewrites
 - Agent recommends Azure SQL-specific features
-- Optimization Agent connected to Validation Agent
+- Optimization Agent connected to the Validation Agent
 - Three-agent pipeline works end-to-end: Translation → Validation → Optimization
 - Valid SQL flows through all three agents
 - Invalid SQL stops at Validation (doesn't reach Optimization)

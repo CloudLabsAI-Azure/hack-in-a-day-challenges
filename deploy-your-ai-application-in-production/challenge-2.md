@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Infrastructure is deployed, but is it truly secure? In this challenge, you'll harden your network security by configuring Network Security Groups (NSGs), disabling all public access, and validating that your AI services are completely isolated from the internet.
+Infrastructure is deployed, but is it truly secure? In this challenge, you will harden your network security by configuring Network Security Groups (NSGs), disabling all public access, and validating that your AI services are completely isolated from the internet.
 
-This is where enterprises fail most often - deploying services with default settings that allow public access. You'll learn to lock down your environment like a production system.
+This is where enterprises fail most often deploying services with default settings that allow public access. You will learn to lock down your environment like a production system.
 
 ## Prerequisites
 
@@ -178,11 +178,10 @@ Now ensure no service accepts connections from the internet using the Azure Port
       - Click **Networking** in the left menu under Settings
       - Under **Firewalls and virtual networks**, select **Disable public access**
       - Click **Apply**
-      - kv-secureai-2082611
 
 ### Task 4: Create Private Endpoint for Azure Key Vault
 
-Now that public access is disabled, create a private endpoint to enable secure connectivity from your VNET.
+Now that public access is disabled, create a private endpoint to enable secure connectivity from your VNet.
 
 1. **In Azure Portal**, navigate to your **kv-secureai-<inject key="DeploymentID" enableCopy="false"/>** Key Vault.
 
@@ -416,7 +415,7 @@ Ensure all services are reachable via private endpoints only. For this validatio
    --output table
    ```
 
-The VNET should be linked to enable DNS resolution.
+The VNet should be linked to enable DNS resolution.
 
 ### Task 9: Test DNS Resolution for Private Endpoints (Using VS Code)
 
@@ -428,7 +427,7 @@ Verify that service names resolve to private IP addresses (not public). Continue
    nslookup openai-secureai-<inject key="DeploymentID" enableCopy="false"/>.openai.azure.com
    ```
 
-   - The returned IP should be in the `10.0.1.x` range (private), NOT a public IP!
+   - The returned IP should be in the `10.0.1.x` range (private), not a public IP.
 
    - Expected output:
       ```
@@ -501,7 +500,7 @@ Verify that your services are properly locked down by checking network settings 
    https://openai-secureai-<inject key="DeploymentID" enableCopy="false"/>.openai.azure.com
    ```
 
-   - You should get **Error 403: Forbidden** or **Connection timeout** — this confirms public access is blocked!
+   - You should get **Error 403: Forbidden** or **Connection timeout** — This confirms that public access is blocked.
 
 ### Task 11: Create NSG for Storage Subnet (Using Portal)
 
@@ -609,10 +608,10 @@ Verify your network is fully secured:
 - NSG `nsg-ai-services` created and attached to ai-services subnet
 - NSG `nsg-storage-services` created and attached to storage-services subnet
 - NSG rules allow traffic from application subnet to AI services on port 443
-- NSG rules explicitly deny internet traffic
-- Azure OpenAI public network access is DISABLED
-- Storage Account public network access is DISABLED
-- Key Vault public network access is DISABLED
+- NSG rules explicitly deny Internet traffic
+- Azure OpenAI public network access is disabled
+- Storage Account public network access is disabled
+- Key Vault public network access is disabled
 - All private endpoints show status: Approved
 - Private DNS zones exist for all services
 - VNET is linked to all private DNS zones
