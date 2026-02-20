@@ -311,8 +311,39 @@ def upload_to_blob(file_content: bytes, filename: str) -> str:
         return ""
 
 
+def _extract_json_objects(text: str) -> list:
+    """Extract JSON objects from text by finding balanced braces."""
+    objects = []
+    i = 0
+    while i < len(text):
+        if text[i] == "{":
+            depth = 0
+            start = i
+            while i < len(text):
+                if text[i] == "{":
+                    depth += 1
+                elif text[i] == "}":
+                    depth -= 1
+                    if depth == 0:
+                        candidate = text[start : i + 1]
+                        try:
+                            obj = json.loads(candidate)
+                            objects.append(obj)
+                        except json.JSONDecodeError:
+                            pass
+                        break
+                i += 1
+        i += 1
+    return objects
+
+
 def parse_pipeline_response(response_text: str) -> dict:
-    """Parse the multi-agent pipeline response into structured components."""
+    """Parse the multi-agent pipeline response into structured components.
+
+    Handles two response formats:
+    1. Combined JSON: one object with classification_result, extraction_result, validation_result keys
+    2. Separate blocks: individual JSON objects for each agent stage
+    """
     result = {
         "classification": None,
         "extraction": None,
@@ -320,36 +351,49 @@ def parse_pipeline_response(response_text: str) -> dict:
         "raw_response": response_text,
     }
 
-    # Extract all JSON blocks from response
+    # Step 1: Try to extract JSON from ```json fenced blocks
     json_blocks = re.findall(r"```json\s*\n(.*?)```", response_text, re.DOTALL)
-
-    # Also try plain JSON objects (agents sometimes skip the markdown fence)
-    if not json_blocks:
-        json_blocks = re.findall(
-            r"(\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\})", response_text, re.DOTALL
-        )
-
+    parsed_objects = []
     for block in json_blocks:
         try:
-            data = json.loads(block.strip())
-
-            # Identify which agent produced this
-            if "document_type" in data and "key_indicators" in data:
-                result["classification"] = data
-            elif "extracted_data" in data:
-                result["extraction"] = data
-            elif "validation_result" in data:
-                result["validation"] = data.get("validation_result", data)
-            elif "confidence_score" in data and "routing_decision" in data:
-                result["validation"] = data
-            elif "document_type" in data and "extracted_data" not in data:
-                result["classification"] = data
+            parsed_objects.append(json.loads(block.strip()))
         except json.JSONDecodeError:
             continue
 
-    # If validation is nested, unwrap it
-    if result["validation"] and "validation_result" in result["validation"]:
-        result["validation"] = result["validation"]["validation_result"]
+    # Step 2: If no fenced blocks, find raw JSON objects with balanced-brace parsing
+    if not parsed_objects:
+        parsed_objects = _extract_json_objects(response_text)
+
+    # Step 3: Process each parsed object
+    for data in parsed_objects:
+        # ── Combined response format (single JSON with all three results) ──
+        if "classification_result" in data or "extraction_result" in data or "validation_result" in data:
+            if "classification_result" in data:
+                result["classification"] = data["classification_result"]
+            if "extraction_result" in data:
+                result["extraction"] = data["extraction_result"]
+            if "validation_result" in data:
+                vr = data["validation_result"]
+                # Unwrap double-nesting if present
+                if isinstance(vr, dict) and "validation_result" in vr:
+                    vr = vr["validation_result"]
+                result["validation"] = vr
+            continue
+
+        # ── Individual block format (separate JSON per agent) ──
+        if "document_type" in data and "key_indicators" in data:
+            result["classification"] = data
+        elif "extracted_data" in data:
+            result["extraction"] = data
+        elif "validation_result" in data:
+            vr = data["validation_result"]
+            if isinstance(vr, dict) and "validation_result" in vr:
+                vr = vr["validation_result"]
+            result["validation"] = vr
+        elif "confidence_score" in data and "routing_decision" in data:
+            result["validation"] = data
+        elif "document_type" in data:
+            result["classification"] = data
 
     return result
 
