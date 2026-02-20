@@ -1,0 +1,50 @@
+CONTOSO ENTERPRISES
+Human Resources Department
+NEW EMPLOYEE ONBOARDING NOTIFICATION
+
+Employee Information:
+Full Name: Jane Elizabeth Doe
+Employee ID: EMP-2026-0847
+Position: Senior Software Engineer
+Department: Engineering - Cloud Platform Team
+Start Date: March 1, 2026
+Employment Type: Full-Time, Permanent
+Work Location: Seattle Headquarters, Floor 12, Desk 12-47
+
+Reporting Structure:
+Direct Manager: Michael Chen, VP of Engineering
+Skip-Level Manager: Patricia Williams, CTO
+Buddy/Mentor: Raj Patel, Staff Engineer
+
+Compensation:
+Base Salary: $145,000/year
+Sign-On Bonus: $15,000 (paid after 90 days)
+Annual Bonus Target: 15% of base salary
+Stock Options: 2,000 RSUs vesting over 4 years
+Benefits Start Date: March 1, 2026
+
+Equipment and Access Requirements:
+- Laptop: MacBook Pro 16-inch M3 Pro
+- Monitor: Dell UltraSharp 32" 4K
+- Peripherals: Keyboard, mouse, headset
+- Software Access: GitHub Enterprise, Azure DevOps, Slack, Confluence, Jira
+- Building Access: Badge required, Floor 12 clearance
+- VPN: Remote access setup required
+- Email: jane.doe@contoso.com (to be created)
+
+Onboarding Schedule:
+Day 1 - HR orientation, badge pickup, IT equipment setup
+Day 2 - Engineering team meeting, codebase walkthrough
+Day 3 - Development environment setup, first PR review
+Week 2 - Shadow senior engineer on production deployments
+Week 3-4 - First independent feature assignment
+
+Action Items:
+1. IT: Create email account and provision access by Feb 25
+2. Facilities: Prepare workspace and equipment by Feb 28
+3. HR: Send welcome packet by Feb 22
+4. Manager: Schedule 1:1 meetings for first month
+5. Payroll: Set up direct deposit and tax forms
+
+Emergency Contact:
+Robert Doe (Spouse) - (206) 555-0342
