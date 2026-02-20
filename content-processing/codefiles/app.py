@@ -524,10 +524,8 @@ st.markdown(
 
 # ─── Sidebar ──────────────────────────────────────────────────────────
 with st.sidebar:
-    st.image(
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/200px-Microsoft_logo.svg.png",
-        width=140,
-    )
+    st.markdown("### 📄 Content Processing")
+    st.markdown("---")
     st.markdown("### 🔗 Service Status")
 
     cfg = validate_config()

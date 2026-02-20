@@ -47,7 +47,6 @@ class DocumentProcessor:
             dict with extracted_text, tables, key_value_pairs, and metadata
         """
         try:
-            from azure.ai.documentintelligence.models import AnalyzeDocumentRequest
 
             # Determine content type
             ext = filename.lower().rsplit(".", 1)[-1] if "." in filename else "txt"
@@ -65,7 +64,7 @@ class DocumentProcessor:
             # Analyze with OCR/Read model
             poller = self.client.begin_analyze_document(
                 model_id="prebuilt-read",
-                analyze_request=file_content,
+                body=file_content,
                 content_type=content_type,
             )
             result = poller.result()
