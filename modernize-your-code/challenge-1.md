@@ -132,16 +132,16 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
       >**Note:** Close all the pop-ups.
 
-1. Click **+ New Container** drop-down. From the drop-down select **+ New Database**.
+2. Click **+ New Container** drop-down. From the drop-down select **+ New Database**.
 
-1. Configure the database:
+3. Configure the database:
 
       - **Database id**: `SQLModernizationDB`
       - Select **OK**
 
-1. Click **OK**.
+4. Click **OK**.
 
-1. Create the first container for translation results:
+5. Create the first container for translation results:
 
      - Right-Click on the **SQLModernizationDB** and click **New Container**
     - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
@@ -149,15 +149,15 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
     - **Partition key**: `/sourceDialect`
     - Click **OK**
 
-1. Create a second container for validation logs:
+6. Create a second container for validation logs:
 
-      - Right-Click on the **SQLModernizationDB** and click **New Container** again
-      - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
-      - **Container id**: `ValidationLogs`
-      - **Partition key**: `/translationId`
-      - Click **OK**
+   - Right-Click on the **SQLModernizationDB** and click **New Container** again
+   - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
+   - **Container id**: `ValidationLogs`
+   - **Partition key**: `/translationId`
+   - Click **OK**
 
-1. Create a third container for optimization suggestions:
+7. Create a third container for optimization suggestions:
 
       - Right-Click on the **SQLModernizationDB** and click **New Container** again
       - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
@@ -165,9 +165,9 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
       - **Partition key**: `/translationId`
       - Click **OK**
 
-1. Verify all three containers are visible in Data Explorer.
+8. Verify all three containers are visible in Data Explorer.
 
-1. Navigate to **Keys** in the left menu under **Settings** and copy:
+9. Navigate to **Keys** in the left menu under **Settings** and copy:
 
       - **URI**
       - **PRIMARY KEY**
