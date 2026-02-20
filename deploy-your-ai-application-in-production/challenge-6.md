@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Your secure AI application is running! Now let's validate the **secure connectivity** layer. 
+Your secure AI application is running. Now let’s validate the **secure connectivity** layer. 
 
-In this challenge, you'll test accessing your VM and application using Azure Bastion - a fully managed PaaS service that provides secure RDP/SSH without exposing public IPs.
+In this challenge, you will test accessing your VM and application using Azure Bastion a fully managed PaaS service that provides secure RDP/SSH without exposing public IPs.
 
-This proves your entire architecture works through private networking only!
+This proves that your entire architecture works through private networking only.
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@ This proves your entire architecture works through private networking only!
 
 ## Challenge Objectives
 
-- Connect to VM using Azure Bastion (no public IP!)
+- Connect to the VM using Azure Bastion
 - Test chat application through Bastion
 - Validate private endpoint DNS resolution
 - Test network isolation (verify public access is blocked)
@@ -43,12 +43,12 @@ This proves your entire architecture works through private networking only!
 
 1. Click **Connect** (opens a new browser tab with a remote desktop session).
 
-1. Run the below command in the PowerShell terminal:
+1. Run the following command in the PowerShell terminal:
 
    ```powershell
    hostname
    ipconfig | Select-String "IPv4"
-   # Should show private IP (10.0.3.x) - no public IP!
+   # Should show a private IP (10.0.3.x) - no public IP!
    ```
 
 ### Task 2: Run and Test Chat Application Through Bastion
@@ -61,7 +61,7 @@ This proves your entire architecture works through private networking only!
    streamlit run app.py
    ```
 
-2. **Open browser** to `http://localhost:8501` if it doesn't open automatically.
+2. Open a browser and navigate to `http://localhost:8501` if it does not open automatically.
 
 3. **Verify the app works**:
 
@@ -71,7 +71,7 @@ This proves your entire architecture works through private networking only!
 
 ### Task 3: Quick Connectivity Verification
 
-Confirm all services resolve to private IPs from within the VNET:
+Confirm that all services resolve to private IPs from within the VNet:
 
 ```powershell
 # Get resource names
@@ -131,7 +131,7 @@ Verify chat session history is saved to Azure Storage:
 
 Validate your secure connectivity:
 
-- Connected to VM via Azure Bastion (no public IP)
+- Connected to the VM via Azure Bastion
 - Chat application accessible and working through Bastion session
 - DNS resolves all services to private IPs (10.0.x.x)
 - Session history saved to Blob Storage

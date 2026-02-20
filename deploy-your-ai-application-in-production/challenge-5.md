@@ -2,7 +2,7 @@
 
 ## Introduction
 
-All the infrastructure is ready! Now comes the fun part - deploying a secure, production-ready chat application that uses everything you've built:
+All the infrastructure is ready! Now comes the fun part deploying a secure, production-ready chat application that uses everything you have built:
 
 - Private endpoints (no public access)
 - Managed identity (no API keys)
@@ -11,7 +11,7 @@ All the infrastructure is ready! Now comes the fun part - deploying a secure, pr
 
 The application code is already pre-built for you. You'll download it, configure the `.env` file with your Key Vault name, install dependencies, and run it. **No code changes required!**
 
-Let's build a secure ChatGPT-like experience!
+Let’s build a secure ChatGPT-like experience.
 
 ## Prerequisites
 
@@ -37,7 +37,7 @@ Let's build a secure ChatGPT-like experience!
 
 The application code is provided in a pre-built package.
 
-1. In the Bastion VM, open an edge browser tab **Download the code package**, and select **open file**:
+1. In the Bastion VM, open an Edge browser tab download the code package, and select **Open file**:
    
    Visit this link in your browser:
    ```
@@ -53,7 +53,7 @@ The application code is provided in a pre-built package.
 
 3. **Navigate to the codefiles folder**:
    
-   - Open VSCode, select **File** > click on **Open folder** and select the folder `C:\Code\hack-in-a-day-challenges-deploy-your-ai-application\codefiles`
+   - Open VSCode, select **File** > click on **Open Folder** and select the folder `C:\Code\hack-in-a-day-challenges-deploy-your-ai-application\codefiles`
 
 ### Task 2: Configure the Application
 
@@ -210,7 +210,7 @@ Moment of truth!
    streamlit run app.py
    ```
 
-   >**Note:** When asked for **Email** type **<inject key="DeploymentID" enableCopy="false"/>** and hit enter.
+   >**Note:** When asked for **Email** type **<inject key="DeploymentID" enableCopy="false"/>** and press enter.
 
 3. **Expected output**:
 
@@ -223,8 +223,8 @@ Moment of truth!
 
 4. **Open browser**:
 
-   - The browser should open automatically
-   - If not, manually navigate to: `http://localhost:8501`
+   - The browser should open automatically.
+   - If not, manually navigate to `http://localhost:8501`
 
 5. **You should see**:
 
@@ -251,7 +251,7 @@ Moment of truth!
    How does that apply to Azure managed identities?
    ```
 
-      - Response should reference the previous question (context maintained)
+      - The response should reference the previous question
 
 3. **Verify no API keys in code** (quick security check):
 
@@ -269,9 +269,9 @@ Validate your app deployment:
 - Application code downloaded and extracted to `C:\Code\hack-in-a-day-challenges-deploy-your-ai-application\codefiles`
 - `.env` file configured with your Key Vault name (no secrets in the file!)
 - Virtual environment created and dependencies installed
-- App starts without errors (`streamlit run app.py`)
+- The app starts without errors (`streamlit run app.py`)
 - Sidebar shows "Authenticated" with Managed Identity
-- Chat completions work (receive AI responses)
+- Chat completions work
 - Multi-turn conversations work (context maintained)
 - No API keys in code or config files
 

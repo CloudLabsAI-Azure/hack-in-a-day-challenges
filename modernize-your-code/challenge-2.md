@@ -203,7 +203,7 @@ In this challenge, you will create your first AI agent directly in the Microsoft
 
 3. Copy the **Agent ID** (e.g., `asst_4suaVDw2ZsziL9sShpoyeoDM`).
 
-4. Save this ID in a text file — you will need it in Challenge 6 for the Streamlit app.
+4. Save this ID in a text file you will need it in Challenge 6 for the Streamlit app.
 
 ## Success Criteria
 
