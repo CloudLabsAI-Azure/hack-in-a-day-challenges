@@ -33,10 +33,9 @@ Getting classification right is critical because it determines which extraction 
 
 1. Under **Model**, select the **doc-processor** deployment (GPT-4.1) you created in Challenge 1.
 
-1. In the **Instructions** field, copy the entire block below (from **===START INSTRUCTIONS===** to **===END INSTRUCTIONS===**) and paste it into the Instructions box. Do **NOT** include the START/END marker lines themselves:
+1. In the **Instructions** field, copy the entire block below and paste it into the Instructions box:
 
-   **===START INSTRUCTIONS===**
-
+   ```
    You are a Document Classification Specialist for Contoso Enterprises.
 
    Your role is to analyze OCR-extracted text from documents and classify them into the correct document type, along with a confidence assessment.
@@ -105,8 +104,7 @@ Getting classification right is critical because it determines which extraction 
    - The input text may be messy — it comes from OCR and may have formatting issues, missing characters, or merged words
    - Focus on semantic meaning, not exact formatting
    - ALWAYS return valid JSON, even for uncertain classifications
-
-   **===END INSTRUCTIONS===**
+   ```
 
 1. Click **Save** to save the agent.
 

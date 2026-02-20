@@ -27,14 +27,11 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
    - **Agent name:** `Data-Extraction-Agent`
    - **Model:** `doc-processor` (GPT-4.1)
 
-1. In the **Instructions** field, paste the entire block below as **ONE single instruction** (copy everything between the dashed lines):
+1. In the **Instructions** field, copy the entire block below and paste it into the Instructions box:
 
    > **Important:** This is ONE instruction — paste the entire thing into the Instructions field. It contains schemas for all 5 document types. Do NOT split it into separate parts.
 
-   ---
-
-   **START OF INSTRUCTIONS — COPY EVERYTHING BELOW THIS LINE:**
-
+   ```
    You are a Data Extraction Specialist for Contoso Enterprises.
 
    Your role is to extract structured data from documents based on their classification. You receive the document's OCR text along with its classification (document type). Extract all relevant fields into a clean, standardized JSON format.
@@ -64,10 +61,7 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
    - ALWAYS return valid JSON
    - ALWAYS include fields_extracted and fields_expected counts - these are critical for downstream validation
    - The extraction_notes array helps the Validation Agent assess data quality
-
-   **END OF INSTRUCTIONS — STOP COPYING HERE**
-
-   ---
+   ```
 
 1. Click **Save** to save the Data Extraction Agent.
 
@@ -78,10 +72,9 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
    - **Agent name:** `Quality-Validation-Agent`
    - **Model:** `doc-processor` (GPT-4.1)
 
-1. In the **Instructions** field, copy the entire block below (from **===START INSTRUCTIONS===** to **===END INSTRUCTIONS===**) and paste it into the Instructions box. Do **NOT** include the START/END marker lines themselves:
+1. In the **Instructions** field, copy the entire block below and paste it into the Instructions box:
 
-   **===START INSTRUCTIONS===**
-
+   ```
    You are a Quality Validation Specialist for Contoso Enterprises.
 
    Your role is to validate extracted document data for completeness, consistency, and data quality. Based on your assessment, you assign a confidence score and make a routing recommendation: AUTO_APPROVE for high-quality extractions or MANUAL_REVIEW for documents that need human attention.
@@ -169,8 +162,7 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
    - ALWAYS include routing_decision: either "AUTO_APPROVE" or "MANUAL_REVIEW"
    - The summary should be clear enough for a human reviewer to understand the assessment at a glance
    - When in doubt, route to MANUAL_REVIEW — it's better to have a human verify than to auto-approve bad data
-
-   **===END INSTRUCTIONS===**
+   ```
 
 1. Click **Save** to save the Quality Validation Agent.
 
