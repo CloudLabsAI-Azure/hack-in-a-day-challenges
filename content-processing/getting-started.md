@@ -1,6 +1,6 @@
 ## Getting Started with Challenge
 
-Welcome to Hack in a Day: Modernize Your Code! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
+Welcome to Hack in a Day: Intelligent Content Processing! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
 
 ### Accessing Your Challenge Environment
 
@@ -28,7 +28,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 > **Note:** If the VM is not in use, please **deallocate** it to avoid unnecessary resource consumption.
 
-## Let's Get Started with SQL Modernization
+## Let's Get Started with Intelligent Content Processing
 
 1. In the JumpVM, click on the **Microsoft Edge** browser shortcut which is created on the desktop.
 
@@ -58,14 +58,14 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/gs-4.png)
 
-1. Welcome to **Azure Portal**! You're now ready to start building your AI-powered SQL modernization pipeline using Azure OpenAI, AI Foundry, Cosmos DB, and Container Apps.
+1. Welcome to **Azure Portal**! You're now ready to start building your AI-powered Intelligent Content Processing pipeline using Azure AI Document Intelligence, AI Foundry Agents, Cosmos DB, and Blob Storage.
 
 1. The lab environment includes:
    - Azure subscription with Owner permissions
    - Pre-configured resource group for deployments
-   - Access to Azure OpenAI Service and Microsoft Foundry
-   - Sample Oracle PL/SQL files for testing
-   - Pre-built Streamlit application code (download link provided in Challenge 5)
+   - Access to Azure AI Document Intelligence and Microsoft Foundry
+   - Sample documents for testing (invoices, receipts, medical forms, etc.)
+   - Pre-built Streamlit application code (download link provided in Challenge 4)
    - Python 3.11 and VS Code pre-installed
    - Azure CLI for authentication
 
