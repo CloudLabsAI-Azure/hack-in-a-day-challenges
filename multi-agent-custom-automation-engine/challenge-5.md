@@ -1,176 +1,329 @@
-# Challenge 05: End-to-End Execution & Validation
+# Challenge 05: Production Dashboard & End-to-End Validation
 
 ## Introduction
 
-In this final challenge, you will execute and validate the complete Multi-Agent Automation Engine built throughout the hackathon. Rather than focusing on infrastructure deployment, this challenge emphasizes reliability, correctness, and observability of AI-driven workflows.
+In this final challenge, you will run a **production-grade Streamlit dashboard** that brings together the complete Multi-Agent Automation Engine built throughout the hackathon. Instead of running scripts in the terminal, you will use a professional web interface to submit workflow requests, watch agents collaborate in real time, view structured results, and review execution history from Cosmos DB.
 
-Participants will run the central orchestrator, trigger multi-agent collaboration using Semantic Kernel, and verify that agents successfully share context, make decisions, and persist execution state in Azure Cosmos DB. This approach ensures that all participants can complete the hackathon within the allotted time, regardless of infrastructure or subscription constraints.
-
-By the end of this challenge, you will have a fully working enterprise-style automation engine that demonstrates real-world AI orchestration patterns without being blocked by cloud deployment limitations.
+The pre-built application wraps your Semantic Kernel agents and orchestrator in an interactive dashboard with sample data, file upload support, and full audit traceability — demonstrating a production-ready AI orchestration pattern suitable for enterprise automation.
 
 ## Challenge Objectives
 
-* Execute the complete multi-agent workflow end-to-end
+* Download and configure the pre-built Streamlit application
+* Authenticate with Azure CLI
+* Run the production dashboard locally
+* Test the multi-agent pipeline through the web UI with sample enterprise scenarios
+* Process multiple workflow requests and review agent outputs
+* Verify execution history in Cosmos DB
+* (Bonus) Build and push a Docker image to Azure Container Registry
 
-* Trigger agent collaboration through the central orchestrator
+## Steps to Complete
 
-* Validate agent outputs across extraction, validation, communication, and reporting
+### Task 1: Download and Extract Code Files
 
-* Persist workflow state and execution history in Azure Cosmos DB
+The application code is provided in a pre-built package.
 
-* Verify workflow completion, status transitions, and audit traceability
+1. **Download the code package**:
 
-* Demonstrate a production-ready AI orchestration pattern suitable for enterprise automation
-
-## Step 1: Verify Project Structure
-
-Your project root **must look like this**:
-
-```
-multi-agent-engine/
-│
-├─ app/
-│   ├─ main.py
-│   ├─ orchestrator.py
-│   ├─ agents/
-│   └─ storage/
-│
-├─ requirements.txt
-├─ Dockerfile
-└─ .venv/        (ignored)
-```
-
-## Step 2: Create `requirements.txt`
-
-In the **project root**, create a file named:
-
-```
-requirements.txt
-```
-
-Paste the following:
-
-```txt
-semantic-kernel
-azure-identity
-azure-cosmos
-python-dotenv
-```
-
-Save the file.
-
-## Step 3: Create the Dockerfile
-
-In the **project root**, create a file named:
-
-```
-Dockerfile
-```
-
-Paste **exactly** this content, and save the file:
-
-```dockerfile
-FROM python:3.10-slim
-
-WORKDIR /app
-
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY app ./app
-
-CMD ["python", "app/main.py"]
-```
-
-> **Do NOT copy `.env` files into the image**
-
-## Step 4: Build the Image Using Azure ACR
-
-1. Run the command to login to Azure.
-
+   Visit this link in your browser:
    ```
+   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/multi-agent-custom-automation-engine.zip
+   ```
+
+2. **Extract the ZIP file**:
+
+   - Right-click the downloaded ZIP file
+   - Select **Extract All...**
+   - Choose a location like `C:\LabFiles\` or your Desktop
+   - Click **Extract**
+
+3. **Navigate to the codefiles folder**:
+
+   Open File Explorer and go to:
+   ```
+   [extraction-path]\hack-in-a-day-challenges-multi-agent-custom-automation-engine\multi-agent-custom-automation-engine\codefiles
+   ```
+
+### Task 2: Authenticate with Azure CLI
+
+The application uses Azure CLI authentication to connect to Azure services.
+
+1. Open **Windows PowerShell** as an administrator.
+
+1. **Install Azure CLI** (if not already installed):
+
+   ```powershell
+   Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi
+   Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi'
+   ```
+
+1. Accept the terms and license agreement and select **Install**. Once done, select **Finish**.
+
+1. **Login to Azure**:
+   ```bash
    az login
    ```
 
-   >**Note:** Sign in with the azure credentials.
+1. This will open a pop-up for authentication. Sign in with your Azure credentials.
 
-2. Run this command from the project root:
+1. Don't change the subscription or tenant, hit enter.
+
+### Task 3: Get Your Configuration Values
+
+You need the following values from your Azure resources:
+
+1. **Microsoft Foundry API Key and Endpoint**:
+
+   - Go to **Azure Portal** → Your Microsoft Foundry resource: **agent-foundry-<inject key="DeploymentID" enableCopy="false"/>**
+   - Navigate to **Keys and Endpoint**
+   - Copy the **Key** and **Endpoint**
+
+2. **Cosmos DB Connection Details** (from Challenge 1):
+
+   - Go to **Azure Portal** → Your Cosmos DB account: **agent-cosmos-<inject key="DeploymentID" enableCopy="false"/>**
+   - Navigate to **Settings** → **Keys**
+   - Copy the **URI** and **PRIMARY KEY**
+
+### Task 4: Configure the Application
+
+1. Navigate to the `codefiles` folder you extracted in Task 1.
+
+2. Locate the `.env.example` file.
+
+3. **Copy** `.env.example` to create a new file named `.env`:
 
    ```powershell
-   az acr build --registry agentacr<inject key="DeploymentID" enableCopy="false"/> --image agent-orchestrator:v1 .
+   copy .env.example .env
    ```
 
-### Expected Result
+4. Open `.env` and replace the placeholder values:
 
-```
-Successfully built and pushed image
-```
+   ```env
+   # Azure OpenAI / Microsoft Foundry Configuration
+   AZURE_OPENAI_ENDPOINT=https://<your-foundry-resource>.openai.azure.com/
+   MICROSOFT_FOUNDRY_API_KEY=<your-foundry-key>
+   AZURE_DEPLOYMENT_NAME=agent-gpt-4o-mini
 
-## Step 5: Verify Image in Azure Portal
+   # Cosmos DB Configuration
+   COSMOS_DB_ENDPOINT=https://agent-cosmos-<DeploymentID>.documents.azure.com:443/
+   COSMOS_DB_KEY=<your-cosmos-primary-key>
+   COSMOS_DB_DATABASE=agent-memory-db
+   COSMOS_DB_CONTAINER=agent-state
+   ```
+
+   - **Important Notes:**
+     - Replace `<your-foundry-resource>` with your Foundry resource name
+     - Replace `<your-foundry-key>` with the API key from Task 3
+     - Replace `<DeploymentID>` with your actual deployment ID
+     - Replace `<your-cosmos-primary-key>` with your Cosmos DB Primary Key
+     - Keep `AZURE_DEPLOYMENT_NAME=agent-gpt-4o-mini` (the model deployment from Challenge 1)
+
+5. Save the file.
+
+### Task 5: Review the Application Code
+
+Before running, take a moment to explore the application code:
+
+**app.py** - Main Streamlit application
+- Custom CSS styling for premium enterprise UI
+- Three-tab layout: Process Workflow, Results, History
+- Sample data selection and file upload support
+- Real-time pipeline progress tracking
+- Professional result display with agent-specific cards
+
+**orchestrator.py** - Multi-agent orchestrator
+- Semantic Kernel initialization and agent definitions
+- Sequential agent execution: Extraction → Validation → Communication → Reporting
+- Shared state management and workflow tracking
+- Structured JSON output from each agent
+
+**cosmos_helper.py** - Cosmos DB persistence
+- Save and retrieve workflow states
+- Query execution history
+- Error handling and retry logic
+
+**Key features:**
+- Rich enterprise-style UI with gradient headers and status cards
+- 5 sample enterprise scenarios (employee onboarding, expense reports, compliance, etc.)
+- File upload support for `.txt` files
+- Real-time progress indicators for each pipeline stage
+- Structured result display showing all four agent outputs
+- Execution history tab with Cosmos DB integration
+- Error handling and input validation
+
+### Task 6: Install Dependencies
+
+1. Open a terminal in VS Code or PowerShell.
+
+2. Navigate to the `codefiles` folder:
+
+   ```powershell
+   cd C:\LabFiles\hack-in-a-day-challenges-multi-agent-custom-automation-engine\multi-agent-custom-automation-engine\codefiles
+   ```
+
+3. Create and activate a virtual environment:
+
+   ```powershell
+   py -m venv .venv
+   .venv\Scripts\activate
+   ```
+
+4. Install dependencies:
+
+   ```powershell
+   pip install -r requirements.txt
+   ```
+
+   > **Note:** This may take 3-5 minutes to complete.
+
+### Task 7: Run the Application
+
+1. Start the Streamlit app:
+
+   **Windows PowerShell:**
+
+   ```powershell
+   $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+
+   streamlit run app.py
+   ```
+
+1. Enter the email as **<inject key="AzureAdUserEmail"></inject>** and hit enter.
+
+1. The application will automatically open in your browser at `http://localhost:8501`
+
+### Task 8: Test the Multi-Agent Pipeline
+
+1. You'll see the **Multi-Agent Automation Engine** dashboard with a blue gradient header.
+
+2. In the **sidebar**, verify all agents show green checkmarks:
+   - Extraction Agent
+   - Validation Agent
+   - Communication Agent
+   - Reporting Agent
+
+3. **Option A: Use a Sample Scenario**
+   - On the right side, select a sample from the dropdown (e.g., "Employee Onboarding")
+   - Click **"Load Sample"**
+
+4. **Option B: Upload a Text File**
+   - Click the file upload area
+   - Upload a `.txt` file with enterprise workflow text
+
+5. **Option C: Type Directly**
+   - Paste or type your workflow request in the text area
+
+6. Click the **"Run Pipeline"** button
+
+7. Watch the progress indicators as your request flows through all four agents:
+   - Extraction Agent processing...
+   - Validation Agent processing...
+   - Communication Agent processing...
+   - Reporting Agent processing...
+   - Pipeline completed!
+
+8. After completion, you'll see a professional completion banner and the app will automatically switch to the **"Results"** tab.
+
+9. View the **four-section output**:
+
+   **Section 1: Extraction**
+   - Structured JSON data extracted from the input text
+
+   **Section 2: Validation**
+   - Validation status and any flagged issues
+
+   **Section 3: Communication**
+   - Generated email with subject and body
+
+   **Section 4: Reporting**
+   - Workflow execution summary
+
+10. Click the **"History"** tab to see all past workflows from Cosmos DB.
+
+### Task 9: Test Multiple Scenarios
+
+Try each of the 5 sample scenarios to verify the pipeline handles different enterprise workflows:
+
+**Test 1: Employee Onboarding**
+- Select "Employee Onboarding" from the dropdown
+- Expected: Extracts employee name, department, start date, manager, etc.
+
+**Test 2: Expense Report**
+- Select "Expense Report" from the dropdown
+- Expected: Extracts expense items, amounts, dates, and approval fields
+
+**Test 3: Compliance Report**
+- Select "Compliance Report" from the dropdown
+- Expected: Extracts audit findings, risk levels, and action items
+
+**Test 4: Leave Request**
+- Select "Leave Request" from the dropdown
+- Expected: Extracts employee info, leave dates, type, and approval chain
+
+**Test 5: Vendor Contract**
+- Select "Vendor Contract" from the dropdown
+- Expected: Extracts vendor details, contract terms, and financial amounts
+
+### Task 10: Verify Workflow State in Cosmos DB
 
 1. Open **Azure Portal**
-2. Go to **Container Registry → agentacr<inject key="DeploymentID" enableCopy="false"/>**
-3. Select **Services** > **Repositories**
-4. Confirm:
-
-   ```
-   agent-orchestrator : v1
-   ```
-
-## Step 6: Run the Multi-Agent Workflow
-
-In this hackathon, the **multi-agent automation engine** is executed **locally** using Azure services for AI and persistence.
-
-This approach ensures:
-
-* Zero infrastructure permission blockers
-* Faster execution
-* Focus on AI orchestration and agent collaboration
-
-### Run the Workflow
-
-From the project root, run:
-
-```powershell
-py app/main.py
-```
-
-### Expected Output
-
-```
-Workflow completed
-Workflow ID: <guid>
-```
-
-## Step 7: Verify Workflow State in Azure Cosmos DB
-
-1. Open **Azure Portal**
-2. Navigate to **Azure Cosmos DB**
+2. Navigate to **Azure Cosmos DB** → **agent-cosmos-<inject key="DeploymentID" enableCopy="false"/>**
 3. Open **Data Explorer**
 4. Select:
 
    * Database: `agent-memory-db`
    * Container: `agent-state`
-5. Locate the document using the workflow ID
+5. Locate the documents using the workflow IDs from the dashboard
 
-Confirm the following:
+Confirm the following for each workflow:
 
 * `status` = `COMPLETED`
 * `agentData` contains:
-
   * extraction
   * validation
   * communication
   * reporting
-* `history` shows all agent executions
+* `history` shows all four agent executions with timestamps
 
-## Completion Criteria
+### Task 11 (Bonus): Docker Image & ACR
 
-You have successfully completed the hackathon:
+If time permits, containerize and push the application:
 
-* Multi-agent workflow executes end-to-end
-* Agents collaborate using shared state
-* Cosmos DB stores the complete workflow history
-* Outputs are validated and traceable
+1. Verify your project structure includes the `Dockerfile` from the codefiles.
 
-Congratulations! You've completed all challenges. 
+2. Login to Azure:
+
+   ```
+   az login
+   ```
+
+3. Build and push the image to ACR:
+
+   ```powershell
+   az acr build --registry agentacr<inject key="DeploymentID" enableCopy="false"/> --image agent-orchestrator:v1 .
+   ```
+
+4. Verify in **Azure Portal** → **Container Registry** → **agentacr<inject key="DeploymentID" enableCopy="false"/>** → **Repositories**:
+   ```
+   agent-orchestrator : v1
+   ```
+
+## Success Criteria
+
+- Streamlit application runs locally and displays the Multi-Agent Automation Engine dashboard
+- All four agents show green status in the sidebar
+- At least 3 sample scenarios are processed successfully through the full pipeline
+- Results tab displays structured output from all four agents (Extraction, Validation, Communication, Reporting)
+- Each workflow shows `status: COMPLETED` in the Results tab
+- Cosmos DB contains complete workflow records with `agentData` and `history` entries
+- History tab displays past workflow executions retrieved from Cosmos DB
+- (Bonus) Docker image built and pushed to ACR successfully
+
+## Additional Resources
+
+- [Streamlit Documentation](https://docs.streamlit.io/)
+- [Semantic Kernel Python SDK](https://learn.microsoft.com/semantic-kernel/overview/)
+- [Azure Cosmos DB Data Explorer](https://learn.microsoft.com/azure/cosmos-db/data-explorer)
+- [Azure Container Registry](https://learn.microsoft.com/azure/container-registry/)
+- [Docker Best Practices](https://docs.docker.com/develop/dev-best-practices/)
+
+Congratulations! You've completed all challenges. Your Multi-Agent Automation Engine is production-ready!
