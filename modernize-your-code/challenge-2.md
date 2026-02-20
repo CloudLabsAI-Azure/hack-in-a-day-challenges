@@ -15,19 +15,19 @@ In this challenge, you will create your first AI agent directly in the Microsoft
 
 ## Steps to Complete
 
-### Task 1: Navigate to Agents Section
+### Task 1: Navigate to the Agents Section
 
 1. Open **Microsoft Foundry Studio** (https://ai.azure.com).
 
 1. Select your project: **sql-modernize-<inject key="DeploymentID" enableCopy="false"/>** (from Challenge 1).
 
-1. In the left navigation menu, under **Build and customize**. Click on **Agents**.
+1. In the left navigation menu, under **Build and customize**, click on **Agents**.
 
 1. You should see a **Default Agent** on the *Create and debug your agents* page.
 
 ### Task 2: Create Translation Agent
 
-1. Click on the **default Agent**.
+1. Click on the **Default Agent**.
 
 1. In the **Setup** panel on the right, configure:
 
@@ -128,9 +128,9 @@ In this challenge, you will create your first AI agent directly in the Microsoft
       Translates Oracle PL/SQL code to Azure SQL T-SQL code using comprehensive syntax conversion rules. This agent handles date functions, string operations, joins, hierarchical queries, and procedural code translation.
       ```
 
-### Task 5: Test the Agent in Playground
+### Task 5: Test the Agent in the Playground
 
-1. Click the **Try in playground** button on the top right.
+1. Click the **Try in playground** button in the top right.
 
 1. In the chat interface, test with this simple Oracle query:
 
@@ -143,7 +143,7 @@ In this challenge, you will create your first AI agent directly in the Microsoft
 
 1. Send the message and wait for the response.
 
-1. Verify the agent returns Azure SQL like:
+1. Verify that the agent returns Azure SQL like:
 
       ```sql
       SELECT TOP 10 emp_id, emp_name, hire_date
@@ -151,7 +151,7 @@ In this challenge, you will create your first AI agent directly in the Microsoft
       WHERE hire_date > DATEADD(DAY, -30, GETDATE());
       ```
 
-### Task 6: Test with More Complex Query
+### Task 6: Test with a More Complex Query
 
 1. Test with an Oracle NVL and DECODE query:
 
@@ -167,7 +167,7 @@ In this challenge, you will create your first AI agent directly in the Microsoft
 
 ### Task 7: Test with Cursor-Based Code
 
-1. Test with Oracle PL/SQL procedure:
+1. Test with the following Oracle PL/SQL procedure:
 
       ```
       DECLARE
@@ -187,15 +187,15 @@ In this challenge, you will create your first AI agent directly in the Microsoft
 
 ### Task 8: Refine Instructions (If Needed)
 
-1. If the translations aren't accurate, go back to the agent configuration.
+1. If the translations are not accurate, go back to the agent configuration.
 
 2. Update the **Instructions** to be more specific about problem areas.
 
 3. Test again in the playground.
 
-4. Repeat until translations are consistently accurate.
+4. Repeat until the translations are consistently accurate.
 
-### Task 9: Save and Note Agent ID
+### Task 9: Save and Note the Agent ID
 
 1. The agent auto-saves as you make changes.
 
@@ -203,7 +203,7 @@ In this challenge, you will create your first AI agent directly in the Microsoft
 
 3. Copy the **Agent ID** (e.g., `asst_4suaVDw2ZsziL9sShpoyeoDM`).
 
-4. Save this ID in a text file - you'll need it in Challenge 6 for the Streamlit app.
+4. Save this ID in a text file — you will need it in Challenge 6 for the Streamlit app.
 
 ## Success Criteria
 
@@ -213,7 +213,7 @@ In this challenge, you will create your first AI agent directly in the Microsoft
 - Agent tested with simple SELECT queries and produces correct T-SQL
 - Agent handles NVL, DECODE, ROWNUM, and SYSDATE correctly
 - Agent can translate PL/SQL cursor code to T-SQL
-- Complex queries (hierarchical, outer joins) translate accurately
+- Complex queries (hierarchical queries, outer joins)
 - Agent ID copied and saved for later use
 - Agent consistently provides clean T-SQL output without extra formatting
 
