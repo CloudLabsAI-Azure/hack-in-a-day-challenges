@@ -16,7 +16,7 @@ At this stage, agents will run **locally** (not containerized yet).
 
 ## Steps to Complete
 
-## Step 1: Create Agent Folder Structure
+### Task 1: Create Agent Folder Structure
 
 Inside your existing project, update the structure as follows:
 
@@ -36,15 +36,11 @@ Inside your existing project, update the structure as follows:
   └── README.md
   ```
 
-## Step 2: Create the Extraction Agent
-
-### Purpose
+### Task 2: Create the Extraction Agent
 
 Extract structured data from raw text input.
 
-### Step 2.1: Create `extraction_agent.py`
-
-Paste the following code, and save the file:
+1. Create `extraction_agent.py` and paste the following code, and save the file:
 
   ```python
   from semantic_kernel import Kernel
@@ -74,15 +70,11 @@ Paste the following code, and save the file:
 
   ```
 
-## Step 3: Create the Validation Agent
-
-### Purpose
+### Task 3: Create the Validation Agent
 
 Validate extracted data for completeness and correctness.
 
-### Step 3.1: Create `validation_agent.py`
-
-Paste the following code, and save the file:
+1. Create `validation_agent.py` and paste the following code, and save the file:
 
   ```python
   from semantic_kernel import Kernel
@@ -112,15 +104,11 @@ Extracted Data:
       return result
   ```
 
-## Step 4: Create the Communication Agent
-
-### Purpose
+### Task 4: Create the Communication Agent
 
 Generate email or notification content based on validated data.
 
-### Step 4.1: Create `communication_agent.py`
-
-Paste the following code, and save the file:
+1. Create `communication_agent.py` and paste the following code, and save the file:
 
   ```python
   from semantic_kernel import Kernel
@@ -149,15 +137,11 @@ Validated Data:
       return result
   ```
 
-## Step 5: Create the Reporting Agent
-
-### Purpose
+### Task 5: Create the Reporting Agent
 
 Generate a human-readable summary of the workflow.
 
-### Step 5.1: Create `reporting_agent.py`
-
-Paste the following code, and save the file:
+1. Create `reporting_agent.py` and paste the following code, and save the file:
 
   ```python
   from semantic_kernel import Kernel
@@ -186,7 +170,7 @@ Workflow State:
       return result
   ```
 
-## Step 6: Test Agents Individually
+### Task 6: Test Agents Individually
 
 Update `app/main.py` temporarily to test **only the Extraction Agent** and save the file.
 
@@ -227,7 +211,7 @@ Update `app/main.py` temporarily to test **only the Extraction Agent** and save 
   py app/main.py
   ```
 
-## Step 7: Verify Agent Output
+### Task 7: Verify Agent Output
 
 Expected output (example):
 

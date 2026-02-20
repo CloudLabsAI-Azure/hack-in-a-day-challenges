@@ -13,5 +13,8 @@ azure-identity
 # Environment Configuration
 python-dotenv==1.0.0
 
+# Async compatibility for Streamlit
+nest_asyncio
+
 # Data Processing
 pandas

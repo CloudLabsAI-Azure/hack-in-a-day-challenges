@@ -63,7 +63,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 1. The lab environment includes:
    - Azure subscription with Owner permissions
    - Pre-configured resource group for deployments
-   - Access to Microsoft Foundry (Azure AI Foundry)
+   - Access to Microsoft Foundry
    - Pre-built Streamlit application code (download link provided in Challenge 5)
    - Python 3.11 and VS Code pre-installed
    - Azure CLI for authentication
