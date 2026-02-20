@@ -375,7 +375,7 @@ with tab1:
 
                     for i, (agent_name, agent_desc) in enumerate(agent_steps):
                         status_text.markdown(
-                            f'<div class="agent-card active">🔄 <strong>{agent_name}</strong> — {agent_desc}</div>',
+                            f'<div class="agent-card active">🔄 <strong>{agent_name}</strong> - {agent_desc}</div>',
                             unsafe_allow_html=True,
                         )
                         progress_bar.progress((i) / len(agent_steps))
@@ -396,7 +396,7 @@ with tab1:
                             prev_key = step_key
 
                             status_text.markdown(
-                                f'<div class="agent-card done">✅ <strong>{agent_name}</strong> — Complete</div>',
+                                f'<div class="agent-card done">✅ <strong>{agent_name}</strong> - Complete</div>',
                                 unsafe_allow_html=True,
                             )
                             time.sleep(0.3)
@@ -434,7 +434,7 @@ with tab1:
                         )
 
                         status_text.markdown(
-                            f'<div class="status-card success">🎯 <strong>Workflow ID:</strong> <code>{workflow_id}</code> — Status: <strong>COMPLETED</strong></div>',
+                            f'<div class="status-card success">🎯 <strong>Workflow ID:</strong> <code>{workflow_id}</code> | Status: <strong>COMPLETED</strong></div>',
                             unsafe_allow_html=True,
                         )
 
@@ -518,7 +518,7 @@ with tab3:
 
                     status_icon = "✅" if status == "COMPLETED" else "❌" if status == "FAILED" else "⏳"
 
-                    with st.expander(f"{status_icon} {wf_id[:8]}... — {status} — {ts}"):
+                    with st.expander(f"{status_icon} {wf_id[:8]}... | {status} | {ts}"):
                         st.markdown(f"**Input Preview:** {input_preview}...")
                         st.markdown(f"**Current Step:** {step}")
                         st.markdown(f"**Status:** {status}")

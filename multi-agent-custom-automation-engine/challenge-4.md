@@ -40,7 +40,7 @@ All intermediate data is stored in **Cosmos DB**.
 
 ## Steps to Complete
 
-## Step 1: Create Orchestrator Module
+### Task 1: Create Orchestrator Module
 
 Create a new file:
 
@@ -48,7 +48,7 @@ Create a new file:
 app/orchestrator.py
 ```
 
-## Step 2: Implement Orchestrator Logic
+### Task 2: Implement Orchestrator Logic
 
 Paste the following code into `orchestrator.py`, and save the file:
 
@@ -122,7 +122,7 @@ async def run_workflow(kernel, workflow_id, input_text):
     return workflow_state
 ```
 
-## Step 3: Update `main.py` to Use Orchestrator
+### Task 3: Update `main.py` to Use Orchestrator
 
 Replace the logic in `app/main.py` with the following:
 
@@ -162,7 +162,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## Step 4: Verify Agent Compatibility
+### Task 4: Verify Agent Compatibility
 
 Before running the orchestrator, verify that your agents from Challenge 02 are compatible with the orchestrator.
 
@@ -183,7 +183,7 @@ Open each agent file in `app/agents/` and confirm:
 
 > **Note:** If you completed Challenge 02 correctly, all agents should already be compatible. No changes are needed.
 
-## Step 5: Run the Full Workflow
+### Task 5: Run the Full Workflow
 
 Run:
 
@@ -191,7 +191,7 @@ Run:
 py app/main.py
 ```
 
-## Step 6: Verify Workflow Execution
+### Task 6: Verify Workflow Execution
 
 In **Azure Portal → Cosmos DB → Data Explorer**:
 

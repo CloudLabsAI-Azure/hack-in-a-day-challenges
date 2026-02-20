@@ -3,7 +3,7 @@
 ## Introduction
 
 In this challenge, you will enable **agent collaboration** by introducing a **shared memory layer**.
-In a multi-agent system, agents must not operate in isolation—they need a **common source of truth** to store workflow state, intermediate results, and execution history.
+In a multi-agent system, agents must not operate in isolation - they need a **common source of truth** to store workflow state, intermediate results, and execution history.
 
 You will use **Azure Cosmos DB** as a **shared memory and messaging layer** so that all agents can read from and write to the same workflow context.
 
@@ -35,7 +35,7 @@ Cosmos DB acts as the **shared notebook** for all agents.
 
 ## Steps to Complete
 
-## Step 1: Verify Cosmos DB Setup
+### Task 1: Verify Cosmos DB Setup
 
 Ensure the following already exist (from Challenge 01):
 
@@ -46,7 +46,7 @@ Ensure the following already exist (from Challenge 01):
 
 If not created, create them now via **Azure Portal → Data Explorer**.
 
-## Step 2: Define Workflow State Schema
+### Task 2: Define Workflow State Schema
 
 Create a **standard workflow state object** that all agents will use.
 
@@ -75,7 +75,7 @@ This is a **logical schema** (no code yet):
 | `history`     | Audit trail            |
 | `timestamp`   | Execution tracking     |
 
-## Step 3: Install Cosmos DB SDK
+### Task 3: Install Cosmos DB SDK
 
 In your active virtual environment, install the SDK:
 
@@ -83,7 +83,7 @@ In your active virtual environment, install the SDK:
 pip install azure-cosmos
 ```
 
-## Step 4: Configure Cosmos DB Connection
+### Task 4: Configure Cosmos DB Connection
 
 Add these values to your `.env` file and save the file:
 
@@ -97,7 +97,7 @@ Add these values to your `.env` file and save the file:
    > **Note:** Use **Settings → Key** from the Cosmos DB resource in Azure Portal.
 
 
-## Step 5: Create Cosmos DB Helper Module
+### Task 5: Create Cosmos DB Helper Module
 
 1. Create a new file using the below format:
 
@@ -131,7 +131,7 @@ Add these values to your `.env` file and save the file:
       return items[0] if items else None
    ```
 
-## Step 6: Store Extraction Agent Output in Cosmos DB
+### Task 6: Store Extraction Agent Output in Cosmos DB
 
 Update **`main.py`** temporarily to test shared memory.
 
@@ -208,7 +208,7 @@ Run:
 py app/main.py
 ```
 
-## Step 7: Verify Data in Azure Portal
+### Task 7: Verify Data in Azure Portal
 
 1. Open **Cosmos DB → Data Explorer**
 2. Select:

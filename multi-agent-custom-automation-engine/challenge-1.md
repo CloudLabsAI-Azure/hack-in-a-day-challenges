@@ -14,7 +14,7 @@ In this challenge, you will prepare the **core infrastructure** required to buil
 
 ## Steps to Complete
 
-### Step 1: Create Microsoft Foundry Resource
+### Task 1: Create Microsoft Foundry Resource
 
 1. In the **Azure Portal**, search for **Microsoft Foundry** under **Use with Foundry**, select **Foundry** and click **+ Create**.
 
@@ -28,7 +28,7 @@ In this challenge, you will prepare the **core infrastructure** required to buil
 3. Click **Review + Create** → **Create**.
 4. After deployment succeeds, open the **Microsoft Foundry** resource.
 
-### Step 2: Deploy the Model
+### Task 2: Deploy the Model
 
 1. In the Microsoft Foundry resource, click **Go to Microsoft Foundry portal**.
 2. Navigate to **Models + endpoints** → **+ Deploy model > Deploy base model**.
@@ -40,7 +40,7 @@ In this challenge, you will prepare the **core infrastructure** required to buil
 
 4. Click **Deploy** and wait for deployment.
 
-### Step 3: Create Azure Cosmos DB (Shared Agent Memory)
+### Task 3: Create Azure Cosmos DB (Shared Agent Memory)
 
 1. In the **Azure Portal**, search for **Azure Cosmos DB** and click **Create**.
 2. Select **Azure Cosmos DB for NoSQL**.
@@ -54,7 +54,7 @@ In this challenge, you will prepare the **core infrastructure** required to buil
    * **Capacity mode:** Provisioned throughput
 4. Click **Review + Create** → **Create**.
 
-### Step 4: Create Database and Container
+### Task 4: Create Database and Container
 
 1. Open the Cosmos DB account.
 2. Go to **Data Explorer**.
@@ -71,7 +71,7 @@ In this challenge, you will prepare the **core infrastructure** required to buil
 
 5. Click **OK**.
 
-### Step 5: Create Azure Container Registry (ACR)
+### Task 5: Create Azure Container Registry (ACR)
 
 1. In the **Azure Portal**, search for **Container registries** and click **+ Create**.
 
@@ -85,9 +85,9 @@ In this challenge, you will prepare the **core infrastructure** required to buil
 
 3. Click **Review + Create** → **Create**.
 
-### Step 6: Initialize Local Project (Agent Codebase)
+### Task 6: Initialize Local Project (Agent Codebase)
 
-#### Step 6.1: Create Project Folder Structure
+#### 6.1: Create Project Folder Structure
 
 1. In the `C: drive` create a new folder named:
 
@@ -111,7 +111,7 @@ In this challenge, you will prepare the **core infrastructure** required to buil
    └── README.md
    ```
 
-#### Step 6.2: Create and Activate Virtual Environment (Windows)
+#### 6.2: Create and Activate Virtual Environment (Windows)
 
 1. Open the **Terminal** in VS Code, by pressing `CTRL+J` in keyboard.
 
@@ -129,7 +129,7 @@ In this challenge, you will prepare the **core infrastructure** required to buil
 
 You should see `(.venv)` in the terminal prompt.
 
-#### Step 6.3: Install Required Packages
+#### 6.3: Install Required Packages
 
 1. Add the following to `requirements.txt`, and save the txt file:
 
@@ -146,7 +146,7 @@ You should see `(.venv)` in the terminal prompt.
 
    >**Note:** It will take 5-10 minutes to deploy.
 
-#### Step 6.4: Configure Environment Variables
+#### 6.4: Configure Environment Variables
 
 1. Open the `.env` file in the project root.
 
@@ -160,7 +160,7 @@ You should see `(.venv)` in the terminal prompt.
 
    > **Note:** You can get the values from the **Microsoft Foundry** → **Keys and Endpoint** resource that you created.
 
-#### Step 6.5: Verify Semantic Kernel Setup
+#### 6.5: Verify Semantic Kernel Setup
 
 1. Open `app/main.py` and add the following code:
 
@@ -204,9 +204,9 @@ You should see `(.venv)` in the terminal prompt.
 3. Verify you see a greeting message from the model.
 
 
-### Step 7: Define Agent Roles (Conceptual)
+### Task 7: Define Agent Roles (Conceptual)
 
-#### Step 7.1: Why Agent Roles Matter
+#### 7.1: Why Agent Roles Matter
 
 Multi-agent systems work best when:
 
@@ -214,7 +214,7 @@ Multi-agent systems work best when:
 * Agents do not overlap tasks
 * Coordination is handled centrally
 
-#### Step 7.2: Define Agent Responsibilities
+#### 7.2: Define Agent Responsibilities
 
 Document the following agent roles in `README.md`:
 

@@ -4,13 +4,13 @@ Production-ready Streamlit dashboard for enterprise workflow automation using AI
 
 ## Features
 
-- **Multi-Agent Pipeline** — Extraction → Validation → Communication → Reporting
-- **Enterprise Scenarios** — 5 pre-built sample workflows (onboarding, expenses, compliance, leave, contracts)
-- **File Upload** — Process `.txt` files with enterprise workflow text
-- **Real-time Progress** — Visual pipeline progress indicators
-- **History Tracking** — Save and review past workflows (requires Cosmos DB)
-- **Premium UI** — Clean, responsive design with gradient styling
-- **Setup Wizard** — Guided configuration if environment variables are missing
+- **Multi-Agent Pipeline** - Extraction > Validation > Communication > Reporting
+- **Enterprise Scenarios** - 5 pre-built sample workflows (onboarding, expenses, compliance, leave, contracts)
+- **File Upload** - Process `.txt` files with enterprise workflow text
+- **Real-time Progress** - Visual pipeline progress indicators
+- **History Tracking** - Save and review past workflows (requires Cosmos DB)
+- **Premium UI** - Clean, responsive design with gradient styling
+- **Setup Wizard** - Guided configuration if environment variables are missing
 
 ## Quick Start
 
@@ -102,11 +102,11 @@ codefiles/
 
 | Scenario | Description |
 |----------|-------------|
-| **Employee Onboarding** | New hire joining Engineering — extracts name, role, department, equipment needs |
-| **Expense Report** | Q4 client visit expenses — extracts items, amounts, approvals |
-| **Compliance Report** | Data privacy audit findings — extracts risk levels, action items |
-| **Leave Request** | Employee annual leave — extracts dates, coverage plans, approvals |
-| **Vendor Contract** | Cloud infrastructure service agreement — extracts terms, amounts, SLAs |
+| **Employee Onboarding** | New hire joining Engineering - extracts name, role, department, equipment needs |
+| **Expense Report** | Q4 client visit expenses - extracts items, amounts, approvals |
+| **Compliance Report** | Data privacy audit findings - extracts risk levels, action items |
+| **Leave Request** | Employee annual leave - extracts dates, coverage plans, approvals |
+| **Vendor Contract** | Cloud infrastructure service agreement - extracts terms, amounts, SLAs |
 
 ## Docker Deployment
 
