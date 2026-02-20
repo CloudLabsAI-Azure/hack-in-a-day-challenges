@@ -388,13 +388,13 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
 
 ## Success Criteria
 
-- [ ] `Data-Extraction-Agent` is created with type-specific extraction schemas
-- [ ] `Quality-Validation-Agent` is created with confidence scoring and routing logic
-- [ ] Classification Agent has **both** `extraction_agent` and `validation_agent` as connected agents
-- [ ] Pipeline instructions appended to Classification Agent for orchestration
-- [ ] Full pipeline test: Clean invoice → classified, extracted, validated → `AUTO_APPROVE` with confidence ≥ 0.85
-- [ ] Full pipeline test: Ambiguous/poor document → `MANUAL_REVIEW` with clear review_reasons
-- [ ] All three agents return valid JSON in the specified formats
+- `Data-Extraction-Agent` is created with type-specific extraction schemas
+- `Quality-Validation-Agent` is created with confidence scoring and routing logic
+- Classification Agent has **both** `extraction_agent` and `validation_agent` as connected agents
+- Pipeline instructions appended to Classification Agent for orchestration
+- Full pipeline test: Clean invoice → classified, extracted, validated → `AUTO_APPROVE` with confidence ≥ 0.85
+- Full pipeline test: Ambiguous/poor document → `MANUAL_REVIEW` with clear review_reasons
+- All three agents return valid JSON in the specified formats
 
 ## Additional Resources
 

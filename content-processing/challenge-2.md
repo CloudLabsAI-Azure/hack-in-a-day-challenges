@@ -233,7 +233,7 @@ Getting classification right is critical because it determines which extraction 
 
 1. This should return a lower confidence score (below 0.85), showing the agent handles ambiguity correctly.
 
-<validation step="9e5f7a8b-2c3d-4e0f-1a2b-6c7d8e9f0a1b" />
+<validation step="d8239636-15d6-4f78-b064-786b79917066" />
 
 > **Congratulations!** Your Document Classification Agent is built and tested.
 >
@@ -244,12 +244,12 @@ Getting classification right is critical because it determines which extraction 
 
 ## Success Criteria
 
-- [ ] `Document-Classification-Agent` is created in your AI Foundry project
-- [ ] Agent correctly classifies an invoice with confidence ≥ 0.90
-- [ ] Agent correctly classifies a receipt with confidence ≥ 0.90
-- [ ] Agent correctly classifies an identity document with confidence ≥ 0.85
-- [ ] Agent returns lower confidence (< 0.85) for ambiguous text
-- [ ] All responses are valid JSON in the specified format
+- `Document-Classification-Agent` is created in your AI Foundry project
+- Agent correctly classifies an invoice with confidence ≥ 0.90
+- Agent correctly classifies a receipt with confidence ≥ 0.90
+- Agent correctly classifies an identity document with confidence ≥ 0.85
+- Agent returns lower confidence (< 0.85) for ambiguous text
+- All responses are valid JSON in the specified format
 
 ## Additional Resources
 
