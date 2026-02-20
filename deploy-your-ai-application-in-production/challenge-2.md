@@ -16,7 +16,7 @@ This is where enterprises fail most often - deploying services with default sett
    - Storage Account
    - Key Vault
 - Connected to **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion
-- Configure Network Security Group (NSG) rules for AI services subnet
+- Configure Network Security Group (NSG) rules for the AI services subnet
 - Disable public network access on all AI services
 - Configure subnet delegation for private endpoints
 - Validate private endpoint connectivity
@@ -25,7 +25,7 @@ This is where enterprises fail most often - deploying services with default sett
 
 ## Steps to Complete
 
-### Part 1: Review Current Network Configuration
+### Task 1: Review Current Network Configuration
 
 First, understand what was deployed.
 
@@ -45,12 +45,12 @@ First, understand what was deployed.
 
 6. **Check if an NSG is attached**:
 
-   - Look for "Network security group" field
+   - Look for the "Network security group" field
    - If it says "None", you'll create one
    - If there's already one attached, note its name
    - Close the pane
 
-### Part 2: Create Network Security Group for AI Services
+### Task 2: Create Network Security Group for AI Services
 
 Let's create an NSG with restrictive rules using the Azure Portal.
 
@@ -134,7 +134,7 @@ Let's create an NSG with restrictive rules using the Azure Portal.
    - **Subnet**: Select **snet-ai-services**
    - Click **OK**
 
-### Part 3: Disable Public Access on AI Services
+### Task 3: Disable Public Access on AI Services
 
 Now ensure no service accepts connections from the internet using the Azure Portal.
 
@@ -180,7 +180,7 @@ Now ensure no service accepts connections from the internet using the Azure Port
       - Click **Apply**
       - kv-secureai-2082611
 
-### Part 4: Create Private Endpoint for Azure Key Vault
+### Task 4: Create Private Endpoint for Azure Key Vault
 
 Now that public access is disabled, create a private endpoint to enable secure connectivity from your VNET.
 
@@ -234,7 +234,7 @@ Now that public access is disabled, create a private endpoint to enable secure c
 
 1. From the left select **DNS configuration**. **Note the private IP address** assigned (should be in 10.0.2.x range).
 
-### Part 5: Create Private Endpoint for Azure OpenAI
+### Task 5: Create Private Endpoint for Azure OpenAI
 
 Create a private endpoint for your OpenAI service to ensure all AI traffic stays within your VNET.
 
@@ -288,7 +288,7 @@ Create a private endpoint for your OpenAI service to ensure all AI traffic stays
 
 1. From the left select **DNS configuration**. **Note the private IP address** assigned (should be in 10.0.1.x range).
 
-### Part 6: Create Private Endpoint for Azure Storage Account
+### Task 6: Create Private Endpoint for Azure Storage Account
 
 Create a private endpoint for your Storage Account so that blob storage traffic stays within your VNET.
 
@@ -340,9 +340,9 @@ Create a private endpoint for your Storage Account so that blob storage traffic 
 
 1. Once complete, click **Go to resource** to view the private endpoint details.
 
-1. From the left select **DNS configuration**. **Note the private IP address** assigned (should be in 10.0.2.x range).
+1. From the left, select **DNS configuration**. **Note the private IP address** assigned (should be in 10.0.2.x range).
 
-### Part 7: Verify Private DNS Configuration
+### Task 7: Verify Private DNS Configuration
 
 After creating private endpoints, verify that the Private DNS zones were created and linked to your VNET.
 
@@ -370,7 +370,7 @@ After creating private endpoints, verify that the Private DNS zones were created
 
    > **Why this matters**: Private DNS zones ensure that when your VM resolves names like `kv-secureai-<DID>.vault.azure.net`, it resolves to the private IP address instead of the public endpoint. This keeps all traffic within your VNET.
 
-### Part 8: Validate Private Endpoint Connectivity (Using VS Code)
+### Task 8: Validate Private Endpoint Connectivity (Using VS Code)
 
 Ensure all services are reachable via private endpoints only. For this validation, we'll use VS Code on **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**.
 
@@ -418,7 +418,7 @@ Ensure all services are reachable via private endpoints only. For this validatio
 
 The VNET should be linked to enable DNS resolution.
 
-### Part 9: Test DNS Resolution for Private Endpoints (Using VS Code)
+### Task 9: Test DNS Resolution for Private Endpoints (Using VS Code)
 
 Verify that service names resolve to private IP addresses (not public). Continue using VS Code PowerShell terminal.
 
@@ -463,11 +463,11 @@ Verify that service names resolve to private IP addresses (not public). Continue
    az keyvault secret list --vault-name kv-secureai-<inject key="DeploymentID" enableCopy="false"/>
    ```
 
-   - If you see a permission error (not a network error), private endpoint is working!
+   - If you see a permission error (not a network error), the private endpoint is working!
 
-> **Note:** If the output returns an empty list `[]`, that's completely expected, no secrets have been added to the Key Vault yet. The important thing is that the command didn't return a network error, which confirms that private endpoint connectivity to Key Vault is working correctly.
+> **Note:** If the output returns an empty list `[]`, that's completely expected; no secrets have been added to the Key Vault yet. The important thing is that the command didn't return a network error, which confirms that private endpoint connectivity to Key Vault is working correctly.
 
-### Part 10: Validate Public Access is Blocked
+### Task 10: Validate Public Access is Blocked
 
 Verify that your services are properly locked down by checking network settings in the Azure Portal.
 
@@ -503,7 +503,7 @@ Verify that your services are properly locked down by checking network settings 
 
    - You should get **Error 403: Forbidden** or **Connection timeout** — this confirms public access is blocked!
 
-### Part 11: Create NSG for Storage Subnet (Using Portal)
+### Task 11: Create NSG for Storage Subnet (Using Portal)
 
 Repeat NSG creation for the storage subnet using Azure Portal.
 
@@ -551,7 +551,7 @@ Repeat NSG creation for the storage subnet using Azure Portal.
    - **Subnet**: Select **snet-storage-services**
    - Click **OK**
 
-### Part 12: Document Your Network Configuration (Using VS Code)
+### Task 12: Document Your Network Configuration (Using VS Code)
 
 Save your network topology for reference using VS Code PowerShell terminal.
 

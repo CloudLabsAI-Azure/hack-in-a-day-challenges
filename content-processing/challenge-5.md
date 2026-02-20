@@ -16,7 +16,7 @@ In this final challenge, you'll use the dashboard's **Review Queue** to examine,
 
 ## Steps to Complete
 
-### Part 1: Process All Sample Documents
+### Task 1: Process All Sample Documents
 
 1. In the Streamlit app, go to the **Process Documents** tab.
 
@@ -32,7 +32,7 @@ In this final challenge, you'll use the dashboard's **Review Queue** to examine,
 
 1. After processing all documents, note how many were auto-approved vs. sent to review.
 
-### Part 2: Review Flagged Documents
+### Task 2: Review Flagged Documents
 
 1. Click on the **🔍 Review Queue** tab.
 
@@ -66,7 +66,7 @@ In this final challenge, you'll use the dashboard's **Review Queue** to examine,
 > - At least one document was approved from the Review Queue
 > - The approved document appears in the `ProcessedDocuments` container with `review_status: "HUMAN_APPROVED"`
 
-### Part 3: Explore the Analytics Dashboard
+### Task 3: Explore the Analytics Dashboard
 
 1. Click on the **📊 Analytics** tab.
 
@@ -88,7 +88,7 @@ In this final challenge, you'll use the dashboard's **Review Queue** to examine,
 
 1. Review the metrics and confirm they match your processing history.
 
-### Part 4: Validate End-to-End in Cosmos DB
+### Task 4: Validate End-to-End in Cosmos DB
 
 1. Go to the Azure portal → Cosmos DB → **Data Explorer**.
 

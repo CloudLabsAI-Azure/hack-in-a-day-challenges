@@ -31,7 +31,7 @@ By the end, your secure chat application will be running on a production URL —
 
 ## Steps to Complete
 
-### Part 1: Create App Service Subnet
+### Task 1: Create App Service Subnet
 
 App Service VNet integration requires a dedicated subnet delegated to `Microsoft.Web/serverFarms`.
 
@@ -51,7 +51,7 @@ App Service VNet integration requires a dedicated subnet delegated to `Microsoft
 
    > **Why a dedicated subnet?** App Service VNet integration requires a subnet delegated exclusively to `Microsoft.Web/serverFarms`. This delegation allows the App Service to inject into your VNet and access private endpoints.
 
-### Part 2: Create App Service Plan and Web App
+### Task 2: Create App Service Plan and Web App
 
 1. **Create the App Service Plan** (Linux, Python):
 
@@ -78,7 +78,7 @@ App Service VNet integration requires a dedicated subnet delegated to `Microsoft
    Write-Host "Web App created: app-secureai-<inject key="DeploymentID" enableCopy="false"/>"
    ```
 
-### Part 3: Enable Managed Identity and Assign RBAC Roles
+### Task 3: Enable Managed Identity and Assign RBAC Roles
 
 The App Service needs its own managed identity to authenticate to Key Vault, OpenAI, and Storage — just like the VM.
 
@@ -134,7 +134,7 @@ The App Service needs its own managed identity to authenticate to Key Vault, Ope
 
    > **Note**: RBAC role assignments take **2-3 minutes** to propagate. Continue with the next steps while they take effect.
 
-### Part 4: Configure VNet Integration
+### Task 4: Configure VNet Integration
 
 Connect the App Service to your VNet so it can reach private endpoints.
 
@@ -168,7 +168,7 @@ Connect the App Service to your VNet so it can reach private endpoints.
       >
       > **Note**: We use `az resource update` with API version `2023-12-01` because the `--vnet-route-all-enabled` flag on `az webapp config set` is deprecated in newer Azure CLI versions and may silently fail.
 
-### Part 5: Configure App Settings and Startup Command
+### Task 5: Configure App Settings and Startup Command
 
 1. **Set application settings** (these become environment variables for the app):
 
@@ -211,7 +211,7 @@ Connect the App Service to your VNet so it can reach private endpoints.
 
       > **Why this startup command?** Azure App Service (Python) defaults to Gunicorn, but Streamlit has its own web server. This command tells App Service to run Streamlit on port 8000 (the expected internal port) with settings optimized for production.
 
-### Part 6: Deploy the Application Code
+### Task 6: Deploy the Application Code
 
 1. **Prepare the deployment package** (clean up local-only files):
 
@@ -262,7 +262,7 @@ Connect the App Service to your VNet so it can reach private endpoints.
 
       > **What happens during deployment?** Oryx (Azure's build engine) detects `requirements.txt`, creates a virtual environment, and installs all dependencies (`streamlit`, `azure-identity`, `openai`, etc.). Then it starts the app using your startup command.
 
-### Part 7: Verify Production Deployment
+### Task 7: Verify Production Deployment
 
 1. **Get the App Service URL**:
 

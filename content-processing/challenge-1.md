@@ -17,7 +17,7 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 
 ## Steps to Complete
 
-### Part 1: Create Azure Storage Account
+### Task 1: Create Azure Storage Account
 
 1. In the Azure portal, click **+ Create a resource** and search for **Storage account**.
 
@@ -40,7 +40,7 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 
 1. Click **+ Container** again and create a second container named **processed** with **Private** access level.
 
-### Part 2: Upload Sample Documents
+### Task 2: Upload Sample Documents
 
 1. Download the sample documents from:
 
@@ -69,11 +69,11 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 > **Congratulations!** You've created the Storage Account and uploaded sample documents.
 >
 > If validation fails, verify:
-> - The Storage Account name is `docstore<inject key="DeploymentID" enableCopy="false"/>`
+> - The Storage Account name is **docstore<inject key="DeploymentID" enableCopy="false"/>**
 > - The `documents` container exists and contains all 5 files
 > - The `processed` container exists
 
-### Part 3: Create Azure AI Document Intelligence Resource
+### Task 3: Create Azure AI Document Intelligence Resource
 
 1. In the Azure portal, click **+ Create a resource** and search for **Document Intelligence**.
 
@@ -89,7 +89,7 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 
 1. Click **Review + Create**, then **Create**. Wait for deployment to complete.
 
-### Part 4: Test OCR in Document Intelligence Studio
+### Task 4: Test OCR in Document Intelligence Studio
 
 1. Navigate to [Document Intelligence Studio](https://documentintelligence.ai.azure.com/studio).
 
@@ -122,7 +122,7 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 > - The Document Intelligence resource exists in your resource group
 > - You can successfully analyse a document in the Studio
 
-### Part 5: Create Microsoft Foundry Resource and Deploy GPT-4.1
+### Task 5: Create Microsoft Foundry Resource and Deploy GPT-4.1
 
 1. In the Azure portal, search for **Microsoft Foundry** in the top search bar.
 
@@ -173,7 +173,7 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 > - The default project `proj-default` is created
 > - The `doc-processor` model deployment is in **Succeeded** state
 
-### Part 6: Create Azure Cosmos DB Account
+### Task 6: Create Azure Cosmos DB Account
 
 1. In the Azure portal, click **+ Create a resource** and search for **Azure Cosmos DB**.
 

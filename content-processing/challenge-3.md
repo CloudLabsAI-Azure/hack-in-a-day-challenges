@@ -18,7 +18,7 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
 
 ## Steps to Complete
 
-### Part 1: Create the Data Extraction Agent
+### Task 1: Create the Data Extraction Agent
 
 1. In your AI Foundry project **proj-default** (under **openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>**), navigate to **Agents**.
 
@@ -65,7 +65,7 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
 
 1. Click **Save** to save the Data Extraction Agent.
 
-### Part 2: Create the Quality Validation Agent
+### Task 2: Create the Quality Validation Agent
 
 1. Click **+ New Agent** again and configure:
 
@@ -166,7 +166,7 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
 
 1. Click **Save** to save the Quality Validation Agent.
 
-### Part 3: Connect Both Agents to the Classification Agent
+### Task 3: Connect Both Agents to the Classification Agent
 
 > **Note**: Due to Microsoft Foundry limitations, an agent that is already added as a connected agent cannot have its own connected agents. Therefore, you'll connect **both** the Extraction Agent and the Validation Agent directly to the **Document-Classification-Agent** as connected agents. The Classification Agent's instructions will orchestrate the pipeline flow.
 
@@ -206,7 +206,7 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
    - `extraction_agent`
    - `validation_agent`
 
-### Part 4: Update Classification Agent Instructions for Pipeline Orchestration
+### Task 4: Update Classification Agent Instructions for Pipeline Orchestration
 
 1. Still in the **Document-Classification-Agent**, scroll to the **Instructions** text box.
 
@@ -309,7 +309,7 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
 > - Classification Agent has **both** `extraction_agent` and `validation_agent` as connected agents
 > - Neither Extraction Agent nor Validation Agent has any connected agents of their own
 
-### Part 4: Test the Full Pipeline
+### Task 4: Test the Full Pipeline
 
 1. Open the **Document-Classification-Agent** in the playground (this is the entry point to the pipeline).
 

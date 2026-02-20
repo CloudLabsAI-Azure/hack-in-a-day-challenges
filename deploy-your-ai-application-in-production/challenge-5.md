@@ -24,7 +24,7 @@ Let's build a secure ChatGPT-like experience!
 ## Challenge Objectives
 
 - Download the pre-built secure chat application
-- Configure `.env` file with Key Vault name
+- Configure `.env` file with the Key Vault name
 - Install Python dependencies
 - Run the chat app locally on the VM
 - Test chat functionality with managed identity
@@ -33,11 +33,11 @@ Let's build a secure ChatGPT-like experience!
 
 ## Steps to Complete
 
-### Part 1: Download and Extract Application Code
+### Task 1: Download and Extract Application Code
 
 The application code is provided in a pre-built package.
 
-1. In the Bastion VM, open a edge browser tab **Download the code package**, and select **open file**:
+1. In the Bastion VM, open an edge browser tab **Download the code package**, and select **open file**:
    
    Visit this link in your browser:
    ```
@@ -55,7 +55,7 @@ The application code is provided in a pre-built package.
    
    - Open VSCode, select **File** > click on **Open folder** and select the folder `C:\Code\hack-in-a-day-challenges-deploy-your-ai-application\codefiles`
 
-### Part 2: Configure the Application
+### Task 2: Configure the Application
 
 1. **Copy `.env.example` to create your `.env` file**:
 
@@ -93,7 +93,7 @@ The application code is provided in a pre-built package.
 
       > **Important**: The `.env` file contains **only non-sensitive configuration**. All secrets (OpenAI endpoint, deployment name, API version, storage account name) are retrieved from Azure Key Vault at runtime using Managed Identity. No API keys anywhere!
 
-### Part 3: Store Storage Account Name in Key Vault
+### Task 3: Store Storage Account Name in Key Vault
 
 The app saves chat session history to Blob Storage. Store the storage account name in Key Vault so the app can retrieve it securely.
 
@@ -130,7 +130,7 @@ Write-Host "Key Vault secured"
 
    > **Note**: If you already stored `StorageAccountName` in Challenge 3, this step will simply update the existing secret with the same value.
 
-### Part 4: Install Dependencies
+### Task 4: Install Dependencies
 
 1. **Create a virtual environment** (best practice):
 
@@ -157,7 +157,7 @@ Write-Host "Key Vault secured"
 
       > **Note**: The `requirements.txt` pins `openai>=1.12.0,<2.0.0`. Versions earlier than 1.x will fail with errors like "Client.__init__() got an unexpected keyword argument 'proxies'" due to breaking changes in the OpenAI Python SDK.
 
-### Part 5: Verify Storage Account Access
+### Task 5: Verify Storage Account Access
 
 Verify managed identity has access to Blob Storage for session history (should be assigned from Challenge 3).
 
@@ -193,7 +193,7 @@ if (-not $existing) {
 }
 ```
 
-### Part 6: Run the Chat Application
+### Task 6: Run the Chat Application
 
 Moment of truth!
 
@@ -234,7 +234,7 @@ Moment of truth!
    - "Auth: Managed Identity" and "Network: Private Only"
    - Chat input box ready
 
-### Part 7: Test the Chat Application
+### Task 7: Test the Chat Application
 
 1. **Send a test message** in the chat input:
 

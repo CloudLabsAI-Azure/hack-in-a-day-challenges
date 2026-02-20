@@ -15,7 +15,7 @@ Getting classification right is critical because it determines which extraction 
 
 ## Steps to Complete
 
-### Part 1: Navigate to AI Foundry Agents
+### Task 1: Navigate to AI Foundry Agents
 
 1. Go to [Azure AI Foundry](https://ai.azure.com) and open your project **proj-default** (under the Foundry resource **openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>**).
 
@@ -23,7 +23,7 @@ Getting classification right is critical because it determines which extraction 
 
 1. Click **+ New Agent** to create your first agent.
 
-### Part 2: Configure the Classification Agent
+### Task 2: Configure the Classification Agent
 
 1. Set the **Agent name** to:
 
@@ -110,7 +110,7 @@ Getting classification right is critical because it determines which extraction 
 
 1. Note the **Agent ID** displayed in the Setup panel (starts with `asst_`). You'll need this later.
 
-### Part 3: Test the Classification Agent in the Playground
+### Task 3: Test the Classification Agent in the Playground
 
 1. In the agent's page, you should see the **Playground** / chat panel on the right.
 

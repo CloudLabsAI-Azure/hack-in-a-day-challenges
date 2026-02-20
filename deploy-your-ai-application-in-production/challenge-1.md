@@ -11,7 +11,7 @@ You'll provision:
 - Azure Key Vault for secrets management
 - Azure Storage Account for data persistence
 
-By deploying each resource manually, you'll gain deep understanding of Azure networking, security, and resource configuration.
+By deploying each resource manually, you'll gain a deep understanding of Azure networking, security, and resource configuration.
 
 ## Challenge Objectives
 
@@ -25,7 +25,7 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
 ## Steps to Complete
 
-### Part 1: Verify Pre-Deployed Resource Group
+### Task 1: Verify Pre-Deployed Resource Group
 
 1. In the **Azure Portal**, search for **Resource groups** in the top search bar and select it.
 
@@ -35,7 +35,7 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 
 1. This resource group will be used for all resources you create in this hackathon.
 
-### Part 2: Create Virtual Network
+### Task 2: Create Virtual Network
 
 1. In the **Azure Portal**, navigate to the **Home** page and click **+ Create a resource**.
 
@@ -51,7 +51,7 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
       - **Virtual network name**: **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
       - **Region**: **<inject key="Region"></inject>**
 
-1. Click **Next**. On the **Security** tab leave everything **turned off (default)**, then click **Next**.
+1. Click **Next**. On the **Security** tab, leave everything **turned off (default)**, then click **Next**.
 
 1. On **IP Addresses**.
 
@@ -97,7 +97,7 @@ By deploying each resource manually, you'll gain deep understanding of Azure net
 1. Once the deployment is complete, click **Go to resource**. To verify that all three subnets were created, select **Settings** > **Subnets** from the left navigation menu.
 
 
-### Part 3: Create Application Virtual Machine
+### Task 3: Create Application Virtual Machine
 
 Now you'll deploy a Windows VM in the application subnet where you'll host the secure chat application.
 
@@ -117,7 +117,7 @@ Now you'll deploy a Windows VM in the application subnet where you'll host the s
       - **Image**: **See all images** > **Windows server** > **Windows Server 2022 Datacenter: Azure Edition - x64 Gen2**
       - **Size**: Click **See all sizes**, search for **Standard_B2s**, select it, and click **Select**
    
-         > **Note**: We're using Standard_B2s (2 vCPU, 4GB RAM) which is cost-effective for testing while providing adequate performance for this lab.
+         > **Note**: We're using Standard_B2s (2 vCPU, 4GB RAM), which is cost-effective for testing while providing adequate performance for this lab.
    
    - **Administrator account**:
       - **Username**: **azureuser**
@@ -165,7 +165,7 @@ Now you'll deploy a Windows VM in the application subnet where you'll host the s
 
 1. Once complete, click **Go to resource**.
 
-### Part 4: Create Azure Bastion Subnet
+### Task 4: Create Azure Bastion Subnet
 
 Before we can connect to the VM, we need to create a dedicated subnet for Azure Bastion.
 
@@ -187,7 +187,7 @@ Before we can connect to the VM, we need to create a dedicated subnet for Azure 
 
 1. Wait for the deployment to complete; it will take a maximum of 30 seconds.
 
-### Part 5: Test VM Connection via Bastion
+### Task 5: Test VM Connection via Bastion
 
 Now let's install Azure Bastion and connect to the VM.
 
@@ -221,13 +221,13 @@ Now let's install Azure Bastion and connect to the VM.
 
 1. Click **Connect**.
 
-   >**Note:** If the error message appears—“**A popup blocker is preventing a new window from opening. Please allow popups and retry.**”—enable pop-ups from the top navigation menu and try again.
+   >**Note:** If the error message appears—“**A pop-up blocker is preventing a new window from opening. Please allow pop-ups and retry.**”—enable pop-ups from the top navigation menu and try again.
 
 1. A new browser tab will open with a remote desktop session.
 
 1. Wait for Windows to finish setup (may take 1-2 minutes on first connection).
 
-### Part 6: Install Required Software and Set Up VM
+### Task 6: Install Required Software and Set Up VM
 
 The VM is a fresh Windows Server 2022 instance. You'll install Chocolatey (package manager), then use it to install Python 3.11, VS Code, Azure CLI, and Git.
 
@@ -266,11 +266,11 @@ The VM is a fresh Windows Server 2022 instance. You'll install Chocolatey (packa
 
 1. Keep the bastion session open - you'll use it throughout the hackathon. Username: **azureuser**, Password: **SecureAI@2026**
 
-1. Inside the bastion VM, open **File Explorer**, and create a folder name `Code` inside `C:\`.
+1. Inside the bastion VM, open **File Explorer**, and create a folder named `Code` inside `C:\`.
 
-   >**Note:** If it is already created skip this step, and proceed to the next part.
+   >**Note:** If it is already created, skip this step and proceed to the next part.
 
-### Part 7: Create Microsoft Foundry Project
+### Task 7: Create Microsoft Foundry Project
 
 1. In the **Azure Portal**, from the **Home** page, click **+ Create a resource**.
 
@@ -287,7 +287,7 @@ The VM is a fresh Windows Server 2022 instance. You'll install Chocolatey (packa
       - **Region**: **<inject key="Region"></inject>**
       - **Default project name**: Keep as **proj-default**
 
-         > **Note**: This creates both an Microsoft Foundry Hub (resource) and a default project inside it.
+         > **Note**: This creates both a Microsoft Foundry Hub (resource) and a default project inside it.
 
 1. Click **Review + Create**.
 
@@ -297,7 +297,7 @@ The VM is a fresh Windows Server 2022 instance. You'll install Chocolatey (packa
 
 1. Once complete, click **Go to resource**.
 
-### Part 8: Configure Custom Domain for Azure OpenAI (Critical for Private Endpoints)
+### Task 8: Configure Custom Domain for Azure OpenAI (Critical for Private Endpoints)
 
 Now that the Azure AI Foundry resource is created, you must configure a custom subdomain for it. This is a requirement for token-based authentication with managed identities and private endpoints.
 
@@ -362,7 +362,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 > **Important**: Complete this step before proceeding to Challenge 2. Without the custom domain, private endpoint creation will succeed but authentication will fail.
 
-### Part 9: Deploy GPT-4 Model in Azure AI Foundry
+### Task 9: Deploy GPT-4 Model in Azure AI Foundry
 
 1. Switch to the **Azure portal** under **labvm-<inject key="DeploymentID" enableCopy="false"/>**.
 
@@ -391,7 +391,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 1. Click **Deploy**.
 
-### Part 10: Test the Model Deployment
+### Task 10: Test the Model Deployment
 
 1.  On the **secure-chat** deployment page, click **Open in playground**.
 
@@ -412,11 +412,11 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
    ```
    https://openai-secureai-<inject key="DeploymentID" enableCopy="false"/>.openai.azure.com/
    ```
-   This is the custom domain you configured in Part 8. You'll store this in Key Vault in the next challenge.
+   This is the custom domain you configured in Task 8. You'll store this in Key Vault in the next challenge.
 
 1. Close the playground.
 
-### Part 11: Create Azure Key Vault
+### Task 11: Create Azure Key Vault
 
 1. In the **Azure Portal**, click **+ Create a resource**.
 
@@ -450,7 +450,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 1. Once complete, click **Go to resource**.
 
-### Part 12: Assign Key Vault Permissions
+### Task 12: Assign Key Vault Permissions
 
 1. In your **kv-secureai-<inject key="DeploymentID" enableCopy="false"/>** Key Vault.
 
@@ -477,7 +477,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
    > **Note**: RBAC can take 2-3 minutes to propagate. Wait before testing.
 
-### Part 13: Create Azure Storage Account
+### Task 13: Create Azure Storage Account
 
 1. In the **Azure Portal**, click **+ Create a resource**.
 
@@ -515,7 +515,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 1. Once complete, click **Go to resource**.
 
-### Part 14: Create Blob Container
+### Task 14: Create Blob Container
 
 1. In your **stsecureai<inject key="DeploymentID" enableCopy="false"/>** Storage Account.
 
@@ -531,7 +531,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 1. Verify the **chat-sessions** container appears in the list.
 
-### Part 15: Verify All Resources
+### Task 15: Verify All Resources
 
 1. Navigate back to your resource group: **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**.
 
@@ -549,7 +549,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
    - snet-storage-services (10.0.2.0/24)
    - snet-application (10.0.3.0/24)
 
-### Part 16: Save Configuration Details
+### Task 16: Save Configuration Details
 
 Open Notepad on your VM and document the following:
 
@@ -568,12 +568,12 @@ Region: <inject key="Region"></inject>
 - Windows VM deployed in the application subnet with no public IP
 - Azure Bastion deployed and VM accessible via Bastion
 - Required software installed on VM (Python 3.11, VS Code, Azure CLI)
-- Azure AI Foundry project created with GPT-4.1 model deployed successfully
+- Azure AI Foundry project created with the GPT-4.1 model deployed successfully
 - Custom domain configured on the Azure OpenAI resource
 - Model tested in Chat Playground and working correctly
 - Azure Key Vault created with RBAC authorization and Key Vault Administrator role assigned
 - Azure Storage Account created with blob container (chat-sessions)
-- All resources deployed in the same resource group and region
+- All resources are deployed in the same resource group and region
 
 ## Additional Resources
 

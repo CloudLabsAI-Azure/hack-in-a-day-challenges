@@ -25,7 +25,7 @@ Network isolation alone isn't enough. Even with private endpoints, you need stro
 - Test passwordless authentication to Azure OpenAI
 - Validate least-privilege access model
 
-### Part 1: Enable System-Assigned Managed Identity on Your VM
+### Task 1: Enable System-Assigned Managed Identity on Your VM
 
 Your VM needs an identity to authenticate to Azure services without passwords or API keys.
 
@@ -50,7 +50,7 @@ Your VM needs an identity to authenticate to Azure services without passwords or
 
       > **Note**: Copy the `$identityId` value - you'll need it for RBAC assignments next.
 
-### Part 2: Assign RBAC Roles for Azure OpenAI and Key Vault
+### Task 2: Assign RBAC Roles for Azure OpenAI and Key Vault
 
 Grant your VM's managed identity the necessary permissions via CLI.
 
@@ -110,7 +110,7 @@ Grant your VM's managed identity the necessary permissions via CLI.
 
    > **Important**: RBAC takes 2-3 minutes to propagate. Wait before proceeding.
 
-### Part 3: Store OpenAI Configuration in Key Vault (Using VS Code)
+### Task 3: Store OpenAI Configuration in Key Vault (Using VS Code)
 
 Instead of storing endpoints and keys in files, store them securely in Key Vault. Since Key Vault has public access disabled, we'll temporarily enable it to add secrets from your VM.
 
@@ -143,7 +143,7 @@ Instead of storing endpoints and keys in files, store them securely in Key Vault
    if ($openaiEndpoint -notlike "*$openaiName*") {
       Write-Warning "WARNING: Endpoint should contain your resource name!"
       Write-Warning "Expected format: https://<resource-name>.cognitiveservices.azure.com/"
-      Write-Warning "If you see a generic endpoint, go back to Challenge 1 Part 5 and configure custom domain."
+      Write-Warning "If you see a generic endpoint, go back to Challenge 1 Task 5 and configure custom domain."
       Write-Warning "Current endpoint: $openaiEndpoint"
    }
 
@@ -203,7 +203,7 @@ Instead of storing endpoints and keys in files, store them securely in Key Vault
    Write-Host "Key Vault secured - public access disabled"
    ```
 
-### Part 4: Configure Storage Account Access for Managed Identity
+### Task 4: Configure Storage Account Access for Managed Identity
 
 Grant your VM's managed identity permission to read/write blobs.
 
@@ -259,7 +259,7 @@ Grant your VM's managed identity permission to read/write blobs.
    Write-Host "Key Vault secured"
    ```
 
-### Part 5: Verify RBAC Assignments
+### Task 5: Verify RBAC Assignments
 
 Confirm all role assignments are in place:
 

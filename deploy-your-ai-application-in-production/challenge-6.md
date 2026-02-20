@@ -28,7 +28,7 @@ This proves your entire architecture works through private networking only!
 
 ## Steps to Complete
 
-### Part 1: Verify Bastion and Connect to VM
+### Task 1: Verify Bastion and Connect to VM
 
 >**Note:** You should already be connected to your VM via Bastion from the previous challenges. If not, complete **Task 1** and **Task 2**. Otherwise, you can skip them and proceed directly to **Task 3**.
 
@@ -41,7 +41,7 @@ This proves your entire architecture works through private networking only!
    - **Username**: `azureuser`
    - **Password**: `SecureAI@2026`
 
-1. Click **Connect** (opens a new browser tab with remote desktop session).
+1. Click **Connect** (opens a new browser tab with a remote desktop session).
 
 1. Run the below command in the PowerShell terminal:
 
@@ -51,7 +51,7 @@ This proves your entire architecture works through private networking only!
    # Should show private IP (10.0.3.x) - no public IP!
    ```
 
-### Part 2: Run and Test Chat Application Through Bastion
+### Task 2: Run and Test Chat Application Through Bastion
 
 1. **Start the chat app** (if not already running):
 
@@ -69,7 +69,7 @@ This proves your entire architecture works through private networking only!
    - Send a test message: `What is Azure Bastion?`
    - Confirm you receive an AI response
 
-### Part 3: Quick Connectivity Verification
+### Task 3: Quick Connectivity Verification
 
 Confirm all services resolve to private IPs from within the VNET:
 
@@ -94,7 +94,7 @@ Resolve-DnsName "$storageName.blob.core.windows.net" | Select-Object Name, IPAdd
 
 All services should resolve to **10.0.x.x** private IPs, confirming private endpoint connectivity.
 
-### Part 4: Test Session Persistence
+### Task 4: Test Session Persistence
 
 Verify chat session history is saved to Azure Storage:
 
