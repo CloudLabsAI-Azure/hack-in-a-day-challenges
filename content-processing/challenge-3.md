@@ -166,69 +166,70 @@ You'll then use Azure AI Foundry's **Connected Agents** feature to chain all thr
 
 1. Click **Save** to save the Quality Validation Agent.
 
-### Part 3: Connect the Agent Pipeline
+### Part 3: Connect Both Agents to the Classification Agent
 
-Now you'll connect all three agents so that a single request flows automatically through the full pipeline: Classification → Extraction → Validation.
+> **Note**: Due to Microsoft Foundry limitations, an agent that is already added as a connected agent cannot have its own connected agents. Therefore, you'll connect **both** the Extraction Agent and the Validation Agent directly to the **Document-Classification-Agent** as connected agents. The Classification Agent's instructions will orchestrate the pipeline flow.
 
 1. Navigate back to **Agents** and open the **Document-Classification-Agent**.
 
-1. In the agent's Setup panel, scroll down to **Connected agents** (or **Tools** section).
+1. In the **Setup** panel on the right, scroll down to the **Connected agents** section.
 
-1. Click **+ Add connected agent**.
+1. Click **+ Add**.
 
-1. Select **Data-Extraction-Agent** from the list.
+1. In the **Adding a connected agent** dialog, configure:
 
-1. Set the **unique name** to: `extraction_agent`
+   - **Agent**: Select **Data-Extraction-Agent** from the dropdown
+   - **Unique name**: Enter `extraction_agent`
+   - **Detail the steps to activate the agent**:
 
-1. Set the **Description** to:
+     ```
+     After classifying the document, hand off the classification result along with the original OCR text to this extraction agent. It will extract structured data fields based on the document type. Always invoke this agent after classification is complete.
+     ```
+
+1. Click **Add**.
+
+1. You should now see **Data-Extraction-Agent** listed under Connected agents with unique name `extraction_agent`. Click **+ Add** again to add a second connected agent.
+
+1. In the **Adding a connected agent** dialog, configure:
+
+   - **Agent**: Select **Quality-Validation-Agent** from the dropdown
+   - **Unique name**: Enter `validation_agent`
+   - **Detail the steps to activate the agent**:
+
+     ```
+     After the extraction agent has extracted structured data, hand off the extraction results to this validation agent. It will validate completeness, consistency, and assign a confidence score with a routing recommendation (AUTO_APPROVE or MANUAL_REVIEW). Always invoke this agent after extraction is complete.
+     ```
+
+1. Click **Add**.
+
+1. You should now see both connected agents listed:
+   - `extraction_agent`
+   - `validation_agent`
+
+### Part 4: Update Classification Agent Instructions for Pipeline Orchestration
+
+1. Still in the **Document-Classification-Agent**, scroll to the **Instructions** text box.
+
+1. Add the following to the **very end** of your existing Classification Agent instructions:
 
    ```
-   After classifying the document, hand off the classification result along with the original OCR text to this extraction agent. It will extract structured data fields based on the document type. Always invoke this agent after classification is complete.
+   PIPELINE INSTRUCTIONS (MANDATORY):
+   After completing your document classification, you MUST execute this pipeline in order:
+
+   Step 1: CLASSIFY the document (your main task)
+   Step 2: Hand off to extraction_agent — Pass your complete classification JSON along with the original OCR text. Wait for it to return the structured extraction result.
+   Step 3: Hand off to validation_agent — Pass the classification result, the extraction JSON, and the original OCR text. Wait for it to return the validation result with confidence score and routing decision.
+
+   After all agents have completed, compile the FINAL combined response that includes:
+   1. Your classification result
+   2. The extraction agent's structured data
+   3. The validation agent's confidence score and routing decision
+
+   IMPORTANT: You must invoke BOTH connected agents. Do NOT skip any step. The pipeline flow is:
+   Classification (you) → Extraction (extraction_agent) → Validation (validation_agent)
    ```
 
 1. Click **Save**.
-
-1. Now open the **Data-Extraction-Agent**.
-
-1. Add a connected agent:
-   - Select **Quality-Validation-Agent**
-   - Set unique name to: `validation_agent`
-   - Set description to:
-
-     ```
-     After extracting structured data, hand off the extraction results to this validation agent. It will validate completeness, consistency, and assign a confidence score with a routing recommendation (AUTO_APPROVE or MANUAL_REVIEW). Always invoke this agent after extraction is complete.
-     ```
-
-1. Click **Save**.
-
-1. **Update the Classification Agent instructions** — Go back to **Document-Classification-Agent** and **append** the following to the end of its existing instructions:
-
-   ```
-
-   ## Pipeline Behavior
-   After completing your classification, you MUST hand off to the extraction_agent connected agent. Pass along:
-   1. Your complete classification JSON
-   2. The original OCR text
-
-   The pipeline flow is: Classification (you) → Extraction → Validation
-   Do NOT skip the hand-off. The downstream agents need your output to proceed.
-   ```
-
-1. **Update the Extraction Agent instructions** — Open **Data-Extraction-Agent** and **append**:
-
-   ```
-
-   ## Pipeline Behavior
-   After completing your extraction, you MUST hand off to the validation_agent connected agent. Pass along:
-   1. The classification result you received
-   2. Your complete extraction JSON
-   3. The original OCR text
-
-   The pipeline flow is: Classification → Extraction (you) → Validation
-   Do NOT skip the hand-off. The validation agent needs your output to make a routing decision.
-   ```
-
-1. Save both agents.
 
 <validation step="0f1a2b3c-4d5e-6f7a-8b9c-0d1e2f3a4b5c" />
 
@@ -236,8 +237,8 @@ Now you'll connect all three agents so that a single request flows automatically
 >
 > If validation fails, verify:
 > - All three agents exist: `Document-Classification-Agent`, `Data-Extraction-Agent`, `Quality-Validation-Agent`
-> - Classification Agent has `extraction_agent` as a connected agent
-> - Extraction Agent has `validation_agent` as a connected agent
+> - Classification Agent has **both** `extraction_agent` and `validation_agent` as connected agents
+> - Neither Extraction Agent nor Validation Agent has any connected agents of their own
 
 ### Part 4: Test the Full Pipeline
 
@@ -320,8 +321,8 @@ Now you'll connect all three agents so that a single request flows automatically
 
 - [ ] `Data-Extraction-Agent` is created with type-specific extraction schemas
 - [ ] `Quality-Validation-Agent` is created with confidence scoring and routing logic
-- [ ] Classification Agent has `extraction_agent` connected (hand-off configured)
-- [ ] Extraction Agent has `validation_agent` connected (hand-off configured)
+- [ ] Classification Agent has **both** `extraction_agent` and `validation_agent` as connected agents
+- [ ] Pipeline instructions appended to Classification Agent for orchestration
 - [ ] Full pipeline test: Clean invoice → classified, extracted, validated → `AUTO_APPROVE` with confidence ≥ 0.85
 - [ ] Full pipeline test: Ambiguous/poor document → `MANUAL_REVIEW` with clear review_reasons
 - [ ] All three agents return valid JSON in the specified formats
