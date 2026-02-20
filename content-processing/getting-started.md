@@ -1,6 +1,6 @@
 ## Getting Started with Challenge
 
-Welcome to Hack in a Day: Intelligent Content Processing! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
+Welcome to Hack in a Day: Intelligent Content Processing! We have prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
 
 ### Accessing Your Challenge Environment
 
@@ -36,13 +36,13 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 1. On the **Sign into Microsoft Azure** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
 
-   - Email/Username: <inject key="AzureAdUserEmail"></inject>
+   - Email/Username: <inject key="AzureAdUserEmail" />
 
      ![](./media/gs-lab3-g2.png)
 
 1. Now, enter the following password and click on **Sign in**.
 
-   - Password: <inject key="AzureAdUserPassword"></inject>
+   - Password: <inject key="AzureAdUserPassword" />
 
      ![](./media/gs-lab3-g3.png)
 
@@ -52,14 +52,15 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/gs-4.png)
 
-1. Welcome to **Azure Portal**! You're now ready to start building your AI-powered Intelligent Content Processing pipeline using Azure AI Document Intelligence, AI Foundry Agents, Cosmos DB, and Blob Storage.
+1. Welcome to **Azure Portal**! You are now ready to start building your AI-powered Intelligent Content Processing pipeline using Azure AI Document Intelligence, Microsoft Foundry Agents, Cosmos DB, and Blob Storage.
 
 1. The lab environment includes:
+
    - Azure subscription with Owner permissions
    - Pre-configured resource group for deployments
    - Access to Azure AI Document Intelligence and Microsoft Foundry
    - Sample documents for testing (invoices, receipts, medical forms, etc.)
-   - Pre-built Streamlit application code (download link provided in Challenge 4)
+   - Pre-built Streamlit application code (download link provided in Challenge 04)
    - Python 3.11 and VS Code pre-installed
    - Azure CLI for authentication
 
