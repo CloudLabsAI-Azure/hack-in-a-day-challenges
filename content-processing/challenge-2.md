@@ -15,17 +15,15 @@ Getting classification right is critical because it determines which extraction 
 
 ## Steps to Complete
 
-### Task 1: Navigate to Microsoft Foundry Agents
+### Task 1: Navigate and Configure Microsoft Foundry Agents
 
-1. Go to [Microsoft Foundry](https://ai.azure.com) and open your project **proj-default** (under the Foundry resource **openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>**).
+1. Go to **Microsoft Foundry**.
 
 1. In the left navigation menu, click **Agents**.
 
-1. Click **+ New Agent** to create your first agent.
+1. Choose the existing **Default Agent**
 
-### Task 2: Configure the Classification Agent
-
-1. Set the **Agent name** to:
+1. Rename the **Agent** to:
 
    ```
    Document-Classification-Agent

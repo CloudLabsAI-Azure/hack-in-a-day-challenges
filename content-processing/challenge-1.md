@@ -103,7 +103,7 @@ You will also upload sample documents and test Document Intelligence's OCR capab
    - **Words and Lines** - Individual words and lines detected with confidence scores
    - **Pages** - Page-level metadata, including dimensions and language
 
-   > **Note:** The OCR/Read model focuses on text extraction, which is exactly what our AI agents need. The agents downstream will handle classification, structured data extraction, and validation. We don't need Layout's table/structure detection because the agents are smart enough to understand the text format.
+      > **Note:** The OCR/Read model focuses on text extraction, which is exactly what our AI agents need. The agents downstream will handle classification, structured data extraction, and validation. We don't need Layout's table/structure detection because the agents are smart enough to understand the text format.
 
 1. Try analysing **Images** as well. Notice how Document Intelligence handles different document formats (PDF vs image) and layouts.
 
@@ -123,7 +123,7 @@ You will also upload sample documents and test Document Intelligence's OCR capab
    - **Region**: **<inject key="Region" />**
    - **Default project name**: Keep it as **proj-default**
 
-   > **Important:** Keep the default project name as **proj-default** - this is used in the application's endpoint URL.
+      > **Important:** Keep the default project name as **proj-default** - this is used in the application's endpoint URL.
 
 1. Click **Review + Create**, then **Create**. Wait for the deployment to complete (this may take 2-3 minutes).
 
@@ -144,13 +144,6 @@ You will also upload sample documents and test Document Intelligence's OCR capab
    - **Tokens per Minute Rate Limit**: **30K** (or maximum available)
 
 1. Click **Deploy** and wait for the model to be ready.
-
-<validation step="67fcae6d-e490-4215-8b86-e1cdc1722cc2" />
-
-> **Congratulations** on completing the Task! Now, it's time to validate it. Here are the steps:
-> - Hit the Validate button for the corresponding Task. If you receive a success message, you can proceed to the next Task.
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
 ### Task 6: Create Azure Cosmos DB Account
 
