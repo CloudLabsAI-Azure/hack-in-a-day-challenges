@@ -122,28 +122,33 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 > - The Document Intelligence resource exists in your resource group
 > - You can successfully analyze a document in the Studio
 
-### Part 5: Create Microsoft Foundry Project and Deploy GPT-4.1
+### Part 5: Create Microsoft Foundry Resource and Deploy GPT-4.1
 
-1. Navigate to [Azure AI Foundry](https://ai.azure.com).
+1. In the Azure portal, search for **Microsoft Foundry** in the top search bar.
 
-1. Sign in with your lab credentials: **<inject key="AzureAdUserEmail" />**
+1. In the left menu under **Use with Foundry**, click **Foundry**.
 
-1. Click **+ Create project**.
+1. Click **+ Create**.
 
-1. Configure the project:
+1. On the **Create a Foundry resource** page, fill in the following:
 
    | Setting | Value |
    |---------|-------|
-   | **Project name** | content-processor-<inject key="DeploymentID" enableCopy="false"/> |
-   | **Hub** | Create a new hub |
-   | **Hub name** | content-hub-<inject key="DeploymentID" enableCopy="false"/> |
    | **Subscription** | Your Azure subscription |
    | **Resource group** | challenge-rg-<inject key="DeploymentID" enableCopy="false"/> |
+   | **Name** | content-hub-<inject key="DeploymentID" enableCopy="false"/> |
    | **Region** | <inject key="Region" /> |
+   | **Default project name** | Leave as `proj-default` |
 
-1. Click **Create** and wait for the project to be provisioned.
+   > **Important:** Keep the default project name as **proj-default** — this is used in the application's endpoint URL.
 
-1. Once the project is created, navigate to **Models + endpoints** in the left menu.
+1. Click **Review + create**, then **Create**. Wait for the deployment to complete (this may take 2–3 minutes).
+
+1. Once deployed, navigate to [Azure AI Foundry portal](https://ai.azure.com) and sign in with your lab credentials: **<inject key="AzureAdUserEmail" />**
+
+1. You should see your project listed. Click on it to open the project.
+
+1. In the left menu, navigate to **Models + endpoints**.
 
 1. Click **+ Deploy model** → **Deploy base model**.
 
@@ -161,10 +166,11 @@ You'll also upload sample documents and test Document Intelligence's OCR capabil
 
 <validation step="7c3d5e6f-0a1b-4c8d-9e2f-4a5b6c7d8e9f" />
 
-> **Congratulations!** Your AI Foundry project and GPT-4.1 model are ready.
+> **Congratulations!** Your Foundry resource, project, and GPT-4.1 model are ready.
 >
 > If validation fails, verify:
-> - The project name is `content-processor-<inject key="DeploymentID" enableCopy="false"/>`
+> - The Foundry resource `content-hub-<inject key="DeploymentID" enableCopy="false"/>` exists in your resource group
+> - The default project `proj-default` is created
 > - The `doc-processor` model deployment is in **Succeeded** state
 
 ### Part 6: Create Azure Cosmos DB Account

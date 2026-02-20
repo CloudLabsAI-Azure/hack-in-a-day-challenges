@@ -79,10 +79,8 @@ In this challenge, you'll configure and run the pre-built application, then test
 
    **Azure AI Foundry Agent Configuration:**
 
-   - **AGENT_API_ENDPOINT** — Go to [Azure AI Foundry](https://ai.azure.com) → Your project → **Settings** → **Overview**. Copy the **Project endpoint**.
+   - **AGENT_API_ENDPOINT** — Go to [Azure AI Foundry](https://ai.azure.com) → Your project (**proj-default**) → **Settings** → **Overview**. Copy the **Project endpoint**.
      - Format: `https://content-hub-<inject key="DeploymentID" enableCopy="false"/>.services.ai.azure.com/api/projects/proj-default`
-
-     > **Important:** The project name in the URL should be `proj-default`, NOT your actual project name.
 
    - **AGENT_ID** — Go to **Agents** → Open **Document-Classification-Agent** → Copy the **Agent ID** from the Setup panel (starts with `asst_`).
 
