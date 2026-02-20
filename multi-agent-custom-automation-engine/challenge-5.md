@@ -18,30 +18,27 @@ The pre-built application wraps your Semantic Kernel agents and orchestrator in 
 
 ## Steps to Complete
 
-### Task 1: Download and Extract Code Files
+### Task 1: Download the Application Code
 
-The application code is provided in a pre-built package.
+The application code is provided in the lab repository.
 
-1. **Download the code package**:
+1. On your lab VM, open a terminal (**PowerShell** or **Command Prompt**).
 
-   Visit this link in your browser:
+2. Create a working directory and download the application code:
+
+   ```powershell
+   mkdir C:\LabFiles
+   cd C:\LabFiles
    ```
-   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/multi-agent-custom-automation-engine.zip
+
+3. Download the codefiles from the repository:
+
+   ```powershell
+   git clone https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges.git --depth 1
+   cd hack-in-a-day-challenges\multi-agent-custom-automation-engine\codefiles
    ```
 
-2. **Extract the ZIP file**:
-
-   - Right-click the downloaded ZIP file
-   - Select **Extract All...**
-   - Choose a location like `C:\LabFiles\` or your Desktop
-   - Click **Extract**
-
-3. **Navigate to the codefiles folder**:
-
-   Open File Explorer and go to:
-   ```
-   [extraction-path]\hack-in-a-day-challenges-multi-agent-custom-automation-engine\multi-agent-custom-automation-engine\codefiles
-   ```
+   > **Note:** If git is not available, you can download the ZIP from `https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/main.zip` and extract it to `C:\LabFiles`.
 
 ### Task 2: Authenticate with Azure CLI
 
@@ -59,7 +56,7 @@ The application uses Azure CLI authentication to connect to Azure services.
 1. Accept the terms and license agreement and select **Install**. Once done, select **Finish**.
 
 1. **Login to Azure**:
-   ```bash
+   ```powershell
    az login
    ```
 
@@ -157,7 +154,7 @@ Before running, take a moment to explore the application code:
 2. Navigate to the `codefiles` folder:
 
    ```powershell
-   cd C:\LabFiles\hack-in-a-day-challenges-multi-agent-custom-automation-engine\multi-agent-custom-automation-engine\codefiles
+   cd C:\LabFiles\hack-in-a-day-challenges\multi-agent-custom-automation-engine\codefiles
    ```
 
 3. Create and activate a virtual environment:

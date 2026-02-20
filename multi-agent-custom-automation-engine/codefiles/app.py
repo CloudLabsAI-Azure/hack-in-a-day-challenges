@@ -11,6 +11,9 @@ import asyncio
 import time
 from datetime import datetime
 from dotenv import load_dotenv
+import nest_asyncio
+
+nest_asyncio.apply()
 
 from orchestrator import MultiAgentOrchestrator
 from cosmos_helper import CosmosHelper
@@ -380,7 +383,7 @@ with tab1:
                         try:
                             step_key = agent_name.split()[0].lower()
                             result = asyncio.run(
-                                orchestrator.run_single_agent(step_key, input_text if i == 0 else json.dumps(results.get(prev_key, {})), workflow_state)
+                                orchestrator.run_single_agent(step_key, input_text if i == 0 else results.get(prev_key, ""), workflow_state)
                             )
                             results[step_key] = result
                             workflow_state["agentData"][step_key] = str(result)

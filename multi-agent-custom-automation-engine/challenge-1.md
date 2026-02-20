@@ -289,14 +289,19 @@ Coordinate execution across all agents, manage task order, handle retries, and m
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
-## Completion Criteria
+## Success Criteria
 
-You have successfully completed Challenge 01:
+- Microsoft Foundry model deployment (`agent-gpt-4o-mini`) is ready and responding
+- Cosmos DB database (`agent-memory-db`) and container (`agent-state`) exist
+- Azure Container Registry is created
+- Semantic Kernel project is initialized and returns a greeting from the model
+- Agent roles are clearly documented in `README.md`
 
-* Microsoft Foundry model deployment is ready
-* Cosmos DB database and container exist
-* ACR is created
-* Semantic Kernel project is initialized
-* Agent roles are clearly defined
+## Additional Resources
+
+- [Microsoft Foundry Documentation](https://learn.microsoft.com/azure/ai-services/openai/)
+- [Azure Cosmos DB for NoSQL](https://learn.microsoft.com/azure/cosmos-db/nosql/)
+- [Azure Container Registry](https://learn.microsoft.com/azure/container-registry/)
+- [Semantic Kernel Getting Started](https://learn.microsoft.com/semantic-kernel/get-started/)
 
 Now, click **Next** to continue to **Challenge 02**.
