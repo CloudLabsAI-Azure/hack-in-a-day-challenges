@@ -1,66 +1,74 @@
-# Getting Started with the Lab
+## Getting Started with Challenge
 
-## Accessing Your Lab Environment
+Welcome to Hack in a Day: Modernize Your Code! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
 
-1. Once the environment is provisioned, a virtual machine (JumpVM/LabVM) and lab guide will be loaded in your browser. Use this virtual machine throughout the workshop to perform the lab.
+### Accessing Your Challenge Environment
 
-1. To get the lab environment details, select the **Environment** tab. The credentials will also be emailed to your registered email address. You can open the Lab Guide on a separate, full window by selecting the **Split Window** icon at the bottom right corner.
+Once you're ready to dive in, your virtual machine and challenge guide will be right at your fingertips within your web browser.
 
-   ![](media/getting-started-1.png)
+![](./media/gs1.png)
 
-## Login to Azure Portal
+### Exploring Your Challenge Resources
 
-1. In the JumpVM, click on the **Azure Portal** shortcut of the Microsoft Edge browser, which is created on the desktop.
+To get a better understanding of your challenge resources and credentials, navigate to the Environment tab.
 
-   ![](media/getting-started-2.png)
+![](./media/gs-leave-2.png)
 
-1. On the **Sign in to Microsoft Azure** tab, you will see the login screen. Enter the following email/username, and click **Next**.
+### Utilizing the Split Window Feature
 
-   - **Email/Username:** <inject key="AzureAdUserEmail" />
+For convenience, you can open the challenge guide in a separate window by selecting the Split Window button from the Top right corner.
 
-   ![](media/getting-started-3.png)
+![](./media/gs-leave-3.png)
 
-1. Now enter the following password and click **Sign in**.
+### Managing Your Virtual Machine
 
-   - **Password:** <inject key="AzureAdUserPassword" />
+Feel free to start, stop, or restart your virtual machine as needed from the Resources tab. Your experience is in your hands!
 
-   ![](media/getting-started-4.png)
+![](./media/gs-leave-4.png)
 
-1. If you see the pop-up **Stay Signed in?**, click **No**.
+> **Note:** If the VM is not in use, please **deallocate** it to avoid unnecessary resource consumption.
 
-1. If a **Welcome to Microsoft Azure** pop-up window appears, click **Cancel** to skip the tour.
+## Let's Get Started with SQL Modernization
 
-1. Now you will see the Azure Portal Dashboard. Click on **Resource groups** from the Navigate panel to see the resource groups.
+1. In the JumpVM, click on the **Microsoft Edge** browser shortcut which is created on the desktop.
 
-   ![](media/getting-started-5.png)
+   ![](./media/gs-up1.png)
 
-1. Confirm that you have a resource group named **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**. This resource group contains the pre-provisioned resources for this hackathon.
+1. Navigate to the **Azure Portal**:
 
-   ![](media/getting-started-6.png)
+   ```
+   https://portal.azure.com/
+   ```
 
-## Pre-provisioned Resources
+1. On the **Sign into Microsoft Azure** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
 
-Your lab environment includes the following resources:
+   - Email/Username: <inject key="AzureAdUserEmail"></inject>
 
-| Resource | Name | Purpose |
-|----------|------|---------|
-| **Resource Group** | challenge-rg-<inject key="DeploymentID" enableCopy="false"/> | Contains all hackathon resources |
-| **Azure Subscription** | Azure subscription with Owner access | Full permissions for resource creation |
-| **Virtual Machine** | JumpVM with Python 3.11, VS Code, Azure CLI pre-installed | Your development workstation |
+     ![](./media/gs-lab3-g2.png)
 
-## Important Notes
+1. Now, enter the following password and click on **Sign in**.
 
-- Use the credentials provided in the **Environment** tab for all Azure operations.
-- Your Azure region is: **<inject key="Region" />**
-- Your Deployment ID is: **<inject key="DeploymentID" enableCopy="false"/>** — use this to keep resource names unique.
-- If you encounter any issues, reach out to the support team via the **Help** tab or email cloudlabs-support@spektrasystems.com.
+   - Password: <inject key="AzureAdUserPassword"></inject>
 
-## Tips for Success
+     ![](./media/gs-lab3-g3.png)
 
-- **Read each challenge fully** before starting — understanding the big picture helps.
-- **Test incrementally** — verify each step before moving to the next.
-- **Use the playground** — Azure AI Foundry's playground is your best friend for testing agents.
-- **Check Success Criteria** — each challenge ends with a checklist. Make sure you can tick every box.
-- **Don't skip the validation steps** — they confirm your progress and unlock the next challenge.
+     >**Note:** If you see the Action Required dialog box, then select the Ask Later option.
+     
+1. If you see the pop-up **Stay Signed in?**, click No.
 
-Click **Next** to begin **Challenge 1: Set Up Azure Infrastructure**.
+   ![](./media/gs-4.png)
+
+1. Welcome to **Azure Portal**! You're now ready to start building your AI-powered SQL modernization pipeline using Azure OpenAI, AI Foundry, Cosmos DB, and Container Apps.
+
+1. The lab environment includes:
+   - Azure subscription with Owner permissions
+   - Pre-configured resource group for deployments
+   - Access to Azure OpenAI Service and Microsoft Foundry
+   - Sample Oracle PL/SQL files for testing
+   - Pre-built Streamlit application code (download link provided in Challenge 5)
+   - Python 3.11 and VS Code pre-installed
+   - Azure CLI for authentication
+
+Now, click on the **Next** from the lower right corner to move on to the next page.
+
+## Happy Hacking!
