@@ -141,6 +141,27 @@ class CosmosHelper:
         review = self.get_review_queue(status="ALL")
         return processed + review
 
+    def get_processed_blob_names(self) -> set:
+        """Get blob names that have already been processed (from blob_url and filename fields).
+
+        Used by the Auto-Watch feature to avoid reprocessing documents.
+        """
+        try:
+            all_docs = self.get_all_documents()
+            blob_names = set()
+            for doc in all_docs:
+                # Extract blob name from blob_url
+                blob_url = doc.get("blob_url", "")
+                if blob_url:
+                    blob_names.add(blob_url.split("/")[-1])
+                # Also track by filename
+                filename = doc.get("filename", "")
+                if filename:
+                    blob_names.add(filename)
+            return blob_names
+        except Exception:
+            return set()
+
     # ── Review Actions ──────────────────────────────────────────────
 
     def approve_document(self, document_id: str) -> bool:
