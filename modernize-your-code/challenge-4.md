@@ -9,7 +9,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 - Create an Optimization Agent with performance analysis instructions
 - Configure the agent to provide actionable Azure SQL recommendations
 - Test optimization capabilities with sample queries
-- **Connect the Optimization Agent to the Validation Agent**
+- Connect the Optimization Agent to the Validation Agent
 - Test the complete three-agent pipeline
 - Verify all results flow through automatically
 
@@ -17,9 +17,9 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 
 ### Task 1: Create Optimization Agent
 
-1. In **Microsoft Foundry Studio**, navigate to **Agents**.
+1. In **Microsoft Foundry**, navigate to **Agents**.
 
-2. Click **+ New agent**.
+2. Click on **+ New agent**.
 
 3. Configure:
    - **Agent name**: `SQL-Optimization-Agent`
@@ -34,7 +34,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 
 ### Task 2: Write Optimization Instructions
 
-1. In the **Instructions** box, paste:
+1. In the **Instructions** box, paste the below mentioned content:
 
       ```
       You are an Azure SQL Database performance optimization expert. Your role is to analyze T-SQL code and provide specific, actionable optimization recommendations.
@@ -122,7 +122,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 
 ### Task 3: Add Agent Description
 
-1. Expand **Agent Description**:
+1. Expand on **Agent Description**:
 
       ```
       Analyzes Azure SQL T-SQL code and provides performance optimization recommendations, including indexes, query rewrites, and Azure-specific features. Returns structured JSON with prioritized suggestions.
@@ -130,7 +130,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 
 ### Task 4: Test Optimization Agent Independently
 
-1. Click **Try in playground**.
+1. Click on **Try in playground**.
 
 2. Test with a simple query:
 
@@ -181,20 +181,19 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 
 3. In the **Setup** panel on the right, scroll to **Connected agents** section.
 
-4. You should already see **validation_agent** listed. Click **+ Add** to add a second connected agent.
+4. You should already see **validation_agent** listed. Click on **+ Add** to add a second connected agent.
 
 5. In the **Adding a connected agent** dialog, configure:
 
       - **Agent**: Select **SQL-Optimization-Agent** from the dropdown
       - **Unique name**: Enter `optimization_agent`
-      - **Tools**: (Shows agent tools if any - leave as is)
       - **Detail the steps to activate the agent**: Enter:
 
          ```
          After the translation is complete and validation has passed, automatically transfer the translated SQL to the SQL-Optimization-Agent for performance analysis and optimization recommendations.
          ```
 
-6. Click **Add**.
+6. Click on **Add**.
 
 7. You should now see both connected agents listed:
 
@@ -203,7 +202,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 
 ### Task 6: Update Translation Agent Instructions
 
-1. Still in **SQL-Translation-Agent**, scroll to the **Instructions** text box.
+1. From the **SQL-Translation-Agent**, scroll to the **Instructions** text box.
 
 2. Find the `PIPELINE INSTRUCTIONS` section you added in Challenge 3 and **replace it** with this updated version:
 
@@ -238,7 +237,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
 
 1. Go back to **SQL-Translation-Agent** (the first agent).
 
-2. Click **Try in playground**.
+2. Click on **Try in playground**.
 
 3. Send this Oracle query:
 
@@ -320,7 +319,7 @@ Your SQL translation and validation pipeline is working! Now you'll add the fina
       - **SQL-Validation-Agent**: `asst_yyyyy`
       - **SQL-Optimization-Agent**: `asst_zzzzz`
 
-3. Save these you will need them in Challenge 6 for API calls.
+3. Save these Agent IDs, you will need them in Challenge 6 for API calls.
 
 ## Success Criteria
 

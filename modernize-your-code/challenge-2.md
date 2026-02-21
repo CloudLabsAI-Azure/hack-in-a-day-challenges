@@ -17,7 +17,7 @@ In this challenge, you will create your first AI agent directly in the Microsoft
 
 ### Task 1: Navigate to the Agents Section
 
-1. Open **Microsoft Foundry Studio** (https://ai.azure.com).
+1. Open **Microsoft Foundry** (https://ai.azure.com).
 
 1. Select your project: **sql-modernize-<inject key="DeploymentID" enableCopy="false"/>** (from Challenge 1).
 
@@ -113,12 +113,11 @@ In this challenge, you will create your first AI agent directly in the Microsoft
       - Ensure proper T-SQL syntax
       - Maintain readability with proper indentation
       ```
-
 1. The agent will auto-save the instructions.
 
-> **Important**: You will add hand-off instructions later in Challenge 3 and Challenge 4 when you connect the other agents.
+   > **Important**: You will add hand-off instructions later in Challenge 3 and Challenge 4 when you connect the other agents.
 
-### Task 4: Configure Agent Description (Optional)
+### Task 4: Configure Agent Description
 
 1. Expand the **Agent Description** section.
 
@@ -143,7 +142,7 @@ In this challenge, you will create your first AI agent directly in the Microsoft
 
 1. Send the message and wait for the response.
 
-1. Verify that the agent returns Azure SQL like:
+1. Verify that the agent returns Azure SQL query in the below format:
 
       ```sql
       SELECT TOP 10 emp_id, emp_name, hire_date
@@ -185,17 +184,7 @@ In this challenge, you will create your first AI agent directly in the Microsoft
 
 2. Verify the agent converts it to T-SQL cursor syntax or suggests a set-based approach.
 
-### Task 8: Refine Instructions (If Needed)
-
-1. If the translations are not accurate, go back to the agent configuration.
-
-2. Update the **Instructions** to be more specific about problem areas.
-
-3. Test again in the playground.
-
-4. Repeat until the translations are consistently accurate.
-
-### Task 9: Save and Note the Agent ID
+### Task 8: Save and Note the Agent ID
 
 1. The agent auto-saves as you make changes.
 

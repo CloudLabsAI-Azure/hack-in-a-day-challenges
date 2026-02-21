@@ -2,14 +2,11 @@
 
 ## Introduction
 
-Your three-agent pipeline is operational! All the code has been built for you. In this challenge, you will configure and run a Streamlit web application locally that provides a beautiful interface for your SQL modernization system.
+Your three-agent pipeline is operational! All the code has been built for you. In this challenge, you will configure and run a Streamlit web application locally that provides a interface for your SQL modernization system.
 
 ## Prerequisites
 
 - Completed Challenge 4 (all three agents created and connected)
-- Visual Studio Code installed
-- Python 3.11+ installed
-- Azure CLI installed and authenticated (`az login`)
 
 ## Challenge Objectives
 
@@ -29,60 +26,62 @@ The application code is provided in a pre-built package.
 
 1. **Download the code package**:
    
-   Visit this link in your browser:
+   Access the link mentioned below using browser:
    ```
    https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/modernize-your-code.zip
    ```
 
-2. **Extract the ZIP file**:
+1. **Extract the ZIP file**:
    
-   - Right-click the downloaded `modernize-your-code.zip` file
-   - Select **Extract All...**
-   - Choose a location like `C:\LabFiles\` or your Desktop
-   - Click **Extract**
+   - Right-click on the downloaded `modernize-your-code.zip` file
+   - Select the **Extract All...** option
+   - Choose a location `C:\Code`.
+   - Click on **Extract**
 
-3. **Navigate to the codefiles folder**:
-   
-   Open File Explorer and go to:
-   ```
-   [extraction-path]\hack-in-a-day-challenges-modernize-your-code\modernize-your-code\codefiles
-   ```
-
-### Task 2: Install and Authenticate with Azure CLI
+### Task 2: Authenticate with Azure CLI
 
 The application uses Azure CLI authentication to connect to your agents.
 
-1. Open the **Windows Powershell** as an administrator.
+1. From the **Desktop**, open **Visual Studio Code**.
 
-1. **Install Azure CLI** (if not already installed):
+1. In **Visual Studio Code**, select **File** > **Open Folder**.
+
+1. Browse to **C:\Code**, open the **modernize-your-code** folder, select the **codefiles** folder, and then choose **Select Folder**.
    
-   For Windows:
-   ```powershell
-   Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi
-   Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi'
-   ```
+1. In the **Trust the authors of the files in this folder?** pop-up, select **Yes, I trust the authors**.
 
-1. Accept the terms and license agreement and select **Install**. Once done, select **Finish**.
+1. Select **Terminal** from the top menu, and then choose **New Terminal**.
 
-1. **Login to Azure**:
+1. In the opened terminal, log in to Azure by running the following command:
+
    ```bash
    az login
    ```
-   
-1. This will open a pop-up for authentication. Sign in with your Azure credentials.
 
-1. Do not change the subscription or tenant; press Enter.
+   **Note:** This will open a browser pop-up for authentication; minimize **Visual Studio Code** to view the sign-in window.
+
+1. On the **Sign into Microsoft Azure** page, enter the below provided email and password, to login.
+
+   - Email/Username: <inject key="AzureAdUserEmail"></inject>
+
+   - Password: <inject key="AzureAdUserPassword"></inject>
+
+1. In the **Stay signed in to all your apps?** window, select **No, sign in to this app only**.
+
+1. Return to **Visual Studio Code**, enter **1** to select the subscription, and then press **Enter**.
 
 ### Task 3: Get Your Agent Credentials
 
-You need three values to connect to your agents:
+You need these below values to connect to your agents:
 
-1. Go to **Microsoft Foundry Studio** → the project that is created.
+1. Open **Notepad**, and keep it ready to paste the required values that you will copy in the following steps.
 
-1. In the Overview section, find the **Microsoft Foundry project endpoint**:
+1. Go to **Microsoft Foundry** and open the project that you created in earlier challenge.
+
+1. In the Overview section, find the **Microsoft Foundry project endpoint** which would look like the below mentioned example:
 
    - Example format: `https://sql-modernize-2034545.services.ai.azure.com/api/projects/proj-default`
-   - **CRITICAL:** The project name at the end is always `proj-default` (not sql-modernize-XXXX)
+   - **Important:** The project name at the end is always `proj-default` (not sql-modernize-XXXX)
    - Make sure it ends with `/api/projects/proj-default`
 
 1. Navigate to **Agents** in the left menu.
@@ -97,34 +96,15 @@ You need three values to connect to your agents:
 
 ### Task 4: Configure the Application
 
-1. Navigate to the `codefiles` folder you extracted in Task 1.
+1. Navigate back to **Visual Studio Code**
 
-2. Locate the `.env.example` file.
+1. Locate the `.env.example` file.
 
-3. **Copy** `.env.example` to create a new file named `.env`
+1. Rename the **.env.example** file to **.env**.
 
-4. Open `.env` and replace the placeholder values:
+1. Open the **.env** file and replace the placeholder with the values you copied earlier.
 
-    ```env
-    # Microsoft Foundry Agent API Configuration
-    # IMPORTANT: Use proj-default as the project name (not sql-modernize-XXXX)
-    AGENT_API_ENDPOINT=https://sql-modernize-<DeploymentID>.services.ai.azure.com/api/projects/proj-default
-    AGENT_ID=asst_<your-agent-id>
-
-    # Cosmos DB Configuration
-    COSMOS_ENDPOINT=https://sql-modernization-cosmos-<DeploymentID>.documents.azure.com:443/
-    COSMOS_KEY=<your-cosmos-primary-key>
-    DATABASE_NAME=SQLModernizationDB
-    ```
-
-    - **Important Notes:**
-        - Replace `<DeploymentID>` with your actual deployment ID (for example, 2034545)
-        - **CRITICAL:** Endpoint must end with `/api/projects/proj-default` (the project name is always `proj-default`)
-        - Replace `<your-agent-id>` with your Translation Agent ID from step 6 (starts with `asst_`)
-        - Replace `<your-cosmos-primary-key>` with your Cosmos DB Primary Key
-        - The app uses Azure CLI authentication (`az login`), so no API key is required for agents.
-
-5. Save the file.
+1. Save the file.
 
 ### Task 5: Review the Code
 
@@ -185,27 +165,25 @@ This installs:
 
 ### Task 8: Test the Multi-Agent Pipeline
 
-1. You'll see a premium blue gradient header: **"SQL Modernization Assistant"**
+1. You'll see a blue gradient header: **"SQL Modernization Assistant"**
 
-2. In the **sidebar**, verify all agents show green checkmarks:
+1. In the **sidebar**, verify all agents show green checkmarks:
    - Translation Agent
    - Validation Agent
    - Optimization Agent
 
-3. **Option A: Use a Sample Query**
-   - On the right side, select a sample from the dropdown (e.g., "Hierarchical Query (CONNECT BY)")
-   - Click **"Load Sample"**
+1. Paste your Oracle SQL in the text area.
 
-4. **Option B: Upload a SQL File**
-   - Click the file upload area
-   - Upload a .sql file with Oracle SQL code
+   ```sql
+   SELECT emp_id, emp_name, salary
+   FROM employees
+   WHERE ROWNUM <= 10
+   ORDER BY salary DESC;
+   ```
 
-5. **Option C: Paste SQL Directly**
-   - Paste your Oracle SQL in the text area
+1. Click the **"Modernize SQL"** button
 
-6. Click the **"Modernize SQL"** button
-
-7. Watch the progress indicators as your query flows through all three agents.
+1. Watch the progress indicators as your query flows through all three agents.
 
    - Creating conversation thread...
    - Sending Oracle SQL to Translation Agent...
@@ -213,9 +191,9 @@ This installs:
    - Agent Status: RUNNING...
    - Agent processing completed!
 
-8. After completion, you'll see a **professional gradient completion banner** and the app will automatically switch to the **"Results"** tab.
+1. After completion, you'll see a **professional gradient completion banner** and the app will automatically switch to the **"Results"** tab.
 
-9. View the **three-column output**.
+1. View the **three-column output**.
 
    **Column 1: Translation**
    - Azure SQL T-SQL translation
@@ -233,42 +211,50 @@ This installs:
    - Suggested indexes
    - Raw JSON data
 
-10. Click the **"History"** tab to see all past translations from Cosmos DB.
+1. Click the **"History"** tab to see all past translations from Cosmos DB.
 
 ### Task 9: Test Complex Scenarios
 
 Try these test cases to verify everything works:
 
-**Test 1: Simple ROWNUM Query**
-```sql
-SELECT emp_id, emp_name, salary
-FROM employees
-WHERE ROWNUM <= 10
-ORDER BY salary DESC;
-```
+**Test 1: Simple Query**
+
+   ```sql
+   SELECT dept_id,
+          COUNT(*) AS total_employees,
+          AVG(salary) AS avg_salary,
+          MAX(hire_date) AS last_hired
+   FROM employees
+   WHERE status = 'ACTIVE'
+   GROUP BY dept_id
+   HAVING COUNT(*) > 5
+   ORDER BY avg_salary DESC;
+   ```
 
 Expected Output: Should convert `ROWNUM <= 10` to `TOP 10`
 
 ---
 
 **Test 2: NVL and Date Functions**
-```sql
-SELECT emp_name, NVL(commission, 0) as comm
-FROM employees
-WHERE hire_date > SYSDATE - 30;
-```
+
+   ```sql
+   SELECT emp_name, NVL(commission, 0) as comm
+   FROM employees
+   WHERE hire_date > SYSDATE - 30;
+   ```
 
 Expected: Should convert `NVL` to `ISNULL`, `SYSDATE` to `GETDATE()`
 
 ---
 
 **Test 3: Hierarchical Query** (Most Complex)
-```sql
-SELECT emp_id, emp_name, manager_id, LEVEL as emp_level
-FROM employees
-START WITH manager_id IS NULL
-CONNECT BY PRIOR emp_id = manager_id;
-```
+
+   ```sql
+   SELECT emp_id, emp_name, manager_id, LEVEL as emp_level
+   FROM employees
+   START WITH manager_id IS NULL
+   CONNECT BY PRIOR emp_id = manager_id;
+   ```
 
 Expected Output:
 - Translation: Recursive CTE with `WITH` clause
@@ -278,15 +264,14 @@ Expected Output:
 ---
 
 **Test 4: Invalid SQL** (Test Validation Agent)
-```sql
-SELECT emp_id, emp_name
-FROM employees
-WHERE dept_id = 10
-GROUP BY -- Missing column list
-```
+   ```sql
+   SELECT emp_id, emp_name
+   FROM employees
+   WHERE dept_id = 10
+   GROUP BY -- Missing column list
+   ```
 
 <validation step="34d75f14-cc71-4256-b6a1-731aeff9dca9" />
-
 
 > **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
 > - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
