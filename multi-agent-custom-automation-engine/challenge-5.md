@@ -169,12 +169,8 @@ Before running, take a moment to explore the application code:
 
 1. Start the Streamlit app:
 
-   **Windows PowerShell:**
-
    ```powershell
-   $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-
-   streamlit run app.py
+   .venv\Scripts\python.exe -m streamlit run app.py
    ```
 
 1. Enter the email as **<inject key="AzureAdUserEmail"></inject>** and hit enter.
