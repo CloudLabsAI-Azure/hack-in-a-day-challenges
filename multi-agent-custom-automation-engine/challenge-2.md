@@ -4,7 +4,7 @@
 
 In this challenge, you will implement your **first set of AI agents** using **Semantic Kernel**.
 Each agent will have **one clear responsibility** and will be implemented as a **self-contained skill**.
-At this stage, agents will run **locally** (not containerized yet).
+At this stage, agents will run **locally**.
 
 ## Challenge Objectives
 
@@ -40,7 +40,7 @@ Inside your existing project, update the structure as follows:
 
 Extract structured data from raw text input.
 
-1. Create `extraction_agent.py` and paste the following code, and save the file:
+1. Copy the below mentioned code and paste it in `extraction_agent.py`, and save the file.
 
   ```python
   from semantic_kernel import Kernel
@@ -82,26 +82,26 @@ Validate extracted data for completeness and correctness.
 
   async def run_validation(kernel: Kernel, extracted_text: str):
       prompt = """
-You are a validation agent.
+  You are a validation agent.
 
-Validate the extracted data below.
-Check for missing or inconsistent fields.
-Return ONLY valid JSON.
+  Validate the extracted data below.
+  Check for missing or inconsistent fields.
+  Return ONLY valid JSON.
 
-Extracted Data:
-{{$data}}
-"""
+  Extracted Data:
+  {{$data}}
+  """
 
-      arguments = KernelArguments(
-          data=extracted_text
-      )
+        arguments = KernelArguments(
+            data=extracted_text
+        )
 
-      result = await kernel.invoke_prompt(
-          prompt=prompt,
-          arguments=arguments
-      )
+        result = await kernel.invoke_prompt(
+            prompt=prompt,
+            arguments=arguments
+        )
 
-      return result
+        return result
   ```
 
 ### Task 4: Create the Communication Agent

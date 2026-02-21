@@ -61,7 +61,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 1. Welcome to **Azure Portal**! You're now ready to start building your Multi-Agent Automation Engine using Microsoft Foundry, Semantic Kernel, Cosmos DB, and Azure Container Registry.
 
 1. The lab environment includes:
-   - Azure subscription with Owner permissions
+   - Azure subscription with custom permissions
    - Pre-configured resource group for deployments
    - Access to Microsoft Foundry
    - Pre-built Streamlit application code (download link provided in Challenge 5)

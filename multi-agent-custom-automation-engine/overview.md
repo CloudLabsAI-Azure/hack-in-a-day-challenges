@@ -1,6 +1,6 @@
 # Multi-Agent Custom Automation Engine
 
-**Duration:** 4-6 hours
+**Duration:** 6 hours
 
 ## Overview
 
