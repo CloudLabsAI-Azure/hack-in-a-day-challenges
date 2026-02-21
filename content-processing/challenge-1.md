@@ -46,7 +46,7 @@ You will also upload sample documents and test Document Intelligence's OCR capab
    https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/content-processing-files.zip
    ```
 
-1. Extract the ZIP file. You should see 5 sample documents:
+1. Extract the ZIP file. You should see 5 sample documents inside the **sample_data** folder:
 
    - **invoice_contoso.pdf** - Commercial invoice from Contoso Ltd with line items, amounts, and payment terms
    - **receipt_cafe.jpg** - Cafe receipt with items, tax, and total
@@ -54,15 +54,9 @@ You will also upload sample documents and test Document Intelligence's OCR capab
    - **insurance_claim.pdf** - Auto insurance claim with incident details and cost estimates
    - **drivers_license.jpg** - Sample driver's license with personal information
 
-1. Navigate to your **documents** container in the Storage Account.
-
-1. Click **Upload** and upload all 5 sample documents.
-
-1. Verify all 5 documents appear in the container.
-
 ### Task 3: Create Azure AI Document Intelligence Resource
 
-1. In the Azure portal, click **+ Create a resource** and search for **Document Intelligence**.
+1. In the Azure portal, search for **Document Intelligence** and **Select it**.
 
 1. Click **Create** and configure:
 
@@ -127,9 +121,9 @@ You will also upload sample documents and test Document Intelligence's OCR capab
 
 1. Click **Review + Create**, then **Create**. Wait for the deployment to complete (this may take 2-3 minutes).
 
-1. Once deployed, navigate to [Microsoft Foundry portal](https://ai.azure.com) and sign in with your lab credentials: <inject key="AzureAdUserEmail" />
+1. Once deployed, navigate to the **Microsoft Foundry** resource you just created.
 
-1. You should see your project listed. Click on it to open the project.
+1. On the **Overview** page of the Microsoft Foundry resource, select **Go to Foundry**.
 
 1. In the left menu, navigate to **Models + endpoints**.
 
@@ -141,7 +135,9 @@ You will also upload sample documents and test Document Intelligence's OCR capab
 
    - **Deployment name**: `doc-processor`
    - **Deployment type**: **Standard**
-   - **Tokens per Minute Rate Limit**: **30K** (or maximum available)
+   - **Tokens per Minute Rate Limit**: **40K**
+
+      > **Note:** Do not set the Tokens per Minute rate limit above **40K**, as exceeding this limit may cause deployment or quota issues.
 
 1. Click **Deploy** and wait for the model to be ready.
 
