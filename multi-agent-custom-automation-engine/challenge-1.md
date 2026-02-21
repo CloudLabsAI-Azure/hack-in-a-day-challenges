@@ -6,11 +6,11 @@ In this challenge, you will prepare the **core infrastructure** required to buil
 
 ## Challenge Objectives
 
-* Set up Microsoft Foundry for agent intelligence
-* Create shared state storage using Azure Cosmos DB
-* Create Azure Container Registry (ACR) for agent containers
-* Initialize a Semantic Kernel project
-* Define agent roles and responsibilities
+- Set up Microsoft Foundry for agent intelligence
+- Create shared state storage using Azure Cosmos DB
+- Create Azure Container Registry (ACR) for agent containers
+- Initialize a Semantic Kernel project
+- Define agent roles and responsibilities
 
 ## Steps to Complete
 
@@ -20,23 +20,23 @@ In this challenge, you will prepare the **core infrastructure** required to buil
 
 2. Under **Basics**, provide:
 
-   * **Subscription:** Use the available subscription
-   * **Resource Group:** **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   * **Region:** Supported Microsoft Foundry region
-   * **Name:** **agent-foundry-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Subscription:** Use the available subscription
+   - **Resource Group:** **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Region:** Supported Microsoft Foundry region
+   - **Name:** **agent-foundry-<inject key="DeploymentID" enableCopy="false"/>**
 
-3. Click **Review + Create** → **Create**.
+3. Click on **Review + Create** and then click **Create**.
 4. After deployment succeeds, open the **Microsoft Foundry** resource.
 
 ### Task 2: Deploy the Model
 
 1. In the Microsoft Foundry resource, click **Go to Microsoft Foundry portal**.
-2. Navigate to **Models + endpoints** → **+ Deploy model > Deploy base model**.
+2. Navigate to **Models + endpoints**, click on **+ Deploy model**, and then select **Deploy base model**.
 3. Provide:
 
-   * **Model:** `gpt-4o-mini`
-   * **Deployment name:** `agent-gpt-4o-mini`
-   * **Deployment type:** Standard
+   - **Model:** `gpt-4o-mini`
+   - **Deployment name:** `agent-gpt-4o-mini`
+   - **Deployment type:** Standard
 
 4. Click **Deploy** and wait for deployment.
 
@@ -46,30 +46,30 @@ In this challenge, you will prepare the **core infrastructure** required to buil
 2. Select **Azure Cosmos DB for NoSQL**.
 3. Under **Basics**, provide:
 
-   * **Workload Type:** Development/ Testing
-   * **Subscription:** Use the available subscription
-   * **Resource Group:** **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   * **Account Name:** **agent-cosmos-<inject key="DeploymentID" enableCopy="false"/>**
-   * **Location:** Same region as other resources
-   * **Capacity mode:** Provisioned throughput
-4. Click **Review + Create** → **Create**.
+   - **Workload Type:** Development/Testing
+   - **Subscription:** Use the available subscription
+   - **Resource Group:** **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Account Name:** **agent-cosmos-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Location:** Same region as other resources
+   - **Capacity mode:** Provisioned throughput
+4. Click on **Review + Create** and then click **Create**.
 
 ### Task 4: Create Database and Container
 
 1. Open the Cosmos DB account.
 2. Go to **Data Explorer**.
-3. Click **+ New Container > + New Database**:
+3. Click on **+ New Container** and then select **+ New Database**:
 
-   * **Database ID:** `agent-memory-db`
-   * Select **OK**
+   - **Database ID:** `agent-memory-db`
+   - Select on **OK**
 
-4. Right-Click on the *agent-memory-db* and select **New Container**:
+4. Right-click on the *agent-memory-db* and select **New Container**:
 
-   * Select **Use existing**
-   * **Container ID:** `agent-state`
-   * **Partition key:** `/workflowId`
+   - Select **Use existing**
+   - **Container ID:** `agent-state`
+   - **Partition key:** `/workflowId`
 
-5. Click **OK**.
+5. Click on **OK**.
 
 ### Task 5: Create Azure Container Registry (ACR)
 
@@ -77,13 +77,13 @@ In this challenge, you will prepare the **core infrastructure** required to buil
 
 2. Under **Basics**, provide:
 
-   * **Subscription:** Use the available subscription
-   * **Resource Group:** **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   * **Registry name:** **agentacr<inject key="DeploymentID" enableCopy="false"/>**
-   * **Location:** Same region
-   * **Pricing plan:** Basic
+   - **Subscription:** Use the available subscription
+   - **Resource Group:** **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Registry name:** **agentacr<inject key="DeploymentID" enableCopy="false"/>**
+   - **Location:** Same region
+   - **Pricing plan:** Basic
 
-3. Click **Review + Create** → **Create**.
+3. Click on **Review + Create** and then click **Create**.
 
 ### Task 6: Initialize Local Project (Agent Codebase)
 
@@ -158,7 +158,7 @@ You should see `(.venv)` in the terminal prompt.
    AZURE_DEPLOYMENT_NAME=agent-gpt-4o-mini
    ```
 
-   > **Note:** You can get the values from the **Microsoft Foundry** → **Keys and Endpoint** resource that you created.
+   > **Note:** You can get the values from the **Microsoft Foundry** resource by navigating to **Keys and Endpoint**.
 
 #### 6.5: Verify Semantic Kernel Setup
 
@@ -210,9 +210,9 @@ You should see `(.venv)` in the terminal prompt.
 
 Multi-agent systems work best when:
 
-* Each agent has a **single responsibility**
-* Agents do not overlap tasks
-* Coordination is handled centrally
+- Each agent has a **single responsibility**
+- Agents do not overlap tasks
+- Coordination is handled centrally
 
 #### 7.2: Define Agent Responsibilities
 

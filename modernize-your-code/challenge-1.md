@@ -172,7 +172,6 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
       - **URI**
       - **PRIMARY KEY**
-
       - Save these values for later use.
 
 <validation step="47428908-2f8d-456b-84a5-df4c148f8c67" />

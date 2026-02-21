@@ -5,20 +5,20 @@
 In this challenge, you will implement a **Central Orchestrator** that coordinates multiple AI agents.
 Instead of running agents manually, the orchestrator will:
 
-* Decide which agent runs next
-* Pass data between agents using Cosmos DB
-* Validate outputs
-* Update workflow state
+- Decide which agent runs next
+- Pass data between agents using Cosmos DB
+- Validate outputs
+- Update workflow state
 
 This is the **brain of the multi-agent system**.
 
 ## Challenge Objectives
 
-* Create a central orchestration layer
-* Execute agents in the correct order
-* Read and update workflow state from Cosmos DB
-* Route data between agents
-* Maintain execution trace
+- Create a central orchestration layer
+- Execute agents in the correct order
+- Read and update workflow state from Cosmos DB
+- Route data between agents
+- Maintain execution trace
 
 ## What the Orchestrator Will Do (Simple View)
 
@@ -177,9 +177,9 @@ The orchestrator expects the following function signatures:
 
 Open each agent file in `app/agents/` and confirm:
 
-* Each function uses `KernelArguments` for prompt variables
-* Each prompt uses `{{$data}}` or `{{$inputText}}` template syntax
-* Each function returns the result from `kernel.invoke_prompt()`
+- Each function uses `KernelArguments` for prompt variables
+- Each prompt uses `{{$data}}` or `{{$inputText}}` template syntax
+- Each function returns the result from `kernel.invoke_prompt()`
 
 > **Note:** If you completed Challenge 02 correctly, all agents should already be compatible. No changes are needed.
 
@@ -193,30 +193,23 @@ py app/main.py
 
 ### Task 6: Verify Workflow Execution
 
-In **Azure Portal → Cosmos DB → Data Explorer**:
+In **Azure Portal**, navigate to **Cosmos DB** and then open **Data Explorer**:
 
-* Open `agent-state` container
-* Locate the document with your workflow ID
-* Confirm:
-
-  * `status` = `COMPLETED`
-  * `agentData` contains:
-
-    * extraction
-    * validation
-    * communication
-    * reporting
-  * `history` contains all agent executions
+- Open the `agent-state` container
+- Locate the document with your workflow ID
+- Confirm that `status` is set to `COMPLETED`
+- Confirm that `agentData` contains extraction, validation, communication, and reporting
+- Confirm that `history` contains all agent executions
 
 ## Success Criteria
 
 - Orchestrator module (`orchestrator.py`) executes all four agents sequentially
 - Each agent writes its output to the Cosmos DB workflow state
-- Workflow state transitions correctly through `extraction` → `validation` → `communication` → `reporting` → `completed`
+- Workflow state transitions correctly from `extraction` to `validation` to `communication` to `reporting` to `completed`
 - Final `status` is `COMPLETED` in the Cosmos DB document
 - `agentData` contains outputs from all four agents (extraction, validation, communication, reporting)
 - `history` array contains all four agent execution entries
-- Full execution history is visible in Azure Portal → Data Explorer
+- Full execution history is visible in Azure Portal under **Data Explorer**
 
 ## Additional Resources
 

@@ -9,11 +9,11 @@ You will use **Azure Cosmos DB** as a **shared memory and messaging layer** so t
 
 ## Challenge Objectives
 
-* Use Cosmos DB as shared memory for agents
-* Store workflow state centrally
-* Persist agent outputs between steps
-* Enable agents to read prior agent results
-* Maintain auditability and traceability
+- Use Cosmos DB as shared memory for agents
+- Store workflow state centrally
+- Persist agent outputs between steps
+- Enable agents to read prior agent results
+- Maintain auditability and traceability
 
 ## Conceptual Architecture (Simple)
 
@@ -39,12 +39,12 @@ Cosmos DB acts as the **shared notebook** for all agents.
 
 Ensure the following already exist (from Challenge 01):
 
-* Cosmos DB account (NoSQL)
-* Database: `agent-memory-db`
-* Container: `agent-state`
-* Partition key: `/workflowId`
+- Cosmos DB account (NoSQL)
+- Database: `agent-memory-db`
+- Container: `agent-state`
+- Partition key: `/workflowId`
 
-If not created, create them now via **Azure Portal → Data Explorer**.
+If not created, create them now in **Azure Portal** under **Data Explorer**.
 
 ### Task 2: Define Workflow State Schema
 
@@ -94,7 +94,7 @@ Add these values to your `.env` file and save the file:
    COSMOS_DB_CONTAINER=agent-state
    ```
 
-   > **Note:** Use **Settings → Key** from the Cosmos DB resource in Azure Portal.
+   > **Note:** Navigate to **Settings** and then select **Keys** from the Cosmos DB resource in the Azure Portal.
 
 
 ### Task 5: Create Cosmos DB Helper Module
@@ -210,23 +210,23 @@ py app/main.py
 
 ### Task 7: Verify Data in Azure Portal
 
-1. Open **Cosmos DB → Data Explorer**
+1. Open **Cosmos DB** and navigate to **Data Explorer**.
 2. Select:
 
-   * Database: `agent-memory-db`
-   * Container: `agent-state`
+   - Database: `agent-memory-db`
+   - Container: `agent-state`
 3. Confirm a new document exists with:
 
-   * Workflow ID
-   * Extraction output
-   * History entry
+   - Workflow ID
+   - Extraction output
+   - History entry
 
 ## Success Criteria
 
 - Cosmos DB stores workflow state with the correct schema (`workflowId`, `currentStep`, `status`, `agentData`, `history`)
 - Agent output from the Extraction Agent is persisted in Cosmos DB
 - Workflow state can be retrieved by workflow ID
-- Data is visible in Azure Portal → Data Explorer under `agent-memory-db` / `agent-state`
+- Data is visible in Azure Portal under **Data Explorer** in `agent-memory-db` / `agent-state`
 - The `save_workflow_state` and `get_workflow_state` functions work correctly
 
 ## Additional Resources

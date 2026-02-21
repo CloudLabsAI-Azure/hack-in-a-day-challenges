@@ -8,13 +8,13 @@ The pre-built application wraps your Semantic Kernel agents and orchestrator in 
 
 ## Challenge Objectives
 
-* Download and configure the pre-built Streamlit application
-* Authenticate with Azure CLI
-* Run the production dashboard locally
-* Test the multi-agent pipeline through the web UI with sample enterprise scenarios
-* Process multiple workflow requests and review agent outputs
-* Verify execution history in Cosmos DB
-* (Bonus) Build and push a Docker image to Azure Container Registry
+- Download and configure the pre-built Streamlit application
+- Authenticate with Azure CLI
+- Run the production dashboard locally
+- Test the multi-agent pipeline through the web UI with sample enterprise scenarios
+- Process multiple workflow requests and review agent outputs
+- Verify execution history in Cosmos DB
+- (Bonus) Build and push a Docker image to Azure Container Registry
 
 ## Steps to Complete
 
@@ -63,14 +63,14 @@ You need the following values from your Azure resources:
 
 1. **Microsoft Foundry API Key and Endpoint**:
 
-   - Go to **Azure Portal** → Your Microsoft Foundry resource: **agent-foundry-<inject key="DeploymentID" enableCopy="false"/>**
+   - Go to **Azure Portal** and open your Microsoft Foundry resource: **agent-foundry-<inject key="DeploymentID" enableCopy="false"/>**
    - Navigate to **Keys and Endpoint**
    - Copy the **Key** and **Endpoint**
 
 2. **Cosmos DB Connection Details** (from Challenge 1):
 
-   - Go to **Azure Portal** → Your Cosmos DB account: **agent-cosmos-<inject key="DeploymentID" enableCopy="false"/>**
-   - Navigate to **Settings** → **Keys**
+   - Go to **Azure Portal** and open your Cosmos DB account: **agent-cosmos-<inject key="DeploymentID" enableCopy="false"/>**
+   - Navigate to **Settings** and then select **Keys**
    - Copy the **URI** and **PRIMARY KEY**
 
 ### Task 4: Configure the Application
@@ -122,7 +122,7 @@ Before running, take a moment to explore the application code:
 
 **orchestrator.py** - Multi-agent orchestrator
 - Semantic Kernel initialization and agent definitions
-- Sequential agent execution: Extraction → Validation → Communication → Reporting
+- Sequential agent execution: Extraction, Validation, Communication, and Reporting
 - Shared state management and workflow tracking
 - Structured JSON output from each agent
 
@@ -252,23 +252,19 @@ Try each of the 5 sample scenarios to verify the pipeline handles different ente
 ### Task 10: Verify Workflow State in Cosmos DB
 
 1. Open **Azure Portal**
-2. Navigate to **Azure Cosmos DB** → **agent-cosmos-<inject key="DeploymentID" enableCopy="false"/>**
+2. Navigate to **Azure Cosmos DB** and open **agent-cosmos-<inject key="DeploymentID" enableCopy="false"/>**.
 3. Open **Data Explorer**
 4. Select:
 
-   * Database: `agent-memory-db`
-   * Container: `agent-state`
+   - Database: `agent-memory-db`
+   - Container: `agent-state`
 5. Locate the documents using the workflow IDs from the dashboard
 
 Confirm the following for each workflow:
 
-* `status` = `COMPLETED`
-* `agentData` contains:
-  * extraction
-  * validation
-  * communication
-  * reporting
-* `history` shows all four agent executions with timestamps
+- `status` = `COMPLETED`
+- `agentData` contains extraction, validation, communication, and reporting
+- `history` shows all four agent executions with timestamps
 
 ### Task 11 (Bonus): Docker Image & ACR
 
@@ -288,7 +284,7 @@ If time permits, containerize and push the application:
    az acr build --registry agentacr<inject key="DeploymentID" enableCopy="false"/> --image agent-orchestrator:v1 .
    ```
 
-4. Verify in **Azure Portal** → **Container Registry** → **agentacr<inject key="DeploymentID" enableCopy="false"/>** → **Repositories**:
+4. Verify in **Azure Portal** by navigating to **Container Registry**, then **agentacr<inject key="DeploymentID" enableCopy="false"/>**, and then **Repositories**:
    ```
    agent-orchestrator : v1
    ```

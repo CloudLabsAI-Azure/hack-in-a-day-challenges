@@ -8,11 +8,11 @@ At this stage, agents will run **locally** (not containerized yet).
 
 ## Challenge Objectives
 
-* Create multiple AI agents using Semantic Kernel
-* Assign one responsibility per agent
-* Implement prompt-based skills for each agent
-* Validate agent outputs independently
-* Ensure agents return structured JSON
+- Create multiple AI agents using Semantic Kernel
+- Assign one responsibility per agent
+- Implement prompt-based skills for each agent
+- Validate agent outputs independently
+- Ensure agents return structured JSON
 
 ## Steps to Complete
 
