@@ -35,7 +35,7 @@ The application code is provided in a pre-built package.
    
    - Right-click on the downloaded `modernize-your-code.zip` file
    - Select the **Extract All...** option
-   - Choose a location `C:\Code`.
+   - Choose a location `C:\Code`
    - Click on **Extract**
 
 ### Task 2: Authenticate with Azure CLI
@@ -96,7 +96,7 @@ You need these below values to connect to your agents:
 
 ### Task 4: Configure the Application
 
-1. Navigate back to **Visual Studio Code**
+1. Navigate back to **Visual Studio Code**.
 
 1. Locate the `.env.example` file.
 
@@ -161,11 +161,11 @@ This installs:
 
 1. Enter the email as **<inject key="AzureAdUserEmail"></inject>** and hit enter.
 
-1. The application will automatically open in your browser at `http://localhost:8501` or `http://localhost:8502`
+1. The application will automatically open in your browser at `http://localhost:8501` or `http://localhost:8502`.
 
 ### Task 8: Test the Multi-Agent Pipeline
 
-1. You'll see a blue gradient header: **"SQL Modernization Assistant"**
+1. You'll see a blue gradient header: **"SQL Modernization Assistant"**.
 
 1. In the **sidebar**, verify all agents show green checkmarks:
    - Translation Agent
