@@ -22,110 +22,117 @@ In this challenge, you will configure and run the pre-built application, then te
 
 ## Steps to Complete
 
-### Task 1: Download the Application Code
+### Task 1: Download and Extract Code Files
 
-1. On your lab VM, open a terminal (PowerShell or Command Prompt).
+The application code is provided in a pre-built package.
 
-1. Create a working directory and download the application code:
+1. On your lab VM, open a terminal PowerShell.
 
-   ```powershell
-   mkdir C:\ContentProcessing
-   cd C:\ContentProcessing
-   ```
-
-1. Download the codefiles from the repository:
+1. Create a working directory:
 
    ```powershell
-   git clone https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges.git --depth 1
-   cd hack-in-a-day-challenges\content-processing\codefiles
+   mkdir C:\Code
    ```
 
-   > **Note:** If git is not available, you can download the ZIP from `https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/main.zip` and extract it to `C:\ContentProcessing`.
-
-### Task 2: Configure Environment Variables
-
-1. Copy the environment template:
-
-   ```powershell
-   copy .env.example .env
+1. **Download the code package**:
+   
+   Access the link mentioned below using browser:
+   ```
+   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/content-processing-files.zip
    ```
 
-1. Open `.env` in VS Code:
+1. **Extract the ZIP file**:
+   
+   - Right-click on the downloaded `content-processing-files.zip` file
+   - Select the **Extract All...** option
+   - Choose a location `C:\Code`
+   - Click on **Extract**
 
-   ```powershell
-   code .env
-   ```
+### Task 2: Authenticate with Azure CLI
 
-1. Fill in the following values:
+The application uses Azure CLI authentication to connect to your agents.
 
-   **Microsoft Foundry Agent Configuration:**
+1. From the **Desktop**, open **Visual Studio Code**.
 
-   - **AGENT_API_ENDPOINT** - Go to [Microsoft Foundry](https://ai.azure.com) > Your project (**proj-default**) > **Settings** > **Overview**. Copy the **Project endpoint**.
-    - Format: **https://content-hub-<inject key="DeploymentID" enableCopy="false"/>.services.ai.azure.com/api/projects/proj-default**
+1. In **Visual Studio Code**, select **File** > **Open Folder**.
 
-   - **AGENT_ID** - Go to **Agents** > Open **Document-Classification-Agent** > Copy the **Agent ID** from the Setup panel (starts with `asst_`).
+1. Browse to **C:\Code**, open the **hack-in-a-day-challenges-content-processing-files** folder, then the select the **codefiles** folder, and then choose **Select Folder**.
 
-   **Azure AI Document Intelligence:**
+1. In the **Trust the authors of the files in this folder?** pop-up, select **Yes, I trust the authors**.
 
-   - **DOC_INTELLIGENCE_ENDPOINT** - Go to Azure portal > your Document Intelligence resource **doc-intelligence-<inject key="DeploymentID" enableCopy="false"/>** > **Keys and Endpoint** > Copy **Endpoint**.
-   - **DOC_INTELLIGENCE_KEY** - Same page > Copy **Key 1**.
+1. Select **Terminal** from the top menu, and then choose **New Terminal**.
 
-   **Azure Blob Storage:**
+1. In the opened terminal, install Python dependencies:
 
-   - **STORAGE_CONNECTION_STRING** - Go to Azure portal > Storage Account **contentstore<inject key="DeploymentID" enableCopy="false"/>** > **Access keys** > Copy **Connection string** for Key 1.
-
-   **Azure Cosmos DB:**
-
-   - **COSMOS_ENDPOINT** - Go to Azure portal > Cosmos DB account **content-cosmos-<inject key="DeploymentID" enableCopy="false"/>** > **Keys** > Copy **URI**.
-   - **COSMOS_KEY** - Same page > Copy **Primary Key**.
-
-1. Your `.env` file should look like this (with your actual values):
-
-   ```env
-   # Microsoft Foundry
-   AGENT_API_ENDPOINT=https://content-hub-XXXXX.services.ai.azure.com/api/projects/proj-default
-   AGENT_ID=asst_XXXXXXXXXXXX
-
-   # Document Intelligence
-   DOC_INTELLIGENCE_ENDPOINT=https://doc-intelligence-XXXXX.cognitiveservices.azure.com/
-   DOC_INTELLIGENCE_KEY=your-key-here
-
-   # Blob Storage
-   STORAGE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=...
-
-   # Cosmos DB
-   COSMOS_ENDPOINT=https://content-cosmos-XXXXX.documents.azure.com:443/
-   COSMOS_KEY=your-cosmos-key-here
-   DATABASE_NAME=ContentProcessingDB
-   ```
-
-1. Save the `.env` file.
-
-### Task 3: Install Dependencies and Authenticate
-
-1. Install Python dependencies:
-
-   ```powershell
+   ```bash
    pip install -r requirements.txt
    ```
 
    > **Note:** If you encounter permission errors, try `pip install --user -r requirements.txt`.
 
-1. Authenticate with Azure CLI (required for the Microsoft Foundry Agents SDK):
+1. Log in to Azure by running the following command:
 
-   ```powershell
+   ```bash
    az login
    ```
 
-   Sign in with your lab credentials: <inject key="AzureAdUserEmail" />
+   **Note:** This will open a browser pop-up for authentication; minimize **Visual Studio Code** to view the sign-in window.
 
-1. Set the default subscription:
+1. On the **Sign into Microsoft Azure** page, enter the below provided email and password, to login.
 
-   ```powershell
-   az account set --subscription "<inject key="SubscriptionID" />"
-   ```
+   - Email/Username: <inject key="AzureAdUserEmail"></inject>
 
-### Task 4: Run the Application
+   - Password: <inject key="AzureAdUserPassword"></inject>
+
+1. In the **Stay signed in to all your apps?** window, select **No, sign in to this app only**.
+
+1. Return to **Visual Studio Code**, enter **1** to select the subscription, and then press **Enter**.
+
+### Task 3: Get Your Service Credentials
+
+You need these below values to connect to your Azure services:
+
+1. Open **Notepad**, and keep it ready to paste the required values that you will copy in the following steps.
+
+1. Go to [Microsoft Foundry](https://ai.azure.com) and open the project that you created in an earlier challenge (**proj-default**).
+
+1. In the Overview section, find the **Microsoft Foundry project endpoint** which would look like the below mentioned example:
+
+   - Example format: `https://content-hub-<inject key="DeploymentID" enableCopy="false"/>.services.ai.azure.com/api/projects/proj-default`
+   - **Important:** The project name at the end is always `proj-default`
+   - Make sure it ends with `/api/projects/proj-default`
+
+1. Navigate to **Agents** in the left menu.
+
+1. Click on your **Document-Classification-Agent**.
+
+1. In the Setup panel on the right, copy the **Agent ID** (starts with `asst_`).
+
+1. Retrieve your **Azure AI Document Intelligence** details:
+   - Go to Azure Portal > your Document Intelligence resource **doc-intelligence-<inject key="DeploymentID" enableCopy="false"/>**
+   - Click **Keys and Endpoint** > Copy **Endpoint** and **Key 1**
+
+1. Retrieve your **Azure Blob Storage** connection string:
+   - Go to Azure Portal > Storage Account **contentstore<inject key="DeploymentID" enableCopy="false"/>**
+   - Click **Access keys** > Copy **Connection string** for Key 1
+
+1. Retrieve your **Cosmos DB** connection details:
+   - Go to Azure Portal > Cosmos DB account **content-cosmos-<inject key="DeploymentID" enableCopy="false"/>**
+   - Click **Keys** > Copy **URI** and **Primary Key**
+
+### Task 4: Configure the Application
+
+1. Navigate back to **Visual Studio Code**.
+
+1. Locate the `.env.example` file.
+
+1. Rename the **.env.example** file to **.env**.
+
+1. Open the **.env** file and replace the placeholders with the values you copied earlier:
+
+1. Save the file.
+
+### Task 5: Run the Application
 
 1. Start the Streamlit application:
 
@@ -141,14 +148,11 @@ In this challenge, you will configure and run the pre-built application, then te
 
 1. If any service shows a red status indicator in the sidebar, check your `.env` configuration for that service.
 
-### Task 5: Process Your First Document
+### Task 6: Process Your First Document
 
-1. In the **Process Documents** tab, you have two options:
+1. In the **Process Documents** tab:
 
    - **Upload a file** - drag and drop or browse for a document
-   - **Use sample data** - select from pre-loaded sample documents
-
-1. Click **Use sample data** and select `invoice_contoso` from the dropdown.
 
 1. Click **Process Document**.
 
@@ -170,7 +174,7 @@ In this challenge, you will configure and run the pre-built application, then te
 
 1. Process two more documents - select `receipt_cafe` and `identity_doc` from the sample data and process them.
 
-### Task 6: Verify Data in Cosmos DB
+### Task 7: Verify Data in Cosmos DB
 
 1. Go to the Azure portal > Cosmos DB account **content-cosmos-<inject key="DeploymentID" enableCopy="false"/>** > **Data Explorer**.
 
@@ -192,7 +196,7 @@ In this challenge, you will configure and run the pre-built application, then te
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
-### Task 7: Test Smart Routing
+### Task 8: Test Smart Routing
 
 1. To test that low-confidence documents are routed correctly, use the **Upload a file** option.
 
