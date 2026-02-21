@@ -17,6 +17,7 @@ from azure.identity import DefaultAzureCredential
 
 from doc_processor import DocumentProcessor
 from cosmos_helper import CosmosHelper
+from blob_watcher import BlobWatcher
 
 # Load environment variables
 load_dotenv()
@@ -86,6 +87,7 @@ st.markdown(
 
 doc_processor = DocumentProcessor()
 cosmos = CosmosHelper()
+blob_watcher = BlobWatcher()
 
 SAMPLE_DATA = {
     "invoice_contoso": {
@@ -556,8 +558,8 @@ with st.sidebar:
     )
 
 # ─── Main Tabs ────────────────────────────────────────────────────────
-tab_process, tab_results, tab_review, tab_analytics = st.tabs(
-    ["📤 Process Documents", "📋 Processing Results", "🔍 Review Queue", "📊 Analytics"]
+tab_process, tab_results, tab_review, tab_analytics, tab_watch = st.tabs(
+    ["📤 Process Documents", "📋 Processing Results", "🔍 Review Queue", "📊 Analytics", "🔄 Auto-Watch"]
 )
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -953,3 +955,225 @@ with tab_analytics:
                     file_name=f"content_processing_report_{datetime.utcnow().strftime('%Y%m%d')}.csv",
                     mime="text/csv",
                 )
+
+# ═══════════════════════════════════════════════════════════════════════
+# TAB 5: AUTO-WATCH BLOB STORAGE
+# ═══════════════════════════════════════════════════════════════════════
+with tab_watch:
+    st.markdown("## 🔄 Auto-Watch Blob Storage")
+    st.markdown(
+        "Monitor your Azure Blob Storage container for newly uploaded documents. "
+        "New files are automatically detected and processed through the full AI pipeline."
+    )
+
+    if not blob_watcher.is_configured():
+        st.error(
+            "❌ **Blob Storage not configured.** "
+            "Set `STORAGE_CONNECTION_STRING` in your `.env` file."
+        )
+    elif not cfg["agents"]:
+        st.error(
+            "❌ **Agent pipeline not configured.** "
+            "Set `AGENT_API_ENDPOINT` and `AGENT_ID` in your `.env` file."
+        )
+    else:
+        # ── Session State Initialization ────────────────────────────
+        if "watch_log" not in st.session_state:
+            st.session_state.watch_log = []
+        if "auto_watch_enabled" not in st.session_state:
+            st.session_state.auto_watch_enabled = False
+        if "watched_processed_blobs" not in st.session_state:
+            st.session_state.watched_processed_blobs = set()
+
+        # ── Controls ────────────────────────────────────────────────
+        ctrl_col1, ctrl_col2 = st.columns([3, 1])
+        with ctrl_col1:
+            auto_watch = st.toggle(
+                "🔄 Enable Auto-Watch",
+                value=st.session_state.auto_watch_enabled,
+                help="Automatically scan Blob Storage for new documents at regular intervals. "
+                     "The page will auto-refresh during each polling cycle.",
+            )
+            st.session_state.auto_watch_enabled = auto_watch
+        with ctrl_col2:
+            poll_interval = st.slider("Poll interval (sec)", 15, 120, 30)
+
+        btn_col1, btn_col2, btn_col3 = st.columns(3)
+        with btn_col1:
+            check_now = st.button(
+                "🔍 Scan Now", type="primary", use_container_width=True
+            )
+        with btn_col2:
+            if st.button("🗑️ Clear Log", use_container_width=True):
+                st.session_state.watch_log = []
+                st.session_state.watched_processed_blobs = set()
+                st.rerun()
+        with btn_col3:
+            st.markdown(f"**Container:** `{blob_watcher.container_name}`")
+
+        if auto_watch:
+            st.info(
+                "⚡ **Auto-Watch is ON** — The page will auto-refresh every "
+                f"**{poll_interval}** seconds to scan for new documents."
+            )
+
+        st.markdown("---")
+
+        # ── Blob Scan Logic ─────────────────────────────────────────
+        should_scan = check_now or auto_watch
+
+        if should_scan:
+            scan_status = st.empty()
+            scan_status.info("🔍 Scanning Blob Storage for new documents...")
+
+            # List supported blobs from the container
+            all_blobs = blob_watcher.list_supported_blobs()
+
+            # Combine Cosmos DB records + session-level tracking for dedup
+            processed_names = set()
+            if cosmos.is_configured():
+                processed_names = cosmos.get_processed_blob_names()
+            processed_names |= st.session_state.watched_processed_blobs
+
+            # Find new (unprocessed) blobs
+            new_blobs = all_blobs - processed_names
+
+            timestamp_now = datetime.utcnow().strftime("%H:%M:%S")
+
+            if not new_blobs:
+                scan_status.success(
+                    f"✅ No new documents found. "
+                    f"**{len(all_blobs)}** blob(s) in container, all already processed."
+                )
+                st.session_state.watch_log.append({
+                    "time": timestamp_now,
+                    "type": "scan",
+                    "message": f"Scan complete — no new documents ({len(all_blobs)} total blobs)",
+                })
+            else:
+                scan_status.warning(
+                    f"📥 Found **{len(new_blobs)}** new document(s) to process!"
+                )
+
+                progress = st.progress(0, text="Processing new documents...")
+
+                for idx, blob_name in enumerate(sorted(new_blobs)):
+                    progress_pct = int((idx / len(new_blobs)) * 100)
+                    progress.progress(progress_pct, text=f"Processing: {blob_name}")
+
+                    ts = datetime.utcnow().strftime("%H:%M:%S")
+
+                    # ── Download blob ───────────────────────────────
+                    file_bytes = blob_watcher.download_blob(blob_name)
+                    if file_bytes is None:
+                        st.session_state.watch_log.append({
+                            "time": ts, "type": "error",
+                            "message": f"❌ Failed to download: {blob_name}",
+                        })
+                        continue
+
+                    blob_url = blob_watcher.get_blob_url(blob_name)
+
+                    # ── OCR extraction ──────────────────────────────
+                    ext = blob_name.lower().rsplit(".", 1)[-1] if "." in blob_name else ""
+                    ocr_text = ""
+                    ocr_metadata = {}
+
+                    if ext == "txt":
+                        ocr_text = file_bytes.decode("utf-8", errors="replace")
+                        ocr_metadata = {"filename": blob_name, "source": "direct_text"}
+                    elif doc_processor.is_configured():
+                        ocr_result = doc_processor.analyze_document(file_bytes, blob_name)
+                        if ocr_result["success"]:
+                            ocr_text = ocr_result["extracted_text"]
+                            ocr_metadata = ocr_result["metadata"]
+                        else:
+                            st.session_state.watch_log.append({
+                                "time": ts, "type": "error",
+                                "message": f"❌ OCR failed for {blob_name}: {ocr_result.get('error', 'Unknown')}",
+                            })
+                            st.session_state.watched_processed_blobs.add(blob_name)
+                            continue
+                    else:
+                        st.session_state.watch_log.append({
+                            "time": ts, "type": "error",
+                            "message": f"⚠️ Skipped {blob_name} — Document Intelligence not configured (required for non-text files)",
+                        })
+                        continue
+
+                    if not ocr_text.strip():
+                        st.session_state.watch_log.append({
+                            "time": ts, "type": "error",
+                            "message": f"⚠️ No text extracted from {blob_name}",
+                        })
+                        st.session_state.watched_processed_blobs.add(blob_name)
+                        continue
+
+                    # ── Agent pipeline ──────────────────────────────
+                    response = call_agent_pipeline(ocr_text)
+                    if not response:
+                        st.session_state.watch_log.append({
+                            "time": ts, "type": "error",
+                            "message": f"❌ Agent pipeline returned no response for {blob_name}",
+                        })
+                        st.session_state.watched_processed_blobs.add(blob_name)
+                        continue
+
+                    # ── Parse & route ───────────────────────────────
+                    parsed = parse_pipeline_response(response)
+                    routing = route_document(parsed, blob_name, ocr_text, ocr_metadata, blob_url)
+
+                    # Track as processed
+                    st.session_state.watched_processed_blobs.add(blob_name)
+
+                    # Log result
+                    confidence = routing.get("confidence", 0)
+                    container_dest = routing.get("container", "N/A")
+                    decision = routing.get("routing", "UNKNOWN")
+
+                    if decision == "AUTO_APPROVE" and confidence >= 0.85:
+                        st.session_state.watch_log.append({
+                            "time": ts, "type": "success",
+                            "message": f"✅ **{blob_name}** → AUTO-APPROVED (confidence: {confidence:.0%}) → {container_dest}",
+                        })
+                    else:
+                        st.session_state.watch_log.append({
+                            "time": ts, "type": "warning",
+                            "message": f"⚠️ **{blob_name}** → MANUAL REVIEW (confidence: {confidence:.0%}) → {container_dest}",
+                        })
+
+                progress.progress(100, text="✅ All new documents processed!")
+
+        # ── Processing Log ──────────────────────────────────────────
+        st.markdown("### 📜 Processing Log")
+
+        if not st.session_state.watch_log:
+            st.info(
+                "No activity yet. Click **Scan Now** or enable **Auto-Watch** to start monitoring."
+            )
+        else:
+            for entry in reversed(st.session_state.watch_log[-100:]):
+                log_type = entry.get("type", "info")
+                time_str = entry.get("time", "")
+                msg = entry.get("message", "")
+
+                if log_type == "success":
+                    st.success(f"🕐 {time_str} — {msg}")
+                elif log_type == "warning":
+                    st.warning(f"🕐 {time_str} — {msg}")
+                elif log_type == "error":
+                    st.error(f"🕐 {time_str} — {msg}")
+                else:
+                    st.info(f"🕐 {time_str} — {msg}")
+
+        # ── Auto-Rerun Countdown ────────────────────────────────────
+        if auto_watch:
+            st.markdown("---")
+            countdown_placeholder = st.empty()
+            for remaining in range(poll_interval, 0, -1):
+                countdown_placeholder.info(
+                    f"⏱️ **Auto-Watch active** — Next scan in **{remaining}** seconds"
+                )
+                time.sleep(1)
+            countdown_placeholder.empty()
+            st.rerun()

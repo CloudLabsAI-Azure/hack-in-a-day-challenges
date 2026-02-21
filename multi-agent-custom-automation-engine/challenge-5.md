@@ -31,14 +31,7 @@ The application code is provided in the lab repository.
    cd C:\LabFiles
    ```
 
-3. Download the codefiles from the repository:
-
-   ```powershell
-   git clone https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges.git --depth 1
-   cd hack-in-a-day-challenges\multi-agent-custom-automation-engine\codefiles
-   ```
-
-   > **Note:** If git is not available, you can download the ZIP from `https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/main.zip` and extract it to `C:\LabFiles`.
+3. Download  the ZIP from `https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/multi-agent-custom-automation-engine.zip` and extract it to `C:\LabFiles`.
 
 ### Task 2: Authenticate with Azure CLI
 
@@ -176,12 +169,8 @@ Before running, take a moment to explore the application code:
 
 1. Start the Streamlit app:
 
-   **Windows PowerShell:**
-
    ```powershell
-   $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-
-   streamlit run app.py
+   .venv\Scripts\python.exe -m streamlit run app.py
    ```
 
 1. Enter the email as **<inject key="AzureAdUserEmail"></inject>** and hit enter.

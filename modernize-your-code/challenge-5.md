@@ -24,6 +24,14 @@ Your three-agent pipeline is operational! All the code has been built for you. I
 
 The application code is provided in a pre-built package.
 
+1. On your lab VM, open a terminal PowerShel.
+
+1. Create a working directory and download the application code:
+
+   ```powershell
+   mkdir C:\Code
+   ```
+
 1. **Download the code package**:
    
    Access the link mentioned below using browser:
