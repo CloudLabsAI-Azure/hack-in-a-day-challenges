@@ -63,8 +63,6 @@ You will then use Microsoft Foundry's **Connected Agents** feature to chain all 
    - The extraction_notes array helps the Validation Agent assess data quality
    ```
 
-1. Click **Save** to save the Data Extraction Agent.
-
 ### Task 2: Create the Quality Validation Agent
 
 1. Click **+ New Agent** again and configure:
@@ -161,8 +159,6 @@ You will then use Microsoft Foundry's **Connected Agents** feature to chain all 
    - The summary should be clear enough for a human reviewer to understand the assessment at a glance
    - When in doubt, route to MANUAL_REVIEW - it's better to have a human verify than to auto-approve bad data
    ```
-
-1. Click **Save** to save the Quality Validation Agent.
 
 ### Task 3: Connect Both Agents to the Classification Agent
 
@@ -300,7 +296,7 @@ You will then use Microsoft Foundry's **Connected Agents** feature to chain all 
 
 ### Task 5: Test the Full Pipeline
 
-1. Open the **Document-Classification-Agent** in the playground (this is the entry point to the pipeline).
+1. Open the **Document-Classification-Agent** in the playground.
 
 1. **Test 1: Invoice - Expected AUTO_APPROVE.** Paste the invoice OCR text:
 

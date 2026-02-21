@@ -104,8 +104,6 @@ Getting classification right is critical because it determines which extraction 
    - ALWAYS return valid JSON, even for uncertain classifications
    ```
 
-1. Click **Save** to save the agent.
-
 1. Note the **Agent ID** displayed in the Setup panel (starts with `asst_`). You will need this later.
 
 ### Task 3: Test the Classification Agent in the Playground
@@ -158,63 +156,7 @@ Getting classification right is critical because it determines which extraction 
    - A meaningful summary
    - Relevant key indicators
 
-1. **Test 2: Receipt classification.** Clear the chat and paste:
-
-   ```
-   URBAN GROUNDS CAFE
-   342 Main Street, Seattle WA
-   Tel: (206) 555-0147
-
-   Date: 01/15/2025  Time: 08:42 AM
-   Register: 03  Cashier: Maria
-
-   --------------------------------
-   Cappuccino Grande       $5.50
-   Blueberry Muffin        $3.75
-   Avocado Toast           $8.95
-   Orange Juice Fresh      $4.25
-   --------------------------------
-   Subtotal               $22.45
-   Tax (10.1%)             $2.27
-   --------------------------------
-   TOTAL                  $24.72
-
-   VISA ***4582
-   Auth: 847291
-
-   Thank you for visiting!
-   Rewards Points Earned: 25
-   ```
-
-1. Verify the agent returns `"document_type": "RECEIPT"` with high confidence.
-
-1. **Test 3: Identity Document classification.** Clear the chat and paste:
-
-   ```
-   WASHINGTON STATE
-   DRIVER LICENSE
-
-   DL: SMITHJ*456*RQ
-   CLASS: C
-
-   SMITH, JOHN MICHAEL
-   1234 ELM STREET
-   SEATTLE WA 98101
-
-   DOB: 03/15/1985
-   ISS: 06/01/2023
-   EXP: 03/15/2031
-
-   SEX: M  HT: 5-11  WGT: 180
-   EYES: BRN  HAIR: BLK
-
-   DONOR: YES
-   RESTRICTIONS: CORRECTIVE LENSES
-   ```
-
-1. Verify `"document_type": "IDENTITY_DOCUMENT"` with high confidence.
-
-1. **Test 4: Ambiguous/Edge case.** Clear the chat and paste:
+1. **Test 2: Ambiguous/Edge case.** Clear the chat and paste:
 
    ```
    DOCUMENT RECEIVED
