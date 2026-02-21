@@ -56,7 +56,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 1. The lab environment includes:
 
-   - Azure subscription with Owner permissions
+   - Azure subscription with custom permissions
    - Pre-configured resource group for deployments
    - Access to Azure AI Document Intelligence and Microsoft Foundry
    - Sample documents for testing (invoices, receipts, medical forms, etc.)

@@ -22,7 +22,7 @@ You will then use Microsoft Foundry's **Connected Agents** feature to chain all 
 
 1. In your Microsoft Foundry project **proj-default** (under **openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>**), navigate to **Agents**.
 
-1. Click **+ New Agent** and configure:
+1. Click on **+ New Agent** and configure:
 
    - **Agent name**: `Data-Extraction-Agent`
    - **Model**: `doc-processor` (GPT)
@@ -65,7 +65,7 @@ You will then use Microsoft Foundry's **Connected Agents** feature to chain all 
 
 ### Task 2: Create the Quality Validation Agent
 
-1. Click **+ New Agent** again and configure:
+1. Click on **+ New Agent** again and configure:
 
    - **Agent name**: `Quality-Validation-Agent`
    - **Model**: `doc-processor` (GPT)
@@ -168,7 +168,7 @@ You will then use Microsoft Foundry's **Connected Agents** feature to chain all 
 
 1. In the **Setup** panel on the right, scroll down to the **Connected agents** section.
 
-1. Click **+ Add**.
+1. Click on **+ Add**.
 
 1. In the **Adding a connected agent** dialog, configure:
 
@@ -180,9 +180,9 @@ You will then use Microsoft Foundry's **Connected Agents** feature to chain all 
      After classifying the document, hand off the classification result along with the original OCR text to this extraction agent. It will extract structured data fields based on the document type. Always invoke this agent after classification is complete.
      ```
 
-1. Click **Add**.
+1. Click on **Add**.
 
-1. You should now see **Data-Extraction-Agent** listed under Connected agents with unique name `extraction_agent`. Click **+ Add** again to add a second connected agent.
+1. You should now see **Data-Extraction-Agent** listed under Connected agents with unique name `extraction_agent`. Click on **+ Add** again to add a second connected agent.
 
 1. In the **Adding a connected agent** dialog, configure:
 
@@ -194,7 +194,7 @@ You will then use Microsoft Foundry's **Connected Agents** feature to chain all 
      After the extraction agent has extracted structured data, hand off the extraction results to this validation agent. It will validate completeness, consistency, and assign a confidence score with a routing recommendation (AUTO_APPROVE or MANUAL_REVIEW). Always invoke this agent after extraction is complete.
      ```
 
-1. Click **Add**.
+1. Click on **Add**.
 
 1. You should now see both connected agents listed:
    - `extraction_agent`
@@ -292,7 +292,7 @@ You will then use Microsoft Foundry's **Connected Agents** feature to chain all 
    Classification (you) > Extraction (extraction_agent) > Validation (validation_agent)
    ```
 
-1. Click **Save**.
+1. Click on **Save**.
 
 ### Task 5: Test the Full Pipeline
 

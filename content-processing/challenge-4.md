@@ -2,7 +2,7 @@
 
 ## Introduction
 
-You have built the infrastructure, created three specialized AI agents, and connected them into an automated pipeline. Now it's time to bring everything together with a **production-grade Streamlit application** that orchestrates the full document processing workflow:
+You have built the infrastructure, created three specialized AI agents, and connected them into an automated pipeline. Now it's time to bring everything together with a **Streamlit application** that orchestrates the full document processing workflow:
 
 1. **Upload** documents via the web interface
 2. **Store** them in Azure Blob Storage
@@ -94,7 +94,7 @@ You need these below values to connect to your Azure services:
 
 1. Open **Notepad**, and keep it ready to paste the required values that you will copy in the following steps.
 
-1. Go to [Microsoft Foundry](https://ai.azure.com) and open the project that you created in an earlier challenge (**proj-default**).
+1. Go to **Microsoft Foundry** and open the project that you created in an earlier challenge (**proj-default**).
 
 1. In the Overview section, find the **Microsoft Foundry project endpoint** which would look like the below mentioned example:
 
@@ -109,16 +109,16 @@ You need these below values to connect to your Azure services:
 1. In the Setup panel on the right, copy the **Agent ID** (starts with `asst_`).
 
 1. Retrieve your **Azure AI Document Intelligence** details:
-   - Go to Azure Portal > your Document Intelligence resource **doc-intelligence-<inject key="DeploymentID" enableCopy="false"/>**
-   - Click **Keys and Endpoint** > Copy **Endpoint** and **Key 1**
+   - Go to Azure Portal and open your Document Intelligence resource **doc-intelligence-<inject key="DeploymentID" enableCopy="false"/>**
+   - Click **Keys and Endpoint**, Copy the **Endpoint** and **Key 1**
 
 1. Retrieve your **Azure Blob Storage** connection string:
    - Go to Azure Portal > Storage Account **contentstore<inject key="DeploymentID" enableCopy="false"/>**
-   - Click **Access keys** > Copy **Connection string** for Key 1
+   - Click on **Access keys** > Copy **Connection string** for Key 1
 
 1. Retrieve your **Cosmos DB** connection details:
-   - Go to Azure Portal > Cosmos DB account **content-cosmos-<inject key="DeploymentID" enableCopy="false"/>**
-   - Click **Keys** > Copy **URI** and **Primary Key**
+   - Go to Azure Portal and Cosmos DB account **content-cosmos-<inject key="DeploymentID" enableCopy="false"/>**
+   - Click on **Keys**, Copy the **URI** and **Primary Key**
 
 ### Task 4: Configure the Application
 
@@ -176,11 +176,11 @@ You need these below values to connect to your Azure services:
 
 ### Task 7: Verify Data in Cosmos DB
 
-1. Go to the Azure portal > Cosmos DB account **content-cosmos-<inject key="DeploymentID" enableCopy="false"/>** > **Data Explorer**.
+1. Go to the Azure portal, open Cosmos DB account **content-cosmos-<inject key="DeploymentID" enableCopy="false"/>**, and click on **Data Explorer**.
 
-1. Expand **ContentProcessingDB** > **ProcessedDocuments**.
+1. Expand **ContentProcessingDB** and open **ProcessedDocuments** container.
 
-1. Click **Items** to see the auto-approved documents. You should see at least one item with:
+1. Click on **Items** to see the auto-approved documents. You should see at least one item with:
 
    - A `docType` field (e.g., "INVOICE")
    - Classification, extraction, and validation results

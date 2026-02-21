@@ -77,7 +77,7 @@ In this final challenge, you will use the dashboard's **Review Queue** to examin
 
 ### Task 4: Validate End-to-End in Cosmos DB
 
-1. Go to the Azure portal > Cosmos DB > **Data Explorer**.
+1. Go to the Azure portal, open your Cosmos DB, and select **Data Explorer**.
 
 1. **ProcessedDocuments container** - Verify:
 

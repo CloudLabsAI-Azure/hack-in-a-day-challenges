@@ -21,7 +21,7 @@ You will also upload sample documents and test Document Intelligence's OCR capab
 
 1. In the Azure portal, click **+ Create a resource** and search for **Storage account**.
 
-1. Click **Create** and configure with the following settings:
+1. Click on **Create** and configure with the following settings:
 
    - **Subscription**: Select the available **Azure subscription**
    - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
@@ -30,13 +30,13 @@ You will also upload sample documents and test Document Intelligence's OCR capab
    - **Performance**: **Standard**
    - **Redundancy**: **Locally-redundant storage (LRS)**
 
-1. Click **Review + Create**, then **Create**. Wait for the deployment to complete.
+1. Click on **Review + Create**, then **Create**. Wait for the deployment to complete.
 
 1. Navigate to your new Storage Account. In the left menu, click **Containers** under **Data storage**.
 
-1. Click **+ Container** and create a container named **documents** with **Private** access level.
+1. Click on **+ Container** and create a container named **documents** with **Private** access level.
 
-1. Click **+ Container** again and create a second container named **processed** with **Private** access level.
+1. Click on **+ Container** again and create a second container named **processed** with **Private** access level.
 
 ### Task 2: Upload Sample Documents
 
@@ -58,7 +58,7 @@ You will also upload sample documents and test Document Intelligence's OCR capab
 
 1. In the Azure portal, search for **Document Intelligence** and **Select it**.
 
-1. Click **Create** and configure:
+1. Click on **Create** and configure:
 
    - **Subscription**: Select the available **Azure subscription**
    - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
