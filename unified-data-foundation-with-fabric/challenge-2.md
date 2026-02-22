@@ -48,18 +48,8 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources-CS
 
    - Click the **...** (more options) next to the **bronze** folder
    - Select **Upload** and click on **Upload files**
-   - Browse to `C:\LabFiles\unified-data-foundation-with-fabric\dataset\`
-   - Select **flight.csv**
-   - Click **Upload**
-
-   > **Note:** This may take a moment as the file contains ~63K records.
-
-1. Upload **customer_transactions.json** to Bronze layer:
-
-   - Click the **...** (more options) next to the **bronze** folder.
-   - Select **Upload** and click on **Upload files**
-   - Browse to `C:\LabFiles\unified-data-foundation-with-fabric\dataset\`
-   - Select **customer_transactions.json**
+   - Browse to extracted 
+   - Select **flight.csv** and **customer_transactions.json**.
    - Click **Upload**
 
 1. Verify all files are uploaded:
