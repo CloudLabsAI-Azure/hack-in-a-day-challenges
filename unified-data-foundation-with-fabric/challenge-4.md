@@ -58,6 +58,8 @@ By the end of this challenge, you will:
 
 Dimensions provide context for facts. Create customer, time, and geography dimensions:
 
+1. Add and run the following code.
+
     ```python
     from pyspark.sql.functions import current_timestamp, to_date, year, month, dayofmonth, dayofweek, quarter
 
@@ -111,6 +113,8 @@ Dimensions provide context for facts. Create customer, time, and geography dimen
 ## Part 3: Create Fact Tables
 
 Fact tables contain measurable metrics. Create fact tables for flight activity and transactions:
+
+1. Add and run the following code.
 
     ```python
     from pyspark.sql.functions import col, sum as spark_sum, avg as spark_avg, count, round as spark_round
@@ -173,6 +177,8 @@ Fact tables contain measurable metrics. Create fact tables for flight activity a
 
 Save dimension and fact tables to the Gold layer:
 
+1. Add and run the following code.
+
     ```python
     # === Write Customer Dimension ===
     dim_customers.write \
@@ -220,6 +226,8 @@ Save dimension and fact tables to the Gold layer:
 ## Part 5: Run Analytics Queries
 
 Test your dimensional model with business intelligence queries:
+
+1. Add and run the following code.
 
     ```python
     # === Query 1: Customer Loyalty Segmentation ===
@@ -322,6 +330,8 @@ Test your dimensional model with business intelligence queries:
 ## Part 6: Create Business KPI Table
 
 Create a summary table for dashboard consumption:
+
+1. Add and run the following code.
 
     ```python
     # === Customer Lifetime Value (CLV) Summary ===
