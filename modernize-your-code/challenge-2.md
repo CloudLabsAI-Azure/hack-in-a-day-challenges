@@ -25,6 +25,8 @@ In this challenge, you will create your first AI agent directly in the Microsoft
 
 1. You should see a **Default Agent** on the *Create and debug your agents* page.
 
+   > **Note**: If you encounter any errors related to role assignments or permissions, first refresh the browser. If the issue persists, sign out of the portal and sign in again, then retry the operation.
+
 ### Task 2: Create Translation Agent
 
 1. Click on the **Default Agent**.

@@ -1,37 +1,34 @@
-[
-    {
-        "Name": "modernize-your-code",
-        "Language": "English",
-        "BaseURL": "https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges",
-        "Files": [
-             {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/overview.md",
-                "Order": 1
-            },
-            {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/getting-started.md",
-                "Order": 2
-            },    
-            {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/challenge-1.md",
-                "Order": 3
-            },
-            {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/challenge-2.md",
-                "Order": 4
-            },
-            {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/challenge-3.md",
-                "Order": 5
-            },
-            {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/challenge-4.md",
-                "Order": 6
-            },
-            {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/modernize-your-code/challenge-5.md",
-                "Order": 7
-            }
-        ]
-    }
-]
+{
+  "Name": "Spektra Custom RBAC",
+  "Id": null,
+  "IsCustom": true,
+  "Description": "Spektra Training Custom Role.",
+  "Actions": [
+    "Microsoft.CognitiveServices/accounts/*",
+    "Microsoft.CognitiveServices/accounts/projects/*",
+    "Microsoft.Compute/disks/*",
+    "Microsoft.Compute/virtualMachines/*",
+    "Microsoft.Compute/virtualMachines/extensions/*",
+    "Microsoft.DocumentDb/databaseAccounts/*",
+    "Microsoft.MachineLearningServices/workspaces/read",
+    "Microsoft.MachineLearningServices/workspaces/agents/*",
+    "Microsoft.Network/networkInterfaces/*",
+    "Microsoft.Network/networkSecurityGroups/*",
+    "Microsoft.Network/publicIPAddresses/*",
+    "Microsoft.Network/virtualNetworks/*",
+    "Microsoft.Resources/deployments/*",
+    "Microsoft.Resources/subscriptions/resourceGroups/read",
+    "Microsoft.Authorization/*/read"
+  ],
+  "NotActions": [
+  ],
+  "DataActions": [
+    "Microsoft.CognitiveServices/*",
+    "Microsoft.CognitiveServices/accounts/AIServices/assets/read",
+    "Microsoft.MachineLearningServices/workspaces/*",
+    "Microsoft.MachineLearningServices/workspaces/agents/*/read",
+    "Microsoft.MachineLearningServices/workspaces/agents/*/action",
+    "Microsoft.MachineLearningServices/workspaces/agents/*/delete"
+  ],
+  "NotDataActions": []
+}
