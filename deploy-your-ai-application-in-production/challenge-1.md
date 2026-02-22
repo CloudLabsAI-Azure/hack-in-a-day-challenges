@@ -442,6 +442,13 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 1. Once complete, click **Go to resource**.
 
+<validation step="5ff772a4-41ec-49f7-ab3d-7f4318f1fd7c" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ### Task 11: Assign Key Vault Permissions
 
 1. In your **kv-secureai-<inject key="DeploymentID" enableCopy="false"/>** Key Vault.
