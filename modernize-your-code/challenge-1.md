@@ -6,7 +6,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 ## Challenge Objectives
 
-- Set up a Microsoft Foundry project with GPT-4.1 model deployment
+- Set up a Microsoft Foundry project with GPT model deployment
 - Provision Cosmos DB with an appropriate database and containers
 - Verify all resources are properly configured and accessible
 
@@ -37,9 +37,9 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
    - **Project name**: **sql-modernize-<inject key="DeploymentID" enableCopy="false"/>**
    - **Region**: **<inject key="Region"></inject>**.
    - **Default project name**: Keep it as default
-   - Click **Review + Create**.
+   - Click on **Review + Create**.
 
-1. Click **Create**.
+1. Click on **Create**.
 
 1. Please wait for the deployment to complete as it can take 2-3 minutes.
 
@@ -47,13 +47,13 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 <validation step="616b2c9f-85e8-44de-932a-418e889351a1" />
 
- 
+
 > **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
 > - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
-### Task 3: Deploy GPT-4.1 Model in Microsoft Foundry
+### Task 3: Deploy GPT Model in Microsoft Foundry
 
 1. In **Microsoft Foundry** portal.
 
@@ -61,7 +61,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. Click on **+ Deploy model** and select **Deploy base model**.
 
-1. Search for and select **gpt-4.1** from the model catalog and click on **Confirm** button.
+1. Search for and select **gpt-4.1-mini** from the model catalog and click on **Confirm** button.
 
 1. Configure the deployment:
 
@@ -72,7 +72,9 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
          > **Important**: Do not increase the TPM limit beyond 50K to avoid exceeding quota limits and additional costs.
 
-1. Click **Create**.
+1. Click on **Create**.
+
+      > **Note:** If you are unable to deploy gpt-4.1-mini or the quota shows as zero, try changing the deployment type to Standard. If the issue persists, deploy the gpt-4.1 model instead
 
 ### Task 4: Test the Model Deployment
 
@@ -197,7 +199,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 Create a text file or note with the following information (you'll need these in subsequent challenges):
 
 ```text
-Microsoft Foundry (with GPT-4.1 deployment):
+Microsoft Foundry:
 - Foundry Endpoint: [your-foundry-services-endpoint with /api/projects/...]
 - Deployment Name: sql-translator
 
@@ -210,7 +212,7 @@ Cosmos DB:
 
 ## Success Criteria
 
-- Microsoft Foundry project created with GPT-4.1 model deployed successfully
+- Microsoft Foundry project created with GPT model deployed successfully
 - Model tested in Chat Playground and working correctly
 - Cosmos DB account created with database and three containers (TranslationResults, ValidationLogs, OptimizationResults)
 - All connection strings, keys, and endpoints documented for future use
