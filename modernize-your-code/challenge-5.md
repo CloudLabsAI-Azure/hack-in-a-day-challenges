@@ -242,8 +242,6 @@ Try these test cases to verify everything works:
    ORDER BY avg_salary DESC;
    ```
 
-Expected Output: Should convert `ROWNUM <= 10` to `TOP 10`
-
 ---
 
 **Test 2: NVL and Date Functions**
