@@ -68,7 +68,7 @@ By deploying each resource manually, you will gain a deep understanding of Azure
    - Verify **NAT gateway**, **Network security group**, and **Route table** are set to **None**
    - Verify **Private endpoint network policy** is **Disabled**
    - Leave everything else as default
-   - Click **Save**
+   - Click **Add**
 
 1. Click **+ Add subnet** to add the second subnet. Configure the following:
 
