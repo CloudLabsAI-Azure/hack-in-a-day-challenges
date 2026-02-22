@@ -22,33 +22,7 @@ In this challenge, you will configure and run the pre-built application, then te
 
 ## Steps to Complete
 
-### Task 1: Download and Extract Code Files
-
-The application code is provided in a pre-built package.
-
-1. On your lab VM, open a terminal PowerShell.
-
-1. Create a working directory:
-
-   ```powershell
-   mkdir C:\Code
-   ```
-
-1. **Download the code package**:
-   
-   Access the link mentioned below using browser:
-   ```
-   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/content-processing-files.zip
-   ```
-
-1. **Extract the ZIP file**:
-   
-   - Right-click on the downloaded `content-processing-files.zip` file
-   - Select the **Extract All...** option
-   - Choose a location `C:\Code`
-   - Click on **Extract**
-
-### Task 2: Authenticate with Azure CLI
+### Task 1: Authenticate with Azure CLI
 
 The application uses Azure CLI authentication to connect to your agents.
 
@@ -88,7 +62,7 @@ The application uses Azure CLI authentication to connect to your agents.
 
 1. Return to **Visual Studio Code**, enter **1** to select the subscription, and then press **Enter**.
 
-### Task 3: Get Your Service Credentials
+### Task 2: Get Your Service Credentials
 
 You need these below values to connect to your Azure services:
 
@@ -120,7 +94,7 @@ You need these below values to connect to your Azure services:
    - Go to Azure Portal and Cosmos DB account **content-cosmos-<inject key="DeploymentID" enableCopy="false"/>**
    - Click on **Keys**, Copy the **URI** and **Primary Key**
 
-### Task 4: Configure the Application
+### Task 3: Configure the Application
 
 1. Navigate back to **Visual Studio Code**.
 
@@ -132,7 +106,7 @@ You need these below values to connect to your Azure services:
 
 1. Save the file.
 
-### Task 5: Run the Application
+### Task 4: Run the Application
 
 1. Start the Streamlit application:
 
@@ -148,7 +122,7 @@ You need these below values to connect to your Azure services:
 
 1. If any service shows a red status indicator in the sidebar, check your `.env` configuration for that service.
 
-### Task 6: Process Your First Document
+### Task 5: Process Your First Document
 
 1. In the **Process Documents** tab:
 
@@ -174,7 +148,7 @@ You need these below values to connect to your Azure services:
 
 1. Process two more documents - select `receipt_cafe` and `identity_doc` from the sample data and process them.
 
-### Task 7: Verify Data in Cosmos DB
+### Task 6: Verify Data in Cosmos DB
 
 1. Go to the Azure portal, open Cosmos DB account **content-cosmos-<inject key="DeploymentID" enableCopy="false"/>**, and click on **Data Explorer**.
 
@@ -196,7 +170,7 @@ You need these below values to connect to your Azure services:
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
-### Task 8: Test Smart Routing
+### Task 7: Test Smart Routing
 
 1. To test that low-confidence documents are routed correctly, use the **Upload a file** option.
 

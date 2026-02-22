@@ -34,17 +34,35 @@ You will also upload sample documents and test Document Intelligence's OCR capab
 
 1. Navigate to your new Storage Account. In the left menu, click **Containers** under **Data storage**.
 
-1. Click on **+ Container** and create a container named **documents** with **Private** access level.
+1. Click on **+ Add container** and create a container named **documents**.
 
-1. Click on **+ Container** again and create a second container named **processed** with **Private** access level.
+1. Click on **+ Add container** again and create a second container named **processed**.
 
-### Task 2: Upload Sample Documents
+### Task 2: Download and Extract Sample Documents and Code Files
 
-1. Download the sample documents from:
+The application code is provided in a pre-built package.
 
+1. On your lab VM, open a terminal PowerShell.
+
+1. Create a working directory:
+
+   ```powershell
+   mkdir C:\Code
+   ```
+
+1. **Download the code package**:
+   
+   Access the link mentioned below using browser:
    ```
    https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/content-processing-files.zip
    ```
+
+1. **Extract the ZIP file**:
+   
+   - Right-click on the downloaded `content-processing-files.zip` file
+   - Select the **Extract All...** option
+   - Choose a location `C:\Code`
+   - Click on **Extract**
 
 1. Extract the ZIP file. You should see 5 sample documents inside the **sample_data** folder:
 
@@ -74,18 +92,20 @@ You will also upload sample documents and test Document Intelligence's OCR capab
 
 1. On the **Overview** page, select **Go to Document Intelligence Studio** to open the studio in a new tab.
 
+1. Select **Start with Document Intelligence**.
+
+1. Under **Document analysis**, select **OCR/Read** by clicking on **Try it out**.
+
 1. If prompted on the **Sign into Microsoft Azure** tab, enter the provided credentials and select **Sign in**.
 
-   - **Email**: <inject key="AzureAdUserEmail" />
-   - **Password**: <inject key="AzureAdUserPassword" />
-
-1. Under **Document analysis**, select **OCR/Read**.
+   - **Email**: **<inject key="AzureAdUserEmail" />**
+   - **Password**: **<inject key="AzureAdUserPassword" />**
 
 1. In the top bar, click **Configure** and select:
 
    - **Subscription**: Select the available **Azure subscription**
    - **Resource**: Select **doc-intel-<inject key="DeploymentID" enableCopy="false"/>**
-   - click **Submit**
+   - click **Continue** and click on **Finish**.
 
 1. Click **Browse for files** and upload **invoice_contoso.pdf** from your sample documents.
 
