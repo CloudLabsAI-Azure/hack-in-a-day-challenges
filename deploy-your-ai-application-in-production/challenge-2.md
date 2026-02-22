@@ -25,32 +25,7 @@ This is where enterprises fail most often deploying services with default settin
 
 ## Steps to Complete
 
-### Task 1: Review Current Network Configuration
-
-First, understand what was deployed.
-
-1. **In Azure Portal**, navigate to your resource group: **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-
-2. **Find the Virtual Network**, name: **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
-
-3. Click on it, then click **Subnets** in the left menu
-
-4. **Note the subnets created**:
-
-   - `snet-ai-services` - For AI Foundry and OpenAI private endpoints
-   - `snet-storage-services` - For Storage and Key Vault private endpoints
-   - `snet-application` - For your application/VM
-
-5. Click on **snet-ai-services** subnet
-
-6. **Check if an NSG is attached**:
-
-   - Look for the "Network security group" field
-   - If it says "None", you'll create one
-   - If there's already one attached, note its name
-   - Close the pane
-
-### Task 2: Create Network Security Group for AI Services
+### Task 1: Create Network Security Group for AI Services
 
 Let's create an NSG with restrictive rules using the Azure Portal.
 
@@ -134,7 +109,7 @@ Let's create an NSG with restrictive rules using the Azure Portal.
    - **Subnet**: Select **snet-ai-services**
    - Click **OK**
 
-### Task 3: Disable Public Access on AI Services
+### Task 2: Disable Public Access on AI Services
 
 Now ensure no service accepts connections from the internet using the Azure Portal.
 
@@ -179,7 +154,7 @@ Now ensure no service accepts connections from the internet using the Azure Port
       - Under **Firewalls and virtual networks**, select **Disable public access**
       - Click **Apply**
 
-### Task 4: Create Private Endpoint for Azure Key Vault
+### Task 3: Create Private Endpoint for Azure Key Vault
 
 Now that public access is disabled, create a private endpoint to enable secure connectivity from your VNet.
 
@@ -233,7 +208,7 @@ Now that public access is disabled, create a private endpoint to enable secure c
 
 1. From the left select **DNS configuration**. **Note the private IP address** assigned (should be in 10.0.2.x range).
 
-### Task 5: Create Private Endpoint for Azure OpenAI
+### Task 4: Create Private Endpoint for Azure OpenAI
 
 Create a private endpoint for your OpenAI service to ensure all AI traffic stays within your VNET.
 
@@ -287,7 +262,7 @@ Create a private endpoint for your OpenAI service to ensure all AI traffic stays
 
 1. From the left select **DNS configuration**. **Note the private IP address** assigned (should be in 10.0.1.x range).
 
-### Task 6: Create Private Endpoint for Azure Storage Account
+### Task 5: Create Private Endpoint for Azure Storage Account
 
 Create a private endpoint for your Storage Account so that blob storage traffic stays within your VNET.
 
@@ -326,7 +301,7 @@ Create a private endpoint for your Storage Account so that blob storage traffic 
       - **Integrate with private DNS zone**: **Yes**
       - **Subscription**: Should be pre-selected
       - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-      - **Private DNS zones**: Should show **privatelink.blob.core.windows.net** (will be created if it doesn't exist)
+      - **Private DNS zones**: Should show **3** DNS zones.
       - Click **Next: Tags**
 
    - **Tags tab**:
@@ -341,7 +316,7 @@ Create a private endpoint for your Storage Account so that blob storage traffic 
 
 1. From the left, select **DNS configuration**. **Note the private IP address** assigned (should be in 10.0.2.x range).
 
-### Task 7: Verify Private DNS Configuration
+### Task 6: Verify Private DNS Configuration
 
 After creating private endpoints, verify that the Private DNS zones were created and linked to your VNET.
 
@@ -369,7 +344,7 @@ After creating private endpoints, verify that the Private DNS zones were created
 
    > **Why this matters**: Private DNS zones ensure that when your VM resolves names like `kv-secureai-<DID>.vault.azure.net`, it resolves to the private IP address instead of the public endpoint. This keeps all traffic within your VNET.
 
-### Task 8: Validate Private Endpoint Connectivity (Using VS Code)
+### Task 7: Validate Private Endpoint Connectivity (Using VS Code)
 
 Ensure all services are reachable via private endpoints only. For this validation, we'll use VS Code on **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**.
 
