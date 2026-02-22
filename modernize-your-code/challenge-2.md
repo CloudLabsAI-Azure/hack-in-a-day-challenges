@@ -17,9 +17,11 @@ In this challenge, you will create your first AI agent directly in the Microsoft
 
 ### Task 1: Navigate to the Agents Section
 
-1. Open **Microsoft Foundry** (https://ai.azure.com).
+1. Open **Microsoft Foundry**.
 
-1. Select your project: **sql-modernize-<inject key="DeploymentID" enableCopy="false"/>** (from Challenge 1).
+1. Select your project: **sql-modernize-<inject key="DeploymentID" enableCopy="false"/>**.
+
+1. Click on **Go to Foundary Portal**.
 
 1. In the left navigation menu, under **Build and customize**, click on **Agents**.
 
