@@ -26,11 +26,6 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
    > **Note:** These datasets intentionally contain data quality issues (nulls, duplicates, inconsistent formatting) to demonstrate real-world data cleansing scenarios.
 
-1. Preview the data to identify quality issues:
-
-   - **flight.csv** contains: Missing values (".", empty strings), inconsistent city names, mixed data types
-   - **customer_transactions.json** contains: Null values, duplicate records, inconsistent casing, invalid data, date format variations
-
 1. Keep the File Explorer window open for easy access during upload steps.
 
 ### Part 2: Upload Sample Data to Bronze Layer
@@ -43,7 +38,9 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
 1. Navigate to your **Microsoft Fabric workspace**: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
 
-1. Open your Lakehouse: **contoso-lakehouse-<inject key="DeploymentID" enableCopy="false"/>**
+1. Open your Lakehouse: **contoso-lakehouse-<inject key="DeploymentID" enableCopy="false"/>** 
+
+   > **Note:** Select the **Lakehouse** where the type is Lakehouse.
 
 1. In the Lakehouse Explorer, navigate to **Files** → **bronze** folder.
 
