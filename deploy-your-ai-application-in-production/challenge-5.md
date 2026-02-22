@@ -68,7 +68,6 @@ The application code is provided in a pre-built package.
 
    ```powershell
    $kvName = az keyvault list `
-   --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
    --query "[0].name" -o tsv
 
    Write-Host "Your Key Vault name: $kvName"
