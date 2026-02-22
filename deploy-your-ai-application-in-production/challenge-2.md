@@ -316,35 +316,7 @@ Create a private endpoint for your Storage Account so that blob storage traffic 
 
 1. From the left, select **DNS configuration**. **Note the private IP address** assigned (should be in 10.0.2.x range).
 
-### Task 6: Verify Private DNS Configuration
-
-After creating private endpoints, verify that the Private DNS zones were created and linked to your VNET.
-
-1. **In Azure Portal**, navigate to your resource group **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**.
-
-1. Look for Private DNS zone resources (filter by type "Private DNS zone"):
-
-   - **privatelink.vaultcore.azure.net**
-   - **privatelink.openai.azure.com**
-   - **privatelink.blob.core.windows.net**
-
-1. Click on **privatelink.vaultcore.azure.net**.
-
-1. In the left navigation, click **DNS Management** > **Virtual network links**.
-
-1. Verify that **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>** is listed with **Link status: Completed**.
-
-1. Click **Recordsets** in the left navigation.
-
-1. Verify you see an **A record** pointing to the private IP (10.0.2.x) of your Key Vault.
-
-1. **Repeat steps 3-7** for **privatelink.openai.azure.com** (should show A record to 10.0.1.x).
-
-1. **Repeat steps 3-7** for **privatelink.blob.core.windows.net** (should show A record to 10.0.2.x).
-
-   > **Why this matters**: Private DNS zones ensure that when your VM resolves names like `kv-secureai-<DID>.vault.azure.net`, it resolves to the private IP address instead of the public endpoint. This keeps all traffic within your VNET.
-
-### Task 7: Validate Private Endpoint Connectivity (Using VS Code)
+### Task 6: Validate Private Endpoint Connectivity (Using VS Code)
 
 Ensure all services are reachable via private endpoints only. For this validation, we'll use VS Code on **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**.
 
@@ -392,7 +364,7 @@ Ensure all services are reachable via private endpoints only. For this validatio
 
 The VNet should be linked to enable DNS resolution.
 
-### Task 9: Test DNS Resolution for Private Endpoints (Using VS Code)
+### Task 7: Test DNS Resolution for Private Endpoints (Using VS Code)
 
 Verify that service names resolve to private IP addresses (not public). Continue using VS Code PowerShell terminal.
 
@@ -441,7 +413,7 @@ Verify that service names resolve to private IP addresses (not public). Continue
 
 > **Note:** If the output returns an empty list `[]`, that's completely expected; no secrets have been added to the Key Vault yet. The important thing is that the command didn't return a network error, which confirms that private endpoint connectivity to Key Vault is working correctly.
 
-### Task 10: Validate Public Access is Blocked
+### Task 8: Validate Public Access is Blocked
 
 Verify that your services are properly locked down by checking network settings in the Azure Portal.
 
@@ -477,7 +449,7 @@ Verify that your services are properly locked down by checking network settings 
 
    - You should get **Error 403: Forbidden** or **Connection timeout** — This confirms that public access is blocked.
 
-### Task 11: Create NSG for Storage Subnet (Using Portal)
+### Task 9: Create NSG for Storage Subnet (Using Portal)
 
 Repeat NSG creation for the storage subnet using Azure Portal.
 
@@ -525,7 +497,7 @@ Repeat NSG creation for the storage subnet using Azure Portal.
    - **Subnet**: Select **snet-storage-services**
    - Click **OK**
 
-### Task 12: Document Your Network Configuration (Using VS Code)
+### Task 10: Document Your Network Configuration (Using VS Code)
 
 Save your network topology for reference using VS Code PowerShell terminal.
 
