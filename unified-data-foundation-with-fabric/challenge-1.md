@@ -93,9 +93,7 @@ Contoso Enterprises operates across multiple business units with data scattered 
 
    > **Hint:** Hover over the **Files** folder, click the **...**, select **Properties**, and copy the OneLake path. Save this value in a Notepad file for later use.
 
-### Task: Validation Prerequisite
-
-These tasks are required to be completed successfully to ensure the validation checks function correctly.
+### Task: Prerequisite
 
 1. Select **Workspaces (1)** from the left navigation pane, and then choose **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/> (2)** from the list.
 
