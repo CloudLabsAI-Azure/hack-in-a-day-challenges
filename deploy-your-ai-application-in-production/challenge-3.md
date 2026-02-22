@@ -25,6 +25,8 @@ Network isolation alone isn't enough. Even with private endpoints, you need stro
 - Test passwordless authentication to Azure OpenAI
 - Validate least-privilege access model
 
+In the **VS Code PowerShell terminal**, run the provided commands to complete the configuration tasks.
+
 ### Task 1: Enable System-Assigned Managed Identity on Your VM
 
 Your VM needs an identity to authenticate to Azure services without passwords or API keys.
@@ -113,8 +115,6 @@ Grant your VM's managed identity the necessary permissions via CLI.
 ### Task 3: Store OpenAI Configuration in Key Vault (Using VS Code)
 
 Instead of storing endpoints and keys in files, store them securely in Key Vault. Since Key Vault has public access disabled, you will temporarily enable it to add secrets from your VM.
-
-> **Note**: Open VS Code on your JumpVM and use the PowerShell terminal. Ensure you're logged in to Azure CLI (`az login`).
 
 1. **Get resource names and enable Key Vault public access temporarily**:
 
