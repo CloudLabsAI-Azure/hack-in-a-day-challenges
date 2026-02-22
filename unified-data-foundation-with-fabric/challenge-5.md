@@ -24,11 +24,13 @@ By the end of this challenge, you will:
 
 ## Part 1: Create a Data Science Notebook
 
-1. **Navigate to your Fabric workspace**: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
+1. Navigate to your **Microsoft Fabric workspace**: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
 
-1. Create a new notebook:
+1. Open your Lakehouse: **contoso-lakehouse-<inject key="DeploymentID" enableCopy="false"/>** 
 
-   - Click **+ New** and click on **Notebook**
+   > **Note:** Select the **Lakehouse** where the type is Lakehouse.
+
+1. Click on **Open notebook** and select **+ New notebook** and click on **Notebook**.
 
 1. Attach the Lakehouse:
 

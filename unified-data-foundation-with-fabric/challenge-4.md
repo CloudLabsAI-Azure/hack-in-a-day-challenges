@@ -23,7 +23,13 @@ By the end of this challenge, you will:
 
 ## Part 1: Load Silver Layer Data
 
-1. In your workspace, click **+ New** and click on **Notebook**
+1. Navigate to your **Microsoft Fabric workspace**: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
+
+1. Open your Lakehouse: **contoso-lakehouse-<inject key="DeploymentID" enableCopy="false"/>** 
+
+   > **Note:** Select the **Lakehouse** where the type is Lakehouse.
+
+1. Click on **Open notebook** and select **+ New notebook** and click on **Notebook**.
 
 1. Add and run the following code to load Silver layer tables:
 
