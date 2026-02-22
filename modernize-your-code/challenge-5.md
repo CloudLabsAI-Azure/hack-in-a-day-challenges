@@ -114,7 +114,7 @@ You need these below values to connect to your agents:
 
 1. Open the **.env** file and replace the placeholder with the values you copied earlier.
 
-1. Save the file.
+1. Save the file. 
 
 ### Task 5: Review the Code
 
