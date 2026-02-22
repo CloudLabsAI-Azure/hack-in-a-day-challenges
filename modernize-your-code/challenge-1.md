@@ -112,9 +112,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
       - **Account Name**: **sql-modernization-cosmos-<inject key="DeploymentID" enableCopy="false"/>**
       - **Availability Zones**: Select **Disable**
       - **Location**: Keep it **Default**
-      - **Capacity mode**: Select **Provisioned throughput**
-      - **Apply Free Tier Discount**: Select **Apply**
-      - **Limit total account throughput**: Keep it selected
+      - **Capacity mode**: **Serverless**
 
          >**Note:** If you are unable to create **Azure Cosmos DB** with the workload type set to **Development/Testing**, select **Production** and try again.
 

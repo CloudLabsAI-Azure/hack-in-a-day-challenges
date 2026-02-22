@@ -155,13 +155,14 @@ The application code is provided in a pre-built package.
 
    - **Deployment name**: `doc-processor`
    - **Deployment type**: **Global Standard**
+   - Click **Customize**.
    - **Tokens per Minute Rate Limit**: **40K**
 
       > **Note:** Do not set the Tokens per Minute rate limit above **40K**, as exceeding this limit may cause deployment or quota issues.
 
 1. Click **Deploy** and wait for the model to be ready.
 
-   > **Note:** If you are unable to deploy gpt-4.1-mini or the quota shows as zero, try changing the deployment type to Standard. If the issue persists, deploy the gpt-4.1 model instead
+   > **Note:** If you are unable to deploy gpt-4.1-mini or the quota shows as zero, try changing the deployment type to **Standard**. If the issue persists, deploy the gpt-4.1 model instead
 
 ### Task 6: Create Azure Cosmos DB Account
 
@@ -174,8 +175,10 @@ The application code is provided in a pre-built package.
    - **Subscription**: Select the available **Azure subscription**
    - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
    - **Account Name**: **cosmos-docs-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Region**: **<inject key="Region" />**
+   - **Location**: Keep it **Default**
    - **Capacity mode**: **Serverless**
+
+      >**Note:** If you are unable to create **Azure Cosmos DB** with the workload type set to **Development/Testing**, select **Production** and try again.
 
 1. Click **Review + Create**, then **Create**. Wait for deployment (this may take 3-5 minutes).
 
