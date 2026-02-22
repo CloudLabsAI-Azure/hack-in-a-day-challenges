@@ -42,75 +42,75 @@ Add the following code cells to your notebook:
 
 ### Cell 1: Import libraries and load data
 
-```python
-# Import required libraries
-import pandas as pd
-import numpy as np
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, when
+    ```python
+    # Import required libraries
+    import pandas as pd
+    import numpy as np
+    from pyspark.sql import SparkSession
+    from pyspark.sql.functions import col, when
 
-# Initialize Spark session (already available in Fabric)
-spark = SparkSession.builder.getOrCreate()
+    # Initialize Spark session (already available in Fabric)
+    spark = SparkSession.builder.getOrCreate()
 
-# Load Gold layer tables from Lakehouse
-df_kpi = spark.read.table("kpi_customer_value")
-df_customers = spark.read.table("dim_customers")
-df_flights = spark.read.table("fact_flights")
-df_transactions = spark.read.table("fact_transactions")
+    # Load Gold layer tables from Lakehouse
+    df_kpi = spark.read.table("kpi_customer_value")
+    df_customers = spark.read.table("dim_customers")
+    df_flights = spark.read.table("fact_flights")
+    df_transactions = spark.read.table("fact_transactions")
 
-print(f"KPI Data: {df_kpi.count()} records")
-print(f"Customer Dimension: {df_customers.count()} records")
-print(f"Flight Facts: {df_flights.count()} records")
-print(f"Transaction Facts: {df_transactions.count()} records")
+    print(f"KPI Data: {df_kpi.count()} records")
+    print(f"Customer Dimension: {df_customers.count()} records")
+    print(f"Flight Facts: {df_flights.count()} records")
+    print(f"Transaction Facts: {df_transactions.count()} records")
 
-# Display sample data
-display(df_kpi.limit(10))
-```
+    # Display sample data
+    display(df_kpi.limit(10))
+    ```
 
 ### Cell 2: Prepare features for ML
 
-```python
-from pyspark.sql.functions import col, when, coalesce, lit
+    ```python
+    from pyspark.sql.functions import col, when, coalesce, lit
 
-# Create enhanced features for clustering
-df_ml_features = df_kpi.select(
-    col("customer_key"),
-    col("age"),
-    col("total_flights"),
-    col("total_km_flown"),
-    col("total_loyalty_points"),
-    col("days_since_last_flight"),
-    coalesce(col("total_spent"), lit(0)).alias("total_spent"),
-    coalesce(col("transaction_count"), lit(0)).alias("transaction_count")
-).na.drop()
+    # Create enhanced features for clustering
+    df_ml_features = df_kpi.select(
+        col("customer_key"),
+        col("age"),
+        col("total_flights"),
+        col("total_km_flown"),
+        col("total_loyalty_points"),
+        col("days_since_last_flight"),
+        coalesce(col("total_spent"), lit(0)).alias("total_spent"),
+        coalesce(col("transaction_count"), lit(0)).alias("transaction_count")
+    ).na.drop()
 
-# Add RFM-like scores (Recency, Frequency, Monetary)
-df_ml_features = df_ml_features.withColumn(
-    "recency_score",
-    when(col("days_since_last_flight") <= 90, 5)
-    .when(col("days_since_last_flight") <= 180, 4)
-    .when(col("days_since_last_flight") <= 365, 3)
-    .when(col("days_since_last_flight") <= 730, 2)
-    .otherwise(1)
-).withColumn(
-    "frequency_score",
-    when(col("total_flights") >= 40, 5)
-    .when(col("total_flights") >= 20, 4)
-    .when(col("total_flights") >= 10, 3)
-    .when(col("total_flights") >= 5, 2)
-    .otherwise(1)
-).withColumn(
-    "monetary_score",
-    when(col("total_loyalty_points") >= 50000, 5)
-    .when(col("total_loyalty_points") >= 20000, 4)
-    .when(col("total_loyalty_points") >= 10000, 3)
-    .when(col("total_loyalty_points") >= 5000, 2)
-    .otherwise(1)
-)
+    # Add RFM-like scores (Recency, Frequency, Monetary)
+    df_ml_features = df_ml_features.withColumn(
+        "recency_score",
+        when(col("days_since_last_flight") <= 90, 5)
+        .when(col("days_since_last_flight") <= 180, 4)
+        .when(col("days_since_last_flight") <= 365, 3)
+        .when(col("days_since_last_flight") <= 730, 2)
+        .otherwise(1)
+    ).withColumn(
+        "frequency_score",
+        when(col("total_flights") >= 40, 5)
+        .when(col("total_flights") >= 20, 4)
+        .when(col("total_flights") >= 10, 3)
+        .when(col("total_flights") >= 5, 2)
+        .otherwise(1)
+    ).withColumn(
+        "monetary_score",
+        when(col("total_loyalty_points") >= 50000, 5)
+        .when(col("total_loyalty_points") >= 20000, 4)
+        .when(col("total_loyalty_points") >= 10000, 3)
+        .when(col("total_loyalty_points") >= 5000, 2)
+        .otherwise(1)
+    )
 
-print(f"ML dataset prepared: {df_ml_features.count()} customers")
-display(df_ml_features.limit(10))
-```
+    print(f"ML dataset prepared: {df_ml_features.count()} customers")
+    display(df_ml_features.limit(10))
+    ```
 
 ## Part 3: Perform Customer Segmentation with K-Means
 
@@ -189,203 +189,203 @@ print(df_pandas['segment'].value_counts().sort_index())
 
 ### Cell 5: Analyze segment characteristics
 
-```python
-# Analyze each segment's profile
-segment_profile = df_pandas.groupby('segment').agg({
-    'customer_key': 'count',
-    'age': 'mean',
-    'total_flights': 'mean',
-    'total_km_flown': 'mean',
-    'total_loyalty_points': 'mean',
-    'days_since_last_flight': 'mean',
-    'total_spent': 'mean',
-    'recency_score': 'mean',
-    'frequency_score': 'mean',
-    'monetary_score': 'mean'
-}).round(2)
+    ```python
+    # Analyze each segment's profile
+    segment_profile = df_pandas.groupby('segment').agg({
+        'customer_key': 'count',
+        'age': 'mean',
+        'total_flights': 'mean',
+        'total_km_flown': 'mean',
+        'total_loyalty_points': 'mean',
+        'days_since_last_flight': 'mean',
+        'total_spent': 'mean',
+        'recency_score': 'mean',
+        'frequency_score': 'mean',
+        'monetary_score': 'mean'
+    }).round(2)
 
-segment_profile.columns = ['customer_count', 'avg_age', 'avg_flights', 'avg_km', 
-                            'avg_points', 'avg_days_since_flight', 'avg_spent',
-                            'avg_recency', 'avg_frequency', 'avg_monetary']
+    segment_profile.columns = ['customer_count', 'avg_age', 'avg_flights', 'avg_km', 
+                                'avg_points', 'avg_days_since_flight', 'avg_spent',
+                                'avg_recency', 'avg_frequency', 'avg_monetary']
 
-print("=== Customer Segment Profiles ===")
-print(segment_profile)
+    print("=== Customer Segment Profiles ===")
+    print(segment_profile)
 
-# Visualize segment profiles
-import matplotlib.pyplot as plt
-import seaborn as sns
+    # Visualize segment profiles
+    import matplotlib.pyplot as plt
+    import seaborn as sns
 
-# Set style
-sns.set_style("whitegrid")
+    # Set style
+    sns.set_style("whitegrid")
 
-# Create subplots for key metrics
-fig, axes = plt.subplots(2, 3, figsize=(15, 10))
-fig.suptitle('Customer Segment Analysis', fontsize=16, fontweight='bold')
+    # Create subplots for key metrics
+    fig, axes = plt.subplots(2, 3, figsize=(15, 10))
+    fig.suptitle('Customer Segment Analysis', fontsize=16, fontweight='bold')
 
-# Plot 1: Customer count
-axes[0, 0].bar(segment_profile.index, segment_profile['customer_count'], color='steelblue')
-axes[0, 0].set_title('Customers per Segment')
-axes[0, 0].set_xlabel('Segment')
-axes[0, 0].set_ylabel('Count')
+    # Plot 1: Customer count
+    axes[0, 0].bar(segment_profile.index, segment_profile['customer_count'], color='steelblue')
+    axes[0, 0].set_title('Customers per Segment')
+    axes[0, 0].set_xlabel('Segment')
+    axes[0, 0].set_ylabel('Count')
 
-# Plot 2: Average flights
-axes[0, 1].bar(segment_profile.index, segment_profile['avg_flights'], color='darkorange')
-axes[0, 1].set_title('Average Flights')
-axes[0, 1].set_xlabel('Segment')
-axes[0, 1].set_ylabel('Flights')
+    # Plot 2: Average flights
+    axes[0, 1].bar(segment_profile.index, segment_profile['avg_flights'], color='darkorange')
+    axes[0, 1].set_title('Average Flights')
+    axes[0, 1].set_xlabel('Segment')
+    axes[0, 1].set_ylabel('Flights')
 
-# Plot 3: Average loyalty points
-axes[0, 2].bar(segment_profile.index, segment_profile['avg_points'], color='green')
-axes[0, 2].set_title('Average Loyalty Points')
-axes[0, 2].set_xlabel('Segment')
-axes[0, 2].set_ylabel('Points')
+    # Plot 3: Average loyalty points
+    axes[0, 2].bar(segment_profile.index, segment_profile['avg_points'], color='green')
+    axes[0, 2].set_title('Average Loyalty Points')
+    axes[0, 2].set_xlabel('Segment')
+    axes[0, 2].set_ylabel('Points')
 
-# Plot 4: Average spending
-axes[1, 0].bar(segment_profile.index, segment_profile['avg_spent'], color='purple')
-axes[1, 0].set_title('Average Spending')
-axes[1, 0].set_xlabel('Segment')
-axes[1, 0].set_ylabel('Amount')
+    # Plot 4: Average spending
+    axes[1, 0].bar(segment_profile.index, segment_profile['avg_spent'], color='purple')
+    axes[1, 0].set_title('Average Spending')
+    axes[1, 0].set_xlabel('Segment')
+    axes[1, 0].set_ylabel('Amount')
 
-# Plot 5: RFM Scores
-x_pos = np.arange(len(segment_profile))
-axes[1, 1].plot(x_pos, segment_profile['avg_recency'], marker='o', label='Recency', linewidth=2)
-axes[1, 1].plot(x_pos, segment_profile['avg_frequency'], marker='s', label='Frequency', linewidth=2)
-axes[1, 1].plot(x_pos, segment_profile['avg_monetary'], marker='^', label='Monetary', linewidth=2)
-axes[1, 1].set_title('RFM Scores by Segment')
-axes[1, 1].set_xlabel('Segment')
-axes[1, 1].set_ylabel('Score')
-axes[1, 1].set_xticks(x_pos)
-axes[1, 1].legend()
+    # Plot 5: RFM Scores
+    x_pos = np.arange(len(segment_profile))
+    axes[1, 1].plot(x_pos, segment_profile['avg_recency'], marker='o', label='Recency', linewidth=2)
+    axes[1, 1].plot(x_pos, segment_profile['avg_frequency'], marker='s', label='Frequency', linewidth=2)
+    axes[1, 1].plot(x_pos, segment_profile['avg_monetary'], marker='^', label='Monetary', linewidth=2)
+    axes[1, 1].set_title('RFM Scores by Segment')
+    axes[1, 1].set_xlabel('Segment')
+    axes[1, 1].set_ylabel('Score')
+    axes[1, 1].set_xticks(x_pos)
+    axes[1, 1].legend()
 
-# Plot 6: Days since last flight
-axes[1, 2].bar(segment_profile.index, segment_profile['avg_days_since_flight'], color='red')
-axes[1, 2].set_title('Avg Days Since Last Flight')
-axes[1, 2].set_xlabel('Segment')
-axes[1, 2].set_ylabel('Days')
+    # Plot 6: Days since last flight
+    axes[1, 2].bar(segment_profile.index, segment_profile['avg_days_since_flight'], color='red')
+    axes[1, 2].set_title('Avg Days Since Last Flight')
+    axes[1, 2].set_xlabel('Segment')
+    axes[1, 2].set_ylabel('Days')
 
-plt.tight_layout()
-plt.show()
+    plt.tight_layout()
+    plt.show()
 
-# Log visualizations to MLflow
-mlflow.log_figure(fig, "segment_analysis.png")
-```
+    # Log visualizations to MLflow
+    mlflow.log_figure(fig, "segment_analysis.png")
+    ```
 
 ### Cell 6: Assign business-friendly segment names
 
-```python
-# Assign business-friendly names based on segment characteristics
-# Analyze each segment and assign meaningful names
+    ```python
+    # Assign business-friendly names based on segment characteristics
+    # Analyze each segment and assign meaningful names
 
-def assign_segment_name(row):
-    segment = row['segment']
-    
-    # Segment 0: High recency, low frequency/monetary - likely churned
-    # Segment 1: High all-round scores - premium customers
-    # Segment 2: Moderate scores - regular customers
-    # Segment 3: Low frequency but recent - new joiners
-    # Segment 4: Low engagement - at risk
-    
-    # You should analyze segment_profile and adjust these mappings
-    segment_names = {
-        0: "At-Risk Customers",
-        1: "Premium Elite Members",
-        2: "Loyal Frequent Flyers",
-        3: "New Joiners",
-        4: "Occasional Travelers"
-    }
-    
-    return segment_names.get(segment, "Uncategorized")
+    def assign_segment_name(row):
+        segment = row['segment']
+        
+        # Segment 0: High recency, low frequency/monetary - likely churned
+        # Segment 1: High all-round scores - premium customers
+        # Segment 2: Moderate scores - regular customers
+        # Segment 3: Low frequency but recent - new joiners
+        # Segment 4: Low engagement - at risk
+        
+        # You should analyze segment_profile and adjust these mappings
+        segment_names = {
+            0: "At-Risk Customers",
+            1: "Premium Elite Members",
+            2: "Loyal Frequent Flyers",
+            3: "New Joiners",
+            4: "Occasional Travelers"
+        }
+        
+        return segment_names.get(segment, "Uncategorized")
 
-df_pandas['segment_name'] = df_pandas.apply(assign_segment_name, axis=1)
+    df_pandas['segment_name'] = df_pandas.apply(assign_segment_name, axis=1)
 
-print("=== Segment Name Distribution ===")
-print(df_pandas['segment_name'].value_counts())
+    print("=== Segment Name Distribution ===")
+    print(df_pandas['segment_name'].value_counts())
 
-# Display sample of enriched data
-print("\n=== Sample Enriched Customer Data ===")
-print(df_pandas[['customer_key', 'age', 'total_flights', 'total_loyalty_points', 
-                  'segment', 'segment_name']].head(20))
-```
+    # Display sample of enriched data
+    print("\n=== Sample Enriched Customer Data ===")
+    print(df_pandas[['customer_key', 'age', 'total_flights', 'total_loyalty_points', 
+                    'segment', 'segment_name']].head(20))
+    ```
 
 ## Part 4: Write Enriched Data Back to Lakehouse
 
 ### Cell 7: Create enriched customer table
 
-```python
-# Convert back to Spark DataFrame
-df_enriched_spark = spark.createDataFrame(df_pandas)
+    ```python
+    # Convert back to Spark DataFrame
+    df_enriched_spark = spark.createDataFrame(df_pandas)
 
-# Join with original KPI data to get all fields
-df_customers_enriched = df_kpi.join(
-    df_enriched_spark.select("customer_key", "segment", "segment_name"),
-    on="customer_key",
-    how="left"
-)
+    # Join with original KPI data to get all fields
+    df_customers_enriched = df_kpi.join(
+        df_enriched_spark.select("customer_key", "segment", "segment_name"),
+        on="customer_key",
+        how="left"
+    )
 
-print(f"Enriched customer data created: {df_customers_enriched.count()} records")
+    print(f"Enriched customer data created: {df_customers_enriched.count()} records")
 
-# Display sample
-display(df_customers_enriched.select("customer_key", "age", "total_flights", 
-                                      "total_loyalty_points", "customer_status", 
-                                      "segment", "segment_name").limit(20))
-```
+    # Display sample
+    display(df_customers_enriched.select("customer_key", "age", "total_flights", 
+                                        "total_loyalty_points", "customer_status", 
+                                        "segment", "segment_name").limit(20))
+    ```
 
 ### Cell 8: Write ML results to Gold layer
 
-```python
-# Write the enriched customer segments to Gold layer
-df_customers_enriched.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable("gold_customer_segments_ml")
+    ```python
+    # Write the enriched customer segments to Gold layer
+    df_customers_enriched.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable("gold_customer_segments_ml")
 
-print("ML-enriched customer segments written to Gold layer!")
-print(f"  Table: gold_customer_segments_ml")
-print(f"  Records: {df_customers_enriched.count()}")
+    print("ML-enriched customer segments written to Gold layer!")
+    print(f"  Table: gold_customer_segments_ml")
+    print(f"  Records: {df_customers_enriched.count()}")
 
-# Create segment summary table
-df_segment_summary_spark = spark.createDataFrame(segment_profile.reset_index())
+    # Create segment summary table
+    df_segment_summary_spark = spark.createDataFrame(segment_profile.reset_index())
 
-df_segment_summary_spark.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .option("overwriteSchema", "true") \
-    .saveAsTable("gold_segment_summary")
+    df_segment_summary_spark.write \
+        .format("delta") \
+        .mode("overwrite") \
+        .option("overwriteSchema", "true") \
+        .saveAsTable("gold_segment_summary")
 
-print("\nSegment summary table created!")
-print(f"  Table: gold_segment_summary")
+    print("\nSegment summary table created!")
+    print(f"  Table: gold_segment_summary")
 
-# Display the summary
-display(df_segment_summary_spark)
-```
+    # Display the summary
+    display(df_segment_summary_spark)
+    ```
 
 ## Part 5: Validate ML Results in Lakehouse
 
 ### Cell 9: Query the new ML-enriched tables
 
-```python
-# Verify the tables were created successfully
-print("=== Validating Gold Layer ML Tables ===\n")
+    ```python
+    # Verify the tables were created successfully
+    print("=== Validating Gold Layer ML Tables ===\n")
 
-# Check gold_customer_segments_ml
-ml_segments = spark.read.table("gold_customer_segments_ml")
-print(f"gold_customer_segments_ml: {ml_segments.count()} records")
+    # Check gold_customer_segments_ml
+    ml_segments = spark.read.table("gold_customer_segments_ml")
+    print(f"gold_customer_segments_ml: {ml_segments.count()} records")
 
-# Check gold_segment_summary
-segment_summary = spark.read.table("gold_segment_summary")
-print(f"gold_segment_summary: {segment_summary.count()} records")
+    # Check gold_segment_summary
+    segment_summary = spark.read.table("gold_segment_summary")
+    print(f"gold_segment_summary: {segment_summary.count()} records")
 
-# Show segment distribution
-print("\n=== Segment Distribution ===")
-ml_segments.groupBy("segment_name").count().orderBy("count", ascending=False).show()
+    # Show segment distribution
+    print("\n=== Segment Distribution ===")
+    ml_segments.groupBy("segment_name").count().orderBy("count", ascending=False).show()
 
-# Show sample enriched records
-print("\n=== Sample Enriched Customer Records ===")
-display(ml_segments.select("customer_key", "age", "gender", "loyalty_tier", 
-                           "total_flights", "total_loyalty_points", "total_spent",
-                           "customer_status", "segment", "segment_name").limit(20))
-```
+    # Show sample enriched records
+    print("\n=== Sample Enriched Customer Records ===")
+    display(ml_segments.select("customer_key", "age", "gender", "loyalty_tier", 
+                            "total_flights", "total_loyalty_points", "total_spent",
+                            "customer_status", "segment", "segment_name").limit(20))
+    ```
 
 ## Part 6: View ML Experiments in Fabric
 
