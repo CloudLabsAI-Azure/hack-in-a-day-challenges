@@ -142,20 +142,21 @@ Before running the application, take a moment to explore the code:
 
 ### Task 6: Install Dependencies
 
-Open a terminal in the `codefiles` folder and run:
+1. In the terminal run:
 
-```bash
-pip install -r requirements.txt
-```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-This installs:
-- `streamlit` - Web framework
-- `azure-ai-agents` - Azure AI Agents SDK (for thread/message/run operations)
-- `azure-ai-projects` - Microsoft Foundry SDK (for project management)
-- `azure-identity` - Azure authentication
-- `azure-cosmos` - Cosmos DB SDK
-- `python-dotenv` - Environment variables
-- `pandas` - Data processing
+1. This installs:
+
+   - `streamlit` - Web framework
+   - `azure-ai-agents` - Azure AI Agents SDK (for thread/message/run operations)
+   - `azure-ai-projects` - Microsoft Foundry SDK (for project management)
+   - `azure-identity` - Azure authentication
+   - `azure-cosmos` - Cosmos DB SDK
+   - `python-dotenv` - Environment variables
+   - `pandas` - Data processing
 
 ### Task 7: Run the Application
 
