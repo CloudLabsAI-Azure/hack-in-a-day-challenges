@@ -408,7 +408,7 @@ print(df_pandas['segment'].value_counts().sort_index())
 
 ## Part 7: Save the Notebook
 
-1. Click the **Save** icon (or press Ctrl+S)
+1. Click the **Save as**.
 
 1. In the "Save as new notebook" dialog:
    - **Name**: **ML_Customer_Segmentation**

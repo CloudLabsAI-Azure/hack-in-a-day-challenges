@@ -383,7 +383,7 @@ Create a summary table for dashboard consumption:
 
 ## Part 8: Save the Notebook
 
-1. Click the **Save** icon (or press Ctrl+S)
+1. Click the **Save as**.
 
 1. In the "Save as new notebook" dialog:
    - **Name**: **04_Gold_Layer_Dimensional_Modeling**

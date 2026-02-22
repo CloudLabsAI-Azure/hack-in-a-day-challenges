@@ -321,7 +321,7 @@ The Bronze layer contains raw, unprocessed data with significant quality issues-
 
 ### Part 6: Save the Notebook
 
-1. Click the **Save** icon (or press Ctrl+S)
+1. Click the **Save as** icon
 
 1. In the "Save as new notebook" dialog:
    - **Name**: **Bronze-to-Silver-Transformation**
