@@ -66,59 +66,40 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/fab-kynd-ex1-g4.png)
 
-1. Select the **Profile (1)** icon, and then choose **Free trial (2)**.
+1. Now in a new browser tab, navigate to the **Azure portal**.
 
-   ![](./media/fab-kynd-ex1-g5.png)
+   ```
+   https://portal.azure.com/
+   ```
 
-1. On the **Activate your 60-day free Fabric trial capacity** dialog box, review the **Trial capacity region**, and then select **Activate**.
+If prompted to sign in, enter the provided credentials, and then click **Next** to proceed.
 
-   ![](./media/fab-kynd-ex1-g6.png)
+   - Email/Username: <inject key="AzureAdUserEmail"></inject>
 
-1. On the **Successfully upgraded to Microsoft Fabric** dialog box, select **OK**.
+   - Password: <inject key="AzureAdUserPassword"></inject>
 
-   ![](./media/fab-kynd-ex1-g7.png)
+1. In the search bar, enter **Microsoft Fabric (1)**, and then select **Microsoft Fabric (2)** from the results.
 
-1. On the **Invite teammates to try Fabric to extend your trial** dialog box, select the **Close (X)** icon to dismiss the prompt.
+   ![](./media/fab-kynd-ex1-g1.png)
 
-   ![](./media/fab-kynd-ex1-g8.png)
+1. On the **Microsoft Fabric** page, select **Create**.
 
-1. Select the **Profile (1)** icon, and verify that the **Fabric and Power BI trial status (2)** shows the trial is active.
+   ![](./media/fab-kynd-ex1-g2.png)
 
-   ![](./media/fab-kynd-ex1-g9.png)
+1. In the **Create Fabric capacity** page, configure the following settings:
 
-1. Welcome to **Microsoft Fabric**! You're now ready to start building your data lakehouse solution using Microsoft Fabric, OneLake, and the Medallion architecture for data engineering with flight loyalty and transaction data.
+   - **Subscription (1)**: Select the default subscription  
+   - **Resource group (2)**: **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**  
+   - **Capacity name (3)**: **fabriccapacity<inject key="DeploymentID" enableCopy="false"/>**  
+   - **Region (4)**: Keep the ** default Region** 
+   - **Size (5)**: Select **F2**  
+   - Select **Review + create (6)**
 
-   **Note:** If you are unable to access the free trial, follow the steps below:
+      ![](./media/unified-kynd-ggs-g3.png)
 
-      1. Open a new browser tab, and navigate to the **Azure portal**.
+1. On the **Microsoft Fabric** page, select **Create**.
 
-         ```
-         https://portal.azure.com/
-         ```
-
-      1. In the search bar, enter **Microsoft Fabric (1)**, and then select **Microsoft Fabric (2)** from the results.
-
-         ![](./media/fab-kynd-ex1-g1.png)
-      
-      1. On the **Microsoft Fabric** page, select **Create**.
-
-         ![](./media/fab-kynd-ex1-g2.png)
-
-      1. In the **Create Fabric capacity** page, configure the following settings:
-
-         - **Subscription (1)**: Select the default subscription  
-         - **Resource group (2)**: **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**  
-         - **Capacity name (3)**: **fabriccapacity<inject key="DeploymentID" enableCopy="false"/>**  
-         - **Region (4)**: Keep the ** default Region** 
-         - **Size (5)**: Select **F2**  
-         - Select **Review + create (6)**
-
-            ![](./media/unified-kynd-ggs-g3.png)
-
-      1. On the **Microsoft Fabric** page, select **Create**.
-
-         ![](./media/unified-kynd-ggs-g4.png)
-
+   ![](./media/unified-kynd-ggs-g4.png)
 
 Now, click on the **Next** from lower right corner to move on next page.
 
