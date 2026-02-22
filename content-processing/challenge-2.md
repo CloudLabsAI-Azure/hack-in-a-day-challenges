@@ -17,9 +17,13 @@ Getting classification right is critical because it determines which extraction 
 
 ### Task 1: Navigate and Configure Microsoft Foundry Agents
 
-1. Go to **Microsoft Foundry**.
+1. Open **Microsoft Foundry**.
 
-1. In the left navigation menu, click **Agents**.
+1. Select your project: **openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>**.
+
+1. Click on **Go to Foundary Portal**.
+
+1. In the left navigation menu, under **Build and customize**, click on **Agents**.
 
 1. Choose the existing **Default Agent**
 
