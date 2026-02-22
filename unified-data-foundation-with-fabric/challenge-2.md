@@ -15,13 +15,9 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
 ### Part 1: Access Sample Dataset Files
 
-1. On the **LabVM**, open **File Explorer** and navigate to the dataset folder:
+1. On the **LabVM**, open **File Explorer** and navigate to the dataset folder from `C:\working-dir\hack-in-a-day-challenges-unified-data-foundation-with-fabric` (or to the location where the files were extracted).
 
-   ```
-   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/unified-data-foundation-with-fabric.zip
-   ```
-
-   > **Note:** If you haven't downloaded the datasets yet, refer to Challenge 01 for the download link and extract the ZIP file to `C:\LabFiles\`
+   > **Note:** If you haven't downloaded the datasets yet, refer to Challenge 01 for the download link and extract the ZIP file.
    
 1. Verify the following sample files are available:
 
