@@ -262,6 +262,13 @@ Moment of truth!
       # Should return NO MATCHES - all auth goes through Managed Identity!
       ```
 
+<validation step="2fdf5b82-f5c0-403b-bf34-a222b7a5daa4" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ## Success Criteria
 
 Validate your app deployment:
