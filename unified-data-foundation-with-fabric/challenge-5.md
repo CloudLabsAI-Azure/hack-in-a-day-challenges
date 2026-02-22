@@ -433,6 +433,8 @@ Add the following code cells to your notebook:
    - **Select location**: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
    - Click **Save**
 
+1. Review the active sessions, and close any running **notebook** session to ensure only one session remains active.
+
 <validation step="35ad3f50-8129-449e-a122-1c1737eec0db" />
 
 > **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:

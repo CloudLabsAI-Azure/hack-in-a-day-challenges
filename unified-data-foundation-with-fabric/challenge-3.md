@@ -328,6 +328,8 @@ The Bronze layer contains raw, unprocessed data with significant quality issues-
    - **Select location**: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
    - Click **Save**
 
+1. Review the active sessions, and close any running **notebook** session to ensure only one session remains active.
+
 ## Success Criteria
 
 - Fabric Notebook created and attached to Lakehouse successfully.

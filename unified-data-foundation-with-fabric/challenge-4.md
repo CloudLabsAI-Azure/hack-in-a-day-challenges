@@ -406,6 +406,8 @@ Create a summary table for dashboard consumption:
    - **Select location**: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
    - Click **Save**
 
+1. Review the active sessions, and close any running **notebook** session to ensure only one session remains active.
+
 ## Success Criteria
 
 - Customer, geography, and time dimensions created
