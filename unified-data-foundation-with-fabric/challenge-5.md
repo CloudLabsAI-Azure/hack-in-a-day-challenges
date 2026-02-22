@@ -73,6 +73,8 @@ Add the following code cells to your notebook:
 
 ### Cell 2: Prepare features for ML
 
+1. Add and run the following code.
+
     ```python
     from pyspark.sql.functions import col, when, coalesce, lit
 
