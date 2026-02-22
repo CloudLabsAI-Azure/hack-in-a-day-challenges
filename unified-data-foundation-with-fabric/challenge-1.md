@@ -41,29 +41,12 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
    - **Description**: **Contoso unified analytics workspace**
 
 1. In the **Advanced settings** section:
-   - **Workspace type**: Select **Fabric Trial**  
-   - **Fabric capacity**: Keep the default  
+   - **Workspace type**: Select **Fabric**   
+   - **Details**: Ensure its selected to **fabriccapacity<inject key="DeploymentID" enableCopy="false"/>**.
    - **Semantic model storage format**: Keep **Small semantic model storage format**
+   - Click **Apply**
 
-      > **Note:** If you are unable to use the **Fabric Trial** and have deployed a Fabric capacity from the Azure portal, select **Fabric** as the **Workspace type**, and then choose the Fabric capacity that you deployed in Azure. Make sure the workspace is assigned to an active Fabric capacity, or it will not function properly.
-
-1. Click **Apply**
-
-1. Once the workspace is created, explore the **Home** page to familiarize yourself with Fabric components:
-
-   - **Data Engineering**: Lakehouses, Data Pipelines, Notebooks
-   - **Data Science**: ML models, experiments
-   - **Data Warehouse**: SQL analytics endpoints
-   - **Real-Time Analytics**: Event streams and KQL databases
-   - **Power BI**: Reports and dashboards
-
-1. Navigate to the **OneLake catalog** from the left navigation pane to understand:
-
-   - OneLake provides a **single unified namespace** for all data across your organization
-   - All Fabric workloads (Lakehouses, Warehouses, KQL databases) automatically store data in OneLake
-   - OneLake uses **Delta Lake** format by default for transactional consistency
-
-1. Review the **Medallion Architecture** pattern you'll implement:
+1. The following illustrates the **Medallion Architecture** pattern that you will implement:
 
    - **Bronze Layer (Raw Zone)**: Stores raw, unprocessed data exactly as ingested from source systems (CSV, JSON, Parquet, logs)
    - **Silver Layer (Cleansed Zone)**: Contains validated, deduplicated, and standardized data with quality checks applied
@@ -71,29 +54,30 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
 1. Create your first **Lakehouse** that will hold all three layers:
 
-   - In the Fabric workspace, select **+ New** → **Lakehouse**
+   - In the Fabric workspace which is **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
+   - select **+ New**.
+   - Search and Select **Lakehouse**.
    - Name: **contoso_lakehouse_<inject key="DeploymentID" enableCopy="false"/>**
+   - Location: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
    - Click **Create**
 
-1. Once created, explore the Lakehouse structure:
-
-   - **Files**: For storing raw files (Bronze layer)
-   - **Tables**: For Delta Lake tables (Silver and Gold layers)
-   - **SQL analytics endpoint**: For querying tables using T-SQL
-
-1. Within the Lakehouse, create a folder structure for the Medallion layers:
+1. Within the Lakehouse, we will now create a folders for the Medallion layers:
 
 1. In the **Files** section, create three folders:
    - **bronze**
    - **silver** 
    - **gold**
 
-   > **Hint:** Click on the **...** (more options) next to Files and select **New subfolder**.
+   > **Hint:** Hover over the **Files** folder, click the **...** and select **New subfolder**.
+
+   > **Important:** Create the folders using the exact names shown above, ensuring the correct spelling and case sensitivity.
 
 1. Take note of the **OneLake path** displayed in the properties:
 
    - Format: `abfss://[workspace]@onelake.dfs.fabric.microsoft.com/[lakehouse]/Files`
    - This path can be used across all Fabric workloads for unified data access
+
+   > **Hint:** Hover over the **Files** folder, click the **...**, select **Properties**, and copy the OneLake path. Save this value in a Notepad file for later use.
 
 ## Success Criteria
 
