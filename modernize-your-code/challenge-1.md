@@ -72,7 +72,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
          > **Important**: Do not increase the TPM limit beyond 50K to avoid exceeding quota limits and additional costs.
 
-1. Click on **Create**.
+1. Click on **Deploy**.
 
       > **Note:** If you are unable to deploy gpt-4.1-mini or the quota shows as zero, try changing the deployment type to Standard. If the issue persists, deploy the gpt-4.1 model instead
 

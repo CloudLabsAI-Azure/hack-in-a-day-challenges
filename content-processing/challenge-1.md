@@ -107,7 +107,7 @@ The application code is provided in a pre-built package.
    - **Resource**: Select **doc-intel-<inject key="DeploymentID" enableCopy="false"/>**
    - click **Continue** and click on **Finish**.
 
-1. Click **Browse for files** and upload **invoice_contoso.pdf** from your sample documents.
+1. Click **Browse for files** and upload **pdf** from your sample documents.
 
 1. Click **Run analysis** and wait for results.
 
@@ -149,17 +149,19 @@ The application code is provided in a pre-built package.
 
 1. Click **+ Deploy model** and select **Deploy base model**.
 
-1. Search for and select **GPT-4.1** from the model catalog and click on **Confirm** button.
+1. Search for and select **gpt-4.1-mini** from the model catalog and click on **Confirm** button.
 
 1. Configure the deployment:
 
    - **Deployment name**: `doc-processor`
-   - **Deployment type**: **Standard**
+   - **Deployment type**: **Global Standard**
    - **Tokens per Minute Rate Limit**: **40K**
 
       > **Note:** Do not set the Tokens per Minute rate limit above **40K**, as exceeding this limit may cause deployment or quota issues.
 
 1. Click **Deploy** and wait for the model to be ready.
+
+   > **Note:** If you are unable to deploy gpt-4.1-mini or the quota shows as zero, try changing the deployment type to Standard. If the issue persists, deploy the gpt-4.1 model instead
 
 ### Task 6: Create Azure Cosmos DB Account
 
