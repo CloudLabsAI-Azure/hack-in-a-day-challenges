@@ -135,16 +135,19 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
       >**Note:** Close all pop-up windows.
 
-2. Click **+ New Container** drop-down. From the drop-down, select **+ New Database**.
+1. Click **+ New Container** drop-down. From the drop-down, select **+ New Database**.
 
-3. Configure the database:
+1. Configure the database:
 
-      - **Database id**: `SQLModernizationDB`
-      - Click **OK**
+   - **Database id**: `SQLModernizationDB`
+   - Enable **Provision throughput** checkbox.
+   - Database throughput: Select **Manual**.
+   - **Database Required RU/s**: `400`
+   - Click **OK**
 
-4. Click **OK**.
+      > **Important**: Do not set the RU/s value higher than `400`.
 
-5. Create the first container for translation results:
+1. Create the first container for translation results:
 
     - Right-Click on the **SQLModernizationDB** and click **New Container**
     - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
@@ -152,7 +155,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
     - **Partition key**: `/sourceDialect`
     - Click **OK**
 
-6. Create a second container for validation logs:
+1. Create a second container for validation logs:
 
     - Right-Click on the **SQLModernizationDB** and click **New Container** again
     - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
@@ -160,7 +163,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
     - **Partition key**: `/translationId`
     - Click **OK**
 
-7. Create a third container for optimization suggestions:
+1. Create a third container for optimization suggestions:
 
       - Right-Click on the **SQLModernizationDB** and click **New Container** again
       - **Database id**: Select **Use existing** and choose **SQLModernizationDB**.
@@ -168,9 +171,9 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
       - **Partition key**: `/translationId`
       - Click **OK**
 
-8. Verify all three containers are visible in Data Explorer.
+1. Verify all three containers are visible in Data Explorer.
 
-9. Navigate to **Keys** in the left menu under **Settings** and copy:
+1. Navigate to **Keys** in the left menu under **Settings** and copy:
 
       - **URI**
       - **PRIMARY KEY**
