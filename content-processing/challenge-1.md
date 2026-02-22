@@ -141,6 +141,20 @@ The application code is provided in a pre-built package.
 
 1. Click **Review + Create**, then **Create**. Wait for the deployment to complete (this may take 2-3 minutes).
 
+1. Once created, click **Go to resource** in the overview section.
+
+1. In **sql-modernize-<inject key="DeploymentID" enableCopy="false"/>**, select **Access control (IAM)** from the left navigation menu.
+
+1. Select **+ Add**, and then choose **Add role assignment**.
+
+1. In the **Role** tab, search for **Azure AI Owner**, select **Azure AI Owner** from the results, and then click **Next**.
+
+1. In the **Members** tab, select **+ Select members**, search for **<inject key="AzureAdUserEmail"></inject>**, choose the user from the results, and then click **Select**.
+
+1. Click **Review + assign** to complete the role assignment.
+
+1. In the **Review + assign** tab, click **Review + assign** to confirm the role assignment.
+
 1. Once deployed, navigate to the **Microsoft Foundry** resource you just created.
 
 1. On the **Overview** page of the Microsoft Foundry resource, select **Go to Foundry**.

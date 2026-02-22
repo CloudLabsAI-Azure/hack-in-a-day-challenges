@@ -43,6 +43,20 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. Please wait for the deployment to complete as it can take 2-3 minutes.
 
+1. Once created, click **Go to resource** in the overview section.
+
+1. In **sql-modernize-<inject key="DeploymentID" enableCopy="false"/>**, select **Access control (IAM)** from the left navigation menu.
+
+1. Select **+ Add**, and then choose **Add role assignment**.
+
+1. In the **Role** tab, search for **Azure AI Owner**, select **Azure AI Owner** from the results, and then click **Next**.
+
+1. In the **Members** tab, select **+ Select members**, search for **<inject key="AzureAdUserEmail"></inject>**, choose the user from the results, and then click **Select**.
+
+1. Click **Review + assign** to complete the role assignment.
+
+1. In the **Review + assign** tab, click **Review + assign** to confirm the role assignment.
+
 1. Once created, click **Go to Foundry portal** in the overview section.
 
 <validation step="616b2c9f-85e8-44de-932a-418e889351a1" />
