@@ -114,7 +114,7 @@ Now you'll deploy a Windows VM in the application subnet where you'll host the s
       - **Region**: **<inject key="Region"></inject>**
       - **Availability options**: **No infrastructure redundancy required**
       - **Security type**: **Standard**
-      - **Image**: **See all images** > **Windows server** > **Windows Server 2022 Datacenter: Azure Edition - x64 Gen2**
+      - **Image**: **See all images** > **Windows server** > **Windows Server 2025 Datacenter: Azure Edition - x64 Gen2**
       - **Size**: Click **See all sizes**, search for **Standard_B2s**, select it, and click **Select**
    
          > **Note**: We are using Standard_B2s (2 vCPU, 4GB RAM), which is cost-effective for testing while providing adequate performance for this lab.
