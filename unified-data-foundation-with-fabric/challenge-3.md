@@ -19,7 +19,11 @@ The Bronze layer contains raw, unprocessed data with significant quality issues-
 
 1. Navigate to your **Microsoft Fabric workspace**: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
 
-1. Select **+ New** and click on **Notebook**.
+1. Open your Lakehouse: **contoso-lakehouse-<inject key="DeploymentID" enableCopy="false"/>** 
+
+   > **Note:** Select the **Lakehouse** where the type is Lakehouse.
+
+1. Click on **Open notebook** and select **+ New notebook** and click on **Notebook**.
 
 1. Attach the notebook to your Lakehouse:
 
@@ -50,7 +54,9 @@ The Bronze layer contains raw, unprocessed data with significant quality issues-
    df_transactions.printSchema()
    ```
 
-1. Run the cell to verify data loads successfully.
+1. Run the cell and wait for it to complete.
+
+1. Verify data loads successfully.
 
 ### Part 2: Apply Data Quality Checks and Cleansing - Flight Data
 
