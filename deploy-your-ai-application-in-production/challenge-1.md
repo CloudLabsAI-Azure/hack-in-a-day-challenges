@@ -137,8 +137,13 @@ Now you'll deploy a Windows VM in the application subnet where you'll host the s
 1. **Networking tab**:
    - **Virtual network**: Select **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
    - **Subnet**: Select **snet-application (10.0.3.0/24)**
-   - **Public IP**: Select **None**
-   - **NIC network security group**: **Basic**
+   - **Public IP**: Leave to **Default**
+   - **NIC network security group**: **Advanced**
+   - **Configure Network group**: Create **New**
+   - **Inbound rules**: **Add an inbound rule**
+      - **Destination**: **8501**
+      - **Name**: **ApplicationRule**
+      - Leave rest of the values to *default** and **create** an inbound rule.
    - **Public inbound ports**: **None**
    - Click **Next: Management**
 
@@ -165,49 +170,9 @@ Now you'll deploy a Windows VM in the application subnet where you'll host the s
 
 1. Once complete, click **Go to resource**.
 
-### Task 4: Create Azure Bastion Subnet
-
-Before we can connect to the VM, we need to create a dedicated subnet for Azure Bastion.
-
-1. In the **Azure Portal**, navigate to your **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>** virtual network.
-
-1. In the left navigation, click **Settings** > **Subnets**.
-
-1. Click **+ Subnet**.
-
-1. Configure the Bastion subnet:
-   - **Name**: **AzureBastionSubnet** (must be exactly this name)
-   - **Subnet purpose**: **Azure Bastion**
-   - **Starting address**: **10.0.4.0**
-   - **Subnet size**: **/26 (64 addresses)**
-   
-      > **Important**: Azure Bastion requires a dedicated subnet named exactly "AzureBastionSubnet" with at least /26 CIDR.
-
-1. Click **Add**.
-
-1. Wait for the deployment to complete; it will take a maximum of 30 seconds.
-
-### Task 5: Test VM Connection via Bastion
+### Task 4: Test VM Connection via Bastion
 
 Now let's install Azure Bastion and connect to the VM.
-
-1. In the **Azure Portal**, navigate to your **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** Virtual Machine resource.
-
-1. In the left navigation, click **Connect** > **Connect via Bastion**.
-
-1. On the **Hack-vm-<inject key="DeploymentID" enableCopy="false"/> | Bastion** page, expand **Dedicated Deployment Options**. Select **Configure manually**
-
-1. Configure Bastion:
-   - **Name**: **bastion-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Tier**: **Standard**
-   - **Virtual network**: **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Subnet**: **AzureBastionSubnet (10.0.4.0/26)** 
-   - **Public IP address**: Click **Create new**
-     - **Name**: **bastion-ip-<inject key="DeploymentID" enableCopy="false"/>**
-
-1. Click **Review + create**, then click **Create**
-
-1. Wait for the deployment to complete; it will take a maximum of **8-12 minutes**. 
 
 1. Navigate to your **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** Virtual Machine resource.
 
@@ -227,7 +192,7 @@ Now let's install Azure Bastion and connect to the VM.
 
 1. Wait for Windows to finish setup (may take 1-2 minutes on first connection).
 
-### Task 6: Install Required Software and Set Up VM
+### Task 5: Install Required Software and Set Up VM
 
 The VM is a fresh Windows Server 2022 instance. You'll install Chocolatey (package manager), then use it to install Python 3.11, VS Code, Azure CLI, and Git.
 
@@ -270,7 +235,7 @@ The VM is a fresh Windows Server 2022 instance. You'll install Chocolatey (packa
 
    >**Note:** If it is already created, skip this step and proceed to the next part.
 
-### Task 7: Create Microsoft Foundry Project
+### Task 6: Create Microsoft Foundry Project
 
 1. In the **Azure Portal**, from the **Home** page, click **+ Create a resource**.
 
@@ -297,7 +262,7 @@ The VM is a fresh Windows Server 2022 instance. You'll install Chocolatey (packa
 
 1. Once complete, click **Go to resource**.
 
-### Task 8: Configure Custom Domain for Azure OpenAI (Critical for Private Endpoints)
+### Task 7: Configure Custom Domain for Azure OpenAI (Critical for Private Endpoints)
 
 Now that the Azure AI Foundry resource is created, you must configure a custom subdomain for it. This is a requirement for token-based authentication with managed identities and private endpoints.
 
@@ -362,7 +327,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 > **Important**: Complete this step before proceeding to Challenge 2. Without the custom domain, private endpoint creation will succeed but authentication will fail.
 
-### Task 9: Deploy GPT-4.1 Model in Azure AI Foundry
+### Task 8: Deploy GPT-4.1 Model in Azure AI Foundry
 
 1. Switch to the **Azure portal**.
 
@@ -391,7 +356,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 1. Click **Deploy**.
 
-### Task 10: Test the Model Deployment
+### Task 9: Test the Model Deployment
 
 1.  On the **secure-chat** deployment page, click **Open in playground**.
 
@@ -416,7 +381,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 1. Close the playground.
 
-### Task 11: Create Azure Key Vault
+### Task 10: Create Azure Key Vault
 
 1. In the **Azure Portal**, click **+ Create a resource**.
 
@@ -450,7 +415,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 1. Once complete, click **Go to resource**.
 
-### Task 12: Assign Key Vault Permissions
+### Task 11: Assign Key Vault Permissions
 
 1. In your **kv-secureai-<inject key="DeploymentID" enableCopy="false"/>** Key Vault.
 
@@ -477,7 +442,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
    > **Note**: RBAC changes may take 2–3 minutes to propagate. Please wait a few minutes before testing to ensure the permissions have been applied successfully.
 
-### Task 13: Create Azure Storage Account
+### Task 12: Create Azure Storage Account
 
 1. In the **Azure Portal**, click **+ Create a resource**.
 
@@ -515,7 +480,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 1. Once complete, click **Go to resource**.
 
-### Task 14: Create Blob Container
+### Task 13: Create Blob Container
 
 1. In your **stsecureai<inject key="DeploymentID" enableCopy="false"/>** Storage Account.
 
@@ -531,7 +496,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 1. Verify the **chat-sessions** container appears in the list.
 
-### Task 15: Verify All Resources
+### Task 14: Verify All Resources
 
 1. Navigate back to your resource group: **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**.
 
@@ -549,7 +514,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
    - snet-storage-services (10.0.2.0/24)
    - snet-application (10.0.3.0/24)
 
-### Task 16: Save Configuration Details
+### Task 15: Save Configuration Details
 
 Open Notepad on your VM and document the following:
 
