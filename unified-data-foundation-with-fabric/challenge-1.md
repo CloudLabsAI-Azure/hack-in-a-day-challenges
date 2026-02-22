@@ -125,6 +125,10 @@ These tasks are required to be completed successfully to ensure the validation c
 
    ![](./media/unified-kynd-ggs-t-g10.png)
 
+1. In the **Manage access** pane, verify that the service principal is added with the **Admin** role.
+
+   ![](./media/unified-kynd-ggs-t-g11.png)
+
 ## Success Criteria
 
 - Microsoft Fabric workspace created successfully.
