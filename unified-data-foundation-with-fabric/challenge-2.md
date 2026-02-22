@@ -42,12 +42,12 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
    > **Note:** Select the **Lakehouse** where the type is Lakehouse.
 
-1. In the Lakehouse Explorer, navigate to **Files** → **bronze** folder.
+1. In the Lakehouse Explorer, navigate to **Files** and then click on **bronze** folder.
 
 1. Upload **flight.csv** to Bronze layer:
 
    - Click the **...** (more options) next to the **bronze** folder
-   - Select **Upload** → **Upload files**
+   - Select **Upload** and click on **Upload files**
    - Browse to `C:\LabFiles\unified-data-foundation-with-fabric\dataset\`
    - Select **flight.csv**
    - Click **Upload**
@@ -56,15 +56,15 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 
 1. Upload **customer_transactions.json** to Bronze layer:
 
-   - Click the **...** (more options) next to the **bronze** folder
-   - Select **Upload** → **Upload files**
+   - Click the **...** (more options) next to the **bronze** folder.
+   - Select **Upload** and click on **Upload files**
    - Browse to `C:\LabFiles\unified-data-foundation-with-fabric\dataset\`
    - Select **customer_transactions.json**
    - Click **Upload**
 
 1. Verify all files are uploaded:
 
-   - Navigate to **Files** → **bronze**
+   - Navigate to **Files** and click on **bronze** fodler.
 
 1. Confirm you see:
    - `flight.csv` (CSV format)
@@ -95,7 +95,7 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
    - Inconsistent date formats
    - Mixed case region names
 
-   > **Note:** In Challenge 3, you'll clean and standardize this data as part of the Bronze → Silver transformation.
+   > **Note:** In Challenge 3, you'll clean and standardize this data as part of the Bronze to Silver transformation.
 
 ### Part 4: Validate Bronze Layer Ingestion
 

@@ -23,7 +23,7 @@ By the end of this challenge, you will:
 
 ## Part 1: Load Silver Layer Data
 
-1. In your workspace, click **+ New** → **Notebook**
+1. In your workspace, click **+ New** and click on **Notebook**
 
 1. Add and run the following code to load Silver layer tables:
 

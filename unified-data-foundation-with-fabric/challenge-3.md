@@ -25,7 +25,7 @@ The Bronze layer contains raw, unprocessed data with significant quality issuesâ
 
 1. Navigate to your **Microsoft Fabric workspace**: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
 
-1. Select **+ New** â†’ **Notebook**
+1. Select **+ New** and click on **Notebook**.
 
 1. Attach the notebook to your Lakehouse:
 

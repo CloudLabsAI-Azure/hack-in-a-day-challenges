@@ -28,7 +28,7 @@ By the end of this challenge, you will:
 
 1. Create a new notebook:
 
-   - Click **+ New** → **Notebook**
+   - Click **+ New** and click on **Notebook**
 
 1. Attach the Lakehouse:
 
