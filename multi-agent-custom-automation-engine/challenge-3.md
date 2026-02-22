@@ -15,24 +15,6 @@ You will use **Azure Cosmos DB** as a **shared memory and messaging layer** so t
 - Enable agents to read prior agent results
 - Maintain auditability and traceability
 
-## Conceptual Architecture (Simple)
-
-```
-User Input
-   ↓
-Orchestrator
-   ↓
-Extraction Agent → Cosmos DB
-   ↓
-Validation Agent → Cosmos DB
-   ↓
-Communication Agent → Cosmos DB
-   ↓
-Reporting Agent → Cosmos DB
-```
-
-Cosmos DB acts as the **shared notebook** for all agents.
-
 ## Steps to Complete
 
 ### Task 1: Verify Cosmos DB Setup
@@ -44,11 +26,9 @@ Ensure the following already exist (from Challenge 01):
 - Container: `agent-state`
 - Partition key: `/workflowId`
 
-If not created, create them now in **Azure Portal** under **Data Explorer**.
-
 ### Task 2: Define Workflow State Schema
 
-Create a **standard workflow state object** that all agents will use.
+This is how the Agent Context schema will be stored in your Azure Cosmos DB.
 
 This is a **logical schema** (no code yet):
 

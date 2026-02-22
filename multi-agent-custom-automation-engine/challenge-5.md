@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this final challenge, you will run a **production-grade Streamlit dashboard** that brings together the complete Multi-Agent Automation Engine built throughout the hackathon. Instead of running scripts in the terminal, you will use a professional web interface to submit workflow requests, watch agents collaborate in real time, view structured results, and review execution history from Cosmos DB.
+In this final challenge, you will run a **Streamlit dashboard** that brings together the complete Multi-Agent Automation Engine built throughout the hackathon. Instead of running scripts in the terminal, you will use a professional web interface to submit workflow requests, watch agents collaborate in real time, view structured results, and review execution history from Cosmos DB.
 
 The pre-built application wraps your Semantic Kernel agents and orchestrator in an interactive dashboard with sample data, file upload support, and full audit traceability, demonstrating a production-ready AI orchestration pattern suitable for enterprise automation.
 
@@ -14,7 +14,7 @@ The pre-built application wraps your Semantic Kernel agents and orchestrator in 
 - Test the multi-agent pipeline through the web UI with sample enterprise scenarios
 - Process multiple workflow requests and review agent outputs
 - Verify execution history in Cosmos DB
-- (Bonus) Build and push a Docker image to Azure Container Registry
+- Build and push a Docker image to Azure Container Registry
 
 ## Steps to Complete
 

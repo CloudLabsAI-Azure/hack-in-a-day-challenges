@@ -20,24 +20,6 @@ This is the **brain of the multi-agent system**.
 - Route data between agents
 - Maintain execution trace
 
-## What the Orchestrator Will Do (Simple View)
-
-```
-User Input
-   ↓
-Orchestrator
-   ↓
-Extraction Agent
-   ↓
-Validation Agent
-   ↓
-Communication Agent
-   ↓
-Reporting Agent
-```
-
-All intermediate data is stored in **Cosmos DB**.
-
 ## Steps to Complete
 
 ### Task 1: Create Orchestrator Module
