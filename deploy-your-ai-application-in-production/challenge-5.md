@@ -210,7 +210,7 @@ Moment of truth!
    streamlit run app.py
    ```
 
-   >**Note:** When asked for **Email** type **<inject key="DeploymentID" enableCopy="false"/>** and press enter.
+   >**Note:** When asked for **Email** press **enter**.
 
 3. **Expected output**:
 
