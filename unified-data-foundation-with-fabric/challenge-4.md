@@ -108,9 +108,9 @@ Dimensions provide context for facts. Create customer, time, and geography dimen
     dim_time.show(5, truncate=False)
     ```
 
-    ## Part 3: Create Fact Tables
+## Part 3: Create Fact Tables
 
-    Fact tables contain measurable metrics. Create fact tables for flight activity and transactions:
+Fact tables contain measurable metrics. Create fact tables for flight activity and transactions:
 
     ```python
     from pyspark.sql.functions import col, sum as spark_sum, avg as spark_avg, count, round as spark_round
