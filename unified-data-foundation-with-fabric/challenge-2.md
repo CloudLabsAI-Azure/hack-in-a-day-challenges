@@ -48,7 +48,7 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources-CS
 
    - Click the **...** (more options) next to the **bronze** folder
    - Select **Upload** and click on **Upload files**
-   - Browse to extracted 
+   - Browse to the dataset extracted folder.
    - Select **flight.csv** and **customer_transactions.json**.
    - Click **Upload**
 
