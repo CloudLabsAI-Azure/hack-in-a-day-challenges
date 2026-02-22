@@ -54,7 +54,7 @@ The application uses Azure CLI authentication to connect to your agents.
 
 1. In **Visual Studio Code**, select **File** > **Open Folder**.
 
-1. Browse to **C:\Code**, open the **modernize-your-code** folder, select the **codefiles** folder, and then choose **Select Folder**.
+1. Browse to **C:\Code**, open the **hack-in-a-day-challenges-modernize-your-code** folder, select the **codefiles** folder, and then choose **Select Folder**.
    
 1. In the **Trust the authors of the files in this folder?** pop-up, select **Yes, I trust the authors**.
 
@@ -68,11 +68,13 @@ The application uses Azure CLI authentication to connect to your agents.
 
    **Note:** This will open a browser pop-up for authentication; minimize **Visual Studio Code** to view the sign-in window.
 
+1. On the **Sign in** page, select **Work or school account**, and then click **Continue**.
+
 1. On the **Sign into Microsoft Azure** page, enter the below provided email and password, to login.
 
-   - Email/Username: <inject key="AzureAdUserEmail"></inject>
+   - Email/Username: **<inject key="AzureAdUserEmail"></inject>**
 
-   - Password: <inject key="AzureAdUserPassword"></inject>
+   - Password: **<inject key="AzureAdUserPassword"></inject>**
 
 1. In the **Stay signed in to all your apps?** window, select **No, sign in to this app only**.
 
