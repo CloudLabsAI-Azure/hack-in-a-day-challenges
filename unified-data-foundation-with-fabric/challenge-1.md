@@ -6,13 +6,27 @@ Contoso Enterprises operates across multiple business units with data scattered 
 
 ## Accessing the Datasets
 
-Please copy the link below and paste it into a new browser tab inside your LabVM to download the required datasets for the lab and extract them.
+1. On your lab VM, open a terminal PowerShel.
 
-```
-https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/unified-data-foundation-with-fabric.zip
-```
+1. Create a working directory:
 
-> **Note:** Extract the downloaded ZIP file to `C:\LabFiles\` so that the dataset folder is located at `C:\LabFiles\unified-data-foundation-with-fabric\dataset\`
+   ```powershell
+   mkdir C:\datasets
+   ```
+
+1. **Download the code package**:
+   
+   Access the link mentioned below using browser:
+   ```
+   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/unified-data-foundation-with-fabric.zip
+   ```
+
+1. **Extract the ZIP file**:
+   
+   - Right-click on the downloaded `unified-data-foundation-with-fabric.zip` file
+   - Select the **Extract All...** option
+   - Choose a location `C:\datasets`
+   - Click on **Extract**
 
 ## Challenge Objectives
 

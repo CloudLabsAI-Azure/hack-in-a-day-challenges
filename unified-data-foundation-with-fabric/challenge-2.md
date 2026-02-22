@@ -18,11 +18,11 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources—
 1. On the **LabVM**, open **File Explorer** and navigate to the dataset folder:
 
    ```
-   C:\LabFiles\unified-data-foundation-with-fabric\dataset\
+   https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/unified-data-foundation-with-fabric.zip
    ```
 
    > **Note:** If you haven't downloaded the datasets yet, refer to Challenge 01 for the download link and extract the ZIP file to `C:\LabFiles\`
-
+   
 1. Verify the following sample files are available:
 
    - `flight.csv` - Flight loyalty program data with data quality issues (62,990 records)
