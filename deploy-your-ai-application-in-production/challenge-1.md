@@ -514,6 +514,13 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 1. Once complete, click **Go to resource**.
 
+<validation step="8087941d-46c1-4c4c-b315-9fb4d4638861" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
+
 ### Task 13: Create Blob Container
 
 1. In your **stsecureai<inject key="DeploymentID" enableCopy="false"/>** Storage Account.
