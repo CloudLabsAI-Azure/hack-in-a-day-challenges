@@ -93,6 +93,38 @@ Contoso Enterprises operates across multiple business units with data scattered 
 
    > **Hint:** Hover over the **Files** folder, click the **...**, select **Properties**, and copy the OneLake path. Save this value in a Notepad file for later use.
 
+### Task: Validation Prerequisite
+
+These tasks are required to be completed successfully to ensure the validation checks function correctly.
+
+1. Select **Workspaces (1)** from the left navigation pane, and then choose **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/> (2)** from the list.
+
+   ![](./media/unified-kynd-ggs-t-g5.png)
+
+1. Select **Manage access** from the workspace menu.
+
+   ![](./media/unified-kynd-ggs-t-g6.png)
+
+1. In the **Manage access** pane, select **+ Add people or groups**.
+
+   ![](./media/unified-kynd-ggs-t-g7.png)
+
+1. In the **Add people** pane, enter **below URL** (1)** in the search box, and then select the displayed result (2).
+
+   ```
+   https://cloudlabssandbox.onmicrosoft.com
+   ```
+
+   ![](./media/unified-kynd-ggs-t-g8.png)
+
+1. Select **Viewer (1)**, choose **Member (2)** from the dropdown, and then click **Add (3)**.
+
+   ![](./media/unified-kynd-ggs-t-g9.png)
+
+1. Select **Admin**, and then click **Add**.
+
+   ![](./media/unified-kynd-ggs-t-g10.png)
+
 ## Success Criteria
 
 - Microsoft Fabric workspace created successfully.
