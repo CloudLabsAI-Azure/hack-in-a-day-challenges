@@ -98,17 +98,14 @@ The app saves chat session history to Blob Storage. Store the storage account na
 
 ```powershell
 $kvName = az keyvault list `
- --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[0].name" -o tsv
 
 $storageName = az storage account list `
- --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[0].name" -o tsv
 
 # Temporarily enable Key Vault public access
 az keyvault update `
  --name $kvName `
- --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --public-network-access Enabled
 
 az keyvault secret set `
@@ -121,7 +118,6 @@ Write-Host "Stored StorageAccountName in Key Vault"
 # Disable public access again
 az keyvault update `
  --name $kvName `
- --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --public-network-access Disabled
 
 Write-Host "Key Vault secured"
@@ -162,17 +158,14 @@ Verify managed identity has access to Blob Storage for session history (should b
 
 ```powershell
 $identityId = az vm show `
- --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --name "Hack-vm-<inject key="DeploymentID" enableCopy="false"/>" `
  --query identity.principalId -o tsv
 
 $storageName = az storage account list `
- --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query "[0].name" -o tsv
 
 $storageId = az storage account show `
  --name $storageName `
- --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
  --query id -o tsv
 
 # Check if role is already assigned
