@@ -102,6 +102,12 @@ You need these below values to connect to your Azure services:
 
 ### Task 4: Run the Application
 
+1. In the terminal run:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
 1. Start the Streamlit application:
 
    ```powershell
