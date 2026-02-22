@@ -11,7 +11,7 @@ Contoso Enterprises operates across multiple business units with data scattered 
 1. Create a working directory:
 
    ```powershell
-   mkdir C:\datasets
+   mkdir C:\working-dir
    ```
 
 1. **Download the code package**:
@@ -25,7 +25,7 @@ Contoso Enterprises operates across multiple business units with data scattered 
    
    - Right-click on the downloaded `unified-data-foundation-with-fabric.zip` file
    - Select the **Extract All...** option
-   - Choose a location `C:\datasets`
+   - Choose a location `C:\working-dir`
    - Click on **Extract**
 
 ## Challenge Objectives
