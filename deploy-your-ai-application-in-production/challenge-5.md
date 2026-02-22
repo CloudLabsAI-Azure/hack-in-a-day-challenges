@@ -57,7 +57,7 @@ The application code is provided in a pre-built package.
 
 ### Task 2: Configure the Application
 
-1. **Copy `.env.example` to create your `.env` file**:
+1. **Rename `.env.example` to create your `.env` file**:
 
    ```powershell
    Copy-Item -Path ".env.example" -Destination ".env"

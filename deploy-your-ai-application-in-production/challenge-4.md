@@ -108,7 +108,7 @@ Validate that Azure OpenAI works end to end with managed identity authentication
    pip install azure-identity azure-keyvault-secrets openai
    ```
 
-2. **Create and run the test script**:
+2. **Run the below test script in the terminal**:
 
    ```powershell
    @'
