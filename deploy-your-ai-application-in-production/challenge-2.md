@@ -23,8 +23,6 @@ This is where enterprises fail most often deploying services with default settin
 - Test that public access is completely blocked
 - Verify DNS resolution for private endpoints
 
-## Steps to Complete
-
 ### Task 1: Create Network Security Group for AI Services
 
 Let's create an NSG with restrictive rules using the Azure Portal.
@@ -346,9 +344,11 @@ Ensure all services are reachable via private endpoints only. For this validatio
 
 1. You should see zones like:
 
-- `privatelink.openai.azure.com`
-- `privatelink.vaultcore.azure.net`
 - `privatelink.blob.core.windows.net`
+- `privatelink.cognitiveservices.azure.com`
+- `privatelink.openai.azure.com`
+- `privatelink.services.ai.azure.com`
+- `privatelink.vaultcore.azure.net`
 
 3. **Verify VNET link for DNS zones**:
 
@@ -413,43 +413,7 @@ Verify that service names resolve to private IP addresses (not public). Continue
 
 > **Note:** If the output returns an empty list `[]`, that's completely expected; no secrets have been added to the Key Vault yet. The important thing is that the command didn't return a network error, which confirms that private endpoint connectivity to Key Vault is working correctly.
 
-### Task 8: Validate Public Access is Blocked
-
-Verify that your services are properly locked down by checking network settings in the Azure Portal.
-
-1. **Verify Azure OpenAI network settings**:
-
-   - In Azure Portal, navigate to **openai-secureai-<inject key="DeploymentID" enableCopy="false"/>**
-   - Click **Networking** in the left menu
-   - Under **Firewalls and virtual networks**, confirm:
-     - **Public network access**: **Selected Networks and Private Endpoints** (only your VNET is listed)
-     - Under **Private endpoint connections** tab: private endpoint shows **Approved**
-
-2. **Verify Storage Account network settings**:
-
-   - Navigate to **stsecureai<inject key="DeploymentID" enableCopy="false"/>**
-   - Click **Networking** in the left menu
-   - Confirm **Public network access** is set to **Disabled**
-   - Under **Private endpoint** tab: private endpoint shows **Approved**
-
-3. **Verify Key Vault network settings**:
-
-   - Navigate to **kv-secureai-<inject key="DeploymentID" enableCopy="false"/>**
-   - Click **Networking** in the left menu
-   - Confirm **Public network access** is set to **Disabled**
-   - Under **Private endpoint** tab: private endpoint shows **Approved**
-
-4. **Test public access is blocked** (optional):
-
-   Open a browser on your **local machine** (NOT the VM) and navigate to:
-
-   ```
-   https://openai-secureai-<inject key="DeploymentID" enableCopy="false"/>.openai.azure.com
-   ```
-
-   - You should get **Error 403: Forbidden** or **Connection timeout** — This confirms that public access is blocked.
-
-### Task 9: Create NSG for Storage Subnet (Using Portal)
+### Task 8: Create NSG for Storage Subnet (Using Portal)
 
 Repeat NSG creation for the storage subnet using Azure Portal.
 
@@ -496,57 +460,6 @@ Repeat NSG creation for the storage subnet using Azure Portal.
    - **Virtual network**: Select **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>**
    - **Subnet**: Select **snet-storage-services**
    - Click **OK**
-
-### Task 10: Document Your Network Configuration (Using VS Code)
-
-Save your network topology for reference using VS Code PowerShell terminal.
-
-1. **Create a network diagram document**:
-
-   ```powershell
-   # Get resource names
-   $vnetName = az network vnet list `
-   --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
-   --query "[?contains(name, 'vnet')].name" -o tsv
-
-   $openaiName = "openai-secureai-<inject key="DeploymentID" enableCopy="false"/>"
-   $storageName = "stsecureai<inject key="DeploymentID" enableCopy="false"/>"
-   $kvName = "kv-secureai-<inject key="DeploymentID" enableCopy="false"/>"
-
-   # Create documentation
-   @"
-   === Secure AI Network Configuration ===
-   Date: $(Get-Date)
-
-   VNET Name: $vnetName
-   Address Space: 10.0.0.0/16
-
-   Subnets:
-   - snet-ai-services: 10.0.1.0/24 (NSG: nsg-ai-services)
-   - snet-storage-services: 10.0.2.0/24 (NSG: nsg-storage-services)
-   - snet-application: 10.0.3.0/24
-
-   Private Endpoints:
-   - OpenAI: $openaiName (Private IP in ai-services subnet)
-   - Storage: $storageName (Private IP in storage-services subnet)
-   - Key Vault: $kvName (Private IP in storage-services subnet)
-
-   Public Access Status:
-   - OpenAI: Selected Networks (VNET only)
-   - Storage: DISABLED
-   - Key Vault: DISABLED
-
-   DNS Configuration:
-   - Private DNS zones created for all services
-   - VNET linked to DNS zones for resolution
-   - Services resolve to private IPs only
-
-   Security Posture: LOCKED DOWN
-   "@ | Out-File -FilePath "C:\Code\network-config.txt"
-
-   Write-Host "Network configuration documented at C:\Code\network-config.txt"
-   notepad C:\Code\network-config.txt
-   ```
 
 ## Success Criteria
 
