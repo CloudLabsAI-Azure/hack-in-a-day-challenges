@@ -59,7 +59,7 @@ The application code is provided in a pre-built package.
 
 1. **Extract the ZIP file**:
    
-   - Right-click on the downloaded `content-processing-files.zip` file
+   - Right-click on the downloaded `hack-in-a-day-challenges-content-processing-files.zip` file
    - Select the **Extract All...** option
    - Choose a location `C:\Code`
    - Click on **Extract**
