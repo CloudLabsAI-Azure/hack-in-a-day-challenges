@@ -351,6 +351,8 @@ Now, click **Next** to continue to **Challenge 04**.
    GROUP BY p.Category
    ORDER BY TotalRevenue DESC;
 
+<validation step="f5d9a7e3-f2cd-4603-82ce-b275098789c9" />
+
 > **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
 > - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
 > - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
