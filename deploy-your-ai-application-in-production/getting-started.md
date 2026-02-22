@@ -55,9 +55,9 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 1. Welcome to **Azure Portal**! You're now ready to start building your secure, production-ready AI application with enterprise-grade security.
 
 1. The lab environment includes:
-   - Azure subscription with Owner permissions
+   - Azure subscription with custom permissions
    - Pre-configured resource group for deployments
-   - Access to Azure AI Foundry and Azure OpenAI Service
+   - Access to Microsoft Foundry and Azure OpenAI Service
    - Pre-built chat application code (provided in Challenge 5)
    - Python 3.11 and VS Code pre-installed on JumpVM
    - Azure CLI for authentication

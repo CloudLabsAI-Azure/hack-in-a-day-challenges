@@ -18,7 +18,7 @@ By deploying each resource manually, you will gain a deep understanding of Azure
 - Create a Virtual Network with three subnets
 - Deploy Windows VM in application subnet
 - Deploy Azure OpenAI resource
-- Deploy GPT-4.1 model for chat completions
+- Deploy GPT model for chat completions
 - Create Azure Key Vault with RBAC authorization
 - Deploy Azure Storage Account with security settings
 - Verify all resources are accessible

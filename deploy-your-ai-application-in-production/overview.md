@@ -4,7 +4,7 @@
 
 Most AI projects fail to reach production not due to model quality, but because of security and compliance gaps. Public endpoints, weak identity controls, lack of network isolation, and non-compliant architectures block enterprise AI adoption. Security teams reject deployments that don't meet standards.
 
-In this hands-on hackathon, you'll deploy a production-grade, enterprise-ready AI application following Microsoft's Well-Architected Framework. You'll build a secure chat application using Azure AI Foundry with complete network isolation, private endpoints, managed identities, and zero public access.
+In this hands-on hackathon, you'll deploy an enterprise-ready AI application following Microsoft's Well-Architected Framework. You'll build a secure chat application using Azure AI Foundry with complete network isolation, private endpoints, managed identities, and zero public access.
 
 ## The Challenge
 
@@ -46,7 +46,7 @@ A fully secure AI chat application with:
 
 ## Learning Outcomes
 
-By completing this hackathon, you will:
+By completing this Hack in a Day lab, you will:
 
 ### Security & Compliance
 - Design secure AI architectures aligned with WAF principles
@@ -57,7 +57,7 @@ By completing this hackathon, you will:
 ### Identity & Access Management
 - Deploy managed identities for passwordless authentication
 - Configure Entra ID RBAC with least-privilege access
-- Secure secrets in Azure Key Vault (zero hardcoded credentials)
+- Secure secrets in Azure Key Vault
 - Understand service principal vs managed identity patterns
 
 ### Network Security
@@ -72,18 +72,12 @@ By completing this hackathon, you will:
 - Implement repeatable configuration patterns
 - Understand Azure resource relationships
 
-### Production Readiness
-- Validate security posture against enterprise standards
-- Implement monitoring and logging for compliance
-- Test secure connectivity patterns
-- Prepare applications for SOC 2, ISO 27001, HIPAA compliance
-
 ## Challenge Structure
 
 This hackathon consists of **7 progressive challenges**:
 
 ### Challenge 1: Deploy Core Azure Infrastructure
-Manually create the foundational Azure resources via the Portal: Virtual Network with subnets, Windows VM, Azure AI Foundry with GPT-4.1, Key Vault, Storage Account, and Azure Bastion.
+Manually create the foundational Azure resources via the Portal: Virtual Network with subnets, Windows VM, Microsoft Foundry with GPT Model, Key Vault, Storage Account, and Azure Bastion.
 
 ### Challenge 2: Configure Network Security & Isolation
 Configure Network Security Groups, disable all public access, and validate private endpoint connectivity. Ensure zero internet exposure for AI services.
@@ -92,7 +86,7 @@ Configure Network Security Groups, disable all public access, and validate priva
 Set up managed identities, configure RBAC roles, and establish Key Vault access policies. Implement passwordless authentication patterns.
 
 ### Challenge 4: Secure Azure OpenAI Deployment
-Deploy the GPT-4.1 model with a private endpoint, configure deployment settings, and secure API configuration in Key Vault. Test private connectivity.
+Deploy the GPT model with a private endpoint, configure deployment settings, and secure API configuration in Key Vault. Test private connectivity.
 
 ### Challenge 5: Deploy and Configure the Chat Application
 Download the pre-built secure chat application, configure environment variables with private endpoints, and run the application on your VM.
@@ -101,26 +95,11 @@ Download the pre-built secure chat application, configure environment variables 
 Connect to the VM using Azure Bastion (no public IP needed), validate the chat application works, and verify all traffic flows through the private network.
 
 ### Challenge 7: Deploy Application to Azure App Service
-Deploy the chat application to Azure App Service with VNet integration, managed identity, and private endpoint connectivity. Verify the production deployment works end-to-end.
-
-## Prerequisites
-
-- Access to Azure subscription (provided in lab environment)
-- Resource Group: `challenge-rg-<inject key="DeploymentID" enableCopy="false"/>`
-- Virtual Machine with:
- - VS Code installed
- - Python 3.11 installed
- - Azure CLI installed
-- Azure Bastion for secure VM access
-- Basic understanding of:
- - Azure fundamentals
- - Networking concepts (VNETs, subnets)
- - Command-line tools
- - Python basics
+Deploy the chat application to Azure App Service with VNet integration, managed identity, and private endpoint connectivity. Verify the deployment works end-to-end.
 
 ## Success Criteria
 
-Your deployment is production-ready when:
+Your deployment is ready when:
 
 - All services are accessible only via private endpoints
 - No public IP addresses are exposed
@@ -129,30 +108,8 @@ Your deployment is production-ready when:
 - NSG rules follow least-privilege principle
 - Chat application works perfectly inside the isolated network
 - Azure Bastion provides secure access (no RDP/SSH over internet)
-- Application deployed to Azure App Service with VNet integration
+- Application deployed to Azure App Service
 - App Service uses managed identity and private endpoints
-
-## Estimated Time
-
-- **Total Duration**: 4-6 hours
-- **Challenge 1**: 45 minutes (Infrastructure deployment)
-- **Challenge 2**: 30 minutes (Network security)
-- **Challenge 3**: 45 minutes (Identity & access)
-- **Challenge 4**: 30 minutes (OpenAI configuration)
-- **Challenge 5**: 45 minutes (App deployment)
-- **Challenge 6**: 30 minutes (Connectivity testing)
-- **Challenge 7**: 45 minutes (App Service deployment)
-
-## Real-World Applications
-
-This architecture pattern applies to:
-
-- **Healthcare**: HIPAA-compliant AI for patient data analysis
-- **Finance**: SOC 2 compliant AI for fraud detection
-- **Government**: FedRAMP-ready AI for document processing
-- **Enterprise**: ISO 27001 compliant AI for internal chatbots
-- **Legal**: Confidential document analysis with AI
-- **Manufacturing**: Secure predictive maintenance AI
 
 ## Resources
 
