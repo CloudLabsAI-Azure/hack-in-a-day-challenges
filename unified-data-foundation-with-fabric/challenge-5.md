@@ -44,6 +44,8 @@ Add the following code cells to your notebook:
 
 ### Cell 1: Import libraries and load data
 
+1. Add and run the following code.
+
     ```python
     # Import required libraries
     import pandas as pd
@@ -118,78 +120,84 @@ Add the following code cells to your notebook:
 
 ### Cell 3: Convert to Pandas and prepare for scikit-learn
 
-```python
-# Convert to Pandas DataFrame for scikit-learn
-df_pandas = df_ml_features.toPandas()
+1. Add and run the following code.
 
-# Select features for clustering
-feature_cols = ["age", "total_flights", "total_km_flown", "total_loyalty_points", 
-                "days_since_last_flight", "total_spent", "transaction_count",
-                "recency_score", "frequency_score", "monetary_score"]
+    ```python
+    # Convert to Pandas DataFrame for scikit-learn
+    df_pandas = df_ml_features.toPandas()
 
-X = df_pandas[feature_cols].fillna(0)
+    # Select features for clustering
+    feature_cols = ["age", "total_flights", "total_km_flown", "total_loyalty_points", 
+                    "days_since_last_flight", "total_spent", "transaction_count",
+                    "recency_score", "frequency_score", "monetary_score"]
 
-print(f"Feature matrix shape: {X.shape}")
-print(f"Features: {feature_cols}")
-print("\n=== Feature Statistics ===")
-print(X.describe())
-```
+    X = df_pandas[feature_cols].fillna(0)
+
+    print(f"Feature matrix shape: {X.shape}")
+    print(f"Features: {feature_cols}")
+    print("\n=== Feature Statistics ===")
+    print(X.describe())
+    ```
 
 ### Cell 4: Scale features and train K-Means model
 
-```python
-from sklearn.preprocessing import StandardScaler
-from sklearn.cluster import KMeans
-from sklearn.metrics import silhouette_score
-import mlflow
-import mlflow.sklearn
+1. Add and run the following code.
 
-# Scale features for better clustering
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
+    ```python
+    from sklearn.preprocessing import StandardScaler
+    from sklearn.cluster import KMeans
+    from sklearn.metrics import silhouette_score
+    import mlflow
+    import mlflow.sklearn
 
-# Start MLflow experiment
-mlflow.set_experiment("Customer_Segmentation_Experiment")
+    # Scale features for better clustering
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
 
-with mlflow.start_run(run_name="KMeans_5_Clusters"):
-    
-    # Train K-Means with 5 customer segments
-    n_clusters = 5
-    kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10, max_iter=300)
-    
-    # Fit model and predict clusters
-    cluster_labels = kmeans.fit_predict(X_scaled)
-    
-    # Calculate silhouette score for model quality
-    silhouette = silhouette_score(X_scaled, cluster_labels)
-    
-    # Log parameters and metrics to MLflow
-    mlflow.log_param("n_clusters", n_clusters)
-    mlflow.log_param("algorithm", "KMeans")
-    mlflow.log_param("random_state", 42)
-    mlflow.log_metric("silhouette_score", silhouette)
-    mlflow.log_metric("inertia", kmeans.inertia_)
-    
-    # Log the model
-    mlflow.sklearn.log_model(kmeans, "kmeans_model")
-    
-    # Log the scaler as well
-    mlflow.sklearn.log_model(scaler, "scaler_model")
-    
-    print(f"Model trained successfully!")
-    print(f"Number of clusters: {n_clusters}")
-    print(f"Silhouette Score: {silhouette:.4f}")
-    print(f"Inertia: {kmeans.inertia_:.2f}")
-    
-    # Add cluster labels to dataframe
-    df_pandas['segment'] = cluster_labels
+    # Start MLflow experiment
+    mlflow.set_experiment("Customer_Segmentation_Experiment")
 
-# Display cluster distribution
-print("\n=== Cluster Distribution ===")
-print(df_pandas['segment'].value_counts().sort_index())
-```
+    with mlflow.start_run(run_name="KMeans_5_Clusters"):
+        
+        # Train K-Means with 5 customer segments
+        n_clusters = 5
+        kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10, max_iter=300)
+        
+        # Fit model and predict clusters
+        cluster_labels = kmeans.fit_predict(X_scaled)
+        
+        # Calculate silhouette score for model quality
+        silhouette = silhouette_score(X_scaled, cluster_labels)
+        
+        # Log parameters and metrics to MLflow
+        mlflow.log_param("n_clusters", n_clusters)
+        mlflow.log_param("algorithm", "KMeans")
+        mlflow.log_param("random_state", 42)
+        mlflow.log_metric("silhouette_score", silhouette)
+        mlflow.log_metric("inertia", kmeans.inertia_)
+        
+        # Log the model
+        mlflow.sklearn.log_model(kmeans, "kmeans_model")
+        
+        # Log the scaler as well
+        mlflow.sklearn.log_model(scaler, "scaler_model")
+        
+        print(f"Model trained successfully!")
+        print(f"Number of clusters: {n_clusters}")
+        print(f"Silhouette Score: {silhouette:.4f}")
+        print(f"Inertia: {kmeans.inertia_:.2f}")
+        
+        # Add cluster labels to dataframe
+        df_pandas['segment'] = cluster_labels
+
+    # Display cluster distribution
+    print("\n=== Cluster Distribution ===")
+    print(df_pandas['segment'].value_counts().sort_index())
+    ```
 
 ### Cell 5: Analyze segment characteristics
+
+1. Add and run the following code.
 
     ```python
     # Analyze each segment's profile
@@ -274,6 +282,8 @@ print(df_pandas['segment'].value_counts().sort_index())
 
 ### Cell 6: Assign business-friendly segment names
 
+1. Add and run the following code.
+
     ```python
     # Assign business-friendly names based on segment characteristics
     # Analyze each segment and assign meaningful names
@@ -313,6 +323,8 @@ print(df_pandas['segment'].value_counts().sort_index())
 
 ### Cell 7: Create enriched customer table
 
+1. Add and run the following code.
+
     ```python
     # Convert back to Spark DataFrame
     df_enriched_spark = spark.createDataFrame(df_pandas)
@@ -333,6 +345,8 @@ print(df_pandas['segment'].value_counts().sort_index())
     ```
 
 ### Cell 8: Write ML results to Gold layer
+
+1. Add and run the following code.
 
     ```python
     # Write the enriched customer segments to Gold layer
@@ -365,6 +379,8 @@ print(df_pandas['segment'].value_counts().sort_index())
 ## Part 5: Validate ML Results in Lakehouse
 
 ### Cell 9: Query the new ML-enriched tables
+
+1. Add and run the following code.
 
     ```python
     # Verify the tables were created successfully
