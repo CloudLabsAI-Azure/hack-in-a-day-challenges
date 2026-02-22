@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Contoso Enterprises needs to consolidate data from multiple disparate sources—CSV files from legacy systems, Parquet files from cloud storage, ERP/CRM databases, and unstructured files like JSON logs and application events. The Bronze layer serves as the landing zone for all raw data before any transformation or cleansing. In this challenge, you will use Microsoft Fabric's Data Pipelines and Dataflows Gen2 to ingest structured and unstructured data from various sources into the Bronze layer of your Lakehouse.
+Contoso Enterprises needs to consolidate data from multiple disparate sources-CSV files from legacy systems, Parquet files from cloud storage, ERP/CRM databases, and unstructured files like JSON logs and application events. The Bronze layer serves as the landing zone for all raw data before any transformation or cleansing. In this challenge, you will use Microsoft Fabric's Data Pipelines and Dataflows Gen2 to ingest structured and unstructured data from various sources into the Bronze layer of your Lakehouse.
 
 ## Challenge Objectives
 

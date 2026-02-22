@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Contoso Enterprises operates across multiple business units with data scattered across different systems—ERP, CRM, legacy databases, and unstructured file storage. To unify this data landscape, Contoso has decided to adopt Microsoft Fabric and OneLake as its single logical data lake. Before building data pipelines, it's essential to understand the platform architecture, OneLake's unified storage model, and the Medallion architecture pattern (Bronze → Silver → Gold) that will structure your data transformation journey.
+Contoso Enterprises operates across multiple business units with data scattered across different systems-ERP, CRM, legacy databases, and unstructured file storage. To unify this data landscape, Contoso has decided to adopt Microsoft Fabric and OneLake as its single logical data lake. Before building data pipelines, it's essential to understand the platform architecture, OneLake's unified storage model, and the Medallion architecture pattern (Bronze → Silver → Gold) that will structure your data transformation journey.
 
 ## Accessing the Datasets
 

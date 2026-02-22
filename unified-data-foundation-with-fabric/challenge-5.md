@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Microsoft Fabric's Data Science workload provides a comprehensive environment for building, training, and deploying machine learning models—all within the unified Fabric platform. In this challenge, you'll use Fabric's Data Science capabilities to perform customer segmentation analysis on your flight loyalty and transaction data. You'll create ML experiments, build K-Means clustering models, track experiments with MLflow, and write enriched analytics back to your Fabric Lakehouse.
+Microsoft Fabric's Data Science workload provides a comprehensive environment for building, training, and deploying machine learning models-all within the unified Fabric platform. In this challenge, you'll use Fabric's Data Science capabilities to perform customer segmentation analysis on your flight loyalty and transaction data. You'll create ML experiments, build K-Means clustering models, track experiments with MLflow, and write enriched analytics back to your Fabric Lakehouse.
 
 ## Prerequisites
 

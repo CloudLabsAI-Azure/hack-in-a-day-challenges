@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Bronze layer contains raw, unprocessed data with significant quality issues—missing values, duplicates, inconsistent formats, and mixed data types. Contoso's analytics team needs clean, standardized data for reliable reporting and analysis. The Silver layer serves as the cleansed and validated zone where data quality rules are applied, datatypes are standardized, and inconsistencies are resolved. In this challenge, you will use PySpark and SQL in Fabric Notebooks to transform dirty Bronze data (flight loyalty program data and customer transactions) into clean Silver tables.
+The Bronze layer contains raw, unprocessed data with significant quality issues-missing values, duplicates, inconsistent formats, and mixed data types. Contoso's analytics team needs clean, standardized data for reliable reporting and analysis. The Silver layer serves as the cleansed and validated zone where data quality rules are applied, datatypes are standardized, and inconsistencies are resolved. In this challenge, you will use PySpark and SQL in Fabric Notebooks to transform dirty Bronze data (flight loyalty program data and customer transactions) into clean Silver tables.
 
 ## Challenge Objectives
 
