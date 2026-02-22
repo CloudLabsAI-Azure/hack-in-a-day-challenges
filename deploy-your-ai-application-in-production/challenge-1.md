@@ -96,6 +96,12 @@ By deploying each resource manually, you will gain a deep understanding of Azure
 
 1. Once the deployment is complete, click **Go to resource**. To verify that all three subnets were created, select **Settings** > **Subnets** from the left navigation menu.
 
+<validation step="f7f7c138-daf0-466e-b6d3-915d9da8609c" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
 ### Task 3: Create Application Virtual Machine
 
@@ -169,6 +175,13 @@ Now you'll deploy a Windows VM in the application subnet where you'll host the s
 1. Wait for the deployment to complete; it will take a maximum of **3-5 minutes**.
 
 1. Once complete, click **Go to resource**.
+
+<validation step="089f8f14-394d-4dd6-af48-d1f38d556199" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
 ### Task 4: Test VM Connection via Bastion
 
@@ -261,6 +274,13 @@ The VM is a fresh Windows Server 2022 instance. You'll install Chocolatey (packa
 1. Wait for the deployment to complete; it will take a maximum of **3-5 minutes**.
 
 1. Once complete, click **Go to resource**.
+
+<validation step="37504f43-8b2e-4a77-ac16-0f078605abbb" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
 ### Task 7: Configure Custom Domain for Azure OpenAI (Critical for Private Endpoints)
 
