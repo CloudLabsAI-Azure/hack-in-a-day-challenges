@@ -122,13 +122,6 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
 
 1. Wait for the deployment to complete as it can take 10-15 minutes.
 
-<validation step="c9460cd7-b2b8-4294-8143-516ccadd3f20" />
- 
-> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
-> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
-
 ### Task 6: Create Cosmos DB Database and Containers
 
 1. In your Cosmos DB account, click on **Data Explorer** from the left navigation.
@@ -178,6 +171,13 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
       - **URI**
       - **PRIMARY KEY**
       - Save these values for later use.
+
+<validation step="c9460cd7-b2b8-4294-8143-516ccadd3f20" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
 <validation step="47428908-2f8d-456b-84a5-df4c148f8c67" />
  
