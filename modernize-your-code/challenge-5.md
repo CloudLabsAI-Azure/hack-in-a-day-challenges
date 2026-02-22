@@ -66,7 +66,7 @@ The application uses Azure CLI authentication to connect to your agents.
    az login
    ```
 
-   **Note:** This will open a browser pop-up for authentication; minimize **Visual Studio Code** to view the sign-in window.
+   > **Note:** This will open a browser pop-up for authentication; minimize **Visual Studio Code** to view the sign-in window.
 
 1. On the **Sign in** page, select **Work or school account**, and then click **Continue**.
 
