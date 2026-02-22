@@ -407,26 +407,7 @@ Add the following code cells to your notebook:
                             "customer_status", "segment", "segment_name").limit(20))
     ```
 
-## Part 6: View ML Experiments in Fabric
-
-1. Navigate to your Fabric workspace
-
-1. Click on the left navigation and select **Data Science**
-
-1. Find your experiment: **Customer-Segmentation-Experiment**
-
-1. Click on the experiment to view:
-   - Run history
-   - Parameters (n_clusters, algorithm, random_state)
-   - Metrics (silhouette_score, inertia)
-   - Artifacts (models, visualizations)
-
-1. View the registered model:
-   - Click on **Models** in the left navigation
-   - Find your **kmeans_model**
-   - View model details, versions, and lineage
-
-## Part 7: Save the Notebook
+## Part 6: Save the Notebook
 
 1. Click the **Save as**.
 
