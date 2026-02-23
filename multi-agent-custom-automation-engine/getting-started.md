@@ -34,12 +34,6 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/gs-up1.png)
 
-1. Navigate to the **Azure Portal**:
-
-   ```
-   https://portal.azure.com/
-   ```
-
 1. On the **Sign into Microsoft Azure** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
 
    - Email/Username: <inject key="AzureAdUserEmail"></inject>
