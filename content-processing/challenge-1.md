@@ -80,7 +80,7 @@ The application code is provided in a pre-built package.
 
    - **Subscription**: Select the available **Azure subscription**
    - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Region**: **<inject key="Region" />**
+   - **Region**: Select any from **Defualt**
    - **Name**: **doc-intel-<inject key="DeploymentID" enableCopy="false"/>**
    - **Pricing tier**: **Standard S0**.
 
