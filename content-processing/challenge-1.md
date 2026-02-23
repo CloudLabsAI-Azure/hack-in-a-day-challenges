@@ -80,7 +80,7 @@ The application code is provided in a pre-built package.
 
    - **Subscription**: Select the available **Azure subscription**
    - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Region**: Select any from **Defualt**
+   - **Region**: Select any from **Defualt** region
    - **Name**: **doc-intel-<inject key="DeploymentID" enableCopy="false"/>**
    - **Pricing tier**: **Standard S0**.
 
@@ -134,7 +134,7 @@ The application code is provided in a pre-built package.
    - **Subscription**: Select the available **Azure subscription**
    - **Resource group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
    - **Name**: **openai-doc-ai-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Region**: **<inject key="Region" />**
+   - **Region**: Select any from **Defualt** region
    - **Default project name**: Keep it as **proj-default**
 
       > **Important:** Keep the default project name as **proj-default** - this is used in the application's endpoint URL.

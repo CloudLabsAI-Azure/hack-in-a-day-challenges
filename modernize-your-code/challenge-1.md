@@ -35,7 +35,7 @@ Before building the AI-powered SQL modernization pipeline, you need to provision
    - **Subscription**: Select the available **Azure subscription**.
    - **Resource Group**: Select **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
    - **Project name**: **sql-modernize-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Region**: **<inject key="Region"></inject>**.
+   - **Region**: Select from **Defualt** region
    - **Default project name**: Keep it as default
    - Click on **Review + Create**.
 
