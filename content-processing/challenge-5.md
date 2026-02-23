@@ -19,13 +19,10 @@ In this final challenge, you will use the dashboard's **Review Queue** to examin
 
 1. In the Streamlit app, go to the **Process Documents** tab.
 
-1. Process each of the 5 sample documents using the **Use sample data** dropdown. If you already processed some in Challenge 04, process the remaining ones:
+1. Process the sample documents by **uploading**.
 
    - **invoice_contoso** - Expected Classification: INVOICE, Expected Routing: AUTO_APPROVE (confidence >= 0.85)
    - **receipt_cafe** - Expected Classification: RECEIPT, Expected Routing: AUTO_APPROVE (confidence >= 0.85)
-   - **medical_form** - Expected Classification: MEDICAL_FORM, Routing varies - may go to review if OCR quality is low
-   - **insurance_claim** - Expected Classification: INSURANCE_CLAIM, Routing varies - depends on extraction completeness
-   - **identity_doc** - Expected Classification: IDENTITY_DOCUMENT, Expected Routing: AUTO_APPROVE (confidence >= 0.85)
 
 1. After processing all documents, note how many were auto-approved vs. sent to review.
 
@@ -89,15 +86,6 @@ In this final challenge, you will use the dashboard's **Review Queue** to examin
 
    - Contains rejected documents with `review_status: "REJECTED"` and a `rejection_reason`
    - May still contain pending documents (not yet reviewed)
-
-1. Run this query in Data Explorer for the `ProcessedDocuments` container to see a summary:
-
-   ```sql
-   SELECT c.docType, c.classification.confidence, c.validation.confidence_score, 
-          c.routing_decision, c.review_status, c.timestamp
-   FROM c
-   ORDER BY c.timestamp DESC
-   ```
 
 <validation step="b168305b-cf36-4d19-92dc-0496001a08b0" />
  
