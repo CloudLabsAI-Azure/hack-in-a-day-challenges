@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Your OpenAI service is deployed with a private endpoint, but it's not fully configured yet. In this challenge, you will deploy GPT models, configure content filtering, test embeddings, and validate that everything works through the private network with managed identity authentication.
+Your OpenAI service is deployed with a private endpoint and the GPT model is ready from Challenge 1. In this challenge, you will verify the model deployment, store the configuration securely in Key Vault, and test that chat completions work end-to-end through the private network with managed identity authentication.
 
-By the end, you will have a fully operational, secure OpenAI service ready for your chat application.
+By the end, you will have a fully validated, secure OpenAI service ready for your chat application.
 
 ## Prerequisites
 
@@ -18,13 +18,10 @@ By the end, you will have a fully operational, secure OpenAI service ready for y
 
 ## Challenge Objectives
 
-- Deploy GPT-4 (or GPT-3.5-Turbo) model for chat completions
-- Deploy text-embedding model for semantic search
-- Configure content filtering policies
-- Test model deployments using managed identity
-- Store model deployment names in Key Vault
-- Validate private endpoint connectivity
-- Benchmark model performance
+- Verify the GPT model deployment from Challenge 1
+- Store model deployment name and API version in Key Vault
+- Test chat completions using managed identity authentication
+- Validate end-to-end private connectivity with a Python test script
 
 ## Steps to Complete
 

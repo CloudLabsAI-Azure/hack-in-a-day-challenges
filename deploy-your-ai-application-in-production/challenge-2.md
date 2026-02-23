@@ -18,7 +18,7 @@ This is where enterprises fail most often deploying services with default settin
 - Connected to **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion
 - Configure Network Security Group (NSG) rules for the AI services subnet
 - Disable public network access on all AI services
-- Configure subnet delegation for private endpoints
+- Create private endpoints for Key Vault, Azure OpenAI, and Storage Account
 - Validate private endpoint connectivity
 - Test that public access is completely blocked
 - Verify DNS resolution for private endpoints

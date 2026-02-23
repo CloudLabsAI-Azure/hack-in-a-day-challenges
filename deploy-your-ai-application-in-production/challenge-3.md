@@ -18,11 +18,10 @@ Network isolation alone isn't enough. Even with private endpoints, you need stro
 ## Challenge Objectives
 
 - Understand managed identity vs service principal authentication
-- Create a system-assigned managed identity for your VM
-- Assign RBAC roles for AI services access
-- Configure Key Vault access policies for the managed identity
-- Store OpenAI connection details in Key Vault (no hardcoded secrets!)
-- Test passwordless authentication to Azure OpenAI
+- Enable a system-assigned managed identity on your VM
+- Assign RBAC roles for Azure OpenAI, Key Vault, and Storage Account access
+- Store OpenAI connection details securely in Key Vault (no hardcoded secrets!)
+- Configure Storage Account access for managed identity
 - Validate least-privilege access model
 
 In the **VS Code PowerShell terminal**, run the provided commands to complete the configuration tasks.
