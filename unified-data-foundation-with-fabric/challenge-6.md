@@ -116,7 +116,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 1. Add calculated measures to the **fact_transactions** table:
 
-   - Right-click **fact_transactions** and click on **New measure**
+1. Right-click fact_transactions, select New measure, and then enter the following DAX code.
    
    ```DAX
    Total Revenue = SUM(fact_transactions[transaction_amount])
@@ -136,7 +136,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 1. Add calculated measures to the **fact_flights** table:
 
-   - Right-click **fact_flights** and click **New measure**
+1. Right-click fact_transactions, select New measure, and then enter the following DAX code.
    
    ```DAX
    Total Flights = SUM(fact_flights[total_flights])
@@ -156,7 +156,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 1. Add calculated measures for **ML Segment Analysis** (if gold_customer_segments_ml exists):
 
-   - Right-click **gold_customer_segments_ml** and click on **New measure**
+1. Right-click fact_transactions, select New measure, and then enter the following DAX code.
    
    ```DAX
    Total Customers in Segments = COUNTROWS(gold_customer_segments_ml)
