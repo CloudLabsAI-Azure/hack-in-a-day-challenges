@@ -8,8 +8,6 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources-CS
 
 - Access and verify the sample dataset files downloaded in Challenge 01.
 - Upload CSV files directly to the Bronze layer in Fabric Lakehouse.
-- Optionally create Delta tables for direct SQL querying.
-- Validate data ingestion using the Lakehouse Explorer.
 
 ## Steps to Complete
 
@@ -24,7 +22,7 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources-CS
    - `flight.csv` - Flight loyalty program data with data quality issues (62,990 records)
    - `customer_transactions.json` - Customer transaction data in JSON format with inconsistencies (15 records)
 
-   > **Note:** These datasets intentionally contain data quality issues (nulls, duplicates, inconsistent formatting) to demonstrate real-world data cleansing scenarios.
+      > **Note:** These datasets intentionally contain data quality issues (nulls, duplicates, inconsistent formatting) to demonstrate real-world data cleansing scenarios.
 
 1. Keep the File Explorer window open for easy access during upload steps.
 
@@ -57,6 +55,7 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources-CS
    - Navigate to **Files** and click on **bronze** fodler.
 
 1. Confirm you see:
+
    - `flight.csv` (CSV format)
    - `customer_transactions.json` (JSON format)
 
@@ -85,32 +84,13 @@ Contoso Enterprises needs to consolidate data from multiple disparate sources-CS
    - Inconsistent date formats
    - Mixed case region names
 
-   > **Note:** In Challenge 3, you'll clean and standardize this data as part of the Bronze to Silver transformation.
-
-### Part 4: Validate Bronze Layer Ingestion
-
-1. Navigate to your **Lakehouse**: **contoso-lakehouse-<inject key="DeploymentID" enableCopy="false"/>** (if not already open)
-
-1. In the **Files** section, verify the bronze folder contains:
-   - `flight.csv` (~63K records)
-   - `customer_transactions.json` (15 records)
-
-1. Click on **flight.csv** to preview and verify:
-   - File contains headers: MEMBER_NO, FFP_DATE, GENDER, WORK_CITY, WORK_PROVINCE, AGE, etc.
-   - Data quality issues are visible (missing values, inconsistent formatting)
-
-1. Click on **customer_transactions.json** to preview and verify:
-   - JSON structure is intact
-   - Each record contains: transaction_id, customer_id, customer_name, email, purchase_date, amount, status, payment_method, region
-   - Data quality issues are visible (nulls, duplicates, inconsistent values)
+      > **Note:** In Challenge 3, you'll clean and standardize this data as part of the Bronze to Silver transformation.
 
 ## Success Criteria
 
 - Sample dataset files located in the LabVM at `C:\LabFiles\unified-data-foundation-with-fabric\dataset\`.
 - Both files (flight.csv and customer_transactions.json) were uploaded successfully to the Bronze layer.
 - Files are visible in the Lakehouse Files explorer under the bronze folder.
-- File preview displays data with identifiable quality issues.
-- Ready to proceed to Challenge 3 for data cleansing and transformation.
 
 ## Additional Resources
 

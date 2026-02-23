@@ -91,7 +91,7 @@ Contoso Enterprises operates across multiple business units with data scattered 
    - Format: `abfss://[workspace]@onelake.dfs.fabric.microsoft.com/[lakehouse]/Files`
    - This path can be used across all Fabric workloads for unified data access
 
-   > **Hint:** Hover over the **Files** folder, click the **...**, select **Properties**, and copy the OneLake path. Save this value in a Notepad file for later use.
+      > **Hint:** Hover over the **Files** folder, click the **...**, select **Properties**, and copy the OneLake path. Save this value in a Notepad file for later use.
 
 ## Success Criteria
 

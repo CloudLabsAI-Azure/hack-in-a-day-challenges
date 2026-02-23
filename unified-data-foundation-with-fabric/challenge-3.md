@@ -325,6 +325,7 @@ The Bronze layer contains raw, unprocessed data with significant quality issues-
 
 1. In the "Save as new notebook" dialog:
    - **Name**: **Bronze-to-Silver-Transformation**
+
    - **Select location**: **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/>**
    - Click **Save**
 
@@ -336,30 +337,7 @@ The Bronze layer contains raw, unprocessed data with significant quality issues-
 - Flight data (CSV) and transaction data (JSON) loaded from the Bronze layer.
 - Data quality issues identified: missing values (".", empty strings, nulls), inconsistent formatting, duplicates.
 - Data quality checks applied: nulls handled, duplicates removed, datatypes standardized.
-- Inconsistent values standardized (status, region, payment_method, city/province names).
-- Both structured (CSV) and semi-structured (JSON) data were cleaned successfully.
-- Silver layer tables created in Delta Lake format with validated data quality.
-- SQL queries return clean, standardized data from Silver tables.
-
-## Additional Resources
-
-- [Notebooks in Microsoft Fabric](https://learn.microsoft.com/fabric/data-engineering/how-to-use-notebook)
-- [PySpark DataFrame API](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/dataframe.html)
-- [Delta Lake in Fabric](https://learn.microsoft.com/fabric/data-engineering/lakehouse-and-delta-tables)
-- [Data Quality in Fabric](https://learn.microsoft.com/fabric/data-engineering/data-quality-overview)
-- [Working with JSON in PySpark](https://spark.apache.org/docs/latest/sql-data-sources-json.html)
-
-Now, click **Next** to continue to **Challenge 04**.
-   GROUP BY p.Category
-   ORDER BY TotalRevenue DESC;
-
-## Success Criteria
-
-- Fabric Notebook created and attached to Lakehouse successfully.
-- Data quality checks applied: nulls handled, duplicates removed, datatypes standardized.
-- Related datasets (Customers, Orders, Products) joined successfully.
-- Codes standardized (Region, Status, Product Family).
-- Silver layer tables created in Delta Lake format with validated data quality.
+- Inconsistent values standardized (status, region, payment_method, city/province names)..
 
 ## Additional Resources
 
