@@ -48,6 +48,18 @@ In this challenge, you will prepare the **core infrastructure** required to buil
 
    > **Note:** If you are unable to deploy gpt-4.1-mini or the quota shows as zero, try changing the deployment type to **Standard**. If the issue persists, deploy the gpt-4.1 model instead
 
+1. In the **Azure Portal**, search for **Container registries** and click **+ Create**.
+
+1. Under **Basics**, provide:
+
+   - **Subscription:** Use the available subscription
+   - **Resource Group:** **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
+   - **Registry name:** **agentacr<inject key="DeploymentID" enableCopy="false"/>**
+   - **Location:** Select **Defualt region**
+   - **Pricing plan:** Basic
+
+1. Click on **Review + Create** and then click **Create**.
+
 ### Task 3: Create Azure Cosmos DB (Shared Agent Memory)
 
 1. In the **Azure Portal**, search for **Azure Cosmos DB** and click **Create**.
