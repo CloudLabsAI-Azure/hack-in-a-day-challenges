@@ -195,26 +195,6 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
    - **Total Loyalty Points**
    - **Total Transactions**
 
-1. Add a **Line chart** for Transaction Trend over Time:
-   - Axis: **dim_time[year]** and **dim_time[month]**
-   - Values: **Total Revenue**
-   - Title: "Monthly Transaction Trend"
-
-1. Add a **Clustered column chart** for Revenue by Region:
-   - Axis: **fact_transactions[region]**
-   - Values: **Total Revenue**, **Total Transactions**
-   - Title: "Revenue & Transactions by Region"
-
-1. Add a **Pie chart** for Transactions by Payment Method:
-   - Legend: **fact_transactions[payment_method]**
-   - Values: **Total Transactions**
-   - Title: "Payment Method Distribution"
-
-1. Add a **Table visual** for Top 10 Customers:
-   - Columns: **dim_customers[customer_key]**, **kpi_customer_value[total_spent]**, **kpi_customer_value[total_flights]**, **kpi_customer_value[customer_status]**
-   - Add visual-level filter: Top 10 by **total_spent**
-   - Title: "Top 10 Customers by Spending"
-
 #### Page 2: Geographic & Loyalty Analysis
 
 1. Add a new page: Click **+ Add page** at the bottom
@@ -230,72 +210,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
    - Values: Count of **customer_key**, **Total Flights**, **Total Loyalty Points**
    - Title: "Geographic Loyalty Analysis"
 
-1. Add a **Stacked bar chart** for Flight Activity by Loyalty Tier:
-   - Axis: **dim_customers[loyalty_tier]**
-   - Values: **Total Flights**, **Total Distance KM**
-   - Title: "Flight Activity by Loyalty Tier"
-
-1. Add a **Donut chart** for Transaction Status:
-   - Legend: **fact_transactions[status]**
-   - Values: **Total Transactions**
-   - Title: "Transaction Status Distribution"
-
-#### Page 3: ML-Powered Customer Segmentation Insights
-
-> **Note**: This page showcases the advanced analytics from Challenge 5's Fabric Data Science ML integration. If you didn't complete Challenge 5, skip to Part 4.
-
-1. Add a new page for customer ML segmentation analysis
-
-1. Add **Card visuals** for ML Segment KPIs:
-   - **Total Customers in Segments**
-   - **High Value Customers** (count)
-   - **Average RFM Score**
-
-1. Add a **Donut chart** for Customer Segment Distribution:
-   - Legend: **gold_customer_segments_ml[segment_name]**
-   - Values: Count of **customer_key**
-   - Title: "ML-Based Customer Segmentation"
-   - Enable data labels showing percentages
-
-1. Add a **Clustered column chart** for Segment Performance:
-   - Axis: **gold_customer_segments_ml[segment_name]**
-   - Values: **Total Flights**, **Total Loyalty Points**, **Total Revenue**
-   - Title: "Revenue & Engagement by Customer Segment"
-   - Legend: Show all three metrics
-
-1. Add a **Matrix visual** for Segment Profile Analysis:
-   - Rows: **gold_customer_segments_ml[segment_name]**
-   - Columns: **dim_customers[loyalty_tier]**
-   - Values: Count of **customer_key**, **Total Revenue**, **Average Transaction Value**
-   - Title: "Segment x Loyalty Tier Analysis"
-
-1. Add a **Scatter chart** for RFM Behavioral Mapping:
-   - X-axis: **gold_customer_segments_ml[recency_score]**
-   - Y-axis: **gold_customer_segments_ml[monetary_score]**
-   - Legend: **gold_customer_segments_ml[segment_name]**
-   - Size: **Total Flights**
-   - Title: "Customer Behavioral Patterns (RFM Analysis)"
-
-1. Add a **Table visual** for Segment Summary Statistics (from gold_segment_summary):
-   - Columns: **segment_name**, **customer_count**, **avg_age**, **avg_total_flights**, **avg_loyalty_points**
-   - Sort by: **avg_loyalty_points** descending
-   - Title: "Customer Segment Profiles"
-   - Format numbers appropriately (no decimals for counts, 1 decimal for averages)
-
-1. Add a **Stacked bar chart** for Segment Value Analysis:
-   - Axis: **gold_customer_segments_ml[segment_name]**
-   - Values: **Total Revenue**
-   - Color saturation: **Total Customers in Segments**
-   - Title: "Revenue Contribution by Segment"
-   - Sort by Total Revenue descending
-
-> **Business Insight**: This page enables data-driven marketing strategies:
-> - Target "At-Risk Customers" with retention campaigns
-> - Design VIP experiences for "Premium Elite Members"
-> - Nurture "New Joiners" with onboarding programs
-> - Re-engage "Occasional Travelers" with targeted promotions
-
-### Part 4: Add Interactivity with Slicers
+### Part 3: Add Interactivity with Slicers
 
 1. Go back to **Page 1: Sales Overview**
 
@@ -309,19 +224,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
    - Style: List
    - Position: Left side panel
 
-1. Add a **Slicer** for Loyalty Tier:
-   - Field: **dim_customers[loyalty_tier]**
-   - Style: Dropdown
-
-1. Add a **Slicer** for Customer Status:
-   - Field: **kpi_customer_value[customer_status]**
-   - Style: Dropdown
-
-1. Sync slicers across all pages:
-   - Select a slicer → **View** tab → **Sync slicers**
-   - Enable sync for all relevant pages
-
-### Part 5: Format and Polish the Dashboard
+### Part 4: Format and Polish the Dashboard
 
 1. Apply consistent theme:
    - Go to **View** → **Themes**
@@ -332,18 +235,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
    - Title: "Contoso Flight Loyalty & Customer Analytics Dashboard"
    - Subtitle: "Real-time insights from unified data platform"
 
-1. Add last refresh timestamp:
-   - Insert **Text box**
-   - Add: "Data refreshed: [Current Date]"
-
-1. Configure visual interactions:
-   - Select visuals and use **Format** → **Edit interactions** to control how visuals filter each other
-
-1. Add navigation buttons between pages:
-   - Insert **Buttons** → **Navigator**
-   - Configure to jump between dashboard pages
-
-### Part 6: Publish Dashboard to Power BI Service
+### Part 5: Publish Dashboard to Power BI Service
 
 1. Click **File** → **Save**
    - Report name: **Contoso-Flight-Loyalty-Dashboard**
