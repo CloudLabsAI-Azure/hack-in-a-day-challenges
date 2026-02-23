@@ -30,7 +30,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 ## Let's Get Started with Multi-Agent Automation
 
-1. In the JumpVM, click on the **Microsoft Edge** browser shortcut which is created on the desktop.
+1. In the JumpVM, click on the **Azure Portal** browser shortcut which is created on the desktop.
 
    ![](./media/gs-up1.png)
 
