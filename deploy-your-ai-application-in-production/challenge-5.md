@@ -160,39 +160,39 @@ Write-Host "Key Vault secured"
 
 ### Task 5: Verify Storage Account Access
 
-Verify managed identity has access to Blob Storage for session history (should be assigned from Challenge 3).
+1. Verify managed identity has access to Blob Storage for session history (should be assigned from Challenge 3).
 
-```powershell
-$identityId = az vm show `
- --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --name "Hack-vm-<inject key="DeploymentID" enableCopy="false"/>" `
- --query identity.principalId -o tsv
+   ```powershell
+   $identityId = az vm show `
+   --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+   --name "Hack-vm-<inject key="DeploymentID" enableCopy="false"/>" `
+   --query identity.principalId -o tsv
 
-$storageName = az storage account list `
- --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --query "[0].name" -o tsv
+   $storageName = az storage account list `
+   --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+   --query "[0].name" -o tsv
 
-$storageId = az storage account show `
- --name $storageName `
- --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
- --query id -o tsv
+   $storageId = az storage account show `
+   --name $storageName `
+   --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+   --query id -o tsv
 
-# Check if role is already assigned
-$existing = az role assignment list `
- --assignee $identityId `
- --scope $storageId `
- --query "[?roleDefinitionName=='Storage Blob Data Contributor']" -o tsv
+   # Check if role is already assigned
+   $existing = az role assignment list `
+   --assignee $identityId `
+   --scope $storageId `
+   --query "[?roleDefinitionName=='Storage Blob Data Contributor']" -o tsv
 
-if (-not $existing) {
- az role assignment create `
- --assignee $identityId `
- --role "Storage Blob Data Contributor" `
- --scope $storageId
- Write-Host "Assigned Storage Blob Data Contributor"
-} else {
- Write-Host "Storage Blob Data Contributor already assigned"
-}
-```
+   if (-not $existing) {
+   az role assignment create `
+   --assignee $identityId `
+   --role "Storage Blob Data Contributor" `
+   --scope $storageId
+   Write-Host "Assigned Storage Blob Data Contributor"
+   } else {
+   Write-Host "Storage Blob Data Contributor already assigned"
+   }
+   ```
 
 ### Task 6: Run the Chat Application
 
