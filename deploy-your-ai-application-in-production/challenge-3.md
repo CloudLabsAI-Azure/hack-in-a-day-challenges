@@ -142,7 +142,7 @@ Instead of storing endpoints and keys in files, store them securely in Key Vault
    if ($openaiEndpoint -notlike "*$openaiName*") {
       Write-Warning "WARNING: Endpoint should contain your resource name!"
       Write-Warning "Expected format: https://<resource-name>.cognitiveservices.azure.com/"
-      Write-Warning "If you see a generic endpoint, go back to Challenge 1 Task 5 and configure custom domain."
+      Write-Warning "If you see a generic endpoint, go back to Challenge 1 Task 7 and configure custom domain."
       Write-Warning "Current endpoint: $openaiEndpoint"
    }
 
@@ -205,6 +205,17 @@ Instead of storing endpoints and keys in files, store them securely in Key Vault
 ### Task 4: Configure Storage Account Access for Managed Identity
 
 Grant your VM's managed identity permission to read/write blobs.
+
+1. **Re-fetch the managed identity ID** (in case your terminal session was restarted):
+
+   ```powershell
+   $identityId = az vm identity show `
+   --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+   --name "Hack-vm-<inject key="DeploymentID" enableCopy="false"/>" `
+   --query principalId -o tsv
+
+   Write-Host "Managed Identity ID: $identityId"
+   ```
 
 1. **Assign Storage Blob Data Contributor role via CLI**:
 

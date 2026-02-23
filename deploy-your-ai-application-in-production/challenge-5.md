@@ -58,7 +58,7 @@ The application code is provided in a pre-built package.
 
 ### Task 2: Configure the Application
 
-1. **Reanme `.env.example` to create your `.env` file**:
+1. **Rename `.env.example` to create your `.env` file**:
 
    ```powershell
    Copy-Item -Path ".env.example" -Destination ".env"
@@ -129,7 +129,7 @@ az keyvault update `
 Write-Host "Key Vault secured"
 ```
 
-   > **Note**: If you already stored `StorageAccountName` in Challenge 3, this step will simply update the existing secret with the same value.
+   > **Note**: If you already stored `StorageAccountName` in Challenge 3, this step will simply update the existing secret with the same value. This is intentionally included here to ensure the secret exists regardless of whether Challenge 3 was fully completed.
 
 ### Task 4: Install Dependencies
 
@@ -269,13 +269,13 @@ The app currently runs on `localhost` inside the VM. Now let's make it accessibl
 
 1. **Stop the running Streamlit app** by pressing `Ctrl+C` in the terminal where it's running.
 
-2. **Add a Windows Firewall rule** to allow inbound traffic on port 8501:
+1. **Add a Windows Firewall rule** to allow inbound traffic on port 8501:
 
    ```powershell
    New-NetFirewallRule -DisplayName "Streamlit Port 8501" -Direction Inbound -LocalPort 8501 -Protocol TCP -Action Allow
    ```
 
-3. **Restart Streamlit** bound to all network interfaces (`0.0.0.0`) so it accepts connections from outside the VM:
+1. **Restart Streamlit** bound to all network interfaces (`0.0.0.0`) so it accepts connections from outside the VM:
 
    ```powershell
    streamlit run app.py --server.address=0.0.0.0
@@ -283,7 +283,7 @@ The app currently runs on `localhost` inside the VM. Now let's make it accessibl
 
    >**Note:** When asked for **Email** press **enter**.
 
-4. **Get the VM's public IP address** (open a **new** PowerShell terminal):
+1. **Get the VM's public IP address** (open a **new** PowerShell terminal):
 
    ```powershell
    az vm show -d `
@@ -292,13 +292,18 @@ The app currently runs on `localhost` inside the VM. Now let's make it accessibl
     --query publicIps -o tsv
    ```
 
-5. **Access the app from any device**:
+   >**Note:** You can get the VM’s public IP address from the Azure Portal:
+   - Search for and select **Virtual machines**
+   - Select **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**
+   - In the **Overview** page, copy the **Public IP address**
+
+1. **Access the app from any device**:
 
    - Open a browser on **any device** (your laptop, phone, tablet, etc.)
    - Navigate to: `http://<YOUR-VM-PUBLIC-IP>:8501`
    - For example: `http://20.91.200.211:8501`
 
-6. **Verify**:
+1. **Verify**:
 
    - The **Secure Enterprise Chat** application loads in your browser
    - You can send messages and receive AI responses just like you did locally on the VM

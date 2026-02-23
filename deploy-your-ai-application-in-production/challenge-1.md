@@ -7,7 +7,7 @@ Before deploying your secure AI application, you need to create the foundational
 You will provision:
 - Virtual Network with segmented subnets
 - Windows VM for application hosting
-- Azure OpenAI resource with GPT-4.1 model
+- Azure OpenAI resource with GPT model
 - Azure Key Vault for secrets management
 - Azure Storage Account for data persistence
 
@@ -207,7 +207,7 @@ Now let's install Azure Bastion and connect to the VM.
 
 ### Task 5: Install Required Software and Set Up VM
 
-The VM is a fresh Windows Server 2022 instance. You'll install Chocolatey (package manager), then use it to install Python 3.11, VS Code, Azure CLI, and Git.
+The VM is a fresh Windows Server 2025 instance. You'll install Chocolatey (package manager), then use it to install Python 3.11, VS Code, Azure CLI, and Git.
 
 1. Once connected to **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**, open **PowerShell as Administrator** (right-click Start → Windows PowerShell (Admin)).
 
@@ -347,7 +347,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 > **Important**: Complete this step before proceeding to Challenge 2. Without the custom domain, private endpoint creation will succeed but authentication will fail.
 
-### Task 8: Deploy GPT-4.1 Model in Azure AI Foundry
+### Task 8: Deploy GPT Model in Azure AI Foundry
 
 1. Switch to the **Azure portal**.
 
@@ -361,7 +361,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 1. Click **+ Deploy model** > **Deploy base model**.
 
-1. Search for and select **gpt-4.1** from the model catalog.
+1. Search for and select **gpt-4.1-mini** from the model catalog.
 
 1. Click **Confirm**.
 
@@ -370,11 +370,13 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
    - **Deployment name**: **secure-chat**
    - **Deployment type**: **Global Standard**
    - Select **Customize**
-   - **Tokens per Minute Rate Limit (thousands)**: **40K**
+   - **Tokens per Minute Rate Limit (thousands)**: **50K**
 
-      > **Important**: Do not increase TPM beyond 40K to avoid quota issues. We're using 40K to allow sufficient capacity for testing.
+      > **Important**: Do not increase TPM beyond 50K to avoid quota issues. We're using 50K to allow sufficient capacity for testing.
 
-1. Click **Deploy**.
+1. Click on **Deploy**.
+
+   > **Note:** If you are unable to deploy gpt-4.1-mini or the quota shows as zero, try changing the deployment type to Standard. If the issue persists, deploy the gpt-4.1 model instead
 
 <validation step="f777427b-e1f2-4061-b1e3-87109edac1bb" />
  
@@ -393,7 +395,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
    Explain the principle of least privilege in cloud security.
    ```
 
-1. Verify that you receive a response from GPT-4.1.
+1. Verify that you receive a response from GPT.
 
 1. Click **View code** (top left).
 
@@ -547,7 +549,7 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
    - **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** (Virtual machine)
 
-1. In the left navigation, click **Subnets**.
+1. Click on **vnet-secureai-<inject key="DeploymentID" enableCopy="false"/>** to open the Virtual Network resource. In the left navigation, under **Settings**, click **Subnets**.
 
 1. Verify all three subnets exist:
 
@@ -557,24 +559,22 @@ Now that the Azure AI Foundry resource is created, you must configure a custom s
 
 ### Task 15: Save Configuration Details
 
-Open Notepad on your VM and document the following:
-
-```
-SECURE AI INFRASTRUCTURE – DEPLOYMENT SUMMARY
 Connect to **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** via Bastion, open Notepad, and document the following:
 
 ```
+SECURE AI INFRASTRUCTURE – DEPLOYMENT SUMMARY
 
 Deployment ID: <inject key="DeploymentID" enableCopy="false"/>
 Region: <inject key="Region"></inject>
+```
 
 ## Success Criteria
 
-- Virtual Network created with three subnets (snet-ai-services, snet-storage-services, snet-application) and AzureBastionSubnet
-- Windows VM deployed in the application subnet with no public IP
-- Azure Bastion deployed and VM accessible via Bastion
+- Virtual Network created with three subnets (snet-ai-services, snet-storage-services, snet-application)
+- Windows VM deployed in the application subnet
+- Azure Bastion deployed automatically via the portal and VM accessible via Bastion
 - Required software installed on VM (Python 3.11, VS Code, Azure CLI)
-- Azure AI Foundry project created with the GPT-4.1 model successfully deployed
+- Azure AI Foundry project created with the GPT model successfully deployed
 - Custom domain configured on the Azure OpenAI resource
 - Model tested in Chat Playground and working correctly
 - Azure Key Vault created with RBAC authorization and Key Vault Administrator role assigned

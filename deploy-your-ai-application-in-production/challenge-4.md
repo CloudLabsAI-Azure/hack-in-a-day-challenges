@@ -92,16 +92,19 @@ az keyvault update `
 Write-Host "Key Vault secured"
 ```
 
-   > **Note**: If you deployed a different model, replace `"secure-chat"` with your deployment name.
+   > **Note**: These secrets (`ChatModelDeployment` and `OpenAIApiVersion`) were also stored in Challenge 3. This task updates them to ensure they are current. If you deployed a different model, replace `"secure-chat"` with your deployment name.
 
 ### Task 3: Test Chat Completions with Managed Identity
 
 Validate that Azure OpenAI works end to end with managed identity authentication.
 
-1. **Install required Python packages** (if not already installed):
+1. **Create a temporary virtual environment and install required packages**:
 
    ```powershell
    New-Item -Path "C:\Code" -ItemType Directory -Force
+   Set-Location "C:\Code"
+   python -m venv test-venv
+   .\test-venv\Scripts\Activate.ps1
    pip install azure-identity azure-keyvault-secrets openai
    ```
 

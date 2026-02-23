@@ -4,7 +4,7 @@
 
 Most AI projects fail to reach production not due to model quality, but because of security and compliance gaps. Public endpoints, weak identity controls, lack of network isolation, and non-compliant architectures block enterprise AI adoption. Security teams reject deployments that don't meet standards.
 
-In this hands-on hackathon, you'll deploy an enterprise-ready AI application following Microsoft's Well-Architected Framework. You'll build a secure chat application using Azure AI Foundry with complete network isolation, private endpoints, managed identities, and zero public access.
+In this hands-on hackathon, you'll deploy an enterprise-ready AI application following Microsoft's Well-Architected Framework. You'll build a secure chat application using Azure AI Foundry with network isolation, private endpoints, and managed identities.
 
 ## The Challenge
 
