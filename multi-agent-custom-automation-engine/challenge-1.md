@@ -40,7 +40,13 @@ In this challenge, you will prepare the **core infrastructure** required to buil
    - **Deployment name:** `agent-gpt-4o-mini`
    - **Deployment type:** Standard
 
-1. Click **Deploy** and wait for deployment.
+      > **Note:** Ignore the Deployment name being called **agent-gpt-4o-mini**
+
+      > **Note:** Do not set the Tokens per Minute rate limit above **40K**, as exceeding this limit may cause deployment or quota issues.
+
+1. Click **Deploy** and wait for the model to be ready.
+
+   > **Note:** If you are unable to deploy gpt-4.1-mini or the quota shows as zero, try changing the deployment type to **Standard**. If the issue persists, deploy the gpt-4.1 model instead
 
 ### Task 3: Create Azure Cosmos DB (Shared Agent Memory)
 
