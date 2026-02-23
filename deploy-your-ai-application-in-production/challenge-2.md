@@ -130,7 +130,7 @@ Now ensure no service accepts connections from the internet using the Azure Port
 
          > **What this does**: Restricts AI Foundry to only accept connections from your Virtual Network subnets, blocking all public internet access.
 
-2. **Disable public access on Storage Account**:
+1. **Disable public access on Storage Account**:
 
    - **In Azure Portal** navigate to your **stsecureai<inject key="DeploymentID" enableCopy="false"/>** Storage Account
       - Click **Networking** in the left menu under **Security + networking**
@@ -139,7 +139,7 @@ Now ensure no service accepts connections from the internet using the Azure Port
       - Click **Save**
       - Wait for the deployment to complete; it will take a maximum of 30 seconds.
 
-3. **Disable public access on Key Vault**:
+1. **Disable public access on Key Vault**:
 
    - **In Azure Portal** navigate to your **kv-secureai-<inject key="DeploymentID" enableCopy="false"/>** key Vault.
       - Click **Networking** in the left menu under Settings
@@ -327,7 +327,7 @@ Ensure all services are reachable via private endpoints only. For this validatio
 
    - All should show `State: Approved`
 
-2. **Check private DNS zones**:
+1. **Check private DNS zones**:
 
    ```powershell
    az network private-dns zone list `
@@ -344,7 +344,7 @@ Ensure all services are reachable via private endpoints only. For this validatio
 - `privatelink.services.ai.azure.com`
 - `privatelink.vaultcore.azure.net`
 
-3. **Verify VNET link for DNS zones**:
+1. **Verify VNET link for DNS zones**:
 
    ```powershell
    $dnsZone = "privatelink.openai.azure.com"
@@ -380,7 +380,7 @@ Verify that service names resolve to private IP addresses (not public). Continue
       Address:  10.0.1.4
       ```
 
-2. **Test Key Vault endpoint**:
+1. **Test Key Vault endpoint**:
 
    ```powershell
    nslookup kv-secureai-<inject key="DeploymentID" enableCopy="false"/>.vault.azure.net
@@ -388,7 +388,7 @@ Verify that service names resolve to private IP addresses (not public). Continue
 
    - Expected private IP in `10.0.2.x` range.
 
-3. **Test Storage Account endpoint**:
+1. **Test Storage Account endpoint**:
 
    ```powershell
    nslookup stsecureai<inject key="DeploymentID" enableCopy="false"/>.blob.core.windows.net
@@ -396,7 +396,7 @@ Verify that service names resolve to private IP addresses (not public). Continue
 
    - Expected private IP in `10.0.2.x` range.
 
-4. **Test connectivity to Key Vault**:
+1. **Test connectivity to Key Vault**:
 
    ```powershell
    # Try to list secrets (you should get an access denied, but connection should work)

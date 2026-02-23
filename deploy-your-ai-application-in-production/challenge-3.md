@@ -77,7 +77,7 @@ Grant your VM's managed identity the necessary permissions via CLI.
    Write-Host "Assigned: Cognitive Services OpenAI User on $openaiName"
    ```
 
-2. **Assign Key Vault roles**:
+1. **Assign Key Vault roles**:
 
    ```powershell
    # Get Key Vault resource ID
@@ -155,7 +155,7 @@ Instead of storing endpoints and keys in files, store them securely in Key Vault
    Write-Host "Key Vault public access enabled temporarily"
    ```
 
-2. **Store the OpenAI configuration secrets**:
+1. **Store the OpenAI configuration secrets**:
 
    ```powershell
    # Store OpenAI endpoint
@@ -191,7 +191,7 @@ Instead of storing endpoints and keys in files, store them securely in Key Vault
    Write-Host "Stored OpenAI Resource name"
    ```
 
-3. **Disable public access again** (restore security):
+1. **Disable public access again** (restore security):
 
    ```powershell
    az keyvault update `
@@ -238,7 +238,7 @@ Grant your VM's managed identity permission to read/write blobs.
    Write-Host "Assigned: Storage Blob Data Contributor on $storageName"
    ```
 
-2. **Store Storage Account name in Key Vault**:
+1. **Store Storage Account name in Key Vault**:
 
    ```powershell
    # Get Key Vault name
