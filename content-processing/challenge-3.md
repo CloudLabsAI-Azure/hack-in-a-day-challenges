@@ -5,7 +5,8 @@
 With your Classification Agent identifying document types, you now need two more agents to complete the intelligent pipeline:
 
 1. **Data Extraction Agent** - Takes the classified document and extracts structured data fields specific to that document type (invoice fields are different from medical form fields)
-2. **Quality Validation Agent** - Validates the extracted data for completeness, consistency, and assigns a confidence score that determines routing: **auto-approve** (high confidence) or **human review** (low confidence)
+
+1. **Quality Validation Agent** - Validates the extracted data for completeness, consistency, and assigns a confidence score that determines routing: **auto-approve** (high confidence) or **human review** (low confidence)
 
 You will then use Microsoft Foundry's **Connected Agents** feature to chain all three agents together, so a single request flows automatically: Classification > Extraction > Validation.
 
