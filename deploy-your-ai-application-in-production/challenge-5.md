@@ -45,14 +45,14 @@ The application code is provided in a pre-built package.
    https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/deploy-your-ai-application.zip
    ```
 
-2. **Extract the ZIP file**:
+1. **Extract the ZIP file**:
    
    - Right-click the downloaded `hack-in-a-day-challenges-deploy-your-ai-application.zip` file
    - Select **Extract All...**
    - Choose a location `C:\Code\`
    - Click **Extract**
 
-3. **Navigate to the codefiles folder**:
+1. **Navigate to the codefiles folder**:
    
    - Open VSCode, select **File** > click on **Open Folder** and select the folder `C:\Code\hack-in-a-day-challenges-deploy-your-ai-application\codefiles`
 
@@ -65,7 +65,7 @@ The application code is provided in a pre-built package.
    Write-Host "Created .env file from template"
    ```
 
-2. **Get your Key Vault name**:
+1. **Get your Key Vault name**:
 
    ```powershell
    $kvName = az keyvault list `
@@ -75,7 +75,7 @@ The application code is provided in a pre-built package.
    Write-Host "Your Key Vault name: $kvName"
    ```
 
-3. **Update the `.env` file with your Key Vault name**:
+1. **Update the `.env` file with your Key Vault name**:
 
    ```powershell
    # Replace the placeholder with your actual Key Vault name
@@ -84,7 +84,7 @@ The application code is provided in a pre-built package.
    Write-Host "Updated .env with Key Vault name: $kvName"
    ```
 
-4. **Verify the `.env` file**:
+1. **Verify the `.env` file**:
 
    ```powershell
    Get-Content ".env"
@@ -142,13 +142,13 @@ Write-Host "Key Vault secured"
    .\venv\Scripts\Activate.ps1
    ```
 
-2. **Upgrade pip**:
+1. **Upgrade pip**:
 
    ```powershell
    python -m pip install --upgrade pip
    ```
 
-3. **Install requirements**:
+1. **Install requirements**:
 
    ```powershell
    pip install -r requirements.txt
@@ -205,7 +205,7 @@ Moment of truth!
    .\venv\Scripts\Activate.ps1
    ```
 
-2. **Start the app**:
+1. **Start the app**:
 
    ```powershell
    streamlit run app.py
@@ -213,7 +213,7 @@ Moment of truth!
 
    >**Note:** When asked for **Email** press **enter**.
 
-3. **Expected output**:
+1. **Expected output**:
 
    ```
    You can now view your Streamlit app in your browser.
@@ -222,12 +222,12 @@ Moment of truth!
    Network URL: http://10.0.3.4:8501
    ```
 
-4. **Open browser**:
+1. **Open browser**:
 
    - The browser should open automatically.
    - If not, manually navigate to `http://localhost:8501`
 
-5. **You should see**:
+1. **You should see**:
 
    - The **Secure Enterprise Chat** application with a professional enterprise UI
    - Sidebar showing: **Authenticated** with Managed Identity
@@ -246,7 +246,7 @@ Moment of truth!
    - You should receive an AI response with streaming effect
    - Sidebar shows **Authenticated**, **Managed Identity**, and **Private Only**
 
-2. **Send a follow-up** to test multi-turn conversation:
+1. **Send a follow-up** to test multi-turn conversation:
 
    ```
    How does that apply to Azure managed identities?
@@ -254,7 +254,7 @@ Moment of truth!
 
       - The response should reference the previous question
 
-3. **Verify no API keys in code** (quick security check):
+1. **Verify no API keys in code** (quick security check):
 
    - Open a **new** PowerShell terminal (keep the app running) and run:
 
