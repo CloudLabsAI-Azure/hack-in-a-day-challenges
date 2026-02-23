@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Your OpenAI service is deployed with a private endpoint, but it's not fully configured yet. In this challenge, you will deploy GPT models, configure content filtering, test embeddings, and validate that everything works through the private network with managed identity authentication.
+Your OpenAI service is deployed with a private endpoint and the GPT model is ready from Challenge 1. In this challenge, you will verify the model deployment, store the configuration securely in Key Vault, and test that chat completions work end-to-end through the private network with managed identity authentication.
 
-By the end, you will have a fully operational, secure OpenAI service ready for your chat application.
+By the end, you will have a fully validated, secure OpenAI service ready for your chat application.
 
 ## Prerequisites
 
@@ -18,13 +18,10 @@ By the end, you will have a fully operational, secure OpenAI service ready for y
 
 ## Challenge Objectives
 
-- Deploy GPT-4 (or GPT-3.5-Turbo) model for chat completions
-- Deploy text-embedding model for semantic search
-- Configure content filtering policies
-- Test model deployments using managed identity
-- Store model deployment names in Key Vault
-- Validate private endpoint connectivity
-- Benchmark model performance
+- Verify the GPT model deployment from Challenge 1
+- Store model deployment name and API version in Key Vault
+- Test chat completions using managed identity authentication
+- Validate end-to-end private connectivity with a Python test script
 
 ## Steps to Complete
 
@@ -95,16 +92,19 @@ az keyvault update `
 Write-Host "Key Vault secured"
 ```
 
-   > **Note**: If you deployed a different model, replace `"secure-chat"` with your deployment name.
+   > **Note**: These secrets (`ChatModelDeployment` and `OpenAIApiVersion`) were also stored in Challenge 3. This task updates them to ensure they are current. If you deployed a different model, replace `"secure-chat"` with your deployment name.
 
 ### Task 3: Test Chat Completions with Managed Identity
 
 Validate that Azure OpenAI works end to end with managed identity authentication.
 
-1. **Install required Python packages** (if not already installed):
+1. **Create a temporary virtual environment and install required packages**:
 
    ```powershell
    New-Item -Path "C:\Code" -ItemType Directory -Force
+   Set-Location "C:\Code"
+   python -m venv test-venv
+   .\test-venv\Scripts\Activate.ps1
    pip install azure-identity azure-keyvault-secrets openai
    ```
 

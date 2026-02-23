@@ -30,6 +30,7 @@ Let’s build a secure ChatGPT-like experience.
 - Test chat functionality with managed identity
 - Validate security (no API keys, private endpoints only)
 - Test session history with Storage Account
+- Make the application accessible from any device via the VM's public IP
 
 ## Steps to Complete
 
@@ -57,7 +58,7 @@ The application code is provided in a pre-built package.
 
 ### Task 2: Configure the Application
 
-1. **Reanme `.env.example` to create your `.env` file**:
+1. **Rename `.env.example` to create your `.env` file**:
 
    ```powershell
    Copy-Item -Path ".env.example" -Destination ".env"
@@ -128,7 +129,7 @@ az keyvault update `
 Write-Host "Key Vault secured"
 ```
 
-   > **Note**: If you already stored `StorageAccountName` in Challenge 3, this step will simply update the existing secret with the same value.
+   > **Note**: If you already stored `StorageAccountName` in Challenge 3, this step will simply update the existing secret with the same value. This is intentionally included here to ensure the secret exists regardless of whether Challenge 3 was fully completed.
 
 ### Task 4: Install Dependencies
 
@@ -262,6 +263,53 @@ Moment of truth!
       # Should return NO MATCHES - all auth goes through Managed Identity!
       ```
 
+### Task 8: Make the Application Accessible from Any Device
+
+The app currently runs on `localhost` inside the VM. Now let's make it accessible from any device on the internet using the VM's public IP address.
+
+1. **Stop the running Streamlit app** by pressing `Ctrl+C` in the terminal where it's running.
+
+1. **Add a Windows Firewall rule** to allow inbound traffic on port 8501:
+
+   ```powershell
+   New-NetFirewallRule -DisplayName "Streamlit Port 8501" -Direction Inbound -LocalPort 8501 -Protocol TCP -Action Allow
+   ```
+
+1. **Restart Streamlit** bound to all network interfaces (`0.0.0.0`) so it accepts connections from outside the VM:
+
+   ```powershell
+   streamlit run app.py --server.address=0.0.0.0
+   ```
+
+   >**Note:** When asked for **Email** press **enter**.
+
+1. **Get the VM's public IP address** (open a **new** PowerShell terminal):
+
+   ```powershell
+   az vm show -d `
+    --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+    --name "Hack-vm-<inject key="DeploymentID" enableCopy="false"/>" `
+    --query publicIps -o tsv
+   ```
+
+   >**Note:** You can get the VM’s public IP address from the Azure Portal:
+   - Search for and select **Virtual machines**
+   - Select **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>**
+   - In the **Overview** page, copy the **Public IP address**
+
+1. **Access the app from any device**:
+
+   - Open a browser on **any device** (your laptop, phone, tablet, etc.)
+   - Navigate to: `http://<YOUR-VM-PUBLIC-IP>:8501`
+   - For example: `http://20.91.200.211:8501`
+
+1. **Verify**:
+
+   - The **Secure Enterprise Chat** application loads in your browser
+   - You can send messages and receive AI responses just like you did locally on the VM
+
+   > **Important - HTTP Only (No SSL)**: The application is currently served over **HTTP**, not HTTPS, because no SSL/TLS certificate has been configured. This means the connection is **unencrypted** and is not suitable for handling sensitive data in this state. In a production environment, you would place the application behind a reverse proxy (such as Azure Application Gateway or Nginx) with a valid SSL/TLS certificate to enable HTTPS, or deploy to a PaaS service like Azure App Service that provides managed SSL/TLS out of the box. For the purposes of this lab, HTTP is sufficient to demonstrate the functionality.
+
 <validation step="2fdf5b82-f5c0-403b-bf34-a222b7a5daa4" />
  
 > **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
@@ -281,5 +329,7 @@ Validate your app deployment:
 - Chat completions work
 - Multi-turn conversations work (context maintained)
 - No API keys in code or config files
+- Windows Firewall rule allows inbound traffic on port 8501
+- Application is accessible from any device via `http://<VM-PUBLIC-IP>:8501`
 
-Now, click **Next** to continue to **Challenge 06**.
+**Congratulations!** You have successfully completed all challenges in this hackathon. You built and deployed a fully secure, enterprise-ready AI chat application with network isolation, managed identity authentication, Key Vault secret management, and external accessibility — all without a single API key in your code.

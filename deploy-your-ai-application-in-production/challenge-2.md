@@ -16,12 +16,6 @@ This is where enterprises fail most often deploying services with default settin
    - Storage Account
    - Key Vault
 - Connected to **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** via Azure Bastion
-- Configure Network Security Group (NSG) rules for the AI services subnet
-- Disable public network access on all AI services
-- Configure subnet delegation for private endpoints
-- Validate private endpoint connectivity
-- Test that public access is completely blocked
-- Verify DNS resolution for private endpoints
 
 ### Task 1: Create Network Security Group for AI Services
 
@@ -485,7 +479,6 @@ Verify your network is fully secured:
 - DNS resolution returns private IPs (10.0.x.x) not public IPs
 - Accessing services from public internet is BLOCKED (403/timeout errors)
 - Private endpoint for Storage Account created and approved
-- Network configuration documented in `network-config.txt`
 
 ## Additional Resources
 

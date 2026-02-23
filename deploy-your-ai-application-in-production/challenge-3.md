@@ -18,11 +18,10 @@ Network isolation alone isn't enough. Even with private endpoints, you need stro
 ## Challenge Objectives
 
 - Understand managed identity vs service principal authentication
-- Create a system-assigned managed identity for your VM
-- Assign RBAC roles for AI services access
-- Configure Key Vault access policies for the managed identity
-- Store OpenAI connection details in Key Vault (no hardcoded secrets!)
-- Test passwordless authentication to Azure OpenAI
+- Enable a system-assigned managed identity on your VM
+- Assign RBAC roles for Azure OpenAI, Key Vault, and Storage Account access
+- Store OpenAI connection details securely in Key Vault (no hardcoded secrets!)
+- Configure Storage Account access for managed identity
 - Validate least-privilege access model
 
 In the **VS Code PowerShell terminal**, run the provided commands to complete the configuration tasks.
@@ -143,7 +142,7 @@ Instead of storing endpoints and keys in files, store them securely in Key Vault
    if ($openaiEndpoint -notlike "*$openaiName*") {
       Write-Warning "WARNING: Endpoint should contain your resource name!"
       Write-Warning "Expected format: https://<resource-name>.cognitiveservices.azure.com/"
-      Write-Warning "If you see a generic endpoint, go back to Challenge 1 Task 5 and configure custom domain."
+      Write-Warning "If you see a generic endpoint, go back to Challenge 1 Task 7 and configure custom domain."
       Write-Warning "Current endpoint: $openaiEndpoint"
    }
 
@@ -206,6 +205,17 @@ Instead of storing endpoints and keys in files, store them securely in Key Vault
 ### Task 4: Configure Storage Account Access for Managed Identity
 
 Grant your VM's managed identity permission to read/write blobs.
+
+1. **Re-fetch the managed identity ID** (in case your terminal session was restarted):
+
+   ```powershell
+   $identityId = az vm identity show `
+   --resource-group "challenge-rg-<inject key="DeploymentID" enableCopy="false"/>" `
+   --name "Hack-vm-<inject key="DeploymentID" enableCopy="false"/>" `
+   --query principalId -o tsv
+
+   Write-Host "Managed Identity ID: $identityId"
+   ```
 
 1. **Assign Storage Blob Data Contributor role via CLI**:
 
