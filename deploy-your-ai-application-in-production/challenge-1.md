@@ -187,6 +187,10 @@ Now you'll deploy a Windows VM in the application subnet where you'll host the s
 
 Now let's install Azure Bastion and connect to the VM.
 
+1. Always open the Bastion connection using the Bastion link directly from your local laptop or PC browser. Do NOT open Bastion from inside the existing Lab VM, as this can cause copy-paste limitations. If you open Bastion inside the Lab VM, you will need to copy content from the lab guide to the Lab VM first, and then copy it again into the Bastion VM.
+
+   > **Important:** Please carefully read and follow the above instructions before proceeding.
+
 1. Navigate to your **Hack-vm-<inject key="DeploymentID" enableCopy="false"/>** Virtual Machine resource.
 
 1. In the left navigation, click **Connect** > **Connect via Bastion**.
