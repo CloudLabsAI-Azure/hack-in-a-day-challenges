@@ -8,7 +8,6 @@ In this challenge, you will prepare the **core infrastructure** required to buil
 
 - Set up Microsoft Foundry for agent intelligence
 - Create shared state storage using Azure Cosmos DB
-- Create Azure Container Registry (ACR) for agent containers
 - Initialize a Semantic Kernel project
 - Define agent roles and responsibilities
 
@@ -18,33 +17,38 @@ In this challenge, you will prepare the **core infrastructure** required to buil
 
 1. In the **Azure Portal**, search for **Microsoft Foundry** under **Use with Foundry**, select **Foundry** and click **+ Create**.
 
-2. Under **Basics**, provide:
+1. Under **Basics**, provide:
 
    - **Subscription:** Use the available subscription
    - **Resource Group:** **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
    - **Region:** Supported Microsoft Foundry region
    - **Name:** **agent-foundry-<inject key="DeploymentID" enableCopy="false"/>**
 
-3. Click on **Review + Create** and then click **Create**.
-4. After deployment succeeds, open the **Microsoft Foundry** resource.
+1. Click on **Review + Create** and then click **Create**.
+
+1. After deployment succeeds, open the **Microsoft Foundry** resource.
 
 ### Task 2: Deploy the Model
 
 1. In the Microsoft Foundry resource, click **Go to Microsoft Foundry portal**.
-2. Navigate to **Models + endpoints**, click on **+ Deploy model**, and then select **Deploy base model**.
-3. Provide:
+
+1. Navigate to **Models + endpoints**, click on **+ Deploy model**, and then select **Deploy base model**.
+
+1. Provide:
 
    - **Model:** `gpt-4o-mini`
    - **Deployment name:** `agent-gpt-4o-mini`
    - **Deployment type:** Standard
 
-4. Click **Deploy** and wait for deployment.
+1. Click **Deploy** and wait for deployment.
 
 ### Task 3: Create Azure Cosmos DB (Shared Agent Memory)
 
 1. In the **Azure Portal**, search for **Azure Cosmos DB** and click **Create**.
-2. Select **Azure Cosmos DB for NoSQL**.
-3. Under **Basics**, provide:
+
+1. Select **Azure Cosmos DB for NoSQL**.
+
+1. Under **Basics**, provide:
 
    - **Workload Type:** Development/Testing
    - **Subscription:** Use the available subscription
@@ -52,30 +56,32 @@ In this challenge, you will prepare the **core infrastructure** required to buil
    - **Account Name:** **agent-cosmos-<inject key="DeploymentID" enableCopy="false"/>**
    - **Location:** Same region as other resources
    - **Capacity mode:** Provisioned throughput
-4. Click on **Review + Create** and then click **Create**.
+1. Click on **Review + Create** and then click **Create**.
 
 ### Task 4: Create Database and Container
 
 1. Open the Cosmos DB account.
-2. Go to **Data Explorer**.
-3. Click on **+ New Container** and then select **+ New Database**:
+
+1. Go to **Data Explorer**.
+
+1. Click on **+ New Container** and then select **+ New Database**:
 
    - **Database ID:** `agent-memory-db`
    - Select on **OK**
 
-4. Right-click on the *agent-memory-db* and select **New Container**:
+1. Right-click on the *agent-memory-db* and select **New Container**:
 
    - Select **Use existing**
    - **Container ID:** `agent-state`
    - **Partition key:** `/workflowId`
 
-5. Click on **OK**.
+1. Click on **OK**.
 
 ### Task 5: Create Azure Container Registry (ACR)
 
 1. In the **Azure Portal**, search for **Container registries** and click **+ Create**.
 
-2. Under **Basics**, provide:
+1. Under **Basics**, provide:
 
    - **Subscription:** Use the available subscription
    - **Resource Group:** **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
@@ -83,7 +89,7 @@ In this challenge, you will prepare the **core infrastructure** required to buil
    - **Location:** Same region
    - **Pricing plan:** Basic
 
-3. Click on **Review + Create** and then click **Create**.
+1. Click on **Review + Create** and then click **Create**.
 
 ### Task 6: Initialize Local Project (Agent Codebase)
 
@@ -138,7 +144,7 @@ You should see `(.venv)` in the terminal prompt.
    python-dotenv
    ```
 
-2. Install the dependencies:
+1. Install the dependencies:
 
    ```powershell
    pip install -r requirements.txt
@@ -150,7 +156,7 @@ You should see `(.venv)` in the terminal prompt.
 
 1. Open the `.env` file in the project root.
 
-2. Add the following values (replace placeholders) and save the file:
+1. Add the following values (replace placeholders) and save the file:
 
    ```env
    AZURE_OPENAI_ENDPOINT=https://<your-openai-resource-name>.openai.azure.com/
@@ -195,13 +201,13 @@ You should see `(.venv)` in the terminal prompt.
       asyncio.run(main())
    ```
 
-2. Run the script:
+1. Run the script:
 
    ```powershell
    py app/main.py
    ```
 
-3. Verify you see a greeting message from the model.
+1. Verify you see a greeting message from the model.
 
 <validation step="57edd22d-51dc-4216-b7b4-ea8170d67205" />
  

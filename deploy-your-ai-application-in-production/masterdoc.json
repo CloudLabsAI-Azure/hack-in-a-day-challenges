@@ -31,14 +31,6 @@
             {
                 "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/deploy-your-ai-application-in-production/challenge-5.md",
                 "Order": 7
-            },
-            {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/deploy-your-ai-application-in-production/challenge-6.md",
-                "Order": 8
-            },
-            {
-                "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/hack-in-a-day-challenges/refs/heads/main/deploy-your-ai-application-in-production/challenge-7.md",
-                "Order": 9
             }
         ]
     }

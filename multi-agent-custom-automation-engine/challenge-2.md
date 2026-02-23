@@ -42,33 +42,33 @@ Extract structured data from raw text input.
 
 1. Copy the below mentioned code and paste it in `extraction_agent.py`, and save the file.
 
-  ```python
-  from semantic_kernel import Kernel
-  from semantic_kernel.functions import KernelArguments
+    ```python
+    from semantic_kernel import Kernel
+    from semantic_kernel.functions import KernelArguments
 
-  async def run_extraction(kernel: Kernel, input_text: str):
-    prompt = """
-  You are an extraction agent.
+    async def run_extraction(kernel: Kernel, input_text: str):
+      prompt = """
+    You are an extraction agent.
 
-  Extract structured data from the text below.
-  Return ONLY valid JSON.
+    Extract structured data from the text below.
+    Return ONLY valid JSON.
 
-  Text:
-  {{$inputText}}
-  """
+    Text:
+    {{$inputText}}
+    """
 
-    arguments = KernelArguments(
-        inputText=input_text
-    )
+      arguments = KernelArguments(
+          inputText=input_text
+      )
 
-    result = await kernel.invoke_prompt(
-        prompt,
-        arguments=arguments
-    )
+      result = await kernel.invoke_prompt(
+          prompt,
+          arguments=arguments
+      )
 
-    return result
+      return result
 
-  ```
+    ```
 
 ### Task 3: Create the Validation Agent
 
@@ -116,14 +116,14 @@ Generate email or notification content based on validated data.
 
   async def run_communication(kernel: Kernel, validated_text: str):
       prompt = """
-You are a communication agent.
+  You are a communication agent.
 
-Draft a professional email based on the validated data below.
-Return ONLY valid JSON with subject and body.
+  Draft a professional email based on the validated data below.
+  Return ONLY valid JSON with subject and body.
 
-Validated Data:
-{{$data}}
-"""
+  Validated Data:
+  {{$data}}
+  """
 
       arguments = KernelArguments(
           data=validated_text
@@ -149,14 +149,14 @@ Generate a human-readable summary of the workflow.
 
   async def run_reporting(kernel: Kernel, workflow_data):
       prompt = """
-You are a reporting agent.
+  You are a reporting agent.
 
-Summarize the workflow execution below.
-Return ONLY valid JSON.
+  Summarize the workflow execution below.
+  Return ONLY valid JSON.
 
-Workflow State:
-{{$data}}
-"""
+  Workflow State:
+  {{$data}}
+  """
 
       arguments = KernelArguments(
           data=str(workflow_data)
