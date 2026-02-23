@@ -36,7 +36,7 @@ In this challenge, you will prepare the **core infrastructure** required to buil
 
 1. Provide:
 
-   - **Model:** `gpt-4o-mini`
+   - **Model:** `gpt-4.1-mini`
    - **Deployment name:** `agent-gpt-4o-mini`
    - **Deployment type:** Standard
 
