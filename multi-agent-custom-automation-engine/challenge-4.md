@@ -167,7 +167,7 @@ Open each agent file in `app/agents/` and confirm:
 
 ### Task 5: Run the Full Workflow
 
-Run:
+Run the below command in the terminal:
 
 ```powershell
 py app/main.py

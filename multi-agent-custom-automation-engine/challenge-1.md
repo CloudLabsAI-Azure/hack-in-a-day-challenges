@@ -209,13 +209,6 @@ You should see `(.venv)` in the terminal prompt.
 
 1. Verify you see a greeting message from the model.
 
-<validation step="57edd22d-51dc-4216-b7b4-ea8170d67205" />
- 
-> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
-> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
-
 ## Success Criteria
 
 - Microsoft Foundry model deployment (`agent-gpt-4o-mini`) is ready and responding

@@ -76,21 +76,21 @@ Validate extracted data for completeness and correctness.
 
 1. Create `validation_agent.py` and paste the following code, and save the file:
 
-  ```python
-  from semantic_kernel import Kernel
-  from semantic_kernel.functions import KernelArguments
+    ```python
+    from semantic_kernel import Kernel
+    from semantic_kernel.functions import KernelArguments
 
-  async def run_validation(kernel: Kernel, extracted_text: str):
-      prompt = """
-  You are a validation agent.
+    async def run_validation(kernel: Kernel, extracted_text: str):
+        prompt = """
+    You are a validation agent.
 
-  Validate the extracted data below.
-  Check for missing or inconsistent fields.
-  Return ONLY valid JSON.
+    Validate the extracted data below.
+    Check for missing or inconsistent fields.
+    Return ONLY valid JSON.
 
-  Extracted Data:
-  {{$data}}
-  """
+    Extracted Data:
+    {{$data}}
+    """
 
         arguments = KernelArguments(
             data=extracted_text
@@ -102,7 +102,7 @@ Validate extracted data for completeness and correctness.
         )
 
         return result
-  ```
+    ```
 
 ### Task 4: Create the Communication Agent
 
@@ -110,32 +110,32 @@ Generate email or notification content based on validated data.
 
 1. Create `communication_agent.py` and paste the following code, and save the file:
 
-  ```python
-  from semantic_kernel import Kernel
-  from semantic_kernel.functions import KernelArguments
+    ```python
+    from semantic_kernel import Kernel
+    from semantic_kernel.functions import KernelArguments
 
-  async def run_communication(kernel: Kernel, validated_text: str):
-      prompt = """
-  You are a communication agent.
+    async def run_communication(kernel: Kernel, validated_text: str):
+        prompt = """
+    You are a communication agent.
 
-  Draft a professional email based on the validated data below.
-  Return ONLY valid JSON with subject and body.
+    Draft a professional email based on the validated data below.
+    Return ONLY valid JSON with subject and body.
 
-  Validated Data:
-  {{$data}}
-  """
+    Validated Data:
+    {{$data}}
+    """
 
-      arguments = KernelArguments(
-          data=validated_text
-      )
+        arguments = KernelArguments(
+            data=validated_text
+        )
 
-      result = await kernel.invoke_prompt(
-          prompt=prompt,
-          arguments=arguments
-      )
+        result = await kernel.invoke_prompt(
+            prompt=prompt,
+            arguments=arguments
+        )
 
-      return result
-  ```
+        return result
+    ```
 
 ### Task 5: Create the Reporting Agent
 
@@ -143,85 +143,85 @@ Generate a human-readable summary of the workflow.
 
 1. Create `reporting_agent.py` and paste the following code, and save the file:
 
-  ```python
-  from semantic_kernel import Kernel
-  from semantic_kernel.functions import KernelArguments
+    ```python
+    from semantic_kernel import Kernel
+    from semantic_kernel.functions import KernelArguments
 
-  async def run_reporting(kernel: Kernel, workflow_data):
-      prompt = """
-  You are a reporting agent.
+    async def run_reporting(kernel: Kernel, workflow_data):
+        prompt = """
+    You are a reporting agent.
 
-  Summarize the workflow execution below.
-  Return ONLY valid JSON.
+    Summarize the workflow execution below.
+    Return ONLY valid JSON.
 
-  Workflow State:
-  {{$data}}
-  """
+    Workflow State:
+    {{$data}}
+    """
 
-      arguments = KernelArguments(
-          data=str(workflow_data)
-      )
+        arguments = KernelArguments(
+            data=str(workflow_data)
+        )
 
-      result = await kernel.invoke_prompt(
-          prompt=prompt,
-          arguments=arguments
-      )
+        result = await kernel.invoke_prompt(
+            prompt=prompt,
+            arguments=arguments
+        )
 
-      return result
-  ```
+        return result
+    ```
 
 ### Task 6: Test Agents Individually
 
-Update `app/main.py` temporarily to test **only the Extraction Agent** and save the file.
+1. Update `app/main.py` temporarily to test **only the Extraction Agent** and save the file.
 
-  ```python
-  import os
-  import asyncio
-  from dotenv import load_dotenv
-  from semantic_kernel import Kernel
-  from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
-  from agents.extraction_agent import run_extraction
+    ```python
+    import os
+    import asyncio
+    from dotenv import load_dotenv
+    from semantic_kernel import Kernel
+    from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
+    from agents.extraction_agent import run_extraction
 
-  load_dotenv()
+    load_dotenv()
 
-  async def main():
-      kernel = Kernel()
+    async def main():
+        kernel = Kernel()
 
-      kernel.add_service(
-          AzureChatCompletion(
-              service_id="chat",
-              deployment_name=os.environ["AZURE_DEPLOYMENT_NAME"],
-              endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
-              api_key=os.environ["MICROSOFT_FOUNDRY_API_KEY"]
-          )
-      )
+        kernel.add_service(
+            AzureChatCompletion(
+                service_id="chat",
+                deployment_name=os.environ["AZURE_DEPLOYMENT_NAME"],
+                endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+                api_key=os.environ["MICROSOFT_FOUNDRY_API_KEY"]
+            )
+        )
 
-      sample_input = "Employee Jane Doe joins Engineering on Feb 1, 2026."
+        sample_input = "Employee Jane Doe joins Engineering on Feb 1, 2026."
 
-      result = await run_extraction(kernel, sample_input)
-      print(result)
+        result = await run_extraction(kernel, sample_input)
+        print(result)
 
-  if __name__ == "__main__":
-      asyncio.run(main())
-  ```
+    if __name__ == "__main__":
+        asyncio.run(main())
+    ```
 
-- Run:
+1. Run the below command in the terminal:
 
-  ```powershell
-  py app/main.py
-  ```
+    ```powershell
+    py app/main.py
+    ```
 
 ### Task 7: Verify Agent Output
 
-Expected output (example):
+1. Expected output (example):
 
-  ```json
-  {
+    ```json
+    {
     "employeeName": "Jane Doe",
     "department": "Engineering",
     "startDate": "2026-02-01"
-  }
-  ```
+    }
+    ```
 
 Minor variations are acceptable.
 

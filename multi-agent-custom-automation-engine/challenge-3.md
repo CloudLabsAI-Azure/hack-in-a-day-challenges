@@ -65,7 +65,7 @@ pip install azure-cosmos
 
 ### Task 4: Configure Cosmos DB Connection
 
-Add these values to your `.env` file and save the file:
+1. Add these values to your `.env` file and save the file:
 
    ```env
    COSMOS_DB_ENDPOINT=https://<your-cosmos-account>.documents.azure.com:443/
@@ -75,7 +75,6 @@ Add these values to your `.env` file and save the file:
    ```
 
    > **Note:** Navigate to **Settings** and then select **Keys** from the Cosmos DB resource in the Azure Portal.
-
 
 ### Task 5: Create Cosmos DB Helper Module
 
@@ -182,7 +181,7 @@ Update **`main.py`** temporarily to test shared memory.
       asyncio.run(main())
    ```
 
-Run:
+Run the below command in the terminal:
 
 ```powershell
 py app/main.py

@@ -207,7 +207,7 @@ Before running, take a moment to explore the application code:
    - Reporting Agent processing...
    - Pipeline completed!
 
-8. After completion, you'll see a professional completion banner and the app will automatically switch to the **"Results"** tab.
+8. After completion, you'll see a completion banner and the app will automatically switch to the **"Results"** tab.
 
 9. View the **four-section output**:
 
@@ -249,45 +249,12 @@ Try each of the 5 sample scenarios to verify the pipeline handles different ente
 - Select "Vendor Contract" from the dropdown
 - Expected: Extracts vendor details, contract terms, and financial amounts
 
-### Task 10: Verify Workflow State in Cosmos DB
-
-1. Open **Azure Portal**
-2. Navigate to **Azure Cosmos DB** and open **agent-cosmos-<inject key="DeploymentID" enableCopy="false"/>**.
-3. Open **Data Explorer**
-4. Select:
-
-   - Database: `agent-memory-db`
-   - Container: `agent-state`
-5. Locate the documents using the workflow IDs from the dashboard
-
-Confirm the following for each workflow:
-
-- `status` = `COMPLETED`
-- `agentData` contains extraction, validation, communication, and reporting
-- `history` shows all four agent executions with timestamps
-
-### Task 11 (Bonus): Docker Image & ACR
-
-If time permits, containerize and push the application:
-
-1. Verify your project structure includes the `Dockerfile` from the codefiles.
-
-2. Login to Azure:
-
-   ```
-   az login
-   ```
-
-3. Build and push the image to ACR:
-
-   ```powershell
-   az acr build --registry agentacr<inject key="DeploymentID" enableCopy="false"/> --image agent-orchestrator:v1 .
-   ```
-
-4. Verify in **Azure Portal** by navigating to **Container Registry**, then **agentacr<inject key="DeploymentID" enableCopy="false"/>**, and then **Repositories**:
-   ```
-   agent-orchestrator : v1
-   ```
+<validation step="57edd22d-51dc-4216-b7b4-ea8170d67205" />
+ 
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
 ## Success Criteria
 
@@ -298,7 +265,6 @@ If time permits, containerize and push the application:
 - Each workflow shows `status: COMPLETED` in the Results tab
 - Cosmos DB contains complete workflow records with `agentData` and `history` entries
 - History tab displays past workflow executions retrieved from Cosmos DB
-- (Bonus) Docker image built and pushed to ACR successfully
 
 ## Additional Resources
 
