@@ -132,7 +132,7 @@ You need these below values to connect to your Azure services:
 
 1. Watch the processing pipeline execute:
 
-   - **Step 1 - Upload**: Document is uploaded to Azure Blob Storage `documents` container
+   - **Step 1 - Upload**: Document is uploaded
    - **Step 2 - OCR**: Document Intelligence extracts text, tables, and key-value pairs
    - **Step 3 - Classification**: Agent classifies the document type (INVOICE)
    - **Step 4 - Extraction**: Agent extracts structured data (vendor, line items, totals)
