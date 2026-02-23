@@ -77,23 +77,7 @@ In this challenge, you will prepare the **core infrastructure** required to buil
 
 1. Click on **OK**.
 
-### Task 5: Create Azure Container Registry (ACR)
-
-1. In the **Azure Portal**, search for **Container registries** and click **+ Create**.
-
-1. Under **Basics**, provide:
-
-   - **Subscription:** Use the available subscription
-   - **Resource Group:** **challenge-rg-<inject key="DeploymentID" enableCopy="false"/>**
-   - **Registry name:** **agentacr<inject key="DeploymentID" enableCopy="false"/>**
-   - **Location:** Same region
-   - **Pricing plan:** Basic
-
-1. Click on **Review + Create** and then click **Create**.
-
-### Task 6: Initialize Local Project (Agent Codebase)
-
-#### 6.1: Create Project Folder Structure
+### Task 5: Initialize Local Project (Agent Codebase)
 
 1. In the `C: drive` create a new folder named:
 
@@ -117,8 +101,6 @@ In this challenge, you will prepare the **core infrastructure** required to buil
    └── README.md
    ```
 
-#### 6.2: Create and Activate Virtual Environment (Windows)
-
 1. Open the **Terminal** in VS Code, by pressing `CTRL+J` in keyboard.
 
 1. Create a virtual environment using the Python launcher:
@@ -135,8 +117,6 @@ In this challenge, you will prepare the **core infrastructure** required to buil
 
 You should see `(.venv)` in the terminal prompt.
 
-#### 6.3: Install Required Packages
-
 1. Add the following to `requirements.txt`, and save the txt file:
 
    ```txt
@@ -152,8 +132,6 @@ You should see `(.venv)` in the terminal prompt.
 
    >**Note:** It will take 5-10 minutes to deploy.
 
-#### 6.4: Configure Environment Variables
-
 1. Open the `.env` file in the project root.
 
 1. Add the following values (replace placeholders) and save the file:
@@ -165,8 +143,6 @@ You should see `(.venv)` in the terminal prompt.
    ```
 
    > **Note:** You can get the values from the **Microsoft Foundry** resource by navigating to **Keys and Endpoint**.
-
-#### 6.5: Verify Semantic Kernel Setup
 
 1. Open `app/main.py` and add the following code:
 
@@ -213,7 +189,6 @@ You should see `(.venv)` in the terminal prompt.
 
 - Microsoft Foundry model deployment (`agent-gpt-4o-mini`) is ready and responding
 - Cosmos DB database (`agent-memory-db`) and container (`agent-state`) exist
-- Azure Container Registry is created
 - Semantic Kernel project is initialized and returns a greeting from the model
 - Agent roles are clearly documented in `README.md`
 
@@ -221,7 +196,6 @@ You should see `(.venv)` in the terminal prompt.
 
 - [Microsoft Foundry Documentation](https://learn.microsoft.com/azure/ai-services/openai/)
 - [Azure Cosmos DB for NoSQL](https://learn.microsoft.com/azure/cosmos-db/nosql/)
-- [Azure Container Registry](https://learn.microsoft.com/azure/container-registry/)
 - [Semantic Kernel Getting Started](https://learn.microsoft.com/semantic-kernel/get-started/)
 
 Now, click **Next** to continue to **Challenge 02**.

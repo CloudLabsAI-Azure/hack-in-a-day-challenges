@@ -14,7 +14,6 @@ The pre-built application wraps your Semantic Kernel agents and orchestrator in 
 - Test the multi-agent pipeline through the web UI with sample enterprise scenarios
 - Process multiple workflow requests and review agent outputs
 - Verify execution history in Cosmos DB
-- Build and push a Docker image to Azure Container Registry
 
 ## Steps to Complete
 
@@ -271,7 +270,6 @@ Try each of the 5 sample scenarios to verify the pipeline handles different ente
 - [Streamlit Documentation](https://docs.streamlit.io/)
 - [Semantic Kernel Python SDK](https://learn.microsoft.com/semantic-kernel/overview/)
 - [Azure Cosmos DB Data Explorer](https://learn.microsoft.com/azure/cosmos-db/data-explorer)
-- [Azure Container Registry](https://learn.microsoft.com/azure/container-registry/)
 - [Docker Best Practices](https://docs.docker.com/develop/dev-best-practices/)
 
 Congratulations! You've completed all challenges. Your Multi-Agent Automation Engine is production-ready!

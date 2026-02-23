@@ -14,7 +14,6 @@ At **Contoso Enterprises**, workflows such as employee onboarding, compliance re
 
 - **Microsoft Foundry** - AI model hosting with GPT-models for agent intelligence
 - **Azure Cosmos DB (NoSQL)** - Shared memory for workflow state, agent outputs, and audit history
-- **Azure Container Registry** - (Bonus) Container image storage for deployment
 - **Semantic Kernel** - Multi-agent orchestration framework
 - **Streamlit** - Production dashboard for workflow processing and history
 
