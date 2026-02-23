@@ -14,6 +14,40 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 ## Steps to Complete
 
+### Task: Prerequisite
+
+1. Select **Workspaces (1)** from the left navigation pane, and then choose **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/> (2)** from the list.
+
+   ![](./media/unified-kynd-ggs-t-g5.png)
+
+1. Select **Manage access** from the workspace menu.
+
+   ![](./media/unified-kynd-ggs-t-g6.png)
+
+1. In the **Manage access** pane, select **+ Add people or groups**.
+
+   ![](./media/unified-kynd-ggs-t-g7.png)
+
+1. In the **Add people** pane, enter **below URL** (1)** in the search box, and then select the displayed result (2).
+
+   ```
+   https://cloudlabssandbox.onmicrosoft.com
+   ```
+
+   ![](./media/unified-kynd-ggs-t-g8.png)
+
+1. Select **Viewer (1)**, choose **Member (2)** from the dropdown, and then click **Add (3)**.
+
+   ![](./media/unified-kynd-ggs-t-g9.png)
+
+1. Select **Admin**, and then click **Add**.
+
+   ![](./media/unified-kynd-ggs-t-g10.png)
+
+1. In the **Manage access** pane, verify that the service principal is added with the **Admin** role.
+
+   ![](./media/unified-kynd-ggs-t-g11.png)
+
 ### Part 1: Connect Power BI to Fabric Lakehouse
 
 1. In the **Edge browser**, navigate to the **Microsoft Fabric** portal (if not already open):
@@ -47,6 +81,13 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
    > **Note**: If you completed Challenge 5's Fabric Data Science ML modeling, you'll have ML-enriched customer segment tables for advanced behavioral analysis.
 
 1. Click **Confirm** to create the semantic model.
+
+<validation step="f499aee9-5db5-4792-ae27-8edcc1b19acf" />
+
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
 ### Part 2: Configure Relationships in Semantic Model
 
@@ -317,39 +358,11 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 1. Once published, click **Open 'Contoso-Flight-Loyalty-Dashboard' in Power BI** to view in the service
 
-### Part 7: Configure Automatic Refresh (Optional)
-
-1. In **Power BI Service**, navigate to the **semantic model** (not the report)
-
-1. Go to **Settings** → **Scheduled refresh**
-
-1. Configure refresh schedule:
-   - Frequency: **Daily**
-   - Time: **6:00 AM**
-   - Time zone: **Your local timezone**
-
-1. Click **Apply**
-
-   > **Note:** Since the data is in Fabric OneLake, Power BI will automatically pick up any updates to the Gold layer tables.
-
-### Part 8: Validate Dashboard Functionality
-
-1. Open the published dashboard in **Power BI Service**
-
-1. Test interactivity:
-   - Click on different provinces in the map → other visuals should filter accordingly
-   - Use slicers to filter by Year, Region, Loyalty Tier, Customer Status
-   - Drill through from summary visuals to detailed tables
-
-1. Verify data accuracy:
-   - Compare Total Revenue in Power BI with SQL query results from Lakehouse
-   - Verify Total Flights and Loyalty Points match fact_flights table
-   - Confirm customer segments match data written from Fabric Data Science notebook (if Challenge 5 was completed)
-
-1. Share the dashboard:
-   - Click **Share** button
-   - Enter email addresses of stakeholders
-   - Grant appropriate permissions (View only recommended)
+<validation step="f5d9a7e3-f2cd-4603-82ce-b275098789c9" />
+> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
+> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
+> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
 ## Success Criteria
 

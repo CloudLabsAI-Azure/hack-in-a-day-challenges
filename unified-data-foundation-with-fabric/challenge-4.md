@@ -417,10 +417,6 @@ Create a summary table for dashboard consumption:
 - Analytics queries return meaningful insights
 - Tables visible in OneLake catalog
 
-## Validation Checkpoint
-
-**Copy this GUID and submit for validation:** `{{guid-challenge-4}}`
-
 ## Summary
 
 In this challenge, you built a complete Gold layer with:

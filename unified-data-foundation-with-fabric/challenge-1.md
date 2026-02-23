@@ -93,47 +93,6 @@ Contoso Enterprises operates across multiple business units with data scattered 
 
    > **Hint:** Hover over the **Files** folder, click the **...**, select **Properties**, and copy the OneLake path. Save this value in a Notepad file for later use.
 
-### Task: Prerequisite
-
-1. Select **Workspaces (1)** from the left navigation pane, and then choose **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/> (2)** from the list.
-
-   ![](./media/unified-kynd-ggs-t-g5.png)
-
-1. Select **Manage access** from the workspace menu.
-
-   ![](./media/unified-kynd-ggs-t-g6.png)
-
-1. In the **Manage access** pane, select **+ Add people or groups**.
-
-   ![](./media/unified-kynd-ggs-t-g7.png)
-
-1. In the **Add people** pane, enter **below URL** (1)** in the search box, and then select the displayed result (2).
-
-   ```
-   https://cloudlabssandbox.onmicrosoft.com
-   ```
-
-   ![](./media/unified-kynd-ggs-t-g8.png)
-
-1. Select **Viewer (1)**, choose **Member (2)** from the dropdown, and then click **Add (3)**.
-
-   ![](./media/unified-kynd-ggs-t-g9.png)
-
-1. Select **Admin**, and then click **Add**.
-
-   ![](./media/unified-kynd-ggs-t-g10.png)
-
-1. In the **Manage access** pane, verify that the service principal is added with the **Admin** role.
-
-   ![](./media/unified-kynd-ggs-t-g11.png)
-
-<validation step="f499aee9-5db5-4792-ae27-8edcc1b19acf" />
-
-> **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
-> - Hit the Validate button for the corresponding Challenge. If you receive a success message, you can proceed to the next Challenge. 
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
-
 ## Success Criteria
 
 - Microsoft Fabric workspace created successfully.
