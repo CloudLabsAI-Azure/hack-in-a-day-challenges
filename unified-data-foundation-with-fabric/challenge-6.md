@@ -116,7 +116,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 1. Add calculated measures to the **fact_transactions** table:
 
-   - Right-click **fact_transactions** → **New measure**
+   - Right-click **fact_transactions** and click on **New measure**
    
    ```DAX
    Total Revenue = SUM(fact_transactions[transaction_amount])
@@ -136,7 +136,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 1. Add calculated measures to the **fact_flights** table:
 
-   - Right-click **fact_flights** → **New measure**
+   - Right-click **fact_flights** and click **New measure**
    
    ```DAX
    Total Flights = SUM(fact_flights[total_flights])
@@ -156,7 +156,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 1. Add calculated measures for **ML Segment Analysis** (if gold_customer_segments_ml exists):
 
-   - Right-click **gold_customer_segments_ml** → **New measure**
+   - Right-click **gold_customer_segments_ml** and click on **New measure**
    
    ```DAX
    Total Customers in Segments = COUNTROWS(gold_customer_segments_ml)
@@ -226,10 +226,6 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 ### Part 4: Format and Polish the Dashboard
 
-1. Apply consistent theme:
-   - Go to **View** → **Themes**
-   - Select a professional theme (e.g., "Executive")
-
 1. Add report title and description:
    - Insert **Text box** at the top
    - Title: "Contoso Flight Loyalty & Customer Analytics Dashboard"
@@ -237,7 +233,8 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 ### Part 5: Publish Dashboard to Power BI Service
 
-1. Click **File** → **Save**
+1. Click **File** and click on **Save**
+
    - Report name: **Contoso-Flight-Loyalty-Dashboard**
 
 1. Click **Publish** in the Home ribbon
