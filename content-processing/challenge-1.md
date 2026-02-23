@@ -64,13 +64,7 @@ The application code is provided in a pre-built package.
    - Choose a location `C:\Code`
    - Click on **Extract**
 
-1. Extract the ZIP file. You should see 5 sample documents inside the **sample_data** folder:
-
-   - **invoice_contoso.pdf** - Commercial invoice from Contoso Ltd with line items, amounts, and payment terms
-   - **receipt_cafe.jpg** - Cafe receipt with items, tax, and total
-   - **medical_form.pdf** - Patient intake form with personal details and medical history
-   - **insurance_claim.pdf** - Auto insurance claim with incident details and cost estimates
-   - **drivers_license.jpg** - Sample driver's license with personal information
+1. Extract the ZIP file. You should see sample documents inside the **sample_data** folder:
 
 ### Task 3: Create Azure AI Document Intelligence Resource
 
