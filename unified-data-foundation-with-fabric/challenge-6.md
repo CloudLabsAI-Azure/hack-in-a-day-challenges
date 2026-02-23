@@ -14,7 +14,7 @@ Contoso's business stakeholders need intuitive, interactive dashboards to visual
 
 ## Steps to Complete
 
-### Task: Prerequisite
+### Task: Configure Workspace Access
 
 1. Select **Workspaces (1)** from the left navigation pane, and then choose **fabric-workspace-<inject key="DeploymentID" enableCopy="false"/> (2)** from the list.
 
