@@ -163,13 +163,6 @@ You need these below values to connect to your Azure services:
 
 1. Expand **ReviewQueue** and check if any documents were routed for human review.
 
-<validation step="91273538-4019-4887-8d59-87c8bda31f27" />
-
-> **Congratulations** on completing the Task! Now, it's time to validate it. Here are the steps:
-> - Hit the Validate button for the corresponding Task. If you receive a success message, you can proceed to the next Task.
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
-
 ### Task 7: Test Smart Routing
 
 1. To test that low-confidence documents are routed correctly, use the **Upload a file** option.
