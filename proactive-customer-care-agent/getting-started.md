@@ -26,7 +26,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 ![](./media/gs-leave-4.png)
 
-## Let's Get Started with Copilot Studio and Microsoft 365
+## Let's Get Started with Copilot Studio
 
 1. In the JumpVM, click on the **Microsoft Edge** browser shortcut on the desktop.
 
