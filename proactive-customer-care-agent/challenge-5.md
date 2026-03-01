@@ -1,7 +1,7 @@
-# Challenge 05: Test Your Customer Care Copilot End-to-End
+# Challenge 05: Test Your Proactive Customer Care Agent End-to-End
 
 ## Introduction
-Now that you've built your Customer Care Copilot with 4 topics and a reusable CustomerServiceFlow, it's time to thoroughly test the complete solution. End-to-end testing ensures all components work together seamlessly from customer input to ticket creation in Freshdesk.
+Now that you've built your Proactive Customer Care Agent with 4 topics and a reusable CustomerServiceFlow, it's time to thoroughly test the complete solution. End-to-end testing ensures all components work together seamlessly from customer input to ticket creation in Freshdesk.
 
 In this challenge, you will test all 4 topics comprehensively, verify CustomerServiceFlow integration, confirm tickets are created in Freshdesk, and validate the entire customer experience.
  
@@ -17,49 +17,49 @@ In this challenge, you will test all 4 topics comprehensively, verify CustomerSe
 
 ### Step 1: Prepare Your Test Environment
 
-1. Open your **Customer Care Copilot** in Copilot Studio.
+1. Open your **Customer Care Copilot Agent** in Copilot Studio.
 
-2. Ensure all 4 topics are **enabled**:
+1. Ensure all 4 topics are **enabled**:
    - OrderTrackingAssistance
    - ProductReturnProcessing
    - DeliveryDelayManagement
    - ServiceQualityComplaintHandling
 
-3. Verify your **CustomerServiceFlow** is **published** (check in Actions list).
+1. Verify your **CustomerServiceFlow** is **published** (check in Actions list).
 
-4. Open a second browser tab or window with **Freshdesk** portal:
+1. Open a second browser tab or window with the **Freshdesk** portal by navigating to the following URL:
    ```
    https://your-account.freshdesk.com
    ```
 
-5. Sign in to Freshdesk to monitor ticket creation in real-time.
+1. Sign in to Freshdesk to monitor ticket creation in real-time.
 
-6. Keep both windows visible for testing.
+1. Keep both windows visible for testing.
 
 ### Step 2: Test OrderTrackingAssistance Topic
 
 1. In Copilot Studio, open the **Test your copilot** pane.
 
-2. Start a fresh conversation by clicking **Reset** (trash icon).
+1. Start a fresh conversation by clicking **Reset** (trash icon).
 
-3. Type a trigger phrase:
+1. Type the following trigger phrase:
    ```
    Track my order
    ```
 
-4. Follow the conversation flow:
+1. Follow the conversation flow:
    - Provide order number when asked (e.g., ORD123456)
    - Review tracking information provided
    - When asked if you need additional assistance, say: **Yes, I need help**
 
-5. Verify the copilot:
+1. Verify the agent:
    - Calls the CustomerServiceFlow
    - Displays confirmation message
    - Shows appropriate response
 
-6. Switch to Freshdesk portal → Go to **Tickets** section.
+1. Switch to Freshdesk portal → Go to **Tickets** section.
 
-7. Verify the new ticket:
+1. Verify the new ticket:
    - **Subject:** Should contain "Order Tracking Request - ORD123456"
    - **Description:** Should mention order number and tracking issue
    - **Priority:** Medium
@@ -70,23 +70,23 @@ In this challenge, you will test all 4 topics comprehensively, verify CustomerSe
 
 1. Reset the conversation in the test pane.
 
-2. Type:
+1. Type the following:
    ```
    I want to return a product
    ```
 
-3. Follow the conversation:
+1. Follow the conversation:
    - Provide order number (e.g., ORD789012)
    - Describe return reason (e.g., "Product is defective")
    - Request assistance with processing
 
-4. Ensure the topic triggers correctly and provides relevant return policy information.
+1. Ensure the topic triggers correctly and provides relevant return policy information.
 
-5. When ticket is created, verify:
+1. When ticket is created, verify:
    - Confirmation message is displayed
    - Ticket appears in Freshdesk
 
-6. In **Freshdesk**, check the new ticket:
+1. In **Freshdesk**, check the new ticket:
    - **Subject:** Should contain "Product Return Request - ORD789012"
    - **Description:** Should include order number and return reason
    - **Priority:** Medium
@@ -96,21 +96,21 @@ In this challenge, you will test all 4 topics comprehensively, verify CustomerSe
 
 1. Reset the test conversation.
 
-2. Type:
+1. Type the following:
    ```
    My delivery is late
    ```
 
-3. Complete the conversation flow:
+1. Complete the conversation flow:
    - Provide order number (e.g., ORD345678)
    - Describe delivery issue (e.g., "Order should have arrived 3 days ago")
    - Indicate issue is not resolved
 
-4. Verify topic provides helpful delay information before escalation.
+1. Verify topic provides helpful delay information before escalation.
 
-5. Check ticket confirmation message in copilot.
+1. Check ticket confirmation message in the agent.
 
-6. In **Freshdesk**, verify the ticket:
+1. In **Freshdesk**, verify the ticket:
    - **Subject:** Contains "Delivery Delay - ORD345678"
    - **Description:** Includes order number and delay details
    - **Priority:** Medium
@@ -120,21 +120,21 @@ In this challenge, you will test all 4 topics comprehensively, verify CustomerSe
 
 1. Reset the conversation.
 
-2. Type:
+1. Type the following:
    ```
    I have a complaint about your service
    ```
 
-3. Complete the conversation:
+1. Complete the conversation:
    - Describe complaint details (e.g., "The product quality is poor and customer service was rude")
    - Provide order number if asked (e.g., ORD901234)
    - Indicate not satisfied with proposed solutions
 
-4. Verify topic provides empathetic response and resolution options.
+1. Verify topic provides empathetic response and resolution options.
 
-5. Check ticket confirmation message.
+1. Check ticket confirmation message.
 
-6. In **Freshdesk**, verify the ticket:
+1. In **Freshdesk**, verify the ticket:
    - **Subject:** Contains "Service Quality Complaint - ORD901234"
    - **Description:** Includes complaint details and order information
    - **Priority:** Medium
@@ -142,28 +142,28 @@ In this challenge, you will test all 4 topics comprehensively, verify CustomerSe
 
 ### Step 6: Test Knowledge Base Integration
 
-Test if your copilot can answer questions directly from the knowledge base without creating tickets.
+Test if your agent can answer questions directly from the knowledge base without creating tickets.
 
 1. Reset the conversation.
 
-2. Ask a general customer service question:
+1. Ask a general customer service question by typing the following:
    ```
    What is your return policy?
    ```
 
-3. Verify the copilot:
+1. Verify the agent:
    - Provides a direct answer from knowledge base
    - Does NOT trigger a topic unnecessarily
    - Offers helpful policy information
 
-4. Try another knowledge base query:
+1. Try another knowledge base query by typing the following:
    ```
    How long does shipping take?
    ```
 
-5. Check if the response comes from the uploaded knowledge base.
+1. Check if the response comes from the uploaded knowledge base.
 
-6. If responses are generic, verify:
+1. If responses are generic, verify:
    - Knowledge sources are enabled in **Settings** → **Generative AI**
    - All four PDF files are uploaded and indexed
 
@@ -175,39 +175,39 @@ Test if your copilot can answer questions directly from the knowledge base witho
    - Delivery delay ticket
    - Service complaint ticket
 
-2. Verify all 4 tickets appear in Freshdesk.
+1. Verify all 4 tickets appear in Freshdesk.
 
-3. Ensure no duplicate tickets are created.
+1. Ensure no duplicate tickets are created.
 
 ### Step 8: Test Edge Cases and Error Handling
 
 1. Test what happens if customer provides incomplete information:
    - Start order tracking topic
    - Skip order number when asked
-   - See how copilot handles it
+   - See how the agent handles it
 
-2. Test fallback behavior:
+1. Test fallback behavior:
    - Type something unrelated: "What's the weather today?"
-   - Verify copilot uses fallback topic appropriately
+   - Verify the agent uses the fallback topic appropriately
 
-3. Test error handling if API fails:
+1. Test error handling if API fails:
    - If possible, temporarily disconnect Freshdesk connection
    - Try creating a ticket
-   - Verify copilot provides graceful error message
+   - Verify the agent provides a graceful error message
 
-4. Reconnect Freshdesk connection after testing.
+1. Reconnect Freshdesk connection after testing.
 
 ### Step 9: Verify Ticket Details in Freshdesk
 
 1. In **Freshdesk**, go to **Tickets** → View all open tickets.
 
-2. For each test ticket, verify:
+1. For each test ticket, verify:
    - All required fields are populated correctly
    - No missing or null values
    - Priority levels match flow configuration (Medium)
-   - Description provides enough context for customer service team
+   - Description provides enough context for the customer service team
 
-3. Check if tickets are assigned to any agent or group (optional based on your Freshdesk setup).
+1. Check if tickets are assigned to any agent or group (optional based on your Freshdesk setup).
 
 ### Step 10: Test Conversation Flow Quality
 
@@ -217,7 +217,7 @@ Test if your copilot can answer questions directly from the knowledge base witho
    - Is the tone appropriate for customer service?
    - Are transitions smooth?
 
-2. If any topic feels generic or unhelpful:
+1. If any topic feels generic or unhelpful:
    - Go to **Topics** → Open the specific topic
    - Edit message nodes to improve clarity
    - Add more context or instructions
@@ -235,9 +235,9 @@ Test if your copilot can answer questions directly from the knowledge base witho
    | ServiceQualityComplaintHandling | Have a complaint | Yes | Medium | Pass |
    | Knowledge Base | Return policy | N/A | N/A | Pass |
 
-2. Note any issues encountered during testing.
+1. Note any issues encountered during testing.
 
-3. Document any required fixes or improvements.
+1. Document any required fixes or improvements.
 
 ### Step 12: Fix Issues (If Any)
 
@@ -248,17 +248,17 @@ If you encounter issues during testing:
    - Add more trigger phrases
    - Save and retest
 
-2. **Flow not being called:**
+1. **Flow not being called:**
    - Verify "Call an action" node is correctly configured
    - Check flow is published
    - Verify flow input mappings
 
-3. **Ticket not appearing in Freshdesk:**
+1. **Ticket not appearing in Freshdesk:**
    - Check Freshdesk connection in Copilot Studio
    - Verify API Key and Account URL are correct
    - Test flow independently in Actions
 
-4. **Incorrect ticket details:**
+1. **Incorrect ticket details:**
    - Review variable mappings in "Call an action" node
    - Ensure variables are captured in topic conversation
    - Update mappings and retest
@@ -267,17 +267,17 @@ If you encounter issues during testing:
 
 1. Complete one final end-to-end test for each topic.
 
-2. Verify in Freshdesk:
+1. Verify in Freshdesk:
    - All tickets are created successfully
    - Ticket details are accurate
    - No errors in ticket creation
 
-3. Check copilot behavior:
+1. Check agent behavior:
    - All topics trigger correctly
    - Conversation flows are smooth
    - Ticket confirmations are displayed
 
-4. Your copilot is now ready for deployment.
+1. Your agent is now ready for deployment.
 
 ## Success Criteria
 - All 4 topics tested successfully in Copilot Studio
@@ -297,4 +297,6 @@ If you encounter issues during testing:
 
 ---
 
-Now, click **Next** to continue to **Challenge 06: Publish Your Copilot to Microsoft Teams**.
+Click **Next** at the bottom of the page to proceed to the next page.
+
+   ![](./media/pro-activ-gg-g21.png)
