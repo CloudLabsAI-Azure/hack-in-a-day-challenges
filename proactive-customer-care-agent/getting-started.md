@@ -6,7 +6,7 @@ Welcome to Hack in a Day: Build a Proactive Customer Care Agent challenge! We've
 
 Once you're ready to dive in, your virtual machine and challenge guide will be right at your fingertips within your web browser.
 
-![](./media/gs1.png)
+![](./media/pro-activ-gg-g23.png)
 
 ### Exploring Your Challenge Resources
 
