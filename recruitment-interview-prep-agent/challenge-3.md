@@ -19,7 +19,9 @@ This ensures the Copilot behaves like a real HR assistant rather than a generic 
 
 ### Topic 1: Interview Question Generator
 
-1. Open the HR Interview Copilot, from the top navigation bar, select **topics** and click on **+ Add a topic** and select **From Blank** to create a new topic.
+1. Open the HR Interview Copilot, from the top navigation bar, select **Topics** and click on **+ Add a topic** and select **From Blank** to create a new topic.
+
+   >If you don't see Topics option from top menu, expand the menu using **+** option and select **Topics** from the list.
 
 1. In the topic setup panel, under **Describe what this topic does**, enter:
 
@@ -36,12 +38,14 @@ This ensures the Copilot behaves like a real HR assistant rather than a generic 
 1. Under Identify, select **User’s entire response**.
 
 1. Add one more Ask a question node and type:
-
+   
+   ```
    What is the experience level for this role? (Junior / Mid-Level / Senior)
+   ```
 
 1. Under Identify, again select **User’s entire response**.
 
-1. Add a new node → Advanced → **Generative answers**.
+1. Add a new node, select Advanced and choose **Generative answers**.
 
 1. In the **Generative answers** node:
 
@@ -60,6 +64,8 @@ This ensures the Copilot behaves like a real HR assistant rather than a generic 
    ```
 
 ### Topic 2: Resume Fit & Evaluation
+
+1. Navigate back to **Topics** page, using top menu.
 
 1. From the Topics page, click **+Add New topic** again.
 
@@ -85,7 +91,7 @@ This ensures the Copilot behaves like a real HR assistant rather than a generic 
 
 1. Under Identify, again select **User’s entire response**.
 
-1. Add a new node → Advanced → **Generative answers**.
+1. Add a new node, select Advanced and choose **Generative answers**.
 
 1. In the **Generative answers** node:
 
@@ -105,9 +111,11 @@ This ensures the Copilot behaves like a real HR assistant rather than a generic 
 
 1. Ensure all files in the Knowledge tab show status **Ready**.
 
+   >If your files are still in **in-progress** state, it will take up to 30 minutes to index all these files, please skip the test and continue with further configurations as you will be testing the complete agent further in this hackathon.
+
 1. Click Test (top-right of Copilot Studio).
 
-1. Trigger Interview Questions Generator by giving the below prompt and answer the questiosn asked by agent:
+1. Trigger Interview Questions Generator by giving the below prompt and answer the questions asked by agent:
 
    ```
    Generate some interview questions
@@ -122,7 +130,7 @@ This ensures the Copilot behaves like a real HR assistant rather than a generic 
    - `Software Developer`
    - `AI Engineer`
 
-1. On the next prompt to specify, enter the follwoing prompt:
+1. On the next prompt to specify, enter the following prompt:
 
    ```
    Evaluate all resumes and generate a report on shortlisted candidate.

@@ -22,7 +22,7 @@ This transforms the Copilot into a practical assistant that supports the full re
 
 1. In the configuration pane, scroll down to bottom and expand **Advanced >** option.
 
-1. Once expanded, under **Save agent response as**, click on the input area and Select **Create new variable**. This will create a new variable to save the agent response.
+1. Once expanded, under **Save bot response as**, click on the input area and Select **Create new variable**. This will create a new variable to save the agent response.
 
 1. After the final **Generative answers** node, click **+ Add node**.
 
@@ -46,20 +46,19 @@ This transforms the Copilot into a practical assistant that supports the full re
 
 1. Under the **No** branch, add a **Send a message** node.
 
-1. Enter:
-   No worries. Let me know if you need help with anything else in the hiring process.
+1. Enter: `No worries. Let me know if you need help with anything else in the hiring process.`
 
 1. This closes the evaluation workflow gracefully.
 
-1. Click on save, to save the topic, you will congigure **Yes** branch later.
+1. Click on save, to save the topic, you will configure **Yes** branch later.
 
 ### Step 3: Create a Power Automate flow (Send Email to Hiring Manager)
 
-1. In Copilot Studio, from the left navigation pane, select **Flows → + New agent flow**
+1. In Copilot Studio, from the left navigation pane, select **Flows** and click **+ New agent flow**
 
 1. You will be navigated to **Designer** pane, under the add a trigger pane, search for **When an agent calls the flow** and select it.
 
-1. Inside **When an agent calls the flow** node, select **Add an input** option to add a input variable and provide the name as **Body**.
+1. Inside **When an agent calls the flow** node, select **Add an input** option to add a **Text** input variable and provide the name as **Body**.
 
 1. Once configured, add one more node by clicking on **+**.
 
@@ -67,16 +66,18 @@ This transforms the Copilot into a practical assistant that supports the full re
 
 1. In the **Compose** node, click on the input area and select the function icon (fx) to add an expression.
 
-1. In the function area, add the below expressiona nd click on **Add**.
+1. In the function area, add the below expression and click **Add**.
 
    ```
    replace(replace(replace(replace(triggerBody()?['text'], '**', '<b>'), '- ', '<br>• '), '\n', '<br>'), '*', '<em>')
    ```
 1. Once configured, add one more node by clicking on **+**.
 
-1. Search and Choose **Send an email (V2)** node. 
+1. Search and Choose **Send an email (V2)** node under office 365 outlook section.
 
-1. In the configuration pane, provide **<inject key="AzureAdUserEmail"></inject>** in the **To** parameter.
+1. Once added, please configure the connection using **Sign in** option. Use the same credentials provided for the lab to sign in and allow access.
+
+1. Once done, in the configuration pane, provide **<inject key="AzureAdUserEmail"></inject>** in the **To** parameter.
 
 1. Configure the flow:
 
@@ -86,7 +87,7 @@ This transforms the Copilot into a practical assistant that supports the full re
 
 1. Select **Publish** to publish the flow.  
 
-1. Once published, open the **Flow Overview** page and click **Edit** on the Details card.  
+1. Once published, open the **Overview** page of Agent Flows and click **Edit** on the Details card.  
 
 1. Change the flow name from **Untitled** to **Outlook Flow**.  
 
@@ -99,6 +100,8 @@ This transforms the Copilot into a practical assistant that supports the full re
 1. In the **Resume Fit & Evaluation** topic, under the **Yes** branch, click **+ Add node**.
 
 1. From the list, select **Add a tool** and click on the **Outlook Flow** which you created earlier.
+
+1. Select the input variable **Body** as **Var 3** variable, where the agent response will be stored.
 
 1. After that node, add a **Send a message** node and enter:
 
@@ -147,7 +150,7 @@ This transforms the Copilot into a practical assistant that supports the full re
    ```
    https://outlook.office.com/
    ```
-1. Verify that you recived a mail.
+1. Verify that you received a mail.
 
 ## Success Criteria
 - The Copilot now supports a full recruitment workflow, not just Q&A.
