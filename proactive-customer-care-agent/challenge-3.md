@@ -19,35 +19,35 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 1. In **Copilot Studio**, with your **Proactive Customer Care Agent** open, click **Actions** (or **Flows**) in the left navigation.
 
-2. Click **+ Add an action** at the top.
+1. Click **+ Add an action** at the top.
 
-3. Select **Create a new flow** (or **Create from blank**).
+1. Select **Create a new flow** (or **Create from blank**).
 
-4. This will open the flow designer.
+1. This will open the flow designer.
 
 ### Step 2: Configure Flow Trigger
 
 1. The flow will start with a trigger node: **When an agent calls the flow** (or **Power Virtual Agents**).
 
-2. Click on the trigger node to expand it.
+1. Click on the trigger node to expand it.
 
-3. You'll now add input parameters that topics will pass to this flow.
+1. You'll now add input parameters that topics will pass to this flow.
 
 ### Step 3: Add Input Parameters
 
 1. In the trigger node, click **+ Add an input**.
 
-2. Select **Text** as the datatype.
+1. Select **Text** as the datatype.
 
-3. Provide `Subject` as the **Input name**.
+1. Provide `Subject` as the **Input name**.
 
-4. Add one more input:
+1. Add one more input:
 
    **Input 2:**
    - Type: **Text**
    - Name: `Description`
 
-5. Your trigger should now have 2 text input parameters.
+1. Your trigger should now have 2 text input parameters.
 
    > **Note:** These are reference variables. Topics will pass actual values when calling this flow. Email, Priority, and Status will be preset in the flow.
 
@@ -55,95 +55,95 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 1. Below the trigger node, click **+ New step** (or **+**).
 
-2. Search for **Freshdesk** in the connector search box.
+1. Search for **Freshdesk** in the connector search box.
 
-3. From the list, select **Freshdesk** connector.
+1. From the list, select **Freshdesk** connector.
 
-4. Select the action **Create a ticket**.
+1. Select the action **Create a ticket**.
 
 ### Step 5: Configure Freshdesk Connection
 
 1. In the **Create a ticket** action pane, you'll be prompted to create a new connection.
 
-2. Click **Create new** (or **+ New connection**).
+1. Click **Create new** (or **+ New connection**).
 
-3. Provide the following connection details:
+1. Provide the following connection details:
    - **Connection name:** `customerservice`
    - **Account URL:** Paste the Account URL you copied in Challenge 02 (e.g., `https://your-account.freshdesk.com`)
    - **Email or API key:** Paste the **API Key** you copied in Challenge 02
    - **Password:** Since you're using an API Key, enter any random value (e.g., `X`) as it's a required field
 
-4. Click **Create** to establish the connection.
+1. Click **Create** to establish the connection.
 
-5. Wait for the connection to be validated.
+1. Wait for the connection to be validated.
 
 ### Step 6: Map Flow Inputs to Freshdesk Fields
 
 1. Once the connection is created, configure the **Create a ticket** action fields:
 
-2. **Subject** parameter:
+1. **Subject** parameter:
    - Click in the **Subject** field
    - Click **Dynamic content** option
    - Select **Subject** from the trigger's input variables
 
-3. **Description** parameter:
+1. **Description** parameter:
    - Click in the **Description** field
    - Click **Dynamic content**
    - Select **Description** variable
 
-4. **Email** parameter:
+1. **Email** parameter:
    - Enter your email address: **<inject key="AzureAdUserEmail"></inject>**
 
-5. **Priority** parameter:
+1. **Priority** parameter:
    - Select **Medium** from the dropdown
 
-6. **Status** parameter:
+1. **Status** parameter:
    - Select **Open** from the dropdown
 
-7. Leave other optional fields blank.
+1. Leave other optional fields blank.
 
 ### Step 7: Add Return Values to Agent
 
 1. Below the **Create a ticket** action, click **+ New step**.
 
-2. Search for **Return value(s) to Microsoft Copilot** (or **Respond to Power Virtual Agents**).
+1. Search for **Return value(s) to Microsoft Copilot** (or **Respond to Power Virtual Agents**).
 
-3. Select this action.
+1. Select this action.
 
-4. Click **+ Add an output**.
+1. Click **+ Add an output**.
 
-5. Configure output as follows:
+1. Configure output as follows:
    - Type: **Text**
    - Name: `TicketStatus`
    - Value: Type `Ticket created successfully`
 
-6. Optionally, you can add another output for Ticket ID if Freshdesk returns it in the response.
+1. Optionally, you can add another output for Ticket ID if Freshdesk returns it in the response.
 
 ### Step 8: Save the Flow
 
 1. Click **Save** in the top-right corner of the flow designer.
 
-2. The flow will be saved with a default name initially.
+1. The flow will be saved with a default name initially.
 
-3. Wait for the flow to save successfully.
+1. Wait for the flow to save successfully.
 
 ### Step 9: Test the Flow Independently
 
 1. Click **Test** in the top-right corner of the flow designer.
 
-2. Select **Manually** → **Test**.
+1. Select **Manually** → **Test**.
 
-3. Provide test values for the input parameters:
+1. Provide test values for the input parameters:
    - **Subject:** `Test Ticket - Flow Validation`
    - **Description:** `Testing the customer service flow before connecting to topics`
 
-4. Click **Run flow**.
+1. Click **Run flow**.
 
-5. Wait for the flow to execute.
+1. Wait for the flow to execute.
 
-6. Review the flow run history to ensure all steps completed successfully.
+1. Review the flow run history to ensure all steps completed successfully.
 
-7. You should see a green checkmark on each action.
+1. You should see a green checkmark on each action.
 
 ### Step 10: Verify Ticket in Freshdesk
 
@@ -152,67 +152,67 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
    https://your-account.freshdesk.com
    ```
 
-2. Sign in if prompted.
+1. Sign in if prompted.
 
-3. Click on **Tickets** in the left navigation.
+1. Click on **Tickets** in the left navigation.
 
-4. You should see a new ticket with:
+1. You should see a new ticket with:
    - **Subject:** Test Ticket - Flow Validation
    - **Description:** Testing the customer service flow before connecting to topics
    - **Priority:** Medium
    - **Status:** Open
    - **Requester:** Your email address
 
-5. Click on the ticket to view full details.
+1. Click on the ticket to view full details.
 
-6. Verify all information is correctly populated.
+1. Verify all information is correctly populated.
 
-7. If the ticket appears correctly, your flow is working.
+1. If the ticket appears correctly, your flow is working.
 
 ### Step 11: Publish the Flow
 
 1. Go back to the flow designer in Copilot Studio.
 
-2. Click **Publish** in the top-right corner.
+1. Click **Publish** in the top-right corner.
 
 3. Wait for the flow to be published.
 
-4. You'll see a confirmation message: "Your flow has been published."
+1. You'll see a confirmation message: "Your flow has been published."
 
-5. Click **Go back to agent** to return to Copilot Studio.
+1. Click **Go back to agent** to return to Copilot Studio.
 
 ### Step 12: Rename the Flow
 
 1. In Copilot Studio, click **Actions** in the left navigation.
 
-2. Find your newly published flow in the list.
+1. Find your newly published flow in the list.
 
-3. Click on the flow to open the **Flow overview** page.
+1. Click on the flow to open the **Flow overview** page.
 
-4. Click **Edit** in the top-right corner.
+1. Click **Edit** in the top-right corner.
 
-5. In the flow designer, click on the flow name at the top (it will have a default name).
+1. In the flow designer, click on the flow name at the top (it will have a default name).
 
-6. Change the name to the following:
+1. Change the name to the following:
    ```
    CustomerServiceFlow
    ```
 
-7. Click **Save** to save the renamed flow.
+1. Click **Save** to save the renamed flow.
 
-8. Click **Publish** again to publish the updated flow name.
+1. Click **Publish** again to publish the updated flow name.
 
-9. Click **Go back to agent** to return to Copilot Studio.
+1. Click **Go back to agent** to return to Copilot Studio.
 
 ### Step 13: Verify Flow is Available in Actions
 
 1. In Copilot Studio, go back to **Actions** in the left navigation.
 
-2. You should see your flow listed:
+1. You should see your flow listed:
    - **Name:** CustomerServiceFlow
    - **Status:** Published
 
-3. This flow is now ready to be called from any topic.
+1. This flow is now ready to be called from any topic.
 
 <validation step="79f81fd7-cb7b-41f4-b1a4-031172834963" />
  

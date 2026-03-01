@@ -21,72 +21,68 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
 ## Steps to Complete
 
-### Step 1: Sign in to Microsoft Copilot Studio
+### Step 1: Create a New Agent
 
 1. Open **Microsoft Edge** browser in your lab VM.
 
-2. Navigate to **Microsoft Copilot Studio** by entering the following URL in the browser:
+1. If not already open, navigate to **Microsoft Copilot Studio** by entering the following URL in the browser:
 
    ```
    https://copilotstudio.microsoft.com
    ```
 
-3. Click **Sign in**.
+1. Click **Sign in**.
 
-4. Enter the provided credentials:
+1. Enter the provided credentials:
+
    - **Email/Username: <inject key="AzureAdUserEmail"></inject>**
    - **Password: <inject key="AzureAdUserPassword"></inject>**
 
-5. If prompted with **"Stay signed in?"**, click **No**.
+1. If prompted with **"Stay signed in?"**, click **No**.
 
-6. Wait for the Copilot Studio home page to load.
+1. Wait for the Copilot Studio home page to load.
 
-### Step 2: Create a New Agent
+1. In Copilot Studio, select **Agents** from the left navigation pane, and then click **Create blank agent** to start creating a new agent.
 
-1. On the Copilot Studio pane, from the left menu, select **Create** and then click on the **+New Agent** option to create a new agent.
+1. On the overview pane of the agent, click on **edit** inside the Details card to edit the agent's name and description.
 
-2. If an error appears such as `There was a problem creating your agent.`, then click on **Create a blank agent**.
+1. Configure the agent details as follows:
 
-3. On the overview pane of the agent, click on **edit** inside the Details card to edit the agent's name and description.
+  - **Name:** `Customer Care Copilot`
+  - **Description:** `AI-powered assistant for customer service automation including order tracking, complaint management, service inquiries, and product support`
 
-4. Configure the agent details as follows:
+1. Click on **Save**.
 
-   - **Name:** `Proactive Customer Care Agent`
+1. Once done, scroll down and add the following **instructions** by clicking on **edit** inside the Instruction card.
 
-   - **Description:** `AI-powered assistant for customer service automation including order tracking, complaint management, service inquiries, and product support`
+    ```
+    - You are a Proactive Customer Care Agent designed to help customers with order tracking, product returns, delivery delays, and service complaints.
+    - Handle inquiries related to order status, return policies, delivery issues, and service quality concerns.
+    - When answering questions:
+      - Provide clear, helpful guidance to resolve customer issues quickly
+      - Use friendly, professional language when explaining solutions
+      - Ask clarifying questions to understand the issue better before providing solutions
+    - For order tracking requests:
+      - Ask for the order number
+      - Provide tracking information and delivery status
+      - If tracking issues persist, offer to create a support ticket with Freshdesk
+    - For product return requests:
+      - Ask for order number and return reason
+      - Provide return policy information and instructions
+      - If customer needs assistance with processing, escalate to Freshdesk ticket
+    - For delivery delay issues:
+      - Ask for order number and details about the delay
+      - Provide information about common delays and resolution steps
+      - If issue is not resolved, offer to create a priority support ticket
+    - For service quality complaints:
+      - Listen empathetically and ask for details about the complaint
+      - Offer immediate solutions when appropriate
+      - If customer is not satisfied, escalate to Freshdesk ticket for management review
+    - Always be professional, empathetic, and helpful
+    - When creating tickets, generate clear subject lines and detailed descriptions with all relevant information including order numbers
+    ```
 
-5. Click **Save**.
-
-6. Once done, scroll down and add the following **instructions** by clicking on **edit** inside the Instruction card.
-
-     ```
-     - You are a Proactive Customer Care Agent designed to help customers with order tracking, product returns, delivery delays, and service complaints.
-     - Handle inquiries related to order status, return policies, delivery issues, and service quality concerns.
-     - When answering questions:
-       - Provide clear, helpful guidance to resolve customer issues quickly
-       - Use friendly, professional language when explaining solutions
-       - Ask clarifying questions to understand the issue better before providing solutions
-     - For order tracking requests:
-       - Ask for the order number
-       - Provide tracking information and delivery status
-       - If tracking issues persist, offer to create a support ticket with Freshdesk
-     - For product return requests:
-       - Ask for order number and return reason
-       - Provide return policy information and instructions
-       - If customer needs assistance with processing, escalate to Freshdesk ticket
-     - For delivery delay issues:
-       - Ask for order number and details about the delay
-       - Provide information about common delays and resolution steps
-       - If issue is not resolved, offer to create a priority support ticket
-     - For service quality complaints:
-       - Listen empathetically and ask for details about the complaint
-       - Offer immediate solutions when appropriate
-       - If customer is not satisfied, escalate to Freshdesk ticket for management review
-     - Always be professional, empathetic, and helpful
-     - When creating tickets, generate clear subject lines and detailed descriptions with all relevant information including order numbers
-     ```
-
-7. Click **Save**.
+1. Click on **Save**.
 
 <validation step="fd23ac57-641a-4da5-8f64-44bbb4ae7722" />
  
@@ -100,7 +96,6 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 - Created a new agent named **Proactive Customer Care Agent**
 - Configured agent with appropriate description and instructions for customer service scenarios
 - Agent instructions configured with proper customer service behavior guidelines
-- Agent ready for Freshdesk integration in the next challenges
 
 ## Additional Resources
 - [Microsoft Copilot Studio Overview](https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-what-is-copilot-studio)

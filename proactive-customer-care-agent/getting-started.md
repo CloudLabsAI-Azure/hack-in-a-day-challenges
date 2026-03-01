@@ -168,5 +168,3 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 Click **Next** at the bottom of the page to proceed to the next page.
 
    ![](./media/pro-activ-gg-g16.png)
-
-## Happy Hacking!!
