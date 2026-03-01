@@ -66,7 +66,7 @@ This makes the agent conversational and context-aware.
 
 1. Once added, add one more node, select **Advanced** from list and click on **Generative answers**.
 
-1. In **Generative answers** node, select the **Variable** `Var2` by clicking on **...** option.
+1. In **Generative answers** node, select the **Variable** `Var1` by clicking on **...** option.
 
 1. Under data sources, click on **edit** and in the configuration pane, under **Knowledge Sources**, enable **search only selected resources** and select all the documents uploaded.
 
@@ -85,9 +85,9 @@ This makes the agent conversational and context-aware.
 1. Ask the Copilot:
 
    ```
-   Analyse revenue performance
+   Analyze revenue performance
    ```
-1. When the Agent asks for period, add any one of the follwoing as answer: 
+1. When the Agent asks for period, add any one of the following as answer: 
 
   - Q1-2024
   - Q2-2024
@@ -100,7 +100,7 @@ This makes the agent conversational and context-aware.
    ```
    How is our cash flow ?
    ```
-1. When the Agent asks for period, add any one of the follwoing as answer: 
+1. When the Agent asks for period, add any one of the following as answer: 
 
   - Q1-2024
   - Q2-2024

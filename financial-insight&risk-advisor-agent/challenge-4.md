@@ -33,7 +33,7 @@ The Copilot can now analyze financial documents and classify risk. In this chall
    ```
 1. Once configured, add one more node by clicking on **+**.
 
-1. Search and Choose **Send an email (V2)** node. 
+1. Search and Choose **Send an email (V2)** . 
 
 1. In the configuration pane, provide **<inject key="AzureAdUserEmail"></inject>** in the **To** parameter.
 
@@ -63,7 +63,7 @@ The Copilot can now analyze financial documents and classify risk. In this chall
 
 1. Under **Save agent response as**, click on the input area and Select **Create new variable**.  
 
-### Step 4: Add User Confirmation and Execute the Escalation Flow
+### Step 3: Add User Confirmation and Execute the Escalation Flow
 
 1. Select **+ Add node** under the Generative Answers node.  
 
@@ -88,6 +88,8 @@ The Copilot can now analyze financial documents and classify risk. In this chall
 #### Under the **Yes** branch:
 
 1. Select **+** to add new node, from the list, select **Add a tool** and click on the **Outlook Flow** which you created earlier.
+
+1. Add **Var2** as the input variable, using **...**.
 
 1. Add **Send a message** node under that.
 

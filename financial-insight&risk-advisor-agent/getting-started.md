@@ -93,6 +93,8 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    > **Note:** Environment provisioning may take 10–15 minutes to complete. Wait until the status shows as ready before proceeding.
 
+   > **Note:** If you are still unable to see the newly created environment, please close the browser completely and open a new InPrivate window. Log in again and check whether the environment appears. If it is still not visible, try creating the environment once more.
+
 1. In the power **platform admin center**, select **Manage** from left menu and click on the environment with the name, ODL_User <inject key="Deployment ID" enableCopy="false"></inject>'s Environment.
 
    ![](./media/uppowadminimg1.png)
@@ -153,4 +155,4 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 Now, click on the **Next** from lower right corner to move on next page.
 
-## Happy Hacking!!
+## Happy Hacking!

@@ -14,7 +14,7 @@ Your mission is to build an **AI-powered Financial Risk Advisor Copilot** that h
 - Identify strengths, weaknesses, anomalies, and financial pressure indicators
 - Classify business performance into **No Risk, Moderate Risk, or High Risk**
 - Escalate high-risk findings to the CFO automatically via Outlook email
-- Respond naturally inside Microsoft Teams with professional summary outputs
+- Respond naturally inside Microsoft Teams with professional financial summaries.
 
 The solution reduces manual review effort, speeds up financial reporting, and ensures that high-priority risks are surfaced early and consistently.
 
@@ -42,7 +42,7 @@ This is structured into five progressive challenges that model the lifecycle of 
   Create two interactive topics for *Revenue Trend & Growth Drivers* and *Cash Flow Stability & Liquidity Outlook*.
 
 - **Challenge 04: Configure Email Escalation Flow and Integrate it With the Copilot**  
-  Trigger an Outlook email to the CFO automatically when high risk is detected and HR approves.
+  Trigger an Outlook email to the CFO automatically when high risk is detected.
 
 - **Challenge 05: Publish the Copilot to Microsoft Teams and Test the Full Workflow**  
   Deploy the Copilot to Teams and validate the complete analysis and escalation experience.
