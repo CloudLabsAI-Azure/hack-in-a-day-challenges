@@ -6,12 +6,11 @@ Now that you've built your Proactive Customer Care Agent with 4 topics and a reu
 In this challenge, you will test all 4 topics comprehensively, verify CustomerServiceFlow integration, confirm tickets are created in Freshdesk, and validate the entire customer experience.
  
 ## Challenge Objectives
- - Test all 4 topics in Copilot Studio test pane
- - Verify CustomerServiceFlow integration for each topic
- - Confirm tickets are created in Freshdesk portal
- - Validate ticket details (subject, description, priority, requester email)
- - Test knowledge base responses for common queries
- - Identify and fix any conversation flow issues
+- Prepare Your Test Environment
+- Test 1 Customer Care Copilot Agent
+- Test 2 Customer Care Copilot Agent
+- Test 3 Knowledge Base Integration
+- Verify Ticket Details in Freshdesk
 
 ## Steps to Complete
 
@@ -126,13 +125,11 @@ Test if your agent can answer questions directly from the knowledge base without
 1. Review the newly created tickets.
 
 ## Success Criteria
-- All 4 topics tested successfully in Copilot Studio
-- Each topic correctly triggers from appropriate phrases
-- CustomerServiceFlow is called from each topic without errors
-- Tickets appear in Freshdesk portal with correct details
-- Confirmation messages are displayed to customers
-- Knowledge base queries return accurate responses
-- Edge cases and error scenarios handled gracefully
+- Prepare Your Test Environment
+- Test 1 Customer Care Copilot Agent
+- Test 2 Customer Care Copilot Agent
+- Test 3 Knowledge Base Integration
+- Verify Ticket Details in Freshdesk
 
 ## Additional Resources
 - [Test your copilot](https://learn.microsoft.com/microsoft-copilot-studio/authoring-test-bot)
