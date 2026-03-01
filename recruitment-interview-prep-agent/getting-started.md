@@ -8,12 +8,6 @@ Once you're ready to dive in, your virtual machine and challenge guide will be r
 
 ![](./media/gs1.png)
 
-### Accessing Your Challenge Environment
-
-Once you're ready to dive in, your virtual machine and challenge guide will be right at your fingertips within your web browser.
-
-![](./media/gs1.png)
-
 ### Exploring Your Challenge Resources
 
 To get a better understanding of your challenge resources and credentials, navigate to the Environment tab.
@@ -34,7 +28,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 ## Let's Get Started with Microsoft Copilot Studio
 
-1. In the JumpVM, click on **Microsoft Edge** browser which is created on desktop.
+1. In the JumpVM, click on **Microsoft Edge** browser icon from the desktop.
 
    ![](./media/zgr-gt.png)
 
@@ -86,7 +80,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 1. In the **New environment** pane, configure the environment with the following settings, and then select **Next (3)**:
 
-   - Enter **ODL_User <inject key="DeploymentID" enableCopy="false"></inject>'s Environment** in the **Name (1)** field.
+   - Enter **ODL_User <inject key="Deployment ID" enableCopy="false"></inject>'s Environment** in the **Name (1)** field.
    - Select **Developer (2)** from the **Type** dropdown.
 
       ![](./media/nimg25.png)
@@ -99,11 +93,11 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    > **Note:** Environment provisioning may take 10–15 minutes to complete. Wait until the status shows as ready before proceeding.
 
-1. In the power **platform admin center**, select **Manage** from left menu and click on the environmnet with the name, ODL_User <inject key="Deployment ID" enableCopy="false"></inject>'s Environment.
+1. In the power **platform admin center**, select **Manage** from left menu and click on the environment with the name, ODL_User <inject key="Deployment ID" enableCopy="false"></inject>'s Environment.
 
    ![](./media/uppowadminimg1.png)
 
-1. In the environmnet page, click on **See all** under **S2S apps**.
+1. In the environment page, click on **See all** under **S2S apps**.
 
    ![](./media/uppowadminimg2.png)
 
@@ -157,7 +151,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/ex1-travel-g6.png)
 
-1. You are now ready to start building your **HR Interview Copilot Agent**.
+1. You are now ready to start building your **HR Interview Copilot**.
 
 Now, click on the **Next** from lower right corner to move on next page.
 

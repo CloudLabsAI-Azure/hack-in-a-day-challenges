@@ -26,10 +26,14 @@ This makes the agent conversational and context-aware.
 
 1. From the top navigation bar, select **topics** and click on **+ Add a topic** and select **From Blank** to create a new topic.
 
+   >If you don't see Topics option from top menu, expand the menu using **+** option and select **Topics** from the list.
+
 1. Configure: 
+
    - **Describe what topic does:** Analyze revenue patterns across reporting periods using financial documents. Ask the user which period or report to analyze, then evaluate the revenue trend, identify drivers behind changes, and assign a risk level (No Risk / Moderate Risk / High Risk) with clear reasoning.
 
 1. In the topic flow editor, Add a new **ask a question** node and add the below question:
+
      ```
      Which reporting period or document would you like me to analyze for revenue performance? 
      ```
@@ -62,7 +66,7 @@ This makes the agent conversational and context-aware.
 
 1. Once added, add one more node, select **Advanced** from list and click on **Generative answers**.
 
-1. In **Generative answers** node, select the **Variable** `Var2` by clicking on **...** option.
+1. In **Generative answers** node, select the **Variable** `Var1` by clicking on **...** option.
 
 1. Under data sources, click on **edit** and in the configuration pane, under **Knowledge Sources**, enable **search only selected resources** and select all the documents uploaded.
 
@@ -74,14 +78,16 @@ This makes the agent conversational and context-aware.
 
 1. Confirm uploaded files under **Knowledge** show status **Ready**.
 
+   >If your files are still in **in-progress** state, it will take up to 30 minutes to index all these files, please skip the test and continue with further configurations as you will be testing the complete agent further in this hackathon.
+
 1. Click **Test** from top right corner.
 
 1. Ask the Copilot:
 
    ```
-   Analyse revenue performance
+   Analyze revenue performance
    ```
-1. When the Agent asks for period, add any one of the follwoing as answer: 
+1. When the Agent asks for period, add any one of the following as answer: 
 
   - Q1-2024
   - Q2-2024
@@ -94,7 +100,7 @@ This makes the agent conversational and context-aware.
    ```
    How is our cash flow ?
    ```
-1. When the Agent asks for period, add any one of the follwoing as answer: 
+1. When the Agent asks for period, add any one of the following as answer: 
 
   - Q1-2024
   - Q2-2024

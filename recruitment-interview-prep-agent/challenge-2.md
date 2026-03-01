@@ -16,7 +16,7 @@ In this challenge, you will upload **Job Description PDFs and Resume PDFs** to t
 
 1. In top navigation bar, select **Knowledge**.
 
-1. Click **+ Add a knowledge source**.
+1. Click **+ Add Knowledge**.
 
 1. Choose **Upload files**.
 

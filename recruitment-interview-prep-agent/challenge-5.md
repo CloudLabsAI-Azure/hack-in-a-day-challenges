@@ -33,7 +33,7 @@ Once published, you will add the Copilot to Teams and test the complete hiring w
 
 1. Once clicked it will navigate to teams window, select **Use web app instead** option.
 
-1. In the Teams, add your Agent.
+1. In the Microsoft Teams, add your Agent.
 
 1. Now test and evaluate the working of your agent.
 
@@ -66,6 +66,4 @@ This solution can transform recruitment operations across:
 - **Interview Preparation** - Question generation, role-specific assessments, level-based evaluations
 - **Hiring Manager Support** - Candidate reports, evaluation summaries, decision assistance
 - **Recruitment Analytics** - Candidate pipeline tracking, hiring metrics, time-to-hire optimization
-
-Congratulations on completing this challenge!
 

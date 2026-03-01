@@ -26,9 +26,9 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 ![](./media/gs-leave-4.png)
 
-## Let's Get Started with Copilot Studio and Microsoft 365
+## Let's Get Started with Microsoft Copilot Studio
 
-1. In the JumpVM, click on **Microsoft Edge** browser which is created on desktop.
+1. In the JumpVM, click on **Microsoft Edge** browser icon from the desktop.
 
    ![](./media/zgr-gt.png)
 
@@ -46,11 +46,9 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 1. Now, enter the following password and click on **Sign in**.
 
-   - Password: **<inject key="AzureAdUserPassword"></inject>**
+   - Temporary Access Pass: **<inject key="AzureAdUserPassword"></inject>**
 
      ![](./media/gs-lab3-g3.png)
-
-     > **Note:** If you see the Action Required dialog box, then select **Ask Later** option.
      
 1. If you see the pop-up **Stay Signed in?**, click **No**.
 
@@ -80,15 +78,12 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/d2-coor-gs-g2.png)
 
-   > **Note:** If the **New** environment page does not load, refresh the browser and try again.
+1. In the **New environment** pane, configure the environment with the following settings, and then select **Next (3)**:
 
-1. In the **New environment** pane, configure the environment with the following settings, and then select **Next (4)**:
+   - Enter **ODL_User <inject key="Deployment ID" enableCopy="false"></inject>'s Environment** in the **Name (1)** field.
+   - Select **Developer (2)** from the **Type** dropdown.
 
-   - Enter **ODL_User <inject key="DeploymentID" enableCopy="false"></inject>'s Environment** in the **Name (1)** field.
-   - Set **Get new features early (2)** to **Yes**.
-   - Select **Developer (3)** from the **Type** dropdown.
-
-      ![](./media/d2-coor-gs-g3.png)
+      ![](./media/nimg25.png)
 
 1. In the **Add Dataverse** pane, leave all settings as default, and then select **Save**.
 
@@ -98,13 +93,13 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    > **Note:** Environment provisioning may take 10–15 minutes to complete. Wait until the status shows as ready before proceeding.
 
-   > **Note:** If you see an error stating that the environment list cannot be displayed, this is expected while the environment is being created in the background. After 10–15 minutes, refresh the browser and the environment should appear.
+   > **Note:** If you are still unable to see the newly created environment, please close the browser completely and open a new InPrivate window. Log in again and check whether the environment appears. If it is still not visible, try creating the environment once more.
 
-1. In the power **platform admin center**, select **Manage** from left menu and click on the environmnet with the name, ODL_User <inject key="Deployment ID" enableCopy="false"></inject>'s Environment.
+1. In the power **platform admin center**, select **Manage** from left menu and click on the environment with the name, ODL_User <inject key="Deployment ID" enableCopy="false"></inject>'s Environment.
 
    ![](./media/uppowadminimg1.png)
 
-1. In the environmnet page, click on **See all** under **S2S apps**.
+1. In the environment page, click on **See all** under **S2S apps**.
 
    ![](./media/uppowadminimg2.png)
 
@@ -154,40 +149,10 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/gs-travel-g3.png)
 
-1. If you are directly taken to the **agent creation** screen, click the **ellipsis (1)** icon beside the **Create** button, then select **Cancel agent creation (2)** to return to the main dashboard.
-
-   ![](./media/gs-travel-g4.png)
-
 1. In Copilot Studio, open the environment picker **(1)**, expand **Supported environments (2)**, and select **ODL_User <inject key="Deployment ID" enableCopy="false"></inject>'s Environment (3)** to switch.
 
    ![](./media/ex1-travel-g6.png)
 
-   > If you are not able to see the environment under **Supported environments**, follow the below steps.
-
-   ![](./media/cor2-gs-g4.png)
-
-   1. In the **Power Platform admin center**, select **Environments** from the left navigation pane, and then verify that **ODL_User <inject key="DeploymentID" enableCopy="false"></inject>'s Environment** is listed.
-
-      ![](./media/nd-d2-cor-g-4.png)
-   
-   1. On the **ODL_User 22<inject key="DeploymentID" enableCopy="false"></inject>'s Environment** details page, copy the **Environment ID**.
-
-      ![](./media/nd-d2-cor-g-5.png)
-      
-   1. Open a **new browser tab**, and paste the copied **Environment ID** at the end of the following URL to verify access:
-
-      ```
-      https://copilotstudio.microsoft.com/environments/(Environment ID)
-      ```
-
-      ![](./media/cor2-gs-g6.png)
-
-      > **Note:** Replace **(Environment ID)** with the ID you copied in the previous step.
-      
-   1. You will be navigated to the **Copilot Studio** portal. Verify that **ODL_User <inject key="Deployment ID" enableCopy="false"></inject>’s Environment** is visible and selected under **Supported environments**.
-
-      ![](./media/cor2-gs-g7.png)
-
 Now, click on the **Next** from lower right corner to move on next page.
 
-## Happy Hacking!!
+## Happy Hacking!
