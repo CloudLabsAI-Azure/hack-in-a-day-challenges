@@ -13,7 +13,7 @@ Please download and extract the datasets required for this challenge here:
 https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/fin-datasets.zip
 ```
 
-> Once the file is downloaded, please extract it in any desired path in the LabVM. You will be able to see `Codefiles` and `Datasets` folders.
+> Once the file is downloaded, please extract it in any desired path in the LabVM.
 
 ## Challenge Objectives
 - Create a new Copilot in Copilot Studio.
@@ -24,7 +24,7 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
 1. Open **Microsoft Copilot Studio**.
 
-1. On the Copilot Studio pane, from left menu select **Agents** and then click on **+ Create a blank agent** option to create a new agent.
+1. On the Copilot Studio pane, from left menu select **Agents** and then click on **+ Create blank agent** option to create a new agent.
 
 1. Wait until the agent provisioning completes. This may take up to 5 minutes.
 

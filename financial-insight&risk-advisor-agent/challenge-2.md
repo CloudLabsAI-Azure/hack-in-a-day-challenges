@@ -14,7 +14,7 @@ In this challenge, you will upload **quarterly finance PDFs, cash flow reports, 
 
 1. In top navigation bar, select **Knowledge**.
 
-1. Click **+ Add a knowledge source**.
+1. Click **+ Add knowledge**.
 
 1. Choose **Upload files**.
 
