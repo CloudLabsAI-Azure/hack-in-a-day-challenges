@@ -17,7 +17,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 ### Step 1: Navigate to Actions in Copilot Studio
 
-1. In **Copilot Studio**, with your **Customer Care Copilot** open, click **Actions** (or **Flows**) in the left navigation.
+1. In **Copilot Studio**, with your **Proactive Customer Care Agent** open, click **Actions** (or **Flows**) in the left navigation.
 
 2. Click **+ Add an action** at the top.
 
@@ -112,7 +112,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 4. Click **+ Add an output**.
 
-5. Configure output:
+5. Configure output as follows:
    - Type: **Text**
    - Name: `TicketStatus`
    - Value: Type `Ticket created successfully`
@@ -147,7 +147,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 ### Step 10: Verify Ticket in Freshdesk
 
-1. Open a new tab and navigate to your **Freshdesk portal**:
+1. Open a new tab and navigate to your **Freshdesk portal** by entering the following URL:
    ```
    https://your-account.freshdesk.com
    ```
@@ -193,7 +193,7 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 5. In the flow designer, click on the flow name at the top (it will have a default name).
 
-6. Change the name to:
+6. Change the name to the following:
    ```
    CustomerServiceFlow
    ```

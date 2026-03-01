@@ -1,6 +1,6 @@
 ## Getting Started with Challenge
 
-Welcome to Hack in a Day: Build a Customer Care Copilot challenge! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
+Welcome to Hack in a Day: Build a Proactive Customer Care Agent challenge! We've prepared a seamless environment for you to explore and learn. Let's begin by making the most of this experience.
 
 ### Accessing Your Challenge Environment
 
@@ -28,11 +28,11 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 ## Let's Get Started with Copilot Studio and Microsoft 365
 
-1. In the JumpVM, click on **Microsoft Edge** browser which is created on desktop.
+1. In the JumpVM, click on the **Microsoft Edge** browser shortcut on the desktop.
 
    ![](./media/zgr-gt.png)
 
-1. Open a new browser tab and navigate to the Power Apps portal using the link below:
+1. Open a new browser tab and navigate to the Power Apps portal by entering the following URL:
 
    ```
    https://make.powerapps.com/
@@ -66,7 +66,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    > **Note:** We are signing in to the Power Apps portal because it automatically assigns a Developer license, which is required to create and use a Developer environment in the next steps.
 
-1. Open a new browser tab, and then navigate to the Power Platform admin center.
+1. Open a new browser tab and navigate to the Power Platform admin center by entering the following URL:
 
    ```
    https://admin.powerplatform.microsoft.com
@@ -96,15 +96,15 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    > **Environment Foundation:** This step creates the foundational environment that will support your agents with company-specific data and knowledge sources.
 
-   > **Note:** Environment provisioning may take 10–15 minutes to complete. Wait until the status shows as ready before proceeding.
+   > **Note:** Environment provisioning may take 10-15 minutes to complete. Wait until the status shows as ready before proceeding.
 
-   > **Note:** If you see an error stating that the environment list cannot be displayed, this is expected while the environment is being created in the background. After 10–15 minutes, refresh the browser and the environment should appear.
+   > **Note:** If you see an error stating that the environment list cannot be displayed, this is expected while the environment is being created in the background. After 10-15 minutes, refresh the browser and the environment should appear.
 
-1. In the power **platform admin center**, select **Manage** from left menu and click on the environmnet with the name, ODL_User <inject key="Deployment ID" enableCopy="false"></inject>'s Environment.
+1. In the **Power Platform admin center**, select **Manage** from the left menu and click on the environment with the name ODL_User <inject key="Deployment ID" enableCopy="false"></inject>'s Environment.
 
    ![](./media/uppowadminimg1.png)
 
-1. In the environmnet page, click on **See all** under **S2S apps**.
+1. In the environment page, click on **See all** under **S2S apps**.
 
    ![](./media/uppowadminimg2.png)
 
@@ -140,7 +140,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/uppowadminimg12.png)
 
-1. Navigate to **Microsoft Copilot Studio** by opening a new browser tab and using the link below:
+1. Navigate to **Microsoft Copilot Studio** by opening a new browser tab and entering the following URL:
 
    ```
    https://copilotstudio.microsoft.com
@@ -188,7 +188,7 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
       ![](./media/cor2-gs-g7.png)
 
-1. You are now ready to start building your **Customer Care Copilot** using Microsoft Copilot Studio! This copilot will help customers with order tracking, product returns, delivery delays, and service complaints, and will integrate with Freshdesk for automated ticket creation.
+1. You are now ready to start building your **Proactive Customer Care Agent** using Microsoft Copilot Studio! This agent will help customers with order tracking, product returns, delivery delays, and service complaints, and will integrate with Freshdesk for automated ticket creation.
 
 Now, click on the **Next** from lower right corner to move on next page.
 

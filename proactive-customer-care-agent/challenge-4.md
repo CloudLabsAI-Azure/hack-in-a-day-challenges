@@ -15,7 +15,7 @@ In this challenge, you will create 4 essential customer care topics using genera
 
 ### Step 1: Navigate to Topics Section
 
-1. In your **Customer Care Copilot**, click **Topics** in the left navigation pane.
+1. In your **Proactive Customer Care Agent**, click **Topics** in the left navigation pane.
 
 2. You'll see existing system topics (Conversation Start, Fallback, Error).
 
@@ -25,7 +25,7 @@ In this challenge, you will create 4 essential customer care topics using genera
 
 ### Step 2: Create Topic 1 - Order Tracking Assistance
 
-1. In the topic creation dialog, enter the following:
+1. In the topic creation dialog, enter the following details:
 
     - **Name:** `OrderTrackingAssistance`
     - **Description:**
@@ -71,7 +71,7 @@ In this challenge, you will create 4 essential customer care topics using genera
 
 1. Click **+ Add** → **Create from description with Copilot**.
 
-2. Enter the following:
+2. Enter the following details:
 
     - **Name:** `ProductReturnProcessing`
     - **Description:**
@@ -82,9 +82,9 @@ In this challenge, you will create 4 essential customer care topics using genera
 
 3. Click **Create** or **Generate**.
 
-4. Review and customize:
+4. Review and customize the generated topic:
 
-   - **Trigger phrases:** Verify phrases like:
+   - **Trigger phrases:** Verify it includes phrases like:
    - "I want to return a product"
    - "Return my order"
    - "Exchange item"
@@ -109,7 +109,7 @@ In this challenge, you will create 4 essential customer care topics using genera
 
 1. Click **+ Add** → **Create from description with Copilot**.
 
-2. Enter the following:
+2. Enter the following details:
 
     - **Name:** `DeliveryDelayManagement`
     - **Description:**
@@ -120,8 +120,9 @@ In this challenge, you will create 4 essential customer care topics using genera
 
 3. Click **Create** or **Generate**.
 
-4. Review and customize:
-   - **Trigger phrases:** Verify phrases like:
+4. Review and customize the generated topic:
+
+   - **Trigger phrases:** Verify it includes phrases like:
    - "My delivery is late"
    - "Order not delivered"
    - "Delayed shipment"
@@ -146,7 +147,7 @@ In this challenge, you will create 4 essential customer care topics using genera
 
 1. Click **+ Add** → **Create from description with Copilot**.
 
-2. Enter the following:
+2. Enter the following details:
 
     - **Name:** `ServiceQualityComplaintHandling`
     - **Description:**
@@ -157,8 +158,9 @@ In this challenge, you will create 4 essential customer care topics using genera
 
 3. Click **Create** or **Generate**.
 
-4. Review and customize:
-   - **Trigger phrases:** Verify phrases like:
+4. Review and customize the generated topic:
+
+   - **Trigger phrases:** Verify it includes phrases like:
    - "I have a complaint"
    - "Poor service"
    - "Product quality issue"
@@ -326,4 +328,4 @@ Now connect each topic to your published **CustomerServiceFlow**. The AI-generat
 
 ---
 
-Now, click **Next** to continue to **Challenge 05: Test Your Customer Care Copilot End-to-End**.
+Now, click **Next** to continue to **Challenge 05: Test Your Proactive Customer Care Agent End-to-End**.

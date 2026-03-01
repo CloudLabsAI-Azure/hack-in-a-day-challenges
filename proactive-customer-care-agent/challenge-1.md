@@ -1,19 +1,19 @@
-# Challenge 01: Create Customer Care Copilot in Copilot Studio
+# Challenge 01: Create Proactive Customer Care Agent in Copilot Studio
 
 ## Introduction
 Customer service organizations struggle with reactive support models that only address issues after they arise. Traditional helpdesk approaches lead to delayed responses, customer dissatisfaction, and missed opportunities for proactive engagement.
 
-In this challenge, you will create an AI-powered Customer Care Copilot using Microsoft Copilot Studio that will serve as your intelligent assistant to handle customer inquiries, complaints, and service requests automatically.
+In this challenge, you will create an AI-powered Proactive Customer Care Agent using Microsoft Copilot Studio that will serve as your intelligent assistant to handle customer inquiries, complaints, and service requests automatically.
 
 ## Challenge Objectives
 - Sign in to Microsoft Copilot Studio
-- Create a new Copilot for customer care automation
-- Configure basic copilot settings and identity
+- Create a new agent for customer care automation
+- Configure basic agent settings and identity
 - Upload knowledge base for intelligent responses
 
 ## Accessing the Datasets
 
-Please download and extract the datasets required for this challenge here:
+Please download and extract the datasets required for this challenge from the following URL:
 
 ```
 https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads/proactive-dataset.zip
@@ -25,7 +25,7 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
 1. Open **Microsoft Edge** browser in your lab VM.
 
-2. Navigate to **Microsoft Copilot Studio**:
+2. Navigate to **Microsoft Copilot Studio** by entering the following URL in the browser:
 
    ```
    https://copilotstudio.microsoft.com
@@ -41,26 +41,26 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
 6. Wait for the Copilot Studio home page to load.
 
-### Step 2: Create a New Copilot
+### Step 2: Create a New Agent
 
-1. On the Copilot Studio pane, from left menu select **Create** and then click on **+New Agent** option to create a new agent.
+1. On the Copilot Studio pane, from the left menu, select **Create** and then click on the **+New Agent** option to create a new agent.
 
-2. If any error shows up like `There was a problem creating your agent.`, then please click on **Create a blank agent**.
+2. If an error appears such as `There was a problem creating your agent.`, then click on **Create a blank agent**.
 
-3. On the overview pane of the agent, click on **edit** inside Details card to edit agent's name and description.
+3. On the overview pane of the agent, click on **edit** inside the Details card to edit the agent's name and description.
 
-4. Configure the Copilot details as below:
+4. Configure the agent details as follows:
 
-   - **Name:** `Customer Care Copilot`
+   - **Name:** `Proactive Customer Care Agent`
 
    - **Description:** `AI-powered assistant for customer service automation including order tracking, complaint management, service inquiries, and product support`
 
-5. Click on save.
+5. Click **Save**.
 
-6. Once done, scroll down and add below **instructions** by clicking on **edit** inside Instruction card.
+6. Once done, scroll down and add the following **instructions** by clicking on **edit** inside the Instruction card.
 
      ```
-     - You are a Customer Care Copilot designed to help customers with order tracking, product returns, delivery delays, and service complaints.
+     - You are a Proactive Customer Care Agent designed to help customers with order tracking, product returns, delivery delays, and service complaints.
      - Handle inquiries related to order status, return policies, delivery issues, and service quality concerns.
      - When answering questions:
        - Provide clear, helpful guidance to resolve customer issues quickly
@@ -86,7 +86,7 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
      - When creating tickets, generate clear subject lines and detailed descriptions with all relevant information including order numbers
      ```
 
-7. Click on save.
+7. Click **Save**.
 
 <validation step="fd23ac57-641a-4da5-8f64-44bbb4ae7722" />
  
@@ -97,10 +97,10 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
 ## Success Criteria
 - Successfully signed in to Microsoft Copilot Studio
-- Created a new agent named **Customer Care Copilot**
+- Created a new agent named **Proactive Customer Care Agent**
 - Configured agent with appropriate description and instructions for customer service scenarios
 - Agent instructions configured with proper customer service behavior guidelines
-- Copilot ready for Freshdesk integration in next challenges
+- Agent ready for Freshdesk integration in the next challenges
 
 ## Additional Resources
 - [Microsoft Copilot Studio Overview](https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-what-is-copilot-studio)

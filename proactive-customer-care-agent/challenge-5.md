@@ -1,7 +1,7 @@
-# Challenge 05: Test Your Customer Care Copilot End-to-End
+# Challenge 05: Test Your Proactive Customer Care Agent End-to-End
 
 ## Introduction
-Now that you've built your Customer Care Copilot with 4 topics and a reusable CustomerServiceFlow, it's time to thoroughly test the complete solution. End-to-end testing ensures all components work together seamlessly from customer input to ticket creation in Freshdesk.
+Now that you've built your Proactive Customer Care Agent with 4 topics and a reusable CustomerServiceFlow, it's time to thoroughly test the complete solution. End-to-end testing ensures all components work together seamlessly from customer input to ticket creation in Freshdesk.
 
 In this challenge, you will test all 4 topics comprehensively, verify CustomerServiceFlow integration, confirm tickets are created in Freshdesk, and validate the entire customer experience.
  
@@ -17,7 +17,7 @@ In this challenge, you will test all 4 topics comprehensively, verify CustomerSe
 
 ### Step 1: Prepare Your Test Environment
 
-1. Open your **Customer Care Copilot** in Copilot Studio.
+1. Open your **Proactive Customer Care Agent** in Copilot Studio.
 
 2. Ensure all 4 topics are **enabled**:
    - OrderTrackingAssistance
@@ -27,7 +27,7 @@ In this challenge, you will test all 4 topics comprehensively, verify CustomerSe
 
 3. Verify your **CustomerServiceFlow** is **published** (check in Actions list).
 
-4. Open a second browser tab or window with **Freshdesk** portal:
+4. Open a second browser tab or window with the **Freshdesk** portal by navigating to the following URL:
    ```
    https://your-account.freshdesk.com
    ```
@@ -42,7 +42,7 @@ In this challenge, you will test all 4 topics comprehensively, verify CustomerSe
 
 2. Start a fresh conversation by clicking **Reset** (trash icon).
 
-3. Type a trigger phrase:
+3. Type the following trigger phrase:
    ```
    Track my order
    ```
@@ -52,7 +52,7 @@ In this challenge, you will test all 4 topics comprehensively, verify CustomerSe
    - Review tracking information provided
    - When asked if you need additional assistance, say: **Yes, I need help**
 
-5. Verify the copilot:
+5. Verify the agent:
    - Calls the CustomerServiceFlow
    - Displays confirmation message
    - Shows appropriate response
@@ -70,7 +70,7 @@ In this challenge, you will test all 4 topics comprehensively, verify CustomerSe
 
 1. Reset the conversation in the test pane.
 
-2. Type:
+2. Type the following:
    ```
    I want to return a product
    ```
@@ -96,7 +96,7 @@ In this challenge, you will test all 4 topics comprehensively, verify CustomerSe
 
 1. Reset the test conversation.
 
-2. Type:
+2. Type the following:
    ```
    My delivery is late
    ```
@@ -108,7 +108,7 @@ In this challenge, you will test all 4 topics comprehensively, verify CustomerSe
 
 4. Verify topic provides helpful delay information before escalation.
 
-5. Check ticket confirmation message in copilot.
+5. Check ticket confirmation message in the agent.
 
 6. In **Freshdesk**, verify the ticket:
    - **Subject:** Contains "Delivery Delay - ORD345678"
@@ -120,7 +120,7 @@ In this challenge, you will test all 4 topics comprehensively, verify CustomerSe
 
 1. Reset the conversation.
 
-2. Type:
+2. Type the following:
    ```
    I have a complaint about your service
    ```
@@ -142,21 +142,21 @@ In this challenge, you will test all 4 topics comprehensively, verify CustomerSe
 
 ### Step 6: Test Knowledge Base Integration
 
-Test if your copilot can answer questions directly from the knowledge base without creating tickets.
+Test if your agent can answer questions directly from the knowledge base without creating tickets.
 
 1. Reset the conversation.
 
-2. Ask a general customer service question:
+2. Ask a general customer service question by typing the following:
    ```
    What is your return policy?
    ```
 
-3. Verify the copilot:
+3. Verify the agent:
    - Provides a direct answer from knowledge base
    - Does NOT trigger a topic unnecessarily
    - Offers helpful policy information
 
-4. Try another knowledge base query:
+4. Try another knowledge base query by typing the following:
    ```
    How long does shipping take?
    ```
@@ -184,16 +184,16 @@ Test if your copilot can answer questions directly from the knowledge base witho
 1. Test what happens if customer provides incomplete information:
    - Start order tracking topic
    - Skip order number when asked
-   - See how copilot handles it
+   - See how the agent handles it
 
 2. Test fallback behavior:
    - Type something unrelated: "What's the weather today?"
-   - Verify copilot uses fallback topic appropriately
+   - Verify the agent uses the fallback topic appropriately
 
 3. Test error handling if API fails:
    - If possible, temporarily disconnect Freshdesk connection
    - Try creating a ticket
-   - Verify copilot provides graceful error message
+   - Verify the agent provides a graceful error message
 
 4. Reconnect Freshdesk connection after testing.
 
@@ -205,7 +205,7 @@ Test if your copilot can answer questions directly from the knowledge base witho
    - All required fields are populated correctly
    - No missing or null values
    - Priority levels match flow configuration (Medium)
-   - Description provides enough context for customer service team
+   - Description provides enough context for the customer service team
 
 3. Check if tickets are assigned to any agent or group (optional based on your Freshdesk setup).
 
@@ -272,12 +272,12 @@ If you encounter issues during testing:
    - Ticket details are accurate
    - No errors in ticket creation
 
-3. Check copilot behavior:
+3. Check agent behavior:
    - All topics trigger correctly
    - Conversation flows are smooth
    - Ticket confirmations are displayed
 
-4. Your copilot is now ready for deployment.
+4. Your agent is now ready for deployment.
 
 ## Success Criteria
 - All 4 topics tested successfully in Copilot Studio
@@ -297,4 +297,4 @@ If you encounter issues during testing:
 
 ---
 
-Now, click **Next** to continue to **Challenge 06: Publish Your Copilot to Microsoft Teams**.
+Now, click **Next** to continue to **Challenge 06: Publish Your Agent to Microsoft Teams**.

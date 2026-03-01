@@ -1,7 +1,7 @@
 # Challenge 02: Setup Freshdesk & Get API Credentials
 
 ## Introduction
-When the copilot cannot resolve an issue automatically, it needs to create a support ticket in your helpdesk system. Freshdesk is a popular cloud-based helpdesk solution that integrates seamlessly with Copilot Studio through its API connector.
+When the agent cannot resolve an issue automatically, it needs to create a support ticket in your helpdesk system. Freshdesk is a popular cloud-based helpdesk solution that integrates seamlessly with Copilot Studio through its API connector.
 
 In this challenge, you will activate your Freshdesk free trial, configure your account, and obtain the API credentials needed to connect Copilot Studio to Freshdesk for automated ticket creation.
 
@@ -17,7 +17,7 @@ In this challenge, you will activate your Freshdesk free trial, configure your a
 
 1. Open **Microsoft Edge** browser in your lab VM.
 
-2. Navigate to **Freshworks Portal**:
+2. Navigate to the **Freshworks Portal** by entering the following URL in the browser:
 
    ```
    https://www.freshworks.com/freshdesk/
@@ -46,7 +46,7 @@ In this challenge, you will activate your Freshdesk free trial, configure your a
 
 ### Step 4: Activate Your Account via Email
 
-1. Open a new tab and navigate to **Outlook**:
+1. Open a new tab and navigate to **Outlook** by entering the following URL:
 
    ```
    https://outlook.office.com
@@ -62,7 +62,7 @@ In this challenge, you will activate your Freshdesk free trial, configure your a
 
 ### Step 5: Set Your Password
 
-1. In the activation pane, provide:
+1. In the activation pane, provide the following details:
    - **Enter password:** Create a strong password (e.g., `Freshdesk@2025`)
    - **Confirm password:** Re-enter the same password
 
@@ -94,14 +94,14 @@ In this challenge, you will activate your Freshdesk free trial, configure your a
 
 1. From the browser address bar, copy the **Account URL**.
 
-2. The URL format is typically:
+2. The URL format is typically as follows:
    ```
    https://your-company-name.freshdesk.com
    ```
 
 3. **Copy this full URL** and paste it into the same Notepad file alongside your API Key.
 
-4. Your Notepad should now contain:
+4. Your Notepad should now contain something like the following:
    ```
    Account URL: https://your-account.freshdesk.com
    API Key: [Your API Key Here]
@@ -131,10 +131,10 @@ In this challenge, you will activate your Freshdesk free trial, configure your a
 
 1. To familiarize yourself with Freshdesk, create a test ticket manually:
    - Click **+ New Ticket** in the top-right corner
-   - Fill in:
+   - Fill in the following details:
      - **Requester:** Your email
      - **Subject:** `Test Ticket - Setup Complete`
-     - **Description:** `Testing Freshdesk setup before Copilot integration`
+     - **Description:** `Testing Freshdesk setup before agent integration`
      - **Priority:** Medium
      - **Status:** Open
 
