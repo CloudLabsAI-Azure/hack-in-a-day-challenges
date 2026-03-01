@@ -84,6 +84,27 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
 1. Click on **Save**.
 
+### Step 2: Upload Knowledge Base
+
+1. From the Copilot Studio home screen, open the **Customer Care Copilot** agent created in Step 1.
+
+1. In the top navigation bar, select **Knowledge**.
+
+1. Click **+ Add Knowledge**.
+
+1. Choose **Upload files**.
+
+1. Upload the following files from the dataset you downloaded and extracted earlier:
+
+   - **Customer Support Ticket Dataset** (.csv)
+   - **Customer-Data** (.xlsx)
+   - **Employee-Data** (.xlsx)
+   - **Employee-Travel-Reimbursement** (.xlsx)
+
+1. After uploading, verify each file shows the status **Ready**.
+
+   > **Note:** It may take up to 30 minutes for files to finish processing. You can proceed with the next challenge while the files are being processed.
+
 <validation step="fd23ac57-641a-4da5-8f64-44bbb4ae7722" />
  
 > **Congratulations** on completing the Challenge! Now, it's time to validate it. Here are the steps:
@@ -94,6 +115,7 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 ## Success Criteria
 
 - Created a new agent named **Customer Care Copilot**
+- Knowledge base files uploaded and status shows **Ready**
 
 ## Additional Resources
 - [Microsoft Copilot Studio Overview](https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-what-is-copilot-studio)
