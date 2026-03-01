@@ -12,15 +12,13 @@ In this challenge, you will upload **quarterly finance PDFs, cash flow reports, 
 
 ## Steps to Complete
 
-1. From the Copilot Studio home screen, open the **agent** created previously.
-
 1. In top navigation bar, select **Knowledge**.
 
 1. Click **+ Add a knowledge source**.
 
 1. Choose **Upload files**.
 
-1. Upload the Job Description and Resume documents provided, which you downloaded and extracted earlier.
+1. Upload the documents and datasets provided, which you downloaded and extracted earlier.
 
 1. After uploading, verify each file shows the status **Ready**.
 

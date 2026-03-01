@@ -30,7 +30,7 @@ By participating in this Hack in a Day, you will learn how to:
 
 ## Hack in a Day Format: Challenge-Based
 
-This hands-on lab is structured into five progressive challenges that model the lifecycle of a financial AI agent:
+This is structured into five progressive challenges that model the lifecycle of a financial AI agent:
 
 - **Challenge 01: Create the Financial Risk Advisor Copilot**  
   Configure the Copilot identity, purpose, and behavioral instructions.
@@ -46,12 +46,6 @@ This hands-on lab is structured into five progressive challenges that model the 
 
 - **Challenge 05: Publish the Copilot to Microsoft Teams and Test the Full Workflow**  
   Deploy the Copilot to Teams and validate the complete analysis and escalation experience.
-
-Across all challenges, you will:
-- Interpret the financial analysis use case
-- Design a knowledge-grounded conversational workflow
-- Integrate AI reasoning with real-world financial operations
-- Test end-to-end automation from insight → risk classification → escalation
 
 ## Challenge Overview
 
