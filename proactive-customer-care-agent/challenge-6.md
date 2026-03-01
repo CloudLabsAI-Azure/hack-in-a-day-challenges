@@ -18,7 +18,7 @@ In this challenge, you will publish your agent, add it to Teams, test the comple
 
 1. In **Copilot Studio**, ensure you're in your **Customer Care Copilot Agent**.
 
-1. Click **Publish** in the top-right corner (or in the left navigation).
+1. Click on **Publish**, in the channel section.
 
 1. Review the pre-publish checklist:
    - Topics are configured
@@ -47,11 +47,11 @@ In this challenge, you will publish your agent, add it to Teams, test the comple
 
 1. Select **Availability options** → **Show to everyone in my org**.
 
-1. Click **Submit for admin approval** (or **Add to Teams** if you have permissions).
+1. Click **Submit for admin approval**.
 
 ### Step 3: Add the Agent to Your Teams
 
-1. Open **Microsoft Teams** (desktop or web) by navigating to the following URL:
+1. Open **Microsoft Teams** ( web) by navigating to the following URL:
 
    ```
    https://teams.microsoft.com
