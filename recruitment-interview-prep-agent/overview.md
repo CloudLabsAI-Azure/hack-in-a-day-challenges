@@ -4,7 +4,7 @@ Welcome to the Recruitment Interview Prep Agent Hack in a Day! Today, you’ll e
 
 ## Scenario
 
-A fast-growing technology company is hiring for two critical roles , Software Developer and AI Engineer to support upcoming product launches. The HR team is receiving many resumes but is struggling to manually screen candidates, match their skills to job requirements, and prepare role-appropriate interview questions for each technical round. Important shortlisting updates for hiring managers are often delayed due to workload. To streamline this process, the company decides to build an HR Interview Copilot that can evaluate resumes, compare them to Job Descriptions, generate interview question sets based on experience level, and email shortlist reports to hiring managers for the next round. This ensures a faster, consistent, and more reliable hiring workflow.
+A fast-growing technology company is hiring for two critical roles, Software Developer and AI Engineer to support upcoming product launches. The HR team is receiving many resumes but is struggling to manually screen candidates, match their skills to job requirements, and prepare role-appropriate interview questions for each technical round. Important shortlisting updates for hiring managers are often delayed due to workload. To streamline this process, the company decides to build an HR Interview Copilot that can evaluate resumes, compare them to Job Descriptions, generate interview question sets based on experience level, and email shortlist reports to hiring managers for the next round. This ensures a faster, consistent, and more reliable hiring workflow.
 
 ## Introduction
 
@@ -51,7 +51,7 @@ Throughout each challenge, you will design, build, and test intelligent workflow
 
 ## Challenge Overview
 
-You will start by creating the HR Interview Copilot framework and uploading key hiring documents. Next, you will implement resume evaluation and interview question generation using knowledge-grounded conversational intelligence. You will then automate shortlist reporting through Outlook email using Power Automate. Finally, you will deploy the Copilot to Microsoft Teams to experience the full, conversational hiring workflow.
+You will start by creating the HR Interview Copilot framework and uploading key hiring documents. Next, you will implement resume evaluation and interview question generation using knowledge-grounded conversational intelligence. You will then automate shortlist reporting through Outlook using Power Automate. Finally, you will deploy the Copilot to Microsoft Teams to experience the full, conversational hiring workflow.
 
 By the end of this Hack in a Day, you will have a fully functional **HR Interview Copilot** that can evaluate technical candidates, prepare interview questions, email shortlist reports, and operate naturally inside Microsoft Teams, a complete and scalable HR automation solution.
 

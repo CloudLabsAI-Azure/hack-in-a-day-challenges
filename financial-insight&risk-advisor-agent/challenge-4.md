@@ -14,11 +14,11 @@ The Copilot can now analyze financial documents and classify risk. In this chall
 
 ### Step 1: Create the Flow for Email Escalation  
 
-1. In Copilot Studio, from the left navigation pane, select **Flows → + New agent flow**
+1. In Copilot Studio, from the left navigation pane, select **Flows** and click **+ New agent flow**
 
 1. You will be navigated to **Designer** pane, under the add a trigger pane, search for **When an agent calls the flow** and select it.
 
-1. Inside **When an agent calls the flow** node, select **Add an input** option to add a input variable and provide the name as **Body**.
+1. Inside **When an agent calls the flow** node, select **Add an input** option to add a **Text** input variable and provide the name as **Body**.
 
 1. Once configured, add one more node by clicking on **+**.
 
@@ -26,14 +26,14 @@ The Copilot can now analyze financial documents and classify risk. In this chall
 
 1. In the **Compose** node, click on the input area and select the function icon (fx) to add an expression.
 
-1. In the function area, add the below expressiona nd click on **Add**.
+1. In the function area, add the below expression and click on **Add**.
 
    ```
    replace(replace(replace(replace(triggerBody()?['text'], '**', '<b>'), '- ', '<br>• '), '\n', '<br>'), '*', '<em>')
    ```
 1. Once configured, add one more node by clicking on **+**.
 
-1. Search and Choose **Send an email (V2)** node. 
+1. Search and Choose **Send an email (V2)** . 
 
 1. In the configuration pane, provide **<inject key="AzureAdUserEmail"></inject>** in the **To** parameter.
 
@@ -55,7 +55,7 @@ The Copilot can now analyze financial documents and classify risk. In this chall
 
 ### Step 2: Connect the Flow to the Cash Flow Topic
 
-1. Navigate back to **Topics** → open **Cash Flow Stability & Liquidity Outlook**.  
+1. Navigate back to **Topics**  open **Cash Flow Stability & Liquidity Outlook**.  
 
 1. Scroll to the **last Generative Answers node** and select **Edit data source**.  
 
@@ -63,7 +63,7 @@ The Copilot can now analyze financial documents and classify risk. In this chall
 
 1. Under **Save agent response as**, click on the input area and Select **Create new variable**.  
 
-### Step 4: Add User Confirmation and Execute the Escalation Flow
+### Step 3: Add User Confirmation and Execute the Escalation Flow
 
 1. Select **+ Add node** under the Generative Answers node.  
 
@@ -87,11 +87,11 @@ The Copilot can now analyze financial documents and classify risk. In this chall
 
 #### Under the **Yes** branch:
 
-1. Select **Add node → Action**. 
+1. Select **+** to add new node, from the list, select **Add a tool** and click on the **Outlook Flow** which you created earlier.
 
-1. Choose **Outlook Flow**.
+1. Add **Var2** as the input variable, using **...**.
 
-1. Select **Add node → Send a message**.
+1. Add **Send a message** node under that.
 
 1. Add message text such as:  
    
@@ -100,7 +100,8 @@ The Copilot can now analyze financial documents and classify risk. In this chall
    ```
 
 #### Under the **No** branch:
-1. Select **Add node → Send a message**.  
+
+1. Add **Send a message** node.
 
 1. Add message text such as:  
   
@@ -123,8 +124,8 @@ The Copilot can now analyze financial documents and classify risk. In this chall
    - Copilot analyzes the cash flow based on the answers provided by you. 
    - Copilot displays the full summary  
    - Copilot asks whether to send the report to the CFO  
-   - If **Yes** → Outlook Flow runs and email is sent  
-   - If **No** → Copilot thanks the user without escalation
+   - If **Yes**, Outlook Flow runs and email is sent  
+   - If **No**, Copilot thanks the user without escalation
 
 ## Success Criteria  
 
@@ -139,4 +140,4 @@ The Copilot can now analyze financial documents and classify risk. In this chall
 - https://learn.microsoft.com/microsoft-copilot-studio/create-plugin  
 - https://learn.microsoft.com/power-automate/flows-overview
 
-Click **Next** to continue to **Challenge 05: Publish the Copilot to Microsoft Teams and Test the Full Workflow **.
+Click **Next** to continue to **Challenge 05: Publish the Copilot to Microsoft Teams and Test the Full Workflow**.
