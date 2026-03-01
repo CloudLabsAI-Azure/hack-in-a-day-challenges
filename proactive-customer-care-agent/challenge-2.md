@@ -38,6 +38,8 @@ In this challenge, you will activate your Freshdesk free trial, configure your a
 
 1. Click **Try it free**.
 
+1. If prompted with a CAPTCHA challenge, complete the verification, and then choose **VERIFY** to proceed.
+
 1. Open a new tab and navigate to **Outlook** by entering the following URL:
 
    ```
@@ -105,25 +107,18 @@ In this challenge, you will activate your Freshdesk free trial, configure your a
 
 1. Your Notepad should now contain something like the following:
    ```
-   Account URL: https://your-account.freshdesk.com
+   Account URL: https://cloudlabssandboxonmicrosoft<numeric>.freshdesk.com
    API Key: [Your API Key Here]
    ```
 
 ## Success Criteria
-- Freshdesk free trial successfully activated
-- Account verified via email activation
-- Profile settings accessed successfully
-- API Key retrieved and saved securely
-- Account URL copied and documented
-- Freshdesk dashboard explored and understood
-- Test ticket created manually (optional) to understand ticket structure
+- Setup Freshdesk Free Trial Account
+- Retrieve API Key and Account URL
 
 ## Additional Resources
 - [Freshdesk Documentation](https://support.freshdesk.com/)
 - [Freshdesk API Overview](https://developers.freshdesk.com/api/)
 - [Freshdesk Getting Started Guide](https://freshdesk.com/resources/getting-started)
-
----
 
 Click **Next** at the bottom of the page to proceed to the next page.
 

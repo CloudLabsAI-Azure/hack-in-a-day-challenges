@@ -92,10 +92,8 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
 ## Success Criteria
-- Successfully signed in to Microsoft Copilot Studio
-- Created a new agent named **Proactive Customer Care Agent**
-- Configured agent with appropriate description and instructions for customer service scenarios
-- Agent instructions configured with proper customer service behavior guidelines
+
+- Created a new agent named **Customer Care Copilot**
 
 ## Additional Resources
 - [Microsoft Copilot Studio Overview](https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-what-is-copilot-studio)

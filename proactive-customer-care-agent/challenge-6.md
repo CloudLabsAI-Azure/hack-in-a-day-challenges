@@ -16,7 +16,7 @@ In this challenge, you will publish your agent, add it to Teams, test the comple
 
 ### Step 1: Publish Your Agent
 
-1. In **Copilot Studio**, ensure you're in your **Proactive Customer Care Agent**.
+1. In **Copilot Studio**, ensure you're in your **Customer Care Copilot Agent**.
 
 1. Click **Publish** in the top-right corner (or in the left navigation).
 
@@ -63,7 +63,7 @@ In this challenge, you will publish your agent, add it to Teams, test the comple
 
 1. In Teams, click **Apps** in the left sidebar.
 
-1. Search for **Proactive Customer Care Agent**.
+1. Search for **Customer Care Copilot Agent**.
 
 1. Click on your agent in the search results.
 

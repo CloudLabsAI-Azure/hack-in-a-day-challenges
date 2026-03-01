@@ -17,7 +17,7 @@ In this challenge, you will test all 4 topics comprehensively, verify CustomerSe
 
 ### Step 1: Prepare Your Test Environment
 
-1. Open your **Proactive Customer Care Agent** in Copilot Studio.
+1. Open your **Customer Care Copilot Agent** in Copilot Studio.
 
 1. Ensure all 4 topics are **enabled**:
    - OrderTrackingAssistance
