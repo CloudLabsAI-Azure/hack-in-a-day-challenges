@@ -23,7 +23,6 @@ By participating in this Hack in a Day, you will learn how to:
 - Map topic variables to flow inputs for dynamic ticket creation with proper subject lines and descriptions
 - Test end-to-end integration from agent to Freshdesk ticket creation
 - Deploy your agent to Microsoft Teams for organization-wide access
-- Implement best practices for customer service automation and user experience
 
 ## Hack in a Day Format: Challenge-Based
 
@@ -59,6 +58,8 @@ Learner Support Contacts:
 - Email Support: cloudlabs-support@spektrasystems.com
 - Live Chat Support: https://cloudlabs.ai/labs-support
 
-Now, click on the **Next** from lower right corner to move on next page.
+Click **Next** at the bottom of the page to proceed to the next page.
+
+   ![](./media/pro-activ-gg-g15.png)
 
 ## Happy Hacking!!

@@ -109,4 +109,6 @@ https://github.com/CloudLabsAI-Azure/hack-in-a-day-challenges/archive/refs/heads
 
 ---
 
-Now, click **Next** to continue to **Challenge 02: Setup Freshdesk & Get API Credentials**.
+Click **Next** at the bottom of the page to proceed to the next page.
+
+   ![](./media/pro-activ-gg-g17.png)

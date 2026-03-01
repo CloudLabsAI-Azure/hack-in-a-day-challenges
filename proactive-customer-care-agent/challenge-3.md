@@ -240,4 +240,6 @@ In this challenge, you will create an agent flow with the Freshdesk connector th
 
 ---
 
-Now, click **Next** to continue to **Challenge 04: Create Topics Using Generative AI**.
+Click **Next** at the bottom of the page to proceed to the next page.
+
+   ![](./media/pro-activ-gg-g19.png)

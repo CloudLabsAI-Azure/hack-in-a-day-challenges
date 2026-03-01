@@ -297,4 +297,6 @@ If you encounter issues during testing:
 
 ---
 
-Now, click **Next** to continue to **Challenge 06: Publish Your Agent to Microsoft Teams**.
+Click **Next** at the bottom of the page to proceed to the next page.
+
+   ![](./media/pro-activ-gg-g21.png)

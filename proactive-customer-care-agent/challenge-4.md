@@ -328,4 +328,6 @@ Now connect each topic to your published **CustomerServiceFlow**. The AI-generat
 
 ---
 
-Now, click **Next** to continue to **Challenge 05: Test Your Proactive Customer Care Agent End-to-End**.
+Click **Next** at the bottom of the page to proceed to the next page.
+
+   ![](./media/pro-activ-gg-g20.png)

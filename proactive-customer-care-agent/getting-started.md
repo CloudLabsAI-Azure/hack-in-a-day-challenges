@@ -38,19 +38,17 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
    https://make.powerapps.com/
    ```
 
-1. On the **Sign into Microsoft** tab, you will see the login screen. Enter the provided email or username, and click **Next** to proceed.
+1. On the **Sign into Microsoft** tab, enter the following email **(1)** in the email field, and then click **Next (2)** to proceed.
 
-   - Email/Username: **<inject key="AzureAdUserEmail"></inject>**
+   - Email: **<inject key="AzureAdUserEmail"></inject>**
 
      ![](./media/gs-lab3-g2.png)
 
-1. Now, enter the following password and click on **Sign in**.
+1. On the **Enter Temporary Access Pass** screen, enter the following **Temporary Access Pass**, and then click **Sign in (2)**.
 
-   - Password: **<inject key="AzureAdUserPassword"></inject>**
+   - Temporary Access Pass: **<inject key="AzureAdUserPassword"></inject>**
 
      ![](./media/gs-lab3-g3.png)
-
-     > **Note:** If you see the Action Required dialog box, then select **Ask Later** option.
      
 1. If you see the pop-up **Stay Signed in?**, click **No**.
 
@@ -80,15 +78,12 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    ![](./media/d2-coor-gs-g2.png)
 
-   > **Note:** If the **New** environment page does not load, refresh the browser and try again.
-
-1. In the **New environment** pane, configure the environment with the following settings, and then select **Next (4)**:
+1. In the **New environment** pane, configure the environment with the following settings, and then select **Next (3)**:
 
    - Enter **ODL_User <inject key="DeploymentID" enableCopy="false"></inject>'s Environment** in the **Name (1)** field.
-   - Set **Get new features early (2)** to **Yes**.
-   - Select **Developer (3)** from the **Type** dropdown.
+   - Select **Developer (2)** from the **Type** dropdown.
 
-      ![](./media/d2-coor-gs-g3.png)
+      ![](./media/nimg25.png)
 
 1. In the **Add Dataverse** pane, leave all settings as default, and then select **Save**.
 
@@ -100,13 +95,13 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
    > **Note:** If you see an error stating that the environment list cannot be displayed, this is expected while the environment is being created in the background. After 10-15 minutes, refresh the browser and the environment should appear.
 
-1. In the **Power Platform admin center**, select **Manage** from the left menu and click on the environment with the name ODL_User <inject key="Deployment ID" enableCopy="false"></inject>'s Environment.
+1. In the **Power Platform admin center**, select **Manage (1)**, choose **Environments (2)**, and then click **ODL_User <inject key="DeploymentID" enableCopy="false"/>'s Environment (3)**.
 
    ![](./media/uppowadminimg1.png)
 
 1. In the environment page, click on **See all** under **S2S apps**.
 
-   ![](./media/uppowadminimg2.png)
+   ![](./media/pro-activ-gg-g3.png)
 
 1. In the next pane, click on **+ New app user**.
 
@@ -114,31 +109,31 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 1. In the create a new app user pane, under **App**, click on **+ Add an app**.
 
-   ![](./media/uppowadminimg4.png)
+   ![](./media/pro-activ-gg-g4.png)
 
-1. From the list of apps, search for `https://cloudlabssandbox.onmicrosoft.com/cloudlabs.ai/` and select it.
+1. In the **Add an app from Microsoft Entra ID** pane, enter `https://cloudlabssandbox.onmicrosoft.com/cloudlabs.ai/` in the search box **(1)**, select the app from the results **(2)**, and then click **Add (3)**.
 
-   ![](./media/uppowadminimg5.png)
+   ![](./media/pro-activ-gg-g5.png)
 
-1. Once done, under **Business unit** search for **org** and select the only business unit that comes in the list.
+1. Under **Business unit**, enter **org (1)** in the search box, and then select the available business unit from the list **(2)**.
 
-   ![](./media/uppowadminimg6.png)
+   ![](./media/pro-activ-gg-g6.png)
 
 1. Beside **Security roles** click on **Edit** icon.
 
-   ![](./media/uppowadminimg9.png)
+   ![](./media/pro-activ-gg-g7.png)
 
-1. From the list of roles, search and select **System Administrator** and click on **Save**.
+1. In the **Sync Permissions** pane, select **System Administrator (1)**, and then click **Save (2)**.
 
-   ![](./media/uppowadminimg10.png)
+   ![](./media/pro-activ-gg-g8.png)
 
 1. In the pop-up window, select **save**.
 
-   ![](./media/uppowadminimg11.png)
+   ![](./media/pro-activ-gg-g9.png)
 
 1. Review all the details and click on **Create**.
 
-   ![](./media/uppowadminimg12.png)
+   ![](./media/pro-activ-gg-g10.png)
 
 1. Navigate to **Microsoft Copilot Studio** by opening a new browser tab and entering the following URL:
 
@@ -148,48 +143,30 @@ Feel free to start, stop, or restart your virtual machine as needed from the Res
 
 1. On the **Welcome to Microsoft Copilot Studio** screen, keep the default **country/region** selection and click **Get Started** to continue.
 
-   ![](./media/gs-travel-g2.png)
+   ![](./media/pro-activ-gg-g11.png)
 
 1. If the **Welcome to Copilot Studio!** pop-up appears, click **Skip** to continue to the main dashboard.
 
    ![](./media/gs-travel-g3.png)
 
-1. If you are directly taken to the **agent creation** screen, click the **ellipsis (1)** icon beside the **Create** button, then select **Cancel agent creation (2)** to return to the main dashboard.
+1. If the **We've updated you to the latest version of Microsoft Copilot Studio** pop-up appears, click **Got it!**.
 
-   ![](./media/gs-travel-g4.png)
+   ![](./media/pro-activ-gg-g12.png)
+
+1. If the **What's new in Copilot Studio** pop-up appears, click the **Close (X)** icon to dismiss it.
+
+   ![](./media/pro-activ-gg-g13.png)
 
 1. In Copilot Studio, open the environment picker **(1)**, expand **Supported environments (2)**, and select **ODL_User <inject key="Deployment ID" enableCopy="false"></inject>'s Environment (3)** to switch.
 
    ![](./media/ex1-travel-g6.png)
 
-   > If you are not able to see the environment under **Supported environments**, follow the below steps.
-
-   ![](./media/cor2-gs-g4.png)
-
-   1. In the **Power Platform admin center**, select **Environments** from the left navigation pane, and then verify that **ODL_User <inject key="DeploymentID" enableCopy="false"></inject>'s Environment** is listed.
-
-      ![](./media/nd-d2-cor-g-4.png)
-   
-   1. On the **ODL_User 22<inject key="DeploymentID" enableCopy="false"></inject>'s Environment** details page, copy the **Environment ID**.
-
-      ![](./media/nd-d2-cor-g-5.png)
-      
-   1. Open a **new browser tab**, and paste the copied **Environment ID** at the end of the following URL to verify access:
-
-      ```
-      https://copilotstudio.microsoft.com/environments/(Environment ID)
-      ```
-
-      ![](./media/cor2-gs-g6.png)
-
-      > **Note:** Replace **(Environment ID)** with the ID you copied in the previous step.
-      
-   1. You will be navigated to the **Copilot Studio** portal. Verify that **ODL_User <inject key="Deployment ID" enableCopy="false"></inject>’s Environment** is visible and selected under **Supported environments**.
-
-      ![](./media/cor2-gs-g7.png)
-
 1. You are now ready to start building your **Proactive Customer Care Agent** using Microsoft Copilot Studio! This agent will help customers with order tracking, product returns, delivery delays, and service complaints, and will integrate with Freshdesk for automated ticket creation.
 
-Now, click on the **Next** from lower right corner to move on next page.
+   ![](./media/pro-activ-gg-g14.png)
+
+Click **Next** at the bottom of the page to proceed to the next page.
+
+   ![](./media/pro-activ-gg-g16.png)
 
 ## Happy Hacking!!

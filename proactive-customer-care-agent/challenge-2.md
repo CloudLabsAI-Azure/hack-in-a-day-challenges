@@ -160,4 +160,6 @@ In this challenge, you will activate your Freshdesk free trial, configure your a
 
 ---
 
-Now, click **Next** to continue to **Challenge 03: Create Customer Service Flow**.
+Click **Next** at the bottom of the page to proceed to the next page.
+
+   ![](./media/pro-activ-gg-g18.png)
