@@ -1,6 +1,6 @@
 # Recruitment Interview Prep Agent
 
-Welcome to the Recruitment Interview Prep Agent Hack in a Day! Today, you’ll explore how AI can streamline HR operations by building an intelligent Copilot that assists with technical hiring. Through this hands-on lab, you will create a recruitment assistant capable of evaluating candidate resumes, generating role-specific interview questions, and sharing shortlist reports with hiring managers, all powered by Azure AI and Copilot Studio.
+Welcome to the Recruitment Interview Prep Agent Hack in a Day! Today, you’ll explore how AI can streamline HR operations by building an intelligent Copilot that assists with technical hiring. Through this hands-on lab, you will create a recruitment assistant capable of evaluating candidate resumes, generating role-specific interview questions, and sharing shortlist reports with hiring managers, all powered by Copilot Studio.
 
 ## Scenario
 
@@ -8,7 +8,7 @@ A fast-growing technology company is hiring for two critical roles , Software De
 
 ## Introduction
 
-Your mission is to build an **HR Interview Copilot** that supports recruitment teams in selecting the right candidate faster and more consistently. Using Microsoft Copilot Studio, Azure AI Foundry, Azure OpenAI, and Power Automate, you will design a conversational agent that can:
+Your mission is to build an **HR Interview Copilot** that supports recruitment teams in selecting the right candidate faster and more consistently. Using Microsoft Copilot Studio and Power Automate, you will design a conversational agent that can:
 
 - Understand Job Descriptions for roles such as **Software Developer** and **AI Engineer**
 - Analyze resumes against skill requirements and identify strengths and gaps
@@ -30,7 +30,7 @@ By participating in this Hack in a Day, you will learn how to:
 
 ## Hack in a Day Format: Challenge-Based
 
-This hands-on lab is structured into five progressive challenges that mirror a real HR automation implementation:
+This is structured into five progressive challenges that mirror a real HR automation implementation:
 
 - **Challenge 1: Create the HR Interview Copilot**  
   Set up the Copilot with the right purpose, instructions, and conversational identity.
@@ -39,7 +39,7 @@ This hands-on lab is structured into five progressive challenges that mirror a r
   Add Job Descriptions and sample resumes to the knowledge base for grounding.
 
 - **Challenge 3: Build Resume Evaluation & Question Generation Topics**  
-  Create two conversational topics — one for evaluating candidates and one for generating interview questions.
+  Create two conversational topics, one for evaluating candidates and one for generating interview questions.
 
 - **Challenge 4: Email Shortlist Reports to Hiring Managers**  
   Integrate Power Automate so the Copilot can send structured reports when HR approves.
