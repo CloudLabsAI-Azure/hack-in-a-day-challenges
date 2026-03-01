@@ -116,7 +116,7 @@ Test if your agent can answer questions directly from the knowledge base without
 
 1. If responses are generic, verify:
    - Knowledge sources are enabled in **Settings** → **Generative AI**
-   - All four PDF files are uploaded and indexed
+   - All four files are uploaded and indexed
 
 ### Step 5: Verify Ticket Details in Freshdesk
 
