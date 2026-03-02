@@ -7,9 +7,8 @@ In this challenge, you will create 4 essential customer care topics using genera
 
 ## Challenge Objectives
 - Use Copilot Studio's generative AI to create 4 topics
-- Connect each topic to your published CustomerServiceFlow
-- Map topic variables to flow inputs
-- Test topics with flow integration
+- Review All Topics
+- Connect Topics to CustomerServiceFlow
 
 ## Steps to Complete
 
@@ -41,17 +40,13 @@ In this challenge, you will create 4 essential customer care topics using genera
 1. Review the generated topic:
 
    - **Trigger phrases:** Verify it includes phrases like:
-     - "Track my order"
-     - "Where is my package"
-     - "Order status"
-     - "Delivery tracking"
-     - "Track shipment"
+   - "Track my order"
+   - "Where is my package"
+   - "Order status"
+   - "Delivery tracking"
+   - "Track shipment"
 
 1. Review the conversation flow:
-   - Should ask for order number and save as variable
-   - Should provide tracking information using knowledge base
-   - Should ask if issue is resolved
-   - Should offer escalation to ticket creation
 
 1. **Important:** If you see an error about limited scope or variables:
    - Open the **Variables** pane.
@@ -87,11 +82,6 @@ In this challenge, you will create 4 essential customer care topics using genera
    - "Return policy"
 
 1. Review the conversation flow:
-   - Should ask for order number and save as variable
-   - Should ask for return reason and save as variable
-   - Should provide return policy information using knowledge base
-   - Should ask if customer needs assistance
-   - Should offer ticket creation with order number in subject
 
 1. **Important:** If you see an error about limited scope or variables:
    - Open the **Variables** pane.
@@ -127,11 +117,6 @@ In this challenge, you will create 4 essential customer care topics using genera
    - "Missed delivery"
 
 1. Review the conversation flow:
-   - Should ask for order number and save as variable
-   - Should ask about delivery issue and save as variable
-   - Should provide delay information using knowledge base
-   - Should ask if issue is resolved
-   - Should offer ticket creation with order number in subject
 
 1. **Important:** If you see an error about limited scope or variables:
    - Open the **Variables** pane.
@@ -168,11 +153,6 @@ In this challenge, you will create 4 essential customer care topics using genera
    - "File a complaint"
 
 1. Review the conversation flow:
-   - Should ask for complaint details and save as variable
-   - Should ask for order number if applicable and save as variable
-   - Should provide empathetic response and solutions using knowledge base
-   - Should ask if customer is satisfied
-   - Should offer ticket creation for escalation
 
 1. **Important:** If you see an error such as **PowerFxError** or a limited scope issue:
    - Click the ellipsis (**...**) on the affected node.
@@ -206,9 +186,10 @@ Now connect each topic to your published **CustomerServiceFlow**. The AI-generat
    - Select **Add a tool**.
    - Select **CustomerServiceFlow**.
 
-1. Map the flow inputs using the **(...)** icon:
-   - **Subject:** Select the appropriate variable from your topic
-   - **Description:** Select the relevant variables that capture the tracking issue details
+1. Map the flow inputs using the ellipsis (**...**) icon:
+
+   - For **Subject**, select the appropriate topic variable such as **OrderNumber**.
+   - For **Description**, select the relevant topic variable such as **SupportIssue**.
 
    > **Note:** If your topic doesn't have all the required variables, add **Question** nodes to collect missing information before calling the flow.
 
@@ -220,14 +201,16 @@ Now connect each topic to your published **CustomerServiceFlow**. The AI-generat
 
 1. Navigate through the topic flow and find the appropriate place for ticket creation.
 
-1. Add the **CustomerServiceFlow** tool immediately after the message where you inform the user that a support ticket will be created:
+1. Add the **CustomerServiceFlow** tool immediately after the message where you inform the user that the issue is escalated:
+
    - Click the **+** icon.
    - Select **Add a tool**.
    - Select **CustomerServiceFlow**.
 
-1. Map the flow inputs using the (...) icon:
-   - **Subject:** Select the appropriate variable from your topic
-   - **Description:** Select the relevant variables about the return request
+1. Map the flow inputs using the ellipsis (**...**) icon:
+
+   - For **Subject**, select the appropriate topic variable such as **OrderNumber**.
+   - For **Description**, select the relevant topic variable such as **ReturnReason**.
 
    > **Note:** If your topic doesn't capture all necessary information, add **Question** nodes to collect missing details before calling the flow.
 
@@ -245,9 +228,10 @@ Now connect each topic to your published **CustomerServiceFlow**. The AI-generat
 
 1. Search for and select **CustomerServiceFlow** from the tool list.
 
-1. Map the flow inputs using the (...) icon:
-   - **Subject:** Select the delivery-related variable from your topic
-   - **Description:** Select the variables that describe the delivery delay
+1. Map the flow inputs using the ellipsis (**...**) icon:
+
+   - For **Subject**, select the appropriate topic variable such as **OrderNumber**.
+   - For **Description**, select the relevant topic variable such as **DeliveryIssue**.
 
    > **Note:** If your topic doesn't have the necessary variables, add **Question** nodes to gather the required information before calling the flow.
 
@@ -260,13 +244,15 @@ Now connect each topic to your published **CustomerServiceFlow**. The AI-generat
 1. Navigate through the topic flow and find the escalation point.
 
 1. Add the **CustomerServiceFlow** tool immediately after the message where you inform the user that a support ticket will be created:
+
    - Click the **+** icon.
    - Select **Add a tool**.
    - Select **CustomerServiceFlow**.
 
-1. Map the flow inputs using the (...) icon:
-   - **Subject:** Select the complaint category variable from your topic
-   - **Description:** Select the variables that capture the complaint details
+1. Map the flow inputs using the ellipsis (**...**) icon:
+
+   - For **Subject**, select the appropriate topic variable such as **OrderNumber**.
+   - For **Description**, select the relevant topic variable such as **ComplaintDetails**.
 
    > **Note:** If your topic doesn't have the necessary variables, add **Question** nodes to gather the required information before calling the flow.
 
@@ -280,13 +266,9 @@ Now connect each topic to your published **CustomerServiceFlow**. The AI-generat
 > - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help.
 
 ## Success Criteria
-- Created 4 topics using generative AI (OrderTrackingAssistance, ProductReturnProcessing, DeliveryDelayManagement, ServiceQualityComplaintHandling)
-- All topics have relevant trigger phrases configured
-- Topics capture customer input in variables (order numbers, issues, complaints, etc.)
-- Connected each topic to your CustomerServiceFlow via "Call an action"
-- Mapped flow inputs (Subject and Description) correctly using topic variables
-- Test pane successfully creates tickets through topics with dynamic subject lines
-- Confirmation messages are displayed to customers
+- Use Copilot Studio's generative AI to create 4 topics
+- Review All Topics
+- Connect Topics to CustomerServiceFlow
 
 ## Additional Resources
 - [Create topics with Copilot](https://learn.microsoft.com/microsoft-copilot-studio/authoring-create-edit-topics)

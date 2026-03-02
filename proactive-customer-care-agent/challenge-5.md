@@ -18,20 +18,13 @@ In this challenge, you will test all 4 topics comprehensively, verify CustomerSe
 
 1. Open your **Customer Care Copilot Agent** in Copilot Studio.
 
-1. Ensure all 4 topics are **enabled**:
-   - OrderTrackingAssistance
-   - ProductReturnProcessing
-   - DeliveryDelayManagement
-   - ServiceQualityComplaintHandling
+1. Click on **Publish**.
 
-1. Verify your **CustomerServiceFlow** is **published** (check in Actions list).
+1. In the **Publish this agent** pane, click on **Publish**.
 
-1. Open a second browser tab or window with the **Freshdesk** portal by navigating to the following URL:
-   ```
-   https://your-account.freshdesk.com
-   ```
+1. Wait for the **Customer Care Copilot Agent** to be **published**.
 
-1. Sign in to Freshdesk to monitor ticket creation in real-time.
+1. In a separate browser tab, navigate back to the **Freshdesk** portal.
 
 1. Keep both windows visible for testing.
 
