@@ -30,9 +30,7 @@ In this challenge, you will test all 4 topics comprehensively, verify CustomerSe
 
 ### Step 2: Test 1 Customer Care Copilot Agent
 
-1. In Copilot Studio, open the **Test your copilot** pane.
-
-1. Start a fresh conversation by clicking **Reset** (trash icon).
+1. Click the **Test** button to open the test panel on the right side.
 
 1. Type the following trigger phrase:
    ```
